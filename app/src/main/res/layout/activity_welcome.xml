@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".xc.WelcomeActivity"
+    android:paddingHorizontal="16dp"
+    android:background="@color/white">
+
+    <!-- Logo -->
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/logo"
+        android:layout_above="@+id/welcomeTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+<!--    <View-->
+<!--        android:id="@+id/dashedBorderView"-->
+<!--        android:layout_width="96dp"-->
+<!--        android:layout_height="96dp"-->
+<!--        android:layout_above="@+id/welcomeTextView"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:background="@drawable/dashed_border"-->
+<!--        android:layout_marginTop="16dp" />-->
+
+    <!-- Welcome Text -->
+    <TextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="31dp"
+        android:layout_marginBottom="7dp"
+        android:fontFamily="@font/work_sans_black"
+        android:text="@string/welcome_text"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <!-- Description Text -->
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcomeTextView"
+        android:layout_centerHorizontal="true"
+        android:text="@string/description_text"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        />
+
+    <!-- Create Wallet Button -->
+    <android.widget.Button
+        android:id="@+id/createWalletButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="160dp"
+        android:minHeight="20dp"
+        android:background="@drawable/custom_button_background"
+        android:layout_below="@id/descriptionTextView"
+        android:layout_centerHorizontal="true"
+        android:text="@string/create_wallet"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="31dp"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <!-- Import Wallet Text -->
+<!--    <TextView-->
+<!--        android:id="@+id/importwallettextview"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/createWalletButton"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:text="@string/import_existing_wallet"-->
+<!--        android:textColor="#888888"-->
+<!--        android:textSize="14sp"-->
+<!--        android:layout_marginTop="31dp"-->
+<!--        android:clickable="true"/>-->
+</RelativeLayout>

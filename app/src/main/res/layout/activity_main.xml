@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".xc.MainActivity"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Logo and Text -->
+        <include
+            layout="@layout/topbar"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_below="@+id/action_bar"
+            android:layout_above="@+id/icon_four"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/WTextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/work_sans_black"
+                android:maxLines="3"
+                android:text="Loading..."
+                android:textColor="#000000"
+                android:textSize="48sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tsv_dollar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/WTextview"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:text="Please wait a moment"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/icon_four"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:paddingHorizontal="34dp">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:columnCount="5"
+
+                android:rowCount="2">
+
+                <!-- 第一行，放四张 SVG 图标 -->
+                <ImageView
+                    android:id="@+id/buy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/plus_icon" />
+
+                <ImageView
+                    android:id="@+id/send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/send_icon" />
+
+                <ImageView
+                    android:id="@+id/swap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/transaction_icon" />
+
+                <!-- 第二行，四个 TextView 表示图标名称 -->
+                <ImageView
+                    android:id="@+id/broker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center"
+
+                    android:src="@drawable/line_chart_icon" />
+
+                <ImageView
+                    android:id="@+id/nft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="4"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center"
+
+                    android:src="@drawable/codepen_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center_horizontal"
+
+                    android:clickable="true"
+                    android:text="Faucet"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center_horizontal"
+                    android:clickable="true"
+                    android:text="Send"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="2"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center_horizontal"
+                    android:clickable="true"
+                    android:text="Swap"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="3"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center_horizontal"
+                    android:clickable="true"
+                    android:text="Broker"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="4"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center_horizontal"
+                    android:clickable="true"
+                    android:text="NFT"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+            </GridLayout>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/support"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:clickable="true"
+
+            android:layout_below="@+id/icon_four"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="48dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/question_circle"
+                android:clickable="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:text="BrokerChain仅供学术交流使用，用户不得使用BrokerChain从事任何非法活动。用户使用BrokerChain所产生的任何直接或间接后果，均与BrokerChain创始团队无关。BrokerChain创始团队保留随时修改、更新或终止BrokerChain的权利，且无需事先通知用户。用户在使用BrokerChain时，应自行承担风险，并同意放弃对创始团队的任何索赔权利。本免责声明受中华人民共和国法律管辖，并按照其解释。"
+                android:textColor="#888888"
+                android:textSize="14sp" />
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+    <!-- Support Text -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BrokerFi support"
+        android:textSize="14sp"
+        android:textColor="#888888"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp" />
+</LinearLayout>
