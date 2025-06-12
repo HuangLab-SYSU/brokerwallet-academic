@@ -171,6 +171,9 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if(status.length()>=18){
+                    accountstate.setTextSize(20);
+                }
                 accountstate.setText(status+" BKC");
                 tsv_dollar.setText("");
             }
