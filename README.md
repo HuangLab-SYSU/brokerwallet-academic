@@ -21,7 +21,7 @@ After entering the main page of BrokerChain Wallet, click on the upper right cor
 
 ![test1](img/img_1.png)
 
-After entering the account management page, click the Add account button and enter the private key of the account to be imported in the Account private key input box. (**Note that you should get the private key from the BrokerChain miner client, do not fill a key randomly, otherwise the wallet may fail to import account**)
+After entering the account management page, click the Add account button and enter the private key of the account to be imported in the Account private key input box. (<span style="color: red;">**Note that you should get the private key from the BrokerChain miner client, do not fill a key randomly, otherwise the wallet may fail to import account**</span>)
 
 Click the Save button to save this account. The account list will display the address and balance of the account that was just imported. Click on the account, select it, and it will be used as the payer account in the future.
 
