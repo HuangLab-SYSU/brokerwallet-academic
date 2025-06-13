@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BrokerFi</string>
+    <string name="app_name">BrokerChain Wallet</string>
     <string name="welcome_text">Welcome to BrokerChain Wallet</string>
     <string name="create_wallet">Create a Wallet</string>
     <string name="import_wallet">Import existing wallet</string>
