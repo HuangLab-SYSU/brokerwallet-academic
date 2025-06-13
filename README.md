@@ -35,6 +35,6 @@ Enter the main page of BrokerChain Wallet. Click the Send button to enter the tr
 
 ## Use the faucet function of BrokerChain Wallet to receive test coins
 
-BrokerChain Wallet provides a "Faucet" feature, allowing any user to receive a small amount of test coins for free. Enter the main page of BrokerChain Wallet, click the Faucet button, and enter the faucet page. Click the Claim button to receive 1 BKC of test coins. Users can only receive one test coin per account per day.
+BrokerChain Wallet provides a "Faucet" feature, allowing any user to receive a small amount of test coins for free. Enter the main page of BrokerChain Wallet, click the Faucet button, and enter the faucet page. Click the Claim button to receive some BKC of test coins. Users can only receive once per account per day.
 
 ![test4](img/img_4.png)
