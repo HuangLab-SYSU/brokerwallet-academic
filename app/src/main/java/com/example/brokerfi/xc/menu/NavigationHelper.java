@@ -139,7 +139,7 @@ public class NavigationHelper{
                     context.startActivity(intent);
                 } else {
 
-                    Toast.makeText(context, "无法打开网页，请检查您的浏览器设置。", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "打开网页失败，请手动打开https://www.blockemulator.com", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -178,8 +178,8 @@ public class NavigationHelper{
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, AtvActivity.class);
-                context.startActivity(intent);
+//                Intent intent = new Intent(context, AtvActivity.class);
+//                context.startActivity(intent);
 
             }
         });

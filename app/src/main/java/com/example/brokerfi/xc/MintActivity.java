@@ -131,10 +131,10 @@ public class MintActivity extends AppCompatActivity {
         btn_mint.setOnClickListener(v -> {
             String nftname = edt_nft_name.getText().toString();
             String sharesStr = edt_shares.getText().toString();
-            if (hasImage == 0) {
-                Toast.makeText(this, "请先上传图片", Toast.LENGTH_SHORT).show();
-                return;
-            }
+//            if (hasImage == 0) {
+//                Toast.makeText(this, "请先上传图片", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
             if (nftname.isEmpty()) {
                 edt_nft_name.setError("必填字段");
                 edt_nft_name.requestFocus();
@@ -168,26 +168,31 @@ public class MintActivity extends AppCompatActivity {
 
 
             try {
-                InputStream in = getContentResolver().openInputStream(imageUri);
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 4; // 直接缩小4倍
-                Bitmap bitmap = BitmapFactory.decodeStream(in, null, options);
-                in.close();
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                int quality = 70;
-                bitmap.compress(Bitmap.CompressFormat.JPEG, quality, out);
-                while (out.toByteArray().length > 200 * 1024 && quality > 50) {
-                    out.reset();
-                    quality -= 10;
+                String base64Image;
+                if (hasImage ==1){
+                    InputStream in = getContentResolver().openInputStream(imageUri);
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 4; // 直接缩小4倍
+                    Bitmap bitmap = BitmapFactory.decodeStream(in, null, options);
+                    in.close();
+                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+                    int quality = 70;
                     bitmap.compress(Bitmap.CompressFormat.JPEG, quality, out);
+                    while (out.toByteArray().length > 200 * 1024 && quality > 50) {
+                        out.reset();
+                        quality -= 10;
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, out);
+                    }
+                    byte[] imageBytes = out.toByteArray();
+                    base64Image = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+                }else {
+                    base64Image = "123";
                 }
-                byte[] imageBytes = out.toByteArray();
-                String base64Image = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
                 BigInteger share = new BigInteger(sharesStr);
                 String data = ABIUtils.encodeMint(nftname, base64Image, share);
                 sendMintTransaction(data, BigInteger.TEN);
             } catch (Exception e) {
-                Toast.makeText(this, "处理失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, " " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
