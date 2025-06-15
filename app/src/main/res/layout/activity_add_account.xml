@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Explain what is an account here"
+            android:text="You should get the private key from the BrokerChain miner client.\nDo not fill a key randomly, otherwise the wallet may fail to import account."
             android:textSize="16sp"
             android:textColor="#000000"/>
 
@@ -60,6 +60,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:background="@drawable/custom_edittext_border"
+            android:textSize="12sp"
             android:inputType="text"/>
 
 

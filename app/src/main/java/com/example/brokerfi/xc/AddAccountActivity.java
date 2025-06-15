@@ -23,6 +23,7 @@ public class AddAccountActivity extends AppCompatActivity {
     private NavigationHelper navigationHelper;
 
     private EditText editacc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +41,8 @@ public class AddAccountActivity extends AppCompatActivity {
         editacc = findViewById(R.id.edt_account);
     }
 
-    private void intEvent(){
-        navigationHelper = new NavigationHelper(menu, action_bar,this);
+    private void intEvent() {
+        navigationHelper = new NavigationHelper(menu, action_bar, this);
 
         btn_cancel.setOnClickListener(view -> {
 
@@ -54,12 +55,14 @@ public class AddAccountActivity extends AppCompatActivity {
         btn_save.setOnClickListener(view -> {
             String acc = editacc.getText().toString();
             String existAcc = StorageUtil.getPrivateKey(this);
-            if (existAcc!=null){
-                existAcc+=(";"+ acc);
-            }else {
+            if (existAcc != null) {
+                if(!existAcc.contains(acc)){
+                    existAcc += (";" + acc);
+                }
+            } else {
                 existAcc = acc;
             }
-            StorageUtil.savePrivateKey(this,existAcc);
+            StorageUtil.savePrivateKey(this, existAcc);
 
             Intent intent = new Intent();
             intent.setClass(AddAccountActivity.this, SelectAccountActivity.class);
@@ -67,15 +70,16 @@ public class AddAccountActivity extends AppCompatActivity {
         });
 
     }
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult intentResult = IntentIntegrator.parseActivityResult(
-                requestCode,resultCode,data
+                requestCode, resultCode, data
         );
-        if (intentResult.getContents() != null){
+        if (intentResult.getContents() != null) {
             String scannedData = intentResult.getContents();
-            Intent intent = new Intent(this,SendActivity.class);
-            intent.putExtra("scannedData",scannedData);
+            Intent intent = new Intent(this, SendActivity.class);
+            intent.putExtra("scannedData", scannedData);
             startActivity(intent);
         }
     }
