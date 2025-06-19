@@ -26,6 +26,7 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -104,6 +105,8 @@ public class AfterBrokerActivity extends AppCompatActivity {
                 JSONObject jsonResponse = null;
                 try {
                     jsonResponse = new JSONObject(result);
+                    BigDecimal d1 = new BigDecimal(0);
+                    BigDecimal d2 = new BigDecimal(0);
                     Double sum = 0.0;
                     Double sumBalance = 0.0;
                     for (int i = 0; i < 10000; i++) {
@@ -117,17 +120,23 @@ public class AfterBrokerActivity extends AppCompatActivity {
                             break;
                         }
                         String[] split = s.split("/");
-                        sum += Double.parseDouble(split[0]);
-                        sumBalance += Double.parseDouble(split[1]);
+                        BigDecimal bigDecimal1 = new BigDecimal(split[0]);
+                        BigDecimal bigDecimal2 = new BigDecimal(split[1]);
+                        d1=d1.add(bigDecimal1);
+                        d2=d2.add(bigDecimal2);
+
+//                        sum += Double.parseDouble(split[0]);
+//                        sumBalance += Double.parseDouble(split[1]);
                     }
 
-                    Double finalSum = sum;
-                    Double finalSumBalance = sumBalance;
+//                    Double finalSum = sum;
+                    String finalSum = d1.toString();
+                    String finalSumBalance = d2.toString();
                     JSONObject finalJsonResponse = jsonResponse;
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            bkcprofittextview.setText("+" + (int) (finalSum.intValue()) + " BKC");
+                            bkcprofittextview.setText("+" + (finalSum) + " BKC");
                             bkctextview.setText(finalSumBalance + " BKC");
                             brokerprofit.removeAllViews();
 
@@ -166,7 +175,7 @@ public class AfterBrokerActivity extends AppCompatActivity {
 
 
                                 TextView shardTextView2 = new TextView(AfterBrokerActivity.this);
-                                shardTextView2.setText(s);
+                                shardTextView2.setText(split[0]);
                                 shardTextView2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
                                 shardTextView2.setTextColor(ContextCompat.getColor(AfterBrokerActivity.this, R.color.white));
                                 RelativeLayout.LayoutParams shardParams2 = new RelativeLayout.LayoutParams(
