@@ -79,6 +79,9 @@
             android:name=".xc.AddAccountActivity"
             android:exported="false" />
         <activity
+            android:name=".xc.GenerateAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".xc.SelectAccountActivity"
             android:exported="false" />
         <activity

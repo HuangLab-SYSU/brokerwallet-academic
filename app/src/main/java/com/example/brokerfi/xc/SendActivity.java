@@ -90,7 +90,13 @@ public class SendActivity extends AppCompatActivity {
 
     }
 
+    private volatile boolean tx = false;
     private void sendtx2network(){
+        if(tx){
+            Toast.makeText(SendActivity.this,"Do not resubmit the transaction!",Toast.LENGTH_LONG).show();
+            return;
+        }
+        tx = true;
         String sendTo = edt_sendto.getText().toString();
         String amount = edt_amount.getText().toString();
         String fee = edt_fee.getText().toString();
@@ -104,21 +110,27 @@ public class SendActivity extends AppCompatActivity {
             i = Integer.parseInt(acc);
         }
         if (account != null) {
-
             String[] split = account.split(";");
             String privatekey = split[i];
             new Thread(()->{
-                String s = MyUtil.SendTX(privatekey,sendTo,amount,fee);
-                if(s!=null &&s.contains("success")){
-                    runOnUiThread(()->{
-                        Toast.makeText(SendActivity.this,"交易成功",Toast.LENGTH_LONG).show();
-                    });
+                runOnUiThread(()->{
+                    Toast.makeText(SendActivity.this,"Submit transaction successfully! Please wait for the result.",Toast.LENGTH_LONG).show();
+                });
+                try {
+                    String s = MyUtil.SendTX(privatekey,sendTo,amount,fee);
+                    if(s!=null &&s.contains("success")){
+                        runOnUiThread(()->{
+                            Toast.makeText(SendActivity.this,"Send successfully",Toast.LENGTH_LONG).show();
+                        });
 
-                }else{
-                    runOnUiThread(()->{
-                        Toast.makeText(SendActivity.this,"交易失败："+ s,Toast.LENGTH_LONG).show();
-                    });
+                    }else{
+                        runOnUiThread(()->{
+                            Toast.makeText(SendActivity.this,"Send failed："+ s,Toast.LENGTH_LONG).show();
+                        });
 
+                    }
+                }finally {
+                    tx=false;
                 }
             }).start();
 

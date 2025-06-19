@@ -21,5 +21,13 @@ public class ExampleUnitTest {
 
     @Test
     public void T() throws Exception {
+
+        System.out.println("generatekey:");
+        String privatekey = SecurityUtil.generatePrivateKey();
+        System.out.println(privatekey);
+        System.out.println("PublicKey:");
+        System.out.println(SecurityUtil.getPublicKeyFromPrivateKey(privatekey));
+        System.out.println("addr:");
+        System.out.println(SecurityUtil.GetAddress(privatekey));
     }
 }

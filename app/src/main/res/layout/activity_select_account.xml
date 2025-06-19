@@ -252,7 +252,7 @@
         android:id="@+id/btn_add"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="Add account"
+        android:text="Import account"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textColor="#FFFFFF"
@@ -264,28 +264,44 @@
         android:layout_marginHorizontal="16dp"
         android:background="@drawable/custom_button_background" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
+    <android.widget.Button
+        android:id="@+id/btn_add2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Generate account"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/custom_button_background" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/form" />
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:orientation="horizontal">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Import account"
-            android:textSize="12sp"
-            android:textColor="#888888"/>
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginRight="8dp"-->
+<!--            android:src="@drawable/form" />-->
 
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:text="Import account"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textColor="#888888"/>-->
+
+<!--    </LinearLayout>-->
 
 
 

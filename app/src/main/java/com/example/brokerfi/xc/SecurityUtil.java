@@ -1,24 +1,15 @@
 package com.example.brokerfi.xc;
 
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.MessageDigest;
-import java.security.PrivateKey;
+
+import java.security.SecureRandom;
 import java.security.Security;
-import java.security.Signature;
-import java.security.interfaces.ECPrivateKey;
-import java.security.spec.ECGenParameterSpec;
 
-
-import org.bouncycastle.asn1.ASN1Integer;
-import org.bouncycastle.asn1.DERSequence;
-import org.bouncycastle.asn1.gm.GMNamedCurves;
-import org.bouncycastle.asn1.x9.X9ECParameters;
+import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 import org.bouncycastle.crypto.digests.SHA256Digest;
+import org.bouncycastle.crypto.generators.ECKeyPairGenerator;
 import org.bouncycastle.crypto.params.ECDomainParameters;
+import org.bouncycastle.crypto.params.ECKeyGenerationParameters;
 import org.bouncycastle.crypto.params.ECPrivateKeyParameters;
 import org.bouncycastle.crypto.signers.ECDSASigner;
 import org.bouncycastle.jce.ECNamedCurveTable;
@@ -82,5 +73,40 @@ public class SecurityUtil {
         ECPoint publicPoint = spec.getG().multiply(privateKey);
         byte[] encoded = publicPoint.getEncoded(true);
         return Hex.toHexString(encoded);
+    }
+
+    public static String generatePrivateKey() {
+        try {
+            // 获取 secp256r1 曲线的参数
+            ECNamedCurveParameterSpec spec = ECNamedCurveTable.getParameterSpec("secp256r1");
+            ECDomainParameters domainParams = new ECDomainParameters(
+                    spec.getCurve(), spec.getG(), spec.getN(), spec.getH());
+
+            // 使用安全随机数生成器
+            SecureRandom random = new SecureRandom();
+
+            // 创建密钥对生成器
+            ECKeyPairGenerator generator = new ECKeyPairGenerator();
+            ECKeyGenerationParameters params = new ECKeyGenerationParameters(domainParams, random);
+            generator.init(params);
+
+            // 生成密钥对
+            AsymmetricCipherKeyPair keyPair = generator.generateKeyPair();
+            ECPrivateKeyParameters privateKeyParams = (ECPrivateKeyParameters) keyPair.getPrivate();
+
+            // 获取私钥的BigInteger值
+            BigInteger privateKey = privateKeyParams.getD();
+
+            // 返回私钥的十六进制字符串表示
+            return privateKey.toString(10);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(generatePrivateKey());
     }
 }

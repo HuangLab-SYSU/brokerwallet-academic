@@ -46,7 +46,7 @@ public class FaucetActivity extends AppCompatActivity {
                     });
                     return;
                 }
-                Toast.makeText(FaucetActivity.this, "领取结果："+result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(FaucetActivity.this, "Result："+result, Toast.LENGTH_SHORT).show();
             }
         });
     }

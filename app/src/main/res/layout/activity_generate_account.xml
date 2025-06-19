@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".xc.AddAccountActivity"
+    tools:context=".xc.GenerateAccountActivity"
     android:orientation="vertical"
     android:background="@color/white">
 
@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Import existing account"
+            android:text="Generate new account"
             android:fontFamily="@font/work_sans_black"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Fill the private key in the dialog box below to import an existing account."
+            android:text="Click the Generate button to generate a new account\nThe private key will be shown in the dialog box below."
             android:textSize="16sp"
             android:textColor="#000000"/>
 
@@ -46,7 +46,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Account privatekey"
+            android:text="Account privatekey(Generated)"
             android:textColor="#000000"
             android:textSize="16sp" />
 
@@ -96,7 +96,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Save"
+                android:text="Generate"
                 android:textAllCaps="false"
                 android:textSize="16dp"
                 android:textColor="#ffffff"

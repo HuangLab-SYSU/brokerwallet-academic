@@ -25,16 +25,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class SelectAccountActivity extends AppCompatActivity {
     private ImageView menu;
     private RelativeLayout action_bar;
     private Button btn_add;
+    private Button btn_add2;
     private NavigationHelper navigationHelper;
     private RelativeLayout currentLayout = null;
     private ImageView currentcheck ;
     private RelativeLayout.LayoutParams layoutParams;
     private LinearLayout acclinear;
+    private volatile boolean flag = false;
+    private Lock lock = new ReentrantLock(false);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,7 @@ public class SelectAccountActivity extends AppCompatActivity {
         menu = findViewById(R.id.menu);
         action_bar = findViewById(R.id.action_bar);
         btn_add = findViewById(R.id.btn_add);
+        btn_add2 = findViewById(R.id.btn_add2);
         layoutParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT
@@ -59,19 +65,36 @@ public class SelectAccountActivity extends AppCompatActivity {
 
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,RelativeLayout.TRUE);
         layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-        String account = StorageUtil.getPrivateKey(this);
+
 
         new Thread(()->{
+            while (true) {
+                if(flag){
+                    break;
+                }
+                refresh();
+                try {
+                    Thread.sleep(1000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
 
 
+    }
+
+    private void refresh() {
+
+        String account = StorageUtil.getPrivateKey(this);
         List<ReturnAccountState> list = new ArrayList<>();
         List<String> validlist = new ArrayList<>();
-        if (account != null){
+        if (account != null) {
             String[] split = account.split(";");
             AtomicReference<ReturnAccountState> returnAccountState = new AtomicReference<>();
             for (String s : split) {
                 CountDownLatch latch = new CountDownLatch(1);
-                new Thread(()->{
+                new Thread(() -> {
                     returnAccountState.set(MyUtil.GetAddrAndBalance(s));
                     latch.countDown();
                 }).start();
@@ -80,22 +103,22 @@ public class SelectAccountActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if (returnAccountState.get() !=null){
+                if (returnAccountState.get() != null) {
                     list.add(returnAccountState.get());
                     validlist.add(s);
                 }
             }
         }
-        StringBuilder saveA= new StringBuilder();
+        StringBuilder saveA = new StringBuilder();
         for (int i = 0; i < validlist.size(); i++) {
             saveA.append(validlist.get(i));
-            if(i!=validlist.size()-1){
+            if (i != validlist.size() - 1) {
                 saveA.append(";");
             }
         }
-        StorageUtil.savePrivateKey(this, saveA.toString());
+//        StorageUtil.savePrivateKey(this, saveA.toString());
 
-        runOnUiThread(()->{
+        runOnUiThread(() -> {
             acclinear.removeAllViews();
         });
 
@@ -141,9 +164,8 @@ public class SelectAccountActivity extends AppCompatActivity {
             linearLayout.setOrientation(LinearLayout.VERTICAL);
 
 
-
             TextView textView = new TextView(this);
-            textView.setText("Account "+String.valueOf(i+1));
+            textView.setText("Account " + String.valueOf(i + 1));
             float textSizeInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 18, getResources().getDisplayMetrics());
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPx);
             textView.setTextColor(Color.parseColor("#000000"));
@@ -166,7 +188,7 @@ public class SelectAccountActivity extends AppCompatActivity {
             linearLayout.addView(textView2);
             relativeLayout.addView(linearLayout);
             TextView textView3 = new TextView(this);
-            textView3.setText(accountState.getBalance()+"BKC");
+            textView3.setText(accountState.getBalance() + "BKC");
             float textSizeInPx3 = TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics());
             textView3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPx3);
@@ -179,14 +201,16 @@ public class SelectAccountActivity extends AppCompatActivity {
             layoutParams6.addRule(RelativeLayout.CENTER_VERTICAL);
             textView3.setLayoutParams(layoutParams6);
             relativeLayout.addView(textView3);
-            runOnUiThread(()->{
+            runOnUiThread(() -> {
                 acclinear.addView(relativeLayout);
             });
 
         }
-        }).start();
-
-
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        flag = true;
     }
     private void intEvent(){
         navigationHelper = new NavigationHelper(menu, action_bar,this);
@@ -195,6 +219,13 @@ public class SelectAccountActivity extends AppCompatActivity {
             //创建意图对象
             Intent intent = new Intent();
             intent.setClass(SelectAccountActivity.this, AddAccountActivity.class);
+            //跳转
+            startActivity(intent);
+        });
+        btn_add2.setOnClickListener(view -> {
+            //创建意图对象
+            Intent intent = new Intent();
+            intent.setClass(SelectAccountActivity.this, GenerateAccountActivity.class);
             //跳转
             startActivity(intent);
         });
