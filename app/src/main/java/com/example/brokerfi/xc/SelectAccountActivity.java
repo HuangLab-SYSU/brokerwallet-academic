@@ -75,9 +75,11 @@ public class SelectAccountActivity extends AppCompatActivity {
                 if(flag){
                     break;
                 }
-                refresh();
+                service.execute(()->{
+                    refresh();
+                });
                 try {
-                    Thread.sleep(1000L);
+                    Thread.sleep(5000L);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -89,6 +91,7 @@ public class SelectAccountActivity extends AppCompatActivity {
 
     static ExecutorService service = Executors.newCachedThreadPool();
 
+    Lock lock1  =new ReentrantLock(false);
     private void refresh() {
 
         String account = StorageUtil.getPrivateKey(this);
@@ -140,6 +143,10 @@ public class SelectAccountActivity extends AppCompatActivity {
 //            }
 //        }
 //        StorageUtil.savePrivateKey(this, saveA.toString());
+
+        lock1.lock();
+        try {
+
 
         runOnUiThread(() -> {
             acclinear.removeAllViews();
@@ -229,6 +236,10 @@ public class SelectAccountActivity extends AppCompatActivity {
             });
 
         }
+        }finally {
+            lock1.unlock();
+        }
+
     }
     @Override
     protected void onDestroy() {
