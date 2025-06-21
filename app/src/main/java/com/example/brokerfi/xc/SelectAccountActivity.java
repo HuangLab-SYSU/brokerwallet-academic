@@ -106,7 +106,9 @@ public class SelectAccountActivity extends AppCompatActivity {
                 Integer finali = i;
                 service.execute(() -> {
                     ReturnAccountState state = MyUtil.GetAddrAndBalance(s);
-                    map.put(finali,state);
+                    if(state!= null){
+                        map.put(finali,state);
+                    }
                     latch.countDown();
                 });
 
