@@ -23,7 +23,10 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -84,38 +87,56 @@ public class SelectAccountActivity extends AppCompatActivity {
 
     }
 
+    static ExecutorService service = Executors.newCachedThreadPool();
+
     private void refresh() {
 
         String account = StorageUtil.getPrivateKey(this);
         List<ReturnAccountState> list = new ArrayList<>();
-        List<String> validlist = new ArrayList<>();
+//        List<String> validlist = new ArrayList<>();
         if (account != null) {
             String[] split = account.split(";");
-            AtomicReference<ReturnAccountState> returnAccountState = new AtomicReference<>();
-            for (String s : split) {
-                CountDownLatch latch = new CountDownLatch(1);
-                new Thread(() -> {
-                    returnAccountState.set(MyUtil.GetAddrAndBalance(s));
+
+
+            ConcurrentHashMap<Integer,ReturnAccountState> map = new ConcurrentHashMap<>();
+
+            CountDownLatch latch = new CountDownLatch(split.length);
+            for (int i = 0;i<split.length;i++) {
+                String s = split[i];
+                Integer finali = i;
+                service.execute(() -> {
+                    ReturnAccountState state = MyUtil.GetAddrAndBalance(s);
+                    map.put(finali,state);
                     latch.countDown();
-                }).start();
-                try {
-                    latch.await();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (returnAccountState.get() != null) {
-                    list.add(returnAccountState.get());
-                    validlist.add(s);
+                });
+
+//                if (returnAccountState.get() != null) {
+//                    list.add(returnAccountState.get());
+//                    validlist.add(s);
+//                }
+            }
+
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            for (int i = 0;i<split.length;i++) {
+                if(map.containsKey(i)){
+                    ReturnAccountState state = map.get(i);
+                    list.add(state);
                 }
             }
+
+
         }
-        StringBuilder saveA = new StringBuilder();
-        for (int i = 0; i < validlist.size(); i++) {
-            saveA.append(validlist.get(i));
-            if (i != validlist.size() - 1) {
-                saveA.append(";");
-            }
-        }
+//        StringBuilder saveA = new StringBuilder();
+//        for (int i = 0; i < validlist.size(); i++) {
+//            saveA.append(validlist.get(i));
+//            if (i != validlist.size() - 1) {
+//                saveA.append(";");
+//            }
+//        }
 //        StorageUtil.savePrivateKey(this, saveA.toString());
 
         runOnUiThread(() -> {
