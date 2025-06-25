@@ -109,7 +109,7 @@ public class AfterBrokerActivity extends AppCompatActivity {
                     BigDecimal d2 = new BigDecimal(0);
                     Double sum = 0.0;
                     Double sumBalance = 0.0;
-                    for (int i = 0; i < 10000; i++) {
+                    for (int i = 0; i < 100000; i++) {
                         String s;
                         try {
                             s = jsonResponse.getString(String.valueOf(i));
@@ -140,7 +140,7 @@ public class AfterBrokerActivity extends AppCompatActivity {
                             bkctextview.setText(finalSumBalance + " BKC");
                             brokerprofit.removeAllViews();
 
-                            for (int i = 0; i < 10000; i++) {
+                            for (int i = 0; i < 100; i++) {
                                 String s;
                                 try {
                                     s = finalJsonResponse.getString(String.valueOf(i));
