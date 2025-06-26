@@ -29,6 +29,7 @@ import com.example.brokerfi.xc.AtvActivity;
 import com.example.brokerfi.xc.QRCode.Capture;
 import com.example.brokerfi.xc.ReceiveActivity;
 
+import com.example.brokerfi.xc.SelectAccountActivity;
 import com.example.brokerfi.xc.SettingActivity;
 import com.example.brokerfi.xc.WelcomeBackActivity;
 import com.example.brokerfi.xc.tool.UnitConverter;
@@ -187,7 +188,7 @@ public class NavigationHelper{
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, SettingActivity.class);
+                Intent intent = new Intent(context, SelectAccountActivity.class);
                 context.startActivity(intent);
 
             }

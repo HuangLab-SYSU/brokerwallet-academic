@@ -1,5 +1,7 @@
 package com.example.brokerfi.xc;
 
+//import static com.example.brokerfi.xc.MainActivity.accountSpinner;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,6 +45,7 @@ public class SelectAccountActivity extends AppCompatActivity {
     private LinearLayout acclinear;
     private volatile boolean flag = false;
     private Lock lock = new ReentrantLock(false);
+    public static volatile  boolean flag2 = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,17 +75,22 @@ public class SelectAccountActivity extends AppCompatActivity {
 
         new Thread(()->{
             while (true) {
-                if(flag){
-                    break;
-                }
-                service.execute(()->{
-                    refresh();
-                });
                 try {
-                    Thread.sleep(5000L);
+                    Thread.sleep(1000L);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+                if(flag){
+                    break;
+                }
+                if (!flag2){
+                    continue;
+                }
+//                flag2 = false;
+                service.execute(()->{
+                    refresh();
+                });
+
             }
         }).start();
 
@@ -295,6 +303,7 @@ public class SelectAccountActivity extends AppCompatActivity {
                 int cur = i-1;
                 String s = String.valueOf(cur);
                 StorageUtil.saveCurrentAccount(this,s);
+//                accountSpinner.setSelection(cur);
                 TextView textView2 = (TextView) getLastView(relativeLayout);
                 ImageView imageView = new ImageView(SelectAccountActivity.this);
                 imageView.setImageResource(R.drawable.check);
@@ -323,6 +332,7 @@ public class SelectAccountActivity extends AppCompatActivity {
             int cur = i-1;
             String s = String.valueOf(cur);
             StorageUtil.saveCurrentAccount(this,s);
+//            accountSpinner.setSelection(cur);
             TextView textView = (TextView) getLastView(relativeLayout);
             ImageView imageView = new ImageView(SelectAccountActivity.this);
             imageView.setImageResource(R.drawable.check);

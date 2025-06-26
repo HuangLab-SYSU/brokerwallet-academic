@@ -12,10 +12,15 @@ import android.content.Intent;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.menu.NavigationHelper;
@@ -42,8 +47,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView accountstate;
     private TextView tsv_dollar;
     private volatile boolean flag = false;
+    public static volatile boolean flag2 = true;
 
-
+    public  Spinner accountSpinner;
+//    private TextView balanceTextView;
 
     @Override
     protected void onDestroy() {
@@ -57,6 +64,93 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         intView();
         intEvent();
+        accountSpinner = findViewById(R.id.accountSpinner);
+//        balanceTextView = findViewById(R.id.balanceTextView);
+
+
+        accountSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // 例如：balanceTextView.setText("Selected: " + accounts[position]);
+//                    Toast.makeText(MainActivity.this,"position is "+position+",id is "+ id,Toast.LENGTH_LONG).show();
+                String s = String.valueOf(position);
+                StorageUtil.saveCurrentAccount(MainActivity.this,s);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // 没有选择时的处理
+            }
+        });
+//        new Thread(()->{
+//            while (true) {
+//                try {
+//                    Thread.sleep(1000L);
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                if(flag){
+//                    break;
+//                }
+//                String acc = StorageUtil.getCurrentAccount(this);
+//                try {
+//
+//                    if(acc!=null){
+//                        int i = Integer.parseInt(acc);
+//                        if(accountSpinner.getAdapter() != null && accountSpinner.getAdapter().getCount() > i){
+//                            accountSpinner.setSelection(i);
+//                        }
+//
+//                    }
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//
+//
+//            }
+//        }).start();
+        new Thread(()->{
+            while (true){
+                try {
+                    Thread.sleep(1000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                if(flag){
+                    break;
+                }
+                if (!flag2){
+                    continue;
+                }
+                flag2 = false;
+                String account = StorageUtil.getPrivateKey(this);
+                if (account != null) {
+                    String[] split = account.split(";");
+                    String[] arr = new String[split.length];
+                    for (int i = 0; i < arr.length; i++) {
+//                        arr[i] = SecurityUtil.GetAddress(split[i]);
+                        arr[i] = "Account " + (i + 1);
+                    }
+                    runOnUiThread(()->{
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, arr);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        accountSpinner.setAdapter(adapter);
+                    });
+                }
+
+            }
+
+        }).start();
+
+
+
+        // 设置适配器
+
+        // 设置选择监听器
+
+
+
         new Thread(()->{
             while (true){
                 if(flag){
@@ -64,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 fetchAccountStatus();
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

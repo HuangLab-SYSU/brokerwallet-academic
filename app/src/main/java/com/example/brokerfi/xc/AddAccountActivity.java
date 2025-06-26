@@ -64,6 +64,8 @@ public class AddAccountActivity extends AppCompatActivity {
             }
             StorageUtil.savePrivateKey(this, existAcc);
 
+            MainActivity.flag2 = true;
+            SelectAccountActivity.flag2 = true;
             Intent intent = new Intent();
             intent.setClass(AddAccountActivity.this, SelectAccountActivity.class);
             startActivity(intent);

@@ -67,7 +67,8 @@ public class GenerateAccountActivity extends AppCompatActivity {
                 existAcc = acc;
             }
             StorageUtil.savePrivateKey(this, existAcc);
-
+            MainActivity.flag2 = true;
+            SelectAccountActivity.flag2 = true;
             editacc.setText(acc);
             Toast.makeText(this, "✅ Successfully generate a new account!", Toast.LENGTH_SHORT).show();
 //            Intent intent = new Intent();
