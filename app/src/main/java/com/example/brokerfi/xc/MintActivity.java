@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,16 +34,12 @@ import java.util.Date;
 import java.util.Locale;
 
 
-
-
-
 import android.widget.RelativeLayout;
 import android.widget.EditText;
 
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.menu.NavigationHelper;
-
 
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -55,7 +52,6 @@ import android.os.Handler;
 import com.example.brokerfi.xc.net.ABIUtils;
 
 
-
 public class MintActivity extends AppCompatActivity {
 
     private static final String PREFS_NAME = "MyPrefsFile";
@@ -63,7 +59,7 @@ public class MintActivity extends AppCompatActivity {
     private ImageView menu;
     private RelativeLayout action_bar;
 
-    private EditText edt_nft_name, edt_shares;
+    private EditText edt_nft_name, edt_shares, edt_gas;
 
     private NavigationHelper navigationHelper;
     private Button btn_doCamera, btn_doFile, btn_cancel, btn_mint;
@@ -72,6 +68,7 @@ public class MintActivity extends AppCompatActivity {
     private ImageView uploadView;
     private int hasImage = 0; // 0-无图片 1-有图片
 
+    private TextView warning;
 
     private static final int PERMISSION_CAMERA = 2001;
     private static final int PERMISSION_STORAGE = 2002;
@@ -115,6 +112,8 @@ public class MintActivity extends AppCompatActivity {
         btn_cancel = findViewById(R.id.btn_cancel);
         btn_mint = findViewById(R.id.btn_mint);
         uploadView = findViewById(R.id.uploadIcon);
+        edt_gas = findViewById(R.id.edt_gas);
+        warning = findViewById(R.id.warning);
     }
 
     private void intEvent() {
@@ -166,10 +165,9 @@ public class MintActivity extends AppCompatActivity {
             }
 
 
-
             try {
                 String base64Image;
-                if (hasImage ==1){
+                if (hasImage == 1) {
                     InputStream in = getContentResolver().openInputStream(imageUri);
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     options.inSampleSize = 4; // 直接缩小4倍
@@ -185,12 +183,12 @@ public class MintActivity extends AppCompatActivity {
                     }
                     byte[] imageBytes = out.toByteArray();
                     base64Image = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
-                }else {
+                } else {
                     base64Image = "123";
                 }
                 BigInteger share = new BigInteger(sharesStr);
                 String data = ABIUtils.encodeMint(nftname, base64Image, share);
-                sendMintTransaction(data, BigInteger.TEN);
+                sendMintTransaction(data, BigInteger.TEN, edt_gas.getText().toString());
             } catch (Exception e) {
                 Toast.makeText(this, " " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -213,8 +211,7 @@ public class MintActivity extends AppCompatActivity {
                 requestPermissions(new String[]{Manifest.permission.READ_MEDIA_IMAGES}, PERMISSION_STORAGE);
                 return;
             }
-        }
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_STORAGE);
                 return;
@@ -298,10 +295,10 @@ public class MintActivity extends AppCompatActivity {
         return File.createTempFile(fileName, ".jpg", storageDir);
     }
 
-    private void sendMintTransaction(String data, BigInteger value) {
+    private void sendMintTransaction(String data, BigInteger value, String gas) {
         try {
             String privatekey = StorageUtil.getCurrentPrivatekey(this);
-            if(privatekey==null){
+            if (privatekey == null) {
                 runOnUiThread(() ->
                         Toast.makeText(MintActivity.this,
                                 "铸造失败",
@@ -309,12 +306,16 @@ public class MintActivity extends AppCompatActivity {
                 );
                 return;
             }
-            String result = MyUtil.sendethtx(data, privatekey);
-            if(result ==  null){
-                runOnUiThread(() ->
-                        Toast.makeText(MintActivity.this,
-                                "铸造失败,服务器响应为空",
-                                Toast.LENGTH_LONG).show()
+            String result = MyUtil.sendethtx2(data, privatekey, gas);
+            if (result == null) {
+                runOnUiThread(() -> {
+                            Toast.makeText(MintActivity.this,
+                                    "铸造失败,服务器响应为空",
+                                    Toast.LENGTH_LONG).show();
+
+                        warning.setText("铸造失败,服务器响应为空");
+
+                        }
                 );
                 return;
             }
@@ -322,18 +323,26 @@ public class MintActivity extends AppCompatActivity {
                 if (result.trim().startsWith("{")) {
                     JSONObject response = new JSONObject(result);
                     if (response.has("error")) {
+                        String error = response.getString("error");
                         Toast.makeText(MintActivity.this,
-                                "铸造失败: " + response.getString("error"),
+                                "铸造失败: " + error,
                                 Toast.LENGTH_LONG).show();
+                        runOnUiThread(() -> {
+                            warning.setText(error);
+                        });
+
                     } else {
                         String txHash = response.getString("result");
                         checkTransactionStatus(txHash);
                     }
                 } else {
-                    runOnUiThread(() ->
-                            Toast.makeText(MintActivity.this,
-                                    "服务器错误: " + result,
-                                    Toast.LENGTH_LONG).show()
+                    runOnUiThread(() -> {
+                                Toast.makeText(MintActivity.this,
+                                        "服务器错误: " + result,
+                                        Toast.LENGTH_LONG).show();
+
+                                warning.setText(result);
+                            }
                     );
                 }
             } catch (JSONException e) {
@@ -352,14 +361,14 @@ public class MintActivity extends AppCompatActivity {
     }
 
     private void checkTransactionStatus(String txHash) {
-        if(txHash.startsWith("0x")){
+        if (txHash.startsWith("0x")) {
             txHash = txHash.substring(2);
         }
         try {
             JSONArray params = new JSONArray();
             params.put(txHash);
             String result = MyUtil.getTransactionReceipt(txHash, StorageUtil.getCurrentPrivatekey(this));
-            if(result == null){
+            if (result == null) {
                 runOnUiThread(() ->
                         Toast.makeText(MintActivity.this, "交易失败！", Toast.LENGTH_SHORT).show()
                 );

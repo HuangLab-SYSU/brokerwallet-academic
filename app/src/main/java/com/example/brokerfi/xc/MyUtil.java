@@ -45,7 +45,46 @@ public class MyUtil {
         }
         return reference.get();
     }
+    public static String sendethtx2(String data, String privateKey,String gas1) {
+        AtomicReference<String> reference = new AtomicReference<>();
+        CountDownLatch latch = new CountDownLatch(1);
+        service.execute(() -> {
+            try {
+                int decimalNumber = Integer.parseInt(gas1);
 
+                // 将整数转换为十六进制字符串
+                String hexString = Integer.toHexString(decimalNumber);
+                String gas = "0x"+hexString;
+                String uuid = UUID.randomUUID().toString();
+                SendETHTXReq req = new SendETHTXReq();
+                String thedata = Holder.contractaddr + data + "0x0" + gas + uuid;
+                String[] sign = SecurityUtil.signECDSA(privateKey, thedata);
+
+                req.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey));
+                req.setData(data);
+                req.setRandomStr(uuid);
+                req.setTo(Holder.contractaddr);
+                req.setValue("0x0");
+                req.setSign1(sign[0]);
+                req.setSign2(sign[1]);
+                req.setGas(gas);
+                byte[] bytes = HTTPUtil.doPost("eth_sendTransaction", req);
+                reference.set(new String(bytes));
+                latch.countDown();
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            reference.set(null);
+            latch.countDown();
+        });
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return reference.get();
+    }
     public static String sendethtx(String data, String privateKey) {
         AtomicReference<String> reference = new AtomicReference<>();
         CountDownLatch latch = new CountDownLatch(1);
