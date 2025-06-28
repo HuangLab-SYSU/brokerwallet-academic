@@ -84,14 +84,14 @@ public class WithdrawActivity extends AppCompatActivity {
                 String s = MyUtil.withdraw(privatekey);
                 if (s!=null){
                     runOnUiThread(()->{
-                        Handler h = new Handler();
-                        h.postDelayed(()->{
-
-                            Intent intent = new Intent();
-                            intent.setClass(WithdrawActivity.this, MainActivity.class);
-
-                            startActivity(intent);
-                        },3000);
+//                        Handler h = new Handler();
+//                        h.postDelayed(()->{
+//
+//                            Intent intent = new Intent();
+//                            intent.setClass(WithdrawActivity.this, MainActivity.class);
+//
+//                            startActivity(intent);
+//                        },3000);
                         if(s.contains("success")) {
                             runOnUiThread(()->{
                                 Toast.makeText(WithdrawActivity.this, "Withdraw successfully", Toast.LENGTH_LONG).show();

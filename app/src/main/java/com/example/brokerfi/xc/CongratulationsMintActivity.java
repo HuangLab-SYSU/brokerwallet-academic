@@ -27,7 +27,7 @@ public class CongratulationsMintActivity extends AppCompatActivity {
         btn.setOnClickListener(view -> {
             //创建意图对象
             Intent intent = new Intent();
-            intent.setClass(CongratulationsMintActivity.this, MainActivity.class);
+            intent.setClass(CongratulationsMintActivity.this, NFTMainActivity.class);
             //跳转
             startActivity(intent);
         });

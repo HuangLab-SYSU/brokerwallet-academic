@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     private volatile boolean flag = false;
     public static volatile boolean flag2 = true;
 
+    private volatile int position=0;
+
     public  Spinner accountSpinner;
 //    private TextView balanceTextView;
 
@@ -64,16 +66,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         intView();
         intEvent();
+        flag2 = true;
         accountSpinner = findViewById(R.id.accountSpinner);
 //        balanceTextView = findViewById(R.id.balanceTextView);
 
 
+        StorageUtil.saveCurrentAccount(MainActivity.this,"0");
         accountSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 例如：balanceTextView.setText("Selected: " + accounts[position]);
 //                    Toast.makeText(MainActivity.this,"position is "+position+",id is "+ id,Toast.LENGTH_LONG).show();
                 String s = String.valueOf(position);
+                MainActivity.this.position=position;
                 StorageUtil.saveCurrentAccount(MainActivity.this,s);
 
             }
@@ -120,10 +125,11 @@ public class MainActivity extends AppCompatActivity {
                 if(flag){
                     break;
                 }
-                if (!flag2){
-                    continue;
-                }
-                flag2 = false;
+//                if (!flag2){
+//                    continue;
+//                }
+//                flag2 = false;
+
                 String account = StorageUtil.getPrivateKey(this);
                 if (account != null) {
                     String[] split = account.split(";");
@@ -136,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, arr);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         accountSpinner.setAdapter(adapter);
+                        accountSpinner.setSelection(MainActivity.this.position,false);
                     });
                 }
 

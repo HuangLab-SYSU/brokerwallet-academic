@@ -14,6 +14,7 @@ import com.example.brokerfi.R;
 import com.example.brokerfi.xc.menu.NavigationHelper;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.kenai.jffi.Main;
 
 public class AddAccountActivity extends AppCompatActivity {
     private ImageView menu;
