@@ -76,7 +76,7 @@ public class SelectAccountActivity extends AppCompatActivity {
         new Thread(()->{
             while (true) {
                 try {
-                    Thread.sleep(1000L);
+                    Thread.sleep(20000L);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
