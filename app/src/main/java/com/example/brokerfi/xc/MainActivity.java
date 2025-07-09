@@ -118,11 +118,7 @@ public class MainActivity extends AppCompatActivity {
 //        }).start();
         new Thread(()->{
             while (true){
-                try {
-                    Thread.sleep(30000L);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+
                 if(flag){
                     break;
                 }
@@ -146,7 +142,11 @@ public class MainActivity extends AppCompatActivity {
                         accountSpinner.setSelection(MainActivity.this.position,false);
                     });
                 }
-
+                try {
+                    Thread.sleep(30000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
         }).start();
