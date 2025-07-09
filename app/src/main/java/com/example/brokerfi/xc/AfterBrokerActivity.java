@@ -130,13 +130,23 @@ public class AfterBrokerActivity extends AppCompatActivity {
                     }
 
 //                    Double finalSum = sum;
-                    String finalSum = d1.toString();
-                    String finalSumBalance = d2.toString();
+                    String finalSum1 = d1.toString();
+                    String finalSumBalance1 = d2.toString();
                     JSONObject finalJsonResponse = jsonResponse;
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            String finalSumBalance = finalSumBalance1;
+                            String finalSum = finalSum1;
+                            if(finalSum!=null &&finalSum.length()>6){
+                                finalSum = finalSum.substring(0,6);
+                                bkcprofittextview.setTextSize(16);
+                            }
                             bkcprofittextview.setText("+" + (finalSum) + " BKC");
+                            if(finalSumBalance!=null &&finalSumBalance.length()>8){
+                                finalSumBalance = finalSumBalance.substring(0,8);
+                                bkctextview.setTextSize(20);
+                            }
                             bkctextview.setText(finalSumBalance + " BKC");
                             brokerprofit.removeAllViews();
 
