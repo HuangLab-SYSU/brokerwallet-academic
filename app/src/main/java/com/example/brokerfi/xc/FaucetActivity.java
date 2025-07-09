@@ -30,6 +30,14 @@ public class FaucetActivity extends AppCompatActivity {
 
         intView();
         intEvent();
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(FaucetActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void intView() {

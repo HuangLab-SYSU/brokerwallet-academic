@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -57,6 +58,14 @@ public class BuyNFTsActivity extends AppCompatActivity{
         intEvent();
 
         fetchListedNFTs();
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(BuyNFTsActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private void intView() {
         menu = findViewById(R.id.menu);

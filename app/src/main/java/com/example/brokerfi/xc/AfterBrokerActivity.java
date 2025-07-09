@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -56,7 +57,14 @@ public class AfterBrokerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_after_broker);
         intView();
         intEvent();
-
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(AfterBrokerActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         new Thread(() -> {
 
             while (true) {

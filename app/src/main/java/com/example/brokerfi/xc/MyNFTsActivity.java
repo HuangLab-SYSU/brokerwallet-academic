@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,6 +54,14 @@ public class MyNFTsActivity extends AppCompatActivity{
         intView();
         intEvent();
         fetchMyNFTs();
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MyNFTsActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void intView() {

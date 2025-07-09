@@ -75,6 +75,14 @@ public class ReceiveActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(ReceiveActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

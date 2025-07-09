@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -42,6 +43,14 @@ public class NFTMainActivity extends AppCompatActivity {
 
         intView();
         intEvent();
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(NFTMainActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void intView() {

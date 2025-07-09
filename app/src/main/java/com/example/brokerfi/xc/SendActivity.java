@@ -36,7 +36,14 @@ public class SendActivity extends AppCompatActivity {
 
         intView();
         intEvent();
-
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(SendActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

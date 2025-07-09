@@ -55,7 +55,14 @@ public class SelectAccountActivity extends AppCompatActivity {
         acclinear = findViewById(R.id.acclinear);
         intView();
         intEvent();
-
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(SelectAccountActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

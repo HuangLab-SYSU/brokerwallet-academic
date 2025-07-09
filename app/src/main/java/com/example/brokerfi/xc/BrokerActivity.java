@@ -42,6 +42,14 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
         setContentView(R.layout.activity_broker);
         intView();
         intEvent();
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(BrokerActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {

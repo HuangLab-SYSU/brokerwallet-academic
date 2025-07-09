@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         intEvent();
         flag2 = true;
         accountSpinner = findViewById(R.id.accountSpinner);
+
 //        balanceTextView = findViewById(R.id.balanceTextView);
 
 
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(()->{
             while (true){
                 try {
-                    Thread.sleep(1000L);
+                    Thread.sleep(30000L);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
