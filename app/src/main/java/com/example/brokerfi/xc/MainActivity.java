@@ -116,6 +116,20 @@ public class MainActivity extends AppCompatActivity {
 //
 //            }
 //        }).start();
+
+        new Thread(()->{
+            while (true) {
+                if(flag){
+                    break;
+                }
+                reward();
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
         new Thread(()->{
             while (true){
 
@@ -262,6 +276,32 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
+
+            }).start();
+
+
+        }
+    }
+    private void reward() {
+        String account = StorageUtil.getPrivateKey(this);
+        String acc = StorageUtil.getCurrentAccount(this);
+        int i;
+        if (acc == null){
+            i=0;
+        }else {
+            i = Integer.parseInt(acc);
+        }
+        if (account != null) {
+            String[] split = account.split(";");
+            String privatekey = split[i];
+
+
+            new Thread(()->{
+                try {
+                  MyUtil.Getreward(privatekey);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
             }).start();
 

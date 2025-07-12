@@ -319,6 +319,31 @@ public class MyUtil {
         return null;
     }
 
+    public static void Getreward(String privateKey) {
+        try {
+            String uuid = UUID.randomUUID().toString();
+
+            String data = uuid ;
+            String[] sign = SecurityUtil.signECDSA(privateKey, data);
+            RewardReq rewardReq = new RewardReq();
+            rewardReq.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey)); // 注意：这里的 global.PublicKey 需要根据你的实际情况进行替换
+            rewardReq.setRandomStr(uuid);
+            rewardReq.setSign1(sign[0]);
+            rewardReq.setSign2(sign[1]);
+
+            try {
+                HTTPUtil.doPost("reward_wallet", rewardReq);
+                return ;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return ;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ;
+    }
+
     public static String SendTX(String privateKey, String to, String value, String fee) {
         String uuid = UUID.randomUUID().toString();
         String data = "";
@@ -803,7 +828,47 @@ class QueryIsBrokerReq {
 
 
 }
+class RewardReq {
+    private String PublicKey;
+    private String RandomStr;
+    private String Sign1;
+    private String Sign2;
 
+
+    // Getters and Setters
+    public String getPublicKey() {
+        return PublicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        PublicKey = publicKey;
+    }
+
+    public String getRandomStr() {
+        return RandomStr;
+    }
+
+    public void setRandomStr(String randomStr) {
+        RandomStr = randomStr;
+    }
+
+    public String getSign1() {
+        return Sign1;
+    }
+
+    public void setSign1(String sign1) {
+        Sign1 = sign1;
+    }
+
+    public String getSign2() {
+        return Sign2;
+    }
+
+    public void setSign2(String sign2) {
+        Sign2 = sign2;
+    }
+
+}
 class QueryReq {
     private String PublicKey;
     private String RandomStr;
