@@ -17,7 +17,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/work_sans_black"
         android:paddingHorizontal="16dp"
-        android:text="Account List"
+        android:text="Accounts List"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold" />
