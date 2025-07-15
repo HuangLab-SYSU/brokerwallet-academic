@@ -288,6 +288,7 @@ public class MyUtil {
 
     public static ReturnAccountState[] GetAddrAndBalance2(String[] addrs) {
         try {
+
             QueryAccReq req = new QueryAccReq();
             req.setAccounts(addrs);
 

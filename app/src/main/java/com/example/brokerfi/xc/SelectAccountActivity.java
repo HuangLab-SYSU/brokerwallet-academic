@@ -142,9 +142,15 @@ public class SelectAccountActivity extends AppCompatActivity {
             //                }
             list1.addAll(Arrays.asList(split));
 
+            String[] pks =list1.toArray(new String[0]);
+            String[] addrs = new String[pks.length];
+            for (int i = 0; i < pks.length; i++) {
+                addrs[i] = SecurityUtil.GetAddress(pks[i]);
+            }
+
             long l = System.currentTimeMillis();
             service.execute(() -> {
-                ReturnAccountState[] state = MyUtil.GetAddrAndBalance2(list1.toArray(new String[0]));
+                ReturnAccountState[] state = MyUtil.GetAddrAndBalance2(addrs);
 
                 if (state != null) {
                     for (int i = 0; i < state.length; i++) {
