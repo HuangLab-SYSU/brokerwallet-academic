@@ -33,4 +33,30 @@ public class HTTPUtil {
             return scanner.hasNext() ? scanner.next().getBytes() : new byte[0];
         }
     }
+    public static byte[] doGet(String url, Object requestBody) throws Exception {
+        Gson gson = new Gson();
+        String jsonInputString = gson.toJson(requestBody);
+        String urlString = "http://" + Holder.serverHost + ":" + Holder.serverPort+"/";
+        urlString += url;
+
+        URL requestUrl = new URL(urlString);
+        HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Content-Type", "application/json; utf-8");
+        connection.setRequestProperty("Accept", "application/json");
+        connection.setDoOutput(true);
+
+        try(OutputStream os = connection.getOutputStream()) {
+            byte[] input = jsonInputString.getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+
+        int responseCode = connection.getResponseCode();
+        if(responseCode != HttpURLConnection.HTTP_OK) {
+            throw new RuntimeException("HttpResponseCode: " + responseCode);
+        } else {
+            java.util.Scanner scanner = new java.util.Scanner(connection.getInputStream(), "UTF-8").useDelimiter("\\A");
+            return scanner.hasNext() ? scanner.next().getBytes() : new byte[0];
+        }
+    }
 }

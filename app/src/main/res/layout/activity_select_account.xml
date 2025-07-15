@@ -10,16 +10,17 @@
 
     <include
         layout="@layout/topbar"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:paddingHorizontal="16dp"
-        android:text="Select an account"
         android:fontFamily="@font/work_sans_black"
+        android:paddingHorizontal="16dp"
+        android:text="Account List"
+        android:textColor="#000000"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="#000000"/>
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"

@@ -286,6 +286,26 @@ public class MyUtil {
         return null;
     }
 
+    public static ReturnAccountState[] GetAddrAndBalance2(String[] addrs) {
+        try {
+            QueryAccReq req = new QueryAccReq();
+            req.setAccounts(addrs);
+
+            try {
+                byte[] bytes = HTTPUtil.doPost("query-g10", req);
+                Gson gson = new Gson();
+                ReturnAccountState[] returnAccountState = gson.fromJson(new String(bytes), ReturnAccountState[].class);
+                return returnAccountState;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static ReturnAccountState GetAddrAndBalance(String privateKey) {
         try {
             String uuid = UUID.randomUUID().toString();
@@ -784,6 +804,18 @@ class ApplyBrokerReq {
     }
 
 
+}
+
+class QueryAccReq {
+    private String[] accounts;
+
+    public String[] getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(String[] accounts) {
+        this.accounts = accounts;
+    }
 }
 
 class QueryIsBrokerReq {
