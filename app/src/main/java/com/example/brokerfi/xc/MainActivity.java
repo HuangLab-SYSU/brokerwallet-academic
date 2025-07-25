@@ -1,6 +1,7 @@
 package com.example.brokerfi.xc;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,9 +11,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -26,6 +29,8 @@ import com.example.brokerfi.R;
 import com.example.brokerfi.xc.menu.NavigationHelper;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import java.io.File;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -63,11 +68,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
         intView();
         intEvent();
         flag2 = true;
         accountSpinner = findViewById(R.id.accountSpinner);
+
+
+
+
+
+
+
+
 
 //        balanceTextView = findViewById(R.id.balanceTextView);
 
@@ -76,12 +91,43 @@ public class MainActivity extends AppCompatActivity {
         accountSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
                 // 例如：balanceTextView.setText("Selected: " + accounts[position]);
 //                    Toast.makeText(MainActivity.this,"position is "+position+",id is "+ id,Toast.LENGTH_LONG).show();
                 String s = String.valueOf(position);
                 MainActivity.this.position=position;
                 StorageUtil.saveCurrentAccount(MainActivity.this,s);
 
+                String account = StorageUtil.getPrivateKey(MainActivity.this);
+                String[] split = account.split(";");
+                String privatekey = split[position];
+
+
+                new Thread(()->{
+                    ReturnAccountState returnAccountState = null;
+                    try {
+                        returnAccountState=MyUtil.GetAddrAndBalance(privatekey);
+                        ReturnAccountState finalReturnAccountState = returnAccountState;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (finalReturnAccountState !=null){
+                                    String balance = finalReturnAccountState.getBalance();
+                                    Log.d("balance:",balance);
+                                    updateAccountStatusText(balance,finalReturnAccountState.getAccountAddr());
+                                }
+                            }
+                        });
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }finally {
+
+                    }
+
+
+
+                }).start();
             }
 
             @Override
@@ -150,7 +196,24 @@ public class MainActivity extends AppCompatActivity {
                         arr[i] = "Account " + (i + 1);
                     }
                     runOnUiThread(()->{
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, arr);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arr){
+                            @NonNull
+                            @Override
+                            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                                View view = super.getView(position, convertView, parent);
+                                TextView textView = (TextView) view;
+                                textView.setTextSize(17);
+                                return view;
+                            }
+
+                            @Override
+                            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                                View view = super.getDropDownView(position, convertView, parent);
+                                TextView textView = (TextView) view;
+                                textView.setTextSize(15);
+                                return view;
+                            }
+                        };
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         accountSpinner.setAdapter(adapter);
                         accountSpinner.setSelection(MainActivity.this.position,false);
@@ -265,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
                             if (finalReturnAccountState !=null){
                                 String balance = finalReturnAccountState.getBalance();
                                 Log.d("balance:",balance);
-                                updateAccountStatusText(balance);
+                                updateAccountStatusText(balance,finalReturnAccountState.getAccountAddr());
                             }
                         }
                     });
@@ -309,7 +372,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void updateAccountStatusText(final String status) {
+    private void updateAccountStatusText(final String status,final  String addr) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -319,7 +382,9 @@ public class MainActivity extends AppCompatActivity {
                     status1 = status1.substring(0,10);
                 }
                 accountstate.setText(status1+" BKC");
-                tsv_dollar.setText("");
+                tsv_dollar.setText("Address: "+addr);
+                tsv_dollar.setTextSize(10);
+                tsv_dollar.setTextColor(Color.BLACK);
             }
         });
     }
