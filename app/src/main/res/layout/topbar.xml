@@ -12,7 +12,7 @@
         android:layout_height="48dp"
         android:layout_marginRight="8dp"
 
-        android:src="@drawable/logo3" />
+        android:src="@drawable/logo4" />
 
 <!--    <View-->
 <!--        android:id="@+id/dashedBorderView"-->

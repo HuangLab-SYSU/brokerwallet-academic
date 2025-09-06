@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:src="@drawable/logo3"
+        android:src="@drawable/logo4"
         android:layout_above="@+id/welcomeTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
