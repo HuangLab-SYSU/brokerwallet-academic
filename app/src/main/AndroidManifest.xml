@@ -21,13 +21,14 @@
     </queries>
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher2"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher2_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BrokerFi"
         tools:targetApi="31">
@@ -36,6 +37,9 @@
             android:exported="false" />
         <activity
             android:name=".xc.WithdrawActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.NewsActivity"
             android:exported="false" />
         <activity
             android:name=".xc.StakeMoreActivity"

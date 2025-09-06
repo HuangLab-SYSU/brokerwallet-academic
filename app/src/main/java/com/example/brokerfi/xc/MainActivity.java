@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView swap;
     private ImageView broker;
     private ImageView nft;
+    private ImageView news;
     private LinearLayout support;
     private NavigationHelper navigationHelper;
     private RelativeLayout sendlist;
@@ -262,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
         accountstate=findViewById(R.id.WTextview);
         tsv_dollar=findViewById(R.id.tsv_dollar);
         nft = findViewById(R.id.nft);
+        news = findViewById(R.id.news);
     }
 
     private void intEvent(){
@@ -300,7 +302,12 @@ public class MainActivity extends AppCompatActivity {
             //跳转
             startActivity(intent);
         });
-
+        news.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this,NewsActivity.class);
+            //跳转
+            startActivity(intent);
+        });
     }
 
     private void fetchAccountStatus() {
