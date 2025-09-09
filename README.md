@@ -4,11 +4,16 @@
 # BrokerChain Wallet
 
 
-## Overview of BrokerChain
+## Overview
 
-### Several typical Roles of Participants
+### BrokerChain Wallet
+BrokerChain Wallet is the native wallet for **BrokerChain** (https://github.com/HuangLab-SYSU/brokerchain-academic).
+Using BrokerChain Wallet, users can submit token-transfer transactions, receive payments, stake tokens to DeFi protocols, become brokers (i.e., market makers) to earn liquidity staking revenue, receive faucet tokens, participate in airdrops, and so on.
 
-In BrokerChain’s ecosystem, everyone can become a researcher, miner, user (including staker, market maker, etc), or dApp developer.
+
+### Four typical BrokerChain Participants
+
+In BrokerChain’s ecosystem, everyone can become a researcher, miner, user (such as staker, market maker, etc), or dApp developer.
 
 ![Roles](img/img_15.png)
 
@@ -16,9 +21,6 @@ In BrokerChain’s ecosystem, everyone can become a researcher, miner, user (inc
 - **Miners** can join the Testnet to earn mining rewards. Please visit the release page ( https://github.com/HuangLab-SYSU/brokerchain-academic/releases/ ) to download the miner client and join the network.
 - **Developers** can build dApps by deploying smart contracts to the embedded EVM. Please review the README.md to learn how to deploy/invoke smart contracts.
 - **Users** can initiate token-transfer transactions, invest in BrokerChain on-chain financial products, and participate in other activities held by dApps. 
-
-### BrokerChain Wallet
-Using BrokerChain Wallet, users can submit transfer transactions, receive payments, stake tokens to DeFi protocols, become brokers (i.e., market makers) to earn liquidity staking revenue, receive faucet tokens, participate in airdrops, and so on.
 
 
 
