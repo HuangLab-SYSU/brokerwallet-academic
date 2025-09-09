@@ -1,4 +1,4 @@
-![Logo](logo_h.png)
+![Logo](logo-h.png)
 
 
 # BrokerChain Wallet
@@ -6,7 +6,7 @@
 ## Disclaimers
 
 - BrokerChain (academic) is only for educational exchange purposes, and users are not allowed to engage in any illegal activities using BrokerChain (academic).
-- Any direct or indirect consequences arising from users' use of BrokerChain are not related to the founding team of BrokerChain.
+- Any direct or indirect consequences arising from users' use of BrokerChain are unrelated to the founding team of BrokerChain.
 - The founding team of BrokerChain (academic) reserves the right to modify, update, or terminate BrokerChain (academic) without prior notice to users.
 - When using BrokerChain (academic), users should bear the risks themselves and agree to waive any claims against the founding team.
 - This disclaimer is governed by and interpreted according to the laws of the People's Republic of China.
@@ -48,6 +48,6 @@ Enter the main page of BrokerChain Wallet. Click the Send button to enter the tr
 
 ## Use the faucet function of BrokerChain Wallet to receive free coins
 
-BrokerChain Wallet provides a "Faucet" function, allowing users to receive a small amount of test coins for free. Enter the main page of BrokerChain Wallet, click the Faucet button, and enter the faucet page. Click the Claim button to receive some BKC coins. Users can only receive once per account per day. However, each IP address has a limited number of faucet tokens that can be claimed.
+BrokerChain Wallet provides a "Faucet" function, allowing users to receive a small amount of test coins for free. Enter the main page of BrokerChain Wallet, click the Faucet button, and enter the faucet page. Click the Claim button to receive some BKC coins. Users can only receive once per account per day. However, each IP address can claim only a few faucet tokens.
 
 ![test4](img/img_9.png)
