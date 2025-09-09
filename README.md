@@ -3,13 +3,24 @@
 
 # BrokerChain Wallet
 
-## Disclaimers
 
-- BrokerChain (academic) is only for educational exchange purposes, and users are not allowed to engage in any illegal activities using BrokerChain (academic).
-- Any direct or indirect consequences arising from users' use of BrokerChain are unrelated to the founding team of BrokerChain.
-- The founding team of BrokerChain (academic) reserves the right to modify, update, or terminate BrokerChain (academic) without prior notice to users.
-- When using BrokerChain (academic), users should bear the risks themselves and agree to waive any claims against the founding team.
-- This disclaimer is governed by and interpreted according to the laws of the People's Republic of China.
+## Overview of BrokerChain
+
+### Several typical Roles of Participants
+
+In BrokerChain’s ecosystem, everyone can become a researcher, miner, user (including staker, market maker, etc), or dApp developer.
+
+![Roles](img/img_15.png)
+
+- **Researchers** can use this project's open-source code to implement technological innovations at the bottom of the chain.
+- **Miners** can join the Testnet to earn mining rewards. Please visit the release page ( https://github.com/HuangLab-SYSU/brokerchain-academic/releases/ ) to download the miner client and join the network.
+- **Developers** can build dApps by deploying smart contracts to the embedded EVM. Please review the README.md to learn how to deploy/invoke smart contracts.
+- **Users** can initiate token-transfer transactions, invest in BrokerChain on-chain financial products, and participate in other activities held by dApps. 
+
+### BrokerChain Wallet
+Using BrokerChain Wallet, users can submit transfer transactions, receive payments, stake tokens to DeFi protocols, become brokers (i.e., market makers) to earn liquidity staking revenue, receive faucet tokens, participate in airdrops, and so on.
+
+
 
 ## Download BrokerChain Wallet
 
@@ -20,7 +31,7 @@ Download the compiled **APK** file from the BrokerChain Wallet's Github reposito
 
 
 
-## Import Account
+## Import an Account
 
 After entering the main page of BrokerChain Wallet, click on the upper right corner to enter the menu list, click on the Settings option to enter the settings page, and click on the Accounts option to enter the account management page.
 
@@ -37,7 +48,7 @@ Click the Save button to save this account. The account list will display the ad
 
 
 
-## Initiate a transfer transaction
+## Initiate a Token-transfer Transaction
 
 Enter the main page of BrokerChain Wallet. Click the Send button to enter the transfer page. Enter the recipient's account address in the Send to input box, the transfer amount (in BKC) in the Amount input box, and the transfer fee (in **BKC**) in the Fee input box. Click the Send button to initiate a transfer transaction. After the transfer is successful, return to the main page of BrokerChain Wallet, and you will see that the transfer amount and transaction fee have been deducted from the account balance. The transfer amount will be credited to the recipient's account, and the transfer fee will be used as the broker's income.
 
@@ -46,8 +57,17 @@ Enter the main page of BrokerChain Wallet. Click the Send button to enter the tr
 
 
 
-## Use the faucet function of BrokerChain Wallet to receive free coins
+## Use the Faucet Function of BrokerChain Wallet to Receive Airdropped Coins
 
-BrokerChain Wallet provides a "Faucet" function, allowing users to receive a small amount of test coins for free. Enter the main page of BrokerChain Wallet, click the Faucet button, and enter the faucet page. Click the Claim button to receive some BKC coins. Users can only receive once per account per day. However, each IP address can claim only a few faucet tokens.
+BrokerChain Wallet provides a **Faucet** function, allowing users to receive a small amount of test coins for free. Enter the main page of BrokerChain Wallet, click the Faucet button, and enter the faucet page. Click the Claim button to receive some BKC coins. Users can only receive once per account per day. However, each IP address can claim only a few faucet tokens.
 
 ![test4](img/img_9.png)
+
+
+## Disclaimers
+
+- BrokerChain (academic) is only for educational purposes, and users are not allowed to engage in any illegal activities using BrokerChain (academic).
+- Any direct or indirect consequences arising from users' use of BrokerChain are unrelated to the founding team of BrokerChain.
+- The founding team of BrokerChain (academic) reserves the right to modify, update, or terminate BrokerChain (academic) without prior notice to users.
+- When using BrokerChain (academic), users should bear the risks themselves and agree to waive any claims against the founding team.
+- This disclaimer is governed by and interpreted according to the laws of the People's Republic of China.
