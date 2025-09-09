@@ -4,7 +4,7 @@
 # BrokerChain Wallet
 
 
-## Overview
+## Basics
 
 ### BrokerChain Wallet
 BrokerChain Wallet is the native wallet for **BrokerChain** (https://github.com/HuangLab-SYSU/brokerchain-academic).
@@ -21,6 +21,10 @@ In BrokerChain’s ecosystem, everyone can become a researcher, miner, user (suc
 - **Miners** can join the Testnet to earn mining rewards. Please visit the release page ( https://github.com/HuangLab-SYSU/brokerchain-academic/releases/ ) to download the miner client and join the network.
 - **Developers** can build dApps by deploying smart contracts to the embedded EVM. Please review the README.md to learn how to deploy/invoke smart contracts.
 - **Users** can initiate token-transfer transactions, invest in BrokerChain on-chain financial products, and participate in other activities held by dApps. 
+
+
+### Follow our X Media
+Please follow our X (Twitter) account: https://x.com/0xBrokerChain. We share BrokerChain news in this X account.
 
 
 
