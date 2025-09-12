@@ -196,10 +196,15 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject j = new JSONObject(noticestr);
                     JSONArray array = (JSONArray) j.get("data");
                     Integer maxid = 0;
+                    String title = "";
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject jsonObject = (JSONObject) array.get(i);
                         Integer id = (Integer) jsonObject.get("id");
-                        maxid = Math.max(maxid,id);
+
+                        if (id>maxid) {
+                            title = jsonObject.getString("title");
+                            maxid = id;
+                        }
                     }
                     String currnoticeIdstr = StorageUtil.getNoticeId(this);
                     Integer currnoticeId=0;
@@ -208,10 +213,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if(currnoticeId < maxid) {
                         Integer finalMaxid = maxid;
+                        String finalTitle = title;
                         runOnUiThread(()->{
                             new AlertDialog.Builder(this)
                                     .setTitle("Info")  // 标题
-                                    .setMessage("You have new notification messages, please check them out")  // 内容
+                                    .setMessage("You have new a notification message:  " + finalTitle + ", please check it out")  // 内容
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
