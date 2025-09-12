@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">BrokerChain Wallet</string>
-    <string name="welcome_text">Welcome to BrokerChain Wallet</string>
+    <string name="welcome_text">BrokerChain Wallet</string>
     <string name="create_wallet">Create a Wallet</string>
     <string name="import_wallet">Import existing wallet</string>
     <string name="import_existing_wallet">Import existing wallet?</string>
-    <string name="description_text">Connecting you to the decentralized world</string>
+    <string name="description_text">Connecting to the decentralized world</string>
     <string name="use_secret_phrase">Using a Secret Recovery Phrase</string>
     <string name="get_started">Get started</string>
     <string name="broker">Get started</string>

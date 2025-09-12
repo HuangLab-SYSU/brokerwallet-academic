@@ -7,19 +7,16 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.xc.menu.NavigationHelper;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class NewsActivity extends AppCompatActivity {
+public class EmulatorActivity extends AppCompatActivity {
 
 //    private ImageView menu;
 //    private RelativeLayout action_bar;
@@ -29,7 +26,7 @@ public class NewsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
+        setContentView(R.layout.activity_emulator);
 
         intView();
         intEvent();
@@ -65,7 +62,7 @@ public class NewsActivity extends AppCompatActivity {
 
                 // ✅ 使用 loadDataWithBaseURL
                 view.loadDataWithBaseURL("file:///android_asset/", customErrorHtml, "text/html", "utf-8", null);
-                Toast.makeText(NewsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EmulatorActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent();
 //                intent.setClass(NewsActivity.this, MainActivity.class);
 //                startActivity(intent);
@@ -92,7 +89,7 @@ public class NewsActivity extends AppCompatActivity {
         });
 
         // 加载指定网站
-        webView.loadUrl("http://academic.broker-chain.com/news");
+        webView.loadUrl("https://www.blockemulator.com");
     }
     @Override
     public void onBackPressed() {
@@ -119,7 +116,7 @@ public class NewsActivity extends AppCompatActivity {
         );
         if (intentResult.getContents() != null){
             String scannedData = intentResult.getContents();
-            Intent intent = new Intent(this,SendActivity.class);
+            Intent intent = new Intent(this, SendActivity.class);
             intent.putExtra("scannedData",scannedData);
             startActivity(intent);
 

@@ -286,7 +286,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
                     android:layout_toRightOf="@+id/lockicon"
-                    android:text="Lock BrokerFi"
+                    android:text="Lock Wallet"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 

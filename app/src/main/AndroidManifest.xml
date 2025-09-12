@@ -42,6 +42,9 @@
             android:name=".xc.NewsActivity"
             android:exported="false" />
         <activity
+            android:name=".xc.EmulatorActivity"
+            android:exported="false" />
+        <activity
             android:name=".xc.StakeMoreActivity"
             android:exported="false" />
         <activity

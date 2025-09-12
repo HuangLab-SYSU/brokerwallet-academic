@@ -26,6 +26,9 @@ import android.widget.Toast;
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.AtvActivity;
 
+import com.example.brokerfi.xc.EmulatorActivity;
+import com.example.brokerfi.xc.MainActivity;
+import com.example.brokerfi.xc.NewsActivity;
 import com.example.brokerfi.xc.QRCode.Capture;
 import com.example.brokerfi.xc.ReceiveActivity;
 
@@ -130,18 +133,22 @@ public class NavigationHelper{
         supportlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://www.blockemulator.com";
-
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-
-
-                if (intent.resolveActivity(context.getPackageManager()) != null) {
-
-                    context.startActivity(intent);
-                } else {
-
-                    Toast.makeText(context, "打开网页失败，请手动打开https://www.blockemulator.com", Toast.LENGTH_LONG).show();
-                }
+                Intent intent = new Intent();
+                intent.setClass(context, EmulatorActivity.class);
+                //跳转
+                context.startActivity(intent);
+//                String url = "https://www.blockemulator.com";
+//
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//
+//
+//                if (intent.resolveActivity(context.getPackageManager()) != null) {
+//
+//                    context.startActivity(intent);
+//                } else {
+//
+//                    Toast.makeText(context, "打开网页失败，请手动打开https://www.blockemulator.com", Toast.LENGTH_LONG).show();
+//                }
             }
         });
 

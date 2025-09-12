@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout setlist;
     private RelativeLayout supportlist;
     private RelativeLayout locklist;
+    private ImageView receive;
+    private ImageView accounts;
     private TextView accountstate;
     private TextView tsv_dollar;
     private volatile boolean flag = false;
@@ -264,11 +266,27 @@ public class MainActivity extends AppCompatActivity {
         tsv_dollar=findViewById(R.id.tsv_dollar);
         nft = findViewById(R.id.nft);
         news = findViewById(R.id.news);
+        receive = findViewById(R.id.receiveicon);
+        accounts = findViewById(R.id.accounts);
     }
 
     private void intEvent(){
 
         navigationHelper = new NavigationHelper(menu, action_bar,this);
+
+        accounts.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this,SelectAccountActivity.class);
+            //跳转
+            startActivity(intent);
+        });
+        receive.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this,ReceiveActivity.class);
+            //跳转
+            startActivity(intent);
+        });
+
         buy.setOnClickListener(view -> {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,FaucetActivity.class);
