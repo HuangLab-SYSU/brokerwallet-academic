@@ -58,6 +58,7 @@ public class MintActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String PREF_ACCOUNT_NUMBER = "accountNumber";
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
 
     private EditText edt_nft_name, edt_shares, edt_gas;
@@ -113,6 +114,7 @@ public class MintActivity extends AppCompatActivity {
 
     private void intView() {
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         edt_nft_name = findViewById(R.id.edt_nft_name);
         edt_shares = findViewById(R.id.edt_shares);
@@ -126,7 +128,7 @@ public class MintActivity extends AppCompatActivity {
     }
 
     private void intEvent() {
-        navigationHelper = new NavigationHelper(menu, action_bar, this);
+        navigationHelper = new NavigationHelper(menu, action_bar, this,notificationBtn);
         btn_doCamera.setOnClickListener(v -> handleCameraClick());
         btn_doFile.setOnClickListener(v -> handleGalleryClick());
 

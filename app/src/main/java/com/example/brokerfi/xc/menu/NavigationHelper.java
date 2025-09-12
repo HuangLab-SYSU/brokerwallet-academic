@@ -24,11 +24,13 @@ import android.widget.Toast;
 
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.xc.AboutActivity;
 import com.example.brokerfi.xc.AtvActivity;
 
 import com.example.brokerfi.xc.EmulatorActivity;
 import com.example.brokerfi.xc.MainActivity;
 import com.example.brokerfi.xc.NewsActivity;
+import com.example.brokerfi.xc.NewsActivity2;
 import com.example.brokerfi.xc.QRCode.Capture;
 import com.example.brokerfi.xc.ReceiveActivity;
 
@@ -41,6 +43,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 
 public class NavigationHelper{
     private ImageView menu;
+    private ImageView notice;
     private RelativeLayout action_bar;
     private Context context;
 
@@ -53,15 +56,17 @@ public class NavigationHelper{
     private RelativeLayout activitylist;
     private RelativeLayout setlist;
     private RelativeLayout supportlist;
+    private RelativeLayout about;
     private RelativeLayout locklist;
     private PopupWindow popupWindow;
     boolean hasExecuted = false;
 
 
-    public NavigationHelper(ImageView menu, RelativeLayout action_bar,Context context) {
+    public NavigationHelper(ImageView menu, RelativeLayout action_bar,Context context,ImageView notificationBtn) {
         this.menu = menu;
         this.action_bar = action_bar;
         this.context = context;
+        this.notice = notificationBtn;
 
 
         int status_bar_height = getStatusBarHeight(context);
@@ -128,8 +133,20 @@ public class NavigationHelper{
         activitylist = customView.findViewById(R.id.activitylist);
         setlist = customView.findViewById(R.id.setlist);
         supportlist = customView.findViewById(R.id.supportlist);
+        about = customView.findViewById(R.id.about);
         locklist = customView.findViewById(R.id.locklist);
-
+        about.setOnClickListener(v -> {
+            context.startActivity(new Intent(context, AboutActivity.class));
+        });
+        notice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, NewsActivity2.class);
+                //跳转
+                context.startActivity(intent);
+            }
+        });
         supportlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

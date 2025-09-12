@@ -31,6 +31,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class BrokerActivity extends AppCompatActivity implements View.OnTouchListener{
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private NavigationHelper navigationHelper;
     private Button btn;
@@ -89,6 +90,7 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
 
     private void intView() {
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         btn = findViewById(R.id.button);
         text = findViewById(R.id.editTextTextMultiLine);
@@ -96,7 +98,7 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
 
     private void intEvent() {
         text.setOnTouchListener(this);
-        navigationHelper = new NavigationHelper(menu, action_bar, this);
+        navigationHelper = new NavigationHelper(menu, action_bar, this,notificationBtn);
 
         List<String> keywords = Arrays.asList("contract", "require", "emit", "function","returns","address","struct","mapping","payable","false","true","event","constructor");
         int keywordColor = Color.parseColor("#FF8C00"); // 深橙色

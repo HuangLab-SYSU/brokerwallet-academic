@@ -52,6 +52,37 @@
         android:textSize="18sp"
         android:textStyle="bold" />
     <!-- Menu Icon -->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/notificationBtn"-->
+<!--        android:layout_width="82dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="72dp"-->
+<!--        android:layout_toEndOf="@+id/brokerTextview1"-->
+<!--        android:layout_toStartOf="@+id/menu"-->
+<!--        android:background="?android:attr/selectableItemBackground"-->
+<!--        android:clickable="true"-->
+<!--        android:contentDescription="Notification"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:padding="8dp"-->
+<!--        android:src="@drawable/notifications" />-->
+
+
+    <ImageView
+        android:id="@+id/notificationBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/brokerTextview1"
+        android:layout_toStartOf="@+id/menu"
+        android:padding="8dp"
+        android:src="@drawable/notifications"
+    android:background="?android:attr/selectableItemBackground"
+    android:contentDescription="通知"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:clickable="true" />
+
     <ImageView
         android:id="@+id/menu"
         android:layout_width="wrap_content"

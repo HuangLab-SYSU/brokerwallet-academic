@@ -17,6 +17,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class ShowPrKryActivity extends AppCompatActivity {
 
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private Button btn_done;
     private NavigationHelper navigationHelper;
@@ -32,12 +33,13 @@ public class ShowPrKryActivity extends AppCompatActivity {
 
     private void intView() {
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         btn_done = findViewById(R.id.btn_done);
     }
 
     private void intEvent(){
-        navigationHelper = new NavigationHelper(menu, action_bar,this);
+        navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
         btn_done.setOnClickListener(view -> {
             //创建意图对象

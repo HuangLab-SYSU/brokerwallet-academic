@@ -17,6 +17,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class BeforeShowPrKeyActivity extends AppCompatActivity {
 
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private Button btn_cancel;
     private Button btn_confirm;
@@ -33,13 +34,14 @@ public class BeforeShowPrKeyActivity extends AppCompatActivity {
 
     private void intView() {
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         btn_cancel = findViewById(R.id.btn_cancel);
         btn_confirm = findViewById(R.id.btn_confirm);
     }
 
     private void intEvent(){
-        navigationHelper = new NavigationHelper(menu, action_bar,this);
+        navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
         btn_cancel.setOnClickListener(view -> {
             finish();

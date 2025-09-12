@@ -33,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AfterBrokerActivity extends AppCompatActivity {
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private ImageView buy;
     private ImageView send;
@@ -239,6 +240,7 @@ public class AfterBrokerActivity extends AppCompatActivity {
 
     private void intView() {
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         buy = findViewById(R.id.buy);
         send = findViewById(R.id.send);
@@ -254,7 +256,7 @@ public class AfterBrokerActivity extends AppCompatActivity {
     }
 
     private void intEvent() {
-        navigationHelper = new NavigationHelper(menu, action_bar, this);
+        navigationHelper = new NavigationHelper(menu, action_bar, this,notificationBtn);
 
         buttonWithIconAndText();
         buy.setOnClickListener(view -> {

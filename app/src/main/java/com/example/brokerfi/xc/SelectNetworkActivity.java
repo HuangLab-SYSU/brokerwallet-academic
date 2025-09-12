@@ -24,6 +24,7 @@ import java.util.List;
 public class SelectNetworkActivity extends AppCompatActivity {
 
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private RelativeLayout main_network;
     private RelativeLayout third_network;
@@ -40,6 +41,7 @@ public class SelectNetworkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_network);
 
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         main_network = findViewById(R.id.main_network);
         third_network = findViewById(R.id.third_network);
@@ -51,7 +53,7 @@ public class SelectNetworkActivity extends AppCompatActivity {
         int grayColor = Color.rgb(229, 231, 235);
 
 
-        navigationHelper = new NavigationHelper(menu, action_bar, this);
+        navigationHelper = new NavigationHelper(menu, action_bar, this,notificationBtn);
 
         add_network.setOnClickListener(view -> {
             Intent intent = new Intent();

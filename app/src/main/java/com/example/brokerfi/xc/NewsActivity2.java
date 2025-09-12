@@ -16,7 +16,7 @@ import com.example.brokerfi.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class EmulatorActivity extends AppCompatActivity {
+public class NewsActivity2 extends AppCompatActivity {
 
 //    private ImageView menu;
 //    private RelativeLayout action_bar;
@@ -26,7 +26,7 @@ public class EmulatorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emulator);
+        setContentView(R.layout.activity_news2);
 
         intView();
         intEvent();
@@ -62,7 +62,7 @@ public class EmulatorActivity extends AppCompatActivity {
 
                 // ✅ 使用 loadDataWithBaseURL
                 view.loadDataWithBaseURL("file:///android_asset/", customErrorHtml, "text/html", "utf-8", null);
-                Toast.makeText(EmulatorActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewsActivity2.this, "网络连接失败", Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent();
 //                intent.setClass(NewsActivity.this, MainActivity.class);
 //                startActivity(intent);
@@ -89,7 +89,7 @@ public class EmulatorActivity extends AppCompatActivity {
         });
 
         // 加载指定网站
-        webView.loadUrl("https://www.blockemulator.com");
+        webView.loadUrl("http://academic.broker-chain.com/news2");
     }
     @Override
     public void onBackPressed() {
@@ -116,7 +116,7 @@ public class EmulatorActivity extends AppCompatActivity {
         );
         if (intentResult.getContents() != null){
             String scannedData = intentResult.getContents();
-            Intent intent = new Intent(this, SendActivity.class);
+            Intent intent = new Intent(this,SendActivity.class);
             intent.putExtra("scannedData",scannedData);
             startActivity(intent);
 

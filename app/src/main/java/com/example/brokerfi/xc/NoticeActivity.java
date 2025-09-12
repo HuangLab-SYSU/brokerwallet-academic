@@ -16,7 +16,7 @@ import com.example.brokerfi.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class EmulatorActivity extends AppCompatActivity {
+public class NoticeActivity extends AppCompatActivity {
 
 //    private ImageView menu;
 //    private RelativeLayout action_bar;
@@ -62,7 +62,7 @@ public class EmulatorActivity extends AppCompatActivity {
 
                 // ✅ 使用 loadDataWithBaseURL
                 view.loadDataWithBaseURL("file:///android_asset/", customErrorHtml, "text/html", "utf-8", null);
-                Toast.makeText(EmulatorActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NoticeActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent();
 //                intent.setClass(NewsActivity.this, MainActivity.class);
 //                startActivity(intent);

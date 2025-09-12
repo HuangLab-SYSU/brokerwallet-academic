@@ -33,6 +33,12 @@
         android:theme="@style/Theme.BrokerFi"
         tools:targetApi="31">
         <activity
+            android:name=".xc.AboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.NewsActivity2"
+            android:exported="false" />
+        <activity
             android:name=".xc.AtvActivity"
             android:exported="false" />
         <activity

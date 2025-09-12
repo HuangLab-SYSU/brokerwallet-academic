@@ -109,7 +109,7 @@ public class NewsActivity extends AppCompatActivity {
     }
 
     private void intEvent(){
-//        navigationHelper = new NavigationHelper(menu, action_bar,this);
+//        navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
     }
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

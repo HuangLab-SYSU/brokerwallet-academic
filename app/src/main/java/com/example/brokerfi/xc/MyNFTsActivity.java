@@ -38,6 +38,7 @@ import java.util.List;
 public class MyNFTsActivity extends AppCompatActivity{
 
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private NavigationHelper navigationHelper;
     private RecyclerView recyclerView;
@@ -66,6 +67,7 @@ public class MyNFTsActivity extends AppCompatActivity{
 
     private void intView() {
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         btn_list = findViewById(R.id.btn_list);
         btn_unlist = findViewById(R.id.btn_unlist);
@@ -76,7 +78,7 @@ public class MyNFTsActivity extends AppCompatActivity{
     }
     
     private void intEvent(){
-        navigationHelper = new NavigationHelper(menu, action_bar,this);
+        navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
         btn_list.setOnClickListener(view -> {
             NFT selected = adapter.getSelectedItem();

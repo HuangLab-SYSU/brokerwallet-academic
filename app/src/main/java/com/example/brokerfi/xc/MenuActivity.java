@@ -21,6 +21,7 @@ public class MenuActivity extends AppCompatActivity {
     private RelativeLayout activitylist;
     private RelativeLayout setlist;
     private RelativeLayout supportlist;
+    private RelativeLayout about;
     private RelativeLayout locklist;
     private ImageView up_icon;
 
@@ -42,9 +43,13 @@ public class MenuActivity extends AppCompatActivity {
         supportlist = findViewById(R.id.supportlist);
         locklist = findViewById(R.id.locklist);
         up_icon = findViewById(R.id.up_icon);
+        about = findViewById(R.id.about);
     }
 
     private void intEvent(){
+        about.setOnClickListener(v -> {
+            startActivity(new Intent(this, AboutActivity.class));
+        });
         sendlist.setOnClickListener(view -> {
             IntentIntegrator intentIntegrator = new IntentIntegrator(MenuActivity.this);
             intentIntegrator.setPrompt("For flash use volume up key");

@@ -40,6 +40,7 @@ import java.util.Locale;
 public class BuyNFTsActivity extends AppCompatActivity{
 
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private NavigationHelper navigationHelper;
     private RecyclerView recyclerView;
@@ -69,6 +70,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
     }
     private void intView() {
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         btn_buy_nfts = findViewById(R.id.btn_buy_nfts);
         recyclerView = findViewById(R.id.rv_nft_list);
@@ -77,7 +79,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
         recyclerView.setAdapter(adapter);
     }
     private void intEvent(){
-        navigationHelper = new NavigationHelper(menu, action_bar,this);
+        navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
         //购买按钮
         btn_buy_nfts.setOnClickListener(view -> {

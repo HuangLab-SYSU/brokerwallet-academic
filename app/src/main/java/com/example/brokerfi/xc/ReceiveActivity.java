@@ -54,6 +54,7 @@ import java.io.OutputStream;
 public class ReceiveActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_SAVE_IMAGE = 1;
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private EditText edittext;
     private ImageView imageView;
@@ -88,6 +89,7 @@ public class ReceiveActivity extends AppCompatActivity {
 
     private void intView() {
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         edittext = findViewById(R.id.edittext);
         imageView = findViewById(R.id.imageView);
@@ -96,7 +98,7 @@ public class ReceiveActivity extends AppCompatActivity {
     }
 
     private void intEvent() throws WriterException {
-        navigationHelper = new NavigationHelper(menu, action_bar,this);
+        navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
         ViewTreeObserver vto = imageView.getViewTreeObserver();
 
         String account = StorageUtil.getPrivateKey(this);

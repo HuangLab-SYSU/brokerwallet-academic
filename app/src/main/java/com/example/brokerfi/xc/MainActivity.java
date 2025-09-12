@@ -30,11 +30,15 @@ import com.example.brokerfi.xc.menu.NavigationHelper;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.File;
 
 
 public class MainActivity extends AppCompatActivity {
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private ImageView buy;
     private ImageView send;
@@ -179,6 +183,68 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
+
+
+        new Thread(()->{
+            while (true) {
+                if (flag) {
+                    break;
+                }
+                try {
+                    byte[] bytes = HTTPUtil.doGet2("http://academic.broker-chain.com/user/news2", null);
+                    String noticestr = new String(bytes);
+                    JSONObject j = new JSONObject(noticestr);
+                    JSONArray array = (JSONArray) j.get("data");
+                    Integer maxid = 0;
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject jsonObject = (JSONObject) array.get(i);
+                        Integer id = (Integer) jsonObject.get("id");
+                        maxid = Math.max(maxid,id);
+                    }
+                    String currnoticeIdstr = StorageUtil.getNoticeId(this);
+                    Integer currnoticeId=0;
+                    if(currnoticeIdstr != null) {
+                        currnoticeId = Integer.parseInt(currnoticeIdstr);
+                    }
+                    if(currnoticeId < maxid) {
+                        Integer finalMaxid = maxid;
+                        runOnUiThread(()->{
+                            new AlertDialog.Builder(this)
+                                    .setTitle("Info")  // 标题
+                                    .setMessage("You have new notification messages, please check them out")  // 内容
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            StorageUtil.saveNoticeId(MainActivity.this,String.valueOf(finalMaxid));
+                                            Intent intent = new Intent();
+                                            intent.setClass(MainActivity.this, NewsActivity2.class);
+                                            //跳转
+                                            startActivity(intent);
+                                        }
+                                    })
+                                    .show();
+                        });
+
+
+                    }else {
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                try {
+                    Thread.sleep(10000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        }).start();
+
+
         new Thread(()->{
             while (true){
 
@@ -256,6 +322,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void intView() {
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         buy = findViewById(R.id.buy);
         send = findViewById(R.id.send);
@@ -272,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void intEvent(){
 
-        navigationHelper = new NavigationHelper(menu, action_bar,this);
+        navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
         accounts.setOnClickListener(view -> {
             Intent intent = new Intent();

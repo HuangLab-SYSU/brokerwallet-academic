@@ -19,6 +19,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class FaucetActivity extends AppCompatActivity {
 
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private NavigationHelper navigationHelper;
     private Button button;
@@ -42,6 +43,7 @@ public class FaucetActivity extends AppCompatActivity {
 
     private void intView() {
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +62,7 @@ public class FaucetActivity extends AppCompatActivity {
     }
 
     private void intEvent(){
-        navigationHelper = new NavigationHelper(menu, action_bar,this);
+        navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
     }
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

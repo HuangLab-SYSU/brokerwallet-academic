@@ -37,6 +37,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class SelectAccountActivity extends AppCompatActivity {
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private Button btn_add;
     private Button btn_add2;
@@ -70,6 +71,7 @@ public class SelectAccountActivity extends AppCompatActivity {
 
     private void intView() {
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         btn_add = findViewById(R.id.btn_add);
         btn_add2 = findViewById(R.id.btn_add2);
@@ -295,7 +297,7 @@ public class SelectAccountActivity extends AppCompatActivity {
     }
 
     private void intEvent() {
-        navigationHelper = new NavigationHelper(menu, action_bar, this);
+        navigationHelper = new NavigationHelper(menu, action_bar, this,notificationBtn);
 
         btn_add.setOnClickListener(view -> {
             //创建意图对象

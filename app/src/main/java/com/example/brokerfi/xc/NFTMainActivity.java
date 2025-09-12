@@ -30,6 +30,7 @@ import java.math.BigInteger;
 
 public class NFTMainActivity extends AppCompatActivity {
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private ImageView mint;
     private ImageView mynfts;
@@ -55,13 +56,14 @@ public class NFTMainActivity extends AppCompatActivity {
 
     private void intView() {
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         mint = findViewById(R.id.mint);
         mynfts = findViewById(R.id.mynfts);
         buy = findViewById(R.id.buy);
     }
     private void intEvent(){
-        navigationHelper = new NavigationHelper(menu, action_bar,this);
+        navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
         mint.setOnClickListener(view -> {
             Intent intent = new Intent();
             intent.setClass(NFTMainActivity.this,MintActivity.class);

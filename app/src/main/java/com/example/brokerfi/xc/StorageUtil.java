@@ -10,6 +10,8 @@ public class StorageUtil {
     private static final String PREF_ACCOUNT = "accountkey";
     private static final String Curacc = "curacc";
     private static final String PREFS_NAME2 = "MyPrefsFile2";
+    private static final String NoticeIdName = "NoticeIdName";
+    private static final String NoticeId = "NoticeId";
 
     public static void savePrivateKey(AppCompatActivity activity, String acc){
         SharedPreferences settings = activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -17,6 +19,17 @@ public class StorageUtil {
         editor.putString(PREF_ACCOUNT, acc);
         editor.apply();
     }
+    public static void saveNoticeId(AppCompatActivity activity, String id){
+        SharedPreferences settings = activity.getSharedPreferences(NoticeIdName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(NoticeId, id);
+        editor.apply();
+    }
+    public static String getNoticeId(AppCompatActivity activity){
+        SharedPreferences settings =activity.getSharedPreferences(NoticeIdName, Context.MODE_PRIVATE);
+        return settings.getString(NoticeId, null); // 如果没有找到，返回null
+    }
+
 
     public static String getPrivateKey(AppCompatActivity activity) {
         SharedPreferences settings =activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);

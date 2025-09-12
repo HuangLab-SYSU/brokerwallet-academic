@@ -31,6 +31,7 @@ public class StakeMoreActivity extends AppCompatActivity {
     private EditText stakeamount;
     private Button btn_stake;
     private ImageView menu;
+    private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private NavigationHelper navigationHelper;
 
@@ -67,13 +68,14 @@ public class StakeMoreActivity extends AppCompatActivity {
         edt_sendto = findViewById(R.id.edt_sendto);
         btn_stake = findViewById(R.id.stakemorebtn);
         menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         stakeamount = findViewById(R.id.stakeamount);
         stakemoretext = findViewById(R.id.stakemoretext);
     }
 
     private void intEvent() {
-        navigationHelper = new NavigationHelper(menu, action_bar, this);
+        navigationHelper = new NavigationHelper(menu, action_bar, this,notificationBtn);
         String account = StorageUtil.getPrivateKey(this);
         String acc = StorageUtil.getCurrentAccount(this);
         int i;
