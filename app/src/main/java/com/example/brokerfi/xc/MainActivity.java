@@ -216,8 +216,8 @@ public class MainActivity extends AppCompatActivity {
                         String finalTitle = title;
                         runOnUiThread(()->{
                             new AlertDialog.Builder(this)
-                                    .setTitle("Info")  // 标题
-                                    .setMessage("You have new a notification message:  " + finalTitle + ", please check it out")  // 内容
+                                    .setTitle("")  // 标题
+                                    .setMessage("You have a new message:  " + finalTitle + " Please check it out.")  // 内容
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
