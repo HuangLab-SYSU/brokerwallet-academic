@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="#f8f9fa">
+
+    <!-- App 图标 -->
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/logo4"
+        android:contentDescription="App Logo"
+        android:layout_marginBottom="16dp" />
+
+    <!-- App 名称 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BrokerChain Wallet"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#333"
+        android:layout_marginBottom="8dp" />
+
+    <!-- 版本号 -->
+    <TextView
+        android:id="@+id/text_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version 1.1.9"
+        android:textSize="16sp"
+        android:textColor="#666"
+        android:layout_marginBottom="32dp" />
+
+    <!-- 检查更新按钮 -->
+    <Button
+        android:id="@+id/btn_check_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check for updates"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#007BFF"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="12dp"
+        android:elevation="4dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="32dp"
+        android:text="GitHub:"
+        android:textColor="#021DFA"
+        android:textSize="13sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="1dp"
+        android:text="https://github.com/HuangLab-SYSU/brokerwallet-academic"
+        android:textColor="#021DFA"
+        android:textIsSelectable="true"
+        android:scrollHorizontally="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:autoLink="web"
+        android:textSize="13sp" />
+    <!-- 版权信息（可选） -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="© 2025 BrokerChain. All rights reserved."
+        android:textSize="13sp"
+        android:textColor="#999"
+        android:layout_marginTop="32dp" />
+
+
+
+</LinearLayout>

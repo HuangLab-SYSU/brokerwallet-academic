@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 事件类型 -->
+    <string-array name="event_types">
+        <item>论文发表</item>
+        <item>实验完成</item>
+        <item>代码贡献</item>
+        <item>社区参与</item>
+        <item>会议报告</item>
+        <item>项目合作</item>
+        <item>其他</item>
+    </string-array>
+
+    <!-- 贡献等级 -->
+    <string-array name="contribution_levels">
+        <item>初级贡献</item>
+        <item>中级贡献</item>
+        <item>高级贡献</item>
+        <item>专家级贡献</item>
+        <item>杰出贡献</item>
+    </string-array>
+
+    <!-- 图片类型 -->
+    <string-array name="image_types">
+        <item>自动生成勋章</item>
+        <item>自定义图片</item>
+    </string-array>
+</resources>
+
+
+
+

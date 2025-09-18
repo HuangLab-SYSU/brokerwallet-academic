@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <include layout="@layout/topbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/action_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 标题 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📄 证明提交"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="24dp" />
+
+            <!-- 证明文件上传 (必填) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="提交证明文件 *"
+                    android:textSize="16sp"
+                    android:textColor="@color/black" />
+                
+                <TextView
+                    android:id="@+id/fileHelpIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:text="❓"
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_60"
+                    android:gravity="center"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:clickable="true" />
+                    
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/selectFileButton"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="📁 点击选择证明文件"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:background="@drawable/dashed_border"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_marginBottom="8dp" />
+
+            <!-- 文件数量提示 -->
+            <TextView
+                android:id="@+id/fileCountHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💡 最多可选择 3 个文件"
+                android:textSize="12sp"
+                android:textColor="@color/grey_60"
+                android:layout_marginBottom="8dp" />
+
+            <!-- 已选择文件列表 -->
+            <LinearLayout
+                android:id="@+id/selectedFilesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp" />
+
+            <!-- 选择铸造NFT的照片 (选填) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="选择铸造NFT的照片"
+                    android:textSize="16sp"
+                    android:textColor="@color/black" />
+                
+                <TextView
+                    android:id="@+id/imageHelpIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:text="❓"
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_60"
+                    android:gravity="center"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:clickable="true" />
+                    
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/selectImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="🖼️ 点击选择NFT照片"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:background="@drawable/dashed_border"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_marginBottom="8dp" />
+
+            <!-- 已选择图片显示区域 -->
+            <LinearLayout
+                android:id="@+id/selectedImageContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp"
+                android:visibility="gone" />
+
+            <!-- 图片预览对话框（隐藏的ImageView用于预览） -->
+            <ImageView
+                android:id="@+id/previewImageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone" />
+
+            <!-- 用户花名 (选填) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户花名（可选）"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/displayNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入您希望显示的花名"
+                android:textSize="14sp"
+                android:padding="12dp"
+                android:background="@drawable/custom_edittext_border"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 希望展示在排行榜上的代表作 (选填) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="希望展示在排行榜上的代表作（可选）"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/representativeWorkEditText"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="请描述您的代表作，如：开发了多个DeFi协议，专注于智能合约安全"
+                android:textSize="14sp"
+                android:padding="12dp"
+                android:background="@drawable/custom_edittext_border"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 分割线 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 是否在排行榜上展示代表作 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="是否在排行榜上展示代表作"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="12dp" />
+
+            <RadioGroup
+                android:id="@+id/showRepresentativeWorkGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <RadioButton
+                    android:id="@+id/showRepresentativeWorkYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="是"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="32dp" />
+
+                <RadioButton
+                    android:id="@+id/showRepresentativeWorkNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="否"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:checked="true" />
+
+            </RadioGroup>
+
+            <!-- 提示信息 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💡 提示：代表作需要管理员审核后才能在排行榜上显示"
+                android:textSize="12sp"
+                android:textColor="@color/grey_60"
+                android:layout_marginBottom="24dp" />
+
+            <!-- 提交按钮 -->
+            <TextView
+                android:id="@+id/submitProofButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="提交证明"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_green_background"
+                android:gravity="center"
+                android:clickable="true" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

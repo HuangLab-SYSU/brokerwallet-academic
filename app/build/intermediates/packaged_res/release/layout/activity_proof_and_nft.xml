@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <include layout="@layout/topbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/action_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 标题 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📄 证明提交"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="24dp" />
+
+            <!-- 证明文件上传 (必填) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="提交证明文件 *"
+                    android:textSize="16sp"
+                    android:textColor="@color/black" />
+                
+                <TextView
+                    android:id="@+id/fileHelpIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:text="❓"
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_60"
+                    android:gravity="center"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:clickable="true" />
+                    
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/selectFileButton"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="📁 点击选择证明文件"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:background="@drawable/dashed_border"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_marginBottom="8dp" />
+
+            <!-- 文件数量提示 -->
+            <TextView
+                android:id="@+id/fileCountHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💡 最多可选择 3 个文件"
+                android:textSize="12sp"
+                android:textColor="@color/grey_60"
+                android:layout_marginBottom="8dp" />
+
+            <!-- 已选择文件列表 -->
+            <LinearLayout
+                android:id="@+id/selectedFilesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp" />
+
+            <!-- 选择铸造NFT的照片 (选填) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="选择铸造NFT的照片"
+                    android:textSize="16sp"
+                    android:textColor="@color/black" />
+                
+                <TextView
+                    android:id="@+id/imageHelpIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:text="❓"
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_60"
+                    android:gravity="center"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:clickable="true" />
+                    
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/selectImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="🖼️ 点击选择NFT照片"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:background="@drawable/dashed_border"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_marginBottom="8dp" />
+
+            <!-- 已选择图片显示区域 -->
+            <LinearLayout
+                android:id="@+id/selectedImageContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp"
+                android:visibility="gone" />
+
+            <!-- 图片预览对话框（隐藏的ImageView用于预览） -->
+            <ImageView
+                android:id="@+id/previewImageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone" />
+
+            <!-- 希望使用的名称 (选填) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="希望使用的名称"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/nftNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入希望使用的名称"
+                android:textSize="14sp"
+                android:padding="12dp"
+                android:background="@drawable/custom_edittext_border"
+                android:layout_marginBottom="24dp" />
+
+            <!-- 希望显示的代表作 (选填) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="希望显示的代表作"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/nftDescriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="请描述您的代表作"
+                android:textSize="14sp"
+                android:padding="12dp"
+                android:background="@drawable/custom_edittext_border"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:layout_marginBottom="32dp" />
+
+            <!-- 提交按钮 -->
+            <TextView
+                android:id="@+id/submitProofButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="提交证明"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_green_background"
+                android:gravity="center"
+                android:clickable="true" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".xc.MintActivity">
+
+        <include layout="@layout/topbar" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp">
+
+                <TextView
+                    android:id="@+id/minttitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/work_sans_black"
+                    android:text="Mint NFT"
+                    android:textColor="#000000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/minttextview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/minttitle"
+                    android:layout_marginTop="8dp"
+                    android:text="Upload an image to create your unique NFT."
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/uploadIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@+id/minttextview"
+                    android:layout_marginTop="80dp"
+                    app:srcCompat="@drawable/cloud_upload" />
+
+                <View
+                    android:id="@+id/uploadView"
+                    android:layout_width="match_parent"
+                    android:layout_height="332dp"
+                    android:layout_below="@+id/minttextview"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/dashed_border" />
+
+                <LinearLayout
+                    android:id="@+id/uploadButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/uploadView"
+                    android:layout_marginTop="32dp"
+                    android:orientation="horizontal">
+
+                    <!-- 第一个按钮，点击相机拍照 -->
+                    <android.widget.Button
+                        android:id="@+id/btn_doCamera"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_bg_gray"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:onClick="remindMeLater"
+                        android:padding="4dp"
+                        android:text="Camera"
+                        android:textAllCaps="false"
+                        android:textColor="#ffffff"
+                        android:textSize="16dp" />
+
+                    <!-- 第二个按钮，点击图库上传 -->
+                    <android.widget.Button
+                        android:id="@+id/btn_doFile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_bg_gray"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:onClick="nextAction"
+                        android:padding="4dp"
+                        android:text="Album"
+                        android:textAllCaps="false"
+                        android:textColor="#ffffff"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/scrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/uploadButton"
+                    android:layout_marginTop="32dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="NFT name"
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/edt_nft_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="43dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/custom_edittext_border"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="NFT shares"
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Create shared NFT:\nEnter shares (1=sole owner, >1 splits to X shares)"
+                            android:textColor="#6B6B6B"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/edt_shares"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/custom_edittext_border"
+                            android:hint="1"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="8dp"
+                            android:inputType="number"
+                            android:digits="0123456789" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="*This platform implements 'fractional NFT ownership':\n- Divide NFTs into multiple shares\n- Enable multi-user co-ownership\n- Allow per-batch pricing"
+                            android:textColor="#6B6B6B"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Gas Limit"
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/edt_gas"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/custom_edittext_border"
+                            android:hint="1"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="8dp"
+                            android:inputType="number"
+                            android:digits="0123456789" />
+
+                        <TextView
+                            android:id="@+id/warning"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
+
+
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+                <LinearLayout
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/scrollView"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="32dp"
+                    android:orientation="horizontal">
+
+                    <!-- 第一个按钮 -->
+                    <android.widget.Button
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_bg_white"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:onClick="remindMeLater"
+                        android:padding="4dp"
+                        android:text="Cancel"
+                        android:textAllCaps="false"
+                        android:textSize="16dp" />
+
+                    <!-- 第二个按钮 -->
+                    <android.widget.Button
+                        android:id="@+id/btn_mint"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_button_background"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:onClick="nextAction"
+                        android:padding="4dp"
+                        android:text="Mint"
+                        android:textAllCaps="false"
+                        android:textColor="#ffffff"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,1082 @@
+[
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_faucet.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_faucet.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_send_activity_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/send_activity_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_dialog_confirm.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/dialog_confirm.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_transaction.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/transaction.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_right.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/right.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_codepen_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/codepen_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-mdpi_baseline_newspaper_white_20.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-mdpi/baseline_newspaper_white_20.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xhdpi_ic_launcher3_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xhdpi/ic_launcher3_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_medal_ranking.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_medal_ranking.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_question_circle_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/question_circle_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_create_passw.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_create_passw.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxhdpi_ic_launcher4_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxhdpi/ic_launcher4_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-hdpi_ic_launcher4_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-hdpi/ic_launcher4_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xxxhdpi_baseline_newspaper_black_48.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xxxhdpi/baseline_newspaper_black_48.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_apartment.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/apartment.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_qrcode.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/qrcode.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_logo4.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/logo4.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_smile.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/smile.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_uncheck_circle.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/uncheck_circle.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xhdpi_ic_launcher3_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xhdpi/ic_launcher3_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_dialog_bg.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_dialog_bg.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_cloud_upload_white.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/cloud_upload_white.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-anydpi-v26_ic_launcher2_round.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-anydpi-v26/ic_launcher2_round.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-mdpi_baseline_newspaper_black_20.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-mdpi/baseline_newspaper_black_20.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_scan.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/scan.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_cloud_upload.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/cloud_upload.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_edittext_border_disabled.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_edittext_border_disabled.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xhdpi_baseline_newspaper_white_36.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xhdpi/baseline_newspaper_white_36.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xxhdpi_baseline_newspaper_black_36.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xxhdpi/baseline_newspaper_black_36.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_dialog_confirm_unlist.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/dialog_confirm_unlist.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_logo3.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/logo3.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_main.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_my_account.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_my_account.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_codepen.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/codepen.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-mdpi_ic_launcher4_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-mdpi/ic_launcher4_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_action_menu_30.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/action_menu_30.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_nft_minting.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_nft_minting.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_secret_phrase.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_secret_phrase.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-hdpi_baseline_newspaper_black_36.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-hdpi/baseline_newspaper_black_36.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-mdpi_baseline_newspaper_black_48.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-mdpi/baseline_newspaper_black_48.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_form.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/form.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_grid_background.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_grid_background.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-hdpi_ic_launcher4.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-hdpi/ic_launcher4.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/font_work_sans_black.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/font/work_sans_black.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_menu.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_menu.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_cloud_download.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/cloud_download.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_atv_send.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/atv_send.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_select_account.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_select_account.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_cloud_download_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/cloud_download_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xxxhdpi_baseline_newspaper_black_20.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xxxhdpi/baseline_newspaper_black_20.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_dribbble_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/dribbble_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher4_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxxhdpi/ic_launcher4_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_setting.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_setting.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_atv_receive.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/atv_receive.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_topbar.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/topbar.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_emoji.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/emoji.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-hdpi_ic_launcher2_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-hdpi/ic_launcher2_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_question_circle.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/question_circle.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_emulator.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_emulator.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_baseline_newspaper_24.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/baseline_newspaper_24.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_shape_progressbar_bg.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/shape_progressbar_bg.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_bg.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/bg.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_ic_launcher4_background.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/ic_launcher4_background.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_logo1.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/logo1.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_apartment_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/apartment_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-hdpi_baseline_newspaper_white_48.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-hdpi/baseline_newspaper_white_48.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_congratulations.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_congratulations.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_setting.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/setting.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxhdpi_ic_launcher4.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxhdpi/ic_launcher4.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_radio_button.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_radio_button.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-mdpi_baseline_newspaper_black_24.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-mdpi/baseline_newspaper_black_24.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/font_bowlby_one.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/font/bowlby_one.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-mdpi_logonew.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-mdpi/logonew.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_user.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/user.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_my_nfts.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_my_nfts.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_logo2.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/logo2.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-mdpi_baseline_newspaper_white_24.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-mdpi/baseline_newspaper_white_24.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xxhdpi_baseline_newspaper_black_18.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xxhdpi/baseline_newspaper_black_18.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-mdpi_ic_launcher2_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-mdpi/ic_launcher2_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_sketch_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/sketch_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxhdpi_ic_launcher2_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxhdpi/ic_launcher2_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_cloud_sync_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/cloud_sync_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_add_account.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_add_account.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xhdpi_baseline_newspaper_black_48.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xhdpi/baseline_newspaper_black_48.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_button_border_red.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_button_border_red.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-mdpi_ic_launcher3.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-mdpi/ic_launcher3.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_database.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/database.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_database_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/database_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_congratulations_mint.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_congratulations_mint.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_line_chart.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/line_chart.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_sketch.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/sketch.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xxhdpi_baseline_newspaper_black_20.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xxhdpi/baseline_newspaper_black_20.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_cloud_download_white.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/cloud_download_white.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_cloud_upload_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/cloud_upload_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_shape_progressbar_progress.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/shape_progressbar_progress.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xhdpi_baseline_newspaper_white_24.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xhdpi/baseline_newspaper_white_24.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_news.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_news.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_buy_nfts.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_buy_nfts.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xhdpi_baseline_newspaper_black_36.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xhdpi/baseline_newspaper_black_36.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher2.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxxhdpi/ic_launcher2.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_nft_holder.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/nft_holder.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_receive.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_receive.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xhdpi_ic_launcher2.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xhdpi/ic_launcher2.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_buy.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_buy.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_welcome_back.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_welcome_back.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xxxhdpi_baseline_newspaper_black_24.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xxxhdpi/baseline_newspaper_black_24.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_button_bg_white.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_button_bg_white.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_withdraw.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_withdraw.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_baseline_newspaper_20.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/baseline_newspaper_20.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_plus_circle.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/plus_circle.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-hdpi_baseline_newspaper_white_36.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-hdpi/baseline_newspaper_white_36.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-hdpi_ic_launcher2_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-hdpi/ic_launcher2_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_red_background.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_red_background.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_news2.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_news2.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_reddit.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/reddit.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher4.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxxhdpi/ic_launcher4.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_button_background.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_button_background.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xhdpi_ic_launcher4.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xhdpi/ic_launcher4.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxhdpi_ic_launcher2.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxhdpi/ic_launcher2.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xhdpi_ic_launcher4_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xhdpi/ic_launcher4_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher3_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxxhdpi/ic_launcher3_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_scan_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/scan_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-hdpi_baseline_newspaper_black_48.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-hdpi/baseline_newspaper_black_48.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/anim_slide_in_from_left.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/anim/slide_in_from_left.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_item_nft_view.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/item_nft_view.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-mdpi_ic_launcher4.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-mdpi/ic_launcher4.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxhdpi_ic_launcher2_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxhdpi/ic_launcher2_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_alert_background.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_alert_background.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_cloud_upload_icon_black.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/cloud_upload_icon_black.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/anim_slide_in_from_top.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/anim/slide_in_from_top.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_cloud_sync.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/cloud_sync.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xhdpi_ic_launcher4_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xhdpi/ic_launcher4_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-hdpi_ic_launcher3_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-hdpi/ic_launcher3_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher2_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxxhdpi/ic_launcher2_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_select_network.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_select_network.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_bg_2.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/bg_2.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_edittext_border.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_edittext_border.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_stake_more.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_stake_more.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xxxhdpi_logonew.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xxxhdpi/logonew.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_lock_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/lock_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_proof_and_nft.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_proof_and_nft.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-hdpi_ic_launcher2.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-hdpi/ic_launcher2.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_before_show_pr_key.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_before_show_pr_key.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_smile_activity_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/smile_activity_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_menu.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/menu.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xhdpi_ic_launcher2_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xhdpi/ic_launcher2_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_check.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/check.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-hdpi_baseline_newspaper_black_24.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-hdpi/baseline_newspaper_black_24.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-mdpi_baseline_newspaper_white_18.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-mdpi/baseline_newspaper_white_18.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xxhdpi_baseline_newspaper_black_24.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xxhdpi/baseline_newspaper_black_24.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_fire.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/fire.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-hdpi_logonew.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-hdpi/logonew.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_welcome.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_welcome.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xxxhdpi_baseline_newspaper_black_18.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xxxhdpi/baseline_newspaper_black_18.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_nft_selected_bg.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_nft_selected_bg.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_send.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/send.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-hdpi_ic_launcher3_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-hdpi/ic_launcher3_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-mdpi_baseline_newspaper_black_36.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-mdpi/baseline_newspaper_black_36.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-mdpi_ic_launcher2_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-mdpi/ic_launcher2_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-anydpi-v26_ic_launcher4.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-anydpi-v26/ic_launcher4.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/anim_slide_out_to_top.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/anim/slide_out_to_top.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_broker.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_broker.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-hdpi_ic_launcher4_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-hdpi/ic_launcher4_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xxhdpi_logonew.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xxhdpi/logonew.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_cloud_download_icon_black.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/cloud_download_icon_black.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.example.brokerfi.app-pngs-26:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_nft_main.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_nft_main.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_nft_background.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_nft_background.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_send_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/send_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_qrcode_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/qrcode_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxhdpi_ic_launcher4_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxhdpi/ic_launcher4_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_button_border_green.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_button_border_green.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xhdpi_baseline_newspaper_white_20.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xhdpi/baseline_newspaper_white_20.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-mdpi_baseline_newspaper_white_36.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-mdpi/baseline_newspaper_white_36.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_show_pr_kry.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_show_pr_kry.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_proof_submission.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_proof_submission.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_user_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/user_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-mdpi_baseline_newspaper_black_18.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-mdpi/baseline_newspaper_black_18.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-hdpi_baseline_newspaper_white_24.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-hdpi/baseline_newspaper_white_24.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-anydpi-v26_ic_launcher3_round.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-anydpi-v26/ic_launcher3_round.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_atv_withdraw.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/atv_withdraw.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_green_background.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_green_background.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xhdpi_baseline_newspaper_black_24.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xhdpi/baseline_newspaper_black_24.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_item_selected_file.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/item_selected_file.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher4_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxxhdpi/ic_launcher4_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_question_circle_white.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/question_circle_white.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-anydpi-v26_ic_launcher2.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-anydpi-v26/ic_launcher2.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_comfirm_secret.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_comfirm_secret.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xxxhdpi_baseline_newspaper_black_36.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xxxhdpi/baseline_newspaper_black_36.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_add_network.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_add_network.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_plus_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/plus_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_reddit_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/reddit_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_check_box.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/check_box.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_swap.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_swap.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_plus.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/plus.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_ic_launcher2_background.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/ic_launcher2_background.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-hdpi_baseline_newspaper_white_18.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-hdpi/baseline_newspaper_white_18.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xhdpi_baseline_newspaper_white_18.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xhdpi/baseline_newspaper_white_18.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-anydpi-v26_ic_launcher4_round.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-anydpi-v26/ic_launcher4_round.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_smile_black.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/smile_black.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher2_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxxhdpi/ic_launcher2_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_nft_view.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_nft_view.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_transaction_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/transaction_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_send.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_send.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_dribbble.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/dribbble.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_lock_white.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/lock_white.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-hdpi_baseline_newspaper_black_20.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-hdpi/baseline_newspaper_black_20.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxhdpi_ic_launcher3_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxhdpi/ic_launcher3_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_item_selected_image.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/item_selected_image.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_line_chart_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/line_chart_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_generate_account.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_generate_account.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_ic_launcher3_background.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/ic_launcher3_background.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_up_circle.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/up_circle.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xhdpi_baseline_newspaper_white_48.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xhdpi/baseline_newspaper_white_48.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/xml_backup_rules.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher3.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxxhdpi/ic_launcher3.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xhdpi_ic_launcher2_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xhdpi/ic_launcher2_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_layer_list_progress_drawable.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/layer_list_progress_drawable.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_atv.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_atv.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxxhdpi_ic_launcher3_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxxhdpi/ic_launcher3_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-mdpi_ic_launcher4_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-mdpi/ic_launcher4_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-mdpi_ic_launcher2.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-mdpi/ic_launcher2.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_after_broker.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_after_broker.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-hdpi_baseline_newspaper_black_18.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-hdpi/baseline_newspaper_black_18.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-hdpi_ic_launcher3.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-hdpi/ic_launcher3.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/anim_slide_out_to_right.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/anim/slide_out_to_right.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxhdpi_ic_launcher3_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxhdpi/ic_launcher3_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_about.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_about.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_lock.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/lock.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_mint.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_mint.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xxhdpi_ic_launcher3.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xxhdpi/ic_launcher3.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/xml_network_security_config.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/xml/network_security_config.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-mdpi_ic_launcher3_foreground.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-mdpi/ic_launcher3_foreground.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_notifications_unread.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/notifications_unread.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_atv_profit.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/atv_profit.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/xml_file_paths.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_setting_icon.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/setting_icon.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xhdpi_baseline_newspaper_black_18.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xhdpi/baseline_newspaper_black_18.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-anydpi-v26_ic_launcher3.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-anydpi-v26/ic_launcher3.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_dialog_enlarged_image.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/dialog_enlarged_image.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-xhdpi_ic_launcher3.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-xhdpi/ic_launcher3.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_import.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/activity_import.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_atv_stake.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/atv_stake.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_dashed_border.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/dashed_border.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-mdpi_baseline_newspaper_white_48.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-mdpi/baseline_newspaper_white_48.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_send_black.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/send_black.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_item_medal_ranking.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/layout/item_medal_ranking.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xxhdpi_baseline_newspaper_black_48.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xxhdpi/baseline_newspaper_black_48.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/mipmap-mdpi_ic_launcher3_round.webp.flat",
+        "source": "com.example.brokerfi.app-main-31:/mipmap-mdpi/ic_launcher3_round.webp"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xhdpi_baseline_newspaper_black_20.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xhdpi/baseline_newspaper_black_20.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-hdpi_baseline_newspaper_white_20.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-hdpi/baseline_newspaper_white_20.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_custom_button_bg_gray.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/custom_button_bg_gray.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_placeholder_image.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/placeholder_image.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_check_circle.xml.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/check_circle.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable_notifications.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable/notifications.png"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/drawable-xhdpi_logonew.png.flat",
+        "source": "com.example.brokerfi.app-main-31:/drawable-xhdpi/logonew.png"
+    }
+]

@@ -8,5 +8,23 @@
     <string name="use_secret_phrase">Using a Secret Recovery Phrase</string>
     <string name="get_started">Get started</string>
     <string name="broker">Get started</string>
+    <string name="medal_ranking">勋章排行榜</string>
+    <string name="proof_submission">证明材料提交</string>
+    <string name="nft_view">NFT查看</string>
+    <string name="nft_minting">NFT铸造</string>
+    <string name="loading">加载中...</string>
+    <string name="load_failed">加载失败</string>
+    <string name="network_error">网络连接失败</string>
+    <string name="data_parse_error">数据解析失败</string>
+    <string name="submit_proof">提交证明材料</string>
+    <string name="mint_nft">铸造NFT</string>
+    <string name="select_file">选择文件</string>
+    <string name="select_image">选择图片</string>
+    <string name="no_file_selected">未选择文件</string>
+    <string name="no_image_selected">未选择图片</string>
+    <string name="my_nfts">我的NFT</string>
+    <string name="all_nfts">所有NFT</string>
+    <string name="medal_system">勋章系统</string>
+    <string name="proof_and_nft">证明提交 &amp; NFT铸造</string>
 </resources>
 

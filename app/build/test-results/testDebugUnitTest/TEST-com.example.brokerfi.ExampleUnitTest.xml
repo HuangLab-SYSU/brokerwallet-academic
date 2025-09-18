@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.brokerfi.ExampleUnitTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-09-17T09:41:40" hostname="LAPTOP-LC21B661" time="1.03">
+  <properties/>
+  <testcase name="T" classname="com.example.brokerfi.ExampleUnitTest" time="1.025"/>
+  <testcase name="addition_isCorrect" classname="com.example.brokerfi.ExampleUnitTest" time="0.0"/>
+  <system-out><![CDATA[generatekey:
+95221067519789456861168481797536370519481948559257430223873001402351156946555
+PublicKey:
+03654e94d715914d333588414841090566c812b78fe35dec2ab36adb2880d57a3a
+addr:
+5565a1526df522a3952875e8dcfca1ce9e246abe
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

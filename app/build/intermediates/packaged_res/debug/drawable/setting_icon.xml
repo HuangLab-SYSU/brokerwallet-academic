@@ -1,0 +1,14 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 黑色实心圆背景 -->
+    <item android:width="39dp" android:height="39dp">
+        <shape android:shape="oval">
+            <solid android:color="#000000" /> <!-- 黑色背景颜色 -->
+        </shape>
+    </item>
+
+    <!-- 您的矢量图标 -->
+    <item
+        android:drawable="@drawable/setting"
+        android:gravity="center"
+        />
+</layer-list>

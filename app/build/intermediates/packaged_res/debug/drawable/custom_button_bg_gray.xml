@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="#e5e7eb" /> <!-- 按下状态的背景颜色 -->
+            <corners android:radius="24dp" /> <!-- 圆角半径 -->
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="#3C3C3C" /> <!-- 默认状态的背景颜色 -->
+            <corners android:radius="24dp" /> <!-- 圆角半径 -->
+        </shape>
+    </item>
+
+</selector>
