@@ -70,6 +70,16 @@ public class ServerConfig {
      */
     public static final String VIEW_NFT_API = BASE_URL + "/api/nft/view";
     
+    /**
+     * 用户提交历史API
+     */
+    public static final String USER_SUBMISSIONS_API = BASE_URL + "/api/upload/user/submissions";
+    
+    /**
+     * 提交详情API
+     */
+    public static final String SUBMISSION_DETAIL_API = BASE_URL + "/api/upload/submission/detail";
+    
     // ==================== 工具方法 ====================
     
     /**

@@ -308,16 +308,15 @@ public class ProofAndNFTActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(String response) {
                     runOnUiThread(() -> {
-                        Toast.makeText(ProofAndNFTActivity.this, "提交成功！", Toast.LENGTH_SHORT).show();
+                        handleSubmissionSuccess(response);
                         resetSubmitButton();
-                        showSuccessMessage();
                     });
                 }
                 
                 @Override
                 public void onError(String error) {
                     runOnUiThread(() -> {
-                        Toast.makeText(ProofAndNFTActivity.this, "提交失败: " + error, Toast.LENGTH_LONG).show();
+                        handleSubmissionError(error);
                         resetSubmitButton();
                     });
                 }
@@ -725,5 +724,199 @@ public class ProofAndNFTActivity extends AppCompatActivity {
                 Toast.makeText(this, "需要摄像头权限才能拍照", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    
+    /**
+     * 处理提交成功的响应
+     */
+    private void handleSubmissionSuccess(String response) {
+        try {
+            // 尝试解析JSON响应
+            org.json.JSONObject jsonResponse = new org.json.JSONObject(response);
+            
+            if (jsonResponse.getBoolean("success")) {
+                // 获取提交详情
+                org.json.JSONObject data = jsonResponse.optJSONObject("data");
+                if (data != null) {
+                    String submissionId = data.optString("submissionId", "未知");
+                    String status = data.optString("status", "PENDING");
+                    String message = data.optString("message", "提交成功");
+                    
+                    // 显示详细成功信息
+                    showDetailedSuccessDialog(submissionId, status, message);
+                    
+                    // 保存提交记录到本地
+                    saveSubmissionToLocal(submissionId, status);
+                    
+                    // 重置表单
+                    resetForm();
+                } else {
+                    // 如果没有详细数据，显示简单成功信息
+                    String message = jsonResponse.optString("message", "提交成功");
+                    showSimpleSuccessDialog(message);
+                    resetForm();
+                }
+            } else {
+                // 服务器返回失败状态
+                String errorMessage = jsonResponse.optString("message", "提交失败");
+                showErrorDialog("提交失败", errorMessage);
+            }
+            
+        } catch (org.json.JSONException e) {
+            Log.e("ProofSubmit", "解析服务器响应失败", e);
+            // JSON解析失败，可能是简单的字符串响应
+            if (response.toLowerCase().contains("success") || response.toLowerCase().contains("成功")) {
+                showSimpleSuccessDialog("提交成功！请等待管理员审核。");
+                resetForm();
+            } else {
+                showErrorDialog("响应解析错误", "服务器返回了无法解析的响应格式");
+            }
+        }
+    }
+    
+    /**
+     * 处理提交失败的响应
+     */
+    private void handleSubmissionError(String error) {
+        Log.e("ProofSubmit", "提交失败: " + error);
+        
+        // 分析错误类型并提供相应的解决建议
+        String userFriendlyMessage;
+        String suggestion = "";
+        
+        if (error.contains("网络") || error.contains("Network") || error.contains("timeout")) {
+            userFriendlyMessage = "网络连接问题";
+            suggestion = "请检查网络连接后重试";
+        } else if (error.contains("文件") || error.contains("File")) {
+            userFriendlyMessage = "文件处理错误";
+            suggestion = "请检查文件格式和大小";
+        } else if (error.contains("服务器") || error.contains("Server") || error.contains("500")) {
+            userFriendlyMessage = "服务器暂时不可用";
+            suggestion = "请稍后重试";
+        } else if (error.contains("权限") || error.contains("Permission") || error.contains("401")) {
+            userFriendlyMessage = "权限验证失败";
+            suggestion = "请检查账户状态";
+        } else {
+            userFriendlyMessage = "提交失败";
+            suggestion = "请检查输入信息后重试";
+        }
+        
+        showErrorDialog(userFriendlyMessage, suggestion + "\n\n详细错误：" + error);
+    }
+    
+    /**
+     * 显示详细成功对话框
+     */
+    private void showDetailedSuccessDialog(String submissionId, String status, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("✅ 提交成功")
+               .setMessage("提交ID: " + submissionId + "\n" +
+                          "当前状态: " + getStatusDescription(status) + "\n" +
+                          "详细信息: " + message + "\n\n" +
+                          "您可以在勋章排行榜中查看审核进度")
+               .setPositiveButton("查看排行榜", (dialog, which) -> {
+                   // 跳转到勋章排行榜页面
+                   openMedalRankingPage();
+               })
+               .setNegativeButton("确定", null)
+               .setCancelable(false)
+               .show();
+    }
+    
+    /**
+     * 显示简单成功对话框
+     */
+    private void showSimpleSuccessDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("✅ 提交成功")
+               .setMessage(message)
+               .setPositiveButton("查看排行榜", (dialog, which) -> {
+                   openMedalRankingPage();
+               })
+               .setNegativeButton("确定", null)
+               .setCancelable(false)
+               .show();
+    }
+    
+    /**
+     * 显示错误对话框
+     */
+    private void showErrorDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("❌ " + title)
+               .setMessage(message)
+               .setPositiveButton("重试", (dialog, which) -> {
+                   // 可以在这里重新触发提交
+                   dialog.dismiss();
+               })
+               .setNegativeButton("取消", null)
+               .setCancelable(true)
+               .show();
+    }
+    
+    /**
+     * 获取状态描述
+     */
+    private String getStatusDescription(String status) {
+        switch (status.toUpperCase()) {
+            case "PENDING":
+                return "等待审核";
+            case "APPROVED":
+                return "审核通过";
+            case "REJECTED":
+                return "审核拒绝";
+            case "PROCESSING":
+                return "处理中";
+            default:
+                return status;
+        }
+    }
+    
+    /**
+     * 保存提交记录到本地
+     */
+    private void saveSubmissionToLocal(String submissionId, String status) {
+        try {
+            // 使用SharedPreferences保存提交记录
+            android.content.SharedPreferences prefs = getSharedPreferences("submissions", MODE_PRIVATE);
+            android.content.SharedPreferences.Editor editor = prefs.edit();
+            
+            // 保存提交记录（简单的键值对格式）
+            long timestamp = System.currentTimeMillis();
+            String key = "submission_" + submissionId;
+            String value = status + "|" + timestamp + "|" + getCurrentWalletAddress();
+            
+            editor.putString(key, value);
+            editor.apply();
+            
+            Log.d("ProofSubmit", "提交记录已保存: " + key + " = " + value);
+        } catch (Exception e) {
+            Log.e("ProofSubmit", "保存提交记录失败", e);
+        }
+    }
+    
+    /**
+     * 重置表单
+     */
+    private void resetForm() {
+        selectedFileUris.clear();
+        selectedImageUri = null;
+        displayNameEditText.setText("");
+        representativeWorkEditText.setText("");
+        showRepresentativeWorkCheckBox.setChecked(false);
+        
+        updateFileDisplay();
+        updateImageDisplay();
+        updateFileCountHint();
+        
+        Toast.makeText(this, "表单已重置", Toast.LENGTH_SHORT).show();
+    }
+    
+    /**
+     * 打开勋章排行榜页面
+     */
+    private void openMedalRankingPage() {
+        Intent intent = new Intent(this, MedalRankingActivity.class);
+        startActivity(intent);
     }
 }

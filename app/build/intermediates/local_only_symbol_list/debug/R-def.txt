@@ -196,6 +196,7 @@ id descriptionText
 id descriptionTextView
 id dev_network
 id displayNameEditText
+id displayNameText
 id editTextTextMultiLine
 id edittext
 id edittext1
@@ -212,6 +213,7 @@ id edt_passw
 id edt_sendfrom
 id edt_sendto
 id edt_shares
+id emptyStateLayout
 id enlarged_image
 id errorText
 id et_price
@@ -260,6 +262,7 @@ id receiveicon
 id receivelist
 id recyclerView
 id representativeWorkEditText
+id representativeWorkText
 id rv_nft_list
 id saveqrcodebtn
 id scrollView

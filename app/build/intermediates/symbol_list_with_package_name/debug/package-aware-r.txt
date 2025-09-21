@@ -3165,6 +3165,7 @@ id disablePostScroll
 id disableScroll
 id disjoint
 id displayNameEditText
+id displayNameText
 id dragAnticlockwise
 id dragClockwise
 id dragDown
@@ -3197,6 +3198,7 @@ id edt_sendto
 id edt_shares
 id elastic
 id embed
+id emptyStateLayout
 id end
 id endToStart
 id enlarged_image
@@ -3414,6 +3416,7 @@ id receivelist
 id rectangles
 id recyclerView
 id representativeWorkEditText
+id representativeWorkText
 id reverseSawtooth
 id right
 id rightToLeft
