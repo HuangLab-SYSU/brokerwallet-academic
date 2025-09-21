@@ -32,7 +32,9 @@ public class ServerConfig {
     // ==================== API端点配置 ====================
     
     /**
-     * 证明文件上传API
+     *
+     *
+     * 证明文件上传
      */
     public static final String UPLOAD_PROOF_API = BASE_URL + "/api/proof/upload";
     

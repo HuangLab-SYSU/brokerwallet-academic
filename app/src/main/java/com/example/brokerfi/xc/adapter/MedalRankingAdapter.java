@@ -31,11 +31,23 @@ public class MedalRankingAdapter extends RecyclerView.Adapter<MedalRankingAdapte
         MedalRankingItem item = rankingList.get(position);
         
         holder.rankText.setText(String.valueOf(item.getRank()));
-        holder.addressText.setText(item.getAddress());
-        holder.goldMedalText.setText("金牌: " + item.getGold());
-        holder.silverMedalText.setText("银牌: " + item.getSilver());
-        holder.bronzeMedalText.setText("铜牌: " + item.getBronze());
-        holder.totalMedalText.setText("总计: " + item.getTotal());
+        holder.displayNameText.setText(item.getDisplayName() != null && !item.getDisplayName().isEmpty() 
+            ? item.getDisplayName() : "匿名用户");
+        holder.addressText.setText(item.getFormattedAddress());
+        holder.goldMedalText.setText(String.valueOf(item.getGoldMedals()));
+        holder.silverMedalText.setText(String.valueOf(item.getSilverMedals()));
+        holder.bronzeMedalText.setText(String.valueOf(item.getBronzeMedals()));
+        holder.totalMedalText.setText("总计: " + item.getTotalMedalScore());
+        
+        // 处理代表作显示
+        if (item.isShowRepresentativeWork() && 
+            item.getRepresentativeWork() != null && 
+            !item.getRepresentativeWork().trim().isEmpty()) {
+            holder.representativeWorkText.setText("代表作：" + item.getRepresentativeWork());
+            holder.representativeWorkText.setVisibility(View.VISIBLE);
+        } else {
+            holder.representativeWorkText.setVisibility(View.GONE);
+        }
     }
     
     @Override
@@ -45,20 +57,24 @@ public class MedalRankingAdapter extends RecyclerView.Adapter<MedalRankingAdapte
     
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView rankText;
+        TextView displayNameText;
         TextView addressText;
         TextView goldMedalText;
         TextView silverMedalText;
         TextView bronzeMedalText;
         TextView totalMedalText;
+        TextView representativeWorkText;
         
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             rankText = itemView.findViewById(R.id.rankText);
+            displayNameText = itemView.findViewById(R.id.displayNameText);
             addressText = itemView.findViewById(R.id.addressText);
             goldMedalText = itemView.findViewById(R.id.goldMedalText);
             silverMedalText = itemView.findViewById(R.id.silverMedalText);
             bronzeMedalText = itemView.findViewById(R.id.bronzeMedalText);
             totalMedalText = itemView.findViewById(R.id.totalMedalText);
+            representativeWorkText = itemView.findViewById(R.id.representativeWorkText);
         }
     }
 }

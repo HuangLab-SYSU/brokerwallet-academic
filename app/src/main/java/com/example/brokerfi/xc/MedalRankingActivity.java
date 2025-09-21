@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class MedalRankingActivity extends AppCompatActivity {
     private List<MedalRankingItem> rankingList;
     private TextView loadingText;
     private TextView errorText;
+    private LinearLayout emptyStateLayout;
     private TextView proofAndNftButton;
     private TextView nftViewButton;
 
@@ -59,6 +61,7 @@ public class MedalRankingActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         loadingText = findViewById(R.id.loadingText);
         errorText = findViewById(R.id.errorText);
+        emptyStateLayout = findViewById(R.id.emptyStateLayout);
         proofAndNftButton = findViewById(R.id.proofAndNftButton);
         nftViewButton = findViewById(R.id.nftViewButton);
         
@@ -83,43 +86,68 @@ public class MedalRankingActivity extends AppCompatActivity {
     }
 
     private void loadMedalRanking() {
-        loadingText.setVisibility(View.VISIBLE);
-        errorText.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.GONE);
+        showLoading();
 
         new Thread(() -> {
             try {
-                // 模拟从服务器获取排行榜数据
-                // 实际实现中应该调用contract项目的API
+                Log.d("MedalRanking", "开始加载排行榜数据");
                 String response = MedalApiUtil.getMedalRanking();
                 
                 runOnUiThread(() -> {
-                    loadingText.setVisibility(View.GONE);
-                    if (response != null) {
+                    hideLoading();
+                    if (response != null && !response.trim().isEmpty()) {
+                        Log.d("MedalRanking", "收到排行榜数据: " + response);
                         parseRankingData(response);
                     } else {
-                        // 显示空的排行榜样式，而不是错误信息
-                        rankingList.clear();
-                        adapter.notifyDataSetChanged();
+                        Log.d("MedalRanking", "排行榜数据为空，显示空状态");
+                        showEmptyState();
                     }
-                    recyclerView.setVisibility(View.VISIBLE);
                 });
             } catch (Exception e) {
                 Log.e("MedalRanking", "加载排行榜失败", e);
                 runOnUiThread(() -> {
-                    loadingText.setVisibility(View.GONE);
-                    // 显示空的排行榜样式，而不是错误信息
-                    rankingList.clear();
-                    adapter.notifyDataSetChanged();
-                    recyclerView.setVisibility(View.VISIBLE);
+                    hideLoading();
+                    showEmptyState();
                 });
             }
         }).start();
     }
 
+    private void showLoading() {
+        loadingText.setVisibility(View.VISIBLE);
+        errorText.setVisibility(View.GONE);
+        emptyStateLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+    }
+
+    private void hideLoading() {
+        loadingText.setVisibility(View.GONE);
+    }
+
+    private void showEmptyState() {
+        errorText.setVisibility(View.GONE);
+        emptyStateLayout.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+        rankingList.clear();
+        adapter.notifyDataSetChanged();
+    }
+
+    private void showRankingList() {
+        errorText.setVisibility(View.GONE);
+        emptyStateLayout.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
     private void parseRankingData(String response) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
+            
+            if (!jsonResponse.getBoolean("success")) {
+                Log.w("MedalRanking", "API返回失败: " + jsonResponse.optString("message"));
+                showEmptyState();
+                return;
+            }
+            
             JSONArray data = jsonResponse.getJSONArray("data");
             
             rankingList.clear();
@@ -127,27 +155,34 @@ public class MedalRankingActivity extends AppCompatActivity {
                 JSONObject item = data.getJSONObject(i);
                 MedalRankingItem rankingItem = new MedalRankingItem();
                 rankingItem.setRank(i + 1);
-                rankingItem.setAddress(item.getString("address"));
-                rankingItem.setGold(item.getInt("gold"));
-                rankingItem.setSilver(item.getInt("silver"));
-                rankingItem.setBronze(item.getInt("bronze"));
-                rankingItem.setTotal(item.getInt("total"));
+                rankingItem.setWalletAddress(item.getString("walletAddress"));
+                rankingItem.setDisplayName(item.optString("displayName", "匿名用户"));
+                rankingItem.setGoldMedals(item.getInt("goldMedals"));
+                rankingItem.setSilverMedals(item.getInt("silverMedals"));
+                rankingItem.setBronzeMedals(item.getInt("bronzeMedals"));
+                rankingItem.setTotalMedalScore(item.getInt("totalMedalScore"));
+                rankingItem.setRepresentativeWork(item.optString("representativeWork", ""));
+                rankingItem.setShowRepresentativeWork(item.optBoolean("showRepresentativeWork", false));
                 rankingList.add(rankingItem);
             }
             
-            // 按总数排序
-            Collections.sort(rankingList, (a, b) -> Integer.compare(b.getTotal(), a.getTotal()));
-            
-            // 更新排名
-            for (int i = 0; i < rankingList.size(); i++) {
-                rankingList.get(i).setRank(i + 1);
+            if (rankingList.isEmpty()) {
+                showEmptyState();
+            } else {
+                // 按总分排序（后端应该已经排序了，但保险起见）
+                Collections.sort(rankingList, (a, b) -> Integer.compare(b.getTotalMedalScore(), a.getTotalMedalScore()));
+                
+                // 更新排名
+                for (int i = 0; i < rankingList.size(); i++) {
+                    rankingList.get(i).setRank(i + 1);
+                }
+                
+                adapter.notifyDataSetChanged();
+                showRankingList();
             }
-            
-            adapter.notifyDataSetChanged();
         } catch (JSONException e) {
             Log.e("MedalRanking", "解析数据失败", e);
-            errorText.setVisibility(View.VISIBLE);
-            errorText.setText("数据解析失败");
+            showEmptyState();
         }
     }
 
@@ -167,24 +202,49 @@ public class MedalRankingActivity extends AppCompatActivity {
 
     public static class MedalRankingItem {
         private int rank;
-        private String address;
-        private int gold;
-        private int silver;
-        private int bronze;
-        private int total;
+        private String walletAddress;
+        private String displayName;
+        private int goldMedals;
+        private int silverMedals;
+        private int bronzeMedals;
+        private int totalMedalScore;
+        private String representativeWork;
+        private boolean showRepresentativeWork;
 
         // Getters and Setters
         public int getRank() { return rank; }
         public void setRank(int rank) { this.rank = rank; }
-        public String getAddress() { return address; }
-        public void setAddress(String address) { this.address = address; }
-        public int getGold() { return gold; }
-        public void setGold(int gold) { this.gold = gold; }
-        public int getSilver() { return silver; }
-        public void setSilver(int silver) { this.silver = silver; }
-        public int getBronze() { return bronze; }
-        public void setBronze(int bronze) { this.bronze = bronze; }
-        public int getTotal() { return total; }
-        public void setTotal(int total) { this.total = total; }
+        
+        public String getWalletAddress() { return walletAddress; }
+        public void setWalletAddress(String walletAddress) { this.walletAddress = walletAddress; }
+        
+        public String getDisplayName() { return displayName; }
+        public void setDisplayName(String displayName) { this.displayName = displayName; }
+        
+        public int getGoldMedals() { return goldMedals; }
+        public void setGoldMedals(int goldMedals) { this.goldMedals = goldMedals; }
+        
+        public int getSilverMedals() { return silverMedals; }
+        public void setSilverMedals(int silverMedals) { this.silverMedals = silverMedals; }
+        
+        public int getBronzeMedals() { return bronzeMedals; }
+        public void setBronzeMedals(int bronzeMedals) { this.bronzeMedals = bronzeMedals; }
+        
+        public int getTotalMedalScore() { return totalMedalScore; }
+        public void setTotalMedalScore(int totalMedalScore) { this.totalMedalScore = totalMedalScore; }
+        
+        public String getRepresentativeWork() { return representativeWork; }
+        public void setRepresentativeWork(String representativeWork) { this.representativeWork = representativeWork; }
+        
+        public boolean isShowRepresentativeWork() { return showRepresentativeWork; }
+        public void setShowRepresentativeWork(boolean showRepresentativeWork) { this.showRepresentativeWork = showRepresentativeWork; }
+
+        // 格式化钱包地址显示
+        public String getFormattedAddress() {
+            if (walletAddress == null || walletAddress.length() < 10) {
+                return walletAddress;
+            }
+            return walletAddress.substring(0, 6) + "..." + walletAddress.substring(walletAddress.length() - 4);
+        }
     }
 }
