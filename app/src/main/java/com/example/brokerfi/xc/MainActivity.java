@@ -403,7 +403,9 @@ public class MainActivity extends AppCompatActivity {
         });
         
         medalSystem.setOnClickListener(view -> {
-            showMedalSystemMenu();
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this,MedalRankingActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -506,39 +508,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
-    }
-
-    /**
-     * 显示勋章系统菜单
-     */
-    private void showMedalSystemMenu() {
-        String[] options = {
-            "📋 提交证明材料",
-            "📊 查看勋章排行榜", 
-            "📝 我的提交历史"
-        };
-        
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("🏅 勋章系统")
-               .setItems(options, (dialog, which) -> {
-                   Intent intent;
-                   switch (which) {
-                       case 0: // 提交证明材料
-                           intent = new Intent(MainActivity.this, ProofAndNFTActivity.class);
-                           startActivity(intent);
-                           break;
-                       case 1: // 查看勋章排行榜
-                           intent = new Intent(MainActivity.this, MedalRankingActivity.class);
-                           startActivity(intent);
-                           break;
-                       case 2: // 我的提交历史
-                           intent = new Intent(MainActivity.this, SubmissionHistoryActivity.class);
-                           startActivity(intent);
-                           break;
-                   }
-               })
-               .setNegativeButton("取消", null)
-               .show();
     }
 
     @Override

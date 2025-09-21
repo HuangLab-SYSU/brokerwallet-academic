@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_color">
+    android:background="@color/white">
 
     <!-- 顶部导航栏 -->
     <include layout="@layout/topbar" />
@@ -24,7 +24,7 @@
             android:text="📋 我的提交历史"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/text_primary" />
+            android:textColor="@color/black" />
 
     </LinearLayout>
 
@@ -59,7 +59,7 @@
             android:layout_gravity="center"
             android:text="⏳ 正在加载提交历史..."
             android:textSize="16sp"
-            android:textColor="@color/text_secondary"
+            android:textColor="@color/grey_60"
             android:visibility="gone" />
 
         <!-- 错误状态 -->
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:text="❌ 加载失败"
                 android:textSize="16sp"
-                android:textColor="@color/text_secondary"
+                android:textColor="@color/grey_60"
                 android:gravity="center"
                 android:layout_marginBottom="16dp" />
 
@@ -88,9 +88,9 @@
                 android:layout_height="wrap_content"
                 android:text="🔄 重试"
                 android:textSize="14sp"
-                android:textColor="@color/primary_color"
+                    android:textColor="@color/colorPrimary"
                 android:padding="12dp"
-                android:background="@drawable/button_background"
+                android:background="@drawable/custom_button_background"
                 android:clickable="true"
                 android:focusable="true" />
 
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:text="还没有提交记录"
                 android:textSize="18sp"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/black"
                 android:layout_marginBottom="8dp" />
 
             <TextView
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:text="去提交您的第一个证明材料吧！"
                 android:textSize="14sp"
-                android:textColor="@color/text_secondary" />
+                android:textColor="@color/grey_60" />
 
         </LinearLayout>
 

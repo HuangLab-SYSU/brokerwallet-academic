@@ -43,6 +43,7 @@ public class MedalRankingActivity extends AppCompatActivity {
     private LinearLayout emptyStateLayout;
     private TextView proofAndNftButton;
     private TextView nftViewButton;
+    private TextView submissionHistoryButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class MedalRankingActivity extends AppCompatActivity {
         emptyStateLayout = findViewById(R.id.emptyStateLayout);
         proofAndNftButton = findViewById(R.id.proofAndNftButton);
         nftViewButton = findViewById(R.id.nftViewButton);
+        submissionHistoryButton = findViewById(R.id.submissionHistoryButton);
         
         rankingList = new ArrayList<>();
         adapter = new MedalRankingAdapter(rankingList);
@@ -81,6 +83,11 @@ public class MedalRankingActivity extends AppCompatActivity {
         
         nftViewButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, NFTViewActivity.class);
+            startActivity(intent);
+        });
+        
+        submissionHistoryButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SubmissionHistoryActivity.class);
             startActivity(intent);
         });
     }
