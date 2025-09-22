@@ -3,7 +3,7 @@ package com.example.brokerfi.xc;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+// import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,7 +40,7 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
     private RelativeLayout action_bar;
     private NavigationHelper navigationHelper;
     
-    private SwipeRefreshLayout swipeRefreshLayout;
+    // private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private SubmissionHistoryAdapter adapter;
     private List<SubmissionRecord> submissionList;
@@ -71,12 +71,12 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
     private void initializeViews() {
         // 导航相关
         menu = findViewById(R.id.menu);
-        notificationBtn = findViewById(R.id.notification);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
-        navigationHelper = new NavigationHelper(this);
+        navigationHelper = new NavigationHelper(menu, action_bar, this, notificationBtn);
         
         // 列表相关
-        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        // swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         recyclerView = findViewById(R.id.recyclerView);
         loadingText = findViewById(R.id.loadingText);
         errorText = findViewById(R.id.errorText);
@@ -92,22 +92,26 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
      * 设置UI
      */
     private void setupUI() {
-        // 设置导航
-        menu.setOnClickListener(v -> navigationHelper.openMenu());
-        notificationBtn.setOnClickListener(v -> navigationHelper.openNotifications());
+        // 设置导航（简化版本）
+        menu.setOnClickListener(v -> {
+            // 可以在这里添加菜单逻辑，暂时留空
+        });
+        notificationBtn.setOnClickListener(v -> {
+            // 可以在这里添加通知逻辑，暂时留空  
+        });
         
         // 设置RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         
-        // 设置下拉刷新
-        swipeRefreshLayout.setOnRefreshListener(this::refreshData);
-        swipeRefreshLayout.setColorSchemeResources(
-            android.R.color.holo_blue_bright,
-            android.R.color.holo_green_light,
-            android.R.color.holo_orange_light,
-            android.R.color.holo_red_light
-        );
+        // 设置下拉刷新（暂时注释掉）
+        // swipeRefreshLayout.setOnRefreshListener(this::refreshData);
+        // swipeRefreshLayout.setColorSchemeResources(
+        //     android.R.color.holo_blue_bright,
+        //     android.R.color.holo_green_light,
+        //     android.R.color.holo_orange_light,
+        //     android.R.color.holo_red_light
+        // );
         
         // 设置重试按钮
         retryButton.setOnClickListener(v -> {
@@ -160,7 +164,7 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         isLoading = false;
                         hideLoading();
-                        swipeRefreshLayout.setRefreshing(false);
+                        // swipeRefreshLayout.setRefreshing(false);
                         handleSubmissionHistorySuccess(response);
                     });
                 }
@@ -170,7 +174,7 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         isLoading = false;
                         hideLoading();
-                        swipeRefreshLayout.setRefreshing(false);
+                        // swipeRefreshLayout.setRefreshing(false);
                         handleSubmissionHistoryError(error);
                     });
                 }
@@ -443,3 +447,4 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+

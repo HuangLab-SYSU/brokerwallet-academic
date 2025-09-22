@@ -199,6 +199,12 @@
         <activity
             android:name="com.example.brokerfi.xc.ProofAndNFTActivity"
             android:exported="false" />
+        <activity
+            android:name="com.example.brokerfi.xc.SubmissionHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.brokerfi.xc.SubmissionDetailActivity"
+            android:exported="false" />
 
         <!-- FileProvider for camera photos -->
         <provider

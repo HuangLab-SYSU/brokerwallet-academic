@@ -169,6 +169,12 @@
         <activity
             android:name=".xc.ProofAndNFTActivity"
             android:exported="false" />
+        <activity
+            android:name=".xc.SubmissionHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.SubmissionDetailActivity"
+            android:exported="false" />
 
         <!-- FileProvider for camera photos -->
         <provider

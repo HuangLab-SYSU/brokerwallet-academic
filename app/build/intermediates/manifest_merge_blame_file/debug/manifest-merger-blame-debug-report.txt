@@ -9,43 +9,43 @@
 9        android:targetSdkVersion="33" />
 10
 11    <uses-feature
-11-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:5:5-7:36
+11-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:5:5-7:36
 12        android:name="android.hardware.camera"
-12-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:6:9-47
+12-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:6:9-47
 13        android:required="false" />
-13-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:7:9-33
+13-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:7:9-33
 14    <uses-feature android:name="android.hardware.camera.autofocus" />
-14-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:8:5-70
-14-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:8:19-67
+14-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:8:5-70
+14-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:8:19-67
 15
 16    <uses-permission android:name="android.permission.CAMERA" />
-16-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:10:5-65
-16-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:10:22-62
+16-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:10:5-65
+16-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:10:22-62
 17    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-17-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:11:5-80
-17-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:11:22-77
+17-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:11:5-80
+17-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:11:22-77
 18    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-18-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:12:5-81
-18-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:12:22-78
+18-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:12:5-81
+18-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:12:22-78
 19    <uses-permission android:name="android.permission.INTERNET" />
-19-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:13:5-67
-19-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:13:22-64
+19-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:13:5-67
+19-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:13:22-64
 20
 21    <queries>
-21-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:15:5-21:15
+21-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:15:5-21:15
 22        <intent>
-22-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:16:9-20:18
+22-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:16:9-20:18
 23            <action android:name="android.intent.action.VIEW" />
-23-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:17:13-65
-23-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:17:21-62
+23-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:17:13-65
+23-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:17:21-62
 24
 25            <data android:mimeType="text/html" />
-25-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:18:13-50
-25-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:18:19-47
+25-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:18:13-50
+25-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:18:19-47
 26
 27            <category android:name="android.intent.category.BROWSABLE" />
-27-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:19:13-74
-27-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:19:23-71
+27-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:19:13-74
+27-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:19:23-71
 28        </intent>
 29    </queries>
 30
@@ -86,368 +86,380 @@
 48-->[androidx.core:core:1.9.0] C:\Users\wanweijie\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 49
 50    <application
-50-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:23:5-187:19
+50-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:23:5-193:19
 51        android:allowBackup="true"
-51-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:25:9-35
+51-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:25:9-35
 52        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 52-->[androidx.core:core:1.9.0] C:\Users\wanweijie\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
 53        android:dataExtractionRules="@xml/data_extraction_rules"
-53-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:26:9-65
+53-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:26:9-65
 54        android:debuggable="true"
 55        android:extractNativeLibs="true"
 56        android:fullBackupContent="@xml/backup_rules"
-56-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:27:9-54
+56-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:27:9-54
 57        android:icon="@mipmap/ic_launcher4"
-57-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:28:9-44
+57-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:28:9-44
 58        android:label="@string/app_name"
-58-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:29:9-41
+58-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:29:9-41
 59        android:networkSecurityConfig="@xml/network_security_config"
-59-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:30:9-69
+59-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:30:9-69
 60        android:roundIcon="@mipmap/ic_launcher4_round"
-60-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:31:9-55
+60-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:31:9-55
 61        android:supportsRtl="true"
-61-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:32:9-35
+61-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:32:9-35
 62        android:testOnly="true"
 63        android:theme="@style/Theme.BrokerFi"
-63-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:33:9-46
+63-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:33:9-46
 64        android:usesCleartextTraffic="true" >
-64-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:24:9-44
+64-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:24:9-44
 65        <activity
-65-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:35:9-37:40
+65-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:35:9-37:40
 66            android:name="com.example.brokerfi.xc.AboutActivity"
-66-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:36:13-45
+66-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:36:13-45
 67            android:exported="false" />
-67-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:37:13-37
+67-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:37:13-37
 68        <activity
-68-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:38:9-40:40
+68-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:38:9-40:40
 69            android:name="com.example.brokerfi.xc.NewsActivity2"
-69-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:39:13-45
+69-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:39:13-45
 70            android:exported="false" />
-70-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:40:13-37
+70-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:40:13-37
 71        <activity
-71-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:41:9-43:40
+71-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:41:9-43:40
 72            android:name="com.example.brokerfi.xc.AtvActivity"
-72-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:42:13-43
+72-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:42:13-43
 73            android:exported="false" />
-73-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:43:13-37
+73-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:43:13-37
 74        <activity
-74-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:44:9-46:40
+74-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:44:9-46:40
 75            android:name="com.example.brokerfi.xc.WithdrawActivity"
-75-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:45:13-48
+75-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:45:13-48
 76            android:exported="false" />
-76-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:46:13-37
+76-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:46:13-37
 77        <activity
-77-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:47:9-49:40
+77-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:47:9-49:40
 78            android:name="com.example.brokerfi.xc.NewsActivity"
-78-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:48:13-44
+78-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:48:13-44
 79            android:exported="false" />
-79-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:49:13-37
+79-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:49:13-37
 80        <activity
-80-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:50:9-52:40
+80-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:50:9-52:40
 81            android:name="com.example.brokerfi.xc.EmulatorActivity"
-81-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:51:13-48
+81-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:51:13-48
 82            android:exported="false" />
-82-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:52:13-37
+82-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:52:13-37
 83        <activity
-83-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:53:9-55:40
+83-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:53:9-55:40
 84            android:name="com.example.brokerfi.xc.StakeMoreActivity"
-84-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:54:13-49
+84-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:54:13-49
 85            android:exported="false" />
-85-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:55:13-37
+85-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:55:13-37
 86        <activity
-86-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:56:9-58:40
+86-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:56:9-58:40
 87            android:name="com.example.brokerfi.xc.BrokerActivity"
-87-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:57:13-46
+87-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:57:13-46
 88            android:exported="false" />
-88-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:58:13-37
+88-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:58:13-37
 89        <activity
-89-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:59:9-61:40
+89-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:59:9-61:40
 90            android:name="com.example.brokerfi.xc.AfterBrokerActivity"
-90-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:60:13-51
+90-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:60:13-51
 91            android:exported="false" />
-91-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:61:13-37
+91-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:61:13-37
 92        <activity
-92-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:62:9-66:57
+92-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:62:9-66:57
 93            android:name="com.example.brokerfi.xc.QRCode.Capture"
-93-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:63:13-46
+93-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:63:13-46
 94            android:screenOrientation="portrait"
-94-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:64:13-49
+94-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:64:13-49
 95            android:stateNotNeeded="true"
-95-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:65:13-42
+95-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:65:13-42
 96            android:theme="@style/zxing_CaptureTheme" />
-96-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:66:13-54
+96-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:66:13-54
 97        <activity
-97-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:67:9-69:40
+97-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:67:9-69:40
 98            android:name="com.example.brokerfi.xc.MainActivity"
-98-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:68:13-44
+98-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:68:13-44
 99            android:exported="false" />
-99-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:69:13-37
+99-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:69:13-37
 100        <activity
-100-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:70:9-72:40
+100-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:70:9-72:40
 101            android:name="com.example.brokerfi.xc.NFTMainActivity"
-101-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:71:13-47
+101-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:71:13-47
 102            android:exported="false" />
-102-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:72:13-37
+102-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:72:13-37
 103        <activity
-103-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:73:9-75:40
+103-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:73:9-75:40
 104            android:name="com.example.brokerfi.xc.MintActivity"
-104-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:74:13-44
+104-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:74:13-44
 105            android:exported="false" />
-105-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:75:13-37
+105-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:75:13-37
 106        <activity
-106-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:76:9-78:40
+106-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:76:9-78:40
 107            android:name="com.example.brokerfi.xc.MyNFTsActivity"
-107-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:77:13-46
+107-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:77:13-46
 108            android:exported="false" />
-108-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:78:13-37
+108-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:78:13-37
 109        <activity
-109-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:79:9-81:40
+109-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:79:9-81:40
 110            android:name="com.example.brokerfi.xc.BuyNFTsActivity"
-110-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:80:13-47
+110-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:80:13-47
 111            android:exported="false" />
-111-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:81:13-37
+111-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:81:13-37
 112        <activity
-112-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:82:9-84:40
+112-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:82:9-84:40
 113            android:name="com.example.brokerfi.xc.CongratulationsMintActivity"
-113-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:83:13-59
+113-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:83:13-59
 114            android:exported="false" />
-114-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:84:13-37
+114-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:84:13-37
 115        <activity
-115-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:85:9-87:40
+115-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:85:9-87:40
 116            android:name="com.example.brokerfi.xc.MyAccountActivity"
-116-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:86:13-49
+116-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:86:13-49
 117            android:exported="false" />
-117-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:87:13-37
+117-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:87:13-37
 118        <activity
-118-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:88:9-90:40
+118-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:88:9-90:40
 119            android:name="com.example.brokerfi.xc.BeforeShowPrKeyActivity"
-119-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:89:13-55
+119-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:89:13-55
 120            android:exported="false" />
-120-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:90:13-37
+120-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:90:13-37
 121        <activity
-121-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:91:9-93:40
+121-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:91:9-93:40
 122            android:name="com.example.brokerfi.xc.AddAccountActivity"
-122-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:92:13-50
+122-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:92:13-50
 123            android:exported="false" />
-123-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:93:13-37
+123-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:93:13-37
 124        <activity
-124-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:94:9-96:40
+124-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:94:9-96:40
 125            android:name="com.example.brokerfi.xc.GenerateAccountActivity"
-125-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:95:13-55
+125-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:95:13-55
 126            android:exported="false" />
-126-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:96:13-37
+126-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:96:13-37
 127        <activity
-127-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:97:9-99:40
+127-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:97:9-99:40
 128            android:name="com.example.brokerfi.xc.SelectAccountActivity"
-128-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:98:13-53
+128-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:98:13-53
 129            android:exported="false" />
-129-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:99:13-37
+129-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:99:13-37
 130        <activity
-130-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:100:9-102:40
+130-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:100:9-102:40
 131            android:name="com.example.brokerfi.xc.SettingActivity"
-131-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:101:13-47
+131-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:101:13-47
 132            android:exported="false" />
-132-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:102:13-37
+132-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:102:13-37
 133        <activity
-133-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:103:9-105:40
+133-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:103:9-105:40
 134            android:name="com.example.brokerfi.xc.AddNetworkActivity"
-134-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:104:13-50
+134-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:104:13-50
 135            android:exported="false" />
-135-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:105:13-37
+135-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:105:13-37
 136        <activity
-136-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:106:9-108:40
+136-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:106:9-108:40
 137            android:name="com.example.brokerfi.xc.SelectNetworkActivity"
-137-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:107:13-53
+137-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:107:13-53
 138            android:exported="false" />
-138-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:108:13-37
+138-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:108:13-37
 139        <activity
-139-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:109:9-111:40
+139-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:109:9-111:40
 140            android:name="com.example.brokerfi.xc.ShowPrKryActivity"
-140-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:110:13-49
+140-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:110:13-49
 141            android:exported="false" />
-141-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:111:13-37
+141-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:111:13-37
 142        <activity
-142-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:112:9-114:40
+142-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:112:9-114:40
 143            android:name="com.example.brokerfi.xc.SendActivity"
-143-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:113:13-44
+143-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:113:13-44
 144            android:exported="false" />
-144-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:114:13-37
+144-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:114:13-37
 145        <activity
-145-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:115:9-117:40
+145-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:115:9-117:40
 146            android:name="com.example.brokerfi.xc.ReceiveActivity"
-146-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:116:13-47
+146-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:116:13-47
 147            android:exported="false" />
-147-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:117:13-37
+147-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:117:13-37
 148        <activity
-148-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:118:9-120:40
+148-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:118:9-120:40
 149            android:name="com.example.brokerfi.xc.SwapActivity"
-149-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:119:13-44
+149-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:119:13-44
 150            android:exported="false" />
-150-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:120:13-37
+150-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:120:13-37
 151        <activity
-151-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:121:9-123:40
+151-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:121:9-123:40
 152            android:name="com.example.brokerfi.xc.BuyActivity"
-152-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:122:13-43
+152-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:122:13-43
 153            android:exported="false" />
-153-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:123:13-37
+153-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:123:13-37
 154        <activity
-154-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:124:9-126:40
+154-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:124:9-126:40
 155            android:name="com.example.brokerfi.xc.FaucetActivity"
-155-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:125:13-46
+155-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:125:13-46
 156            android:exported="false" />
-156-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:126:13-37
+156-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:126:13-37
 157        <activity
-157-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:127:9-129:40
+157-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:127:9-129:40
 158            android:name="com.example.brokerfi.xc.MenuActivity"
-158-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:128:13-44
+158-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:128:13-44
 159            android:exported="false" />
-159-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:129:13-37
+159-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:129:13-37
 160        <activity
-160-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:130:9-132:40
+160-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:130:9-132:40
 161            android:name="com.example.brokerfi.xc.WelcomeBackActivity"
-161-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:131:13-51
+161-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:131:13-51
 162            android:exported="false" />
-162-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:132:13-37
+162-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:132:13-37
 163        <activity
-163-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:133:9-135:40
+163-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:133:9-135:40
 164            android:name="com.example.brokerfi.xc.CongratulationsActivity"
-164-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:134:13-55
+164-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:134:13-55
 165            android:exported="false" />
-165-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:135:13-37
+165-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:135:13-37
 166        <activity
-166-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:136:9-138:40
+166-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:136:9-138:40
 167            android:name="com.example.brokerfi.xc.ComfirmSecretActivity"
-167-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:137:13-53
+167-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:137:13-53
 168            android:exported="false" />
-168-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:138:13-37
+168-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:138:13-37
 169        <activity
-169-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:139:9-141:40
+169-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:139:9-141:40
 170            android:name="com.example.brokerfi.xc.SecretPhraseActivity"
-170-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:140:13-52
+170-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:140:13-52
 171            android:exported="false" />
-171-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:141:13-37
+171-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:141:13-37
 172        <activity
-172-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:142:9-144:40
+172-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:142:9-144:40
 173            android:name="com.example.brokerfi.xc.CreatePasswActivity"
-173-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:143:13-51
+173-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:143:13-51
 174            android:exported="false" />
-174-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:144:13-37
+174-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:144:13-37
 175        <activity
-175-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:145:9-147:40
+175-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:145:9-147:40
 176            android:name="com.example.brokerfi.xc.ImportActivity"
-176-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:146:13-46
+176-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:146:13-46
 177            android:exported="false" />
-177-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:147:13-37
+177-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:147:13-37
 178        <activity
-178-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:148:9-156:20
+178-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:148:9-156:20
 179            android:name="com.example.brokerfi.xc.WelcomeActivity"
-179-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:149:13-47
+179-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:149:13-47
 180            android:exported="true" >
-180-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:150:13-36
+180-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:150:13-36
 181            <intent-filter>
-181-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:151:13-155:29
+181-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:151:13-155:29
 182                <action android:name="android.intent.action.MAIN" />
-182-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:152:17-69
-182-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:152:25-66
+182-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:152:17-69
+182-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:152:25-66
 183
 184                <category android:name="android.intent.category.LAUNCHER" />
-184-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:154:17-77
-184-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:154:27-74
+184-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:154:17-77
+184-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:154:27-74
 185            </intent-filter>
 186        </activity>
 187        <activity
-187-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:157:9-159:40
+187-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:157:9-159:40
 188            android:name="com.example.brokerfi.xc.MedalRankingActivity"
-188-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:158:13-52
+188-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:158:13-52
 189            android:exported="false" />
-189-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:159:13-37
+189-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:159:13-37
 190        <activity
-190-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:160:9-162:40
+190-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:160:9-162:40
 191            android:name="com.example.brokerfi.xc.ProofSubmissionActivity"
-191-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:161:13-55
+191-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:161:13-55
 192            android:exported="false" />
-192-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:162:13-37
+192-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:162:13-37
 193        <activity
-193-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:163:9-165:40
+193-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:163:9-165:40
 194            android:name="com.example.brokerfi.xc.NFTMintingActivity"
-194-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:164:13-50
+194-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:164:13-50
 195            android:exported="false" />
-195-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:165:13-37
+195-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:165:13-37
 196        <activity
-196-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:166:9-168:40
+196-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:166:9-168:40
 197            android:name="com.example.brokerfi.xc.NFTViewActivity"
-197-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:167:13-47
+197-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:167:13-47
 198            android:exported="false" />
-198-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:168:13-37
+198-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:168:13-37
 199        <activity
-199-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:169:9-171:40
+199-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:169:9-171:40
 200            android:name="com.example.brokerfi.xc.ProofAndNFTActivity"
-200-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:170:13-51
+200-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:170:13-51
 201            android:exported="false" />
-201-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:171:13-37
-202
-203        <!-- FileProvider for camera photos -->
-204        <provider
-204-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:174:9-182:20
-205            android:name="androidx.core.content.FileProvider"
-205-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:175:13-62
-206            android:authorities="com.example.brokerfi.fileprovider"
-206-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:176:13-68
-207            android:exported="false"
-207-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:177:13-37
-208            android:grantUriPermissions="true" >
-208-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:178:13-47
-209            <meta-data
-209-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:179:13-181:54
-210                android:name="android.support.FILE_PROVIDER_PATHS"
-210-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:180:17-67
-211                android:resource="@xml/file_paths" />
-211-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:181:17-51
-212        </provider>
-213
-214        <meta-data
-214-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:184:9-186:57
-215            android:name="preloaded_fonts"
-215-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:185:13-43
-216            android:resource="@array/preloaded_fonts" />
-216-->D:\brokerwallet-academic\app\src\main\AndroidManifest.xml:186:13-54
-217
-218        <activity
-218-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
-219            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-219-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
-220            android:clearTaskOnLaunch="true"
-220-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
-221            android:screenOrientation="sensorLandscape"
-221-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
-222            android:stateNotNeeded="true"
-222-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
-223            android:theme="@style/zxing_CaptureTheme"
-223-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
-224            android:windowSoftInputMode="stateAlwaysHidden" />
-224-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
-225
-226        <provider
-226-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
-227            android:name="androidx.startup.InitializationProvider"
-227-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
-228            android:authorities="com.example.brokerfi.androidx-startup"
-228-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
-229            android:exported="false" >
-229-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
-230            <meta-data
-230-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
-231                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-231-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
-232                android:value="androidx.startup" />
-232-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
-233            <meta-data
-233-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\wanweijie\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
-234                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-234-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\wanweijie\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
-235                android:value="androidx.startup" />
-235-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\wanweijie\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
-236        </provider>
-237    </application>
-238
-239</manifest>
+201-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:171:13-37
+202        <activity
+202-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:172:9-174:40
+203            android:name="com.example.brokerfi.xc.SubmissionHistoryActivity"
+203-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:173:13-57
+204            android:exported="false" />
+204-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:174:13-37
+205        <activity
+205-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:175:9-177:40
+206            android:name="com.example.brokerfi.xc.SubmissionDetailActivity"
+206-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:176:13-56
+207            android:exported="false" />
+207-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:177:13-37
+208
+209        <!-- FileProvider for camera photos -->
+210        <provider
+210-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:180:9-188:20
+211            android:name="androidx.core.content.FileProvider"
+211-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:181:13-62
+212            android:authorities="com.example.brokerfi.fileprovider"
+212-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:182:13-68
+213            android:exported="false"
+213-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:183:13-37
+214            android:grantUriPermissions="true" >
+214-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:184:13-47
+215            <meta-data
+215-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:185:13-187:54
+216                android:name="android.support.FILE_PROVIDER_PATHS"
+216-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:186:17-67
+217                android:resource="@xml/file_paths" />
+217-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:187:17-51
+218        </provider>
+219
+220        <meta-data
+220-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:190:9-192:57
+221            android:name="preloaded_fonts"
+221-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:191:13-43
+222            android:resource="@array/preloaded_fonts" />
+222-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:192:13-54
+223
+224        <activity
+224-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
+225            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+225-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
+226            android:clearTaskOnLaunch="true"
+226-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
+227            android:screenOrientation="sensorLandscape"
+227-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
+228            android:stateNotNeeded="true"
+228-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
+229            android:theme="@style/zxing_CaptureTheme"
+229-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
+230            android:windowSoftInputMode="stateAlwaysHidden" />
+230-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
+231
+232        <provider
+232-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+233            android:name="androidx.startup.InitializationProvider"
+233-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+234            android:authorities="com.example.brokerfi.androidx-startup"
+234-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+235            android:exported="false" >
+235-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+236            <meta-data
+236-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+237                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+237-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+238                android:value="androidx.startup" />
+238-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+239            <meta-data
+239-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\wanweijie\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+240                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+240-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\wanweijie\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+241                android:value="androidx.startup" />
+241-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\wanweijie\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+242        </provider>
+243    </application>
+244
+245</manifest>

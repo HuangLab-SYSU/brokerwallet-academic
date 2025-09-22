@@ -903,7 +903,9 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         selectedImageUri = null;
         displayNameEditText.setText("");
         representativeWorkEditText.setText("");
-        showRepresentativeWorkCheckBox.setChecked(false);
+        if (showRepresentativeWorkNo != null) {
+            showRepresentativeWorkNo.setChecked(true); // 默认选择"不展示"
+        }
         
         updateFileDisplay();
         updateImageDisplay();

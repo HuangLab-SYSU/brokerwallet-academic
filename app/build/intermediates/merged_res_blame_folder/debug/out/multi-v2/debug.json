@@ -772,7 +772,7 @@
             "outputFile": "com.example.brokerfi.app-merged_res-30:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "D:\\brokerwallet-academic\\app\\src\\main\\res\\values-night\\themes.xml",
+                    "source": "D:\\brokerwallet\\brokerwallet-academic\\app\\src\\main\\res\\values-night\\themes.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -4624,20 +4624,41 @@
                     }
                 },
                 {
-                    "source": "D:\\brokerwallet-academic\\app\\src\\main\\res\\values\\colors.xml",
+                    "source": "D:\\brokerwallet\\brokerwallet-academic\\app\\src\\main\\res\\values\\preloaded_fonts.xml",
                     "from": {
-                        "startLines": "5,4,2,3,10,12,7,8,14,9,11,13,6",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "204,157,57,105,415,496,290,330,583,373,456,540,247",
-                        "endColumns": "41,45,46,50,39,42,38,41,52,40,38,41,41",
-                        "endOffsets": "241,198,99,151,450,534,324,367,631,409,490,577,284"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "205"
                     },
                     "to": {
-                        "startLines": "657,670,671,672,716,717,718,719,720,909,910,919,932",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "35793,36725,36771,36818,39838,39878,39921,39960,40002,53819,53860,54487,55347",
-                        "endColumns": "41,45,46,50,39,42,38,41,52,40,38,41,41",
-                        "endOffsets": "35830,36766,36813,36864,39873,39916,39955,39997,40050,53855,53894,54524,55384"
+                        "startLines": "36",
+                        "startColumns": "4",
+                        "startOffsets": "4215",
+                        "endLines": "39",
+                        "endColumns": "12",
+                        "endOffsets": "4360"
+                    }
+                },
+                {
+                    "source": "D:\\brokerwallet\\brokerwallet-academic\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "262"
+                    },
+                    "to": {
+                        "startLines": "5591",
+                        "startColumns": "4",
+                        "startOffsets": "389313",
+                        "endLines": "5594",
+                        "endColumns": "12",
+                        "endOffsets": "389515"
                     }
                 },
                 {
@@ -4789,44 +4810,6 @@
                     }
                 },
                 {
-                    "source": "D:\\brokerwallet-academic\\app\\src\\main\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "262"
-                    },
-                    "to": {
-                        "startLines": "5591",
-                        "startColumns": "4",
-                        "startOffsets": "389313",
-                        "endLines": "5594",
-                        "endColumns": "12",
-                        "endOffsets": "389515"
-                    }
-                },
-                {
-                    "source": "D:\\brokerwallet-academic\\app\\src\\main\\res\\values\\arrays.xml",
-                    "from": {
-                        "startLines": "14,3,23",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "344,76,569",
-                        "endLines": "20,11,26",
-                        "endColumns": "19,19,19",
-                        "endOffsets": "542,317,680"
-                    },
-                    "to": {
-                        "startLines": "16,23,32",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "3667,3864,4102",
-                        "endLines": "22,31,35",
-                        "endColumns": "19,19,19",
-                        "endOffsets": "3859,4097,4210"
-                    }
-                },
-                {
                     "source": "C:\\Users\\wanweijie\\.gradle\\caches\\transforms-3\\e18c9e83ee9bf9222c458bc45d57d1e0\\transformed\\constraintlayout-2.1.4\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,9,10,15,16,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,42,43,44,45,55,63,64,65,70,71,76,81,82,83,88,89,94,95,100,101,102,108,109,110,115,121,122,123,124,130,131,132,133,136,139,142,143,146,149,150,151,152,153,156,159,160,161,162,168,173,176,179,180,181,186,187,188,191,194,195,198,201,204,207,208,209,212,215,216,221,222,228,233,236,239,240,241,242,243,244,245,246,247,248,249,250,266,272,273,274,275,276,283,289,290,291,294,299,300,308,309,310,311,312,313,314,315,324,325,326,332,333,339,343,344,345,346,347,356,360,361,362,380,566,694,700,704,874,1026,1039,1055,1080,1103,1106,1109,1112,1141,1168,1185,1271,1279,1292,1308,1312,1342,1355,1359,1369,1379,1423,1436,1440,1443,1459,1500,1535,1542,1559",
@@ -4865,6 +4848,25 @@
                     }
                 },
                 {
+                    "source": "D:\\brokerwallet\\brokerwallet-academic\\app\\src\\main\\res\\values\\font_certs.xml",
+                    "from": {
+                        "startLines": "2,6,11",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "57,263,1993",
+                        "endLines": "5,10,15",
+                        "endColumns": "12,19,19",
+                        "endOffsets": "257,1987,3582"
+                    },
+                    "to": {
+                        "startLines": "2,6,11",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "150,352,2077",
+                        "endLines": "5,10,15",
+                        "endColumns": "12,19,19",
+                        "endOffsets": "347,2072,3662"
+                    }
+                },
+                {
                     "source": "C:\\Users\\wanweijie\\.gradle\\caches\\transforms-3\\eab5cdda373296bd2cd4ef91b4c2ecd7\\transformed\\savedstate-1.2.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2",
@@ -4879,6 +4881,23 @@
                         "startOffsets": "114238",
                         "endColumns": "53",
                         "endOffsets": "114287"
+                    }
+                },
+                {
+                    "source": "D:\\brokerwallet\\brokerwallet-academic\\app\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "5,4,2,3,10,12,7,8,14,9,11,13,6",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "204,157,57,105,415,496,290,330,583,373,456,540,247",
+                        "endColumns": "41,45,46,50,39,42,38,41,52,40,38,41,41",
+                        "endOffsets": "241,198,99,151,450,534,324,367,631,409,490,577,284"
+                    },
+                    "to": {
+                        "startLines": "657,670,671,672,716,717,718,719,720,909,910,919,932",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "35793,36725,36771,36818,39838,39878,39921,39960,40002,53819,53860,54487,55347",
+                        "endColumns": "41,45,46,50,39,42,38,41,52,40,38,41,41",
+                        "endOffsets": "35830,36766,36813,36864,39873,39916,39955,39997,40050,53855,53894,54524,55384"
                     }
                 },
                 {
@@ -4898,25 +4917,6 @@
                         "endLines": "73,666,667,668,669,1025,1026,1027,2088,5328,5331,5334,9776",
                         "endColumns": "51,60,61,61,63,58,56,53,12,12,12,12,24",
                         "endOffsets": "5902,36532,36594,36656,36720,61563,61620,61674,146892,370550,370676,370804,637211"
-                    }
-                },
-                {
-                    "source": "D:\\brokerwallet-academic\\app\\src\\main\\res\\values\\font_certs.xml",
-                    "from": {
-                        "startLines": "2,6,11",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "57,263,1993",
-                        "endLines": "5,10,15",
-                        "endColumns": "12,19,19",
-                        "endOffsets": "257,1987,3582"
-                    },
-                    "to": {
-                        "startLines": "2,6,11",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "150,352,2077",
-                        "endLines": "5,10,15",
-                        "endColumns": "12,19,19",
-                        "endOffsets": "347,2072,3662"
                     }
                 },
                 {
@@ -4975,7 +4975,7 @@
                     }
                 },
                 {
-                    "source": "D:\\brokerwallet-academic\\app\\src\\main\\res\\values\\strings.xml",
+                    "source": "D:\\brokerwallet\\brokerwallet-academic\\app\\src\\main\\res\\values\\strings.xml",
                     "from": {
                         "startLines": "25,1,9,3,17,6,8,5,4,15,14,10,26,19,24,16,13,12,22,23,27,11,20,21,18,7,2",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -4992,7 +4992,7 @@
                     }
                 },
                 {
-                    "source": "D:\\brokerwallet-academic\\app\\src\\main\\res\\values\\themes.xml",
+                    "source": "D:\\brokerwallet\\brokerwallet-academic\\app\\src\\main\\res\\values\\themes.xml",
                     "from": {
                         "startLines": "2,12",
                         "startColumns": "4,4",
@@ -5008,6 +5008,25 @@
                         "endLines": "2393,6169",
                         "endColumns": "12,63",
                         "endOffsets": "165891,426922"
+                    }
+                },
+                {
+                    "source": "D:\\brokerwallet\\brokerwallet-academic\\app\\src\\main\\res\\values\\arrays.xml",
+                    "from": {
+                        "startLines": "14,3,23",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "344,76,569",
+                        "endLines": "20,11,26",
+                        "endColumns": "19,19,19",
+                        "endOffsets": "542,317,680"
+                    },
+                    "to": {
+                        "startLines": "16,23,32",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "3667,3864,4102",
+                        "endLines": "22,31,35",
+                        "endColumns": "19,19,19",
+                        "endOffsets": "3859,4097,4210"
                     }
                 },
                 {
@@ -5059,25 +5078,6 @@
                         "startOffsets": "114292",
                         "endColumns": "49",
                         "endOffsets": "114337"
-                    }
-                },
-                {
-                    "source": "D:\\brokerwallet-academic\\app\\src\\main\\res\\values\\preloaded_fonts.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "205"
-                    },
-                    "to": {
-                        "startLines": "36",
-                        "startColumns": "4",
-                        "startOffsets": "4215",
-                        "endLines": "39",
-                        "endColumns": "12",
-                        "endOffsets": "4360"
                     }
                 }
             ]

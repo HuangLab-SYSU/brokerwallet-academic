@@ -124,6 +124,7 @@ drawable sketch_icon
 drawable smile
 drawable smile_activity_icon
 drawable smile_black
+drawable status_badge_background
 drawable transaction
 drawable transaction_icon
 drawable uncheck_circle
@@ -194,6 +195,7 @@ id deleteFileButton
 id deleteImageButton
 id descriptionText
 id descriptionTextView
+id detailContainer
 id dev_network
 id displayNameEditText
 id displayNameText
@@ -215,6 +217,7 @@ id edt_sendto
 id edt_shares
 id emptyStateLayout
 id enlarged_image
+id errorLayout
 id errorText
 id et_price
 id et_shares
@@ -222,6 +225,7 @@ id eventDescriptionEditText
 id eventTypeSpinner
 id fileCountHint
 id fileHelpIcon
+id fileInfoText
 id fileNameText
 id goldMedalText
 id icon_four
@@ -230,12 +234,14 @@ id imageNameText
 id imageTypeSpinner
 id imageView
 id iv_thumbnail
+id labelText
 id layout_bottom
 id loadingText
 id lockicon
 id locklist
 id main_network
 id medalSystem
+id medalText
 id menu
 id mint
 id mintButton
@@ -251,6 +257,7 @@ id nft
 id nftDescriptionEditText
 id nftMintButton
 id nftNameEditText
+id nftStatusText
 id nftViewButton
 id nft_container
 id notificationBtn
@@ -263,6 +270,7 @@ id receivelist
 id recyclerView
 id representativeWorkEditText
 id representativeWorkText
+id retryButton
 id rv_nft_list
 id saveqrcodebtn
 id scrollView
@@ -292,6 +300,8 @@ id silverMedalText
 id stakeamount
 id stakemorebtn
 id stakemoretext
+id statusText
+id submissionHistoryButton
 id submitButton
 id submitProofButton
 id support
@@ -325,7 +335,9 @@ id txw_underline
 id up_icon
 id uploadButton
 id uploadIcon
+id uploadTimeText
 id uploadView
+id valueText
 id view
 id warning
 id webview
@@ -368,6 +380,8 @@ layout activity_send
 layout activity_setting
 layout activity_show_pr_kry
 layout activity_stake_more
+layout activity_submission_detail
+layout activity_submission_history
 layout activity_swap
 layout activity_welcome
 layout activity_welcome_back
@@ -380,10 +394,12 @@ layout atv_withdraw
 layout dialog_confirm
 layout dialog_confirm_unlist
 layout dialog_enlarged_image
+layout item_detail_info
 layout item_medal_ranking
 layout item_nft_view
 layout item_selected_file
 layout item_selected_image
+layout item_submission_history
 layout menu
 layout nft_holder
 layout topbar

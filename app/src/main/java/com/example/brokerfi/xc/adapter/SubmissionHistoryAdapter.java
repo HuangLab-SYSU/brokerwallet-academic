@@ -150,3 +150,4 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
         }
     }
 }
+

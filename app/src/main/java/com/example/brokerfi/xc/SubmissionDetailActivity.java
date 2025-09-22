@@ -66,9 +66,9 @@ public class SubmissionDetailActivity extends AppCompatActivity {
     private void initializeViews() {
         // 导航相关
         menu = findViewById(R.id.menu);
-        notificationBtn = findViewById(R.id.notification);
+        notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
-        navigationHelper = new NavigationHelper(this);
+        navigationHelper = new NavigationHelper(menu, action_bar, this, notificationBtn);
         
         // 内容相关
         loadingText = findViewById(R.id.loadingText);
@@ -81,9 +81,13 @@ public class SubmissionDetailActivity extends AppCompatActivity {
      * 设置UI
      */
     private void setupUI() {
-        // 设置导航
-        menu.setOnClickListener(v -> navigationHelper.openMenu());
-        notificationBtn.setOnClickListener(v -> navigationHelper.openNotifications());
+        // 设置导航（简化版本）
+        menu.setOnClickListener(v -> {
+            // 可以在这里添加菜单逻辑，暂时留空
+        });
+        notificationBtn.setOnClickListener(v -> {
+            // 可以在这里添加通知逻辑，暂时留空
+        });
         
         // 设置重试按钮
         retryButton.setOnClickListener(v -> {
@@ -276,3 +280,4 @@ public class SubmissionDetailActivity extends AppCompatActivity {
         }
     }
 }
+

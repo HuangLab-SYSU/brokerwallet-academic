@@ -2935,6 +2935,7 @@ drawable sketch_icon
 drawable smile
 drawable smile_activity_icon
 drawable smile_black
+drawable status_badge_background
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -3155,6 +3156,7 @@ id design_menu_item_action_area
 id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
+id detailContainer
 id dev_network
 id dialog_button
 id dimensions
@@ -3204,6 +3206,7 @@ id endToStart
 id enlarged_image
 id enterAlways
 id enterAlwaysCollapsed
+id errorLayout
 id errorText
 id et_price
 id et_shares
@@ -3215,6 +3218,7 @@ id expanded_menu
 id fade
 id fileCountHint
 id fileHelpIcon
+id fileInfoText
 id fileNameText
 id fill
 id fill_horizontal
@@ -3270,6 +3274,7 @@ id item_touch_helper_previous_elevation
 id iv_thumbnail
 id jumpToEnd
 id jumpToStart
+id labelText
 id labeled
 id layout
 id layout_bottom
@@ -3312,6 +3317,7 @@ id material_timepicker_view
 id material_value_index
 id matrix
 id medalSystem
+id medalText
 id menu
 id message
 id middle
@@ -3371,6 +3377,7 @@ id nft
 id nftDescriptionEditText
 id nftMintButton
 id nftNameEditText
+id nftStatusText
 id nftViewButton
 id nft_container
 id noScroll
@@ -3417,6 +3424,7 @@ id rectangles
 id recyclerView
 id representativeWorkEditText
 id representativeWorkText
+id retryButton
 id reverseSawtooth
 id right
 id rightToLeft
@@ -3522,9 +3530,11 @@ id startToEnd
 id startVertical
 id staticLayout
 id staticPostLayout
+id statusText
 id stop
 id stretch
 id submenuarrow
+id submissionHistoryButton
 id submitButton
 id submitProofButton
 id submit_area
@@ -3610,8 +3620,10 @@ id up
 id up_icon
 id uploadButton
 id uploadIcon
+id uploadTimeText
 id uploadView
 id useLogo
+id valueText
 id vertical_only
 id view
 id view_offset_helper
@@ -3791,6 +3803,8 @@ layout activity_send
 layout activity_setting
 layout activity_show_pr_kry
 layout activity_stake_more
+layout activity_submission_detail
+layout activity_submission_history
 layout activity_swap
 layout activity_welcome
 layout activity_welcome_back
@@ -3819,10 +3833,12 @@ layout design_text_input_start_icon
 layout dialog_confirm
 layout dialog_confirm_unlist
 layout dialog_enlarged_image
+layout item_detail_info
 layout item_medal_ranking
 layout item_nft_view
 layout item_selected_file
 layout item_selected_image
+layout item_submission_history
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
