@@ -13,16 +13,37 @@
         android:layout_below="@id/action_bar"
         android:orientation="vertical">
 
-        <!-- 标题 -->
-        <TextView
+        <!-- 标题和注释按钮 -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="🏆 勋章排行榜"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:gravity="center" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🏆 勋章排行榜"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:gravity="center" />
+
+            <!-- 注释按钮 -->
+            <TextView
+                android:id="@+id/helpButton"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:text="❓"
+                android:textSize="16sp"
+                android:textColor="@color/grey_60"
+                android:gravity="center"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true" />
+
+        </LinearLayout>
 
         <!-- 内容区域 -->
         <RelativeLayout

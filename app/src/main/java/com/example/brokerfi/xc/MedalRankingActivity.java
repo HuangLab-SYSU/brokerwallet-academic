@@ -44,6 +44,7 @@ public class MedalRankingActivity extends AppCompatActivity {
     private TextView proofAndNftButton;
     private TextView myCenterButton;
     private TextView globalStatsButton;
+    private TextView helpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class MedalRankingActivity extends AppCompatActivity {
         proofAndNftButton = findViewById(R.id.proofAndNftButton);
         myCenterButton = findViewById(R.id.myCenterButton);
         globalStatsButton = findViewById(R.id.globalStatsButton);
+        helpButton = findViewById(R.id.helpButton);
         
         rankingList = new ArrayList<>();
         adapter = new MedalRankingAdapter(rankingList);
@@ -88,6 +90,10 @@ public class MedalRankingActivity extends AppCompatActivity {
 
         globalStatsButton.setOnClickListener(v -> {
             showGlobalStatsMenu();
+        });
+        
+        helpButton.setOnClickListener(v -> {
+            showCalculationHelpDialog();
         });
     }
 
@@ -292,5 +298,33 @@ public class MedalRankingActivity extends AppCompatActivity {
             }
             return walletAddress.substring(0, 6) + "..." + walletAddress.substring(walletAddress.length() - 4);
         }
+    }
+    
+    /**
+     * 显示计算方法说明对话框
+     */
+    private void showCalculationHelpDialog() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+        builder.setTitle("🏆 勋章排行榜计算方法");
+        builder.setMessage("📊 总分计算公式：\n" +
+                "总分 = 金牌数量 × 3 + 银牌数量 × 2 + 铜牌数量 × 1\n\n" +
+                "🥇 金牌 = 3分\n" +
+                "🥈 银牌 = 2分\n" +
+                "🥉 铜牌 = 1分\n\n" +
+                "📈 排序规则：\n" +
+                "1. 按总分从高到低排序\n" +
+                "2. 总分相同时，按金牌数量排序\n" +
+                "3. 金牌相同时，按银牌数量排序\n" +
+                "4. 银牌相同时，按铜牌数量排序\n\n" +
+                "🎨 用户信息展示：\n" +
+                "根据个人意愿决定是否展示您的代表作与昵称\n" +
+                "代表作需要管理员审核后才能在排行榜上显示");
+        
+        builder.setPositiveButton("我知道了", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

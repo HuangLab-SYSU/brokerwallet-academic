@@ -2810,6 +2810,7 @@ drawable form
 drawable ic_arrow_back_black_24
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
+drawable ic_close
 drawable ic_keyboard_black_24dp
 drawable ic_launcher2_background
 drawable ic_launcher3_background
@@ -3118,6 +3119,7 @@ id clear_text
 id clip_horizontal
 id clip_vertical
 id clockwise
+id closeButton
 id closest
 id collapseActionView
 id compress
@@ -3158,7 +3160,11 @@ id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
 id detailContainer
+id detailDescriptionText
+id detailImageView
+id detailNameText
 id dev_network
+id dialogBackground
 id dialog_button
 id dimensions
 id direct
@@ -3214,6 +3220,7 @@ id et_shares
 id eventDescriptionEditText
 id eventTypeSpinner
 id exitUntilCollapsed
+id expandDescriptionButton
 id expand_activities_button
 id expanded_menu
 id fade
@@ -3233,6 +3240,8 @@ id fitXY
 id fixed
 id flip
 id floating
+id footerProgress
+id footerText
 id forever
 id fragment_container_view_tag
 id frost
@@ -3250,6 +3259,7 @@ id group_divider
 id grouping
 id groups
 id header_title
+id helpButton
 id hideable
 id home
 id homeAsUp
@@ -3851,8 +3861,10 @@ layout design_text_input_start_icon
 layout dialog_confirm
 layout dialog_confirm_unlist
 layout dialog_enlarged_image
+layout dialog_nft_detail
 layout item_detail_info
 layout item_medal_ranking
+layout item_nft_footer
 layout item_nft_view
 layout item_selected_file
 layout item_selected_image

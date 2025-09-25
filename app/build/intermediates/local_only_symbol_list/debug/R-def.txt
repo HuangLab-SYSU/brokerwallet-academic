@@ -79,6 +79,7 @@ drawable dribbble_icon
 drawable emoji
 drawable fire
 drawable form
+drawable ic_close
 drawable ic_launcher2_background
 drawable ic_launcher3_background
 drawable ic_launcher4_background
@@ -187,6 +188,7 @@ id check_2
 id check_3
 id check_4
 id checkbox
+id closeButton
 id confirm_passw
 id contributionLevelSpinner
 id copyaddress
@@ -197,7 +199,11 @@ id deleteImageButton
 id descriptionText
 id descriptionTextView
 id detailContainer
+id detailDescriptionText
+id detailImageView
+id detailNameText
 id dev_network
+id dialogBackground
 id displayNameEditText
 id displayNameText
 id editTextTextMultiLine
@@ -224,13 +230,17 @@ id et_price
 id et_shares
 id eventDescriptionEditText
 id eventTypeSpinner
+id expandDescriptionButton
 id fileCountHint
 id fileHelpIcon
 id fileInfoText
 id fileNameText
+id footerProgress
+id footerText
 id globalStatsButton
 id goldMedalCount
 id goldMedalText
+id helpButton
 id icon_four
 id imageHelpIcon
 id imageNameText
@@ -412,8 +422,10 @@ layout atv_withdraw
 layout dialog_confirm
 layout dialog_confirm_unlist
 layout dialog_enlarged_image
+layout dialog_nft_detail
 layout item_detail_info
 layout item_medal_ranking
+layout item_nft_footer
 layout item_nft_view
 layout item_selected_file
 layout item_selected_image

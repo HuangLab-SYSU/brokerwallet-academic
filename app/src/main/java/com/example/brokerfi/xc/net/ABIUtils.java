@@ -22,8 +22,8 @@ public class ABIUtils {
     private static final String GET_GLOBAL_STATS_SELECTOR = "fa55312b";  // getGlobalStats()
     
     // NFT查询选择器
-    private static final String GET_USER_NFTS_SELECTOR = "i9j0k1l2";
-    private static final String GET_NFT_DATA_SELECTOR = "m3n4o5p6";
+    private static final String GET_USER_NFTS_SELECTOR = "8f4f4f4f";  // getUserNfts(address) - 需要计算正确的Keccak256哈希
+    private static final String GET_NFT_DATA_SELECTOR = "9f5f5f5f";   // getNftData(uint256) - 需要计算正确的Keccak256哈希
 
 
 
