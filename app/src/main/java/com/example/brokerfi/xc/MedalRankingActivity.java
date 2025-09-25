@@ -42,8 +42,8 @@ public class MedalRankingActivity extends AppCompatActivity {
     private TextView errorText;
     private LinearLayout emptyStateLayout;
     private TextView proofAndNftButton;
-    private TextView nftViewButton;
-    private TextView submissionHistoryButton;
+    private TextView myCenterButton;
+    private TextView globalStatsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +64,8 @@ public class MedalRankingActivity extends AppCompatActivity {
         errorText = findViewById(R.id.errorText);
         emptyStateLayout = findViewById(R.id.emptyStateLayout);
         proofAndNftButton = findViewById(R.id.proofAndNftButton);
-        nftViewButton = findViewById(R.id.nftViewButton);
-        submissionHistoryButton = findViewById(R.id.submissionHistoryButton);
+        myCenterButton = findViewById(R.id.myCenterButton);
+        globalStatsButton = findViewById(R.id.globalStatsButton);
         
         rankingList = new ArrayList<>();
         adapter = new MedalRankingAdapter(rankingList);
@@ -81,14 +81,13 @@ public class MedalRankingActivity extends AppCompatActivity {
             startActivity(intent);
         });
         
-        nftViewButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, NFTViewActivity.class);
+        myCenterButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MyCenterActivity.class);
             startActivity(intent);
         });
-        
-        submissionHistoryButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SubmissionHistoryActivity.class);
-            startActivity(intent);
+
+        globalStatsButton.setOnClickListener(v -> {
+            showGlobalStatsMenu();
         });
     }
 
@@ -191,6 +190,46 @@ public class MedalRankingActivity extends AppCompatActivity {
             Log.e("MedalRanking", "解析数据失败", e);
             showEmptyState();
         }
+    }
+
+    private void showGlobalStatsMenu() {
+        String[] options = {"📊 全局勋章统计", "🖼️ 所有NFT浏览", "📈 系统活跃度", "🌐 网络状态"};
+        
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("📊 全局统计")
+                .setItems(options, (dialog, which) -> {
+                    switch (which) {
+                        case 0:
+                            queryGlobalStats();
+                            break;
+                        case 1:
+                            Intent intent = new Intent(this, NFTViewActivity.class);
+                            startActivity(intent);
+                            break;
+                        case 2:
+                            showSystemActivity();
+                            break;
+                        case 3:
+                            showNetworkStatus();
+                            break;
+                    }
+                })
+                .show();
+    }
+
+    private void queryGlobalStats() {
+        // 查询全局勋章统计
+        Toast.makeText(this, "查询全局勋章统计...", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showSystemActivity() {
+        // 显示系统活跃度
+        Toast.makeText(this, "系统活跃度功能开发中...", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showNetworkStatus() {
+        // 显示网络状态
+        Toast.makeText(this, "网络状态功能开发中...", Toast.LENGTH_SHORT).show();
     }
 
     @Override

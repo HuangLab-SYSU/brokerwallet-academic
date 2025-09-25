@@ -16,6 +16,14 @@ public class ABIUtils {
     private static final String GET_MY_NFTS_SELECTOR = "629cb2e4";
     private static final String GET_LISTED_NFTS_SELECTOR = "a3f7f7d8";
     private static final String BUY_SELECTOR = "1d85bf03";
+    
+    // 勋章系统选择器
+    private static final String GET_USER_MEDALS_SELECTOR = "5ef4daa5";  // getUserMedals(address)
+    private static final String GET_GLOBAL_STATS_SELECTOR = "fa55312b";  // getGlobalStats()
+    
+    // NFT查询选择器
+    private static final String GET_USER_NFTS_SELECTOR = "i9j0k1l2";
+    private static final String GET_NFT_DATA_SELECTOR = "m3n4o5p6";
 
 
 
@@ -87,6 +95,33 @@ public class ABIUtils {
 
     public static String encodeGetListedNFTs() {
         return "0x" + GET_LISTED_NFTS_SELECTOR;
+    }
+    
+    // 勋章查询编码方法
+    public static String encodeGetUserMedals(String address) {
+        StringBuilder data = new StringBuilder();
+        data.append(GET_USER_MEDALS_SELECTOR);
+        data.append(padLeft(address.substring(2), 64)); // 移除0x前缀并填充到64字符
+        return "0x" + data.toString();
+    }
+    
+    public static String encodeGetGlobalStats() {
+        return "0x" + GET_GLOBAL_STATS_SELECTOR;
+    }
+    
+    // NFT查询编码方法
+    public static String encodeGetUserNfts(String address) {
+        StringBuilder data = new StringBuilder();
+        data.append(GET_USER_NFTS_SELECTOR);
+        data.append(padLeft(address.substring(2), 64)); // 移除0x前缀并填充到64字符
+        return "0x" + data.toString();
+    }
+    
+    public static String encodeGetNftData(BigInteger tokenId) {
+        StringBuilder data = new StringBuilder();
+        data.append(GET_NFT_DATA_SELECTOR);
+        data.append(padLeft(tokenId.toString(16), 64));
+        return "0x" + data.toString();
     }
 
 
@@ -282,5 +317,127 @@ public class ABIUtils {
             array[i] = fullAddress.substring(24);
         }
         return array;
+    }
+    
+    // 勋章查询结果类
+    public static class MedalQueryResult {
+        public int goldMedals;
+        public int silverMedals;
+        public int bronzeMedals;
+        public int totalScore;
+    }
+    
+    public static class GlobalStatsResult {
+        public int totalUsers;
+        public int totalGoldMedals;
+        public int totalSilverMedals;
+        public int totalBronzeMedals;
+        public int totalMedals;
+    }
+    
+    // NFT查询结果类
+    public static class UserNftsResult {
+        public BigInteger[] tokenIds;
+        public String[] names;
+        public String[] descriptions;
+        public String[] imageUrls;
+    }
+    
+    public static class NftDataResult {
+        public String name;
+        public String description;
+        public String imageUrl;
+        public String owner;
+    }
+    
+    // 勋章查询解码方法
+    public static MedalQueryResult decodeGetUserMedals(String hexResponse) {
+        MedalQueryResult result = new MedalQueryResult();
+        try {
+            String cleanHex = hexResponse.startsWith("0x") ? hexResponse.substring(2) : hexResponse;
+            if (cleanHex.isEmpty()) {
+                return result;
+            }
+            byte[] data = Numeric.hexStringToByteArray(cleanHex);
+            
+            result.goldMedals = Numeric.toBigInt(data, 0, 32).intValue();
+            result.silverMedals = Numeric.toBigInt(data, 32, 32).intValue();
+            result.bronzeMedals = Numeric.toBigInt(data, 64, 32).intValue();
+            result.totalScore = Numeric.toBigInt(data, 96, 32).intValue();
+        } catch (Exception e) {
+            Log.e("ABI_DECODE", "解码勋章数据失败: " + e.getMessage());
+        }
+        return result;
+    }
+    
+    public static GlobalStatsResult decodeGetGlobalStats(String hexResponse) {
+        GlobalStatsResult result = new GlobalStatsResult();
+        try {
+            String cleanHex = hexResponse.startsWith("0x") ? hexResponse.substring(2) : hexResponse;
+            if (cleanHex.isEmpty()) {
+                return result;
+            }
+            byte[] data = Numeric.hexStringToByteArray(cleanHex);
+            
+            result.totalUsers = Numeric.toBigInt(data, 0, 32).intValue();
+            result.totalGoldMedals = Numeric.toBigInt(data, 32, 32).intValue();
+            result.totalSilverMedals = Numeric.toBigInt(data, 64, 32).intValue();
+            result.totalBronzeMedals = Numeric.toBigInt(data, 96, 32).intValue();
+            result.totalMedals = Numeric.toBigInt(data, 128, 32).intValue();
+        } catch (Exception e) {
+            Log.e("ABI_DECODE", "解码全局统计失败: " + e.getMessage());
+        }
+        return result;
+    }
+    
+    // NFT查询解码方法
+    public static UserNftsResult decodeGetUserNfts(String hexResponse) {
+        UserNftsResult result = new UserNftsResult();
+        try {
+            String cleanHex = hexResponse.startsWith("0x") ? hexResponse.substring(2) : hexResponse;
+            if (cleanHex.isEmpty()) {
+                return result;
+            }
+            byte[] data = Numeric.hexStringToByteArray(cleanHex);
+            
+            // 解析动态数组偏移量
+            int[] arrayOffsets = new int[4];
+            for (int i = 0; i < 4; i++) {
+                arrayOffsets[i] = Numeric.toBigInt(data, i * 32, 32).intValue();
+            }
+            
+            result.tokenIds = decodeUint256Array(data, arrayOffsets[0]);
+            result.names = decodeStringArray(data, arrayOffsets[1]);
+            result.descriptions = decodeStringArray(data, arrayOffsets[2]);
+            result.imageUrls = decodeStringArray(data, arrayOffsets[3]);
+        } catch (Exception e) {
+            Log.e("ABI_DECODE", "解码用户NFT失败: " + e.getMessage());
+        }
+        return result;
+    }
+    
+    public static NftDataResult decodeGetNftData(String hexResponse) {
+        NftDataResult result = new NftDataResult();
+        try {
+            String cleanHex = hexResponse.startsWith("0x") ? hexResponse.substring(2) : hexResponse;
+            if (cleanHex.isEmpty()) {
+                return result;
+            }
+            byte[] data = Numeric.hexStringToByteArray(cleanHex);
+            
+            // 解析动态字符串偏移量
+            int[] stringOffsets = new int[4];
+            for (int i = 0; i < 4; i++) {
+                stringOffsets[i] = Numeric.toBigInt(data, i * 32, 32).intValue();
+            }
+            
+            result.name = decodeStringStrict(data, stringOffsets[0]);
+            result.description = decodeStringStrict(data, stringOffsets[1]);
+            result.imageUrl = decodeStringStrict(data, stringOffsets[2]);
+            result.owner = decodeStringStrict(data, stringOffsets[3]);
+        } catch (Exception e) {
+            Log.e("ABI_DECODE", "解码NFT数据失败: " + e.getMessage());
+        }
+        return result;
     }
 }

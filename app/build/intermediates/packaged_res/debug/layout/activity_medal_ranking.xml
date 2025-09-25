@@ -119,11 +119,11 @@
                 android:layout_marginEnd="8dp" />
 
             <TextView
-                android:id="@+id/nftViewButton"
+                android:id="@+id/myCenterButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="🖼️ NFT查看"
+                android:text="👤 我的"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:background="@drawable/custom_button_background"
@@ -143,10 +143,10 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/submissionHistoryButton"
+                android:id="@+id/globalStatsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="📝 我的提交历史"
+                android:text="📊 全局统计"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:background="@drawable/custom_button_background"

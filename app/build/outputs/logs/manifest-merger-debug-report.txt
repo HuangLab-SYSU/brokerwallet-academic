@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:2:1-195:12
-INJECTED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:2:1-195:12
-INJECTED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:2:1-195:12
-INJECTED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:2:1-195:12
+ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:2:1-198:12
+INJECTED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:2:1-198:12
+INJECTED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:2:1-198:12
+INJECTED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:2:1-198:12
 MERGED from [com.google.android.material:material:1.8.0] C:\Users\wanweijie\.gradle\caches\transforms-3\d9d0b4443cbf99e17f7361e93850e0d1\transformed\material-1.8.0\AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\wanweijie\.gradle\caches\transforms-3\e18c9e83ee9bf9222c458bc45d57d1e0\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\wanweijie\.gradle\caches\transforms-3\b2dd3356d46ccaa39f931e0a35983fbf\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
@@ -107,8 +107,8 @@ ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xm
 	android:name
 		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:19:23-71
 application
-ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:23:5-193:19
-INJECTED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:23:5-193:19
+ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:23:5-196:19
+INJECTED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:23:5-196:19
 MERGED from [com.google.android.material:material:1.8.0] C:\Users\wanweijie\.gradle\caches\transforms-3\d9d0b4443cbf99e17f7361e93850e0d1\transformed\material-1.8.0\AndroidManifest.xml:24:5-20
 MERGED from [com.google.android.material:material:1.8.0] C:\Users\wanweijie\.gradle\caches\transforms-3\d9d0b4443cbf99e17f7361e93850e0d1\transformed\material-1.8.0\AndroidManifest.xml:24:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\wanweijie\.gradle\caches\transforms-3\e18c9e83ee9bf9222c458bc45d57d1e0\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -435,28 +435,34 @@ ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xm
 		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:177:13-37
 	android:name
 		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:176:13-56
-provider#androidx.core.content.FileProvider
-ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:180:9-188:20
-	android:grantUriPermissions
-		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:184:13-47
-	android:authorities
-		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:182:13-68
+activity#com.example.brokerfi.xc.MyCenterActivity
+ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:178:9-180:40
 	android:exported
-		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:183:13-37
+		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:180:13-37
 	android:name
-		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:181:13-62
+		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:179:13-48
+provider#androidx.core.content.FileProvider
+ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:183:9-191:20
+	android:grantUriPermissions
+		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:187:13-47
+	android:authorities
+		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:185:13-68
+	android:exported
+		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:186:13-37
+	android:name
+		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:184:13-62
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:185:13-187:54
+ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:188:13-190:54
 	android:resource
-		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:187:17-51
+		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:190:17-51
 	android:name
-		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:186:17-67
+		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:189:17-67
 meta-data#preloaded_fonts
-ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:190:9-192:57
+ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:193:9-195:57
 	android:resource
-		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:192:13-54
+		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:195:13-54
 	android:name
-		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:191:13-43
+		ADDED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:194:13-43
 uses-sdk
 INJECTED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml

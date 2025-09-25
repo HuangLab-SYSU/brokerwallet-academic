@@ -175,6 +175,9 @@
         <activity
             android:name=".xc.SubmissionDetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".xc.MyCenterActivity"
+            android:exported="false" />
 
         <!-- FileProvider for camera photos -->
         <provider

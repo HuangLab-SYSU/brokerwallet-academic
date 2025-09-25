@@ -86,7 +86,7 @@
 48-->[androidx.core:core:1.9.0] C:\Users\wanweijie\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 49
 50    <application
-50-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:23:5-193:19
+50-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:23:5-196:19
 51        android:allowBackup="true"
 51-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:25:9-35
 52        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -397,69 +397,75 @@
 206-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:176:13-56
 207            android:exported="false" />
 207-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:177:13-37
-208
-209        <!-- FileProvider for camera photos -->
-210        <provider
-210-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:180:9-188:20
-211            android:name="androidx.core.content.FileProvider"
-211-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:181:13-62
-212            android:authorities="com.example.brokerfi.fileprovider"
-212-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:182:13-68
-213            android:exported="false"
-213-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:183:13-37
-214            android:grantUriPermissions="true" >
-214-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:184:13-47
-215            <meta-data
-215-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:185:13-187:54
-216                android:name="android.support.FILE_PROVIDER_PATHS"
-216-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:186:17-67
-217                android:resource="@xml/file_paths" />
-217-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:187:17-51
-218        </provider>
-219
-220        <meta-data
-220-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:190:9-192:57
-221            android:name="preloaded_fonts"
-221-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:191:13-43
-222            android:resource="@array/preloaded_fonts" />
-222-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:192:13-54
-223
-224        <activity
-224-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
-225            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-225-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
-226            android:clearTaskOnLaunch="true"
-226-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
-227            android:screenOrientation="sensorLandscape"
-227-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
-228            android:stateNotNeeded="true"
-228-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
-229            android:theme="@style/zxing_CaptureTheme"
-229-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
-230            android:windowSoftInputMode="stateAlwaysHidden" />
-230-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
-231
-232        <provider
-232-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
-233            android:name="androidx.startup.InitializationProvider"
-233-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
-234            android:authorities="com.example.brokerfi.androidx-startup"
-234-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
-235            android:exported="false" >
-235-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
-236            <meta-data
-236-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
-237                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-237-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
-238                android:value="androidx.startup" />
-238-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+208        <activity
+208-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:178:9-180:40
+209            android:name="com.example.brokerfi.xc.MyCenterActivity"
+209-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:179:13-48
+210            android:exported="false" />
+210-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:180:13-37
+211
+212        <!-- FileProvider for camera photos -->
+213        <provider
+213-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:183:9-191:20
+214            android:name="androidx.core.content.FileProvider"
+214-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:184:13-62
+215            android:authorities="com.example.brokerfi.fileprovider"
+215-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:185:13-68
+216            android:exported="false"
+216-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:186:13-37
+217            android:grantUriPermissions="true" >
+217-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:187:13-47
+218            <meta-data
+218-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:188:13-190:54
+219                android:name="android.support.FILE_PROVIDER_PATHS"
+219-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:189:17-67
+220                android:resource="@xml/file_paths" />
+220-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:190:17-51
+221        </provider>
+222
+223        <meta-data
+223-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:193:9-195:57
+224            android:name="preloaded_fonts"
+224-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:194:13-43
+225            android:resource="@array/preloaded_fonts" />
+225-->D:\brokerwallet\brokerwallet-academic\app\src\main\AndroidManifest.xml:195:13-54
+226
+227        <activity
+227-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
+228            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+228-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
+229            android:clearTaskOnLaunch="true"
+229-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
+230            android:screenOrientation="sensorLandscape"
+230-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
+231            android:stateNotNeeded="true"
+231-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
+232            android:theme="@style/zxing_CaptureTheme"
+232-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
+233            android:windowSoftInputMode="stateAlwaysHidden" />
+233-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\wanweijie\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
+234
+235        <provider
+235-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+236            android:name="androidx.startup.InitializationProvider"
+236-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+237            android:authorities="com.example.brokerfi.androidx-startup"
+237-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+238            android:exported="false" >
+238-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
 239            <meta-data
-239-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\wanweijie\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
-240                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-240-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\wanweijie\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+239-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+240                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+240-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
 241                android:value="androidx.startup" />
-241-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\wanweijie\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
-242        </provider>
-243    </application>
-244
-245</manifest>
+241-->[androidx.emoji2:emoji2:1.2.0] C:\Users\wanweijie\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+242            <meta-data
+242-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\wanweijie\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+243                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+243-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\wanweijie\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+244                android:value="androidx.startup" />
+244-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\wanweijie\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+245        </provider>
+246    </application>
+247
+248</manifest>

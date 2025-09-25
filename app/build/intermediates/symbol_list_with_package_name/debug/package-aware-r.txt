@@ -3066,6 +3066,7 @@ id bounceStart
 id broker
 id brokerTextview
 id brokerTextview1
+id bronzeMedalCount
 id bronzeMedalText
 id btn_add
 id btn_add2
@@ -3239,6 +3240,8 @@ id fullscreen_header
 id ghost_view
 id ghost_view_holder
 id glide_custom_view_target_tag
+id globalStatsButton
+id goldMedalCount
 id goldMedalText
 id gone
 id graph
@@ -3316,6 +3319,8 @@ id material_timepicker_ok_button
 id material_timepicker_view
 id material_value_index
 id matrix
+id medalErrorText
+id medalLoadingText
 id medalSystem
 id medalText
 id menu
@@ -3357,6 +3362,7 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id mtrl_view_tag_bottom_padding
 id multiply
+id myCenterButton
 id myNFTsButton
 id mynfts
 id nameText
@@ -3375,11 +3381,15 @@ id new_passw
 id news
 id nft
 id nftDescriptionEditText
+id nftEmptyStateLayout
+id nftErrorText
+id nftLoadingText
 id nftMintButton
 id nftNameEditText
+id nftRecyclerView
 id nftStatusText
-id nftViewButton
 id nft_container
+id nftsContent
 id noScroll
 id noState
 id none
@@ -3499,6 +3509,7 @@ id showRepresentativeWorkNo
 id showRepresentativeWorkYes
 id showTitle
 id show_key
+id silverMedalCount
 id silverMedalText
 id sin
 id skipCollapsed
@@ -3534,7 +3545,11 @@ id statusText
 id stop
 id stretch
 id submenuarrow
-id submissionHistoryButton
+id submissionsContent
+id submissionsEmptyStateLayout
+id submissionsErrorText
+id submissionsLoadingText
+id submissionsRecyclerView
 id submitButton
 id submitProofButton
 id submit_area
@@ -3544,6 +3559,8 @@ id supporticon
 id supportlist
 id swap
 id tabMode
+id tabNfts
+id tabSubmissions
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
 id tag_accessibility_heading
@@ -3787,6 +3804,7 @@ layout activity_medal_ranking
 layout activity_menu
 layout activity_mint
 layout activity_my_account
+layout activity_my_center
 layout activity_my_nfts
 layout activity_news
 layout activity_news2
