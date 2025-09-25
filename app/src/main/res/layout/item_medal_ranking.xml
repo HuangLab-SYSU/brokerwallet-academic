@@ -65,7 +65,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:gravity="center"
-            android:background="@drawable/custom_button_bg_gray"
+            android:background="@color/grey"
             android:padding="8dp" />
 
     </LinearLayout>

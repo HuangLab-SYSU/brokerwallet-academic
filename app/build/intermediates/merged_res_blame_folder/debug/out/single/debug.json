@@ -28,28 +28,28 @@
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable\\transaction_icon.xml"
     },
     {
-        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable_send.xml.flat",
-        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable\\send.xml"
-    },
-    {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable_up_circle.xml.flat",
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable\\up_circle.xml"
     },
     {
-        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable-xxhdpi_logonew.png.flat",
-        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable-xxhdpi\\logonew.png"
+        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable_send.xml.flat",
+        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable\\send.xml"
     },
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable_layer_list_progress_drawable.xml.flat",
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable\\layer_list_progress_drawable.xml"
     },
     {
-        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\mipmap-xhdpi_ic_launcher3_round.webp.flat",
-        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\mipmap-xhdpi\\ic_launcher3_round.webp"
+        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable-xxhdpi_logonew.png.flat",
+        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable-xxhdpi\\logonew.png"
     },
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\layout_activity_add_network.xml.flat",
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\layout\\activity_add_network.xml"
+    },
+    {
+        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\mipmap-xhdpi_ic_launcher3_round.webp.flat",
+        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\mipmap-xhdpi\\ic_launcher3_round.webp"
     },
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\layout_item_selected_file.xml.flat",
@@ -88,24 +88,24 @@
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable-hdpi\\baseline_newspaper_white_24.png"
     },
     {
-        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable-mdpi_baseline_newspaper_white_36.png.flat",
-        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable-mdpi\\baseline_newspaper_white_36.png"
+        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable-xxhdpi_baseline_newspaper_black_48.png.flat",
+        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable-xxhdpi\\baseline_newspaper_black_48.png"
     },
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\anim_slide_out_to_right.xml.flat",
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\anim\\slide_out_to_right.xml"
     },
     {
-        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable-xxhdpi_baseline_newspaper_black_48.png.flat",
-        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable-xxhdpi\\baseline_newspaper_black_48.png"
-    },
-    {
-        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\layout_activity_faucet.xml.flat",
-        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\layout\\activity_faucet.xml"
+        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable-mdpi_baseline_newspaper_white_36.png.flat",
+        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable-mdpi\\baseline_newspaper_white_36.png"
     },
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\layout_activity_atv.xml.flat",
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\layout\\activity_atv.xml"
+    },
+    {
+        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\layout_activity_faucet.xml.flat",
+        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\layout\\activity_faucet.xml"
     },
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable_ic_help_outline.xml.flat",
@@ -124,12 +124,12 @@
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable\\smile.xml"
     },
     {
-        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\layout_activity_congratulations.xml.flat",
-        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\layout\\activity_congratulations.xml"
-    },
-    {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\layout_activity_submission_history.xml.flat",
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\layout\\activity_submission_history.xml"
+    },
+    {
+        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\layout_activity_congratulations.xml.flat",
+        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\layout\\activity_congratulations.xml"
     },
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\mipmap-anydpi-v26_ic_launcher2_round.xml.flat",
@@ -148,12 +148,12 @@
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable\\lock.xml"
     },
     {
-        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\layout_atv_receive.xml.flat",
-        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\layout\\atv_receive.xml"
-    },
-    {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\mipmap-xhdpi_ic_launcher3_foreground.webp.flat",
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\mipmap-xhdpi\\ic_launcher3_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\layout_atv_receive.xml.flat",
+        "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\layout\\atv_receive.xml"
     },
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\layout_atv_stake.xml.flat",
@@ -398,10 +398,6 @@
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable_cloud_download_icon_black.xml.flat",
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable\\cloud_download_icon_black.xml"
-    },
-    {
-        "merged": "com.example.brokerfi.app-merged_res-30:/layout_dialog_nft_detail.xml.flat",
-        "source": "com.example.brokerfi.app-main-32:/layout/dialog_nft_detail.xml"
     },
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable-xxxhdpi_baseline_newspaper_black_20.png.flat",
@@ -698,6 +694,10 @@
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\xml_file_paths.xml.flat",
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\xml\\file_paths.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_activity_my_center.xml.flat",
+        "source": "com.example.brokerfi.app-main-32:/layout/activity_my_center.xml"
     },
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\layout_atv_send.xml.flat",
@@ -1082,6 +1082,10 @@
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable_lock_white.xml.flat",
         "source": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-main-32:\\drawable\\lock_white.xml"
+    },
+    {
+        "merged": "com.example.brokerfi.app-merged_res-30:/layout_item_medal_ranking.xml.flat",
+        "source": "com.example.brokerfi.app-main-32:/layout/item_medal_ranking.xml"
     },
     {
         "merged": "C:\\Users\\wanweijie\\.gradle\\daemon\\8.5\\com.example.brokerfi.app-merged_res-30:\\drawable-xhdpi_baseline_newspaper_white_20.png.flat",

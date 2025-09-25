@@ -55,7 +55,6 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:background="@drawable/custom_button_background"
                     android:padding="12dp"
                     android:layout_marginEnd="4dp">
 
@@ -73,14 +72,14 @@
                         android:text="0"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="金牌"
                         android:textSize="12sp"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
@@ -91,7 +90,6 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:background="@drawable/custom_green_background"
                     android:padding="12dp"
                     android:layout_marginHorizontal="4dp">
 
@@ -109,14 +107,14 @@
                         android:text="0"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="银牌"
                         android:textSize="12sp"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
@@ -127,7 +125,6 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:background="@drawable/custom_button_background"
                     android:padding="12dp"
                     android:layout_marginStart="4dp">
 
@@ -145,14 +142,14 @@
                         android:text="0"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="铜牌"
                         android:textSize="12sp"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/black" />
 
                 </LinearLayout>
 
@@ -211,8 +208,8 @@
                 android:layout_weight="1"
                 android:text="🖼️ 我的NFT"
                 android:textSize="16sp"
-                android:textColor="@color/black"
-                android:background="@drawable/custom_edittext_border"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_green_background"
                 android:gravity="center"
                 android:padding="12dp"
                 android:clickable="true"

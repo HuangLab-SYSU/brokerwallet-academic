@@ -147,7 +147,7 @@
                 android:text="👤 我的"
                 android:textSize="16sp"
                 android:textColor="@color/white"
-                android:background="@drawable/custom_button_background"
+                android:background="@drawable/custom_green_background"
                 android:gravity="center"
                 android:padding="16dp"
                 android:clickable="true"
