@@ -67,6 +67,7 @@ drawable custom_edittext_border
 drawable custom_edittext_border_disabled
 drawable custom_green_background
 drawable custom_grid_background
+drawable custom_light_grey_background
 drawable custom_nft_background
 drawable custom_nft_selected_bg
 drawable custom_radio_button
@@ -237,10 +238,12 @@ id fileInfoText
 id fileNameText
 id footerProgress
 id footerText
+id globalMedalStatsLayout
 id globalStatsButton
 id goldMedalCount
 id goldMedalText
 id helpButton
+id highestScoreText
 id icon_four
 id imageHelpIcon
 id imageNameText
@@ -348,7 +351,13 @@ id textview3
 id textview4
 id textview5
 id third_network
+id titleText
+id topUserText
+id totalBronzeMedalsText
+id totalGoldMedalsText
 id totalMedalText
+id totalSilverMedalsText
+id totalUsersText
 id tsv_dollar
 id tv_name
 id tv_price
@@ -364,6 +373,7 @@ id uploadButton
 id uploadIcon
 id uploadTimeText
 id uploadView
+id usersWithMedalsText
 id valueText
 id view
 id warning
@@ -385,6 +395,7 @@ layout activity_create_passw
 layout activity_emulator
 layout activity_faucet
 layout activity_generate_account
+layout activity_global_stats
 layout activity_import
 layout activity_main
 layout activity_medal_ranking

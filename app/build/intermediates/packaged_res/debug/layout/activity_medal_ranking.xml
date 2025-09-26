@@ -13,29 +13,32 @@
         android:layout_below="@id/action_bar"
         android:orientation="vertical">
 
-        <!-- 标题和注释按钮 -->
-        <LinearLayout
+        <!-- 标题和按钮区域 -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_margin="16dp">
 
+            <!-- 证明提交按钮（正方形，左侧） -->
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="🏆 勋章排行榜"
-                android:textSize="24sp"
-                android:textStyle="bold"
+                android:id="@+id/proofAndNftButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:text="📄\n证明\n提交"
+                android:textSize="12sp"
                 android:textColor="@color/black"
-                android:gravity="center" />
+                android:background="@drawable/custom_light_grey_background"
+                android:gravity="center"
+                android:clickable="true" />
 
-            <!-- 注释按钮 -->
+            <!-- 注释按钮（屏幕最右边，与标题垂直对齐） -->
             <TextView
                 android:id="@+id/helpButton"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
                 android:text="❓"
                 android:textSize="16sp"
                 android:textColor="@color/grey_60"
@@ -43,7 +46,18 @@
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:clickable="true" />
 
-        </LinearLayout>
+            <!-- 标题文本（居中，与注释按钮垂直对齐） -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:text="🏆 勋章排行榜"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
 
         <!-- 内容区域 -->
         <RelativeLayout
@@ -118,27 +132,14 @@
         </RelativeLayout>
 
         <!-- 底部导航按钮 -->
-        <!-- 第一行按钮 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/proofAndNftButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="📄 证明提交"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:background="@drawable/custom_green_background"
-                android:gravity="center"
-                android:padding="16dp"
-                android:clickable="true"
-                android:layout_marginEnd="8dp" />
-
+            <!-- 我的按钮（左边） -->
             <TextView
                 android:id="@+id/myCenterButton"
                 android:layout_width="0dp"
@@ -151,29 +152,22 @@
                 android:gravity="center"
                 android:padding="16dp"
                 android:clickable="true"
-                android:layout_marginStart="8dp" />
+                android:layout_marginEnd="8dp" />
 
-        </LinearLayout>
-
-        <!-- 第二行按钮 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal">
-
+            <!-- 全局按钮（右边） -->
             <TextView
                 android:id="@+id/globalStatsButton"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="📊 全局统计"
+                android:layout_weight="1"
+                android:text="📊 全局"
                 android:textSize="16sp"
                 android:textColor="@color/white"
-                android:background="@drawable/custom_button_background"
+                android:background="@drawable/custom_green_background"
                 android:gravity="center"
                 android:padding="16dp"
-                android:clickable="true" />
+                android:clickable="true"
+                android:layout_marginStart="8dp" />
 
         </LinearLayout>
 

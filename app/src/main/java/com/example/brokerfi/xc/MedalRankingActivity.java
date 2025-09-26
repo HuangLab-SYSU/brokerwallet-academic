@@ -199,44 +199,11 @@ public class MedalRankingActivity extends AppCompatActivity {
     }
 
     private void showGlobalStatsMenu() {
-        String[] options = {"📊 全局勋章统计", "🖼️ 所有NFT浏览", "📈 系统活跃度", "🌐 网络状态"};
-        
-        new android.app.AlertDialog.Builder(this)
-                .setTitle("📊 全局统计")
-                .setItems(options, (dialog, which) -> {
-                    switch (which) {
-                        case 0:
-                            queryGlobalStats();
-                            break;
-                        case 1:
-                            Intent intent = new Intent(this, NFTViewActivity.class);
-                            startActivity(intent);
-                            break;
-                        case 2:
-                            showSystemActivity();
-                            break;
-                        case 3:
-                            showNetworkStatus();
-                            break;
-                    }
-                })
-                .show();
+        // 直接跳转到全局统计界面
+        Intent intent = new Intent(this, GlobalStatsActivity.class);
+        startActivity(intent);
     }
 
-    private void queryGlobalStats() {
-        // 查询全局勋章统计
-        Toast.makeText(this, "查询全局勋章统计...", Toast.LENGTH_SHORT).show();
-    }
-
-    private void showSystemActivity() {
-        // 显示系统活跃度
-        Toast.makeText(this, "系统活跃度功能开发中...", Toast.LENGTH_SHORT).show();
-    }
-
-    private void showNetworkStatus() {
-        // 显示网络状态
-        Toast.makeText(this, "网络状态功能开发中...", Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

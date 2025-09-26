@@ -2790,6 +2790,7 @@ drawable custom_edittext_border
 drawable custom_edittext_border_disabled
 drawable custom_green_background
 drawable custom_grid_background
+drawable custom_light_grey_background
 drawable custom_nft_background
 drawable custom_nft_selected_bg
 drawable custom_radio_button
@@ -3249,6 +3250,7 @@ id fullscreen_header
 id ghost_view
 id ghost_view_holder
 id glide_custom_view_target_tag
+id globalMedalStatsLayout
 id globalStatsButton
 id goldMedalCount
 id goldMedalText
@@ -3261,6 +3263,7 @@ id groups
 id header_title
 id helpButton
 id hideable
+id highestScoreText
 id home
 id homeAsUp
 id honorRequest
@@ -3616,11 +3619,17 @@ id third_network
 id time
 id title
 id titleDividerNoCustom
+id titleText
 id title_template
 id toggle
 id top
 id topPanel
+id topUserText
+id totalBronzeMedalsText
+id totalGoldMedalsText
 id totalMedalText
+id totalSilverMedalsText
+id totalUsersText
 id touch_outside
 id transitionToEnd
 id transitionToStart
@@ -3650,6 +3659,7 @@ id uploadIcon
 id uploadTimeText
 id uploadView
 id useLogo
+id usersWithMedalsText
 id valueText
 id vertical_only
 id view
@@ -3808,6 +3818,7 @@ layout activity_create_passw
 layout activity_emulator
 layout activity_faucet
 layout activity_generate_account
+layout activity_global_stats
 layout activity_import
 layout activity_main
 layout activity_medal_ranking

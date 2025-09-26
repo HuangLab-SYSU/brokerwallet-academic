@@ -158,6 +158,9 @@
             android:name=".xc.MedalRankingActivity"
             android:exported="false" />
         <activity
+            android:name=".xc.GlobalStatsActivity"
+            android:exported="false" />
+        <activity
             android:name=".xc.ProofSubmissionActivity"
             android:exported="false" />
         <activity

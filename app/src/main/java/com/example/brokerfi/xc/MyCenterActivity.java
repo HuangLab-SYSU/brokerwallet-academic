@@ -773,7 +773,7 @@ public class MyCenterActivity extends AppCompatActivity {
                         float deltaY = currentY - startY;
                         Log.d("MyCenter", "触摸结束: deltaY=" + deltaY + ", footer可见: " + isFooterVisible);
                         
-                        if (deltaY < -30) { // 向上拉动超过30像素，触发刷新
+                        if (deltaY < -15) { // 向上拉动超过15像素，触发刷新
                             triggerPullRefresh();
                         } else {
                             resetPullState();
@@ -800,18 +800,18 @@ public class MyCenterActivity extends AppCompatActivity {
             return;
         }
         
-        if (deltaY > 30) {
-            // 向上拉动超过30像素，显示松手提示
+        if (deltaY > 15) {
+            // 向上拉动超过15像素，显示松手提示
             Log.d("MyCenter", "显示松手刷新~");
             nftAdapter.setHasMore(true);
             nftAdapter.setLoading(false);
-        } else if (deltaY > 10) {
-            // 向上拉动10-30像素，显示下拉提示
+        } else if (deltaY > 5) {
+            // 向上拉动5-15像素，显示下拉提示
             Log.d("MyCenter", "显示下拉刷新更多");
             nftAdapter.setHasMore(true);
             nftAdapter.setLoading(false);
         } else {
-            // 向上拉动不足10像素，显示默认提示
+            // 向上拉动不足5像素，显示默认提示
             nftAdapter.setHasMore(true);
             nftAdapter.setLoading(false);
         }

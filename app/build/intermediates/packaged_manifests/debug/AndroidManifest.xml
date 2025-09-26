@@ -188,6 +188,9 @@
             android:name="com.example.brokerfi.xc.MedalRankingActivity"
             android:exported="false" />
         <activity
+            android:name="com.example.brokerfi.xc.GlobalStatsActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.brokerfi.xc.ProofSubmissionActivity"
             android:exported="false" />
         <activity
