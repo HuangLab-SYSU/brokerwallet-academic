@@ -9,8 +9,8 @@ import okhttp3.ResponseBody;
 
 import java.io.IOException;
 
-// 导入配置包中的ServerConfig
-import com.example.brokerfi.config.ServerConfig;
+// 导入配置包中的ApiConfig
+import com.example.brokerfi.config.ApiConfig;
 
 public class MedalApiUtil {
     private static final String TAG = "MedalApiUtil";
@@ -22,7 +22,7 @@ public class MedalApiUtil {
      */
     public static String getMedalRanking() {
         Request request = new Request.Builder()
-                .url(ServerConfig.MEDAL_RANKING_API)
+                .url(ApiConfig.BASE_URL + "/api/medal/ranking")
                 .build();
         
         // 使用try-with-resources自动管理Response资源
@@ -57,7 +57,7 @@ public class MedalApiUtil {
         }
         
         Request request = new Request.Builder()
-                .url(ServerConfig.getApiUrl("/api/medal/query?address=" + address))
+                .url(ApiConfig.BASE_URL + "/api/medal/query?address=" + address)
                 .build();
         
         // 使用try-with-resources自动管理Response资源
@@ -87,7 +87,7 @@ public class MedalApiUtil {
      */
     public static String getGlobalStats() {
         Request request = new Request.Builder()
-                .url(ServerConfig.getApiUrl("/api/medal/stats"))
+                .url(ApiConfig.BASE_URL + "/api/medal/stats")
                 .build();
         
         try (Response response = client.newCall(request).execute()) {
@@ -117,7 +117,7 @@ public class MedalApiUtil {
      */
     public static String getServerInfo() {
         Request request = new Request.Builder()
-                .url(ServerConfig.getApiUrl("/api/server/info"))
+                .url(ApiConfig.BASE_URL + "/api/server/info")
                 .build();
         
         try (Response response = client.newCall(request).execute()) {
@@ -147,7 +147,7 @@ public class MedalApiUtil {
      */
     public static String getHealthStatus() {
         Request request = new Request.Builder()
-                .url(ServerConfig.getApiUrl("/api/health"))
+                .url(ApiConfig.BASE_URL + "/api/health")
                 .build();
         
         try (Response response = client.newCall(request).execute()) {
@@ -178,7 +178,7 @@ public class MedalApiUtil {
      * @return JSON字符串，失败返回null
      */
     public static String getAllNfts(int page, int size) {
-        String url = ServerConfig.getApiUrl("/api/blockchain/nft/all") + "?page=" + page + "&size=" + size;
+        String url = ApiConfig.BASE_URL + "/api/blockchain/nft/all?page=" + page + "&size=" + size;
         Log.d(TAG, "Calling getAllNfts API: " + url);
         Request request = new Request.Builder()
                 .url(url)

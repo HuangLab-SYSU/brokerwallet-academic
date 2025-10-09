@@ -271,7 +271,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="暂无提交记录"
+                        android:text="暂无提交历史"
                         android:textSize="18sp"
                         android:textColor="@color/grey_60"
                         android:layout_marginBottom="8dp" />
@@ -279,7 +279,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="快去提交证明文件吧！"
+                        android:text="请提交材料以获得勋章与NFT奖励~"
                         android:textSize="14sp"
                         android:textColor="@color/grey_60" />
 
@@ -297,7 +297,7 @@
 
         </LinearLayout>
 
-        <!-- NFT内容 -->
+        <!-- NFT内容（添加下拉刷新） -->
         <LinearLayout
             android:id="@+id/nftsContent"
             android:layout_width="match_parent"
@@ -306,76 +306,82 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <RelativeLayout
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/nftSwipeRefreshLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!-- NFT加载中 -->
-                <TextView
-                    android:id="@+id/nftLoadingText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="🖼️ 加载NFT中..."
-                    android:textSize="16sp"
-                    android:textColor="@color/grey_60"
-                    android:visibility="gone" />
-
-                <!-- NFT错误 -->
-                <TextView
-                    android:id="@+id/nftErrorText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="加载失败"
-                    android:textSize="16sp"
-                    android:textColor="@color/red_127"
-                    android:visibility="gone" />
-
-                <!-- NFT空状态 -->
-                <LinearLayout
-                    android:id="@+id/nftEmptyStateLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🖼️"
-                        android:textSize="48sp"
-                        android:layout_marginBottom="16dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="暂无NFT"
-                        android:textSize="18sp"
-                        android:textColor="@color/grey_60"
-                        android:layout_marginBottom="8dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="快去铸造NFT吧！"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_60" />
-
-                </LinearLayout>
-
-                <!-- NFT列表 -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/nftRecyclerView"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="16dp"
-                    android:visibility="gone" />
+                    android:layout_height="match_parent">
 
+                    <!-- NFT加载中 -->
+                    <TextView
+                        android:id="@+id/nftLoadingText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="🖼️ 加载NFT中..."
+                        android:textSize="16sp"
+                        android:textColor="@color/grey_60"
+                        android:visibility="gone" />
 
-            </RelativeLayout>
+                    <!-- NFT错误 -->
+                    <TextView
+                        android:id="@+id/nftErrorText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="加载失败"
+                        android:textSize="16sp"
+                        android:textColor="@color/red_127"
+                        android:visibility="gone" />
+
+                    <!-- NFT空状态 -->
+                    <LinearLayout
+                        android:id="@+id/nftEmptyStateLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🖼️"
+                            android:textSize="48sp"
+                            android:layout_marginBottom="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="暂无NFT"
+                            android:textSize="18sp"
+                            android:textColor="@color/grey_60"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="快去铸造NFT吧！"
+                            android:textSize="14sp"
+                            android:textColor="@color/grey_60" />
+
+                    </LinearLayout>
+
+                    <!-- NFT列表 -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/nftRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         </LinearLayout>
 

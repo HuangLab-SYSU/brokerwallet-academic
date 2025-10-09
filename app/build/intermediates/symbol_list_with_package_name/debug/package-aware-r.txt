@@ -1070,6 +1070,7 @@ attr suffixText
 attr suffixTextAppearance
 attr suffixTextColor
 attr suggestionRowLayout
+attr swipeRefreshLayoutProgressSpinnerBackgroundColor
 attr switchMinWidth
 attr switchPadding
 attr switchStyle
@@ -3047,6 +3048,8 @@ id anticipate
 id arc
 id asConfigured
 id async
+id attributesContainer
+id attributesLayout
 id authorInfoEditText
 id auto
 id autoComplete
@@ -3153,7 +3156,6 @@ id deleteFileButton
 id deleteImageButton
 id deltaRelative
 id dependency_ordering
-id descriptionText
 id descriptionTextView
 id design_bottom_sheet
 id design_menu_item_action_area
@@ -3161,11 +3163,7 @@ id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
 id detailContainer
-id detailDescriptionText
-id detailImageView
-id detailNameText
 id dev_network
-id dialogBackground
 id dialog_button
 id dimensions
 id direct
@@ -3221,7 +3219,6 @@ id et_shares
 id eventDescriptionEditText
 id eventTypeSpinner
 id exitUntilCollapsed
-id expandDescriptionButton
 id expand_activities_button
 id expanded_menu
 id fade
@@ -3342,6 +3339,7 @@ id middle
 id mini
 id mint
 id mintButton
+id mintTimeText
 id minttextview
 id minttitle
 id month_grid
@@ -3378,7 +3376,6 @@ id multiply
 id myCenterButton
 id myNFTsButton
 id mynfts
-id nameText
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -3396,11 +3393,14 @@ id nft
 id nftDescriptionEditText
 id nftEmptyStateLayout
 id nftErrorText
+id nftImageView
 id nftLoadingText
 id nftMintButton
 id nftNameEditText
 id nftRecyclerView
 id nftStatusText
+id nftSwipeRefreshLayout
+id nftTotalCountText
 id nft_container
 id nftsContent
 id noScroll
@@ -3418,6 +3418,8 @@ id onInterceptTouchReturnSwipe
 id outline
 id outward
 id overshoot
+id ownerAddressText
+id ownerDisplayNameText
 id packed
 id parallax
 id parent
@@ -3435,6 +3437,10 @@ id postLayout
 id pressed
 id previewImageButton
 id previewImageView
+id progressBar1
+id progressBar2
+id progressBar3
+id progressText
 id progress_circular
 id progress_horizontal
 id proofAndNftButton
@@ -3571,6 +3577,7 @@ id supportScrollUp
 id supporticon
 id supportlist
 id swap
+id swipeRefreshLayout
 id tabMode
 id tabNfts
 id tabSubmissions
@@ -3659,7 +3666,6 @@ id uploadIcon
 id uploadTimeText
 id uploadView
 id useLogo
-id usersWithMedalsText
 id valueText
 id vertical_only
 id view
@@ -3872,6 +3878,7 @@ layout design_text_input_start_icon
 layout dialog_confirm
 layout dialog_confirm_unlist
 layout dialog_enlarged_image
+layout dialog_image_fullscreen
 layout dialog_nft_detail
 layout item_detail_info
 layout item_medal_ranking
@@ -5385,6 +5392,7 @@ styleable State android_id constraints
 styleable StateListDrawable android_dither android_visible android_variablePadding android_constantSize android_enterFadeDuration android_exitFadeDuration
 styleable StateListDrawableItem android_drawable
 styleable StateSet defaultState
+styleable SwipeRefreshLayout swipeRefreshLayoutProgressSpinnerBackgroundColor
 styleable SwitchCompat android_textOn android_textOff android_thumb showText splitTrack switchMinWidth switchPadding switchTextAppearance thumbTextPadding thumbTint thumbTintMode track trackTint trackTintMode
 styleable SwitchMaterial useMaterialThemeColors
 styleable TabItem android_icon android_layout android_text

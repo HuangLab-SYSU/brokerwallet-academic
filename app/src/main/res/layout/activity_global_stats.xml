@@ -46,100 +46,36 @@
                 android:layout_marginBottom="12dp" />
 
             <!-- 用户统计 -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/totalUsersText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="👥"
-                        android:textSize="20sp"
-                        android:layout_marginBottom="4dp" />
-
-                    <TextView
-                        android:id="@+id/totalUsersText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="总用户"
-                        android:textSize="12sp"
-                        android:textColor="@color/black" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🏆"
-                        android:textSize="20sp"
-                        android:layout_marginBottom="4dp" />
-
-                    <TextView
-                        android:id="@+id/usersWithMedalsText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="有勋章用户"
-                        android:textSize="12sp"
-                        android:textColor="@color/black" />
-
-                </LinearLayout>
-
-            </LinearLayout>
+                android:text="总用户: 0"
+                android:textSize="14sp"
+                android:textColor="@color/grey_60"
+                android:layout_marginBottom="12dp" />
 
             <!-- 勋章统计 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal">
 
+                <!-- 金牌 -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="8dp">
+                    android:padding="12dp"
+                    android:layout_marginEnd="4dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="🥇"
-                        android:textSize="20sp"
+                        android:textSize="24sp"
                         android:layout_marginBottom="4dp" />
 
                     <TextView
@@ -147,32 +83,34 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textSize="16sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="金牌总数"
+                        android:text="金牌"
                         android:textSize="12sp"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
 
+                <!-- 银牌 -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="8dp">
+                    android:padding="12dp"
+                    android:layout_marginHorizontal="4dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="🥈"
-                        android:textSize="20sp"
+                        android:textSize="24sp"
                         android:layout_marginBottom="4dp" />
 
                     <TextView
@@ -180,32 +118,34 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textSize="16sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="银牌总数"
+                        android:text="银牌"
                         android:textSize="12sp"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
 
+                <!-- 铜牌 -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="8dp">
+                    android:padding="12dp"
+                    android:layout_marginStart="4dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="🥉"
-                        android:textSize="20sp"
+                        android:textSize="24sp"
                         android:layout_marginBottom="4dp" />
 
                     <TextView
@@ -213,14 +153,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textSize="16sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="铜牌总数"
+                        android:text="铜牌"
                         android:textSize="12sp"
                         android:textColor="@color/black" />
 
@@ -228,70 +168,34 @@
 
             </LinearLayout>
 
-            <!-- 最高分数 -->
+            <!-- 榜首信息 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🥇 最高分数："
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black" />
+                android:layout_marginTop="12dp">
 
                 <TextView
                     android:id="@+id/highestScoreText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="8dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="分"
+                    android:layout_weight="1"
+                    android:text="最高分: 0"
                     android:textSize="14sp"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="4dp" />
-
-            </LinearLayout>
-
-            <!-- 最高分用户 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="👑 最高分用户："
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/grey_60" />
 
                 <TextView
                     android:id="@+id/topUserText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="暂无"
+                    android:layout_weight="1"
+                    android:text="榜首: 暂无"
                     android:textSize="14sp"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="8dp" />
+                    android:textColor="@color/grey_60" />
 
             </LinearLayout>
 
-            <!-- 勋章加载状态 -->
+            <!-- 勋章统计加载状态 -->
             <TextView
                 android:id="@+id/medalLoadingText"
                 android:layout_width="wrap_content"
@@ -302,7 +206,7 @@
                 android:textColor="@color/grey_60"
                 android:visibility="gone" />
 
-            <!-- 勋章错误状态 -->
+            <!-- 勋章统计错误状态 -->
             <TextView
                 android:id="@+id/medalErrorText"
                 android:layout_width="wrap_content"
@@ -315,12 +219,41 @@
 
         </LinearLayout>
 
-        <!-- NFT内容 -->
+        <!-- 全局NFT标题和总数 -->
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🎨 全局NFT展示"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/nftTotalCountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="总数: 0"
+                android:textSize="14sp"
+                android:textColor="@color/grey_60"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <!-- NFT内容区域（添加下拉刷新） -->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/nftSwipeRefreshLayout"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_weight="1">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -332,7 +265,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="🖼️ 加载所有NFT中..."
+                    android:text="🖼️ 加载NFT中..."
                     android:textSize="16sp"
                     android:textColor="@color/grey_60"
                     android:visibility="gone" />
@@ -361,7 +294,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🖼️"
+                        android:text="🎨"
                         android:textSize="48sp"
                         android:layout_marginBottom="16dp" />
 
@@ -376,7 +309,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="系统中还没有NFT作品"
+                        android:text="全局还没有NFT！"
                         android:textSize="14sp"
                         android:textColor="@color/grey_60" />
 
@@ -392,7 +325,7 @@
 
             </RelativeLayout>
 
-        </LinearLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 

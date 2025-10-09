@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.brokerfi.app-mergeDebugResources-28:/values-sq/values-sq.xml",
+            "outputFile": "com.example.brokerfi.app-mergeDebugResources-29:/values-sq/values-sq.xml",
             "map": [
                 {
                     "source": "C:\\Users\\wanweijie\\.gradle\\caches\\transforms-3\\ccccac3bc199769f808c2dfe504d14a2\\transformed\\core-1.9.0\\res\\values-sq\\values-sq.xml",

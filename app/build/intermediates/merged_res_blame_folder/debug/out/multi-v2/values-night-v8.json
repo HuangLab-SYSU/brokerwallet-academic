@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.brokerfi.app-mergeDebugResources-28:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.example.brokerfi.app-mergeDebugResources-29:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
                     "source": "D:\\brokerwallet\\brokerwallet-academic\\app\\src\\main\\res\\values-night\\themes.xml",

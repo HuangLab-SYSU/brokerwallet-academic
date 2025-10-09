@@ -45,6 +45,13 @@ public class MedalRankingActivity extends AppCompatActivity {
     private TextView myCenterButton;
     private TextView globalStatsButton;
     private TextView helpButton;
+    
+    // 下拉刷新相关
+    private androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefreshLayout;
+    private boolean isRefreshing = false;
+    
+    // 静态缓存，用于Activity重建时恢复数据
+    private static List<MedalRankingItem> cachedRankingList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +60,26 @@ public class MedalRankingActivity extends AppCompatActivity {
 
         intView();
         intEvent();
-        loadMedalRanking();
+        setupPullToRefresh();
+        
+        // 恢复排行榜缓存
+        restoreRankingCache();
+        
+        // 如果有缓存，不重新加载；如果没有缓存，才加载
+        if (rankingList.isEmpty()) {
+            loadMedalRanking();
+        } else {
+            Log.d("MedalRanking", "使用缓存的排行榜数据，共" + rankingList.size() + "条");
+            recyclerView.setVisibility(View.VISIBLE);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private void intView() {
         menu = findViewById(R.id.menu);
         notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         recyclerView = findViewById(R.id.recyclerView);
         loadingText = findViewById(R.id.loadingText);
         errorText = findViewById(R.id.errorText);
@@ -97,8 +117,32 @@ public class MedalRankingActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 设置下拉刷新
+     */
+    private void setupPullToRefresh() {
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setOnRefreshListener(() -> {
+                Log.d("MedalRanking", "用户下拉刷新排行榜");
+                isRefreshing = true;
+                loadMedalRanking();
+            });
+            
+            // 设置刷新动画颜色
+            swipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+            );
+        }
+    }
+    
     private void loadMedalRanking() {
-        showLoading();
+        // 如果不是下拉刷新，显示加载状态
+        if (!isRefreshing) {
+            showLoading();
+        }
 
         new Thread(() -> {
             try {
@@ -107,6 +151,7 @@ public class MedalRankingActivity extends AppCompatActivity {
                 
                 runOnUiThread(() -> {
                     hideLoading();
+                    stopRefreshing();
                     if (response != null && !response.trim().isEmpty()) {
                         Log.d("MedalRanking", "收到排行榜数据: " + response);
                         parseRankingData(response);
@@ -119,10 +164,44 @@ public class MedalRankingActivity extends AppCompatActivity {
                 Log.e("MedalRanking", "加载排行榜失败", e);
                 runOnUiThread(() -> {
                     hideLoading();
+                    stopRefreshing();
                     showEmptyState();
                 });
             }
         }).start();
+    }
+    
+    /**
+     * 恢复排行榜缓存
+     */
+    private void restoreRankingCache() {
+        if (cachedRankingList != null && !cachedRankingList.isEmpty()) {
+            rankingList.clear();
+            rankingList.addAll(cachedRankingList);
+            Log.d("MedalRanking", "从静态缓存恢复排行榜数据，共" + rankingList.size() + "条");
+        } else {
+            Log.d("MedalRanking", "没有排行榜缓存数据");
+        }
+    }
+    
+    /**
+     * 保存排行榜缓存
+     */
+    private void saveRankingCache() {
+        if (rankingList != null && !rankingList.isEmpty()) {
+            cachedRankingList = new ArrayList<>(rankingList);
+            Log.d("MedalRanking", "保存排行榜缓存，共" + cachedRankingList.size() + "条");
+        }
+    }
+    
+    /**
+     * 停止下拉刷新动画
+     */
+    private void stopRefreshing() {
+        if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
+        isRefreshing = false;
     }
 
     private void showLoading() {
@@ -191,6 +270,9 @@ public class MedalRankingActivity extends AppCompatActivity {
                 
                 adapter.notifyDataSetChanged();
                 showRankingList();
+                
+                // 保存排行榜缓存
+                saveRankingCache();
             }
         } catch (JSONException e) {
             Log.e("MedalRanking", "解析数据失败", e);

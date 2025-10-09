@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:scaleType="centerCrop"
         android:background="@drawable/placeholder_image" />
 
@@ -21,25 +21,50 @@
         android:orientation="vertical"
         android:layout_marginStart="16dp">
 
-        <TextView
-            android:id="@+id/nameText"
+        <!-- NFT时间信息展示区域 -->
+        <LinearLayout
+            android:id="@+id/attributesLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NFT名称"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/black" />
+            android:orientation="vertical"
+            android:visibility="gone">
 
-        <TextView
-            android:id="@+id/descriptionText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="NFT描述"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="4dp"
-            android:maxLines="3"
-            android:ellipsize="end" />
+            <!-- 材料上传时间 -->
+            <TextView
+                android:id="@+id/uploadTimeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#333333"
+                android:layout_marginBottom="4dp" />
+
+            <!-- NFT铸造时间 -->
+            <TextView
+                android:id="@+id/mintTimeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#666666"
+                android:layout_marginBottom="4dp" />
+
+            <!-- 持有者地址 -->
+            <TextView
+                android:id="@+id/ownerAddressText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#999999"
+                android:layout_marginBottom="4dp" />
+
+            <!-- 持有者花名 -->
+            <TextView
+                android:id="@+id/ownerDisplayNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#666666" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

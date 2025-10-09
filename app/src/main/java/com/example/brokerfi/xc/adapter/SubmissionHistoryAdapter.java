@@ -60,17 +60,15 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
         holder.statusText.setText(record.getAuditStatusDesc());
         holder.statusText.setTextColor(context.getResources().getColor(record.getStatusColor()));
         
-        // 勋章信息
-        String medalInfo = record.getMedalIcon() + " " + record.getMedalAwardedDesc();
+        // 勋章信息（显示数量）
+        String medalInfo = buildMedalInfo(record);
         holder.medalText.setText(medalInfo);
         
-        // NFT状态
-        if (record.isHasNftImage() && record.getNftImage() != null) {
-            holder.nftStatusText.setText("🖼️ " + record.getNftImage().getMintStatusDesc());
-            holder.nftStatusText.setVisibility(View.VISIBLE);
-        } else {
-            holder.nftStatusText.setVisibility(View.GONE);
-        }
+        // NFT状态（隐藏，因为进度条已经能清楚表示状态）
+        holder.nftStatusText.setVisibility(View.GONE);
+        
+        // 进度显示（根据审核状态动态更新）
+        updateProgress(holder, record);
         
         // 点击事件
         holder.itemView.setOnClickListener(v -> {
@@ -78,6 +76,61 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
                 ((SubmissionHistoryActivity) context).openSubmissionDetail(record);
             }
         });
+    }
+    
+    /**
+     * 构建勋章信息显示
+     */
+    private String buildMedalInfo(SubmissionRecord record) {
+        String medalAwarded = record.getMedalAwarded();
+        
+        // 判断是否已发放勋章
+        if (medalAwarded == null || "NONE".equals(medalAwarded)) {
+            return "⚪ 未发放勋章";
+        } else {
+            return "🏅 已发放勋章";
+        }
+    }
+    
+    /**
+     * 更新进度显示
+     */
+    private void updateProgress(ViewHolder holder, SubmissionRecord record) {
+        int progress = 1; // 默认已上传
+        String progressStr = "1/3 已上传";
+        
+        // 根据审核状态确定进度
+        if ("APPROVED".equals(record.getAuditStatus())) {
+            // 已审核通过
+            progress = 2;
+            progressStr = "2/3 审核通过";
+            
+            // 如果有勋章或NFT，则完成
+            String medalAwarded = record.getMedalAwarded();
+            boolean hasMedal = medalAwarded != null && !"NONE".equals(medalAwarded);
+            
+            if (hasMedal || record.isHasNftImage()) {
+                progress = 3;
+                if (record.isHasNftImage()) {
+                    progressStr = "3/3 NFT已铸造";
+                } else {
+                    progressStr = "3/3 勋章已发放";
+                }
+            }
+        } else if ("REJECTED".equals(record.getAuditStatus())) {
+            progress = 2;
+            progressStr = "审核未通过";
+        }
+        
+        // 更新进度条颜色
+        int activeColor = context.getResources().getColor(R.color.colorPrimary);
+        int inactiveColor = context.getResources().getColor(R.color.grey);
+        
+        holder.progressBar1.setBackgroundColor(progress >= 1 ? activeColor : inactiveColor);
+        holder.progressBar2.setBackgroundColor(progress >= 2 ? activeColor : inactiveColor);
+        holder.progressBar3.setBackgroundColor(progress >= 3 ? activeColor : inactiveColor);
+        
+        holder.progressText.setText(progressStr);
     }
     
     @Override
@@ -137,6 +190,8 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
         TextView statusText;
         TextView medalText;
         TextView nftStatusText;
+        View progressBar1, progressBar2, progressBar3;
+        TextView progressText;
         
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -147,6 +202,10 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
             statusText = itemView.findViewById(R.id.statusText);
             medalText = itemView.findViewById(R.id.medalText);
             nftStatusText = itemView.findViewById(R.id.nftStatusText);
+            progressBar1 = itemView.findViewById(R.id.progressBar1);
+            progressBar2 = itemView.findViewById(R.id.progressBar2);
+            progressBar3 = itemView.findViewById(R.id.progressBar3);
+            progressText = itemView.findViewById(R.id.progressText);
         }
     }
 }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -51,6 +52,7 @@ public class MyCenterActivity extends AppCompatActivity {
     
     private RecyclerView submissionsRecyclerView;
     private RecyclerView nftRecyclerView;
+    private androidx.swiperefreshlayout.widget.SwipeRefreshLayout nftSwipeRefreshLayout;
     private TextView submissionsLoadingText;
     private TextView submissionsErrorText;
     private LinearLayout submissionsEmptyStateLayout;
@@ -63,6 +65,10 @@ public class MyCenterActivity extends AppCompatActivity {
     private List<NFTViewActivity.NFTItem> nftList = new ArrayList<>();
     private SubmissionHistoryAdapter submissionsAdapter;
     private NFTViewAdapter nftAdapter;
+    
+    // 静态缓存，用于Activity重建时恢复数据
+    private static List<NFTViewActivity.NFTItem> cachedNftList = null;
+    private static boolean cachedNftHasMore = true;  // 缓存分页状态
     
     // NFT分页加载相关
     private int nftCurrentPage = 0;
@@ -85,6 +91,10 @@ public class MyCenterActivity extends AppCompatActivity {
         
         initViews();
         initEvents();
+        
+        // 恢复NFT缓存
+        restoreNftCache();
+        
         loadUserData();
     }
     
@@ -100,6 +110,7 @@ public class MyCenterActivity extends AppCompatActivity {
         
         submissionsRecyclerView = findViewById(R.id.submissionsRecyclerView);
         nftRecyclerView = findViewById(R.id.nftRecyclerView);
+        nftSwipeRefreshLayout = findViewById(R.id.nftSwipeRefreshLayout);
         submissionsLoadingText = findViewById(R.id.submissionsLoadingText);
         submissionsErrorText = findViewById(R.id.submissionsErrorText);
         submissionsEmptyStateLayout = findViewById(R.id.submissionsEmptyStateLayout);
@@ -169,14 +180,44 @@ public class MyCenterActivity extends AppCompatActivity {
         nftRecyclerView.setVisibility(View.VISIBLE);
         submissionsRecyclerView.setVisibility(View.GONE);
         
-        // 只有在NFT列表为空时才重新加载
+        // 智能缓存：如果有缓存，直接显示；如果没有，首次加载
         if (nftList.isEmpty()) {
-            // 重置NFT分页状态
+            // 首次加载
             resetNftPagination();
-            Log.d("MyCenter", "Tab切换完成，开始加载NFT数据");
+            Log.d("MyCenter", "首次加载NFT数据");
             loadMyNfts();
         } else {
-            Log.d("MyCenter", "NFT数据已存在，直接显示");
+            // 有缓存，直接显示
+            Log.d("MyCenter", "使用缓存的NFT数据，共" + nftList.size() + "个，用户可下拉刷新");
+            nftRecyclerView.setVisibility(View.VISIBLE);
+            // 更新Adapter的分页状态
+            nftAdapter.setHasMore(nftHasMore);
+            nftAdapter.setLoading(false);
+        }
+    }
+    
+    /**
+     * 恢复NFT缓存
+     */
+    private void restoreNftCache() {
+        if (cachedNftList != null && !cachedNftList.isEmpty()) {
+            nftList.clear();
+            nftList.addAll(cachedNftList);
+            nftHasMore = cachedNftHasMore;  // 恢复分页状态
+            Log.d("MyCenter", "从静态缓存恢复NFT数据，共" + nftList.size() + "个，hasMore=" + nftHasMore);
+        } else {
+            Log.d("MyCenter", "没有NFT缓存数据");
+        }
+    }
+    
+    /**
+     * 保存NFT缓存
+     */
+    private void saveNftCache() {
+        if (nftList != null && !nftList.isEmpty()) {
+            cachedNftList = new ArrayList<>(nftList);
+            cachedNftHasMore = nftHasMore;  // 保存分页状态
+            Log.d("MyCenter", "保存NFT缓存，共" + cachedNftList.size() + "个，hasMore=" + cachedNftHasMore);
         }
     }
     
@@ -300,16 +341,57 @@ public class MyCenterActivity extends AppCompatActivity {
                                 // 解析提交记录
                                 for (int i = 0; i < dataArray.length(); i++) {
                                     JSONObject submission = dataArray.getJSONObject(i);
-                                    String fileName = submission.optString("fileName", "");
-                                    String auditStatusDesc = submission.optString("auditStatusDesc", "未知状态");
-                                    String medalAwardedDesc = submission.optString("medalAwardedDesc", "无");
-                                    String nftImage = submission.optString("nftImage", "");
                                     
                                     SubmissionRecord record = new SubmissionRecord();
-                                    record.setFileName(fileName);
-                                    record.setAuditStatusDesc(auditStatusDesc);
-                                    record.setMedalAwardedDesc(medalAwardedDesc);
+                                    
+                                    // 基本信息
+                                    record.setId(submission.optLong("id", 0L));
+                                    record.setSubmissionId(submission.optString("submissionId", ""));
+                                    record.setFileName(submission.optString("fileName", ""));
+                                    record.setFileSize(submission.optLong("fileSize", 0L));
+                                    record.setFileType(submission.optString("fileType", ""));
+                                    record.setUploadTime(submission.optString("uploadTime", ""));
+                                    
+                                    // 审核信息
+                                    record.setAuditStatus(submission.optString("auditStatus", ""));
+                                    record.setAuditStatusDesc(submission.optString("auditStatusDesc", "未知状态"));
+                                    record.setAuditTime(submission.optString("auditTime", ""));
+                                    
+                                    // 勋章信息
+                                    record.setMedalAwarded(submission.optString("medalAwarded", "NONE"));
+                                    record.setMedalAwardedDesc(submission.optString("medalAwardedDesc", "无"));
+                                    record.setMedalAwardTime(submission.optString("medalAwardTime", ""));
+                                    record.setMedalTransactionHash(submission.optString("medalTransactionHash", ""));
+                                    
+                                    // NFT信息
+                                    if (submission.has("nftImage")) {
+                                        JSONObject nftImageObj = submission.optJSONObject("nftImage");
+                                        if (nftImageObj != null) {
+                                            record.setHasNftImage(true);
+                                            
+                                            SubmissionRecord.NftImageInfo nftInfo = new SubmissionRecord.NftImageInfo();
+                                            nftInfo.setId(nftImageObj.optLong("id", 0L));
+                                            nftInfo.setOriginalName(nftImageObj.optString("originalName", ""));
+                                            nftInfo.setMintStatus(nftImageObj.optString("mintStatus", ""));
+                                            nftInfo.setMintStatusDesc(nftImageObj.optString("mintStatusDesc", ""));
+                                            nftInfo.setTokenId(nftImageObj.optString("tokenId", ""));
+                                            nftInfo.setTransactionHash(nftImageObj.optString("transactionHash", ""));
+                                            
+                                            record.setNftImage(nftInfo);
+                                        } else {
+                                            record.setHasNftImage(false);
+                                        }
+                                    } else {
+                                        record.setHasNftImage(false);
+                                    }
+                                    
                                     submissionsList.add(record);
+                                    
+                                    Log.d("MyCenter", "解析提交记录: " + record.getFileName() + 
+                                        ", 大小: " + record.getFormattedFileSize() + 
+                                        ", 状态: " + record.getAuditStatusDesc() + 
+                                        ", 勋章: " + record.getMedalAwardedDesc() +
+                                        ", NFT: " + record.isHasNftImage());
                                 }
                                 
                                 // 更新UI
@@ -431,21 +513,85 @@ public class MyCenterActivity extends AppCompatActivity {
                                         String description = nft.optString("description", "暂无描述");
                                         String imageUrl = nft.optString("imageUrl", "");
                                         
-                                        // 检查图片URL是否为base64数据，如果是则进行优化处理
-                                        if (imageUrl.startsWith("data:image/")) {
+                                        // 检查图片URL格式并处理
+                                        if (imageUrl != null && imageUrl.startsWith("{")) {
+                                            // ✅ 新格式：JSON元数据（包含后端路径）
+                                            try {
+                                                JSONObject imageMetadata = new JSONObject(imageUrl);
+                                                String storageType = imageMetadata.optString("storageType", "");
+                                                
+                                                if ("backend-server".equals(storageType)) {
+                                                    String path = imageMetadata.optString("path", "");
+                                                    String serverUrl = imageMetadata.optString("serverUrl", "http://localhost:5000");
+                                                    
+                                                    if (!path.isEmpty()) {
+                                                        // 拼接完整URL
+                                                        imageUrl = serverUrl + path;
+                                                        Log.d("MyCenter", "使用后端服务器图片: " + imageUrl);
+                                                    } else {
+                                                        Log.w("MyCenter", "图片路径为空");
+                                                        imageUrl = null;
+                                                    }
+                                                } else {
+                                                    Log.w("MyCenter", "未知存储类型: " + storageType);
+                                                    imageUrl = null;
+                                                }
+                                            } catch (JSONException e) {
+                                                Log.e("MyCenter", "解析图片元数据失败: " + e.getMessage());
+                                                imageUrl = null;
+                                            }
+                                        } else if (imageUrl != null && imageUrl.startsWith("data:image/")) {
+                                            // 旧格式：Base64数据
                                             Log.d("MyCenter", "检测到base64图片数据，进行优化处理");
+                                            Log.d("MyCenter", "原始图片数据长度: " + imageUrl.length());
                                             String optimizedUrl = optimizeBase64Image(imageUrl);
                                             if (optimizedUrl != null) {
                                                 imageUrl = optimizedUrl;
                                                 Log.d("MyCenter", "Base64图片优化成功，使用优化后的URL");
                                             } else {
-                                                Log.d("MyCenter", "Base64图片优化失败，使用占位符");
+                                                Log.w("MyCenter", "Base64图片优化失败，使用占位符");
                                                 imageUrl = null;
+                                            }
+                                        } else if (imageUrl != null && !imageUrl.isEmpty()) {
+                                            Log.d("MyCenter", "使用原始图片URL: " + imageUrl.substring(0, Math.min(50, imageUrl.length())) + "...");
+                                        } else {
+                                            Log.w("MyCenter", "图片URL为空或无效");
+                                            imageUrl = null;
+                                        }
+                                        
+                                        // 获取NFT铸造时间（不获取持有者地址，因为是"我的"界面）
+                                        String mintTime = nft.optString("mintTime", "");
+                                        
+                                        // 解析attributes获取材料上传时间
+                                        String uploadTime = "";
+                                        if (nft.has("attributes")) {
+                                            Object attrObj = nft.opt("attributes");
+                                            String attributesStr = "";
+                                            if (attrObj instanceof String) {
+                                                attributesStr = (String) attrObj;
+                                            } else if (attrObj instanceof JSONObject || attrObj instanceof org.json.JSONArray) {
+                                                attributesStr = attrObj.toString();
+                                            }
+                                            
+                                            // 尝试从attributes JSON中提取timestamp
+                                            if (!attributesStr.isEmpty()) {
+                                                try {
+                                                    JSONObject attrJson = new JSONObject(attributesStr);
+                                                    if (attrJson.has("timestamp")) {
+                                                        uploadTime = formatTimestamp(attrJson.optString("timestamp", ""));
+                                                    }
+                                                } catch (JSONException e) {
+                                                    Log.w("MyCenter", "解析attributes中的timestamp失败: " + e.getMessage());
+                                                }
                                             }
                                         }
                                         
-                                        Log.d("MyCenter", "添加NFT: " + name + ", 图片URL: " + (imageUrl != null ? "有图片" : "无图片"));
-                                        nftList.add(new NFTViewActivity.NFTItem(name, description, imageUrl));
+                                        Log.d("MyCenter", "添加NFT: " + name + ", 上传时间: " + uploadTime + ", 铸造时间: " + mintTime);
+                                        NFTViewActivity.NFTItem nftItem = new NFTViewActivity.NFTItem(name, description, imageUrl);
+                                        nftItem.setUploadTime(uploadTime);
+                                        nftItem.setMintTime(mintTime);
+                                        // 不设置ownerAddress，因为是"我的"界面，持有者就是当前用户
+                                        nftList.add(nftItem);
                                         addedCount++;
                                     } catch (JSONException e) {
                                         Log.e("MyCenter", "解析NFT数据失败: " + e.getMessage());
@@ -472,11 +618,11 @@ public class MyCenterActivity extends AppCompatActivity {
                                 nftAdapter.setHasMore(nftHasMore);
                                 nftAdapter.setLoading(false);
                                 
-                                // 完成下拉刷新
-                                if (isRefreshing) {
-                                    isRefreshing = false;
-                                    Log.d("MyCenter", "下拉刷新完成");
-                                }
+                                // 保存NFT缓存
+                                saveNftCache();
+                                
+                                // 停止下拉刷新动画
+                                stopNftRefreshing();
                             } else {
                                 if (nftCurrentPage == 0) {
                                     showNftEmptyState();
@@ -493,6 +639,7 @@ public class MyCenterActivity extends AppCompatActivity {
                 
                 // 查询失败
                 runOnUiThread(() -> {
+                    stopNftRefreshing();
                     if (nftCurrentPage == 0) {
                         hideNftLoading();
                         showNftError();
@@ -504,6 +651,7 @@ public class MyCenterActivity extends AppCompatActivity {
                 
             } catch (Exception e) {
                 runOnUiThread(() -> {
+                    stopNftRefreshing();
                     if (nftCurrentPage == 0) {
                         hideNftLoading();
                         showNftError();
@@ -527,16 +675,28 @@ public class MyCenterActivity extends AppCompatActivity {
      */
     private String optimizeBase64Image(String base64Data) {
         try {
+            // 首先验证数据格式
+            if (base64Data == null || base64Data.isEmpty()) {
+                Log.w("MyCenter", "Base64数据为空");
+                return null;
+            }
+            
+            // 检查是否是有效的data URL格式
+            if (!base64Data.startsWith("data:image/")) {
+                Log.w("MyCenter", "Base64数据格式不正确，不是有效的图片数据URL");
+                return null;
+            }
+            
+            // 验证Base64数据是否有效
+            if (!isValidBase64DataUrl(base64Data)) {
+                Log.w("MyCenter", "Base64数据无效，无法解码");
+                return null;
+            }
+            
             // 检查数据大小，如果小于100KB则直接返回
             if (base64Data.length() < 100000) {
                 Log.d("MyCenter", "Base64图片数据较小，直接使用");
-                // 即使是小数据，也检查格式是否正确
-                if (base64Data.startsWith("data:image/")) {
-                    return base64Data;
-                } else {
-                    Log.w("MyCenter", "Base64数据格式不正确，使用占位符");
-                    return null;
-                }
+                return base64Data;
             }
             
             // 提取Base64数据部分
@@ -599,6 +759,28 @@ public class MyCenterActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.e("MyCenter", "Base64图片优化失败: " + e.getMessage());
             return null; // 优化失败时使用占位符
+        }
+    }
+    
+    /**
+     * 验证Base64数据URL是否有效
+     */
+    private boolean isValidBase64DataUrl(String dataUrl) {
+        try {
+            if (!dataUrl.contains(",")) {
+                return false;
+            }
+            String[] parts = dataUrl.split(",", 2);
+            if (parts.length != 2) {
+                return false;
+            }
+            String base64Part = parts[1];
+            // 尝试解码Base64
+            android.util.Base64.decode(base64Part, android.util.Base64.DEFAULT);
+            return true;
+        } catch (Exception e) {
+            Log.w("MyCenter", "Base64数据验证失败: " + e.getMessage());
+            return false;
         }
     }
     
@@ -737,54 +919,52 @@ public class MyCenterActivity extends AppCompatActivity {
     }
     
     /**
-     * 设置NFT下拉刷新功能
+     * 设置NFT下拉刷新功能（顶部下拉刷新 + 底部加载更多）
      */
     private void setupNftPullRefresh() {
-        nftRecyclerView.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case android.view.MotionEvent.ACTION_DOWN:
-                    startY = event.getY();
-                    isDragging = true;
-                    
-                    // 检查footer是否可见
-                    checkFooterVisibility();
-                    Log.d("MyCenter", "触摸开始: " + startY + ", footer可见: " + isFooterVisible);
-                    break;
-                    
-                case android.view.MotionEvent.ACTION_MOVE:
-                    if (isDragging && !isRefreshing && isFooterVisible) {
-                        currentY = event.getY();
-                        float deltaY = currentY - startY;
-                        Log.d("MyCenter", "触摸移动: deltaY=" + deltaY + ", footer可见: " + isFooterVisible);
-                        
-                        // 只有在footer可见且用户主动向上拉动时才处理
-                        if (deltaY < 0) { // 手指向上移动
-                            handlePullGesture(Math.abs(deltaY)); // 使用绝对值
-                        } else {
-                            resetPullState();
-                        }
-                    }
-                    break;
-                    
-                case android.view.MotionEvent.ACTION_UP:
-                case android.view.MotionEvent.ACTION_CANCEL:
-                    if (isDragging && !isRefreshing && isFooterVisible) {
-                        currentY = event.getY();
-                        float deltaY = currentY - startY;
-                        Log.d("MyCenter", "触摸结束: deltaY=" + deltaY + ", footer可见: " + isFooterVisible);
-                        
-                        if (deltaY < -15) { // 向上拉动超过15像素，触发刷新
-                            triggerPullRefresh();
-                        } else {
-                            resetPullState();
-                        }
-                    }
-                    isDragging = false;
-                    isFooterVisible = false; // 重置footer可见状态
-                    break;
+        // 1. 设置顶部下拉刷新（使用SwipeRefreshLayout）
+        if (nftSwipeRefreshLayout != null) {
+            nftSwipeRefreshLayout.setOnRefreshListener(() -> {
+                Log.d("MyCenter", "用户顶部下拉刷新NFT");
+                refreshNfts();
+            });
+            
+            // 设置刷新动画颜色
+            nftSwipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+            );
+        }
+        
+        // 2. 保留底部加载更多功能（使用Adapter的LoadMoreListener）
+        nftAdapter.setLoadMoreListener(() -> {
+            if (!nftLoadingMore && nftHasMore) {
+                Log.d("MyCenter", "用户触发底部加载更多");
+                loadMoreNfts();
             }
-            return false; // 不消费事件，让RecyclerView正常滚动
         });
+    }
+    
+    /**
+     * 刷新NFT（重置分页，重新加载）
+     */
+    private void refreshNfts() {
+        Log.d("MyCenter", "刷新NFT列表");
+        resetNftPagination();
+        nftList.clear();
+        nftAdapter.notifyDataSetChanged();
+        loadMyNfts();
+    }
+    
+    /**
+     * 停止下拉刷新动画
+     */
+    private void stopNftRefreshing() {
+        if (nftSwipeRefreshLayout != null && nftSwipeRefreshLayout.isRefreshing()) {
+            nftSwipeRefreshLayout.setRefreshing(false);
+        }
     }
     
     /**
@@ -898,77 +1078,122 @@ public class MyCenterActivity extends AppCompatActivity {
     }
     
     /**
-     * 显示NFT详情对话框
+     * 显示NFT详情对话框（图片 + 2个时间属性）
      */
     private void showNftDetailDialog(NFTViewActivity.NFTItem nftItem) {
-        // 创建对话框 - 使用AlertDialog.Builder避免黑色背景
+        // 创建对话框
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
-        
-        // 创建自定义视图
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_nft_detail, null);
         builder.setView(dialogView);
         
-        // 获取视图组件
-        ImageView closeButton = dialogView.findViewById(R.id.closeButton);
-        ImageView detailImageView = dialogView.findViewById(R.id.detailImageView);
-        TextView detailNameText = dialogView.findViewById(R.id.detailNameText);
-        TextView detailDescriptionText = dialogView.findViewById(R.id.detailDescriptionText);
-        TextView expandDescriptionButton = dialogView.findViewById(R.id.expandDescriptionButton);
+        // 获取控件
+        ImageView nftImageView = dialogView.findViewById(R.id.nftImageView);
+        LinearLayout attributesContainer = dialogView.findViewById(R.id.attributesContainer);
+        Button closeButton = dialogView.findViewById(R.id.closeButton);
         
-        // 设置NFT信息
-        detailNameText.setText(nftItem.getName());
-        detailDescriptionText.setText(nftItem.getDescription());
-        
-        // 检查描述长度，决定是否显示展开按钮
-        String description = nftItem.getDescription();
-        if (description != null && description.length() > 100) {
-            expandDescriptionButton.setVisibility(android.view.View.VISIBLE);
-            
-            // 设置展开/收起功能
-            expandDescriptionButton.setOnClickListener(v -> {
-                if (detailDescriptionText.getMaxLines() == 4) {
-                    // 展开
-                    detailDescriptionText.setMaxLines(Integer.MAX_VALUE);
-                    expandDescriptionButton.setText("收起");
-                } else {
-                    // 收起
-                    detailDescriptionText.setMaxLines(4);
-                    expandDescriptionButton.setText("展开");
-                }
-            });
-        } else {
-            expandDescriptionButton.setVisibility(android.view.View.GONE);
-        }
-        
-        // 优化图片加载 - 使用fitCenter显示完整图片
-        if (nftItem.getImageUrl() != null && !nftItem.getImageUrl().isEmpty()) {
+        // 加载NFT图片
+        if (nftImageView != null && nftItem.getImageUrl() != null && !nftItem.getImageUrl().isEmpty()) {
             com.bumptech.glide.Glide.with(this)
                     .load(nftItem.getImageUrl())
                     .placeholder(R.drawable.placeholder_image)
                     .error(R.drawable.placeholder_image)
-                    .fitCenter() // 使用fitCenter显示完整图片
-                    .into(detailImageView);
-        } else {
-            detailImageView.setImageResource(R.drawable.placeholder_image);
+                    .into(nftImageView);
+        }
+        
+        // 显示时间属性
+        if (attributesContainer != null) {
+            attributesContainer.removeAllViews();
+            
+            // 材料上传时间
+            if (nftItem.getUploadTime() != null && !nftItem.getUploadTime().isEmpty()) {
+                addAttributeItem(attributesContainer, "材料上传", nftItem.getUploadTime());
+            }
+            
+            // NFT铸造时间
+            if (nftItem.getMintTime() != null && !nftItem.getMintTime().isEmpty()) {
+                addAttributeItem(attributesContainer, "NFT铸造", nftItem.getMintTime());
+            }
+            
+            // "我的"界面不显示持有者地址（持有者就是当前用户）
         }
         
         // 创建对话框
         androidx.appcompat.app.AlertDialog dialog = builder.create();
         
-        // 设置关闭按钮点击事件
-        closeButton.setOnClickListener(v -> {
-            Log.d("MyCenter", "用户点击了关闭按钮");
-            dialog.dismiss();
-        });
+        // 关闭按钮
+        if (closeButton != null) {
+            closeButton.setOnClickListener(v -> dialog.dismiss());
+        }
         
-        // 设置背景点击关闭
-        dialogView.findViewById(R.id.dialogBackground).setOnClickListener(v -> {
-            Log.d("MyCenter", "用户点击了背景");
-            dialog.dismiss();
-        });
-        
-        // 显示对话框
         dialog.show();
-        Log.d("MyCenter", "显示NFT详情对话框: " + nftItem.getName());
+        Log.d("MyCenter", "显示NFT详情对话框");
+    }
+    
+    
+    /**
+     * 添加单个属性显示项
+     */
+    private void addAttributeItem(android.widget.LinearLayout container, String label, String value) {
+        if (value == null || value.isEmpty() || "null".equals(value)) {
+            return; // 跳过空值
+        }
+        
+        // 创建属性行
+        android.widget.LinearLayout attributeRow = new android.widget.LinearLayout(this);
+        attributeRow.setOrientation(android.widget.LinearLayout.HORIZONTAL);
+        android.widget.LinearLayout.LayoutParams rowParams = new android.widget.LinearLayout.LayoutParams(
+            android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        rowParams.setMargins(0, 0, 0, 8);
+        attributeRow.setLayoutParams(rowParams);
+        
+        // 标签
+        android.widget.TextView labelView = new android.widget.TextView(this);
+        labelView.setText(label + ": ");
+        labelView.setTextSize(14);
+        labelView.setTextColor(getResources().getColor(R.color.grey_60));
+        android.widget.LinearLayout.LayoutParams labelParams = new android.widget.LinearLayout.LayoutParams(
+            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT,
+            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        labelView.setLayoutParams(labelParams);
+        
+        // 值
+        android.widget.TextView valueView = new android.widget.TextView(this);
+        valueView.setText(value);
+        valueView.setTextSize(14);
+        valueView.setTextColor(getResources().getColor(R.color.black));
+        valueView.setTypeface(null, android.graphics.Typeface.BOLD);
+        android.widget.LinearLayout.LayoutParams valueParams = new android.widget.LinearLayout.LayoutParams(
+            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT,
+            android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        valueView.setLayoutParams(valueParams);
+        
+        attributeRow.addView(labelView);
+        attributeRow.addView(valueView);
+        container.addView(attributeRow);
+    }
+    
+    /**
+     * 格式化时间戳（ISO 8601格式转为可读格式）
+     */
+    private String formatTimestamp(String timestamp) {
+        try {
+            // ISO 8601格式: 2025-10-07T18:48:12.345Z
+            if (timestamp != null && timestamp.contains("T")) {
+                String[] parts = timestamp.split("T");
+                if (parts.length >= 2) {
+                    String date = parts[0]; // 2025-10-07
+                    String time = parts[1].split("\\.")[0]; // 18:48:12
+                    return date + " " + time;
+                }
+            }
+            return timestamp;
+        } catch (Exception e) {
+            Log.w("MyCenter", "格式化时间戳失败: " + e.getMessage());
+            return timestamp;
+        }
     }
 }

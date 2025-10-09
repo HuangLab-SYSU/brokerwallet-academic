@@ -1069,6 +1069,7 @@ int attr suffixText 0x7f0403d5
 int attr suffixTextAppearance 0x7f0403d6
 int attr suffixTextColor 0x7f0403d7
 int attr suggestionRowLayout 0x7f0403d8
+int attr swipeRefreshLayoutProgressSpinnerBackgroundColor 0x7f0404b4
 int attr switchMinWidth 0x7f0403d9
 int attr switchPadding 0x7f0403da
 int attr switchStyle 0x7f0403db
@@ -3046,6 +3047,8 @@ int id anticipate 0x7f0a005e
 int id arc 0x7f0a005f
 int id asConfigured 0x7f0a0060
 int id async 0x7f0a0061
+int id attributesContainer 0x7f0a02f0
+int id attributesLayout 0x7f0a02f1
 int id authorInfoEditText 0x7f0a0062
 int id auto 0x7f0a0063
 int id autoComplete 0x7f0a0064
@@ -3152,7 +3155,6 @@ int id deleteFileButton 0x7f0a00c8
 int id deleteImageButton 0x7f0a00c9
 int id deltaRelative 0x7f0a00ca
 int id dependency_ordering 0x7f0a00cb
-int id descriptionText 0x7f0a00cc
 int id descriptionTextView 0x7f0a00cd
 int id design_bottom_sheet 0x7f0a00ce
 int id design_menu_item_action_area 0x7f0a00cf
@@ -3160,11 +3162,7 @@ int id design_menu_item_action_area_stub 0x7f0a00d0
 int id design_menu_item_text 0x7f0a00d1
 int id design_navigation_view 0x7f0a00d2
 int id detailContainer 0x7f0a00d3
-int id detailDescriptionText 0x7f0a00d4
-int id detailImageView 0x7f0a00d5
-int id detailNameText 0x7f0a00d6
 int id dev_network 0x7f0a00d7
-int id dialogBackground 0x7f0a00d8
 int id dialog_button 0x7f0a00d9
 int id dimensions 0x7f0a00da
 int id direct 0x7f0a00db
@@ -3220,7 +3218,6 @@ int id et_shares 0x7f0a010c
 int id eventDescriptionEditText 0x7f0a010d
 int id eventTypeSpinner 0x7f0a010e
 int id exitUntilCollapsed 0x7f0a010f
-int id expandDescriptionButton 0x7f0a0110
 int id expand_activities_button 0x7f0a0111
 int id expanded_menu 0x7f0a0112
 int id fade 0x7f0a0113
@@ -3341,6 +3338,7 @@ int id middle 0x7f0a0185
 int id mini 0x7f0a0186
 int id mint 0x7f0a0187
 int id mintButton 0x7f0a0188
+int id mintTimeText 0x7f0a02f5
 int id minttextview 0x7f0a0189
 int id minttitle 0x7f0a018a
 int id month_grid 0x7f0a018b
@@ -3377,7 +3375,6 @@ int id multiply 0x7f0a01a9
 int id myCenterButton 0x7f0a01aa
 int id myNFTsButton 0x7f0a01ab
 int id mynfts 0x7f0a01ac
-int id nameText 0x7f0a01ad
 int id navigation_bar_item_active_indicator_view 0x7f0a01ae
 int id navigation_bar_item_icon_container 0x7f0a01af
 int id navigation_bar_item_icon_view 0x7f0a01b0
@@ -3395,11 +3392,14 @@ int id nft 0x7f0a01bb
 int id nftDescriptionEditText 0x7f0a01bc
 int id nftEmptyStateLayout 0x7f0a01bd
 int id nftErrorText 0x7f0a01be
+int id nftImageView 0x7f0a02f6
 int id nftLoadingText 0x7f0a01bf
 int id nftMintButton 0x7f0a01c0
 int id nftNameEditText 0x7f0a01c1
 int id nftRecyclerView 0x7f0a01c2
 int id nftStatusText 0x7f0a01c3
+int id nftSwipeRefreshLayout 0x7f0a02fb
+int id nftTotalCountText 0x7f0a02f7
 int id nft_container 0x7f0a01c4
 int id nftsContent 0x7f0a01c5
 int id noScroll 0x7f0a01c6
@@ -3417,6 +3417,8 @@ int id onInterceptTouchReturnSwipe 0x7f0a01d1
 int id outline 0x7f0a01d2
 int id outward 0x7f0a01d3
 int id overshoot 0x7f0a01d4
+int id ownerAddressText 0x7f0a02f8
+int id ownerDisplayNameText 0x7f0a02fc
 int id packed 0x7f0a01d5
 int id parallax 0x7f0a01d6
 int id parent 0x7f0a01d7
@@ -3434,6 +3436,10 @@ int id postLayout 0x7f0a01e2
 int id pressed 0x7f0a01e3
 int id previewImageButton 0x7f0a01e4
 int id previewImageView 0x7f0a01e5
+int id progressBar1 0x7f0a02ec
+int id progressBar2 0x7f0a02ed
+int id progressBar3 0x7f0a02ee
+int id progressText 0x7f0a02ef
 int id progress_circular 0x7f0a01e6
 int id progress_horizontal 0x7f0a01e7
 int id proofAndNftButton 0x7f0a01e8
@@ -3570,6 +3576,7 @@ int id supportScrollUp 0x7f0a026a
 int id supporticon 0x7f0a026b
 int id supportlist 0x7f0a026c
 int id swap 0x7f0a026d
+int id swipeRefreshLayout 0x7f0a02fa
 int id tabMode 0x7f0a026e
 int id tabNfts 0x7f0a026f
 int id tabSubmissions 0x7f0a0270
@@ -3658,7 +3665,6 @@ int id uploadIcon 0x7f0a02c2
 int id uploadTimeText 0x7f0a02c3
 int id uploadView 0x7f0a02c4
 int id useLogo 0x7f0a02c5
-int id usersWithMedalsText 0x7f0a02c6
 int id valueText 0x7f0a02c7
 int id vertical_only 0x7f0a02c8
 int id view 0x7f0a02c9
@@ -3871,6 +3877,7 @@ int layout design_text_input_start_icon 0x7f0d005e
 int layout dialog_confirm 0x7f0d005f
 int layout dialog_confirm_unlist 0x7f0d0060
 int layout dialog_enlarged_image 0x7f0d0061
+int layout dialog_image_fullscreen 0x7f0d00ac
 int layout dialog_nft_detail 0x7f0d0062
 int layout item_detail_info 0x7f0d0063
 int layout item_medal_ranking 0x7f0d0064
@@ -7025,6 +7032,8 @@ int[] styleable StateListDrawableItem { 0x01010199 }
 int styleable StateListDrawableItem_android_drawable 0
 int[] styleable StateSet { 0x7f040150 }
 int styleable StateSet_defaultState 0
+int[] styleable SwipeRefreshLayout { 0x7f0404b4 }
+int styleable SwipeRefreshLayout_swipeRefreshLayoutProgressSpinnerBackgroundColor 0
 int[] styleable SwitchCompat { 0x01010124, 0x01010125, 0x01010142, 0x7f040397, 0x7f0403ac, 0x7f0403d9, 0x7f0403da, 0x7f0403dc, 0x7f040449, 0x7f04044a, 0x7f04044b, 0x7f040472, 0x7f04047c, 0x7f04047d }
 int styleable SwitchCompat_android_textOn 0
 int styleable SwitchCompat_android_textOff 1

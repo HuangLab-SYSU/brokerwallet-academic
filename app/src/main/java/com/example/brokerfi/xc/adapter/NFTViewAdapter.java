@@ -100,15 +100,14 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         NFTItem item = nftList.get(position);
         ViewHolder nftHolder = (ViewHolder) holder;
         
-        android.util.Log.d("NFTAdapter", "绑定NFT: " + item.getName() + ", 描述: " + item.getDescription());
-        nftHolder.nameText.setText(item.getName());
-        nftHolder.descriptionText.setText(item.getDescription());
+        android.util.Log.d("NFTAdapter", "绑定NFT: " + item.getName());
         
-        // 设置点击监听器
+        // 解析并显示时间信息
+        displayTimeInfo(nftHolder, item);
+        
+        // 设置点击监听器：显示NFT详情对话框
         nftHolder.itemView.setOnClickListener(v -> {
-            if (itemClickListener != null) {
-                itemClickListener.onItemClick(item, position);
-            }
+            showNftDetailDialog(v.getContext(), item);
         });
         
         // 使用Glide加载图片，优化大图片处理
@@ -143,16 +142,168 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
     
+    /**
+     * 显示时间信息（材料上传时间、NFT铸造时间、持有者地址）
+     */
+    private void displayTimeInfo(ViewHolder holder, NFTItem item) {
+        String uploadTime = item.getUploadTime();
+        String mintTime = item.getMintTime();
+        String ownerAddress = item.getOwnerAddress();
+        String ownerDisplayName = item.getOwnerDisplayName();
+        
+        int visibleCount = 0;
+        
+        // 显示材料上传时间
+        if (uploadTime != null && !uploadTime.isEmpty()) {
+            holder.uploadTimeText.setText("材料上传: " + uploadTime);
+            holder.uploadTimeText.setVisibility(View.VISIBLE);
+            visibleCount++;
+        } else {
+            holder.uploadTimeText.setVisibility(View.GONE);
+        }
+        
+        // 显示NFT铸造时间
+        if (mintTime != null && !mintTime.isEmpty()) {
+            holder.mintTimeText.setText("NFT铸造: " + mintTime);
+            holder.mintTimeText.setVisibility(View.VISIBLE);
+            visibleCount++;
+        } else {
+            holder.mintTimeText.setVisibility(View.GONE);
+        }
+        
+        // 显示持有者地址（缩短显示）
+        if (ownerAddress != null && !ownerAddress.isEmpty()) {
+            String shortAddress = shortenAddress(ownerAddress);
+            holder.ownerAddressText.setText("持有者地址: " + shortAddress);
+            holder.ownerAddressText.setVisibility(View.VISIBLE);
+            visibleCount++;
+        } else {
+            holder.ownerAddressText.setVisibility(View.GONE);
+        }
+        
+        // 显示持有者花名
+        if (ownerDisplayName != null && !ownerDisplayName.isEmpty() && !ownerDisplayName.equals("匿名用户")) {
+            holder.ownerDisplayNameText.setText("持有者花名: " + ownerDisplayName);
+            holder.ownerDisplayNameText.setVisibility(View.VISIBLE);
+            visibleCount++;
+        } else {
+            holder.ownerDisplayNameText.setVisibility(View.GONE);
+        }
+        
+        // 如果有时间信息，显示时间区域
+        holder.attributesLayout.setVisibility(visibleCount > 0 ? View.VISIBLE : View.GONE);
+    }
+    
+    /**
+     * 缩短地址显示（显示前6位+后4位）
+     */
+    private String shortenAddress(String address) {
+        if (address == null || address.length() < 10) {
+            return address;
+        }
+        return address.substring(0, 6) + "..." + address.substring(address.length() - 4);
+    }
+    
+    /**
+     * 显示NFT详情对话框（图片 + 2个时间属性）
+     */
+    private void showNftDetailDialog(android.content.Context context, NFTItem item) {
+        // 创建对话框
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+        android.view.View dialogView = android.view.LayoutInflater.from(context)
+                .inflate(R.layout.dialog_nft_detail, null);
+        builder.setView(dialogView);
+        
+        // 获取控件
+        android.widget.ImageView nftImageView = dialogView.findViewById(R.id.nftImageView);
+        android.widget.LinearLayout attributesContainer = dialogView.findViewById(R.id.attributesContainer);
+        android.widget.Button closeButton = dialogView.findViewById(R.id.closeButton);
+        
+        // 加载NFT图片
+        if (nftImageView != null && item.getImageUrl() != null && !item.getImageUrl().isEmpty()) {
+            Glide.with(context)
+                    .load(item.getImageUrl())
+                    .placeholder(R.drawable.placeholder_image)
+                    .error(R.drawable.placeholder_image)
+                    .into(nftImageView);
+        }
+        
+        // 显示时间属性
+        if (attributesContainer != null) {
+            attributesContainer.removeAllViews();
+            
+            // 材料上传时间
+            if (item.getUploadTime() != null && !item.getUploadTime().isEmpty()) {
+                addAttributeRow(context, attributesContainer, "材料上传", item.getUploadTime());
+            }
+            
+            // NFT铸造时间
+            if (item.getMintTime() != null && !item.getMintTime().isEmpty()) {
+                addAttributeRow(context, attributesContainer, "NFT铸造", item.getMintTime());
+            }
+        }
+        
+        // 创建对话框
+        android.app.AlertDialog dialog = builder.create();
+        
+        // 关闭按钮
+        if (closeButton != null) {
+            closeButton.setOnClickListener(v -> dialog.dismiss());
+        }
+        
+        dialog.show();
+    }
+    
+    /**
+     * 添加属性行到容器
+     */
+    private void addAttributeRow(android.content.Context context, android.widget.LinearLayout container, 
+                                  String label, String value) {
+        // 创建属性行
+        android.widget.LinearLayout row = new android.widget.LinearLayout(context);
+        row.setOrientation(android.widget.LinearLayout.HORIZONTAL);
+        row.setPadding(0, 16, 0, 16);
+        
+        // 标签
+        android.widget.TextView labelView = new android.widget.TextView(context);
+        labelView.setText(label + ": ");
+        labelView.setTextSize(16);
+        labelView.setTextColor(0xFF666666);
+        android.widget.LinearLayout.LayoutParams labelParams = new android.widget.LinearLayout.LayoutParams(
+                0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+        labelView.setLayoutParams(labelParams);
+        
+        // 值
+        android.widget.TextView valueView = new android.widget.TextView(context);
+        valueView.setText(value);
+        valueView.setTextSize(16);
+        valueView.setTextColor(0xFF333333);
+        valueView.setTypeface(null, android.graphics.Typeface.BOLD);
+        android.widget.LinearLayout.LayoutParams valueParams = new android.widget.LinearLayout.LayoutParams(
+                0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 2);
+        valueView.setLayoutParams(valueParams);
+        
+        row.addView(labelView);
+        row.addView(valueView);
+        container.addView(row);
+    }
+    
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView nameText;
-        TextView descriptionText;
+        ViewGroup attributesLayout;
+        TextView uploadTimeText;
+        TextView mintTimeText;
+        TextView ownerAddressText;
+        TextView ownerDisplayNameText;
         
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
-            nameText = itemView.findViewById(R.id.nameText);
-            descriptionText = itemView.findViewById(R.id.descriptionText);
+            attributesLayout = itemView.findViewById(R.id.attributesLayout);
+            uploadTimeText = itemView.findViewById(R.id.uploadTimeText);
+            mintTimeText = itemView.findViewById(R.id.mintTimeText);
+            ownerAddressText = itemView.findViewById(R.id.ownerAddressText);
+            ownerDisplayNameText = itemView.findViewById(R.id.ownerDisplayNameText);
         }
     }
     

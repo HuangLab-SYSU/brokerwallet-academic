@@ -59,77 +59,84 @@
 
         </RelativeLayout>
 
-        <!-- 内容区域 -->
-        <RelativeLayout
+        <!-- 内容区域（添加下拉刷新） -->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <!-- 加载中文本 -->
-            <TextView
-                android:id="@+id/loadingText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="加载中..."
-                android:textSize="16sp"
-                android:textColor="@color/grey_60"
-                android:visibility="gone" />
-
-            <!-- 错误文本 -->
-            <TextView
-                android:id="@+id/errorText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="加载失败"
-                android:textSize="16sp"
-                android:textColor="@color/red_127"
-                android:visibility="gone" />
-
-            <!-- 空状态提示 -->
-            <LinearLayout
-                android:id="@+id/emptyStateLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🏆"
-                    android:textSize="48sp"
-                    android:layout_marginBottom="16dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="暂无排行榜数据"
-                    android:textSize="18sp"
-                    android:textColor="@color/grey_60"
-                    android:layout_marginBottom="8dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="快去提交证明文件获得勋章吧！"
-                    android:textSize="14sp"
-                    android:textColor="@color/grey_60" />
-
-            </LinearLayout>
-
-            <!-- 排行榜列表 -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp"
-                android:visibility="gone" />
+                android:layout_height="match_parent">
 
-        </RelativeLayout>
+                <!-- 加载中文本 -->
+                <TextView
+                    android:id="@+id/loadingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="加载中..."
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_60"
+                    android:visibility="gone" />
+
+                <!-- 错误文本 -->
+                <TextView
+                    android:id="@+id/errorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="加载失败"
+                    android:textSize="16sp"
+                    android:textColor="@color/red_127"
+                    android:visibility="gone" />
+
+                <!-- 空状态提示 -->
+                <LinearLayout
+                    android:id="@+id/emptyStateLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🏆"
+                        android:textSize="48sp"
+                        android:layout_marginBottom="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="暂无排行榜数据"
+                        android:textSize="18sp"
+                        android:textColor="@color/grey_60"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="快去提交证明文件获得勋章吧！"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_60" />
+
+                </LinearLayout>
+
+                <!-- 排行榜列表 -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="16dp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <!-- 底部导航按钮 -->
         <LinearLayout

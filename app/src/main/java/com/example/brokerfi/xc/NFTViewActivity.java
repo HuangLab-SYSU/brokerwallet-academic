@@ -91,11 +91,23 @@ public class NFTViewActivity extends AppCompatActivity {
         private String name;
         private String description;
         private String imageUrl;
+        private String attributes;        // NFT属性（JSON格式）
+        private String mintTime;          // NFT铸造时间
+        private String minter;            // 铸造者地址
+        private String uploadTime;        // 材料上传时间
+        private String ownerAddress;      // 持有者地址
+        private String ownerDisplayName;  // 持有者花名
 
         public NFTItem(String name, String description, String imageUrl) {
             this.name = name;
             this.description = description;
             this.imageUrl = imageUrl;
+            this.attributes = "";
+            this.mintTime = "";
+            this.minter = "";
+            this.uploadTime = "";
+            this.ownerAddress = "";
+            this.ownerDisplayName = "";
         }
 
         // Getters and Setters
@@ -105,5 +117,17 @@ public class NFTViewActivity extends AppCompatActivity {
         public void setDescription(String description) { this.description = description; }
         public String getImageUrl() { return imageUrl; }
         public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+        public String getAttributes() { return attributes; }
+        public void setAttributes(String attributes) { this.attributes = attributes; }
+        public String getMintTime() { return mintTime; }
+        public void setMintTime(String mintTime) { this.mintTime = mintTime; }
+        public String getMinter() { return minter; }
+        public void setMinter(String minter) { this.minter = minter; }
+        public String getUploadTime() { return uploadTime; }
+        public void setUploadTime(String uploadTime) { this.uploadTime = uploadTime; }
+        public String getOwnerAddress() { return ownerAddress; }
+        public void setOwnerAddress(String ownerAddress) { this.ownerAddress = ownerAddress; }
+        public String getOwnerDisplayName() { return ownerDisplayName; }
+        public void setOwnerDisplayName(String ownerDisplayName) { this.ownerDisplayName = ownerDisplayName; }
     }
 }
