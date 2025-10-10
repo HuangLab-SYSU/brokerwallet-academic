@@ -13,13 +13,13 @@
         android:layout_below="@id/action_bar"
         android:orientation="vertical">
 
-        <!-- 标题 -->
+        <!-- Title -->
         <TextView
             android:id="@+id/titleText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="📊 全局统计"
+            android:text="📊 Global Stats"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -39,18 +39,18 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="🏆 全局勋章统计"
+                android:text="🏆 Global Medal Stats"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginBottom="12dp" />
 
-            <!-- 用户统计 -->
+            <!-- User Statistics -->
             <TextView
                 android:id="@+id/totalUsersText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="总用户: 0"
+                android:text="Total Users: 0"
                 android:textSize="14sp"
                 android:textColor="@color/grey_60"
                 android:layout_marginBottom="12dp" />
@@ -90,13 +90,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="金牌"
+                        android:text="Gold"
                         android:textSize="12sp"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
 
-                <!-- 银牌 -->
+                <!-- Silver Medal -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -125,13 +125,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="银牌"
+                        android:text="Silver"
                         android:textSize="12sp"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
 
-                <!-- 铜牌 -->
+                <!-- Bronze Medal -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="铜牌"
+                        android:text="Bronze"
                         android:textSize="12sp"
                         android:textColor="@color/black" />
 
@@ -168,7 +168,7 @@
 
             </LinearLayout>
 
-            <!-- 榜首信息 -->
+            <!-- Top User Info -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="最高分: 0"
+                    android:text="Highest Score: 0"
                     android:textSize="14sp"
                     android:textColor="@color/grey_60" />
 
@@ -189,37 +189,37 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="榜首: 暂无"
+                    android:text="Top User: None"
                     android:textSize="14sp"
                     android:textColor="@color/grey_60" />
 
             </LinearLayout>
 
-            <!-- 勋章统计加载状态 -->
+            <!-- Medal Stats Loading State -->
             <TextView
                 android:id="@+id/medalLoadingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="🏆 勋章统计加载中..."
+                android:text="🏆 Loading medal stats..."
                 android:textSize="14sp"
                 android:textColor="@color/grey_60"
                 android:visibility="gone" />
 
-            <!-- 勋章统计错误状态 -->
+            <!-- Medal Stats Error State -->
             <TextView
                 android:id="@+id/medalErrorText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="勋章统计加载失败"
+                android:text="Medal stats load failed"
                 android:textSize="14sp"
                 android:textColor="@color/red_127"
                 android:visibility="gone" />
 
         </LinearLayout>
 
-        <!-- 全局NFT标题和总数 -->
+        <!-- Global NFT Title and Total Count -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -232,7 +232,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="🎨 全局NFT展示"
+                android:text="🎨 Global NFT Gallery"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
@@ -241,7 +241,7 @@
                 android:id="@+id/nftTotalCountText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="总数: 0"
+                android:text="Total: 0"
                 android:textSize="14sp"
                 android:textColor="@color/grey_60"
                 android:visibility="gone" />
@@ -259,29 +259,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!-- NFT加载中 -->
+                <!-- NFT Loading -->
                 <TextView
                     android:id="@+id/nftLoadingText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="🖼️ 加载NFT中..."
+                    android:text="🖼️ Loading NFTs..."
                     android:textSize="16sp"
                     android:textColor="@color/grey_60"
                     android:visibility="gone" />
 
-                <!-- NFT错误 -->
+                <!-- NFT Error -->
                 <TextView
                     android:id="@+id/nftErrorText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="加载失败"
+                    android:text="Load Failed"
                     android:textSize="16sp"
                     android:textColor="@color/red_127"
                     android:visibility="gone" />
 
-                <!-- NFT空状态 -->
+                <!-- NFT Empty State -->
                 <LinearLayout
                     android:id="@+id/nftEmptyStateLayout"
                     android:layout_width="wrap_content"
@@ -301,7 +301,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="暂无NFT"
+                        android:text="No NFTs"
                         android:textSize="18sp"
                         android:textColor="@color/grey_60"
                         android:layout_marginBottom="8dp" />
@@ -309,7 +309,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="全局还没有NFT！"
+                        android:text="No NFTs minted globally yet!"
                         android:textSize="14sp"
                         android:textColor="@color/grey_60" />
 

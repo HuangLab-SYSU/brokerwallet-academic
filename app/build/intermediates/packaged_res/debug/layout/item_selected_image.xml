@@ -28,12 +28,12 @@
         android:maxLines="1"
         android:ellipsize="end" />
 
-    <!-- 预览按钮 -->
+    <!-- Preview Button -->
     <TextView
         android:id="@+id/previewImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="预览"
+        android:text="Preview"
         android:textSize="12sp"
         android:textColor="@color/black"
         android:background="@drawable/custom_button_bg_white"

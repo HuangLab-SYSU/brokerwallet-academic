@@ -63,6 +63,13 @@ public class SubmissionUtil {
                 
                 for (int i = 0; i < proofFileUris.size(); i++) {
                     Uri proofFileUri = proofFileUris.get(i);
+                    
+                    // 获取原始文件名
+                    String originalFileName = getFileNameFromUri(context, proofFileUri);
+                    if (originalFileName == null || originalFileName.isEmpty()) {
+                        originalFileName = "proof_file_" + (i + 1) + ".dat";
+                    }
+                    
                     File proofFile = getFileFromUri(context, proofFileUri);
                     if (proofFile == null) {
                         callback.onError("无法获取证明文件 " + (i + 1));
@@ -73,18 +80,28 @@ public class SubmissionUtil {
                         MediaType.parse("application/octet-stream"), 
                         proofFile
                     );
-                    requestBuilder.addFormDataPart("proofFiles", proofFile.getName(), proofFileBody);
+                    // 使用原始文件名而不是临时文件名
+                    requestBuilder.addFormDataPart("proofFiles", originalFileName, proofFileBody);
+                    Log.d(TAG, "添加证明文件: " + originalFileName + " (大小: " + proofFile.length() + " bytes)");
                 }
                 
                 // 2. 添加NFT图片（可选）
                 if (nftImageUri != null) {
+                    // 获取原始图片文件名
+                    String originalImageName = getFileNameFromUri(context, nftImageUri);
+                    if (originalImageName == null || originalImageName.isEmpty()) {
+                        originalImageName = "nft_image.jpg";
+                    }
+                    
                     File nftImageFile = getFileFromUri(context, nftImageUri);
                     if (nftImageFile != null) {
                         RequestBody nftImageBody = RequestBody.create(
                             MediaType.parse("image/*"), 
                             nftImageFile
                         );
-                        requestBuilder.addFormDataPart("nftImage", nftImageFile.getName(), nftImageBody);
+                        // 使用原始图片文件名
+                        requestBuilder.addFormDataPart("nftImage", originalImageName, nftImageBody);
+                        Log.d(TAG, "添加NFT图片: " + originalImageName + " (大小: " + nftImageFile.length() + " bytes)");
                     }
                 }
                 

@@ -72,6 +72,8 @@ drawable custom_nft_background
 drawable custom_nft_selected_bg
 drawable custom_radio_button
 drawable custom_red_background
+drawable dao_team
+drawable dao_team_icon
 drawable dashed_border
 drawable database
 drawable database_icon
@@ -322,6 +324,7 @@ id setlist
 id shard
 id showRepresentativeWorkGroup
 id showRepresentativeWorkNo
+id showRepresentativeWorkSwitch
 id showRepresentativeWorkYes
 id show_key
 id silverMedalCount
@@ -358,6 +361,7 @@ id textview4
 id textview5
 id third_network
 id titleText
+id tokenRewardText
 id topUserText
 id totalBronzeMedalsText
 id totalGoldMedalsText

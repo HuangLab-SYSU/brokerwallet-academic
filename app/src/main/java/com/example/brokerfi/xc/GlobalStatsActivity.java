@@ -1,5 +1,6 @@
 package com.example.brokerfi.xc;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,6 +60,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
     // 静态缓存，用于Activity重建时恢复数据
     private static List<NFTViewActivity.NFTItem> cachedNftList = null;
     private static boolean cachedNftHasMore = true;  // 缓存分页状态
+    private static int cachedTotalNftCount = 0;  // 缓存NFT总数
     
     private int totalNftCount = 0;  // 全局NFT总数
     
@@ -92,10 +94,10 @@ public class GlobalStatsActivity extends AppCompatActivity {
         if (nftList.isEmpty()) {
             loadAllNfts();
         } else {
-            Log.d("GlobalStats", "使用缓存的NFT数据，共" + nftList.size() + "个");
+            Log.d("GlobalStats", "Using cached NFT data, total: " + nftList.size() + ", count: " + totalNftCount);
             nftRecyclerView.setVisibility(View.VISIBLE);
             nftAdapter.notifyDataSetChanged();
-            nftTotalCountText.setText("总数: " + nftList.size());
+            nftTotalCountText.setText("Total: " + totalNftCount);  // ✅ Use cached totalNftCount
             nftTotalCountText.setVisibility(View.VISIBLE);
             // 更新Adapter的分页状态
             nftAdapter.setHasMore(nftHasMore);
@@ -131,6 +133,34 @@ public class GlobalStatsActivity extends AppCompatActivity {
         nftAdapter.setOnItemClickListener((item, position) -> {
             Log.d("GlobalStats", "NFT被点击: " + item.getName());
             showNftDetailDialog(item);
+        });
+        
+        // 设置加载更多监听
+        nftAdapter.setLoadMoreListener(() -> {
+            Log.d("GlobalStats", "触发加载更多NFT");
+            loadMoreNfts();
+        });
+        
+        // 设置RecyclerView滚动监听，滚动到底部时触发加载更多
+        nftRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (layoutManager != null && dy > 0) { // 向上滑动
+                    int visibleItemCount = layoutManager.getChildCount();
+                    int totalItemCount = layoutManager.getItemCount();
+                    int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+                    
+                    // 当滚动到倒数第2个item时，触发加载更多
+                    if (!nftLoadingMore && nftHasMore && 
+                        (visibleItemCount + firstVisibleItemPosition) >= totalItemCount - 2) {
+                        Log.d("GlobalStats", "滚动到底部，触发加载更多");
+                        loadMoreNfts();
+                    }
+                }
+            }
         });
         
         // 设置下拉刷新功能
@@ -191,18 +221,18 @@ public class GlobalStatsActivity extends AppCompatActivity {
             
             JSONObject data = jsonResponse.getJSONObject("data");
             
-            // 更新UI（保留标签）
-            totalUsersText.setText("总用户: " + data.optInt("totalUsers", 0));
+            // Update UI (keep labels)
+            totalUsersText.setText("Total Users: " + data.optInt("totalUsers", 0));
             totalGoldMedalsText.setText(String.valueOf(data.optInt("totalGoldMedals", 0)));
             totalSilverMedalsText.setText(String.valueOf(data.optInt("totalSilverMedals", 0)));
             totalBronzeMedalsText.setText(String.valueOf(data.optInt("totalBronzeMedals", 0)));
-            highestScoreText.setText("最高分: " + data.optInt("highestScore", 0));
+            highestScoreText.setText("Highest Score: " + data.optInt("highestScore", 0));
             
-            String topUser = data.optString("topUserDisplayName", "暂无");
+            String topUser = data.optString("topUserDisplayName", "None");
             if (topUser.equals("null") || topUser.isEmpty()) {
-                topUser = "暂无";
+                topUser = "None";
             }
-            topUserText.setText("榜首: " + topUser);
+            topUserText.setText("Top User: " + topUser);
             
             globalMedalStatsLayout.setVisibility(View.VISIBLE);
             Log.d("GlobalStats", "全局勋章统计加载完成");
@@ -224,6 +254,11 @@ public class GlobalStatsActivity extends AppCompatActivity {
         
         nftLoadingMore = true;
         nftCurrentPage++;
+        
+        // 更新footer状态为"正在加载..."
+        runOnUiThread(() -> {
+            nftAdapter.setLoading(true);
+        });
         
         Log.d("GlobalStats", "开始加载更多NFT，页码: " + nftCurrentPage);
         
@@ -264,6 +299,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                 final String finalResponse = response;
                 runOnUiThread(() -> {
                     nftLoadingMore = false;
+                    nftAdapter.setLoading(false);
                     if (finalResponse != null && !finalResponse.trim().isEmpty()) {
                         parseMoreNftData(finalResponse);
                     } else {
@@ -277,6 +313,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                 Log.e("GlobalStats", "加载更多NFT失败", e);
                 runOnUiThread(() -> {
                     nftLoadingMore = false;
+                    nftAdapter.setLoading(false);
                     completePullRefresh();
                 });
             }
@@ -470,15 +507,28 @@ public class GlobalStatsActivity extends AppCompatActivity {
                 }
             }
             
-            Log.d("GlobalStats", "更多NFT数据解析完成，总数量: " + nftList.size());
+            Log.d("GlobalStats", "更多NFT数据解析完成，当前列表总数: " + nftList.size());
+            
+            // 从响应中获取总NFT数量
+            int totalFromResponse = jsonResponse.optInt("totalCount", 0);
+            if (totalFromResponse > 0) {
+                totalNftCount = totalFromResponse;
+                Log.d("GlobalStats", "更新NFT总数: " + totalNftCount);
+            }
+            
             nftAdapter.notifyDataSetChanged();
             
             // 检查是否还有更多数据
-            if (nfts.length() < nftPageSize) {
+            if (nftList.size() >= totalNftCount) {
                 nftHasMore = false;
                 nftAdapter.setHasMore(false);
-                Log.d("GlobalStats", "已加载完所有NFT");
+                Log.d("GlobalStats", "已加载完所有NFT: " + nftList.size() + "/" + totalNftCount);
+            } else {
+                Log.d("GlobalStats", "还有更多NFT: " + nftList.size() + "/" + totalNftCount);
             }
+            
+            // 保存NFT缓存
+            saveNftCache();
             
         } catch (JSONException e) {
             Log.e("GlobalStats", "解析更多NFT数据失败", e);
@@ -598,18 +648,28 @@ public class GlobalStatsActivity extends AppCompatActivity {
                     }
                 }
                 
-                Log.d("GlobalStats", "NFT数据解析完成，总数量: " + nftList.size());
+                Log.d("GlobalStats", "NFT数据解析完成，当前列表数量: " + nftList.size());
                 
-                // 更新NFT总数显示
-                totalNftCount = nftList.size();
-                nftTotalCountText.setText("总数: " + totalNftCount);
+                // 从响应中获取总NFT数量
+                int totalFromResponse = jsonResponse.optInt("totalCount", nftList.size());
+                totalNftCount = totalFromResponse;
+                Log.d("GlobalStats", "NFT总数: " + totalNftCount + ", 当前已加载: " + nftList.size());
+                
+                // Update NFT total count display
+                nftTotalCountText.setText("Total: " + totalNftCount);
                 nftTotalCountText.setVisibility(View.VISIBLE);
                 
                 // 检查是否还有更多数据（首次加载）
-                if (nfts.length() < nftPageSize) {
+                if (nftList.size() >= totalNftCount) {
+                    // 已加载全部数据
                     nftHasMore = false;
                     nftAdapter.setHasMore(false);
                     Log.d("GlobalStats", "首次加载完成，已加载所有NFT");
+                } else {
+                    // 还有更多数据
+                    nftHasMore = true;
+                    nftAdapter.setHasMore(true);
+                    Log.d("GlobalStats", "首次加载完成，还有更多NFT可加载");
                 }
                 
                 nftAdapter.notifyDataSetChanged();
@@ -677,44 +737,43 @@ public class GlobalStatsActivity extends AppCompatActivity {
         // 获取控件
         ImageView nftImageView = dialogView.findViewById(R.id.nftImageView);
         LinearLayout attributesContainer = dialogView.findViewById(R.id.attributesContainer);
-        Button closeButton = dialogView.findViewById(R.id.closeButton);
         
         // 加载NFT图片
+        // 详情对话框中使用原始分辨率，保证画质
         if (nftImageView != null && nftItem.getImageUrl() != null && !nftItem.getImageUrl().isEmpty()) {
             com.bumptech.glide.Glide.with(this)
                     .load(nftItem.getImageUrl())
                     .placeholder(R.drawable.placeholder_image)
                     .error(R.drawable.placeholder_image)
+                    .override(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL) // 使用原图尺寸
+                    .fitCenter() // 完整显示图片，不裁剪
+                    .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL) // 缓存原图
                     .into(nftImageView);
+            Log.d("GlobalStats", "详情对话框加载高清原图: " + nftItem.getImageUrl());
         }
         
         // 显示时间属性
         if (attributesContainer != null) {
             attributesContainer.removeAllViews();
             
-            // 材料上传时间
+            // Material upload time
             if (nftItem.getUploadTime() != null && !nftItem.getUploadTime().isEmpty()) {
-                addAttributeItem(attributesContainer, "材料上传", nftItem.getUploadTime());
+                addAttributeItem(attributesContainer, "Material Upload", nftItem.getUploadTime());
             }
             
-            // NFT铸造时间
+            // NFT minting time
             if (nftItem.getMintTime() != null && !nftItem.getMintTime().isEmpty()) {
-                addAttributeItem(attributesContainer, "NFT铸造", nftItem.getMintTime());
+                addAttributeItem(attributesContainer, "NFT Minted", nftItem.getMintTime());
             }
             
-            // 持有者地址
+            // Owner address
             if (nftItem.getOwnerAddress() != null && !nftItem.getOwnerAddress().isEmpty()) {
-                addAttributeItem(attributesContainer, "持有者", nftItem.getOwnerAddress());
+                addAttributeItem(attributesContainer, "Owner", nftItem.getOwnerAddress());
             }
         }
         
         // 创建对话框
         androidx.appcompat.app.AlertDialog dialog = builder.create();
-        
-        // 关闭按钮
-        if (closeButton != null) {
-            closeButton.setOnClickListener(v -> dialog.dismiss());
-        }
         
         dialog.show();
         Log.d("GlobalStats", "显示NFT详情对话框");
@@ -797,7 +856,8 @@ public class GlobalStatsActivity extends AppCompatActivity {
             nftList.clear();
             nftList.addAll(cachedNftList);
             nftHasMore = cachedNftHasMore;  // 恢复分页状态
-            Log.d("GlobalStats", "从静态缓存恢复NFT数据，共" + nftList.size() + "个，hasMore=" + nftHasMore);
+            totalNftCount = cachedTotalNftCount;  // 恢复NFT总数
+            Log.d("GlobalStats", "从静态缓存恢复NFT数据，共" + nftList.size() + "个，总数=" + totalNftCount + "，hasMore=" + nftHasMore);
         } else {
             Log.d("GlobalStats", "没有NFT缓存数据");
         }
@@ -810,7 +870,8 @@ public class GlobalStatsActivity extends AppCompatActivity {
         if (nftList != null && !nftList.isEmpty()) {
             cachedNftList = new ArrayList<>(nftList);
             cachedNftHasMore = nftHasMore;  // 保存分页状态
-            Log.d("GlobalStats", "保存NFT缓存，共" + cachedNftList.size() + "个，hasMore=" + cachedNftHasMore);
+            cachedTotalNftCount = totalNftCount;  // 保存NFT总数
+            Log.d("GlobalStats", "保存NFT缓存，共" + cachedNftList.size() + "个，总数=" + cachedTotalNftCount + "，hasMore=" + cachedNftHasMore);
         }
     }
     

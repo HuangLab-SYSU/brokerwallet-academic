@@ -82,9 +82,9 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .inflate(R.layout.item_nft_footer, parent, false);
             return new FooterViewHolder(view);
         } else {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_nft_view, parent, false);
-            return new ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_nft_view, parent, false);
+        return new ViewHolder(view);
         }
     }
     
@@ -112,14 +112,17 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         
         // 使用Glide加载图片，优化大图片处理
         if (item.getImageUrl() != null && !item.getImageUrl().isEmpty()) {
-            // 有图片URL，使用Glide加载
             android.util.Log.d("NFTAdapter", "加载图片: " + item.getName() + ", URL长度: " + item.getImageUrl().length());
-            Glide.with(holder.itemView.getContext())
-                    .load(item.getImageUrl())
-                    .placeholder(R.drawable.placeholder_image)
-                    .error(R.drawable.placeholder_image)
-                    .override(300, 300) // 限制图片大小
-                    .centerCrop()
+            
+            // 普通图片URL，使用Glide加载
+            // Glide支持Base64格式（data:image/jpeg;base64,xxx）和HTTP URL
+            // 列表卡片使用压缩图片以优化性能和内存
+        Glide.with(holder.itemView.getContext())
+                .load(item.getImageUrl())
+                .placeholder(R.drawable.placeholder_image)
+                .error(R.drawable.placeholder_image)
+                    .override(300, 450) // 列表中压缩图片，优化内存和性能
+                    .fitCenter() // 使用fitCenter而不是centerCrop，避免裁剪
                     .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL) // 缓存图片
                     .listener(new com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable>() {
                         @Override
@@ -153,37 +156,37 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         
         int visibleCount = 0;
         
-        // 显示材料上传时间
+        // Display material upload time
         if (uploadTime != null && !uploadTime.isEmpty()) {
-            holder.uploadTimeText.setText("材料上传: " + uploadTime);
+            holder.uploadTimeText.setText("Material Upload: " + uploadTime);
             holder.uploadTimeText.setVisibility(View.VISIBLE);
             visibleCount++;
         } else {
             holder.uploadTimeText.setVisibility(View.GONE);
         }
         
-        // 显示NFT铸造时间
+        // Display NFT minting time
         if (mintTime != null && !mintTime.isEmpty()) {
-            holder.mintTimeText.setText("NFT铸造: " + mintTime);
+            holder.mintTimeText.setText("NFT Minted: " + mintTime);
             holder.mintTimeText.setVisibility(View.VISIBLE);
             visibleCount++;
         } else {
             holder.mintTimeText.setVisibility(View.GONE);
         }
         
-        // 显示持有者地址（缩短显示）
+        // Display owner address (shortened)
         if (ownerAddress != null && !ownerAddress.isEmpty()) {
             String shortAddress = shortenAddress(ownerAddress);
-            holder.ownerAddressText.setText("持有者地址: " + shortAddress);
+            holder.ownerAddressText.setText("Owner Address: " + shortAddress);
             holder.ownerAddressText.setVisibility(View.VISIBLE);
             visibleCount++;
         } else {
             holder.ownerAddressText.setVisibility(View.GONE);
         }
         
-        // 显示持有者花名
-        if (ownerDisplayName != null && !ownerDisplayName.isEmpty() && !ownerDisplayName.equals("匿名用户")) {
-            holder.ownerDisplayNameText.setText("持有者花名: " + ownerDisplayName);
+        // Display owner nickname
+        if (ownerDisplayName != null && !ownerDisplayName.isEmpty() && !ownerDisplayName.equals("Anonymous")) {
+            holder.ownerDisplayNameText.setText("Owner Nickname: " + ownerDisplayName);
             holder.ownerDisplayNameText.setVisibility(View.VISIBLE);
             visibleCount++;
         } else {
@@ -217,39 +220,38 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         // 获取控件
         android.widget.ImageView nftImageView = dialogView.findViewById(R.id.nftImageView);
         android.widget.LinearLayout attributesContainer = dialogView.findViewById(R.id.attributesContainer);
-        android.widget.Button closeButton = dialogView.findViewById(R.id.closeButton);
         
-        // 加载NFT图片
+        // 加载NFT图片（Glide支持data URL和HTTP URL）
+        // 详情对话框中使用原始分辨率，保证画质
         if (nftImageView != null && item.getImageUrl() != null && !item.getImageUrl().isEmpty()) {
             Glide.with(context)
                     .load(item.getImageUrl())
                     .placeholder(R.drawable.placeholder_image)
                     .error(R.drawable.placeholder_image)
+                    .override(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL) // 使用原图尺寸
+                    .fitCenter() // 完整显示图片，不裁剪
+                    .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL) // 缓存原图
                     .into(nftImageView);
+            android.util.Log.d("NFTAdapter", "详情对话框加载高清原图: " + item.getImageUrl());
         }
         
         // 显示时间属性
         if (attributesContainer != null) {
             attributesContainer.removeAllViews();
             
-            // 材料上传时间
+            // Material upload time
             if (item.getUploadTime() != null && !item.getUploadTime().isEmpty()) {
-                addAttributeRow(context, attributesContainer, "材料上传", item.getUploadTime());
+                addAttributeRow(context, attributesContainer, "Material Upload", item.getUploadTime());
             }
             
-            // NFT铸造时间
+            // NFT minting time
             if (item.getMintTime() != null && !item.getMintTime().isEmpty()) {
-                addAttributeRow(context, attributesContainer, "NFT铸造", item.getMintTime());
+                addAttributeRow(context, attributesContainer, "NFT Minted", item.getMintTime());
             }
         }
         
         // 创建对话框
         android.app.AlertDialog dialog = builder.create();
-        
-        // 关闭按钮
-        if (closeButton != null) {
-            closeButton.setOnClickListener(v -> dialog.dismiss());
-        }
         
         dialog.show();
     }
@@ -319,13 +321,13 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         
         public void bind(boolean hasMore, boolean isLoading) {
             if (isLoading) {
-                footerText.setText("正在加载...");
+                footerText.setText("Loading...");
                 footerProgress.setVisibility(View.VISIBLE);
             } else if (hasMore) {
-                footerText.setText("下拉刷新更多");
+                footerText.setText("Pull up to load more");
                 footerProgress.setVisibility(View.GONE);
             } else {
-                footerText.setText("已经到底~请提交材料获得更多NFT");
+                footerText.setText("End of list ~ Submit materials to get more NFTs");
                 footerProgress.setVisibility(View.GONE);
             }
         }

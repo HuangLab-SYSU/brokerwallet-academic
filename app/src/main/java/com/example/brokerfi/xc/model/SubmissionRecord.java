@@ -6,6 +6,8 @@ package com.example.brokerfi.xc.model;
 public class SubmissionRecord {
     private String submissionId;
     private Long id;
+    private String batchId;
+    private int fileCount = 1;  // 批次中的文件数量，默认为1
     private String fileName;
     private long fileSize;
     private String fileType;
@@ -19,6 +21,8 @@ public class SubmissionRecord {
     private String medalTransactionHash;
     private boolean hasNftImage;
     private NftImageInfo nftImage;
+    private String tokenReward;
+    private String tokenRewardTxHash;
     
     // 构造函数
     public SubmissionRecord() {}
@@ -38,6 +42,22 @@ public class SubmissionRecord {
     
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public String getBatchId() {
+        return batchId;
+    }
+    
+    public void setBatchId(String batchId) {
+        this.batchId = batchId;
+    }
+    
+    public int getFileCount() {
+        return fileCount;
+    }
+    
+    public void setFileCount(int fileCount) {
+        this.fileCount = fileCount;
     }
     
     public String getFileName() {
@@ -142,6 +162,22 @@ public class SubmissionRecord {
     
     public void setNftImage(NftImageInfo nftImage) {
         this.nftImage = nftImage;
+    }
+    
+    public String getTokenReward() {
+        return tokenReward;
+    }
+    
+    public void setTokenReward(String tokenReward) {
+        this.tokenReward = tokenReward;
+    }
+    
+    public String getTokenRewardTxHash() {
+        return tokenRewardTxHash;
+    }
+    
+    public void setTokenRewardTxHash(String tokenRewardTxHash) {
+        this.tokenRewardTxHash = tokenRewardTxHash;
     }
     
     /**

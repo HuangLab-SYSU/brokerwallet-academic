@@ -53,6 +53,7 @@ public class MyCenterActivity extends AppCompatActivity {
     private RecyclerView submissionsRecyclerView;
     private RecyclerView nftRecyclerView;
     private androidx.swiperefreshlayout.widget.SwipeRefreshLayout nftSwipeRefreshLayout;
+    private TextView nftTotalCountText;
     private TextView submissionsLoadingText;
     private TextView submissionsErrorText;
     private LinearLayout submissionsEmptyStateLayout;
@@ -69,12 +70,15 @@ public class MyCenterActivity extends AppCompatActivity {
     // 静态缓存，用于Activity重建时恢复数据
     private static List<NFTViewActivity.NFTItem> cachedNftList = null;
     private static boolean cachedNftHasMore = true;  // 缓存分页状态
+    private static int cachedTotalNftCount = 0;  // 缓存NFT总数
+    private static String cachedWalletAddress = null;  // 缓存的钱包地址
     
     // NFT分页加载相关
     private int nftCurrentPage = 0;
     private int nftPageSize = 5; // 每页加载5个NFT
     private boolean nftLoadingMore = false;
     private boolean nftHasMore = true;
+    private int totalNftCount = 0; // NFT总数
     
     // 下拉刷新相关状态
     private boolean isDragging = false;
@@ -92,8 +96,8 @@ public class MyCenterActivity extends AppCompatActivity {
         initViews();
         initEvents();
         
-        // 恢复NFT缓存
-        restoreNftCache();
+        // 检查地址是否变化，恢复或清空NFT缓存
+        checkAndRestoreNftCache();
         
         loadUserData();
     }
@@ -111,6 +115,7 @@ public class MyCenterActivity extends AppCompatActivity {
         submissionsRecyclerView = findViewById(R.id.submissionsRecyclerView);
         nftRecyclerView = findViewById(R.id.nftRecyclerView);
         nftSwipeRefreshLayout = findViewById(R.id.nftSwipeRefreshLayout);
+        nftTotalCountText = findViewById(R.id.nftTotalCountText);
         submissionsLoadingText = findViewById(R.id.submissionsLoadingText);
         submissionsErrorText = findViewById(R.id.submissionsErrorText);
         submissionsEmptyStateLayout = findViewById(R.id.submissionsEmptyStateLayout);
@@ -137,6 +142,28 @@ public class MyCenterActivity extends AppCompatActivity {
         
         nftRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         nftRecyclerView.setAdapter(nftAdapter);
+        
+        // 设置RecyclerView滚动监听，滚动到底部时触发加载更多
+        nftRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@androidx.annotation.NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (layoutManager != null && dy > 0) { // 向上滑动
+                    int visibleItemCount = layoutManager.getChildCount();
+                    int totalItemCount = layoutManager.getItemCount();
+                    int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+                    
+                    // 当滚动到倒数第2个item时，触发加载更多
+                    if (!nftLoadingMore && nftHasMore && 
+                        (visibleItemCount + firstVisibleItemPosition) >= totalItemCount - 2) {
+                        Log.d("MyCenter", "滚动到底部，触发加载更多");
+                        loadMoreNfts();
+                    }
+                }
+            }
+        });
         
         // 设置RecyclerView的下拉刷新监听
         setupNftPullRefresh();
@@ -188,8 +215,11 @@ public class MyCenterActivity extends AppCompatActivity {
             loadMyNfts();
         } else {
             // 有缓存，直接显示
-            Log.d("MyCenter", "使用缓存的NFT数据，共" + nftList.size() + "个，用户可下拉刷新");
+            Log.d("MyCenter", "Using cached NFT data, total: " + nftList.size() + ", count: " + totalNftCount + ", pull to refresh");
             nftRecyclerView.setVisibility(View.VISIBLE);
+            // Update NFT total count display
+            nftTotalCountText.setText("Total: " + totalNftCount);  // ✅ Use cached totalNftCount
+            nftTotalCountText.setVisibility(View.VISIBLE);
             // 更新Adapter的分页状态
             nftAdapter.setHasMore(nftHasMore);
             nftAdapter.setLoading(false);
@@ -197,17 +227,46 @@ public class MyCenterActivity extends AppCompatActivity {
     }
     
     /**
-     * 恢复NFT缓存
+     * 检查地址变化并恢复NFT缓存
      */
-    private void restoreNftCache() {
-        if (cachedNftList != null && !cachedNftList.isEmpty()) {
-            nftList.clear();
-            nftList.addAll(cachedNftList);
-            nftHasMore = cachedNftHasMore;  // 恢复分页状态
-            Log.d("MyCenter", "从静态缓存恢复NFT数据，共" + nftList.size() + "个，hasMore=" + nftHasMore);
+    private void checkAndRestoreNftCache() {
+        String currentAddress = getMyAddressForDatabase();
+        
+        // 检查缓存的地址是否与当前地址一致
+        if (cachedWalletAddress != null && cachedWalletAddress.equals(currentAddress)) {
+            // 地址未变化，恢复缓存
+            if (cachedNftList != null && !cachedNftList.isEmpty()) {
+                nftList.clear();
+                nftList.addAll(cachedNftList);
+                nftHasMore = cachedNftHasMore;
+                totalNftCount = cachedTotalNftCount;
+                Log.d("MyCenter", "Address unchanged, restored NFT cache: " + nftList.size() + " items, address=" + currentAddress);
+            } else {
+                Log.d("MyCenter", "Address unchanged but no cache data, address=" + currentAddress);
+            }
         } else {
-            Log.d("MyCenter", "没有NFT缓存数据");
+            // 地址发生变化，清空旧缓存
+            if (cachedWalletAddress != null) {
+                Log.d("MyCenter", "Address changed from " + cachedWalletAddress + " to " + currentAddress + ", clearing cache");
+            } else {
+                Log.d("MyCenter", "First time loading, address=" + currentAddress);
+            }
+            clearNftCache();
         }
+    }
+    
+    /**
+     * 清空NFT缓存
+     */
+    private void clearNftCache() {
+        cachedNftList = null;
+        cachedNftHasMore = true;
+        cachedTotalNftCount = 0;
+        cachedWalletAddress = null;
+        nftList.clear();
+        nftHasMore = true;
+        totalNftCount = 0;
+        Log.d("MyCenter", "NFT cache cleared");
     }
     
     /**
@@ -216,8 +275,11 @@ public class MyCenterActivity extends AppCompatActivity {
     private void saveNftCache() {
         if (nftList != null && !nftList.isEmpty()) {
             cachedNftList = new ArrayList<>(nftList);
-            cachedNftHasMore = nftHasMore;  // 保存分页状态
-            Log.d("MyCenter", "保存NFT缓存，共" + cachedNftList.size() + "个，hasMore=" + cachedNftHasMore);
+            cachedNftHasMore = nftHasMore;  // Save pagination state
+            cachedTotalNftCount = totalNftCount;  // Save NFT total count
+            cachedWalletAddress = getMyAddressForDatabase();  // Save current wallet address
+            Log.d("MyCenter", "Saved NFT cache, total: " + cachedNftList.size() + ", count=" + cachedTotalNftCount + 
+                  ", hasMore=" + cachedNftHasMore + ", address=" + cachedWalletAddress);
         }
     }
     
@@ -347,6 +409,8 @@ public class MyCenterActivity extends AppCompatActivity {
                                     // 基本信息
                                     record.setId(submission.optLong("id", 0L));
                                     record.setSubmissionId(submission.optString("submissionId", ""));
+                                    record.setBatchId(submission.optString("batchId", null));
+                                    record.setFileCount(submission.optInt("fileCount", 1));
                                     record.setFileName(submission.optString("fileName", ""));
                                     record.setFileSize(submission.optLong("fileSize", 0L));
                                     record.setFileType(submission.optString("fileType", ""));
@@ -385,13 +449,20 @@ public class MyCenterActivity extends AppCompatActivity {
                                         record.setHasNftImage(false);
                                     }
                                     
+                                    // 代币奖励信息
+                                    if (submission.has("tokenReward") && !submission.isNull("tokenReward")) {
+                                        record.setTokenReward(submission.optString("tokenReward", null));
+                                        record.setTokenRewardTxHash(submission.optString("tokenRewardTxHash", null));
+                                    }
+                                    
                                     submissionsList.add(record);
                                     
                                     Log.d("MyCenter", "解析提交记录: " + record.getFileName() + 
                                         ", 大小: " + record.getFormattedFileSize() + 
                                         ", 状态: " + record.getAuditStatusDesc() + 
                                         ", 勋章: " + record.getMedalAwardedDesc() +
-                                        ", NFT: " + record.isHasNftImage());
+                                        ", NFT: " + record.isHasNftImage() +
+                                        ", BKC奖励: " + (record.getTokenReward() != null ? record.getTokenReward() + " BKC" : "无"));
                                 }
                                 
                                 // 更新UI
@@ -438,6 +509,9 @@ public class MyCenterActivity extends AppCompatActivity {
         } else {
             // 分页加载，显示加载更多状态
             nftLoadingMore = true;
+            runOnUiThread(() -> {
+                nftAdapter.setLoading(true);
+            });
             Log.d("MyCenter", "开始分页加载NFT，页码: " + nftCurrentPage);
         }
         
@@ -475,6 +549,12 @@ public class MyCenterActivity extends AppCompatActivity {
                     // 解析JSON响应
                     JSONObject jsonResponse = new JSONObject(response.toString());
                     Log.d("MyCenter", "NFT API响应: " + response.toString());
+                    
+                    // 获取NFT总数
+                    int totalFromResponse = jsonResponse.optInt("totalCount", 0);
+                    totalNftCount = totalFromResponse;
+                    Log.d("MyCenter", "NFT总数: " + totalNftCount);
+                    
                     JSONArray nfts = jsonResponse.optJSONArray("nfts");
                     Log.d("MyCenter", "NFT数组: " + (nfts != null ? nfts.length() + "个NFT" : "null"));
                     
@@ -599,12 +679,13 @@ public class MyCenterActivity extends AppCompatActivity {
                                 }
                                 
                                 // 检查是否还有更多数据
-                                if (nfts.length() < nftPageSize) {
+                                if (nftList.size() >= totalNftCount) {
                                     nftHasMore = false;
-                                    Log.d("MyCenter", "没有更多NFT数据了");
+                                    Log.d("MyCenter", "已加载所有NFT: " + nftList.size() + "/" + totalNftCount);
                                 } else {
+                                    nftHasMore = true;
                                     nftCurrentPage++;
-                                    Log.d("MyCenter", "还有更多NFT数据，下一页: " + nftCurrentPage);
+                                    Log.d("MyCenter", "还有更多NFT: " + nftList.size() + "/" + totalNftCount + ", 下一页: " + nftCurrentPage);
                                 }
                                 
                                 Log.d("MyCenter", "添加NFT数据完成，本次添加: " + addedCount + ", 总数量: " + nftList.size());
@@ -613,6 +694,10 @@ public class MyCenterActivity extends AppCompatActivity {
                                 
                                 nftRecyclerView.setVisibility(View.VISIBLE);
                                 Log.d("MyCenter", "设置RecyclerView可见");
+                                
+                                // 显示NFT总数
+                                nftTotalCountText.setText("总数: " + totalNftCount);
+                                nftTotalCountText.setVisibility(View.VISIBLE);
                                 
                                 // 更新适配器状态
                                 nftAdapter.setHasMore(nftHasMore);
@@ -1089,29 +1174,33 @@ public class MyCenterActivity extends AppCompatActivity {
         // 获取控件
         ImageView nftImageView = dialogView.findViewById(R.id.nftImageView);
         LinearLayout attributesContainer = dialogView.findViewById(R.id.attributesContainer);
-        Button closeButton = dialogView.findViewById(R.id.closeButton);
         
         // 加载NFT图片
+        // 详情对话框中使用原始分辨率，保证画质
         if (nftImageView != null && nftItem.getImageUrl() != null && !nftItem.getImageUrl().isEmpty()) {
             com.bumptech.glide.Glide.with(this)
                     .load(nftItem.getImageUrl())
                     .placeholder(R.drawable.placeholder_image)
                     .error(R.drawable.placeholder_image)
+                    .override(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL) // 使用原图尺寸
+                    .fitCenter() // 完整显示图片，不裁剪
+                    .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL) // 缓存原图
                     .into(nftImageView);
+            Log.d("MyCenter", "详情对话框加载高清原图: " + nftItem.getImageUrl());
         }
         
         // 显示时间属性
         if (attributesContainer != null) {
             attributesContainer.removeAllViews();
             
-            // 材料上传时间
+            // Material upload time
             if (nftItem.getUploadTime() != null && !nftItem.getUploadTime().isEmpty()) {
-                addAttributeItem(attributesContainer, "材料上传", nftItem.getUploadTime());
+                addAttributeItem(attributesContainer, "Material Upload", nftItem.getUploadTime());
             }
             
-            // NFT铸造时间
+            // NFT minting time
             if (nftItem.getMintTime() != null && !nftItem.getMintTime().isEmpty()) {
-                addAttributeItem(attributesContainer, "NFT铸造", nftItem.getMintTime());
+                addAttributeItem(attributesContainer, "NFT Minted", nftItem.getMintTime());
             }
             
             // "我的"界面不显示持有者地址（持有者就是当前用户）
@@ -1119,11 +1208,6 @@ public class MyCenterActivity extends AppCompatActivity {
         
         // 创建对话框
         androidx.appcompat.app.AlertDialog dialog = builder.create();
-        
-        // 关闭按钮
-        if (closeButton != null) {
-            closeButton.setOnClickListener(v -> dialog.dismiss());
-        }
         
         dialog.show();
         Log.d("MyCenter", "显示NFT详情对话框");

@@ -43,13 +43,20 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         SubmissionRecord record = submissionList.get(position);
         
-        // 文件名
-        holder.fileNameText.setText(record.getFileName());
+        // File name (if batch submission, show batch info)
+        String fileName = record.getFileName();
+        if (record.getFileCount() > 1) {
+            fileName = fileName + " and " + record.getFileCount() + " more file(s)";
+        }
+        holder.fileNameText.setText(fileName);
         
-        // 文件大小和类型
+        // File size and type
         String fileInfo = record.getFormattedFileSize();
         if (record.getFileType() != null && !record.getFileType().isEmpty()) {
             fileInfo += " • " + getSimpleFileType(record.getFileType());
+        }
+        if (record.getFileCount() > 1) {
+            fileInfo = record.getFileCount() + " file(s) • " + fileInfo;
         }
         holder.fileInfoText.setText(fileInfo);
         
@@ -66,6 +73,15 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
         
         // NFT状态（隐藏，因为进度条已经能清楚表示状态）
         holder.nftStatusText.setVisibility(View.GONE);
+        
+        // BKC token reward display
+        if (record.getTokenReward() != null && !record.getTokenReward().isEmpty() && 
+            !record.getTokenReward().equals("0") && !record.getTokenReward().equals("0.0")) {
+            holder.tokenRewardText.setText("💰 BKC Reward: " + record.getTokenReward() + " BKC");
+            holder.tokenRewardText.setVisibility(View.VISIBLE);
+        } else {
+            holder.tokenRewardText.setVisibility(View.GONE);
+        }
         
         // 进度显示（根据审核状态动态更新）
         updateProgress(holder, record);
@@ -84,11 +100,11 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
     private String buildMedalInfo(SubmissionRecord record) {
         String medalAwarded = record.getMedalAwarded();
         
-        // 判断是否已发放勋章
+        // Check if medal has been awarded
         if (medalAwarded == null || "NONE".equals(medalAwarded)) {
-            return "⚪ 未发放勋章";
+            return "⚪ No Medal Awarded";
         } else {
-            return "🏅 已发放勋章";
+            return "🏅 Medal Awarded";
         }
     }
     
@@ -96,30 +112,30 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
      * 更新进度显示
      */
     private void updateProgress(ViewHolder holder, SubmissionRecord record) {
-        int progress = 1; // 默认已上传
-        String progressStr = "1/3 已上传";
+        int progress = 1; // Default: uploaded
+        String progressStr = "1/3 Uploaded";
         
-        // 根据审核状态确定进度
+        // Determine progress based on audit status
         if ("APPROVED".equals(record.getAuditStatus())) {
-            // 已审核通过
+            // Audit approved
             progress = 2;
-            progressStr = "2/3 审核通过";
+            progressStr = "2/3 Approved";
             
-            // 如果有勋章或NFT，则完成
+            // If has medal or NFT, then complete
             String medalAwarded = record.getMedalAwarded();
             boolean hasMedal = medalAwarded != null && !"NONE".equals(medalAwarded);
             
             if (hasMedal || record.isHasNftImage()) {
                 progress = 3;
                 if (record.isHasNftImage()) {
-                    progressStr = "3/3 NFT已铸造";
+                    progressStr = "3/3 NFT Minted";
                 } else {
-                    progressStr = "3/3 勋章已发放";
+                    progressStr = "3/3 Medal Awarded";
                 }
             }
         } else if ("REJECTED".equals(record.getAuditStatus())) {
             progress = 2;
-            progressStr = "审核未通过";
+            progressStr = "Audit Rejected";
         }
         
         // 更新进度条颜色
@@ -160,7 +176,7 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
      */
     private String getSimpleFileType(String mimeType) {
         if (mimeType == null) {
-            return "文件";
+            return "File";
         }
         
         if (mimeType.contains("pdf")) {
@@ -172,11 +188,11 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
         } else if (mimeType.contains("powerpoint") || mimeType.contains("presentation")) {
             return "PPT";
         } else if (mimeType.contains("image")) {
-            return "图片";
+            return "Image";
         } else if (mimeType.contains("text")) {
-            return "文本";
+            return "Text";
         } else {
-            return "文件";
+            return "File";
         }
     }
     
@@ -190,6 +206,7 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
         TextView statusText;
         TextView medalText;
         TextView nftStatusText;
+        TextView tokenRewardText;
         View progressBar1, progressBar2, progressBar3;
         TextView progressText;
         
@@ -202,6 +219,7 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
             statusText = itemView.findViewById(R.id.statusText);
             medalText = itemView.findViewById(R.id.medalText);
             nftStatusText = itemView.findViewById(R.id.nftStatusText);
+            tokenRewardText = itemView.findViewById(R.id.tokenRewardText);
             progressBar1 = itemView.findViewById(R.id.progressBar1);
             progressBar2 = itemView.findViewById(R.id.progressBar2);
             progressBar3 = itemView.findViewById(R.id.progressBar3);

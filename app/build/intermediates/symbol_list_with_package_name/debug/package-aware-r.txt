@@ -2796,6 +2796,8 @@ drawable custom_nft_background
 drawable custom_nft_selected_bg
 drawable custom_radio_button
 drawable custom_red_background
+drawable dao_team
+drawable dao_team_icon
 drawable dashed_border
 drawable database
 drawable database_icon
@@ -3525,6 +3527,7 @@ id showCustom
 id showHome
 id showRepresentativeWorkGroup
 id showRepresentativeWorkNo
+id showRepresentativeWorkSwitch
 id showRepresentativeWorkYes
 id showTitle
 id show_key
@@ -3629,6 +3632,7 @@ id titleDividerNoCustom
 id titleText
 id title_template
 id toggle
+id tokenRewardText
 id top
 id topPanel
 id topUserText

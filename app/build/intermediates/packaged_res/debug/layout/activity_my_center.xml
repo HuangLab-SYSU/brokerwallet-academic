@@ -13,12 +13,12 @@
         android:layout_below="@id/action_bar"
         android:orientation="vertical">
 
-        <!-- 标题 -->
+        <!-- Title -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="👤 我的"
+            android:text="👤 My"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -37,7 +37,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="🏆 我的勋章"
+                android:text="🏆 My Medals"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -77,13 +77,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="金牌"
+                        android:text="Gold"
                         android:textSize="12sp"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
 
-                <!-- 银牌 -->
+                <!-- Silver Medal -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -112,13 +112,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="银牌"
+                        android:text="Silver"
                         android:textSize="12sp"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
 
-                <!-- 铜牌 -->
+                <!-- Bronze Medal -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="铜牌"
+                        android:text="Bronze"
                         android:textSize="12sp"
                         android:textColor="@color/black" />
 
@@ -155,24 +155,24 @@
 
             </LinearLayout>
 
-            <!-- 勋章加载状态 -->
+            <!-- Medal Loading State -->
             <TextView
                 android:id="@+id/medalLoadingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="🏆 勋章数据加载中..."
+                android:text="🏆 Loading medal data..."
                 android:textSize="14sp"
                 android:textColor="@color/grey_60"
                 android:visibility="gone" />
 
-            <!-- 勋章错误状态 -->
+            <!-- Medal Error State -->
             <TextView
                 android:id="@+id/medalErrorText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="勋章数据加载失败"
+                android:text="Medal data load failed"
                 android:textSize="14sp"
                 android:textColor="@color/red_127"
                 android:visibility="gone" />
@@ -192,7 +192,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="📝 提交历史"
+                android:text="📝 Submission History"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:background="@drawable/custom_green_background"
@@ -206,7 +206,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="🖼️ 我的NFT"
+                android:text="🖼️ My NFTs"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:background="@drawable/custom_green_background"
@@ -229,29 +229,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!-- 提交历史加载中 -->
+                <!-- Submission History Loading -->
                 <TextView
                     android:id="@+id/submissionsLoadingText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="📝 加载提交历史中..."
+                    android:text="📝 Loading submission history..."
                     android:textSize="16sp"
                     android:textColor="@color/grey_60"
                     android:visibility="gone" />
 
-                <!-- 提交历史错误 -->
+                <!-- Submission History Error -->
                 <TextView
                     android:id="@+id/submissionsErrorText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="加载失败"
+                    android:text="Load Failed"
                     android:textSize="16sp"
                     android:textColor="@color/red_127"
                     android:visibility="gone" />
 
-                <!-- 提交历史空状态 -->
+                <!-- Submission History Empty State -->
                 <LinearLayout
                     android:id="@+id/submissionsEmptyStateLayout"
                     android:layout_width="wrap_content"
@@ -271,7 +271,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="暂无提交历史"
+                        android:text="No Submission History"
                         android:textSize="18sp"
                         android:textColor="@color/grey_60"
                         android:layout_marginBottom="8dp" />
@@ -279,7 +279,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="请提交材料以获得勋章与NFT奖励~"
+                        android:text="Submit materials to earn medals &amp; NFT rewards~"
                         android:textSize="14sp"
                         android:textColor="@color/grey_60" />
 
@@ -306,38 +306,52 @@
             android:orientation="vertical"
             android:visibility="gone">
 
+            <!-- NFT Total Count Display -->
+            <TextView
+                android:id="@+id/nftTotalCountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Total: 0"
+                android:textSize="14sp"
+                android:textColor="@color/grey_60"
+                android:visibility="gone" />
+
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/nftSwipeRefreshLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <!-- NFT加载中 -->
+                    <!-- NFT Loading -->
                     <TextView
                         android:id="@+id/nftLoadingText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="🖼️ 加载NFT中..."
+                        android:text="🖼️ Loading NFTs..."
                         android:textSize="16sp"
                         android:textColor="@color/grey_60"
                         android:visibility="gone" />
 
-                    <!-- NFT错误 -->
+                    <!-- NFT Error -->
                     <TextView
                         android:id="@+id/nftErrorText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="加载失败"
+                        android:text="Load Failed"
                         android:textSize="16sp"
                         android:textColor="@color/red_127"
                         android:visibility="gone" />
 
-                    <!-- NFT空状态 -->
+                    <!-- NFT Empty State -->
                     <LinearLayout
                         android:id="@+id/nftEmptyStateLayout"
                         android:layout_width="wrap_content"
@@ -357,7 +371,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="暂无NFT"
+                            android:text="No NFTs"
                             android:textSize="18sp"
                             android:textColor="@color/grey_60"
                             android:layout_marginBottom="8dp" />
@@ -365,7 +379,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="快去铸造NFT吧！"
+                            android:text="Go mint your first NFT!"
                             android:textSize="14sp"
                             android:textColor="@color/grey_60" />
 

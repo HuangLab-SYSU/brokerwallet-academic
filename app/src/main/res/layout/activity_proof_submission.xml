@@ -28,11 +28,78 @@
                 android:gravity="center"
                 android:layout_marginBottom="24dp" />
 
+            <!-- 花名（用户昵称） -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👤 花名（用户昵称）:"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/displayNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="请输入您的花名（用于排行榜显示）"
+                android:background="@drawable/custom_edittext_border"
+                android:padding="12dp" />
+
+            <!-- 代表作 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🏆 代表作:"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/representativeWorkEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="请输入您的代表作（可选）"
+                android:background="@drawable/custom_edittext_border"
+                android:padding="12dp" />
+
+            <!-- 是否展示代表作 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📢 在排行榜展示代表作:"
+                    android:textSize="16sp"
+                    android:textColor="@color/black" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/showRepresentativeWorkSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="注：需要管理员审核通过后才会在排行榜显示"
+                android:textSize="12sp"
+                android:textColor="@color/grey_60" />
+
             <!-- 作者信息 -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="作者信息:"
+                android:text="✍️ 作者信息:"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="16dp" />

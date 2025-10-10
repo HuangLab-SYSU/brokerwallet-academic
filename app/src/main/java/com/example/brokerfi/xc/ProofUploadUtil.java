@@ -50,10 +50,10 @@ public class ProofUploadUtil {
                                      UploadCallback callback) {
         new Thread(() -> {
             try {
-                // 从URI获取文件
+                // Get file from URI
                 File file = getFileFromUri(context, fileUri);
                 if (file == null) {
-                    callback.onError("无法获取文件");
+                    callback.onError("Cannot get file");
                     return;
                 }
                 
@@ -97,14 +97,17 @@ public class ProofUploadUtil {
                     Log.d(TAG, "上传成功: " + responseBody);
                     callback.onSuccess(responseBody);
                 } else {
-                    String errorBody = response.body() != null ? response.body().string() : "未知错误";
-                    Log.e(TAG, "上传失败: " + response.code() + " - " + errorBody);
-                    callback.onError("上传失败: " + response.code() + " - " + errorBody);
+                    String errorBody = response.body() != null ? response.body().string() : "Unknown error";
+                    Log.e(TAG, "Upload failed: " + response.code() + " - " + errorBody);
+                    
+                    // Parse error message to extract friendly hints
+                    String friendlyError = parseErrorMessage(errorBody, response.code());
+                    callback.onError(friendlyError);
                 }
                 
             } catch (Exception e) {
-                Log.e(TAG, "上传异常", e);
-                callback.onError("上传异常: " + e.getMessage());
+                Log.e(TAG, "Upload exception", e);
+                callback.onError("Upload exception: " + e.getMessage());
             }
         }).start();
     }
@@ -170,14 +173,14 @@ public class ProofUploadUtil {
                     Log.d(TAG, "获取列表成功: " + responseBody);
                     callback.onSuccess(responseBody);
                 } else {
-                    String errorBody = response.body() != null ? response.body().string() : "未知错误";
-                    Log.e(TAG, "获取列表失败: " + response.code() + " - " + errorBody);
-                    callback.onError("获取列表失败: " + response.code() + " - " + errorBody);
+                    String errorBody = response.body() != null ? response.body().string() : "Unknown error";
+                    Log.e(TAG, "Get list failed: " + response.code() + " - " + errorBody);
+                    callback.onError("Get list failed: " + response.code() + " - " + errorBody);
                 }
                 
             } catch (Exception e) {
-                Log.e(TAG, "获取列表异常", e);
-                callback.onError("获取列表异常: " + e.getMessage());
+                Log.e(TAG, "Get list exception", e);
+                callback.onError("Get list exception: " + e.getMessage());
             }
         }).start();
     }
@@ -225,6 +228,111 @@ public class ProofUploadUtil {
         } catch (Exception e) {
             Log.e(TAG, "获取文件失败", e);
             return null;
+        }
+    }
+    
+    /**
+     * 上传证明文件并包含用户信息（同步方法，用于ProofSubmissionActivity）
+     * @param filePath 文件路径
+     * @param originalFileName 原始文件名
+     * @param walletAddress 钱包地址
+     * @param displayName 花名
+     * @param representativeWork 代表作
+     * @param showRepresentativeWork 是否展示代表作
+     * @return 响应字符串
+     */
+    public static String uploadProofWithUserInfo(String filePath, String originalFileName, 
+                                                String walletAddress, String displayName, 
+                                                String representativeWork, boolean showRepresentativeWork) throws Exception {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            throw new Exception("File not found: " + filePath);
+        }
+        
+        // 使用原始文件名，如果为空则使用文件路径中的名称
+        String fileName = (originalFileName != null && !originalFileName.isEmpty()) ? 
+            originalFileName : file.getName();
+        
+        // 创建请求体
+        RequestBody fileBody = RequestBody.create(
+            MediaType.parse("application/octet-stream"), 
+            file
+        );
+        
+        MultipartBody.Builder requestBuilder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("proofFiles", fileName, fileBody)  // 使用原始文件名
+                .addFormDataPart("walletAddress", walletAddress);
+        
+        // 添加用户信息
+        if (displayName != null && !displayName.trim().isEmpty()) {
+            requestBuilder.addFormDataPart("displayName", displayName.trim());
+        }
+        
+        if (representativeWork != null && !representativeWork.trim().isEmpty()) {
+            requestBuilder.addFormDataPart("representativeWork", representativeWork.trim());
+        }
+        
+        requestBuilder.addFormDataPart("showRepresentativeWork", String.valueOf(showRepresentativeWork));
+        
+        MultipartBody requestBody = requestBuilder.build();
+        
+        // 创建请求
+        Request request = new Request.Builder()
+                .url("http://127.0.0.1:5000/api/upload/complete")
+                .post(requestBody)
+                .build();
+        
+        // 执行请求
+        Response response = client.newCall(request).execute();
+        
+        if (response.isSuccessful()) {
+            String responseBody = response.body().string();
+            Log.d(TAG, "Upload successful: " + responseBody);
+            return responseBody;
+        } else {
+            String errorBody = response.body() != null ? response.body().string() : "Unknown error";
+            Log.e(TAG, "Upload failed: " + response.code() + " - " + errorBody);
+            
+            // Parse error message to extract friendly hints
+            String friendlyError = parseErrorMessage(errorBody, response.code());
+            throw new Exception(friendlyError);
+        }
+    }
+    
+    /**
+     * 解析错误信息，提取友好的提示
+     */
+    private static String parseErrorMessage(String errorBody, int statusCode) {
+        try {
+            // 尝试解析JSON错误响应
+            if (errorBody != null && errorBody.contains("{")) {
+                org.json.JSONObject jsonError = new org.json.JSONObject(errorBody);
+                
+                // Check if it's a duplicate NFT image error
+                if (jsonError.has("errorCode") && "DUPLICATE_NFT_IMAGE".equals(jsonError.optString("errorCode"))) {
+                    return "NFT image uniqueness constraint: This NFT already exists, please select a different image to mint";
+                }
+                
+                // 提取message字段
+                if (jsonError.has("message")) {
+                    String message = jsonError.optString("message");
+                    if (message != null && !message.isEmpty()) {
+                        return message;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "解析错误信息失败", e);
+        }
+        
+        // If unable to parse, return generic error message
+        if (statusCode == 400) {
+            return "Upload failed, please check file format and content";
+        } else if (statusCode == 500) {
+            return "Server error, please try again later";
+        } else {
+            return "Upload failed (Error code: " + statusCode + ")";
         }
     }
     

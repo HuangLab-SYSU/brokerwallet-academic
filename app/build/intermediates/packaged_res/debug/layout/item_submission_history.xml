@@ -39,7 +39,7 @@
                 android:id="@+id/statusText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="等待审核"
+                android:text="Pending"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/holo_orange_dark"
@@ -89,7 +89,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="⚪ 无勋章"
+                android:text="⚪ No Medal"
                 android:textSize="14sp"
                 android:textColor="@color/grey_60" />
 
@@ -97,12 +97,24 @@
                 android:id="@+id/nftStatusText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🖼️ 未开始"
+                android:text="🖼️ Not Started"
                 android:textSize="12sp"
                 android:textColor="@color/grey_60"
                 android:visibility="gone" />
 
         </LinearLayout>
+
+        <!-- BKC Token Reward -->
+        <TextView
+            android:id="@+id/tokenRewardText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="💰 BKC Reward: 10.5 BKC"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_green_dark"
+            android:visibility="gone" />
 
         <!-- 进度指示器 -->
         <LinearLayout
@@ -137,12 +149,12 @@
 
         </LinearLayout>
 
-        <!-- 进度文字 -->
+        <!-- Progress Text -->
         <TextView
             android:id="@+id/progressText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1/3 已上传"
+            android:text="1/3 Uploaded"
             android:textSize="10sp"
             android:textColor="@color/grey_60"
             android:layout_marginTop="4dp" />

@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.config.ServerConfig;
 import com.example.brokerfi.xc.menu.NavigationHelper;
 
 public class ProofAndNFTActivity extends AppCompatActivity {
@@ -82,6 +83,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         
         intView();
         intEvent();
+        loadUserInfo();  // 加载用户信息（花名、代表作等）
     }
 
     private void intView() {
@@ -125,16 +127,16 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void showFileHelpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("💡 文件选择提示");
-        builder.setMessage("如需从微信等应用中选择文件，请按以下步骤操作：\n\n" +
-                "1️⃣ 在微信中找到要上传的文件\n" +
-                "2️⃣ 长按文件，选择「转发」\n" +
-                "3️⃣ 选择「保存到文件」或「更多」\n" +
-                "4️⃣ 将文件保存到手机存储\n" +
-                "5️⃣ 返回此页面，点击「选择证明文件」即可找到保存的文件\n\n" +
-                "💡 提示：大部分应用的文件都可以通过「分享→保存到本地」的方式进行选择。");
+        builder.setTitle("💡 File Selection Tips");
+        builder.setMessage("To select files from apps like WeChat, follow these steps:\n\n" +
+                "1️⃣ Find the file you want to upload in WeChat\n" +
+                "2️⃣ Long press the file, select 「Forward」\n" +
+                "3️⃣ Choose 「Save to Files」 or 「More」\n" +
+                "4️⃣ Save the file to phone storage\n" +
+                "5️⃣ Return to this page, click 「Select Proof File」 to find the saved file\n\n" +
+                "💡 Tip: Most app files can be selected by 「Share → Save Locally」.");
         
-        builder.setPositiveButton("我知道了", (dialog, which) -> {
+        builder.setPositiveButton("Got it", (dialog, which) -> {
             dialog.dismiss();
         });
         
@@ -147,15 +149,15 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void selectFile() {
         if (selectedFileUris.size() >= MAX_FILE_COUNT) {
-            Toast.makeText(this, "最多只能选择 " + MAX_FILE_COUNT + " 个文件", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Maximum " + MAX_FILE_COUNT + " files allowed", Toast.LENGTH_SHORT).show();
             return;
         }
         
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*"); // 支持所有文件类型
+        intent.setType("*/*"); // Support all file types
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true); // 支持多选
-        startActivityForResult(Intent.createChooser(intent, "选择证明文件"), REQUEST_CODE_SELECT_FILE);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true); // Support multiple selection
+        startActivityForResult(Intent.createChooser(intent, "Select Proof File"), REQUEST_CODE_SELECT_FILE);
     }
     
     /**
@@ -163,13 +165,13 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void showImageHelpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("💡 NFT图片说明");
-        builder.setMessage("图片不是必选项，如果不上传图片，您也许会收获一张由DAO组织为您精心铸造的独特NFT！\n\n" +
-                "💎 上传图片：使用您的照片作为NFT\n" +
-                "🎨 不上传图片：获得DAO组织设计的专属NFT\n\n" +
-                "两种方式都很棒，选择您喜欢的方式即可！");
+        builder.setTitle("💡 NFT Image Guide");
+        builder.setMessage("Image is optional. If you don't upload, you may receive a unique NFT crafted by the DAO!\n\n" +
+                "💎 Upload Image: Use your photo as NFT\n" +
+                "🎨 No Upload: Get a DAO-designed exclusive NFT\n\n" +
+                "Both options are great, choose your preferred way!");
         
-        builder.setPositiveButton("我知道了", (dialog, which) -> {
+        builder.setPositiveButton("Got it", (dialog, which) -> {
             dialog.dismiss();
         });
         
@@ -182,7 +184,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void selectImage() {
         if (selectedImageUri != null) {
-            Toast.makeText(this, "只能上传1张图片，请先删除现有图片", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Only 1 image allowed, please delete the existing one first", Toast.LENGTH_SHORT).show();
             return;
         }
         showImageSourceDialog();
@@ -193,21 +195,21 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void showImageSourceDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("选择图片来源");
-        builder.setMessage("请选择您希望从哪里选择NFT照片：");
+        builder.setTitle("Select Image Source");
+        builder.setMessage("Please choose where to select your NFT photo:");
         
-        // 从图库选择
-        builder.setPositiveButton("🖼️ 图库", (dialog, which) -> {
+        // From gallery
+        builder.setPositiveButton("🖼️ Gallery", (dialog, which) -> {
             selectImageFromGallery();
         });
         
-        // 拍照（带文档扫描）
-        builder.setNeutralButton("📷 拍照扫描", (dialog, which) -> {
+        // Take photo (with document scanning)
+        builder.setNeutralButton("📷 Camera Scan", (dialog, which) -> {
             checkCameraPermissionAndTakePhoto();
         });
         
-        // 取消
-        builder.setNegativeButton("取消", (dialog, which) -> {
+        // Cancel
+        builder.setNegativeButton("Cancel", (dialog, which) -> {
             dialog.dismiss();
         });
         
@@ -222,7 +224,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(Intent.createChooser(intent, "从图库选择NFT照片"), REQUEST_CODE_SELECT_IMAGE);
+        startActivityForResult(Intent.createChooser(intent, "Select NFT Photo from Gallery"), REQUEST_CODE_SELECT_IMAGE);
     }
     
     /**
@@ -295,8 +297,8 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         String representativeWork = representativeWorkEditText.getText().toString().trim();
         boolean showRepresentativeWork = showRepresentativeWorkYes.isChecked();
         
-        // 显示加载状态
-        submitProofButton.setText("提交中...");
+        // Show loading state
+        submitProofButton.setText("Submitting...");
         submitProofButton.setEnabled(false);
         
         Log.d("ProofSubmit", "一体化提交 - 钱包地址: " + walletAddress + ", 花名: " + displayName + ", 展示代表作: " + showRepresentativeWork);
@@ -341,15 +343,15 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void uploadNftImage() {
         if (selectedImageUri != null) {
-            // 这里调用NFT图片上传API
-            Toast.makeText(this, "NFT图片上传中...", Toast.LENGTH_SHORT).show();
+            // Call NFT image upload API here
+            Toast.makeText(this, "Uploading NFT image...", Toast.LENGTH_SHORT).show();
             
-            // 模拟上传成功
+            // Simulate upload success
             new Thread(() -> {
                 try {
-                    Thread.sleep(1000); // 模拟网络延时
+                    Thread.sleep(1000); // Simulate network delay
                     runOnUiThread(() -> {
-                        Toast.makeText(ProofAndNFTActivity.this, "NFT图片上传成功！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProofAndNFTActivity.this, "NFT image uploaded successfully!", Toast.LENGTH_SHORT).show();
                         resetSubmitButton();
                         showSuccessMessage();
                     });
@@ -364,11 +366,11 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      * 显示成功提示信息
      */
     private void showSuccessMessage() {
-        String message = "提交完成！\n\n";
-        message += "📄 证明文件已上传，等待管理员审核\n";
+        String message = "Submission completed!\n\n";
+        message += "📄 Proof files uploaded, waiting for admin review\n";
         
         if (selectedImageUri != null) {
-            message += "🖼️ NFT图片已上传，等待管理员批准铸造\n";
+            message += "🖼️ NFT image uploaded, waiting for admin approval to mint\n";
         }
         
         String displayName = displayNameEditText.getText().toString().trim();
@@ -376,20 +378,20 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         boolean showRepresentativeWork = showRepresentativeWorkYes.isChecked();
         
         if (!displayName.isEmpty() || !representativeWork.isEmpty()) {
-            message += "👤 个人信息已更新\n";
+            message += "👤 Profile updated\n";
             if (showRepresentativeWork) {
-                message += "🏆 代表作将在管理员审核后显示在排行榜\n";
+                message += "🏆 Representative work will be displayed on ranking after admin approval\n";
             }
         }
         
-        message += "\n请耐心等待审核结果！";
+        message += "\nPlease wait patiently for the review result!";
         
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
-        builder.setTitle("✅ 提交成功");
+        builder.setTitle("✅ Submission Success");
         builder.setMessage(message);
-        builder.setPositiveButton("确定", (dialog, which) -> {
+        builder.setPositiveButton("OK", (dialog, which) -> {
             dialog.dismiss();
-            // 可以选择返回主页面或清空表单
+            // Option to return to main page or clear form
             clearForm();
         });
         builder.show();
@@ -420,13 +422,13 @@ public class ProofAndNFTActivity extends AppCompatActivity {
                 // 从私钥生成钱包地址
                 return SecurityUtil.GetAddress(privateKey);
             } else {
-                Log.e("WalletAddress", "无法获取当前私钥");
-                Toast.makeText(this, "无法获取当前钱包地址，请检查钱包状态", Toast.LENGTH_SHORT).show();
+                Log.e("WalletAddress", "Cannot get current private key");
+                Toast.makeText(this, "Cannot get wallet address, please check wallet status", Toast.LENGTH_SHORT).show();
                 return null;
             }
         } catch (Exception e) {
-            Log.e("WalletAddress", "获取当前钱包地址失败", e);
-            Toast.makeText(this, "获取钱包地址失败: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e("WalletAddress", "Failed to get wallet address", e);
+            Toast.makeText(this, "Failed to get wallet address: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             return null;
         }
     }
@@ -435,7 +437,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      * 重置提交按钮状态
      */
     private void resetSubmitButton() {
-        submitProofButton.setText("提交");
+        submitProofButton.setText("Submit");
         submitProofButton.setEnabled(true);
     }
     
@@ -479,13 +481,13 @@ public class ProofAndNFTActivity extends AppCompatActivity {
             newFiles.add(data.getData());
         }
         
-        // 检查文件数量限制
+        // Check file count limit
         int totalCount = selectedFileUris.size() + newFiles.size();
         if (totalCount > MAX_FILE_COUNT) {
             int allowedCount = MAX_FILE_COUNT - selectedFileUris.size();
-            Toast.makeText(this, "最多只能选择 " + MAX_FILE_COUNT + " 个文件，当前可添加 " + allowedCount + " 个", 
+            Toast.makeText(this, "Maximum " + MAX_FILE_COUNT + " files allowed, you can add " + allowedCount + " more", 
                     Toast.LENGTH_SHORT).show();
-            // 只添加允许的文件数量
+            // Only add allowed number of files
             for (int i = 0; i < allowedCount && i < newFiles.size(); i++) {
                 selectedFileUris.add(newFiles.get(i));
             }
@@ -494,7 +496,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         }
         
         updateFileDisplay();
-        Toast.makeText(this, "已选择 " + newFiles.size() + " 个文件", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Selected " + newFiles.size() + " file(s)", Toast.LENGTH_SHORT).show();
     }
     
     /**
@@ -516,8 +518,8 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      * 使用OpenCV进行文档扫描处理
      */
     private void processImageWithDocumentScanning(Uri imageUri) {
-        // 显示处理提示
-        Toast.makeText(this, "正在优化图片...", Toast.LENGTH_SHORT).show();
+        // Show processing hint
+        Toast.makeText(this, "Optimizing image...", Toast.LENGTH_SHORT).show();
         
         // 在后台线程处理图片
         new Thread(() -> {
@@ -531,23 +533,23 @@ public class ProofAndNFTActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         if (scannedUri != null) {
                             setSelectedImage(scannedUri);
-                            Toast.makeText(this, "📄 文档扫描优化完成", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "📄 Document scanning completed", Toast.LENGTH_SHORT).show();
                         } else {
                             setSelectedImage(imageUri);
-                            Toast.makeText(this, "扫描优化失败，使用原图", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Scan optimization failed, using original image", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
                     runOnUiThread(() -> {
                         setSelectedImage(imageUri);
-                        Toast.makeText(this, "扫描优化失败，使用原图", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Scan optimization failed, using original image", Toast.LENGTH_SHORT).show();
                     });
                 }
             } catch (Exception e) {
                 Log.e("DocumentScan", "Error processing image", e);
                 runOnUiThread(() -> {
                     setSelectedImage(imageUri);
-                    Toast.makeText(this, "扫描处理出错，使用原图", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Scan processing error, using original image", Toast.LENGTH_SHORT).show();
                 });
             }
         }).start();
@@ -580,7 +582,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
     private void setSelectedImage(Uri uri) {
         selectedImageUri = uri;
         updateImageDisplay();
-        Toast.makeText(this, "NFT图片选择成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "NFT image selected successfully", Toast.LENGTH_SHORT).show();
     }
     
     /**
@@ -621,21 +623,21 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         if (selectedImageUri == null) return;
         
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("图片预览");
+        builder.setTitle("Image Preview");
         
-        // 创建ImageView用于显示图片
+        // Create ImageView to display image
         ImageView imageView = new ImageView(this);
         imageView.setImageURI(selectedImageUri);
         imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         imageView.setAdjustViewBounds(true);
         
-        // 设置最大尺寸
+        // Set maximum size
         int maxSize = (int) (getResources().getDisplayMetrics().widthPixels * 0.8);
         imageView.setMaxWidth(maxSize);
         imageView.setMaxHeight(maxSize);
         
         builder.setView(imageView);
-        builder.setPositiveButton("关闭", (dialog, which) -> dialog.dismiss());
+        builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
         
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -647,7 +649,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
     private void removeImage() {
         selectedImageUri = null;
         updateImageDisplay();
-        Toast.makeText(this, "图片已删除", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Image deleted", Toast.LENGTH_SHORT).show();
     }
     
     /**
@@ -686,7 +688,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         if (index >= 0 && index < selectedFileUris.size()) {
             selectedFileUris.remove(index);
             updateFileDisplay();
-            Toast.makeText(this, "文件已删除", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "File deleted", Toast.LENGTH_SHORT).show();
         }
     }
     
@@ -696,20 +698,49 @@ public class ProofAndNFTActivity extends AppCompatActivity {
     private void updateFileCountHint() {
         int currentCount = selectedFileUris.size();
         if (currentCount == 0) {
-            fileCountHint.setText("💡 最多可选择 " + MAX_FILE_COUNT + " 个文件");
+            fileCountHint.setText("💡 Maximum " + MAX_FILE_COUNT + " files allowed");
         } else {
-            fileCountHint.setText("💡 已选择 " + currentCount + "/" + MAX_FILE_COUNT + " 个文件");
+            fileCountHint.setText("💡 Selected " + currentCount + "/" + MAX_FILE_COUNT + " file(s)");
         }
     }
     
     /**
-     * 获取文件名
+     * 获取文件名（支持content://和file://两种URI）
      */
     private String getFileName(Uri uri) {
-        String fileName = uri.getLastPathSegment();
-        if (fileName == null || fileName.isEmpty()) {
-            fileName = "未知文件";
+        String fileName = null;
+        
+        if ("content".equals(uri.getScheme())) {
+            // 对于content://类型的URI，查询文件名
+            android.database.Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            if (cursor != null) {
+                try {
+                    if (cursor.moveToFirst()) {
+                        int nameIndex = cursor.getColumnIndex(android.provider.OpenableColumns.DISPLAY_NAME);
+                        if (nameIndex >= 0) {
+                            fileName = cursor.getString(nameIndex);
+                        }
+                    }
+                } finally {
+                    cursor.close();
+                }
+            }
+        } else if ("file".equals(uri.getScheme())) {
+            // 对于file://类型的URI，直接从路径获取文件名
+            fileName = new File(uri.getPath()).getName();
         }
+        
+        // 如果还是获取不到，使用最后的路径段作为文件名
+        if (fileName == null || fileName.isEmpty()) {
+            fileName = uri.getLastPathSegment();
+        }
+        
+        // Final fallback
+        if (fileName == null || fileName.isEmpty()) {
+            fileName = "Unknown File";
+        }
+        
+        Log.d("ProofAndNFT", "获取文件名: " + fileName + " (URI: " + uri + ")");
         return fileName;
     }
     
@@ -721,7 +752,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 takePhoto();
             } else {
-                Toast.makeText(this, "需要摄像头权限才能拍照", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Camera permission required to take photos", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -738,9 +769,9 @@ public class ProofAndNFTActivity extends AppCompatActivity {
                 // 获取提交详情
                 org.json.JSONObject data = jsonResponse.optJSONObject("data");
                 if (data != null) {
-                    String submissionId = data.optString("submissionId", "未知");
+                    String submissionId = data.optString("submissionId", "Unknown");
                     String status = data.optString("status", "PENDING");
-                    String message = data.optString("message", "提交成功");
+                    String message = data.optString("message", "Submission successful");
                     
                     // 显示详细成功信息
                     showDetailedSuccessDialog(submissionId, status, message);
@@ -751,25 +782,25 @@ public class ProofAndNFTActivity extends AppCompatActivity {
                     // 重置表单
                     resetForm();
                 } else {
-                    // 如果没有详细数据，显示简单成功信息
-                    String message = jsonResponse.optString("message", "提交成功");
+                    // If no detailed data, show simple success message
+                    String message = jsonResponse.optString("message", "Submission successful");
                     showSimpleSuccessDialog(message);
                     resetForm();
                 }
             } else {
-                // 服务器返回失败状态
-                String errorMessage = jsonResponse.optString("message", "提交失败");
-                showErrorDialog("提交失败", errorMessage);
+                // Server returned failure status
+                String errorMessage = jsonResponse.optString("message", "Submission failed");
+                showErrorDialog("Submission Failed", errorMessage);
             }
             
         } catch (org.json.JSONException e) {
-            Log.e("ProofSubmit", "解析服务器响应失败", e);
-            // JSON解析失败，可能是简单的字符串响应
-            if (response.toLowerCase().contains("success") || response.toLowerCase().contains("成功")) {
-                showSimpleSuccessDialog("提交成功！请等待管理员审核。");
+            Log.e("ProofSubmit", "Failed to parse server response", e);
+            // JSON parsing failed, might be a simple string response
+            if (response.toLowerCase().contains("success")) {
+                showSimpleSuccessDialog("Submission successful! Please wait for admin review.");
                 resetForm();
             } else {
-                showErrorDialog("响应解析错误", "服务器返回了无法解析的响应格式");
+                showErrorDialog("Response Parse Error", "Server returned an unparseable response format");
             }
         }
     }
@@ -780,28 +811,28 @@ public class ProofAndNFTActivity extends AppCompatActivity {
     private void handleSubmissionError(String error) {
         Log.e("ProofSubmit", "提交失败: " + error);
         
-        // 分析错误类型并提供相应的解决建议
+        // Analyze error type and provide corresponding suggestions
         String userFriendlyMessage;
         String suggestion = "";
         
         if (error.contains("网络") || error.contains("Network") || error.contains("timeout")) {
-            userFriendlyMessage = "网络连接问题";
-            suggestion = "请检查网络连接后重试";
+            userFriendlyMessage = "Network Connection Issue";
+            suggestion = "Please check network connection and retry";
         } else if (error.contains("文件") || error.contains("File")) {
-            userFriendlyMessage = "文件处理错误";
-            suggestion = "请检查文件格式和大小";
+            userFriendlyMessage = "File Processing Error";
+            suggestion = "Please check file format and size";
         } else if (error.contains("服务器") || error.contains("Server") || error.contains("500")) {
-            userFriendlyMessage = "服务器暂时不可用";
-            suggestion = "请稍后重试";
+            userFriendlyMessage = "Server Temporarily Unavailable";
+            suggestion = "Please try again later";
         } else if (error.contains("权限") || error.contains("Permission") || error.contains("401")) {
-            userFriendlyMessage = "权限验证失败";
-            suggestion = "请检查账户状态";
+            userFriendlyMessage = "Permission Verification Failed";
+            suggestion = "Please check account status";
         } else {
-            userFriendlyMessage = "提交失败";
-            suggestion = "请检查输入信息后重试";
+            userFriendlyMessage = "Submission Failed";
+            suggestion = "Please check input and retry";
         }
         
-        showErrorDialog(userFriendlyMessage, suggestion + "\n\n详细错误：" + error);
+        showErrorDialog(userFriendlyMessage, suggestion + "\n\nDetailed error: " + error);
     }
     
     /**
@@ -809,16 +840,16 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void showDetailedSuccessDialog(String submissionId, String status, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("✅ 提交成功")
-               .setMessage("提交ID: " + submissionId + "\n" +
-                          "当前状态: " + getStatusDescription(status) + "\n" +
-                          "详细信息: " + message + "\n\n" +
-                          "您可以在勋章排行榜中查看审核进度")
-               .setPositiveButton("查看排行榜", (dialog, which) -> {
-                   // 跳转到勋章排行榜页面
+        builder.setTitle("✅ Submission Success")
+               .setMessage("Submission ID: " + submissionId + "\n" +
+                          "Current Status: " + getStatusDescription(status) + "\n" +
+                          "Details: " + message + "\n\n" +
+                          "You can check review progress in Medal Ranking")
+               .setPositiveButton("View Ranking", (dialog, which) -> {
+                   // Jump to medal ranking page
                    openMedalRankingPage();
                })
-               .setNegativeButton("确定", null)
+               .setNegativeButton("OK", null)
                .setCancelable(false)
                .show();
     }
@@ -828,12 +859,12 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void showSimpleSuccessDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("✅ 提交成功")
+        builder.setTitle("✅ Submission Success")
                .setMessage(message)
-               .setPositiveButton("查看排行榜", (dialog, which) -> {
+               .setPositiveButton("View Ranking", (dialog, which) -> {
                    openMedalRankingPage();
                })
-               .setNegativeButton("确定", null)
+               .setNegativeButton("OK", null)
                .setCancelable(false)
                .show();
     }
@@ -845,11 +876,11 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("❌ " + title)
                .setMessage(message)
-               .setPositiveButton("重试", (dialog, which) -> {
-                   // 可以在这里重新触发提交
+               .setPositiveButton("Retry", (dialog, which) -> {
+                   // Can trigger resubmission here
                    dialog.dismiss();
                })
-               .setNegativeButton("取消", null)
+               .setNegativeButton("Cancel", null)
                .setCancelable(true)
                .show();
     }
@@ -860,13 +891,13 @@ public class ProofAndNFTActivity extends AppCompatActivity {
     private String getStatusDescription(String status) {
         switch (status.toUpperCase()) {
             case "PENDING":
-                return "等待审核";
+                return "Pending Review";
             case "APPROVED":
-                return "审核通过";
+                return "Approved";
             case "REJECTED":
-                return "审核拒绝";
+                return "Rejected";
             case "PROCESSING":
-                return "处理中";
+                return "Processing";
             default:
                 return status;
         }
@@ -911,7 +942,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         updateImageDisplay();
         updateFileCountHint();
         
-        Toast.makeText(this, "表单已重置", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Form reset", Toast.LENGTH_SHORT).show();
     }
     
     /**
@@ -920,5 +951,116 @@ public class ProofAndNFTActivity extends AppCompatActivity {
     private void openMedalRankingPage() {
         Intent intent = new Intent(this, MedalRankingActivity.class);
         startActivity(intent);
+    }
+    
+    /**
+     * 加载用户信息（花名、代表作、是否展示代表作）
+     */
+    private void loadUserInfo() {
+        new Thread(() -> {
+            try {
+                String myAddress = getCurrentWalletAddress();
+                Log.d("ProofAndNFT", "==== 开始加载用户信息 ====");
+                Log.d("ProofAndNFT", "当前地址: " + myAddress);
+                
+                // 检查地址是否有效
+                if (myAddress == null || myAddress.equals("0000000000000000000000000000000000000000")) {
+                    Log.e("ProofAndNFT", "地址无效，跳过加载用户信息");
+                    return;
+                }
+                
+                // 构建API请求URL - 使用ServerConfig配置
+                String apiUrl = ServerConfig.USER_INFO_API + "/" + myAddress;
+                Log.d("ProofAndNFT", "请求URL: " + apiUrl);
+                Log.d("ProofAndNFT", "BASE_URL: " + ServerConfig.BASE_URL);
+                
+                // 发送HTTP GET请求
+                java.net.URL url = new java.net.URL(apiUrl);
+                java.net.HttpURLConnection connection = (java.net.HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setConnectTimeout(10000);
+                connection.setReadTimeout(10000);
+                
+                Log.d("ProofAndNFT", "开始连接...");
+                int responseCode = connection.getResponseCode();
+                Log.d("ProofAndNFT", "响应码: " + responseCode);
+                
+                if (responseCode == 200) {
+                    // 读取响应
+                    java.io.BufferedReader reader = new java.io.BufferedReader(
+                        new java.io.InputStreamReader(connection.getInputStream()));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                    reader.close();
+                    
+                    // 解析JSON响应
+                    org.json.JSONObject jsonResponse = new org.json.JSONObject(response.toString());
+                    Log.d("ProofAndNFT", "用户信息响应: " + response.toString());
+                    
+                    if (jsonResponse.optBoolean("success", false)) {
+                        org.json.JSONObject data = jsonResponse.optJSONObject("data");
+                        if (data != null) {
+                            String displayName = data.optString("displayName", "");
+                            String representativeWork = data.optString("representativeWork", "");
+                            boolean showRepresentativeWork = data.optBoolean("showRepresentativeWork", false);
+                            
+                            // 在UI线程更新界面
+                            runOnUiThread(() -> {
+                                if (!displayName.isEmpty() && !"null".equals(displayName)) {
+                                    displayNameEditText.setText(displayName);
+                                    Log.d("ProofAndNFT", "已填充花名: " + displayName);
+                                }
+                                if (!representativeWork.isEmpty() && !"null".equals(representativeWork)) {
+                                    representativeWorkEditText.setText(representativeWork);
+                                    Log.d("ProofAndNFT", "已填充代表作: " + representativeWork);
+                                }
+                                if (showRepresentativeWork && showRepresentativeWorkYes != null) {
+                                    showRepresentativeWorkYes.setChecked(true);
+                                    Log.d("ProofAndNFT", "已填充展示设置: true");
+                                } else if (showRepresentativeWorkNo != null) {
+                                    showRepresentativeWorkNo.setChecked(true);
+                                    Log.d("ProofAndNFT", "已填充展示设置: false");
+                                }
+                            });
+                        }
+                    } else {
+                        Log.d("ProofAndNFT", "用户信息不存在或加载失败，响应: " + response.toString());
+                    }
+                } else {
+                    Log.e("ProofAndNFT", "加载用户信息失败，响应码: " + responseCode);
+                    
+                    // 读取错误响应
+                    try {
+                        java.io.BufferedReader errorReader = new java.io.BufferedReader(
+                            new java.io.InputStreamReader(connection.getErrorStream()));
+                        StringBuilder errorResponse = new StringBuilder();
+                        String line;
+                        while ((line = errorReader.readLine()) != null) {
+                            errorResponse.append(line);
+                        }
+                        errorReader.close();
+                        Log.e("ProofAndNFT", "错误响应: " + errorResponse.toString());
+                    } catch (Exception ex) {
+                        Log.e("ProofAndNFT", "无法读取错误响应");
+                    }
+                }
+            } catch (java.net.ConnectException e) {
+                Log.e("ProofAndNFT", "连接失败: 无法连接到服务器", e);
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "无法连接到服务器", Toast.LENGTH_SHORT).show();
+                });
+            } catch (java.net.SocketTimeoutException e) {
+                Log.e("ProofAndNFT", "连接超时: 服务器响应超时", e);
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "服务器响应超时", Toast.LENGTH_SHORT).show();
+                });
+            } catch (Exception e) {
+                Log.e("ProofAndNFT", "加载用户信息异常: " + e.getClass().getName() + " - " + e.getMessage(), e);
+            }
+            Log.d("ProofAndNFT", "==== 用户信息加载流程结束 ====");
+        }).start();
     }
 }

@@ -80,6 +80,11 @@ public class ServerConfig {
      */
     public static final String SUBMISSION_DETAIL_API = BASE_URL + "/api/upload/submission/detail";
     
+    /**
+     * 获取用户信息API（花名、代表作等）
+     */
+    public static final String USER_INFO_API = BASE_URL + "/api/admin/user/info";
+    
     // ==================== 工具方法 ====================
     
     /**

@@ -69,7 +69,7 @@ public class MedalRankingActivity extends AppCompatActivity {
         if (rankingList.isEmpty()) {
             loadMedalRanking();
         } else {
-            Log.d("MedalRanking", "使用缓存的排行榜数据，共" + rankingList.size() + "条");
+            Log.d("MedalRanking", "Using cached ranking data, total: " + rankingList.size());
             recyclerView.setVisibility(View.VISIBLE);
             adapter.notifyDataSetChanged();
         }
@@ -178,9 +178,9 @@ public class MedalRankingActivity extends AppCompatActivity {
         if (cachedRankingList != null && !cachedRankingList.isEmpty()) {
             rankingList.clear();
             rankingList.addAll(cachedRankingList);
-            Log.d("MedalRanking", "从静态缓存恢复排行榜数据，共" + rankingList.size() + "条");
+            Log.d("MedalRanking", "Restored cached ranking data, total: " + rankingList.size());
         } else {
-            Log.d("MedalRanking", "没有排行榜缓存数据");
+            Log.d("MedalRanking", "No cached ranking data available");
         }
     }
     
@@ -190,7 +190,7 @@ public class MedalRankingActivity extends AppCompatActivity {
     private void saveRankingCache() {
         if (rankingList != null && !rankingList.isEmpty()) {
             cachedRankingList = new ArrayList<>(rankingList);
-            Log.d("MedalRanking", "保存排行榜缓存，共" + cachedRankingList.size() + "条");
+            Log.d("MedalRanking", "Saved ranking cache, total: " + cachedRankingList.size());
         }
     }
     
@@ -247,7 +247,7 @@ public class MedalRankingActivity extends AppCompatActivity {
                 MedalRankingItem rankingItem = new MedalRankingItem();
                 rankingItem.setRank(i + 1);
                 rankingItem.setWalletAddress(item.getString("walletAddress"));
-                rankingItem.setDisplayName(item.optString("displayName", "匿名用户"));
+                rankingItem.setDisplayName(item.optString("displayName", "Anonymous"));
                 rankingItem.setGoldMedals(item.getInt("goldMedals"));
                 rankingItem.setSilverMedals(item.getInt("silverMedals"));
                 rankingItem.setBronzeMedals(item.getInt("bronzeMedals"));
@@ -354,22 +354,36 @@ public class MedalRankingActivity extends AppCompatActivity {
      */
     private void showCalculationHelpDialog() {
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
-        builder.setTitle("🏆 勋章排行榜计算方法");
-        builder.setMessage("📊 总分计算公式：\n" +
-                "总分 = 金牌数量 × 3 + 银牌数量 × 2 + 铜牌数量 × 1\n\n" +
-                "🥇 金牌 = 3分\n" +
-                "🥈 银牌 = 2分\n" +
-                "🥉 铜牌 = 1分\n\n" +
-                "📈 排序规则：\n" +
-                "1. 按总分从高到低排序\n" +
-                "2. 总分相同时，按金牌数量排序\n" +
-                "3. 金牌相同时，按银牌数量排序\n" +
-                "4. 银牌相同时，按铜牌数量排序\n\n" +
-                "🎨 用户信息展示：\n" +
-                "根据个人意愿决定是否展示您的代表作与昵称\n" +
-                "代表作需要管理员审核后才能在排行榜上显示");
+        builder.setTitle("🏆 Medal Ranking Calculation");
+        builder.setMessage("📊 Score Calculation Formula:\n" +
+                "Total Score = Gold × 3 + Silver × 2 + Bronze × 1\n\n" +
+                "🥇 Gold Medal = 3 points\n" +
+                "🥈 Silver Medal = 2 points\n" +
+                "🥉 Bronze Medal = 1 point\n\n" +
+                "📈 Ranking Rules:\n" +
+                "1. Sorted by total score (descending)\n" +
+                "2. If tied, sorted by gold medals\n" +
+                "3. If tied, sorted by silver medals\n" +
+                "4. If tied, sorted by bronze medals\n\n" +
+                "🎨 User Profile Display:\n" +
+                "Choose to display your representative work & nickname\n" +
+                "Representative work requires admin approval\n\n" +
+                "━━━━━━━━━━━━━━━━━━━\n" +
+                "🎁 Take Action, Earn Rewards!\n\n" +
+                "Submit your proof to receive:\n" +
+                "🏅 Honor Medals - Showcase your contribution\n" +
+                "🖼️ Exclusive NFT - Permanently stored on blockchain\n" +
+                "💰 BKC Tokens - Real rewards\n\n" +
+                "What are you waiting for? Submit now!");
         
-        builder.setPositiveButton("我知道了", (dialog, which) -> {
+        builder.setPositiveButton("Submit Now", (dialog, which) -> {
+            dialog.dismiss();
+            // Jump to proof submission page
+            Intent intent = new Intent(this, ProofAndNFTActivity.class);
+            startActivity(intent);
+        });
+        
+        builder.setNegativeButton("Later", (dialog, which) -> {
             dialog.dismiss();
         });
         

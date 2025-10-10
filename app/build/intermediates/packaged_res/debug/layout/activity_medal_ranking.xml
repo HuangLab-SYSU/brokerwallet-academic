@@ -19,14 +19,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp">
 
-            <!-- 证明提交按钮（正方形，左侧） -->
+            <!-- Proof Submission Button (Square, Left) -->
             <TextView
                 android:id="@+id/proofAndNftButton"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentStart="true"
-                android:text="📄\n证明\n提交"
-                android:textSize="12sp"
+                android:text="📄\nProof\nSubmit"
+                android:textSize="11sp"
                 android:textColor="@color/black"
                 android:background="@drawable/custom_light_grey_background"
                 android:gravity="center"
@@ -46,13 +46,13 @@
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:clickable="true" />
 
-            <!-- 标题文本（居中，与注释按钮垂直对齐） -->
+            <!-- Title Text (Centered, Aligned with Help Button) -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
-                android:text="🏆 勋章排行榜"
+                android:text="🏆 Medal Ranking"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
@@ -70,29 +70,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!-- 加载中文本 -->
+                <!-- Loading Text -->
                 <TextView
                     android:id="@+id/loadingText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="加载中..."
+                    android:text="Loading..."
                     android:textSize="16sp"
                     android:textColor="@color/grey_60"
                     android:visibility="gone" />
 
-                <!-- 错误文本 -->
+                <!-- Error Text -->
                 <TextView
                     android:id="@+id/errorText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="加载失败"
+                    android:text="Load Failed"
                     android:textSize="16sp"
                     android:textColor="@color/red_127"
                     android:visibility="gone" />
 
-                <!-- 空状态提示 -->
+                <!-- Empty State Prompt -->
                 <LinearLayout
                     android:id="@+id/emptyStateLayout"
                     android:layout_width="wrap_content"
@@ -112,7 +112,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="暂无排行榜数据"
+                        android:text="No Ranking Data"
                         android:textSize="18sp"
                         android:textColor="@color/grey_60"
                         android:layout_marginBottom="8dp" />
@@ -120,7 +120,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="快去提交证明文件获得勋章吧！"
+                        android:text="Submit proof to earn medals!"
                         android:textSize="14sp"
                         android:textColor="@color/grey_60" />
 
@@ -146,13 +146,13 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <!-- 我的按钮（左边） -->
+            <!-- My Button (Left) -->
             <TextView
                 android:id="@+id/myCenterButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="👤 我的"
+                android:text="👤 My"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:background="@drawable/custom_green_background"
@@ -161,13 +161,13 @@
                 android:clickable="true"
                 android:layout_marginEnd="8dp" />
 
-            <!-- 全局按钮（右边） -->
+            <!-- Global Button (Right) -->
             <TextView
                 android:id="@+id/globalStatsButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="📊 全局"
+                android:text="📊 Global"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:background="@drawable/custom_green_background"
