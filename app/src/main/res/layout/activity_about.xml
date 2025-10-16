@@ -30,7 +30,7 @@
         android:id="@+id/text_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Version 1.1.9"
+        android:text="Version 1.1.10"
         android:textSize="16sp"
         android:textColor="#666"
         android:layout_marginBottom="32dp" />

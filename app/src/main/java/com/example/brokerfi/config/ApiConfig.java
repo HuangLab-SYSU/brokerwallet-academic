@@ -26,7 +26,7 @@ public class ApiConfig {
      * - USB调试：http://你的电脑IP:5000（例如：http://192.168.1.100:5000）
      * - 云服务器：http://your-domain.com 或 http://服务器IP:5000
      */
-    public static final String BASE_URL = "http://127.0.0.1:5000";
+    public static final String BASE_URL = "http://academic.broker-chain.com:5000";
     
     /**
      * API接口路径

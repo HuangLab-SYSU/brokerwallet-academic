@@ -17,7 +17,7 @@ public class ServerConfig {
      * 模拟器使用：10.0.2.2
      * 真机使用：电脑的局域网IP（如：192.168.1.100）
      */
-    public static final String SERVER_HOST = "127.0.0.1"; // USB连接使用localhost
+    public static final String SERVER_HOST = "academic.broker-chain.com"; // USB连接使用localhost
     
     /**
      * 主服务器端口
