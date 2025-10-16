@@ -37,12 +37,14 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation("com.google.zxing:core:3.3.0")
-    implementation("com.journeyapps:zxing-android-embedded:3.6.0")
-    implementation("com.google.android.material:material:1.2.1")
+    implementation("com.google.zxing:core:3.5.1")
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0") {
+        exclude(group = "com.android.support", module = "support-v4")
+    }
     implementation ("com.squareup.okhttp3:okhttp:4.9.3")
     implementation("org.bouncycastle:bcpkix-jdk15on:1.70") // 根据需要选择版本号
     implementation("org.bouncycastle:bcprov-jdk15on:1.70") // 根据需要选择版本号
@@ -55,4 +57,8 @@ dependencies {
 //    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.web3j:core:4.9.8")
     implementation("androidx.exifinterface:exifinterface:1.3.6")
+    
+    // OpenCV for document scanning - using a manual approach
+    // Note: OpenCV Android SDK needs to be downloaded manually and added as a module
+    // For now, we'll implement a simplified version without OpenCV
 }

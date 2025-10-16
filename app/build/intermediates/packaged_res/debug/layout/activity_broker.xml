@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".xc.BrokerActivity"
+    android:background="@color/white">
+
+    <include
+        layout="@layout/topbar"/>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/action_bar">
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/buytitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Broker"
+                android:fontFamily="@font/work_sans_black"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/buytitle"
+                android:layout_marginTop="8dp"
+                android:text="This operation will invoke the requestBroker() function in the smart contract."
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="395dp"
+                android:layout_height="332dp"
+                android:layout_below="@+id/textview"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/dashed_border" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view"
+                android:layout_marginTop="18dp"
+                android:orientation="vertical">
+
+
+                <android.widget.Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/custom_button_background"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"
+                    android:text="Get started"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editTextTextMultiLine"
+                android:layout_width="365dp"
+                android:layout_height="330dp"
+                android:layout_above="@+id/textview2"
+                android:layout_below="@+id/textview"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:maxLines="27"
+                android:scrollbars="horizontal|vertical"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

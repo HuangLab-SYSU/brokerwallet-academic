@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 文件名和状态行 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/fileNameText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="研究报告.pdf"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:ellipsize="end"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pending"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_orange_dark"
+                android:background="@drawable/status_badge_background"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp" />
+
+        </LinearLayout>
+
+        <!-- 文件信息行 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/fileInfoText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2.5 MB • PDF"
+                android:textSize="14sp"
+                android:textColor="@color/grey_60" />
+
+            <TextView
+                android:id="@+id/uploadTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="09-21 14:30"
+                android:textSize="12sp"
+                android:textColor="@color/grey_60" />
+
+        </LinearLayout>
+
+        <!-- 勋章和NFT状态行 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/medalText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="⚪ No Medal"
+                android:textSize="14sp"
+                android:textColor="@color/grey_60" />
+
+            <TextView
+                android:id="@+id/nftStatusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🖼️ Not Started"
+                android:textSize="12sp"
+                android:textColor="@color/grey_60"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <!-- BKC Token Reward -->
+        <TextView
+            android:id="@+id/tokenRewardText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="💰 BKC Reward: 10.5 BKC"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_green_dark"
+            android:visibility="gone" />
+
+        <!-- 进度指示器 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical">
+
+            <View
+                android:id="@+id/progressBar1"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary" />
+
+            <View
+                android:id="@+id/progressBar2"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:background="@color/grey"
+                android:layout_marginStart="4dp" />
+
+            <View
+                android:id="@+id/progressBar3"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:background="@color/grey"
+                android:layout_marginStart="4dp" />
+
+        </LinearLayout>
+
+        <!-- Progress Text -->
+        <TextView
+            android:id="@+id/progressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1/3 Uploaded"
+            android:textSize="10sp"
+            android:textColor="@color/grey_60"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

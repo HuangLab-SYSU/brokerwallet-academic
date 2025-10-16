@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <include layout="@layout/topbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/action_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📄 Proof Submission"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Proof File Upload (Required) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Submit Proof File *"
+                    android:textSize="16sp"
+                    android:textColor="@color/black" />
+                
+                <TextView
+                    android:id="@+id/fileHelpIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:text="❓"
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_60"
+                    android:gravity="center"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:clickable="true" />
+                    
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/selectFileButton"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="📁 Click to Select Proof File"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:background="@drawable/dashed_border"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_marginBottom="8dp" />
+
+            <!-- File Count Hint -->
+            <TextView
+                android:id="@+id/fileCountHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💡 Maximum 3 files allowed"
+                android:textSize="12sp"
+                android:textColor="@color/grey_60"
+                android:layout_marginBottom="8dp" />
+
+            <!-- 已选择文件列表 -->
+            <LinearLayout
+                android:id="@+id/selectedFilesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Select NFT Photo (Optional) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Select Photo for NFT Minting (Optional)"
+                    android:textSize="16sp"
+                    android:textColor="@color/black" />
+                
+                <TextView
+                    android:id="@+id/imageHelpIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:text="❓"
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_60"
+                    android:gravity="center"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:clickable="true" />
+                    
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/selectImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="🖼️ Click to Select NFT Photo"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:background="@drawable/dashed_border"
+                android:gravity="center"
+                android:clickable="true"
+                android:layout_marginBottom="8dp" />
+
+            <!-- 已选择图片显示区域 -->
+            <LinearLayout
+                android:id="@+id/selectedImageContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp"
+                android:visibility="gone" />
+
+            <!-- 图片预览对话框（隐藏的ImageView用于预览） -->
+            <ImageView
+                android:id="@+id/previewImageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone" />
+
+            <!-- User Nickname (Optional) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Nickname (Optional)"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/displayNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your preferred display nickname"
+                android:textSize="14sp"
+                android:padding="12dp"
+                android:background="@drawable/custom_edittext_border"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Representative Work for Ranking Display (Optional) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Representative Work for Ranking (Optional)"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/representativeWorkEditText"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="Describe your work, e.g.: Developed multiple DeFi protocols, focused on smart contract security"
+                android:textSize="14sp"
+                android:padding="12dp"
+                android:background="@drawable/custom_edittext_border"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 分割线 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Display Representative Work on Ranking -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Display Representative Work on Ranking"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="12dp" />
+
+            <RadioGroup
+                android:id="@+id/showRepresentativeWorkGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <RadioButton
+                    android:id="@+id/showRepresentativeWorkYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="32dp" />
+
+                <RadioButton
+                    android:id="@+id/showRepresentativeWorkNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:checked="true" />
+
+            </RadioGroup>
+
+            <!-- Hint Information -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💡 Tip: Representative work requires admin approval before displaying on ranking"
+                android:textSize="12sp"
+                android:textColor="@color/grey_60"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Submit Button -->
+            <TextView
+                android:id="@+id/submitProofButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Submit Proof"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_green_background"
+                android:gravity="center"
+                android:clickable="true" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

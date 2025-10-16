@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="26dp"
+    android:background="@color/black">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cloud_upload_icon"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_green_background"
+                android:layout_marginTop="26dp"
+                android:paddingVertical="16dp">
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:columnCount="3"
+                    android:rowCount="2"
+                    android:clickable="false">
+
+                    <!-- 第一行，放四张 SVG 图标 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="center"
+                        android:text="TYPE"
+                        android:textColor="@color/green"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="0"
+                        android:layout_column="1"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="center"
+                        android:text="AMOUNT"
+                        android:textColor="@color/green"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/swap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="0"
+                        android:layout_column="2"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="center"
+                        android:text="STATUS"
+                        android:textColor="@color/green"
+                        android:textSize="12sp" />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_column="0"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="center_horizontal"
+                        android:text="STAKE"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_column="1"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="center_horizontal"
+                        android:text="- 10 BKC"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_column="2"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="center_horizontal"
+                        android:text="PENDING"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </GridLayout>
+
+            </LinearLayout>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="2"
+                android:rowCount="9"
+                android:layout_marginTop="26dp">
+
+                <!-- 第一行，放四张 SVG 图标 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:text="FEE"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:text="0.01 BKC"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+
+                    android:text="MODEL"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+
+                    android:text="in-shard"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:text="TIMESTAMP"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"
+                    android:layout_gravity="top"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="2"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:text="2023/10/26 下午7:43:18"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="3"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:text="FROM ADDRESS"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="3"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:text="0x7135b24d2387a6eb17d810be19ece92b8a8a3263"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="4"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:text="TO ADDRESS"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="4"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:text="0x7135b24d2387a6eb17d810be19ece92b8a8a3263"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="5"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:text="SHARD ID"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="5"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:text="10"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="6"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:text="BLOCK HEIGHT"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="6"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:text="985"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="7"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:text="BLOCK HASH"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="7"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:text="0x4312f2fab33d34c704ac43e97492dd8677702a0e"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="8"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:text="TRANSACTION HASH"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="8"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:text="0x97dc9728014c67c3a066d46daa9778176611b8d9"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:paddingVertical="13dp"
+                    android:background="@drawable/custom_grid_background"/>
+
+
+
+            </GridLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</LinearLayout>

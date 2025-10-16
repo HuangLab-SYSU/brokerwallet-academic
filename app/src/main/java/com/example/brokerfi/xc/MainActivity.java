@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView broker;
     private ImageView nft;
     private ImageView news;
+    private ImageView medalSystem;
     private LinearLayout support;
     private NavigationHelper navigationHelper;
     private RelativeLayout sendlist;
@@ -339,6 +340,7 @@ public class MainActivity extends AppCompatActivity {
         tsv_dollar=findViewById(R.id.tsv_dollar);
         nft = findViewById(R.id.nft);
         news = findViewById(R.id.news);
+        medalSystem = findViewById(R.id.medalSystem);
         receive = findViewById(R.id.receiveicon);
         accounts = findViewById(R.id.accounts);
     }
@@ -397,6 +399,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,NewsActivity.class);
             //跳转
+            startActivity(intent);
+        });
+        
+        medalSystem.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this,MedalRankingActivity.class);
             startActivity(intent);
         });
     }

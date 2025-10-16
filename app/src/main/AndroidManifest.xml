@@ -154,6 +154,44 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".xc.MedalRankingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.GlobalStatsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.ProofSubmissionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.NFTMintingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.NFTViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.ProofAndNFTActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.SubmissionHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.SubmissionDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.MyCenterActivity"
+            android:exported="false" />
+
+        <!-- FileProvider for camera photos -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.brokerfi.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -8,5 +8,23 @@
     <string name="use_secret_phrase">Using a Secret Recovery Phrase</string>
     <string name="get_started">Get started</string>
     <string name="broker">Get started</string>
+    <string name="medal_ranking">Medal Ranking</string>
+    <string name="proof_submission">Proof Submission</string>
+    <string name="nft_view">NFT Gallery</string>
+    <string name="nft_minting">Mint NFT</string>
+    <string name="loading">Loading...</string>
+    <string name="load_failed">Load Failed</string>
+    <string name="network_error">Network Error</string>
+    <string name="data_parse_error">Data Parse Error</string>
+    <string name="submit_proof">Submit Proof</string>
+    <string name="mint_nft">Mint NFT</string>
+    <string name="select_file">Select File</string>
+    <string name="select_image">Select Image</string>
+    <string name="no_file_selected">No File Selected</string>
+    <string name="no_image_selected">No Image Selected</string>
+    <string name="my_nfts">My NFTs</string>
+    <string name="all_nfts">All NFTs</string>
+    <string name="medal_system">Medal System</string>
+    <string name="proof_and_nft">Proof &amp; NFT</string>
 </resources>
 
