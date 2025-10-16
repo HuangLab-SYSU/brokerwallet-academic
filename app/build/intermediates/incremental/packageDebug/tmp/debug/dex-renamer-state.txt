@@ -1,15 +1,15 @@
-#Fri Oct 10 15:50:10 CST 2025
-base.0=D\:\\brokerwallet\\brokerwallet-academic\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=D\:\\brokerwallet\\brokerwallet-academic\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.10=D\:\\brokerwallet\\brokerwallet-academic\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
-base.2=D\:\\brokerwallet\\brokerwallet-academic\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
-base.3=D\:\\brokerwallet\\brokerwallet-academic\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
-base.4=D\:\\brokerwallet\\brokerwallet-academic\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
-base.5=D\:\\brokerwallet\\brokerwallet-academic\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
-base.6=D\:\\brokerwallet\\brokerwallet-academic\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
-base.7=D\:\\brokerwallet\\brokerwallet-academic\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
-base.8=D\:\\brokerwallet\\brokerwallet-academic\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
-base.9=D\:\\brokerwallet\\brokerwallet-academic\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+#Thu Oct 16 16:01:08 CST 2025
+base.0=C\:\\Users\\1\\Desktop\\brokerchainonline\\brokerfi-public\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=C\:\\Users\\1\\Desktop\\brokerchainonline\\brokerfi-public\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.10=C\:\\Users\\1\\Desktop\\brokerchainonline\\brokerfi-public\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes3.dex
+base.2=C\:\\Users\\1\\Desktop\\brokerchainonline\\brokerfi-public\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex
+base.3=C\:\\Users\\1\\Desktop\\brokerchainonline\\brokerfi-public\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\15\\classes.dex
+base.4=C\:\\Users\\1\\Desktop\\brokerchainonline\\brokerfi-public\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex
+base.5=C\:\\Users\\1\\Desktop\\brokerchainonline\\brokerfi-public\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
+base.6=C\:\\Users\\1\\Desktop\\brokerchainonline\\brokerfi-public\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
+base.7=C\:\\Users\\1\\Desktop\\brokerchainonline\\brokerfi-public\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
+base.8=C\:\\Users\\1\\Desktop\\brokerchainonline\\brokerfi-public\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\9\\classes.dex
+base.9=C\:\\Users\\1\\Desktop\\brokerchainonline\\brokerfi-public\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.10=classes3.dex

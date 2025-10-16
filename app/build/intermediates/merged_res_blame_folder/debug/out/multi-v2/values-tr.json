@@ -4,24 +4,7 @@
             "outputFile": "com.example.brokerfi.app-mergeDebugResources-29:/values-tr/values-tr.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\wanweijie\\.gradle\\caches\\transforms-3\\f207f48d58aa09507f572932c9a1af46\\transformed\\zxing-android-embedded-4.3.0\\res\\values-tr\\values-tr.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,116,166,313",
-                        "endColumns": "60,49,146,119",
-                        "endOffsets": "111,161,308,428"
-                    },
-                    "to": {
-                        "startLines": "97,98,99,100",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "8033,8094,8144,8291",
-                        "endColumns": "60,49,146,119",
-                        "endOffsets": "8089,8139,8286,8406"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\wanweijie\\.gradle\\caches\\transforms-3\\38b933a6d74b017830f77d74b216fc86\\transformed\\appcompat-1.6.1\\res\\values-tr\\values-tr.xml",
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\38b933a6d74b017830f77d74b216fc86\\transformed\\appcompat-1.6.1\\res\\values-tr\\values-tr.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +21,41 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\wanweijie\\.gradle\\caches\\transforms-3\\d9d0b4443cbf99e17f7361e93850e0d1\\transformed\\material-1.8.0\\res\\values-tr\\values-tr.xml",
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\f207f48d58aa09507f572932c9a1af46\\transformed\\zxing-android-embedded-4.3.0\\res\\values-tr\\values-tr.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,116,166,313",
+                        "endColumns": "60,49,146,119",
+                        "endOffsets": "111,161,308,428"
+                    },
+                    "to": {
+                        "startLines": "97,98,99,100",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "8033,8094,8144,8291",
+                        "endColumns": "60,49,146,119",
+                        "endOffsets": "8089,8139,8286,8406"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\ccccac3bc199769f808c2dfe504d14a2\\transformed\\core-1.9.0\\res\\values-tr\\values-tr.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "96",
+                        "startColumns": "4",
+                        "startOffsets": "7932",
+                        "endColumns": "100",
+                        "endOffsets": "8028"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\d9d0b4443cbf99e17f7361e93850e0d1\\transformed\\material-1.8.0\\res\\values-tr\\values-tr.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -54,23 +71,6 @@
                         "endLines": "5,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94",
                         "endColumns": "12,74,74,76,98,90,95,111,81,63,90,76,60,90,62,62,58,68,62,53,107,57,61,53,72,120,83,90,139,76,75,86,52,53,65,69,76,82,70,74,77,70,84,88,94,92,71,71,95,51,66,83,89,61,63,62,93,95,88,96,56,57,78",
                         "endOffsets": "310,3077,3152,3229,3328,3419,3515,3627,3709,3773,3864,3941,4002,4093,4156,4219,4278,4347,4410,4464,4572,4630,4692,4746,4819,4940,5024,5115,5255,5332,5408,5495,5548,5602,5668,5738,5815,5898,5969,6044,6122,6193,6278,6367,6462,6555,6627,6699,6795,6847,6914,6998,7088,7150,7214,7277,7371,7467,7556,7653,7710,7768,7847"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\wanweijie\\.gradle\\caches\\transforms-3\\ccccac3bc199769f808c2dfe504d14a2\\transformed\\core-1.9.0\\res\\values-tr\\values-tr.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "96",
-                        "startColumns": "4",
-                        "startOffsets": "7932",
-                        "endColumns": "100",
-                        "endOffsets": "8028"
                     }
                 }
             ]

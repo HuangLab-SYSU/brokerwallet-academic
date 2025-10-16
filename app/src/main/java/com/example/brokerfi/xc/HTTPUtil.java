@@ -10,6 +10,7 @@ public class HTTPUtil {
     public static byte[] doPost(String url, Object requestBody) throws Exception {
         Gson gson = new Gson();
         String jsonInputString = gson.toJson(requestBody);
+//        String urlString = "https://" + Holder.serverHost + ":" + Holder.serverPort+"/";
         String urlString = "http://" + Holder.serverHost + ":" + Holder.serverPort+"/";
         urlString += url;
 
@@ -64,6 +65,7 @@ public class HTTPUtil {
     public static byte[] doGet(String url, Object requestBody) throws Exception {
         Gson gson = new Gson();
         String jsonInputString = gson.toJson(requestBody);
+//        String urlString = "https://" + Holder.serverHost + ":" + Holder.serverPort+"/";
         String urlString = "http://" + Holder.serverHost + ":" + Holder.serverPort+"/";
         urlString += url;
 

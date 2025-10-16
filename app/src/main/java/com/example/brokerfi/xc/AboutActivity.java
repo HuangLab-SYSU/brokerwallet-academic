@@ -48,6 +48,7 @@ public class AboutActivity extends AppCompatActivity {
                 AtomicReference<String> sv = new AtomicReference<>();
                 new Thread(()->{
                     try {
+//                        byte[] bytes = HTTPUtil.doPost2("https://academic.broker-chain.com/appversion", null);
                         byte[] bytes = HTTPUtil.doPost2("http://academic.broker-chain.com/appversion", null);
                         sv.set(new String(bytes));
                     } catch (Exception e) {
