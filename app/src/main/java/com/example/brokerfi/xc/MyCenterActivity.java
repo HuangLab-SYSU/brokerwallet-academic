@@ -329,8 +329,9 @@ public class MyCenterActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 // 构建API请求URL
-                String apiUrl = "http://academic.broker-chain.com:5000/api/blockchain/medals/" + myAddress;
-                
+//                String apiUrl = "http://academic.broker-chain.com:5000/api/blockchain/medals/" + myAddress;
+                String apiUrl = "https://academic.broker-chain.com:440/api/blockchain/medals/" + myAddress;
+
                 // 发送HTTP GET请求
                 java.net.URL url = new java.net.URL(apiUrl);
                 java.net.HttpURLConnection connection = (java.net.HttpURLConnection) url.openConnection();
@@ -532,7 +533,8 @@ public class MyCenterActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 // 构建API请求URL，添加分页参数
-                String apiUrl = "http://academic.broker-chain.com:5000/api/blockchain/nft/user/" + myAddress +
+//                String apiUrl = "http://academic.broker-chain.com:5000/api/blockchain/nft/user/" + myAddress +
+                String apiUrl = "https://academic.broker-chain.com:440/api/blockchain/nft/user/" + myAddress +
                               "?page=" + nftCurrentPage + "&size=" + nftPageSize;
                 
                 // 发送HTTP GET请求，增加超时时间

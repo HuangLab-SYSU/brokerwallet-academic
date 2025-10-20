@@ -49,7 +49,7 @@ public class AboutActivity extends AppCompatActivity {
                 new Thread(()->{
                     try {
 //                        byte[] bytes = HTTPUtil.doPost2("https://academic.broker-chain.com/appversion", null);
-                        byte[] bytes = HTTPUtil.doPost2("http://academic.broker-chain.com/appversion", null);
+                        byte[] bytes = HTTPUtil.doPost2("https://academic.broker-chain.com:444/appversion", null);
                         sv.set(new String(bytes));
                     } catch (Exception e) {
                         throw new RuntimeException(e);

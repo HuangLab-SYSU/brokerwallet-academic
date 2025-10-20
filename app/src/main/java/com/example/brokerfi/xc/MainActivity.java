@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 try {
 //                    byte[] bytes = HTTPUtil.doGet2("https://academic.broker-chain.com/user/news2", null);
-                    byte[] bytes = HTTPUtil.doGet2("http://academic.broker-chain.com/user/news2", null);
+                    byte[] bytes = HTTPUtil.doGet2("https://academic.broker-chain.com:444/user/news2", null);
                     String noticestr = new String(bytes);
                     JSONObject j = new JSONObject(noticestr);
                     JSONArray array = (JSONArray) j.get("data");

@@ -22,13 +22,15 @@ public class ServerConfig {
     /**
      * 主服务器端口
      */
-    public static final int SERVER_PORT = 5000;
-    
+//    public static final int SERVER_PORT = 5000;
+    public static final int SERVER_PORT = 440;
+
     /**
      * 完整的服务器基础URL
      */
-    public static final String BASE_URL = "http://" + SERVER_HOST + ":" + SERVER_PORT;
-    
+//    public static final String BASE_URL = "http://" + SERVER_HOST + ":" + SERVER_PORT;
+    public static final String BASE_URL = "https://" + SERVER_HOST + ":" + SERVER_PORT;
+
     // ==================== API端点配置 ====================
     
     /**

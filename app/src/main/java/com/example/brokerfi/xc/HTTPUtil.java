@@ -11,7 +11,8 @@ public class HTTPUtil {
         Gson gson = new Gson();
         String jsonInputString = gson.toJson(requestBody);
 //        String urlString = "https://" + Holder.serverHost + ":" + Holder.serverPort+"/";
-        String urlString = "http://" + Holder.serverHost + ":" + Holder.serverPort+"/";
+//        String urlString = "https://" + Holder.serverHost + ":" + Holder.serverPort+"/";
+        String urlString = "https://" + Holder.serverHost + ":" + "443"+"/";
         urlString += url;
 
         URL requestUrl = new URL(urlString);

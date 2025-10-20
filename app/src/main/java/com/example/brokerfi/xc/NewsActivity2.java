@@ -89,7 +89,7 @@ public class NewsActivity2 extends AppCompatActivity {
         });
 
         // 加载指定网站
-        webView.loadUrl("http://academic.broker-chain.com/news2");
+        webView.loadUrl("https://academic.broker-chain.com:444/news2");
     }
     @Override
     public void onBackPressed() {
