@@ -61,7 +61,14 @@ public class MedalRankingActivity extends AppCompatActivity {
         intView();
         intEvent();
         setupPullToRefresh();
-        
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MedalRankingActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         // 恢复排行榜缓存
         restoreRankingCache();
         

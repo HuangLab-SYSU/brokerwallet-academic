@@ -77,7 +77,14 @@ public class ProofAndNFTActivity extends AppCompatActivity {
 
         // 初始化文件列表
         selectedFileUris = new ArrayList<>();
-        
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(ProofAndNFTActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         // 初始化OpenCV
         DocumentScannerUtil.initOpenCV(this);
         

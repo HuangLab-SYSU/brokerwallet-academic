@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -84,7 +85,14 @@ public class GlobalStatsActivity extends AppCompatActivity {
         
         initView();
         initEvent();
-        
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(GlobalStatsActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         // 恢复NFT缓存
         restoreNftCache();
         

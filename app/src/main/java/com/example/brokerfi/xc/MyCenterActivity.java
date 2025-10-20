@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -95,7 +96,14 @@ public class MyCenterActivity extends AppCompatActivity {
         
         initViews();
         initEvents();
-        
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MyCenterActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         // 检查地址是否变化，恢复或清空NFT缓存
         checkAndRestoreNftCache();
         
