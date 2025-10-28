@@ -97,6 +97,7 @@ public class NFTViewActivity extends AppCompatActivity {
         private String uploadTime;        // 材料上传时间
         private String ownerAddress;      // 持有者地址
         private String ownerDisplayName;  // 持有者花名
+        private String contirbution;
 
         public NFTItem(String name, String description, String imageUrl) {
             this.name = name;
@@ -109,6 +110,8 @@ public class NFTViewActivity extends AppCompatActivity {
             this.ownerAddress = "";
             this.ownerDisplayName = "";
         }
+        public String getContirbution(){return contirbution;}
+        public void setContirbution(String contirbution){this.contirbution = contirbution;}
 
         // Getters and Setters
         public String getName() { return name; }

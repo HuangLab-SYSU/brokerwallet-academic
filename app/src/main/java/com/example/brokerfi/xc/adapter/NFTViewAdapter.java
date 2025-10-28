@@ -244,16 +244,24 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         // 显示时间属性
         if (attributesContainer != null) {
             attributesContainer.removeAllViews();
-            
+            if (item.getContirbution() != null && !item.getContirbution().isEmpty()) {
+                addAttributeRow(context, attributesContainer, "Contribution", item.getContirbution());
+            }
             // Material upload time
             if (item.getUploadTime() != null && !item.getUploadTime().isEmpty()) {
                 addAttributeRow(context, attributesContainer, "Material Upload", item.getUploadTime());
             }
-            
+
             // NFT minting time
             if (item.getMintTime() != null && !item.getMintTime().isEmpty()) {
                 addAttributeRow(context, attributesContainer, "NFT Minted", item.getMintTime());
             }
+
+//            if (item.getDescription() != null && !item.getDescription().isEmpty()) {
+//                addAttributeRow(context, attributesContainer, "Description", item.getDescription());
+//            }
+
+
         }
         
         // 创建对话框
