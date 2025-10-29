@@ -18,42 +18,44 @@
             android:id="@+id/titleText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="2dp"
             android:text="📊 Global Stats"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:gravity="center" />
 
         <!-- 全局勋章统计区域 -->
+
+        <!-- Global NFT Title and Total Count -->
         <LinearLayout
             android:id="@+id/globalMedalStatsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="vertical"
+            android:layout_marginBottom="2dp"
             android:background="@drawable/custom_edittext_border"
-            android:padding="16dp">
+            android:orientation="vertical"
+            android:padding="4dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
                 android:text="🏆 Global Medal Stats"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:layout_marginBottom="12dp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <!-- User Statistics -->
             <TextView
                 android:id="@+id/totalUsersText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
                 android:text="Total Users: 0"
-                android:textSize="14sp"
                 android:textColor="@color/grey_60"
-                android:layout_marginBottom="12dp" />
+                android:textSize="14sp" />
 
             <!-- 勋章统计 -->
             <LinearLayout
@@ -65,34 +67,34 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
                     android:layout_weight="1"
-                    android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="12dp"
-                    android:layout_marginEnd="4dp">
+                    android:orientation="vertical"
+                    android:padding="2dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
                         android:text="🥇"
-                        android:textSize="24sp"
-                        android:layout_marginBottom="4dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/totalGoldMedalsText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Gold"
-                        android:textSize="12sp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -100,34 +102,34 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
-                    android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="12dp"
-                    android:layout_marginHorizontal="4dp">
+                    android:orientation="vertical"
+                    android:padding="2dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
                         android:text="🥈"
-                        android:textSize="24sp"
-                        android:layout_marginBottom="4dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/totalSilverMedalsText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Silver"
-                        android:textSize="12sp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -135,34 +137,34 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:layout_weight="1"
-                    android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="12dp"
-                    android:layout_marginStart="4dp">
+                    android:orientation="vertical"
+                    android:padding="2dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
                         android:text="🥉"
-                        android:textSize="24sp"
-                        android:layout_marginBottom="4dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/totalBronzeMedalsText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bronze"
-                        android:textSize="12sp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -172,8 +174,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/highestScoreText"
@@ -181,8 +183,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Highest Score: 0"
-                    android:textSize="14sp"
-                    android:textColor="@color/grey_60" />
+                    android:textColor="@color/grey_60"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/topUserText"
@@ -190,8 +192,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Top User: None"
-                    android:textSize="14sp"
-                    android:textColor="@color/grey_60" />
+                    android:textColor="@color/grey_60"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -202,8 +204,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="🏆 Loading medal stats..."
-                android:textSize="14sp"
                 android:textColor="@color/grey_60"
+                android:textSize="14sp"
                 android:visibility="gone" />
 
             <!-- Medal Stats Error State -->
@@ -213,18 +215,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Medal stats load failed"
-                android:textSize="14sp"
                 android:textColor="@color/red_127"
+                android:textSize="14sp"
                 android:visibility="gone" />
 
         </LinearLayout>
 
-        <!-- Global NFT Title and Total Count -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
@@ -320,7 +322,7 @@
                     android:id="@+id/nftRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="16dp"
+                    android:padding="4dp"
                     android:visibility="gone" />
 
             </RelativeLayout>

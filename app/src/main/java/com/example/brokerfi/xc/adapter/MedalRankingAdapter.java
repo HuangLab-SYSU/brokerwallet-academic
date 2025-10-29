@@ -37,13 +37,13 @@ public class MedalRankingAdapter extends RecyclerView.Adapter<MedalRankingAdapte
         holder.goldMedalText.setText(String.valueOf(item.getGoldMedals()));
         holder.silverMedalText.setText(String.valueOf(item.getSilverMedals()));
         holder.bronzeMedalText.setText(String.valueOf(item.getBronzeMedals()));
-        holder.totalMedalText.setText("Total: " + item.getTotalMedalScore());
+//        holder.totalMedalText.setText("Total: " + item.getTotalMedalScore());
         
         // Handle representative work display
         if (item.isShowRepresentativeWork() && 
             item.getRepresentativeWork() != null && 
             !item.getRepresentativeWork().trim().isEmpty()) {
-            holder.representativeWorkText.setText("Work: " + item.getRepresentativeWork());
+            holder.representativeWorkText.setText("Contribution: " + item.getRepresentativeWork());
             holder.representativeWorkText.setVisibility(View.VISIBLE);
         } else {
             holder.representativeWorkText.setVisibility(View.GONE);
@@ -62,7 +62,7 @@ public class MedalRankingAdapter extends RecyclerView.Adapter<MedalRankingAdapte
         TextView goldMedalText;
         TextView silverMedalText;
         TextView bronzeMedalText;
-        TextView totalMedalText;
+//        TextView totalMedalText;
         TextView representativeWorkText;
         
         public ViewHolder(@NonNull View itemView) {
@@ -73,7 +73,7 @@ public class MedalRankingAdapter extends RecyclerView.Adapter<MedalRankingAdapte
             goldMedalText = itemView.findViewById(R.id.goldMedalText);
             silverMedalText = itemView.findViewById(R.id.silverMedalText);
             bronzeMedalText = itemView.findViewById(R.id.bronzeMedalText);
-            totalMedalText = itemView.findViewById(R.id.totalMedalText);
+//            totalMedalText = itemView.findViewById(R.id.totalMedalText);
             representativeWorkText = itemView.findViewById(R.id.representativeWorkText);
         }
     }
