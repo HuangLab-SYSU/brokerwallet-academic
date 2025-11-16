@@ -82,6 +82,7 @@ drawable dribbble_icon
 drawable emoji
 drawable fire
 drawable form
+drawable green_card_border
 drawable ic_close
 drawable ic_launcher2_background
 drawable ic_launcher3_background
@@ -130,6 +131,8 @@ drawable smile_activity_icon
 drawable smile_black
 drawable status_badge_background
 drawable transaction
+drawable transaction_border
+drawable transaction_container
 drawable transaction_icon
 drawable uncheck_circle
 drawable up_circle
@@ -293,6 +296,7 @@ id progressBar1
 id progressBar2
 id progressBar3
 id progressText
+id progress_bar
 id proofAndNftButton
 id rankText
 id receiveicon
@@ -365,9 +369,17 @@ id tokenRewardText
 id topUserText
 id totalBronzeMedalsText
 id totalGoldMedalsText
-id totalMedalText
 id totalSilverMedalsText
 id totalUsersText
+id transaction_amount
+id transaction_fee
+id transaction_from
+id transaction_id
+id transaction_status
+id transaction_time
+id transaction_to
+id transaction_type
+id transactions_recycler_view
 id tsv_dollar
 id tv_name
 id tv_price
@@ -454,6 +466,7 @@ layout item_submission_history
 layout menu
 layout nft_holder
 layout topbar
+layout transaction_item
 mipmap ic_launcher
 mipmap ic_launcher2
 mipmap ic_launcher2_foreground
