@@ -4,7 +4,7 @@
             "outputFile": "com.example.brokerfi.app-mergeDebugResources-29:/values-id/values-id.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\f207f48d58aa09507f572932c9a1af46\\transformed\\zxing-android-embedded-4.3.0\\res\\values-id\\values-id.xml",
+                    "source": "C:\\Users\\Ryuuko\\.gradle\\caches\\transforms-3\\f207f48d58aa09507f572932c9a1af46\\transformed\\zxing-android-embedded-4.3.0\\res\\values-id\\values-id.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
