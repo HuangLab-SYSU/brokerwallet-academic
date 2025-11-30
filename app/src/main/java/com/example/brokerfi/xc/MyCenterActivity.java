@@ -1205,7 +1205,7 @@ public class MyCenterActivity extends AppCompatActivity {
             
             // Material upload time
             if (nftItem.getUploadTime() != null && !nftItem.getUploadTime().isEmpty()) {
-                addAttributeItem(attributesContainer, "Material Uploaded", nftItem.getUploadTime());
+                addAttributeItem(attributesContainer, "Material Upload", nftItem.getUploadTime());
             }
             
             // NFT minting time

@@ -51,6 +51,8 @@ public class SecurityUtil {
 
     public static String[] signECDSA(String privateKey1, String data)  {
         BigInteger privateKey = new BigInteger(privateKey1,10);
+        //Bouncy Castle 库中的 ECNamedCurveTable 方法 getParameterSpec 方法
+        //升级为 secp256k1
         ECNamedCurveParameterSpec spec = ECNamedCurveTable.getParameterSpec("secp256r1");
         ECDomainParameters domainParameters = new ECDomainParameters( spec.getCurve(),spec.getG(), spec.getN());
         ECDSASigner signer = new ECDSASigner();

@@ -164,7 +164,7 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         
         // Display material upload time
         if (uploadTime != null && !uploadTime.isEmpty()) {
-            holder.uploadTimeText.setText("Material Uploaded: " + uploadTime);
+            holder.uploadTimeText.setText("Material Upload: " + uploadTime);
             holder.uploadTimeText.setVisibility(View.VISIBLE);
             visibleCount++;
         } else {
@@ -244,27 +244,16 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         // 显示时间属性
         if (attributesContainer != null) {
             attributesContainer.removeAllViews();
-            if (item.getContirbution() != null && !item.getContirbution().isEmpty()) {
-
-//                addAttributeRow(context, attributesContainer, "Contribution", item.getContirbution());
-                addAttributeRow2(context, attributesContainer, "Contribution" );
-                addAttributeRow3(context, attributesContainer,  item.getContirbution());
-            }
+            
             // Material upload time
             if (item.getUploadTime() != null && !item.getUploadTime().isEmpty()) {
-                addAttributeRow(context, attributesContainer, "Material Uploaded", item.getUploadTime());
+                addAttributeRow(context, attributesContainer, "Material Upload", item.getUploadTime());
             }
-
+            
             // NFT minting time
             if (item.getMintTime() != null && !item.getMintTime().isEmpty()) {
                 addAttributeRow(context, attributesContainer, "NFT Minted", item.getMintTime());
             }
-
-//            if (item.getDescription() != null && !item.getDescription().isEmpty()) {
-//                addAttributeRow(context, attributesContainer, "Description", item.getDescription());
-//            }
-
-
         }
         
         // 创建对话框
@@ -306,50 +295,7 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         row.addView(valueView);
         container.addView(row);
     }
-
-    private void addAttributeRow2(android.content.Context context, android.widget.LinearLayout container,
-                                 String label) {
-        // 创建属性行
-        android.widget.LinearLayout row = new android.widget.LinearLayout(context);
-        row.setOrientation(android.widget.LinearLayout.HORIZONTAL);
-        row.setPadding(0, 16, 0, 16);
-
-        // 标签
-        android.widget.TextView labelView = new android.widget.TextView(context);
-        labelView.setText(label + ": ");
-        labelView.setTextSize(16);
-        labelView.setTextColor(0xFF666666);
-        android.widget.LinearLayout.LayoutParams labelParams = new android.widget.LinearLayout.LayoutParams(
-                0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 1);
-        labelView.setLayoutParams(labelParams);
-
-
-
-        row.addView(labelView);
-        container.addView(row);
-    }
-
-    private void addAttributeRow3(android.content.Context context, android.widget.LinearLayout container,
-                                   String value) {
-        // 创建属性行
-        android.widget.LinearLayout row = new android.widget.LinearLayout(context);
-        row.setOrientation(android.widget.LinearLayout.HORIZONTAL);
-        row.setPadding(0, 16, 0, 16);
-
-        // 值
-        android.widget.TextView valueView = new android.widget.TextView(context);
-        valueView.setText(value);
-        valueView.setTextSize(16);
-        valueView.setTextColor(0xFF333333);
-        valueView.setTypeface(null, android.graphics.Typeface.BOLD);
-        android.widget.LinearLayout.LayoutParams valueParams = new android.widget.LinearLayout.LayoutParams(
-                0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 2);
-        valueView.setLayoutParams(valueParams);
-
-
-        row.addView(valueView);
-        container.addView(row);
-    }
+    
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         ViewGroup attributesLayout;

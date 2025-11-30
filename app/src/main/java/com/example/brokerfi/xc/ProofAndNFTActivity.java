@@ -836,7 +836,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
             suggestion = "Please check account status";
         } else {
             userFriendlyMessage = "Submission Failed";
-            suggestion = "Maximum 3 files, total size no more than 30MB";
+            suggestion = "Please check input and retry";
         }
         
         showErrorDialog(userFriendlyMessage, suggestion + "\n\nDetailed error: " + error);

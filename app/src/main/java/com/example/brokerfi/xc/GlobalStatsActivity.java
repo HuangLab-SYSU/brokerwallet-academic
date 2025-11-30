@@ -480,10 +480,9 @@ public class GlobalStatsActivity extends AppCompatActivity {
                     String mintTime = nft.optString("mintTime", "");
                     String ownerAddress = nft.optString("ownerAddress", "");
                     String ownerDisplayName = nft.optString("ownerDisplayName", "匿名用户");
-                    String contirbution = nft.optString("contirbution", "");;
+                    
                     // 解析attributes获取材料上传时间
                     String uploadTime = "";
-
                     if (nft.has("attributes")) {
                         Object attrObj = nft.opt("attributes");
                         String attributesStr = "";
@@ -510,7 +509,6 @@ public class GlobalStatsActivity extends AppCompatActivity {
                     NFTViewActivity.NFTItem nftItem = new NFTViewActivity.NFTItem(name, description, imageUrl);
                     nftItem.setUploadTime(uploadTime);
                     nftItem.setMintTime(mintTime);
-                    nftItem.setContirbution(contirbution);
                     nftItem.setOwnerAddress(ownerAddress);
                     nftItem.setOwnerDisplayName(ownerDisplayName);
                     nftList.add(nftItem);
@@ -620,7 +618,6 @@ public class GlobalStatsActivity extends AppCompatActivity {
                         }
                         
                         // 获取NFT铸造时间、持有者地址和花名
-                        String contirbution = nft.optString("contirbution", "");
                         String mintTime = nft.optString("mintTime", "");
                         String ownerAddress = nft.optString("ownerAddress", "");
                         String ownerDisplayName = nft.optString("ownerDisplayName", "匿名用户");
@@ -653,7 +650,6 @@ public class GlobalStatsActivity extends AppCompatActivity {
                         NFTViewActivity.NFTItem nftItem = new NFTViewActivity.NFTItem(name, description, imageUrl);
                         nftItem.setUploadTime(uploadTime);
                         nftItem.setMintTime(mintTime);
-                        nftItem.setContirbution(contirbution);
                         nftItem.setOwnerAddress(ownerAddress);
                         nftItem.setOwnerDisplayName(ownerDisplayName);
                         nftList.add(nftItem);
@@ -772,7 +768,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
             
             // Material upload time
             if (nftItem.getUploadTime() != null && !nftItem.getUploadTime().isEmpty()) {
-                addAttributeItem(attributesContainer, "Material Uploaded", nftItem.getUploadTime());
+                addAttributeItem(attributesContainer, "Material Upload", nftItem.getUploadTime());
             }
             
             // NFT minting time

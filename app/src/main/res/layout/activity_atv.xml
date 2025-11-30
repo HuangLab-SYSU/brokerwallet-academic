@@ -1,55 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".xc.AtvActivity"
-    android:orientation="vertical">
-
-    <androidx.core.widget.NestedScrollView
+    android:fillViewport="true">
+    
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+        <!-- Logo and Text -->
+        <include
+            layout="@layout/topbar"/>
+
+        <TextView
+            android:id="@+id/buytitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:fontFamily="@font/work_sans_black"
+            android:paddingHorizontal="16dp"
+            android:text="Activity"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-            <!-- Logo and Text -->
-            <include
-                layout="@layout/topbar"/>
-            <TextView
-                android:id="@+id/buytitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Activity"
-                android:fontFamily="@font/work_sans_black"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:paddingHorizontal="16dp"/>
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6.5dp"
+            android:layout_marginBottom="16dp"
+            android:paddingHorizontal="16dp"
+            android:text="Transactions of current account"
+            android:textColor="#000000"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/buytitle"
-                android:layout_marginTop="6.5dp"
-                android:text="Transactions of current account"
-                android:textSize="14sp"
-                android:textColor="#000000"
-                android:paddingHorizontal="16dp"
-                android:layout_marginBottom="26dp"/>
-            <include
-                layout="@layout/atv_receive"/>
-
-            <include
-                layout="@layout/atv_profit"/>
-
-
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#000000">
+            
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:minHeight="400dp"
+                    android:background="#000000">
+                
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"/>
+                
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/transactions_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"/>
+            </RelativeLayout>
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-
-
-</LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
