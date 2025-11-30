@@ -75,7 +75,7 @@
                 android:id="@+id/fileCountHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="💡 Maximum 3 files, total size no more than 30MB"
+                android:text="💡 Maximum 3 files allowed"
                 android:textSize="12sp"
                 android:textColor="@color/grey_60"
                 android:layout_marginBottom="8dp" />

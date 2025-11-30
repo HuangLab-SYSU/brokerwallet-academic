@@ -4,7 +4,7 @@
             "outputFile": "com.example.brokerfi.app-mergeDebugResources-29:/values-b+sr+Latn/values-b+sr+Latn.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Ryuuko\\.gradle\\caches\\transforms-3\\38b933a6d74b017830f77d74b216fc86\\transformed\\appcompat-1.6.1\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\38b933a6d74b017830f77d74b216fc86\\transformed\\appcompat-1.6.1\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Ryuuko\\.gradle\\caches\\transforms-3\\d9d0b4443cbf99e17f7361e93850e0d1\\transformed\\material-1.8.0\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\ccccac3bc199769f808c2dfe504d14a2\\transformed\\core-1.9.0\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "97",
+                        "startColumns": "4",
+                        "startOffsets": "8146",
+                        "endColumns": "100",
+                        "endOffsets": "8242"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\d9d0b4443cbf99e17f7361e93850e0d1\\transformed\\material-1.8.0\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
                     "from": {
                         "startLines": "2,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -37,23 +54,6 @@
                         "endLines": "6,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95",
                         "endColumns": "12,76,76,79,107,93,93,131,80,65,92,67,62,102,59,65,55,70,59,53,111,56,60,53,75,124,86,82,138,81,82,87,53,55,65,73,77,88,75,75,74,71,89,72,91,95,71,75,95,52,66,86,86,61,63,62,104,103,95,106,57,59,79",
                         "endOffsets": "369,3177,3254,3334,3442,3536,3630,3762,3843,3909,4002,4070,4133,4236,4296,4362,4418,4489,4549,4603,4715,4772,4833,4887,4963,5088,5175,5258,5397,5479,5562,5650,5704,5760,5826,5900,5978,6067,6143,6219,6294,6366,6456,6529,6621,6717,6789,6865,6961,7014,7081,7168,7255,7317,7381,7444,7549,7653,7749,7856,7914,7974,8054"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Ryuuko\\.gradle\\caches\\transforms-3\\ccccac3bc199769f808c2dfe504d14a2\\transformed\\core-1.9.0\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "97",
-                        "startColumns": "4",
-                        "startOffsets": "8146",
-                        "endColumns": "100",
-                        "endOffsets": "8242"
                     }
                 }
             ]

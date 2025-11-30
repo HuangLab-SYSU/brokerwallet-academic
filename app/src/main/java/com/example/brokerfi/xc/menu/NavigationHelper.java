@@ -203,8 +203,8 @@ public class NavigationHelper{
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, AtvActivity.class);
-                context.startActivity(intent);
+//                Intent intent = new Intent(context, AtvActivity.class);
+//                context.startActivity(intent);
 
             }
         });

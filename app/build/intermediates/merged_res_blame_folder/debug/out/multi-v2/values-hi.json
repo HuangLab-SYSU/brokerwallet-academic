@@ -4,7 +4,7 @@
             "outputFile": "com.example.brokerfi.app-mergeDebugResources-29:/values-hi/values-hi.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Ryuuko\\.gradle\\caches\\transforms-3\\d9d0b4443cbf99e17f7361e93850e0d1\\transformed\\material-1.8.0\\res\\values-hi\\values-hi.xml",
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\d9d0b4443cbf99e17f7361e93850e0d1\\transformed\\material-1.8.0\\res\\values-hi\\values-hi.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Ryuuko\\.gradle\\caches\\transforms-3\\ccccac3bc199769f808c2dfe504d14a2\\transformed\\core-1.9.0\\res\\values-hi\\values-hi.xml",
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\ccccac3bc199769f808c2dfe504d14a2\\transformed\\core-1.9.0\\res\\values-hi\\values-hi.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -40,7 +40,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Ryuuko\\.gradle\\caches\\transforms-3\\38b933a6d74b017830f77d74b216fc86\\transformed\\appcompat-1.6.1\\res\\values-hi\\values-hi.xml",
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\38b933a6d74b017830f77d74b216fc86\\transformed\\appcompat-1.6.1\\res\\values-hi\\values-hi.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -57,7 +57,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Ryuuko\\.gradle\\caches\\transforms-3\\f207f48d58aa09507f572932c9a1af46\\transformed\\zxing-android-embedded-4.3.0\\res\\values-hi\\values-hi.xml",
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\f207f48d58aa09507f572932c9a1af46\\transformed\\zxing-android-embedded-4.3.0\\res\\values-hi\\values-hi.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
