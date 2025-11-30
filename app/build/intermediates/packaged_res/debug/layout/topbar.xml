@@ -77,11 +77,11 @@
         android:layout_toStartOf="@+id/menu"
         android:padding="8dp"
         android:src="@drawable/notifications"
-    android:background="?android:attr/selectableItemBackground"
-    android:contentDescription="通知"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:clickable="true" />
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="通知"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true" />
 
     <ImageView
         android:id="@+id/menu"

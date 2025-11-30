@@ -9,468 +9,468 @@
 9        android:targetSdkVersion="33" />
 10
 11    <uses-feature
-11-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:5:5-7:36
+11-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:5:5-7:36
 12        android:name="android.hardware.camera"
-12-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:6:9-47
+12-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:6:9-47
 13        android:required="false" />
-13-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:7:9-33
+13-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:7:9-33
 14    <uses-feature android:name="android.hardware.camera.autofocus" />
-14-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:8:5-70
-14-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:8:19-67
+14-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:8:5-70
+14-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:8:19-67
 15
 16    <uses-permission android:name="android.permission.CAMERA" />
-16-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:10:5-65
-16-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:10:22-62
+16-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:10:5-65
+16-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:10:22-62
 17    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-17-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:11:5-80
-17-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:11:22-77
+17-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:11:5-80
+17-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:11:22-77
 18    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-18-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:12:5-81
-18-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:12:22-78
+18-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:12:5-81
+18-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:12:22-78
 19    <uses-permission android:name="android.permission.INTERNET" />
-19-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:13:5-67
-19-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:13:22-64
+19-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:13:5-67
+19-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:13:22-64
 20
 21    <queries>
-21-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:15:5-21:15
+21-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:15:5-21:15
 22        <intent>
-22-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:16:9-20:18
+22-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:16:9-20:18
 23            <action android:name="android.intent.action.VIEW" />
-23-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:17:13-65
-23-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:17:21-62
+23-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:17:13-65
+23-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:17:21-62
 24
 25            <data android:mimeType="text/html" />
-25-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:18:13-50
-25-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:18:19-47
+25-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:18:13-50
+25-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:18:19-47
 26
 27            <category android:name="android.intent.category.BROWSABLE" />
-27-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:19:13-74
-27-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:19:23-71
+27-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:19:13-74
+27-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:19:23-71
 28        </intent>
 29    </queries>
 30
 31    <uses-feature
-31-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:28:5-30:36
+31-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:28:5-30:36
 32        android:name="android.hardware.camera.front"
-32-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:29:9-53
+32-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:29:9-53
 33        android:required="false" />
-33-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:30:9-33
+33-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:30:9-33
 34    <uses-feature
-34-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:36:5-38:36
+34-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:36:5-38:36
 35        android:name="android.hardware.camera.flash"
-35-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:37:9-53
+35-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:37:9-53
 36        android:required="false" />
-36-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:38:9-33
+36-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:38:9-33
 37    <uses-feature
-37-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:39:5-41:36
+37-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:39:5-41:36
 38        android:name="android.hardware.screen.landscape"
-38-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:40:9-57
+38-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:40:9-57
 39        android:required="false" />
-39-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:41:9-33
+39-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:41:9-33
 40    <uses-feature
-40-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:42:5-44:36
+40-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:42:5-44:36
 41        android:name="android.hardware.wifi"
-41-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:43:9-45
+41-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:43:9-45
 42        android:required="false" />
-42-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:44:9-33
+42-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:44:9-33
 43
 44    <permission
-44-->[androidx.core:core:1.9.0] C:\Users\1\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+44-->[androidx.core:core:1.9.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
 45        android:name="com.example.brokerfi.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-45-->[androidx.core:core:1.9.0] C:\Users\1\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+45-->[androidx.core:core:1.9.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
 46        android:protectionLevel="signature" />
-46-->[androidx.core:core:1.9.0] C:\Users\1\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+46-->[androidx.core:core:1.9.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
 47
 48    <uses-permission android:name="com.example.brokerfi.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-48-->[androidx.core:core:1.9.0] C:\Users\1\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
-48-->[androidx.core:core:1.9.0] C:\Users\1\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+48-->[androidx.core:core:1.9.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+48-->[androidx.core:core:1.9.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 49
 50    <application
-50-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:23:5-199:19
+50-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:23:5-199:19
 51        android:allowBackup="true"
-51-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:25:9-35
+51-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:25:9-35
 52        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-52-->[androidx.core:core:1.9.0] C:\Users\1\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+52-->[androidx.core:core:1.9.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\ccccac3bc199769f808c2dfe504d14a2\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
 53        android:dataExtractionRules="@xml/data_extraction_rules"
-53-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:26:9-65
+53-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:26:9-65
 54        android:debuggable="true"
 55        android:extractNativeLibs="true"
 56        android:fullBackupContent="@xml/backup_rules"
-56-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:27:9-54
+56-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:27:9-54
 57        android:icon="@mipmap/ic_launcher4"
-57-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:28:9-44
+57-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:28:9-44
 58        android:label="@string/app_name"
-58-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:29:9-41
+58-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:29:9-41
 59        android:networkSecurityConfig="@xml/network_security_config"
-59-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:30:9-69
+59-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:30:9-69
 60        android:roundIcon="@mipmap/ic_launcher4_round"
-60-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:31:9-55
+60-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:31:9-55
 61        android:supportsRtl="true"
-61-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:32:9-35
+61-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:32:9-35
 62        android:testOnly="true"
 63        android:theme="@style/Theme.BrokerFi"
-63-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:33:9-46
+63-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:33:9-46
 64        android:usesCleartextTraffic="true" >
-64-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:24:9-44
+64-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:24:9-44
 65        <activity
-65-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:35:9-37:40
+65-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:35:9-37:40
 66            android:name="com.example.brokerfi.xc.AboutActivity"
-66-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:36:13-45
+66-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:36:13-45
 67            android:exported="false" />
-67-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:37:13-37
+67-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:37:13-37
 68        <activity
-68-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:38:9-40:40
+68-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:38:9-40:40
 69            android:name="com.example.brokerfi.xc.NewsActivity2"
-69-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:39:13-45
+69-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:39:13-45
 70            android:exported="false" />
-70-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:40:13-37
+70-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:40:13-37
 71        <activity
-71-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:41:9-43:40
+71-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:41:9-43:40
 72            android:name="com.example.brokerfi.xc.AtvActivity"
-72-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:42:13-43
+72-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:42:13-43
 73            android:exported="false" />
-73-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:43:13-37
+73-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:43:13-37
 74        <activity
-74-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:44:9-46:40
+74-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:44:9-46:40
 75            android:name="com.example.brokerfi.xc.WithdrawActivity"
-75-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:45:13-48
+75-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:45:13-48
 76            android:exported="false" />
-76-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:46:13-37
+76-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:46:13-37
 77        <activity
-77-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:47:9-49:40
+77-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:47:9-49:40
 78            android:name="com.example.brokerfi.xc.NewsActivity"
-78-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:48:13-44
+78-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:48:13-44
 79            android:exported="false" />
-79-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:49:13-37
+79-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:49:13-37
 80        <activity
-80-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:50:9-52:40
+80-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:50:9-52:40
 81            android:name="com.example.brokerfi.xc.EmulatorActivity"
-81-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:51:13-48
+81-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:51:13-48
 82            android:exported="false" />
-82-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:52:13-37
+82-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:52:13-37
 83        <activity
-83-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:53:9-55:40
+83-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:53:9-55:40
 84            android:name="com.example.brokerfi.xc.StakeMoreActivity"
-84-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:54:13-49
+84-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:54:13-49
 85            android:exported="false" />
-85-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:55:13-37
+85-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:55:13-37
 86        <activity
-86-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:56:9-58:40
+86-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:56:9-58:40
 87            android:name="com.example.brokerfi.xc.BrokerActivity"
-87-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:57:13-46
+87-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:57:13-46
 88            android:exported="false" />
-88-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:58:13-37
+88-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:58:13-37
 89        <activity
-89-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:59:9-61:40
+89-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:59:9-61:40
 90            android:name="com.example.brokerfi.xc.AfterBrokerActivity"
-90-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:60:13-51
+90-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:60:13-51
 91            android:exported="false" />
-91-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:61:13-37
+91-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:61:13-37
 92        <activity
-92-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:62:9-66:57
+92-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:62:9-66:57
 93            android:name="com.example.brokerfi.xc.QRCode.Capture"
-93-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:63:13-46
+93-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:63:13-46
 94            android:screenOrientation="portrait"
-94-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:64:13-49
+94-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:64:13-49
 95            android:stateNotNeeded="true"
-95-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:65:13-42
+95-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:65:13-42
 96            android:theme="@style/zxing_CaptureTheme" />
-96-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:66:13-54
+96-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:66:13-54
 97        <activity
-97-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:67:9-69:40
+97-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:67:9-69:40
 98            android:name="com.example.brokerfi.xc.MainActivity"
-98-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:68:13-44
+98-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:68:13-44
 99            android:exported="false" />
-99-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:69:13-37
+99-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:69:13-37
 100        <activity
-100-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:70:9-72:40
+100-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:70:9-72:40
 101            android:name="com.example.brokerfi.xc.NFTMainActivity"
-101-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:71:13-47
+101-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:71:13-47
 102            android:exported="false" />
-102-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:72:13-37
+102-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:72:13-37
 103        <activity
-103-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:73:9-75:40
+103-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:73:9-75:40
 104            android:name="com.example.brokerfi.xc.MintActivity"
-104-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:74:13-44
+104-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:74:13-44
 105            android:exported="false" />
-105-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:75:13-37
+105-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:75:13-37
 106        <activity
-106-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:76:9-78:40
+106-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:76:9-78:40
 107            android:name="com.example.brokerfi.xc.MyNFTsActivity"
-107-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:77:13-46
+107-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:77:13-46
 108            android:exported="false" />
-108-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:78:13-37
+108-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:78:13-37
 109        <activity
-109-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:79:9-81:40
+109-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:79:9-81:40
 110            android:name="com.example.brokerfi.xc.BuyNFTsActivity"
-110-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:80:13-47
+110-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:80:13-47
 111            android:exported="false" />
-111-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:81:13-37
+111-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:81:13-37
 112        <activity
-112-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:82:9-84:40
+112-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:82:9-84:40
 113            android:name="com.example.brokerfi.xc.CongratulationsMintActivity"
-113-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:83:13-59
+113-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:83:13-59
 114            android:exported="false" />
-114-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:84:13-37
+114-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:84:13-37
 115        <activity
-115-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:85:9-87:40
+115-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:85:9-87:40
 116            android:name="com.example.brokerfi.xc.MyAccountActivity"
-116-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:86:13-49
+116-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:86:13-49
 117            android:exported="false" />
-117-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:87:13-37
+117-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:87:13-37
 118        <activity
-118-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:88:9-90:40
+118-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:88:9-90:40
 119            android:name="com.example.brokerfi.xc.BeforeShowPrKeyActivity"
-119-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:89:13-55
+119-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:89:13-55
 120            android:exported="false" />
-120-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:90:13-37
+120-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:90:13-37
 121        <activity
-121-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:91:9-93:40
+121-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:91:9-93:40
 122            android:name="com.example.brokerfi.xc.AddAccountActivity"
-122-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:92:13-50
+122-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:92:13-50
 123            android:exported="false" />
-123-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:93:13-37
+123-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:93:13-37
 124        <activity
-124-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:94:9-96:40
+124-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:94:9-96:40
 125            android:name="com.example.brokerfi.xc.GenerateAccountActivity"
-125-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:95:13-55
+125-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:95:13-55
 126            android:exported="false" />
-126-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:96:13-37
+126-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:96:13-37
 127        <activity
-127-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:97:9-99:40
+127-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:97:9-99:40
 128            android:name="com.example.brokerfi.xc.SelectAccountActivity"
-128-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:98:13-53
+128-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:98:13-53
 129            android:exported="false" />
-129-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:99:13-37
+129-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:99:13-37
 130        <activity
-130-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:100:9-102:40
+130-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:100:9-102:40
 131            android:name="com.example.brokerfi.xc.SettingActivity"
-131-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:101:13-47
+131-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:101:13-47
 132            android:exported="false" />
-132-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:102:13-37
+132-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:102:13-37
 133        <activity
-133-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:103:9-105:40
+133-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:103:9-105:40
 134            android:name="com.example.brokerfi.xc.AddNetworkActivity"
-134-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:104:13-50
+134-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:104:13-50
 135            android:exported="false" />
-135-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:105:13-37
+135-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:105:13-37
 136        <activity
-136-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:106:9-108:40
+136-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:106:9-108:40
 137            android:name="com.example.brokerfi.xc.SelectNetworkActivity"
-137-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:107:13-53
+137-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:107:13-53
 138            android:exported="false" />
-138-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:108:13-37
+138-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:108:13-37
 139        <activity
-139-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:109:9-111:40
+139-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:109:9-111:40
 140            android:name="com.example.brokerfi.xc.ShowPrKryActivity"
-140-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:110:13-49
+140-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:110:13-49
 141            android:exported="false" />
-141-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:111:13-37
+141-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:111:13-37
 142        <activity
-142-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:112:9-114:40
+142-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:112:9-114:40
 143            android:name="com.example.brokerfi.xc.SendActivity"
-143-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:113:13-44
+143-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:113:13-44
 144            android:exported="false" />
-144-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:114:13-37
+144-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:114:13-37
 145        <activity
-145-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:115:9-117:40
+145-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:115:9-117:40
 146            android:name="com.example.brokerfi.xc.ReceiveActivity"
-146-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:116:13-47
+146-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:116:13-47
 147            android:exported="false" />
-147-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:117:13-37
+147-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:117:13-37
 148        <activity
-148-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:118:9-120:40
+148-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:118:9-120:40
 149            android:name="com.example.brokerfi.xc.SwapActivity"
-149-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:119:13-44
+149-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:119:13-44
 150            android:exported="false" />
-150-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:120:13-37
+150-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:120:13-37
 151        <activity
-151-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:121:9-123:40
+151-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:121:9-123:40
 152            android:name="com.example.brokerfi.xc.BuyActivity"
-152-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:122:13-43
+152-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:122:13-43
 153            android:exported="false" />
-153-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:123:13-37
+153-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:123:13-37
 154        <activity
-154-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:124:9-126:40
+154-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:124:9-126:40
 155            android:name="com.example.brokerfi.xc.FaucetActivity"
-155-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:125:13-46
+155-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:125:13-46
 156            android:exported="false" />
-156-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:126:13-37
+156-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:126:13-37
 157        <activity
-157-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:127:9-129:40
+157-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:127:9-129:40
 158            android:name="com.example.brokerfi.xc.MenuActivity"
-158-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:128:13-44
+158-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:128:13-44
 159            android:exported="false" />
-159-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:129:13-37
+159-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:129:13-37
 160        <activity
-160-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:130:9-132:40
+160-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:130:9-132:40
 161            android:name="com.example.brokerfi.xc.WelcomeBackActivity"
-161-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:131:13-51
+161-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:131:13-51
 162            android:exported="false" />
-162-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:132:13-37
+162-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:132:13-37
 163        <activity
-163-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:133:9-135:40
+163-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:133:9-135:40
 164            android:name="com.example.brokerfi.xc.CongratulationsActivity"
-164-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:134:13-55
+164-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:134:13-55
 165            android:exported="false" />
-165-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:135:13-37
+165-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:135:13-37
 166        <activity
-166-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:136:9-138:40
+166-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:136:9-138:40
 167            android:name="com.example.brokerfi.xc.ComfirmSecretActivity"
-167-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:137:13-53
+167-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:137:13-53
 168            android:exported="false" />
-168-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:138:13-37
+168-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:138:13-37
 169        <activity
-169-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:139:9-141:40
+169-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:139:9-141:40
 170            android:name="com.example.brokerfi.xc.SecretPhraseActivity"
-170-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:140:13-52
+170-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:140:13-52
 171            android:exported="false" />
-171-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:141:13-37
+171-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:141:13-37
 172        <activity
-172-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:142:9-144:40
+172-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:142:9-144:40
 173            android:name="com.example.brokerfi.xc.CreatePasswActivity"
-173-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:143:13-51
+173-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:143:13-51
 174            android:exported="false" />
-174-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:144:13-37
+174-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:144:13-37
 175        <activity
-175-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:145:9-147:40
+175-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:145:9-147:40
 176            android:name="com.example.brokerfi.xc.ImportActivity"
-176-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:146:13-46
+176-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:146:13-46
 177            android:exported="false" />
-177-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:147:13-37
+177-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:147:13-37
 178        <activity
-178-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:148:9-156:20
+178-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:148:9-156:20
 179            android:name="com.example.brokerfi.xc.WelcomeActivity"
-179-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:149:13-47
+179-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:149:13-47
 180            android:exported="true" >
-180-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:150:13-36
+180-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:150:13-36
 181            <intent-filter>
-181-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:151:13-155:29
+181-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:151:13-155:29
 182                <action android:name="android.intent.action.MAIN" />
-182-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:152:17-69
-182-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:152:25-66
+182-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:152:17-69
+182-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:152:25-66
 183
 184                <category android:name="android.intent.category.LAUNCHER" />
-184-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:154:17-77
-184-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:154:27-74
+184-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:154:17-77
+184-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:154:27-74
 185            </intent-filter>
 186        </activity>
 187        <activity
-187-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:157:9-159:40
+187-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:157:9-159:40
 188            android:name="com.example.brokerfi.xc.MedalRankingActivity"
-188-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:158:13-52
+188-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:158:13-52
 189            android:exported="false" />
-189-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:159:13-37
+189-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:159:13-37
 190        <activity
-190-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:160:9-162:40
+190-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:160:9-162:40
 191            android:name="com.example.brokerfi.xc.GlobalStatsActivity"
-191-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:161:13-51
+191-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:161:13-51
 192            android:exported="false" />
-192-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:162:13-37
+192-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:162:13-37
 193        <activity
-193-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:163:9-165:40
+193-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:163:9-165:40
 194            android:name="com.example.brokerfi.xc.ProofSubmissionActivity"
-194-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:164:13-55
+194-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:164:13-55
 195            android:exported="false" />
-195-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:165:13-37
+195-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:165:13-37
 196        <activity
-196-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:166:9-168:40
+196-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:166:9-168:40
 197            android:name="com.example.brokerfi.xc.NFTMintingActivity"
-197-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:167:13-50
+197-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:167:13-50
 198            android:exported="false" />
-198-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:168:13-37
+198-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:168:13-37
 199        <activity
-199-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:169:9-171:40
+199-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:169:9-171:40
 200            android:name="com.example.brokerfi.xc.NFTViewActivity"
-200-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:170:13-47
+200-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:170:13-47
 201            android:exported="false" />
-201-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:171:13-37
+201-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:171:13-37
 202        <activity
-202-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:172:9-174:40
+202-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:172:9-174:40
 203            android:name="com.example.brokerfi.xc.ProofAndNFTActivity"
-203-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:173:13-51
+203-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:173:13-51
 204            android:exported="false" />
-204-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:174:13-37
+204-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:174:13-37
 205        <activity
-205-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:175:9-177:40
+205-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:175:9-177:40
 206            android:name="com.example.brokerfi.xc.SubmissionHistoryActivity"
-206-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:176:13-57
+206-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:176:13-57
 207            android:exported="false" />
-207-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:177:13-37
+207-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:177:13-37
 208        <activity
-208-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:178:9-180:40
+208-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:178:9-180:40
 209            android:name="com.example.brokerfi.xc.SubmissionDetailActivity"
-209-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:179:13-56
+209-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:179:13-56
 210            android:exported="false" />
-210-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:180:13-37
+210-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:180:13-37
 211        <activity
-211-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:181:9-183:40
+211-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:181:9-183:40
 212            android:name="com.example.brokerfi.xc.MyCenterActivity"
-212-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:182:13-48
+212-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:182:13-48
 213            android:exported="false" />
-213-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:183:13-37
+213-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:183:13-37
 214
 215        <!-- FileProvider for camera photos -->
 216        <provider
-216-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:186:9-194:20
+216-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:186:9-194:20
 217            android:name="androidx.core.content.FileProvider"
-217-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:187:13-62
+217-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:187:13-62
 218            android:authorities="com.example.brokerfi.fileprovider"
-218-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:188:13-68
+218-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:188:13-68
 219            android:exported="false"
-219-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:189:13-37
+219-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:189:13-37
 220            android:grantUriPermissions="true" >
-220-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:190:13-47
+220-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:190:13-47
 221            <meta-data
-221-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:191:13-193:54
+221-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:191:13-193:54
 222                android:name="android.support.FILE_PROVIDER_PATHS"
-222-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:192:17-67
+222-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:192:17-67
 223                android:resource="@xml/file_paths" />
-223-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:193:17-51
+223-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:193:17-51
 224        </provider>
 225
 226        <meta-data
-226-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:196:9-198:57
+226-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:196:9-198:57
 227            android:name="preloaded_fonts"
-227-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:197:13-43
+227-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:197:13-43
 228            android:resource="@array/preloaded_fonts" />
-228-->C:\Users\1\Desktop\brokerchainonline\brokerfi-public\app\src\main\AndroidManifest.xml:198:13-54
+228-->C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\src\main\AndroidManifest.xml:198:13-54
 229
 230        <activity
-230-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
+230-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
 231            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-231-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
+231-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
 232            android:clearTaskOnLaunch="true"
-232-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
+232-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
 233            android:screenOrientation="sensorLandscape"
-233-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
+233-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
 234            android:stateNotNeeded="true"
-234-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
+234-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
 235            android:theme="@style/zxing_CaptureTheme"
-235-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
+235-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
 236            android:windowSoftInputMode="stateAlwaysHidden" />
-236-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\1\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
+236-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\f207f48d58aa09507f572932c9a1af46\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
 237
 238        <provider
-238-->[androidx.emoji2:emoji2:1.2.0] C:\Users\1\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+238-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
 239            android:name="androidx.startup.InitializationProvider"
-239-->[androidx.emoji2:emoji2:1.2.0] C:\Users\1\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+239-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
 240            android:authorities="com.example.brokerfi.androidx-startup"
-240-->[androidx.emoji2:emoji2:1.2.0] C:\Users\1\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+240-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
 241            android:exported="false" >
-241-->[androidx.emoji2:emoji2:1.2.0] C:\Users\1\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+241-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
 242            <meta-data
-242-->[androidx.emoji2:emoji2:1.2.0] C:\Users\1\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+242-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
 243                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-243-->[androidx.emoji2:emoji2:1.2.0] C:\Users\1\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+243-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
 244                android:value="androidx.startup" />
-244-->[androidx.emoji2:emoji2:1.2.0] C:\Users\1\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+244-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Ryuuko\.gradle\caches\transforms-3\cddb82e15137b6f6419849cf98cc1b39\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
 245            <meta-data
-245-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\1\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+245-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Ryuuko\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
 246                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-246-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\1\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+246-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Ryuuko\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
 247                android:value="androidx.startup" />
-247-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\1\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+247-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Ryuuko\.gradle\caches\transforms-3\2db929e09f775cb9a16569f3cc924951\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
 248        </provider>
 249    </application>
 250

@@ -4,7 +4,7 @@
             "outputFile": "com.example.brokerfi.app-mergeDebugResources-29:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\38b933a6d74b017830f77d74b216fc86\\transformed\\appcompat-1.6.1\\res\\values-en-rAU\\values-en-rAU.xml",
+                    "source": "C:\\Users\\Ryuuko\\.gradle\\caches\\transforms-3\\38b933a6d74b017830f77d74b216fc86\\transformed\\appcompat-1.6.1\\res\\values-en-rAU\\values-en-rAU.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\ccccac3bc199769f808c2dfe504d14a2\\transformed\\core-1.9.0\\res\\values-en-rAU\\values-en-rAU.xml",
+                    "source": "C:\\Users\\Ryuuko\\.gradle\\caches\\transforms-3\\ccccac3bc199769f808c2dfe504d14a2\\transformed\\core-1.9.0\\res\\values-en-rAU\\values-en-rAU.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

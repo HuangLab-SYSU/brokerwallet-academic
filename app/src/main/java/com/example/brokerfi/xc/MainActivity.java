@@ -112,27 +112,29 @@ public class MainActivity extends AppCompatActivity {
                 String privatekey = split[position];
 
 
+                final int currentPosition = position; // 保存当前请求的账户位置
                 new Thread(()->{
                     ReturnAccountState returnAccountState = null;
                     try {
                         returnAccountState=MyUtil.GetAddrAndBalance(privatekey);
                         ReturnAccountState finalReturnAccountState = returnAccountState;
+                        final int reqPosition = currentPosition; // 保存到最终变量以在lambda中使用
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (finalReturnAccountState !=null){
-                                    String balance = finalReturnAccountState.getBalance();
-                                    Log.d("balance:",balance);
-                                    updateAccountStatusText(balance,finalReturnAccountState.getAccountAddr());
+                                // 只有当返回结果对应当前选择的账户时才更新UI(最后的状态不为空且等于当前的 position)
+                                if (finalReturnAccountState !=null && reqPosition == MainActivity.this.position){
+
+                                    String balance = finalReturnAccountState.getBalance();//测试用
+                                    Log.d("balance:",balance);//测试用的日志
+
+                                    updateAccountStatusText(balance,finalReturnAccountState.getAccountAddr());//更新余额显示
                                 }
                             }
                         });
                     }catch (Exception e){
                         e.printStackTrace();
-                    }finally {
-
                     }
-
 
 
                 }).start();
@@ -424,15 +426,20 @@ public class MainActivity extends AppCompatActivity {
             String privatekey = split[i];
 
 
+            final int currentPosition = i; // 保存当前请求的账户位置
             new Thread(()->{
                 ReturnAccountState returnAccountState = null;
                 try {
                     returnAccountState=MyUtil.GetAddrAndBalance(privatekey);
                     ReturnAccountState finalReturnAccountState = returnAccountState;
+                    final int reqPosition = currentPosition; // 保存到最终变量以在lambda中使用
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (finalReturnAccountState !=null){
+                            // 只有当返回结果对应当前选择的账户时才更新UI
+                            String acc = StorageUtil.getCurrentAccount(MainActivity.this);
+                            int currentAccountPos = (acc == null) ? 0 : Integer.parseInt(acc);
+                            if (finalReturnAccountState !=null && reqPosition == currentAccountPos){
                                 String balance = finalReturnAccountState.getBalance();
                                 Log.d("balance:",balance);
                                 updateAccountStatusText(balance,finalReturnAccountState.getAccountAddr());
@@ -441,10 +448,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }catch (Exception e){
                     e.printStackTrace();
-                }finally {
-
                 }
-
 
 
             }).start();
