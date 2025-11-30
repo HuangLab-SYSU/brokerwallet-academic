@@ -4,7 +4,7 @@
             "outputFile": "com.example.brokerfi.app-mergeDebugResources-29:/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Ryuuko\\.gradle\\caches\\transforms-3\\38b933a6d74b017830f77d74b216fc86\\transformed\\appcompat-1.6.1\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\38b933a6d74b017830f77d74b216fc86\\transformed\\appcompat-1.6.1\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Ryuuko\\.gradle\\caches\\transforms-3\\ccccac3bc199769f808c2dfe504d14a2\\transformed\\core-1.9.0\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\1\\.gradle\\caches\\transforms-3\\ccccac3bc199769f808c2dfe504d14a2\\transformed\\core-1.9.0\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

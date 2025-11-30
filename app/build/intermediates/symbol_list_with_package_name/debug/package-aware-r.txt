@@ -2811,7 +2811,6 @@ drawable dribbble_icon
 drawable emoji
 drawable fire
 drawable form
-drawable green_card_border
 drawable ic_arrow_back_black_24
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
@@ -2946,8 +2945,6 @@ drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable transaction
-drawable transaction_border
-drawable transaction_container
 drawable transaction_icon
 drawable uncheck_circle
 drawable up_circle
@@ -3446,7 +3443,6 @@ id progressBar1
 id progressBar2
 id progressBar3
 id progressText
-id progress_bar
 id progress_circular
 id progress_horizontal
 id proofAndNftButton
@@ -3642,18 +3638,10 @@ id topPanel
 id topUserText
 id totalBronzeMedalsText
 id totalGoldMedalsText
+id totalMedalText
 id totalSilverMedalsText
 id totalUsersText
 id touch_outside
-id transaction_amount
-id transaction_fee
-id transaction_from
-id transaction_id
-id transaction_status
-id transaction_time
-id transaction_to
-id transaction_type
-id transactions_recycler_view
 id transitionToEnd
 id transitionToStart
 id transition_current_scene
@@ -3967,7 +3955,6 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 layout topbar
-layout transaction_item
 layout zxing_barcode_scanner
 layout zxing_capture
 mipmap ic_launcher
