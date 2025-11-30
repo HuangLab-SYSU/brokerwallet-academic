@@ -1,0 +1,51 @@
+# Android Studio / IntelliJ
+.idea/
+.gradle/
+local.properties
+*.iml
+*.hprof
+
+# Build outputs
+build/
+app/build/
+
+# Android Gradle Plugin
+app/.gradle/
+
+# Gradle wrapper
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper1/gradle-wrapper.jar
+
+# Logs
+logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+*.ec
+*.em
+*.lcov
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor directories and files
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
