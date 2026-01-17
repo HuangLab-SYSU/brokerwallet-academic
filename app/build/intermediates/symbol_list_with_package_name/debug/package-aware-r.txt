@@ -1392,6 +1392,7 @@ color green
 color green_83
 color grey
 color grey_60
+color grey_light
 color grey_price_disable
 color highlighted_text_material_dark
 color highlighted_text_material_light
@@ -2782,11 +2783,14 @@ drawable codepen
 drawable codepen_icon
 drawable custom_alert_background
 drawable custom_button_background
+drawable custom_button_background_black
+drawable custom_button_background_white
 drawable custom_button_bg_gray
 drawable custom_button_bg_white
 drawable custom_button_border_green
 drawable custom_button_border_red
 drawable custom_dialog_bg
+drawable custom_edittext_background
 drawable custom_edittext_border
 drawable custom_edittext_border_disabled
 drawable custom_green_background
@@ -2816,6 +2820,8 @@ drawable ic_arrow_back_black_24
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
 drawable ic_close
+drawable ic_eye_closed
+drawable ic_eye_open
 drawable ic_keyboard_black_24dp
 drawable ic_launcher2_background
 drawable ic_launcher3_background
@@ -3089,6 +3095,7 @@ id btn_create
 id btn_doCamera
 id btn_doFile
 id btn_done
+id btn_export_private_key
 id btn_list
 id btn_mint
 id btn_next
@@ -3099,6 +3106,7 @@ id btn_send
 id btn_stake
 id btn_unlist
 id btn_unlock
+id btn_verify
 id btn_withdraw
 id button
 id buttonPanel
@@ -3141,6 +3149,7 @@ id contentPanel
 id contiguous
 id continuousVelocity
 id contributionLevelSpinner
+id convertButton
 id coordinator
 id copyaddress
 id cos
@@ -3219,6 +3228,7 @@ id enterAlways
 id enterAlwaysCollapsed
 id errorLayout
 id errorText
+id et_password
 id et_price
 id et_shares
 id eventDescriptionEditText
@@ -3392,6 +3402,7 @@ id networklist
 id never
 id neverCompleteToEnd
 id neverCompleteToStart
+id newAddressInput
 id new_passw
 id news
 id nft
@@ -3418,6 +3429,7 @@ id notification_background
 id notification_main_column
 id notification_main_column_container
 id off
+id oldAddressInput
 id on
 id onInterceptTouchReturnSwipe
 id outline
@@ -3664,6 +3676,7 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tsv_dollar
+id tv_error
 id tv_name
 id tv_price
 id tv_price_label
@@ -3671,6 +3684,7 @@ id tv_sale_status
 id tv_shares
 id tv_shares_label
 id tv_title
+id tv_wallet_address
 id txw_tip
 id txw_underline
 id unchecked
@@ -3837,8 +3851,10 @@ layout activity_buy_nfts
 layout activity_comfirm_secret
 layout activity_congratulations
 layout activity_congratulations_mint
+layout activity_convert
 layout activity_create_passw
 layout activity_emulator
+layout activity_export_private_key
 layout activity_faucet
 layout activity_generate_account
 layout activity_global_stats
@@ -3851,10 +3867,10 @@ layout activity_my_account
 layout activity_my_center
 layout activity_my_nfts
 layout activity_news
-layout activity_news2
 layout activity_nft_main
 layout activity_nft_minting
 layout activity_nft_view
+layout activity_notification
 layout activity_proof_and_nft
 layout activity_proof_submission
 layout activity_receive
@@ -3984,6 +4000,18 @@ mipmap ic_launcher4_round
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
 raw zxing_beep
+string Account
+string Address_0x
+string BKC
+string Empty_Account_Warning
+string Exit_Confirm
+string Hidden_Account
+string No
+string Old_Account_Warning
+string Old_Account_Warning_MainPage_FirstLine
+string Old_Account_Warning_MainPage_SecondLine
+string Wrong_Password_Warning
+string Yes
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description

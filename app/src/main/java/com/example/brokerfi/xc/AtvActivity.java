@@ -56,7 +56,7 @@ public class AtvActivity extends AppCompatActivity {
     private ExecutorService executorService;
     private static final String CACHE_FILE_NAME = "transactions_cache.txt";
     
-    private static final String API_URL = "http://academic.broker-chain.com/gettx2?acc=";
+    private static final String API_URL = "http://dash.broker-chain.com/gettx2?acc=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,7 @@ public class AtvActivity extends AppCompatActivity {
         transactionsRecyclerView = findViewById(R.id.transactions_recycler_view);
         progressBar = findViewById(R.id.progress_bar);
         
-        // 设置 layoutmanager
+        //layoutmanager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         transactionsRecyclerView.setLayoutManager(layoutManager);
         
@@ -188,13 +188,13 @@ public class AtvActivity extends AppCompatActivity {
                     containsB2E = true;
                 }
                 
-                // 检查地址格式是否标准
+                // 检查地址格式
                 if ((transaction.getFrom() != null && !isValidAddress(transaction.getFrom())) ||
                     (transaction.getTo() != null && !isValidAddress(transaction.getTo()))) {
                     hasInvalidAddress = true;
                 }
                 
-                // 只保留不包含B2E且地址格式标准的交易
+
                 if (!containsB2E && !hasInvalidAddress) {
                     filtered.add(transaction);
                 } else {
@@ -207,8 +207,7 @@ public class AtvActivity extends AppCompatActivity {
         return filtered;
     }
     
-    //缓存交易数据到本地文件
-
+    //Store to local
     private void cacheTransactions(List<Transaction> transactions) {
         try {
             File file = new File(getCacheDir(), CACHE_FILE_NAME);
@@ -223,7 +222,7 @@ public class AtvActivity extends AppCompatActivity {
         }
     }
     
-    //从本地文件加载缓存的交易数据
+    //load from local
     private void loadCachedTransactions() {
         try {
             File file = new File(getCacheDir(), CACHE_FILE_NAME);
@@ -270,7 +269,7 @@ public class AtvActivity extends AppCompatActivity {
         });
     }
     
-    //获取当前选中账户的地址
+    //Get addr
     private String getCurrentAccountAddress() {
         String privateKey = StorageUtil.getCurrentPrivatekey(this);
         if (privateKey != null) {
@@ -283,6 +282,16 @@ public class AtvActivity extends AppCompatActivity {
         menu = findViewById(R.id.menu);
         notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
+        
+        
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(AtvActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void intEvent(){
@@ -317,12 +326,12 @@ public class AtvActivity extends AppCompatActivity {
         }
     }
     
-    //验证地址格式是否标准
+
     private boolean isValidAddress(String address) {
         if (address == null || address.isEmpty()) {
             return false;
         }
-        // 标准地址格式为：40个字符的十六进制字符串
+        // 40个字符、十六进制
         return address.length() == 40 && address.matches("^[0-9a-fA-F]+$");
     }
 

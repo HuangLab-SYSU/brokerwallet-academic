@@ -25,6 +25,8 @@ public class NewsActivity extends AppCompatActivity {
 //    private RelativeLayout action_bar;
 //    private NavigationHelper navigationHelper;
     private WebView webView;
+    
+    private boolean networkErrorShown = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +45,11 @@ public class NewsActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-//                if (true) {
-//                    return;
-//                }
                 if (!request.isForMainFrame()) {
                     return;
                 }
 
-                    String customErrorHtml = "<html>" +
+                String customErrorHtml = "<html>" +
                         "<head>" +
                         "<meta charset='utf-8'>" +
                         "<meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
@@ -59,18 +58,16 @@ public class NewsActivity extends AppCompatActivity {
                         "<body style='font-family: sans-serif; text-align: center; margin-top: 40vh; color: #555;'>" +
                         "<h3>网络连接失败</h3>" +
                         "<p>请检查网络设置</p>" +
-//                        "<button onclick='window.location.reload()'>重新加载</button>" +
                         "</body>" +
                         "</html>";
 
                 // ✅ 使用 loadDataWithBaseURL
                 view.loadDataWithBaseURL("file:///android_asset/", customErrorHtml, "text/html", "utf-8", null);
-                Toast.makeText(NewsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent();
-//                intent.setClass(NewsActivity.this, MainActivity.class);
-//                startActivity(intent);
-                if (true) {
-                    return;
+                
+                // 只显示一次网络错误提示
+                if (!networkErrorShown) {
+                    Toast.makeText(NewsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    networkErrorShown = true;
                 }
 
 //                String customErrorHtml = "<html><head><meta charset='utf-8'>" +
@@ -92,14 +89,21 @@ public class NewsActivity extends AppCompatActivity {
         });
 
         // 加载指定网站
-        webView.loadUrl("https://academic.broker-chain.com:444/news");
+        //webView.loadUrl("https://academic.broker-chain.com:444/news");
+        webView.loadUrl("https://dash.broker-chain.com:444/news");
+        //webView.loadUrl("https://")
     }
     @Override
     public void onBackPressed() {
-        if (webView.canGoBack()) {
+        // 当显示错误页面时，直接退出活动
+        if (networkErrorShown) {
+            super.onBackPressed();
+            overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
+        } else if (webView.canGoBack()) {
             webView.goBack();
         } else {
             super.onBackPressed();
+            overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
         }
     }
 

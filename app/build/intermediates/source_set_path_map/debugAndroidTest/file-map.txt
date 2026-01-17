@@ -1,6 +1,0 @@
-com.example.brokerfi.test.app-core-1.5.0-0 C:\Users\Ryuuko\.gradle\caches\transforms-3\7a2b499a1192cb3bec7b143db645df29\transformed\core-1.5.0\res
-com.example.brokerfi.test.app-annotation-experimental-1.3.0-1 C:\Users\Ryuuko\.gradle\caches\transforms-3\eab32e5d1b2437f6bfaaa3f6c33977b4\transformed\annotation-experimental-1.3.0\res
-com.example.brokerfi.test.app-androidTest-2 C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\build\generated\res\resValues\androidTest\debug
-com.example.brokerfi.test.app-mergeDebugAndroidTestResources-3 C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.example.brokerfi.test.app-mergeDebugAndroidTestResources-4 C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.example.brokerfi.test.app-merged_res-5 C:\Users\Ryuuko\Desktop\brokerwallet-academic\app\build\intermediates\merged_res\debugAndroidTest

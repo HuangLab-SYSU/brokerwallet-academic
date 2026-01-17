@@ -26,5 +26,17 @@
     <string name="all_nfts">All NFTs</string>
     <string name="medal_system">Medal System</string>
     <string name="proof_and_nft">Proof &amp; NFT</string>
+    <string name="Hidden_Account">Hidden Accounts (%1$d)</string>
+    <string name="Account">Account %d</string>
+    <string name="Address_0x">0x %s</string>
+    <string name="BKC">%s BKC </string>
+    <string name="Old_Account_Warning">"The old account type is no longer valid! Please upgrade immediately."</string>
+    <string name="Old_Account_Warning_MainPage_FirstLine">"The old account type is no longer valid!."</string>
+    <string name="Old_Account_Warning_MainPage_SecondLine">"Please upgrade your account on the Dashboard or Miner Client."</string>
+    <string name="Empty_Account_Warning">"No available accounts"</string>
+    <string name="Exit_Confirm">你确定要退出应用吗？</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="Wrong_Password_Warning">Wrong Password</string>
 </resources>
 

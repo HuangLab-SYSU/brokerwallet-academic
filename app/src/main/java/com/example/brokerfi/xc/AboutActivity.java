@@ -4,6 +4,7 @@ import com.example.brokerfi.R;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,8 +49,8 @@ public class AboutActivity extends AppCompatActivity {
                 AtomicReference<String> sv = new AtomicReference<>();
                 new Thread(()->{
                     try {
-//                        byte[] bytes = HTTPUtil.doPost2("https://academic.broker-chain.com/appversion", null);
-                        byte[] bytes = HTTPUtil.doPost2("https://academic.broker-chain.com:444/appversion", null);
+//                      byte[] bytes = HTTPUtil.doPost2("https://academic.broker-chain.com/appversion", null);
+                        byte[] bytes = HTTPUtil.doPost2("https://dash.broker-chain.com:444/appversion", null);
                         sv.set(new String(bytes));
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -82,25 +83,31 @@ public class AboutActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-
-
-
-
-            // 示例：跳转到应用市场（可替换为你的包名）
-//            openAppInPlayStore();
+            //openAppInPlayStore();
         });
     }
 
-    // 获取 App 版本号
+    // Get app Version from Mysql in Server
+
+    //********************************************************************************************
+    // FOR Developer：Please update the latest appVersion in the database before each new release！
+    //********************************************************************************************
     private String getAppVersionName() {
         try {
             return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (Exception e) {
-            return "1.0.0";
+
+            //LEGACY: old implementation - keep for backup only
+            //return "1.0.0";
+
+            //12-26 add error handling logic：
+            Log.e("Version", "Error getting version", e);
+            return "Can't get AppVersion";
+
         }
     }
 
-    // 打开应用在 Play 商店的页面（可用于更新）
+    // 打开应用在 Play 商店的页面（For update the app）
     private void openAppInPlayStore() {
         try {
             startActivity(new Intent(Intent.ACTION_VIEW,

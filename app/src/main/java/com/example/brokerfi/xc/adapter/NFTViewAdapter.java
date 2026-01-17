@@ -99,10 +99,10 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         
         NFTItem item = nftList.get(position);
         if(item.getImageUrl().startsWith("http://localhost:5000/")){
-            item.setImageUrl(item.getImageUrl().replace("http://localhost:5000/","http://academic.broker-chain.com:5000/"));
+            item.setImageUrl(item.getImageUrl().replace("http://localhost:5000/","http://dash.broker-chain.com.com:5000/"));
         }
         if(item.getImageUrl().startsWith("/uploads")){
-            item.setImageUrl("http://academic.broker-chain.com:5000"+item.getImageUrl());
+            item.setImageUrl("http://dash.broker-chain.com:5000"+item.getImageUrl());
         }
         ViewHolder nftHolder = (ViewHolder) holder;
         

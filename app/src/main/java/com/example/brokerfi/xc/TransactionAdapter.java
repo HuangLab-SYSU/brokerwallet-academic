@@ -20,7 +20,8 @@ import java.util.List;
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder> {
 
     private List<Transaction> transactions;
-    private String currentAddress; // 当前用户的地址，用于判断交易方向，通过 from to 匹配当前地址来判断
+    private String currentAddress;
+    //CurrentAddress，For determining the direction of a transaction, match the current address by comparing "from" and "to"
 
     public TransactionAdapter(List<Transaction> transactions, String currentAddress) {
         this.transactions = transactions;
@@ -42,7 +43,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         Transaction transaction = transactions.get(position);
         Log.d("TransactionAdapter", "交易信息 - 从: " + transaction.getFrom() + ", 到: " + transaction.getTo() + ", 金额: " + transaction.getValue());
 
-        // 判断交易类型（发送或接收）
         String type = "UNKNOWN";
         String amount = transaction.getValue();
         
@@ -79,7 +79,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.transactionTo.setText(transaction.getTo() != null ? transaction.getTo() : "-");
         holder.transactionId.setText(transaction.getId());
 
-        // 格式化Gasfee
+        // Format GasFee
         String fee = transaction.getFee();
         if (fee != null && !fee.isEmpty()) {
             try {
@@ -100,7 +100,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         return count;
     }
 
-    // 更新数据集
+    //Update the dataset
     public void updateTransactions(List<Transaction> newTransactions) {
         Log.d("TransactionAdapter", "更新交易数据，新交易数量: " + (newTransactions != null ? newTransactions.size() : 0));
         this.transactions = newTransactions;

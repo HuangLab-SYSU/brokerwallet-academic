@@ -36,7 +36,7 @@
             android:name=".xc.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.NewsActivity2"
+            android:name=".xc.NotificationActivity"
             android:exported="false" />
         <activity
             android:name=".xc.AtvActivity"
@@ -98,6 +98,9 @@
             android:name=".xc.SelectAccountActivity"
             android:exported="false" />
         <activity
+            android:name=".xc.ExportPrivateKeyActivity"
+            android:exported="false" />
+        <activity
             android:name=".xc.SettingActivity"
             android:exported="false" />
         <activity
@@ -123,6 +126,9 @@
             android:exported="false" />
         <activity
             android:name=".xc.FaucetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.ConvertActivity"
             android:exported="false" />
         <activity
             android:name=".xc.MenuActivity"

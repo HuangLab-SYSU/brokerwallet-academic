@@ -17,7 +17,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/work_sans_black"
         android:paddingHorizontal="16dp"
-        android:text="Accounts List"
+        android:text="Account List"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -253,32 +253,55 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:gravity="center"
+        android:padding="8dp">
 
         <android.widget.Button
             android:id="@+id/btn_add"
-            android:layout_width="0dp"
+            android:layout_width="326dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
+            android:background="@drawable/custom_button_background"
             android:text="Import account"
             android:textAllCaps="false"
-            android:textSize="16sp"
             android:textColor="#FFFFFF"
-            android:background="@drawable/custom_button_background"
-            android:layout_marginEnd="8dp" />
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp">
 
         <android.widget.Button
             android:id="@+id/btn_add2"
-            android:layout_width="0dp"
+            android:layout_width="326dp"
             android:layout_height="40dp"
-            android:layout_weight="1"
+            android:background="@drawable/custom_button_background"
             android:text="Generate account"
             android:textAllCaps="false"
-            android:textSize="16sp"
             android:textColor="#FFFFFF"
-            android:background="@drawable/custom_button_background"
-            android:layout_marginStart="8dp" />
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <android.widget.Button
+            android:id="@+id/btn_export_private_key"
+            android:layout_width="326dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_button_background_black"
+            android:text="Export Private Key"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
     </LinearLayout>
 <!--    <android.widget.Button-->
 <!--        android:id="@+id/btn_add"-->

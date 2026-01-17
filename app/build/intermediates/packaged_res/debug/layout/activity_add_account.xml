@@ -63,7 +63,15 @@
             android:textSize="12sp"
             android:inputType="text"/>
 
-
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Can not import invalid private key"
+            android:textColor="@color/red_127"
+            android:textSize="12sp"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/button"

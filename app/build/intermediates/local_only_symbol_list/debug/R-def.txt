@@ -19,6 +19,7 @@ color green
 color green_83
 color grey
 color grey_60
+color grey_light
 color grey_price_disable
 color origin
 color pink
@@ -58,11 +59,14 @@ drawable codepen
 drawable codepen_icon
 drawable custom_alert_background
 drawable custom_button_background
+drawable custom_button_background_black
+drawable custom_button_background_white
 drawable custom_button_bg_gray
 drawable custom_button_bg_white
 drawable custom_button_border_green
 drawable custom_button_border_red
 drawable custom_dialog_bg
+drawable custom_edittext_background
 drawable custom_edittext_border
 drawable custom_edittext_border_disabled
 drawable custom_green_background
@@ -84,6 +88,8 @@ drawable fire
 drawable form
 drawable green_card_border
 drawable ic_close
+drawable ic_eye_closed
+drawable ic_eye_open
 drawable ic_launcher2_background
 drawable ic_launcher3_background
 drawable ic_launcher4_background
@@ -177,6 +183,7 @@ id btn_create
 id btn_doCamera
 id btn_doFile
 id btn_done
+id btn_export_private_key
 id btn_list
 id btn_mint
 id btn_next
@@ -187,6 +194,7 @@ id btn_send
 id btn_stake
 id btn_unlist
 id btn_unlock
+id btn_verify
 id btn_withdraw
 id button
 id buy
@@ -199,6 +207,7 @@ id checkbox
 id closeButton
 id confirm_passw
 id contributionLevelSpinner
+id convertButton
 id copyaddress
 id createWalletButton
 id dashedBorderView
@@ -229,6 +238,7 @@ id emptyStateLayout
 id enlarged_image
 id errorLayout
 id errorText
+id et_password
 id et_price
 id et_shares
 id eventDescriptionEditText
@@ -271,6 +281,7 @@ id myCenterButton
 id myNFTsButton
 id mynfts
 id networklist
+id newAddressInput
 id new_passw
 id news
 id nft
@@ -288,6 +299,7 @@ id nftTotalCountText
 id nft_container
 id nftsContent
 id notificationBtn
+id oldAddressInput
 id ownerAddressText
 id ownerDisplayNameText
 id previewImageButton
@@ -382,6 +394,7 @@ id transaction_to
 id transaction_type
 id transactions_recycler_view
 id tsv_dollar
+id tv_error
 id tv_name
 id tv_price
 id tv_price_label
@@ -389,6 +402,7 @@ id tv_sale_status
 id tv_shares
 id tv_shares_label
 id tv_title
+id tv_wallet_address
 id txw_tip
 id txw_underline
 id up_icon
@@ -413,8 +427,10 @@ layout activity_buy_nfts
 layout activity_comfirm_secret
 layout activity_congratulations
 layout activity_congratulations_mint
+layout activity_convert
 layout activity_create_passw
 layout activity_emulator
+layout activity_export_private_key
 layout activity_faucet
 layout activity_generate_account
 layout activity_global_stats
@@ -427,10 +443,10 @@ layout activity_my_account
 layout activity_my_center
 layout activity_my_nfts
 layout activity_news
-layout activity_news2
 layout activity_nft_main
 layout activity_nft_minting
 layout activity_nft_view
+layout activity_notification
 layout activity_proof_and_nft
 layout activity_proof_submission
 layout activity_receive
@@ -479,6 +495,18 @@ mipmap ic_launcher4
 mipmap ic_launcher4_foreground
 mipmap ic_launcher4_round
 mipmap ic_launcher_round
+string Account
+string Address_0x
+string BKC
+string Empty_Account_Warning
+string Exit_Confirm
+string Hidden_Account
+string No
+string Old_Account_Warning
+string Old_Account_Warning_MainPage_FirstLine
+string Old_Account_Warning_MainPage_SecondLine
+string Wrong_Password_Warning
+string Yes
 string all_nfts
 string app_name
 string broker

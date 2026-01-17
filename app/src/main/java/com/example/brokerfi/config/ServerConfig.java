@@ -1,34 +1,45 @@
 package com.example.brokerfi.config;
 
-/**
- * 服务器配置文件
- * 位于独立的config包中，方便修改IP配置
- * 用于管理所有后端服务的地址和端口
- * 当IP地址发生变化时，只需修改此文件即可
- */
+    /**
+     * 【开发者请注意】：
+     * 这是服务器配置文件
+     * 位于独立的config包中，方便修改IP配置
+     * 此文件用于管理所有后端服务的地址和端口
+     * 当IP地址发生变化时，只需修改此文件即可
+     */
 public class ServerConfig {
     
     // ==================== 服务器配置 ====================
     
     /**
-     * 主服务器地址
-     * 注意：IP地址可能会变化，请根据实际情况修改
-     * 
-     * 模拟器使用：10.0.2.2
-     * 真机使用：电脑的局域网IP（如：192.168.1.100）
+     * 【开发者请注意】:
+     * 主服务器地址 SERVER_HOST 设置规范如下:
+     *
+     * 【连接 BrokerChain-TestNet】
+     * 请设置为:"academic.broker-chain.com"；
+     *
+     * 【本地搭建 Supervisor、在 模拟器(如 Android Studio Emulator) 中运行 BrokerWallet】
+     * 请设置为:"10.0.2.2"；
+     * 警告：请勿在模拟器中设置 SERVER_HOST 为 LOCALHOST 或者 127.0.0.1，这会指向 模拟器 本身；
+     *
+     * 【使用物理设备连接开发机或服务器】
+     * 请使用电脑的局域网 IP 或者服务器的 公网 IP；
      */
-    public static final String SERVER_HOST = "academic.broker-chain.com"; // USB连接使用localhost
-    
+
+    //public static final String SERVER_HOST = "10.0.2.2";
+    public static final String SERVER_HOST = "dash.broker-chain.com";
+    //public static final String SERVER_HOST = "academic.broker-chain.com";
+
     /**
      * 主服务器端口
      */
-//    public static final int SERVER_PORT = 5000;
+    //public static final int SERVER_PORT = 5000;
     public static final int SERVER_PORT = 440;
+    //public static final int SERVER_PORT = 56741;
 
     /**
      * 完整的服务器基础URL
      */
-//    public static final String BASE_URL = "http://" + SERVER_HOST + ":" + SERVER_PORT;
     public static final String BASE_URL = "https://" + SERVER_HOST + ":" + SERVER_PORT;
 
     // ==================== API端点配置 ====================

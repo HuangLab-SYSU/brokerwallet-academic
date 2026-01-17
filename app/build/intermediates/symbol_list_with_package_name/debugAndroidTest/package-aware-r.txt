@@ -1,3 +1,0 @@
-com.example.brokerfi.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme

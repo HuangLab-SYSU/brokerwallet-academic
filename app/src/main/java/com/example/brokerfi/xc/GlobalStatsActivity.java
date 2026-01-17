@@ -280,7 +280,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                     Log.d("GlobalStats", "MedalApiUtil返回空，尝试直接HTTP调用");
                     try {
 //                        String testUrl = "http://academic.broker-chain.com:5000/api/blockchain/nft/all?page=" + nftCurrentPage + "&size=" + nftPageSize;
-                        String testUrl = "https://academic.broker-chain.com:440/api/blockchain/nft/all?page=" + nftCurrentPage + "&size=" + nftPageSize;
+                        String testUrl = "https://dash.broker-chain.com:440/api/blockchain/nft/all?page=" + nftCurrentPage + "&size=" + nftPageSize;
                         java.net.URL url = new java.net.URL(testUrl);
                         java.net.HttpURLConnection connection = (java.net.HttpURLConnection) url.openConnection();
                         connection.setRequestMethod("GET");
@@ -341,7 +341,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                 
                 // 直接测试API调用
 //                String testUrl = "http://academic.broker-chain.com:5000/api/blockchain/nft/all?page=" + nftCurrentPage + "&size=" + nftPageSize;
-                String testUrl = "https://academic.broker-chain.com:440/api/blockchain/nft/all?page=" + nftCurrentPage + "&size=" + nftPageSize;
+                String testUrl = "https://dash.broker-chain.com:440/api/blockchain/nft/all?page=" + nftCurrentPage + "&size=" + nftPageSize;
                 Log.d("GlobalStats", "测试URL: " + testUrl);
                 
                 String response = MedalApiUtil.getAllNfts(nftCurrentPage, nftPageSize);
@@ -440,7 +440,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                             
                             if ("backend-server".equals(storageType)) {
                                 String path = imageMetadata.optString("path", "");
-                                String serverUrl = imageMetadata.optString("serverUrl", "http://academic.broker-chain.com:5000");
+                                String serverUrl = imageMetadata.optString("serverUrl", "http://dash.broker-chain.com:5000");
                                 
                                 if (!path.isEmpty()) {
                                     imageUrl = serverUrl + path;
@@ -581,7 +581,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                                 
                                 if ("backend-server".equals(storageType)) {
                                     String path = imageMetadata.optString("path", "");
-                                    String serverUrl = imageMetadata.optString("serverUrl", "http://academic.broker-chain.com:5000");
+                                    String serverUrl = imageMetadata.optString("serverUrl", "http://dash.broker-chain.com:5000");
                                     
                                     if (!path.isEmpty()) {
                                         imageUrl = serverUrl + path;

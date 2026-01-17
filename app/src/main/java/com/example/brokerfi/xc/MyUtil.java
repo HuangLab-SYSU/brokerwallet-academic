@@ -310,9 +310,12 @@ public class MyUtil {
     public static ReturnAccountState GetAddrAndBalance(String privateKey) {
         try {
             String uuid = UUID.randomUUID().toString();
-
+            //UUID 是一个随机产生的 ID，字符串类型;
+            // data 为 uuid+地址;此地址为通过私钥获取地址;
             String data = uuid + SecurityUtil.GetAddress(privateKey);
+            //String data = uuid;
             String[] sign = SecurityUtil.signECDSA(privateKey, data);
+            //设置这个 query-g 的 req 参数的属性：公钥+RandomStr+Sign1+Sign2+UUID
             QueryReq queryReq = new QueryReq();
             queryReq.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey)); // 注意：这里的 global.PublicKey 需要根据你的实际情况进行替换
             queryReq.setRandomStr(uuid);
@@ -353,7 +356,7 @@ public class MyUtil {
             rewardReq.setSign2(sign[1]);
 
             try {
-                HTTPUtil.doPost("reward_wallet", rewardReq);
+                //HTTPUtil.doPost("reward_wallet", rewardReq);
                 return ;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1022,6 +1025,9 @@ class ReturnAccountState {
     private String AccountAddr;
     @SerializedName("balance")
     private String Balance;
+    private boolean isHidden = false;
+    private String accountName; 
+    private boolean isNewPrivateKeyFormat; 
 
     public String getAccountAddr() {
         return AccountAddr;
@@ -1037,5 +1043,29 @@ class ReturnAccountState {
 
     public void setBalance(String balance) {
         Balance = balance;
+    }
+
+    public boolean isHidden() {
+        return isHidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        isHidden = hidden;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public boolean isNewPrivateKeyFormat() {
+        return isNewPrivateKeyFormat;
+    }
+
+    public void setNewPrivateKeyFormat(boolean newPrivateKeyFormat) {
+        isNewPrivateKeyFormat = newPrivateKeyFormat;
     }
 }

@@ -30,7 +30,7 @@ import com.example.brokerfi.xc.AtvActivity;
 import com.example.brokerfi.xc.EmulatorActivity;
 import com.example.brokerfi.xc.MainActivity;
 import com.example.brokerfi.xc.NewsActivity;
-import com.example.brokerfi.xc.NewsActivity2;
+import com.example.brokerfi.xc.NotificationActivity;
 import com.example.brokerfi.xc.QRCode.Capture;
 import com.example.brokerfi.xc.ReceiveActivity;
 
@@ -142,7 +142,7 @@ public class NavigationHelper{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(context, NewsActivity2.class);
+                intent.setClass(context, NotificationActivity.class);
                 //跳转
                 context.startActivity(intent);
             }

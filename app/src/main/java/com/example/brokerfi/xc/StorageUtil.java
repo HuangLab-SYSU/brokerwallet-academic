@@ -27,13 +27,13 @@ public class StorageUtil {
     }
     public static String getNoticeId(AppCompatActivity activity){
         SharedPreferences settings =activity.getSharedPreferences(NoticeIdName, Context.MODE_PRIVATE);
-        return settings.getString(NoticeId, null); // 如果没有找到，返回null
+        return settings.getString(NoticeId, null);
     }
 
 
     public static String getPrivateKey(AppCompatActivity activity) {
         SharedPreferences settings =activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        return settings.getString(PREF_ACCOUNT, null); // 如果没有找到，返回null
+        return settings.getString(PREF_ACCOUNT, null);
     }
 
     public static String getCurrentAccount(AppCompatActivity activity) {

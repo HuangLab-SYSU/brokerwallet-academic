@@ -6,6 +6,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#e5e7eb</color>
+    <color name="grey_light">#DEDBDB</color>
     <color name="grey_60">#3C3C3C</color>
     <color name="origin">#EEEEEE</color>
     <color name="green">#86EFAC</color>

@@ -279,7 +279,8 @@ public class ProofUploadUtil {
         
         // 创建请求
         Request request = new Request.Builder()
-                .url("http://academic.broker-chain.com:5000/api/upload/complete")
+                //.url("http://academic.broker-chain.com:5000/api/upload/complete")
+                .url("http://dash.broker-chain.com:5000/api/upload/complete")
                 .post(requestBody)
                 .build();
         

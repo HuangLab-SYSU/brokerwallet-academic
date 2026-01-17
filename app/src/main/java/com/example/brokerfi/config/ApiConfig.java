@@ -22,12 +22,14 @@ public class ApiConfig {
      * 后端服务器基础URL
      * 
      * 📝 修改说明：
-     * - 本地开发：http://127.0.0.1:5000 或 http://localhost:5000
-     * - USB调试：http://你的电脑IP:5000（例如：http://192.168.1.100:5000）
-     * - 云服务器：http://your-domain.com 或 http://服务器IP:5000
+     * - 本地开发：http://127.0.0.1:56741 或 http://localhost:56741
+     * - USB调试：http://你的电脑IP:56741（例如：http://192.168.1.100:56741）
+     * - 云服务器：http://your-domain.com 或 http://服务器IP:56741
      */
-//    public static final String BASE_URL = "http://academic.broker-chain.com:5000";
-    public static final String BASE_URL = "https://academic.broker-chain.com:440";
+    //public static final String BASE_URL = "http://academic.broker-chain.com:5000";
+    //public static final String BASE_URL = "https://academic.broker-chain.com:440";
+    //public static final String BASE_URL = "http://10.0.2.2:56741";
+    public static final String BASE_URL = "https://dash.broker-chain.com:440";
 
     /**
      * API接口路径
