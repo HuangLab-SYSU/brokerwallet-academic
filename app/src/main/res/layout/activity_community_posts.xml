@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- 主体 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- 顶部栏 -->
+        <include layout="@layout/topbar" />
+
+        <!-- ⭐ 整页 RecyclerView（未来标准） -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_post_detail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <!-- ⭐ 底部评论输入 -->
+    <LinearLayout
+        android:id="@+id/layout_comment_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="@color/white"
+        android:elevation="4dp">
+
+        <EditText
+            android:id="@+id/et_comment"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:hint="Write a comment..."
+            android:textSize="14sp"
+            android:background="@android:drawable/edit_text"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Send"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</FrameLayout>

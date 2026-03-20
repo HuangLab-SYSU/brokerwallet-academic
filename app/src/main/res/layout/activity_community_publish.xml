@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <!-- 顶部栏 -->
+    <include layout="@layout/topbar" />
+
+    <!-- 内容区 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 标题输入 -->
+            <EditText
+                android:id="@+id/et_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter title (max 30 chars)"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:maxLength="30"
+                android:background="@android:drawable/edit_text"
+                android:padding="10dp" />
+
+            <!-- 正文字数提示 -->
+            <TextView
+                android:id="@+id/tv_content_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0/3000"
+                android:textSize="12sp"
+                android:textColor="@color/grey_60"
+                android:layout_marginTop="4dp" />
+
+            <!-- 正文输入 -->
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:hint="Say something..."
+                android:gravity="top"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:maxLength="3000"
+                android:background="@android:drawable/edit_text"
+                android:padding="10dp"
+                android:layout_marginTop="4dp" />
+
+            <!-- 图片选择标题 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Images (max 9)"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="16dp" />
+
+            <!-- 图片网格 -->
+            <GridLayout
+                android:id="@+id/grid_images"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:layout_marginTop="8dp">
+
+                <!-- 添加图片按钮（占位） -->
+                <ImageView
+                    android:id="@+id/btn_add_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@android:drawable/ic_input_add"
+                    android:background="#EEEEEE"
+                    android:scaleType="center"
+                    android:layout_margin="4dp" />
+
+            </GridLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- 底部发布按钮 -->
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Post"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/black"
+        android:layout_margin="12dp" />
+
+</LinearLayout>

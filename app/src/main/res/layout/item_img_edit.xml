@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_margin="4dp">
+
+    <!-- 图片 -->
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <!-- 删除按钮 -->
+    <ImageView
+        android:id="@+id/btn_delete"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="top|end"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:background="@android:color/white"/>
+
+</FrameLayout>

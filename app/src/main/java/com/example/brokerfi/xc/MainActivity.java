@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView nft;
     private ImageView news;
     private ImageView medalSystem;
+    private ImageView community;
     private LinearLayout support;
     private NavigationHelper navigationHelper;
     private RelativeLayout sendlist;
@@ -442,6 +443,7 @@ public class MainActivity extends AppCompatActivity {
         medalSystem = findViewById(R.id.medalSystem);
         receive = findViewById(R.id.receiveicon);
         accounts = findViewById(R.id.accounts);
+        community = findViewById(R.id.community);
         //ImageView convertBtn = findViewById(R.id.convertBtn);
     }
 
@@ -545,6 +547,12 @@ public class MainActivity extends AppCompatActivity {
         medalSystem.setOnClickListener(view -> {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,MedalRankingActivity.class);
+            startActivity(intent);
+        });
+
+        community.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this,CommunityActivity.class);
             startActivity(intent);
         });
         
