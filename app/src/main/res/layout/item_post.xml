@@ -1,75 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="12dp"
-    android:background="@color/white">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- 标题 -->
-    <TextView
-        android:id="@+id/tv_title"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Post Title"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:maxLines="1"
-        android:ellipsize="end"/>
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:background="@color/white">
 
-    <!-- 用户名 -->
-    <TextView
-        android:id="@+id/tv_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="User123"
-        android:textSize="12sp"
-        android:textColor="@color/grey_60"
-        android:layout_marginTop="4dp"/>
-
-    <!-- 正文（截断） -->
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="This is a long content preview..."
-        android:textSize="14sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="6dp"
-        android:maxLines="3"
-        android:ellipsize="end"/>
-
-    <!-- 图片（只显示一张） -->
-    <ImageView
-        android:id="@+id/iv_image"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="centerCrop"
-        android:visibility="gone"/>
-
-    <!-- 操作区 -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp">
-
+        <!-- 标题 -->
         <TextView
-            android:id="@+id/btn_like"
-            android:text="👍 0"
-            android:textColor="@color/grey_60"
-            android:layout_marginEnd="50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Post Title"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
+        <!-- 用户名 -->
         <TextView
-            android:id="@+id/btn_comment"
-            android:text="💬 0"
-            android:textColor="@color/grey_60"
+            android:id="@+id/tv_username"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="User123"
+            android:textSize="12sp"
+            android:textColor="@color/grey_60"
+            android:layout_marginTop="4dp"/>
+
+        <!-- 正文（截断） -->
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This is a long content preview..."
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="6dp"
+            android:maxLines="3"
+            android:ellipsize="end"/>
+
+        <!-- 图片（只显示一张） -->
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"/>
+
+        <!-- 操作区 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/btn_like"
+                android:text="👍 0"
+                android:textColor="@color/grey_60"
+                android:layout_marginEnd="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/btn_comment"
+                android:text="💬 0"
+                android:textColor="@color/grey_60"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

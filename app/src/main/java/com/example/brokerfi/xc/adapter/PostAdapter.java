@@ -1,5 +1,6 @@
 package com.example.brokerfi.xc.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     private Context context;
     private List<PostDTO> postList;
 
+    public interface OnItemClickListener {
+        void onItemClick(PostDTO post);
+    }
+
+    private OnItemClickListener listener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
     public PostAdapter(Context context, List<PostDTO> postList) {
         this.context = context;
         this.postList = postList;
@@ -33,14 +44,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         return new PostViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         PostDTO post = postList.get(position);
 
         holder.tvUsername.setText(post.username);
         holder.tvTitle.setText(post.title);
-        // 截取正文 50 字作为首页摘要
-        if (post.content.length() > 50) {
+
+        if (post.content != null && post.content.length() > 50) {
             holder.tvContent.setText(post.content.substring(0, 50) + "...");
         } else {
             holder.tvContent.setText(post.content);
@@ -48,15 +60,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         holder.tvLike.setText("👍 " + post.likeCount);
         holder.tvComment.setText("💬 " + post.commentCount);
-        holder.tvReward.setText(post.isRewarded ? "💰 Rewarded" : "💰 Reward");
+        //holder.tvReward.setText(post.isRewarded ? "💰 Rewarded" : "💰 Reward");
 
-        // 加载头像(找个placeholder_image？
-        Glide.with(context)
-                .load(post.avatarUrl)
-                .placeholder(R.drawable.placeholder_image)
-                .into(holder.ivAvatar);
+        // 头像 首页不展示用户头像
+//        Glide.with(context)
+//                .load(post.avatarUrl)
+//                .placeholder(R.drawable.placeholder_image)
+//                .into(holder.ivAvatar);
 
-        // 加载首张图片(找个placeholder_image？
+        // 图片
         if (post.firstImageUrl != null && !post.firstImageUrl.isEmpty()) {
             holder.ivImage.setVisibility(View.VISIBLE);
             Glide.with(context)
@@ -66,11 +78,25 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         } else {
             holder.ivImage.setVisibility(View.GONE);
         }
+
+        // 点击事件（重点）
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(post);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return postList.size();
+        return postList == null ? 0 : postList.size();
+    }
+
+    // 推荐：提供数据刷新方法（比直接操作 list 更规范）
+    public void updateData(List<PostDTO> newList) {
+        this.postList.clear();
+        this.postList.addAll(newList);
+        notifyDataSetChanged();
     }
 
     static class PostViewHolder extends RecyclerView.ViewHolder {

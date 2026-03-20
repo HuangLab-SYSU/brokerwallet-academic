@@ -35,8 +35,8 @@
             <!-- 个人中心按钮 -->
             <ImageView
                 android:id="@+id/profileButton"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/user"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:clickable="true"

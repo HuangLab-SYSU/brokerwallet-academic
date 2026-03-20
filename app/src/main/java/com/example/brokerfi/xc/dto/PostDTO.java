@@ -1,6 +1,7 @@
 package com.example.brokerfi.xc.dto;
 
 public class PostDTO {
+    public long id;
     public String username;
     public String avatarUrl;
     public String title;

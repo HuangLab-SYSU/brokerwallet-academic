@@ -13,7 +13,6 @@
         <!-- 顶部栏 -->
         <include layout="@layout/topbar" />
 
-        <!-- ⭐ 整页 RecyclerView（未来标准） -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_post_detail"
             android:layout_width="match_parent"
@@ -22,7 +21,7 @@
 
     </LinearLayout>
 
-    <!-- ⭐ 底部评论输入 -->
+    <!-- 底部评论输入 -->
     <LinearLayout
         android:id="@+id/layout_comment_input"
         android:layout_width="match_parent"

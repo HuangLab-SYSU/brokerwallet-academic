@@ -187,6 +187,12 @@
         <activity
             android:name=".xc.MyCenterActivity"
             android:exported="false" />
+        <activity
+            android:name=".xc.CommunityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.PostDetailActivity"
+            android:exported="false" />
 
         <!-- FileProvider for camera photos -->
         <provider
