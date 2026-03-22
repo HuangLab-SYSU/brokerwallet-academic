@@ -46,6 +46,24 @@ public class PostDetailActivity extends AppCompatActivity {
         rvDetail.setLayoutManager(new LinearLayoutManager(this));
         adapter = new PostDetailAdapter(this, dataList);
         rvDetail.setAdapter(adapter);
+
+        btnSend.setOnClickListener(v -> {
+            String content = etComment.getText().toString().trim();
+
+            if (content.isEmpty()) return;
+
+            CommentDTO comment = new CommentDTO();
+            comment.username = "当前用户"; // 后面换登录用户
+            comment.content = content;
+            comment.time = "刚刚";
+
+            dataList.add(comment);
+
+            adapter.notifyItemInserted(dataList.size() - 1);
+            rvDetail.scrollToPosition(dataList.size() - 1);
+
+            etComment.setText("");
+        });
     }
 
     private void loadData() {

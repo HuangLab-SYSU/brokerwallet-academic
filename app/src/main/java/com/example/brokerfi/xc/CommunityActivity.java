@@ -2,8 +2,11 @@ package com.example.brokerfi.xc;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.adapter.PostAdapter;
 import com.example.brokerfi.xc.dto.PostDTO;
+import com.example.brokerfi.xc.manager.UserManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -25,7 +29,7 @@ public class CommunityActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView tvEmpty;
     private FloatingActionButton fabPost;
-
+    private ImageView profileButton;
     private PostAdapter adapter;
     private List<PostDTO> postList = new ArrayList<>();
 
@@ -38,7 +42,7 @@ public class CommunityActivity extends AppCompatActivity {
         initRecyclerView();
         initListener();
 
-        loadPosts(); // 页面启动就加载数据
+        initUser();
     }
 
     private void initView() {
@@ -46,6 +50,7 @@ public class CommunityActivity extends AppCompatActivity {
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         tvEmpty = findViewById(R.id.tv_empty);
         fabPost = findViewById(R.id.fab_post);
+        profileButton = findViewById(R.id.profileButton);
     }
 
     private void initRecyclerView() {
@@ -54,7 +59,7 @@ public class CommunityActivity extends AppCompatActivity {
         adapter = new PostAdapter(this, postList);
         rvPosts.setAdapter(adapter);
 
-        // 点击事件（跳详情页）
+        // 跳转详情页
         adapter.setOnItemClickListener(post -> {
             Intent intent = new Intent(this, PostDetailActivity.class);
             intent.putExtra("postId", post.id);
@@ -74,39 +79,94 @@ public class CommunityActivity extends AppCompatActivity {
 
         // 发帖按钮
         fabPost.setOnClickListener(v -> {
-            // TODO: 跳转发帖页
+            Intent intent = new Intent(this, PostPublishActivity.class);
+            startActivityForResult(intent, 1001);
+        });
+
+        // 个人主页按钮
+        profileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfileActivity.class);
+
+            Long userId = UserManager.getInstance().getUserId();
+            String username = UserStorageUtil.getUsername(this);
+
+            intent.putExtra("userId", userId);
+            intent.putExtra("username", username);
+
+            startActivity(intent);
         });
     }
 
     /**
-     * 模拟加载数据（后面换成接口）
+     * 加载数据
      */
     private void loadPosts() {
-
         swipeRefreshLayout.setRefreshing(true);
-
-        // ===== mock数据（先跑通流程）=====
         postList.clear();
-
-        for (int i = 0; i < 10; i++) {
-            PostDTO post = new PostDTO();
-            post.id = (long) i;
-            post.username = "User " + i;
-            post.title = "Test Title " + i;
-            post.content = "This is a test content for post " + i + ". It is used for preview.";
-            post.likeCount = i * 3;
-            post.commentCount = i;
-            post.isRewarded = i % 2 == 0;
-            post.avatarUrl = "";
-            post.firstImageUrl = "";
-
-            postList.add(post);
-        }
-
-        adapter.notifyDataSetChanged();
-
+        //接口获得帖子列表 TODO：分页？
+        adapter.setData(PostApiUtil.getInstance().getPosts());
         tvEmpty.setVisibility(postList.isEmpty() ? View.VISIBLE : View.GONE);
-
         swipeRefreshLayout.setRefreshing(false);
     }
+
+
+    private void initUser() {
+
+        // 1. 初始化本地缓存 → 内存
+        UserManager.getInstance().init(this);
+
+        // 2. 获取钱包地址
+        String address = getCurrentWalletAddress();
+
+        if (address == null) {
+            Log.e("UserInit", "wallet address is null");
+            return;
+        }
+
+        // 3. 调后端登录接口
+        CommunityAccountApiUtil.getInstance().login(address, user -> {
+
+            // 4. 存用户（内存 + 本地）
+            UserManager.getInstance().setUser(
+                    this,
+                    user.getUserId(),
+                    user.getUsername(),
+                    user.getAvatarUrl(),
+                    user.getWalletAddress()
+            );
+
+            Log.d("UserInit", "user init success: " + user.getUserId());
+
+            // 5. 用户准备好之后，再加载数据
+            loadPosts();
+
+        }, error -> {
+            Log.e("UserInit", "login failed: " + error);
+        });
+    }
+
+
+    /**
+     * 获取当前钱包地址
+     */
+    private String getCurrentWalletAddress() {
+        try {
+            // 获取当前私钥
+            String privateKey = StorageUtil.getCurrentPrivatekey(this);
+
+            if (privateKey != null) {
+                // 从私钥生成钱包地址
+                return SecurityUtil.GetAddress(privateKey);
+            } else {
+                Log.e("WalletAddress", "Cannot get current private key");
+                Toast.makeText(this, "Cannot get wallet address, please add an account first", Toast.LENGTH_SHORT).show();
+                return null;
+            }
+        } catch (Exception e) {
+            Log.e("WalletAddress", "Failed to get wallet address", e);
+            Toast.makeText(this, "Failed to get wallet address: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            return null;
+        }
+    }
+
 }

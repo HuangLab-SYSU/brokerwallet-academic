@@ -193,6 +193,13 @@
         <activity
             android:name=".xc.PostDetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".xc.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.PostPublishActivity"
+            android:exported="false" />
+
 
         <!-- FileProvider for camera photos -->
         <provider

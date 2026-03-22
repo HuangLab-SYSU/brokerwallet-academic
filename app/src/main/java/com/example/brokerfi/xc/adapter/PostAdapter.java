@@ -37,6 +37,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         this.postList = postList;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public void setData(List<PostDTO> list) {
+        this.postList.clear();
+        this.postList.addAll(list);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -60,13 +67,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         holder.tvLike.setText("👍 " + post.likeCount);
         holder.tvComment.setText("💬 " + post.commentCount);
-        //holder.tvReward.setText(post.isRewarded ? "💰 Rewarded" : "💰 Reward");
-
-        // 头像 首页不展示用户头像
-//        Glide.with(context)
-//                .load(post.avatarUrl)
-//                .placeholder(R.drawable.placeholder_image)
-//                .into(holder.ivAvatar);
 
         // 图片
         if (post.firstImageUrl != null && !post.firstImageUrl.isEmpty()) {
