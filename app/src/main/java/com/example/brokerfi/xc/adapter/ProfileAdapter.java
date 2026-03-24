@@ -115,10 +115,10 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
         public void bind(PostDTO post) {
-            tvTitle.setText(post.title);
-            tvContent.setText(post.content);
-            tvUsername.setText(post.username);
-            tvLike.setText("👍 " + post.likeCount);
+            tvTitle.setText(post.getTitle());
+            tvContent.setText(post.getContent());
+            tvUsername.setText(post.getUserName());
+            tvLike.setText("👍 " + post.getLikeCount());
         }
     }
 }

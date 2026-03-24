@@ -56,23 +56,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         PostDTO post = postList.get(position);
 
-        holder.tvUsername.setText(post.username);
-        holder.tvTitle.setText(post.title);
+        holder.tvUsername.setText(post.getUserName());
+        holder.tvTitle.setText(post.getTitle());
 
-        if (post.content != null && post.content.length() > 50) {
-            holder.tvContent.setText(post.content.substring(0, 50) + "...");
+        if (post.getContent() != null && post.getContent().length() > 50) {
+            holder.tvContent.setText(post.getContent().substring(0, 50) + "...");
         } else {
-            holder.tvContent.setText(post.content);
+            holder.tvContent.setText(post.getContent());
         }
 
-        holder.tvLike.setText("👍 " + post.likeCount);
-        holder.tvComment.setText("💬 " + post.commentCount);
+        holder.tvLike.setText("👍 " + post.getLikeCount());
+        holder.tvComment.setText("💬 " + post.getCommentCount());
 
         // 图片
-        if (post.firstImageUrl != null && !post.firstImageUrl.isEmpty()) {
+        if (post.getFirstImageUrl() != null && !post.getFirstImageUrl().isEmpty()) {
             holder.ivImage.setVisibility(View.VISIBLE);
             Glide.with(context)
-                    .load(post.firstImageUrl)
+                    .load(post.getFirstImageUrl())
                     .placeholder(R.drawable.placeholder_image)
                     .into(holder.ivImage);
         } else {

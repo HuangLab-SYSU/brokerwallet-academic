@@ -41,10 +41,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         adapter.setOnPostClickListener(post -> {
             Intent intent = new Intent(this, PostDetailActivity.class);
-            intent.putExtra("postId", post.id);
-            intent.putExtra("title", post.title);
-            intent.putExtra("content", post.content);
-            intent.putExtra("username", post.username);
+            intent.putExtra("postId", post.getId());
+            intent.putExtra("title", post.getTitle());
+            intent.putExtra("content", post.getContent());
+            intent.putExtra("username", post.getUserName());
             startActivity(intent);
         });
 
@@ -64,10 +64,10 @@ public class ProfileActivity extends AppCompatActivity {
         // 2️⃣ 帖子
         for (int i = 0; i < 3; i++) {
             PostDTO post = new PostDTO();
-            post.title = "我的帖子 " + i;
-            post.content = "这是内容 " + i;
-            post.username = username;
-            post.likeCount = i * 5;
+            post.setTitle("我的帖子 " + i);
+            post.setContent("这是内容 " + i);
+            post.setUserName(username);
+            post.setLikeCount(i*5);
 
             dataList.add(post);
         }

@@ -1,8 +1,10 @@
 package com.example.brokerfi.xc;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +24,7 @@ public class PostDetailActivity extends AppCompatActivity {
     private RecyclerView rvDetail;
     private EditText etComment;
     private Button btnSend;
-
+    private Button btnReward;
     private PostDetailAdapter adapter;
     private List<Object> dataList = new ArrayList<>();
 
@@ -64,6 +66,10 @@ public class PostDetailActivity extends AppCompatActivity {
 
             etComment.setText("");
         });
+
+        adapter.setOnPostActionListener((post, position) -> {
+            showRewardDialog(post, position);
+        });
     }
 
     private void loadData() {
@@ -75,10 +81,10 @@ public class PostDetailActivity extends AppCompatActivity {
 
         // 构造一个 PostDTO
         PostDTO post = new PostDTO();
-        post.id = postId;
-        post.title = title;
-        post.content = content;
-        post.username = username;
+        post.setId(postId);
+        post.setTitle(title);
+        post.setContent(content);
+        post.setUserName(username);
 
         dataList.clear();
         dataList.add(post);
@@ -96,5 +102,46 @@ public class PostDetailActivity extends AppCompatActivity {
         }
 
         adapter.notifyDataSetChanged();
+    }
+
+
+    // 打赏弹窗
+    private void showRewardDialog(PostDTO post, int position) {
+
+        EditText input = new EditText(this);
+        input.setHint("输入BKC数量");
+
+        new AlertDialog.Builder(this)
+                .setTitle("打赏")
+                .setView(input)
+                .setPositiveButton("确认", (dialog, which) -> {
+
+                    String value = input.getText().toString().trim();
+
+                    if (value.isEmpty()) {
+                        Toast.makeText(this, "请输入金额", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    double amount;
+
+                    try {
+                        amount = Double.parseDouble(value);
+                    } catch (Exception e) {
+                        Toast.makeText(this, "金额格式错误", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (amount <= 0) {
+                        Toast.makeText(this, "金额必须大于0", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // TODO：⭐⭐⭐ 这里改成调用后端 ⭐⭐⭐
+                    //doRewardRequest(post, amount, position);
+
+                })
+                .setNegativeButton("取消", null)
+                .show();
     }
 }

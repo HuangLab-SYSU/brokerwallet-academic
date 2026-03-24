@@ -16,8 +16,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.adapter.PostAdapter;
+import com.example.brokerfi.xc.api.PostApi;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.manager.UserManager;
+import com.example.brokerfi.xc.net.ApiCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -62,10 +64,10 @@ public class CommunityActivity extends AppCompatActivity {
         // 跳转详情页
         adapter.setOnItemClickListener(post -> {
             Intent intent = new Intent(this, PostDetailActivity.class);
-            intent.putExtra("postId", post.id);
-            intent.putExtra("title", post.title);
-            intent.putExtra("content", post.content);
-            intent.putExtra("username", post.username);
+            intent.putExtra("postId", post.getId());
+            intent.putExtra("title", post.getTitle());
+            intent.putExtra("content", post.getContent());
+            intent.putExtra("username", post.getUserName());
             startActivity(intent);
         });
     }
@@ -101,12 +103,27 @@ public class CommunityActivity extends AppCompatActivity {
      * 加载数据
      */
     private void loadPosts() {
+
         swipeRefreshLayout.setRefreshing(true);
-        postList.clear();
-        //接口获得帖子列表 TODO：分页？
-        adapter.setData(PostApiUtil.getInstance().getPosts());
-        tvEmpty.setVisibility(postList.isEmpty() ? View.VISIBLE : View.GONE);
-        swipeRefreshLayout.setRefreshing(false);
+
+        new PostApi().getPosts(new ApiCallback<List<PostDTO>>() {
+            @Override
+            public void onSuccess(List<PostDTO> data) {
+                adapter.setData(data);
+                tvEmpty.setVisibility(postList.isEmpty() ? View.VISIBLE : View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onFail(String msg) {
+
+                Log.e("loadPosts", "error: " + msg);
+
+                Toast.makeText(CommunityActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
 

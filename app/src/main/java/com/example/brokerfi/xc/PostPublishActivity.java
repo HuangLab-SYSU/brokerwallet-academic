@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.xc.api.PostApi;
 import com.example.brokerfi.xc.dto.PostDTO;
 
 import java.util.ArrayList;
@@ -202,7 +203,7 @@ public class PostPublishActivity extends AppCompatActivity {
 //        post.setCreateTime(String.valueOf(System.currentTimeMillis()));
 
         // ⭐ 本地模拟存储（后续替换为API）
-        PostApiUtil.getInstance().addPost(post);
+        //PostApi.getInstance().addPost(post);
 
         Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
 
