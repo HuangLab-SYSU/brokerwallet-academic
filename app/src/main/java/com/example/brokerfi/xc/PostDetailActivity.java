@@ -104,8 +104,8 @@ public class PostDetailActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-
-    // 打赏弹窗
+    // 打赏
+    private volatile boolean rewarding = false;
     private void showRewardDialog(PostDTO post, int position) {
 
         EditText input = new EditText(this);
@@ -124,7 +124,6 @@ public class PostDetailActivity extends AppCompatActivity {
                     }
 
                     double amount;
-
                     try {
                         amount = Double.parseDouble(value);
                     } catch (Exception e) {
@@ -137,11 +136,81 @@ public class PostDetailActivity extends AppCompatActivity {
                         return;
                     }
 
-                    // TODO：⭐⭐⭐ 这里改成调用后端 ⭐⭐⭐
-                    //doRewardRequest(post, amount, position);
+                    // 获取收款地址
+                    String toAddress = post.getAddress();
+
+                    // 执行打赏
+                    doReward(toAddress, value, post, position);
 
                 })
                 .setNegativeButton("取消", null)
                 .show();
+    }
+
+    private void doReward(String toAddress, String amount, PostDTO post, int position) {
+
+        if (rewarding) {
+            Toast.makeText(this, "请勿重复提交", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        rewarding = true;
+
+        // 获取私钥
+        String account = StorageUtil.getPrivateKey(this);
+        String acc = StorageUtil.getCurrentAccount(this);
+
+        int i = (acc == null) ? 0 : Integer.parseInt(acc);
+
+        if (account == null) {
+            Toast.makeText(this, "未找到账户", Toast.LENGTH_SHORT).show();
+            rewarding = false;
+            return;
+        }
+
+        String[] split = account.split(";");
+        String privateKey = split[i];
+
+        new Thread(() -> {
+
+            runOnUiThread(() -> {
+                Toast.makeText(this, "交易已提交，等待确认...", Toast.LENGTH_LONG).show();
+            });
+
+            try {
+                String txHash = Web3jTransferUtil.sendTransaction(
+                        privateKey,
+                        toAddress,
+                        amount
+                );
+
+                runOnUiThread(() -> {
+
+                    if (txHash != null && txHash.startsWith("0x")) {
+
+                        Toast.makeText(this, "打赏成功，txHash=" + txHash, Toast.LENGTH_LONG).show();
+
+                        // 更新UI
+                         post.setRewardAmount(post.getRewardAmount() + Double.parseDouble(amount));
+                         adapter.notifyItemChanged(position);
+
+                    } else {
+                        Toast.makeText(this, "打赏失败：" + txHash, Toast.LENGTH_LONG).show();
+                    }
+
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "打赏异常", Toast.LENGTH_SHORT).show();
+                });
+
+            } finally {
+                rewarding = false;
+            }
+
+        }).start();
     }
 }

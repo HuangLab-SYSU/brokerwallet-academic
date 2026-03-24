@@ -1,14 +1,11 @@
 package com.example.brokerfi.xc.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -85,7 +82,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.tvTitle.setText(post.getTitle());
             vh.tvContent.setText(post.getContent());
             vh.tvUsername.setText(post.getUserName());
-            vh.tvRewardTotal.setText("Total Reward: " + post.getRewardTotal());
+            vh.tvRewardTotal.setText("Total Reward: " + post.getRewardAmount());
 
             // 点赞数显示
             vh.btnLike.setText("👍 " + post.getLikeCount());

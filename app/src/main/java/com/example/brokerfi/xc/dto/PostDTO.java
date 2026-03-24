@@ -15,8 +15,9 @@ public class PostDTO {
     private int commentCount;
     private boolean isRewarded;
     private boolean isLiked;
-    private double rewardTotal; // 打赏总额
+    private double rewardAmount; // 打赏总额
     private String createTime;
+    private String address;//发帖人的钱包地址
 
 
     public String getUserName() {
@@ -33,6 +34,18 @@ public class PostDTO {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getAvatarUrl() {
@@ -111,12 +124,12 @@ public class PostDTO {
         isLiked = liked;
     }
 
-    public double getRewardTotal() {
-        return rewardTotal;
+    public double getRewardAmount() {
+        return rewardAmount;
     }
 
-    public void setRewardTotal(double rewardTotal) {
-        this.rewardTotal = rewardTotal;
+    public void setRewardAmount(double rewardAmount) {
+        this.rewardAmount = rewardAmount;
     }
 
     public String getCreateTime() {
