@@ -15,7 +15,10 @@ import com.example.brokerfi.R;
 import com.example.brokerfi.xc.dto.CommentDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -115,8 +118,19 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             CommentViewHolder vh = (CommentViewHolder) holder;
 
-            vh.tvUsername.setText(comment.username);
-            vh.tvTime.setText(comment.time);
+            // 格式化时间
+            try {
+                vh.tvTime.setText(
+                        new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault()).format(
+                                Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).parse(comment.createTime))
+                        )
+                );
+            } catch (Exception e) {
+                vh.tvTime.setText(comment.createTime);
+            }
+
+            vh.tvUsername.setText(comment.userName);
+            //vh.tvTime.setText(comment.createTime);
             vh.tvContent.setText(comment.content);
 
             // 头像（用 Glide 或默认图）

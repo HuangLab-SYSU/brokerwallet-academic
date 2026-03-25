@@ -6,8 +6,8 @@ public class CommentDTO {
     public Long postId;
     public Long userId;
 
-    public String username;
+    public String userName;
     public String content;
-    public String time;
+    public String createTime;
     public String avatarUrl;
 }

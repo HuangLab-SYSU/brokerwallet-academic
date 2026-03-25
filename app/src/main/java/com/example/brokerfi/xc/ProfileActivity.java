@@ -32,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
         rvProfile = findViewById(R.id.rv_profile);
 
         userId = getIntent().getLongExtra("userId", -1);
-        username = getIntent().getStringExtra("username");
+        username = getIntent().getStringExtra("userName");
 
         rvProfile.setLayoutManager(new LinearLayoutManager(this));
 
@@ -44,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
             intent.putExtra("postId", post.getId());
             intent.putExtra("title", post.getTitle());
             intent.putExtra("content", post.getContent());
-            intent.putExtra("username", post.getUserName());
+            intent.putExtra("userName", post.getUserName());
             startActivity(intent);
         });
 

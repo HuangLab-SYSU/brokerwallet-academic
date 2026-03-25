@@ -34,8 +34,9 @@ public class OkHttpManager {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
 
                 String result = response.body().string();
-
-                handler.post(() -> callback.onSuccess(result));
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    callback.onSuccess(result);
+                });
             }
         });
     }
@@ -61,7 +62,14 @@ public class OkHttpManager {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    callback.onSuccess(response.body().string());
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        try {
+                            assert response.body() != null;
+                            callback.onSuccess(response.body().string());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
                 } else {
                     callback.onFail("网络错误");
                 }

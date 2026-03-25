@@ -17,7 +17,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.adapter.PostAdapter;
 import com.example.brokerfi.xc.api.PostApi;
+import com.example.brokerfi.xc.api.UserApi;
 import com.example.brokerfi.xc.dto.PostDTO;
+import com.example.brokerfi.xc.dto.UserAccountDTO;
 import com.example.brokerfi.xc.manager.UserManager;
 import com.example.brokerfi.xc.net.ApiCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -67,7 +69,7 @@ public class CommunityActivity extends AppCompatActivity {
             intent.putExtra("postId", post.getId());
             intent.putExtra("title", post.getTitle());
             intent.putExtra("content", post.getContent());
-            intent.putExtra("username", post.getUserName());
+            intent.putExtra("userName", post.getUserName());
             startActivity(intent);
         });
     }
@@ -93,7 +95,7 @@ public class CommunityActivity extends AppCompatActivity {
             String username = UserStorageUtil.getUsername(this);
 
             intent.putExtra("userId", userId);
-            intent.putExtra("username", username);
+            intent.putExtra("userName", username);
 
             startActivity(intent);
         });
@@ -129,10 +131,8 @@ public class CommunityActivity extends AppCompatActivity {
 
     private void initUser() {
 
-        // 1. 初始化本地缓存 → 内存
         UserManager.getInstance().init(this);
 
-        // 2. 获取钱包地址
         String address = getCurrentWalletAddress();
 
         if (address == null) {
@@ -140,25 +140,27 @@ public class CommunityActivity extends AppCompatActivity {
             return;
         }
 
-        // 3. 调后端登录接口
-        CommunityAccountApiUtil.getInstance().login(address, user -> {
+        new UserApi().login(address, new ApiCallback<UserAccountDTO>() {
+            @Override
+            public void onSuccess(UserAccountDTO user) {
 
-            // 4. 存用户（内存 + 本地）
-            UserManager.getInstance().setUser(
-                    this,
-                    user.getUserId(),
-                    user.getUsername(),
-                    user.getAvatarUrl(),
-                    user.getWalletAddress()
-            );
+                UserManager.getInstance().setUser(
+                        CommunityActivity.this,
+                        user.getUserId(),
+                        user.getUsername(),
+                        user.getAvatarUrl(),
+                        user.getWalletAddress()
+                );
 
-            Log.d("UserInit", "user init success: " + user.getUserId());
+                Log.d("UserInit", "user init success: " + user.getUserId());
 
-            // 5. 用户准备好之后，再加载数据
-            loadPosts();
+                loadPosts();
+            }
 
-        }, error -> {
-            Log.e("UserInit", "login failed: " + error);
+            @Override
+            public void onFail(String msg) {
+                Log.e("UserInit", "login failed: " + msg);
+            }
         });
     }
 

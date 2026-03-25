@@ -1,5 +1,7 @@
 package com.example.brokerfi.xc;
 
+import android.util.Log;
+
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.RawTransaction;
 import org.web3j.crypto.TransactionEncoder;
@@ -15,7 +17,7 @@ import java.math.BigInteger;
 
 public class Web3jTransferUtil {
 
-    private static final String RPC_URL = "https://dash.broker-chain.com:42515";
+    private static final String RPC_URL = "http://dash.broker-chain.com:42515";
 
     public static String sendTransaction(String privateKey, String toAddress, String amountEther) {
         try {
@@ -30,6 +32,8 @@ public class Web3jTransferUtil {
             ).send();
 
             BigInteger nonce = ethGetTransactionCount.getTransactionCount();
+
+            Log.d("Web3jTransferUtil", "Nonce: " + nonce);
 
             // 转账金额（单位：wei）
             BigInteger value = Convert.toWei(amountEther, Convert.Unit.ETHER).toBigInteger();
@@ -56,6 +60,7 @@ public class Web3jTransferUtil {
             EthSendTransaction ethSendTransaction = web3j.ethSendRawTransaction(hexValue).send();
 
             if (ethSendTransaction.hasError()) {
+                Log.d("Web3jTransferUtil", "转账失败: " + ethSendTransaction.getError().getMessage());
                 return "error: " + ethSendTransaction.getError().getMessage();
             }
 

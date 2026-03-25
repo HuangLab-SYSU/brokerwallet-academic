@@ -1,7 +1,9 @@
 package com.example.brokerfi.xc;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,8 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.adapter.PostDetailAdapter;
+import com.example.brokerfi.xc.api.PostApi;
 import com.example.brokerfi.xc.dto.CommentDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
+import com.example.brokerfi.xc.net.ApiCallback;
+import com.example.brokerfi.xc.net.PageResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +32,12 @@ public class PostDetailActivity extends AppCompatActivity {
     private Button btnReward;
     private PostDetailAdapter adapter;
     private List<Object> dataList = new ArrayList<>();
+    private Long postId;
+    private PostDTO post;
+    private int currentPage = 0;
+    private final int pageSize = 10;
+    private boolean isLoading = false;
+    private boolean hasMore = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,22 +60,47 @@ public class PostDetailActivity extends AppCompatActivity {
         adapter = new PostDetailAdapter(this, dataList);
         rvDetail.setAdapter(adapter);
 
+        rvDetail.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+                if (dy <= 0) return;
+
+                LinearLayoutManager lm = (LinearLayoutManager) recyclerView.getLayoutManager();
+
+                int total = lm.getItemCount();
+                int lastVisible = lm.findLastVisibleItemPosition();
+
+                // 提前2个加载
+                if (lastVisible >= total - 2) {
+                    loadComments();
+                }
+            }
+        });
+
         btnSend.setOnClickListener(v -> {
             String content = etComment.getText().toString().trim();
 
             if (content.isEmpty()) return;
 
-            CommentDTO comment = new CommentDTO();
-            comment.username = "当前用户"; // 后面换登录用户
-            comment.content = content;
-            comment.time = "刚刚";
+            new PostApi().addComment(postId, UserStorageUtil.getUserId(this), content, new ApiCallback<CommentDTO>() {
+                @Override
+                public void onSuccess(CommentDTO comment) {
 
-            dataList.add(comment);
+                    int insertPosition = dataList.size();
+                    dataList.add(comment);
+                    adapter.notifyItemInserted(insertPosition);
+                    rvDetail.scrollToPosition(insertPosition);
 
-            adapter.notifyItemInserted(dataList.size() - 1);
-            rvDetail.scrollToPosition(dataList.size() - 1);
+                    etComment.setText("");
+                }
 
-            etComment.setText("");
+                @Override
+                public void onFail(String msg) {
+                    Toast.makeText(PostDetailActivity.this, "评论失败：" + msg, Toast.LENGTH_SHORT).show();
+                }
+            });
+
         });
 
         adapter.setOnPostActionListener((post, position) -> {
@@ -72,36 +108,76 @@ public class PostDetailActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void loadData() {
-        // 接收数据（先用传参，后面换接口）
-        Long postId = getIntent().getLongExtra("postId", -1);
-        String title = getIntent().getStringExtra("title");
-        String content = getIntent().getStringExtra("content");
-        String username = getIntent().getStringExtra("username");
 
-        // 构造一个 PostDTO
-        PostDTO post = new PostDTO();
-        post.setId(postId);
-        post.setTitle(title);
-        post.setContent(content);
-        post.setUserName(username);
+        postId = getIntent().getLongExtra("postId", -1);
 
-        dataList.clear();
-        dataList.add(post);
-
-        // mock 评论
-        for (int i = 0; i < 25; i++) {
-
-            CommentDTO c = new CommentDTO();
-            c.username = "User" + i;
-            c.content = "Nice post!";
-            c.time = "2026-03-20";
-            c.avatarUrl = "";
-
-            dataList.add(c);
+        if (postId == -1) {
+            Toast.makeText(this, "帖子ID错误", Toast.LENGTH_SHORT).show();
+            return;
         }
 
+        dataList.clear();
         adapter.notifyDataSetChanged();
+
+        // 1. 加载帖子详情
+        new PostApi().getPostDetail(postId, new ApiCallback<PostDTO>() {
+            @Override
+            public void onSuccess(PostDTO data) {
+
+                post = data;
+                dataList.add(post);
+                adapter.notifyItemInserted(0);
+
+                // 2. 加载评论
+                // 加载帖子成功后
+                currentPage = 0;
+                hasMore = true;
+                loadComments();
+            }
+
+            @Override
+            public void onFail(String msg) {
+                Toast.makeText(PostDetailActivity.this, "加载帖子失败：" + msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void loadComments() {
+
+        if (isLoading || !hasMore) return;
+
+        isLoading = true;
+
+        new PostApi().getComments(postId, currentPage, pageSize,
+                new ApiCallback<PageResponse<CommentDTO>>() {
+
+                    @SuppressLint("NotifyDataSetChanged")
+                    @Override
+                    public void onSuccess(PageResponse<CommentDTO> pageData) {
+
+                        List<CommentDTO> list = pageData.getContent();
+
+                        dataList.addAll(list);
+                        adapter.notifyDataSetChanged();
+
+                        currentPage++;
+
+                        // 是否还有下一页
+                        if (currentPage >= pageData.getTotalPages()) {
+                            hasMore = false;
+                        }
+
+                        isLoading = false;
+                    }
+
+                    @Override
+                    public void onFail(String msg) {
+                        isLoading = false;
+                        Toast.makeText(PostDetailActivity.this, "加载评论失败：" + msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     // 打赏
@@ -170,6 +246,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
         String[] split = account.split(";");
         String privateKey = split[i];
+        Log.d("Reward", "Sending transaction: to=" + toAddress + ", amount=" + amount + ", privateKey=" + privateKey);
 
         new Thread(() -> {
 
@@ -183,6 +260,8 @@ public class PostDetailActivity extends AppCompatActivity {
                         toAddress,
                         amount
                 );
+
+                Log.d("Reward", "转账结果: txHash=" + txHash);
 
                 runOnUiThread(() -> {
 

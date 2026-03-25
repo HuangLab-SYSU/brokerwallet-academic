@@ -2,6 +2,7 @@ package com.example.brokerfi.xc.api;
 
 import android.util.Log;
 
+import com.example.brokerfi.xc.dto.CommentDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.net.ApiCallback;
 import com.example.brokerfi.xc.net.ApiResponse;
@@ -12,7 +13,9 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -21,6 +24,7 @@ import okhttp3.ResponseBody;
 
 public class PostApi extends BaseApi {
 
+    // 获取帖子列表
     public void getPosts(ApiCallback<List<PostDTO>> callback) {
 
         String url = "http://10.0.2.2:5001/posts";
@@ -40,7 +44,44 @@ public class PostApi extends BaseApi {
         });
     }
 
+    // 获取帖子详情
+    public void getPostDetail(Long postId, ApiCallback<PostDTO> callback) {
+
+        String url = "http://10.0.2.2:5001/posts/" + postId;
+
+        Type type = new TypeToken<ApiResponse<PostDTO>>() {}.getType();
+
+        executeGet(url, type, callback);
+    }
+
     //TODO:发帖
+
+    // 获取评论列表
+    public void getComments(Long postId, int page, int size,
+                            ApiCallback<PageResponse<CommentDTO>> callback) {
+
+        String url = "http://10.0.2.2:5001/comments/post/"
+                + postId + "?page=" + page + "&size=" + size;
+
+        Type type = new TypeToken<ApiResponse<PageResponse<CommentDTO>>>() {}.getType();
+
+        executeGet(url, type, callback);
+    }
+
+    // 发送评论
+    public void addComment(Long postId, Long userId, String content, ApiCallback<CommentDTO> callback) {
+
+        String url = "http://10.0.2.2:5001/comments";
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("postId", postId);
+        body.put("userId", userId);
+        body.put("content", content);
+
+        Type type = new TypeToken<ApiResponse<CommentDTO>>() {}.getType();
+
+        executePost(url, body, type, callback);
+    }
 }
 
 //public class PostApi {

@@ -15,7 +15,10 @@ import com.bumptech.glide.Glide;
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.dto.PostDTO;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
@@ -58,6 +61,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         holder.tvUsername.setText(post.getUserName());
         holder.tvTitle.setText(post.getTitle());
+        // 格式化时间
+        try {
+            holder.tv_post_time.setText(
+                    new SimpleDateFormat("MM-dd", Locale.getDefault()).format(
+                            Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).parse(post.getCreateTime()))
+                    )
+            );
+        } catch (Exception e) {
+            holder.tv_post_time.setText(post.getCreateTime());
+        }
 
         if (post.getContent() != null && post.getContent().length() > 50) {
             holder.tvContent.setText(post.getContent().substring(0, 50) + "...");
@@ -102,7 +115,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     static class PostViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivAvatar, ivImage;
-        TextView tvUsername, tvTitle, tvContent;
+        TextView tvUsername, tvTitle, tvContent, tv_post_time;
         TextView tvLike, tvComment, tvReward;
 
         public PostViewHolder(@NonNull View itemView) {
@@ -112,6 +125,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             tvUsername = itemView.findViewById(R.id.tv_username);
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvContent = itemView.findViewById(R.id.tv_content);
+            tv_post_time = itemView.findViewById(R.id.tv_post_time);
             tvLike = itemView.findViewById(R.id.btn_like);
             tvComment = itemView.findViewById(R.id.btn_comment);
             tvReward = itemView.findViewById(R.id.btn_reward);
