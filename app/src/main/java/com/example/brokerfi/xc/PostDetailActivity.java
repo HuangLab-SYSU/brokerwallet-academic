@@ -16,13 +16,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.adapter.PostDetailAdapter;
 import com.example.brokerfi.xc.api.PostApi;
+import com.example.brokerfi.xc.api.RewardApi;
 import com.example.brokerfi.xc.dto.CommentDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.net.ApiCallback;
 import com.example.brokerfi.xc.net.PageResponse;
 
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.Sign;
+import org.web3j.utils.Numeric;
+
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class PostDetailActivity extends AppCompatActivity {
 
@@ -78,6 +86,7 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         });
 
+        // 发表评论
         btnSend.setOnClickListener(v -> {
             String content = etComment.getText().toString().trim();
 
@@ -86,12 +95,10 @@ public class PostDetailActivity extends AppCompatActivity {
             new PostApi().addComment(postId, UserStorageUtil.getUserId(this), content, new ApiCallback<CommentDTO>() {
                 @Override
                 public void onSuccess(CommentDTO comment) {
-
                     int insertPosition = dataList.size();
                     dataList.add(comment);
                     adapter.notifyItemInserted(insertPosition);
                     rvDetail.scrollToPosition(insertPosition);
-
                     etComment.setText("");
                 }
 
@@ -103,16 +110,13 @@ public class PostDetailActivity extends AppCompatActivity {
 
         });
 
-        adapter.setOnPostActionListener((post, position) -> {
-            showRewardDialog(post, position);
-        });
+        adapter.setOnPostActionListener(this::showRewardDialog);
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private void loadData() {
 
         postId = getIntent().getLongExtra("postId", -1);
-
         if (postId == -1) {
             Toast.makeText(this, "帖子ID错误", Toast.LENGTH_SHORT).show();
             return;
@@ -121,19 +125,16 @@ public class PostDetailActivity extends AppCompatActivity {
         dataList.clear();
         adapter.notifyDataSetChanged();
 
-        // 1. 加载帖子详情
+        // 加载帖子详情
         new PostApi().getPostDetail(postId, new ApiCallback<PostDTO>() {
             @Override
             public void onSuccess(PostDTO data) {
-
                 post = data;
                 dataList.add(post);
                 adapter.notifyItemInserted(0);
-
-                // 2. 加载评论
-                // 加载帖子成功后
                 currentPage = 0;
                 hasMore = true;
+                // 加载评论详情
                 loadComments();
             }
 
@@ -158,17 +159,13 @@ public class PostDetailActivity extends AppCompatActivity {
                     public void onSuccess(PageResponse<CommentDTO> pageData) {
 
                         List<CommentDTO> list = pageData.getContent();
-
                         dataList.addAll(list);
                         adapter.notifyDataSetChanged();
-
                         currentPage++;
-
                         // 是否还有下一页
                         if (currentPage >= pageData.getTotalPages()) {
                             hasMore = false;
                         }
-
                         isLoading = false;
                     }
 
@@ -193,7 +190,6 @@ public class PostDetailActivity extends AppCompatActivity {
                 .setPositiveButton("确认", (dialog, which) -> {
 
                     String value = input.getText().toString().trim();
-
                     if (value.isEmpty()) {
                         Toast.makeText(this, "请输入金额", Toast.LENGTH_SHORT).show();
                         return;
@@ -206,16 +202,12 @@ public class PostDetailActivity extends AppCompatActivity {
                         Toast.makeText(this, "金额格式错误", Toast.LENGTH_SHORT).show();
                         return;
                     }
-
                     if (amount <= 0) {
                         Toast.makeText(this, "金额必须大于0", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    // 获取收款地址
                     String toAddress = post.getAddress();
-
-                    // 执行打赏
                     doReward(toAddress, value, post, position);
 
                 })
@@ -235,56 +227,89 @@ public class PostDetailActivity extends AppCompatActivity {
         // 获取私钥
         String account = StorageUtil.getPrivateKey(this);
         String acc = StorageUtil.getCurrentAccount(this);
-
         int i = (acc == null) ? 0 : Integer.parseInt(acc);
-
         if (account == null) {
             Toast.makeText(this, "未找到账户", Toast.LENGTH_SHORT).show();
             rewarding = false;
             return;
         }
-
         String[] split = account.split(";");
         String privateKey = split[i];
-        Log.d("Reward", "Sending transaction: to=" + toAddress + ", amount=" + amount + ", privateKey=" + privateKey);
+        String fromAddress = Credentials.create(privateKey).getAddress();
+
+        //Log.d("Reward", "Sending transaction: to=" + toAddress + ", amount=" + amount + ", privateKey=" + privateKey);
 
         new Thread(() -> {
 
-            runOnUiThread(() -> {
-                Toast.makeText(this, "交易已提交，等待确认...", Toast.LENGTH_LONG).show();
-            });
+//            runOnUiThread(() -> {
+//                Toast.makeText(this, "交易已提交，等待确认...", Toast.LENGTH_LONG).show();
+//            });
 
             try {
+                //发送交易
                 String txHash = Web3jTransferUtil.sendTransaction(
                         privateKey,
                         toAddress,
                         amount
                 );
+                if (txHash == null || !txHash.startsWith("0x")) {
+                    runOnUiThread(() ->
+                            Toast.makeText(this, "打赏失败：" + txHash, Toast.LENGTH_LONG).show()
+                    );
+                    return;
+                }
 
-                Log.d("Reward", "转账结果: txHash=" + txHash);
+                String publicKey = SecurityUtil.getPublicKeyFromPrivateKey(privateKey);
 
-                runOnUiThread(() -> {
+                // 构造 message
+                long timestamp = System.currentTimeMillis() / 1000;
+                String nonce = UUID.randomUUID().toString();
+                String message = txHash + "|" + fromAddress + "|" + toAddress + "|" + timestamp + "|" + nonce;
+                Map<String, String> sigMap = SecurityUtil.signMessage(privateKey, message);
 
-                    if (txHash != null && txHash.startsWith("0x")) {
+                RewardApi api = new RewardApi();
+                api.verifyReward(
+                        txHash,
+                        fromAddress,
+                        toAddress,
+                        timestamp,
+                        nonce,
+                        sigMap.get("r"),
+                        sigMap.get("s"),
+                        sigMap.get("v"),
+                        new ApiCallback<Boolean>() {
 
-                        Toast.makeText(this, "打赏成功，txHash=" + txHash, Toast.LENGTH_LONG).show();
+                            @Override
+                            public void onSuccess(Boolean success) {
+                                runOnUiThread(() -> {
+                                    if (success) {
+                                        Toast.makeText(PostDetailActivity.this, "打赏成功", Toast.LENGTH_LONG).show();
 
-                        // 更新UI
-                         post.setRewardAmount(post.getRewardAmount() + Double.parseDouble(amount));
-                         adapter.notifyItemChanged(position);
+                                        post.setRewardAmount(post.getRewardAmount() + Double.parseDouble(amount));
+                                        adapter.notifyItemChanged(position);
 
-                    } else {
-                        Toast.makeText(this, "打赏失败：" + txHash, Toast.LENGTH_LONG).show();
-                    }
+                                    } else {
+                                        Toast.makeText(PostDetailActivity.this, "后端验证失败", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                rewarding = false;
+                            }
 
-                });
+                            @Override
+                            public void onFail(String msg) {
+                                runOnUiThread(() ->
+                                        Toast.makeText(PostDetailActivity.this, "请求失败：" + msg, Toast.LENGTH_SHORT).show()
+                                );
+                                rewarding = false;
+                            }
+                        }
+                );
 
             } catch (Exception e) {
                 e.printStackTrace();
-
-                runOnUiThread(() -> {
-                    Toast.makeText(this, "打赏异常", Toast.LENGTH_SHORT).show();
-                });
+                runOnUiThread(() ->
+                        Toast.makeText(this, "打赏异常", Toast.LENGTH_SHORT).show()
+                );
 
             } finally {
                 rewarding = false;

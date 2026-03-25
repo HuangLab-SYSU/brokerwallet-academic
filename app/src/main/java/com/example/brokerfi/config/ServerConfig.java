@@ -26,15 +26,15 @@ public class ServerConfig {
      * 请使用电脑的局域网 IP 或者服务器的 公网 IP；
      */
 
-    //public static final String SERVER_HOST = "10.0.2.2";
-    public static final String SERVER_HOST = "dash.broker-chain.com";
-    //public static final String SERVER_HOST = "academic.broker-chain.com";
+    public static final String SERVER_HOST = "10.0.2.2";
+    //public static final String SERVER_HOST = "dash.broker-chain.com";
+    //public static final String SERVER_HOST = "192.168.121.1";
 
     /**
      * 主服务器端口
      */
-    //public static final int SERVER_PORT = 5000;
-    public static final int SERVER_PORT = 440;
+    public static final int SERVER_PORT = 5001;
+    //public static final int SERVER_PORT = 440;
     //public static final int SERVER_PORT = 56741;
 
     /**

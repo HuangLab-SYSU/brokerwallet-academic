@@ -2,8 +2,11 @@ package com.example.brokerfi.xc;
 
 import java.math.BigInteger;
 
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.security.Security;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 import org.bouncycastle.crypto.digests.SHA256Digest;
@@ -22,6 +25,9 @@ import org.bouncycastle.jce.spec.ECNamedCurveParameterSpec;
 
 import org.bouncycastle.math.ec.ECPoint;
 import org.bouncycastle.util.encoders.Hex;
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.Sign;
+import org.web3j.utils.Numeric;
 
 public class SecurityUtil {
 
@@ -213,107 +219,28 @@ public class SecurityUtil {
     }
 
 
-    /**
-     * 标准 secp256k1 签名（返回 r + s + v）
-     * 后端必须靠 v 才能恢复公钥！
-     */
-    public static String[] sign(String privateKeyHex, String data) {
-        try {
-            BigInteger privateKey = new BigInteger(privateKeyHex, 16);
-            ECNamedCurveParameterSpec spec = ECNamedCurveTable.getParameterSpec("secp256k1");
-            ECDomainParameters domain = new ECDomainParameters(spec.getCurve(), spec.getG(), spec.getN());
+    public static Map<String, String> signMessage(String privateKeyHex, String message) {
+        Credentials credentials = Credentials.create(privateKeyHex);
 
-            // 1. 数据必须用 Keccak256 哈希（和地址算法统一）
-            byte[] dataBytes = data.getBytes();
-            KeccakDigest keccak = new KeccakDigest(256);
-            keccak.update(dataBytes, 0, dataBytes.length);
-            byte[] hash = new byte[32];
-            keccak.doFinal(hash, 0);
+        byte[] messageBytes = message.getBytes(StandardCharsets.UTF_8);
 
-            // 2. 签名
-            ECDSASigner signer = new ECDSASigner();
-            signer.init(true, new ECPrivateKeyParameters(privateKey, domain));
-            BigInteger[] rs = signer.generateSignature(hash);
-            BigInteger r = rs[0];
-            BigInteger s = rs[1];
+        // 以太坊标准签名（自动加前缀）
+        Sign.SignatureData signature = Sign.signPrefixedMessage(
+                messageBytes,
+                credentials.getEcKeyPair()
+        );
 
-            // 3. 计算 v (recoveryId) → 后端恢复公钥必备
-            ECPoint pubPoint = spec.getG().multiply(privateKey);
-            int v = calculateV(r, s, hash, pubPoint, domain);
+        String r = Numeric.toHexString(signature.getR());
+        String s = Numeric.toHexString(signature.getS());
+        String v = Numeric.toHexString(signature.getV()); // 27 / 28
 
-            // 4. 返回：r, s, v（三个都传给后端）
-            return new String[]{
-                    Hex.toHexString(r.toByteArray()),
-                    Hex.toHexString(s.toByteArray()),
-                    String.valueOf(v)
-            };
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+        Map<String, String> result = new HashMap<>();
+        result.put("r", r);
+        result.put("s", s);
+        result.put("v", v);
+        result.put("message", message);
 
-    // ==============================================
-    // 工具方法：计算 v 值（恢复公钥必须）
-    // ==============================================
-    private static int calculateV(BigInteger r, BigInteger s, byte[] hash, ECPoint pubPoint, ECDomainParameters domain) {
-        int v = 0;
-        while (v < 4) {
-            try {
-                ECPoint recover = recoverPubKey(r, s, hash, v, domain);
-                if (recover != null && recover.equals(pubPoint)) {
-                    break;
-                }
-            } catch (Exception ignored) {}
-            v++;
-        }
-        return v;
-    }
-
-    private static ECPoint recoverPubKey(BigInteger r, BigInteger s, byte[] hash, int v, ECDomainParameters domain) {
-        BigInteger n = domain.getN();
-        BigInteger i = BigInteger.valueOf(v / 2);
-        BigInteger x = r.add(i.multiply(n));
-        ECPoint R = decompressKey(x, (v & 1) == 1, domain);
-        if (R == null) return null;
-        if (!R.multiply(n).isInfinity()) return null;
-
-        BigInteger e = new BigInteger(1, hash);
-        BigInteger eInv = BigInteger.ZERO.subtract(e).mod(n);
-        BigInteger rInv = r.modInverse(n);
-        BigInteger srInv = rInv.multiply(s).mod(n);
-        BigInteger eInvrInv = rInv.multiply(eInv).mod(n);
-
-        ECPoint q = domain.getG().multiply(eInvrInv).add(R.multiply(srInv));
-        return q.normalize();
-    }
-
-    private static ECPoint decompressKey(BigInteger xBN, boolean yBit, ECDomainParameters domain) {
-        try {
-            org.bouncycastle.math.ec.ECCurve curve = domain.getCurve();
-            BigInteger x = xBN.mod(domain.getN());
-            byte[] xEnc = bigIntegerToBytes(x, 32);
-            return curve.decodePoint(concatenate(yBit ? (byte)0x03 : 0x02, xEnc));
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    private static byte[] bigIntegerToBytes(BigInteger bi, int length) {
-        byte[] bytes = bi.toByteArray();
-        byte[] result = new byte[length];
-        if (bytes.length > length + 1) throw new RuntimeException();
-        int srcPos = (bytes[0] == 0) ? 1 : 0;
-        int destPos = length - Math.min(bytes.length - srcPos, length);
-        System.arraycopy(bytes, srcPos, result, destPos, bytes.length - srcPos);
         return result;
-    }
-
-    private static byte[] concatenate(byte b, byte[] array) {
-        byte[] res = new byte[array.length + 1];
-        res[0] = b;
-        System.arraycopy(array, 0, res, 1, array.length);
-        return res;
     }
 
 }

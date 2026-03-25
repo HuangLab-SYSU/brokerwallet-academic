@@ -1,7 +1,5 @@
 package com.example.brokerfi.xc.api;
 
-import android.util.Log;
-
 import com.example.brokerfi.xc.dto.CommentDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.net.ApiCallback;
@@ -10,17 +8,11 @@ import com.example.brokerfi.xc.net.BaseApi;
 import com.example.brokerfi.xc.net.PageResponse;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public class PostApi extends BaseApi {
 

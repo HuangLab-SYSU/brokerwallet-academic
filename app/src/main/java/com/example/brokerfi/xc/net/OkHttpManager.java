@@ -27,7 +27,8 @@ public class OkHttpManager {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                handler.post(() -> callback.onFail(e.getMessage()));
+                //handler.post(() -> callback.onFail(e.getMessage()));
+                new Handler(Looper.getMainLooper()).post(() -> callback.onFail(e.getMessage()));
             }
 
             @Override
@@ -47,7 +48,6 @@ public class OkHttpManager {
                 json,
                 MediaType.parse("application/json; charset=utf-8")
         );
-
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
@@ -56,22 +56,22 @@ public class OkHttpManager {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                callback.onFail(e.getMessage());
+                new Handler(Looper.getMainLooper()).post(() -> callback.onFail(e.getMessage()));
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    new Handler(Looper.getMainLooper()).post(() -> {
-                        try {
-                            assert response.body() != null;
-                            callback.onSuccess(response.body().string());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
-                } else {
-                    callback.onFail("网络错误");
+                try {
+                    if (!response.isSuccessful()) {
+                        new Handler(Looper.getMainLooper()).post(() -> callback.onFail("网络错误"));
+                        return;
+                    }
+                    assert response.body() != null;
+                    String result = response.body().string();
+                    new Handler(Looper.getMainLooper()).post(() -> callback.onSuccess(result));
+
+                } finally {
+                    response.close();
                 }
             }
         });
