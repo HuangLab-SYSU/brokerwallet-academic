@@ -7,73 +7,80 @@ import androidx.annotation.NonNull;
 
 import java.io.IOException;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import okhttp3.*;
 
 public class OkHttpManager {
 
     private static final OkHttpClient client = new OkHttpClient();
     private static final Handler handler = new Handler(Looper.getMainLooper());
+    private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+    /* ==================== 对外接口 ==================== */
 
     public static void get(String url, ApiCallback<String> callback) {
+        Request request = new Request.Builder().url(url).get().build();
+        execute(request, callback);
+    }
 
-        Request request = new Request.Builder().url(url).build();
+    public static void post(String url, String json, ApiCallback<String> callback) {
+        RequestBody body = RequestBody.create(json, JSON);
+        Request request = new Request.Builder().url(url).post(body).build();
+        execute(request, callback);
+    }
+
+    public static void delete(String url, String json, ApiCallback<String> callback) {
+        RequestBody body = (json == null || json.isEmpty())
+                ? RequestBody.create(new byte[0], null)
+                : RequestBody.create(json, JSON);
+
+        Request request = new Request.Builder().url(url).delete(body).build();
+        execute(request, callback);
+    }
+
+    /* ==================== 核心执行逻辑 ==================== */
+
+    private static void execute(Request request, ApiCallback<String> callback) {
 
         client.newCall(request).enqueue(new Callback() {
+
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                //handler.post(() -> callback.onFail(e.getMessage()));
-                new Handler(Looper.getMainLooper()).post(() -> callback.onFail(e.getMessage()));
+                postFail(callback, "请求失败：" + e.getMessage());
             }
 
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
+                Response res = response;
+                try {
+                    if (!res.isSuccessful()) {
+                        postFail(callback, "HTTP错误：" + res.code());
+                        return;
+                    }
 
-                String result = response.body().string();
-                new Handler(Looper.getMainLooper()).post(() -> {
-                    callback.onSuccess(result);
-                });
+                    ResponseBody body = res.body();
+                    if (body == null) {
+                        postFail(callback, "响应体为空");
+                        return;
+                    }
+
+                    postSuccess(callback, body.string());
+
+                } catch (Exception e) {
+                    postFail(callback, "解析异常：" + e.getMessage());
+                } finally {
+                    res.close();
+                }
             }
         });
     }
 
-    public static void post(String url, String json, ApiCallback<String> callback) {
+    /* ==================== 主线程分发 ==================== */
 
-        RequestBody body = RequestBody.create(
-                json,
-                MediaType.parse("application/json; charset=utf-8")
-        );
-        Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .build();
+    private static void postSuccess(ApiCallback<String> callback, String data) {
+        handler.post(() -> callback.onSuccess(data));
+    }
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                new Handler(Looper.getMainLooper()).post(() -> callback.onFail(e.getMessage()));
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    if (!response.isSuccessful()) {
-                        new Handler(Looper.getMainLooper()).post(() -> callback.onFail("网络错误"));
-                        return;
-                    }
-                    assert response.body() != null;
-                    String result = response.body().string();
-                    new Handler(Looper.getMainLooper()).post(() -> callback.onSuccess(result));
-
-                } finally {
-                    response.close();
-                }
-            }
-        });
+    private static void postFail(ApiCallback<String> callback, String msg) {
+        handler.post(() -> callback.onFail(msg));
     }
 }

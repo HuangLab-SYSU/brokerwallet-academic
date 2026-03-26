@@ -49,7 +49,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Posts: 10"
+            android:text="Posts: 0"
             android:textColor="@color/black"/>
 
         <TextView
@@ -57,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Earned: 100"
+            android:text="Earned(BKC): 0"
             android:textColor="@color/black"/>
     </LinearLayout>
 

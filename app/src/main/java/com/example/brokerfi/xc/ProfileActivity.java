@@ -2,6 +2,7 @@ package com.example.brokerfi.xc;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,8 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.adapter.ProfileAdapter;
+import com.example.brokerfi.xc.api.PostApi;
+import com.example.brokerfi.xc.api.ProfileApi;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.dto.ProfileHeaderDTO;
+import com.example.brokerfi.xc.net.ApiCallback;
+import com.example.brokerfi.xc.net.PageResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +25,11 @@ public class ProfileActivity extends AppCompatActivity {
     private RecyclerView rvProfile;
     private ProfileAdapter adapter;
     private List<Object> dataList = new ArrayList<>();
-
     private Long userId;
     private String username;
+    private int page = 0;
+    private final int size = 10;
+    private boolean isLoading = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,30 +55,59 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        mockData(); // ⭐ 模拟数据
+        loadHeader();     // ⭐ 先加载头部
+        loadPosts(true);  // ⭐ 再加载第一页帖子
     }
 
-    private void mockData() {
+    private void loadHeader() {
+        new ProfileApi().getProfileHeader(userId,
+                new ApiCallback<ProfileHeaderDTO>() {
+                    @Override
+                    public void onSuccess(ProfileHeaderDTO header) {
+                        dataList.clear();
+                        dataList.add(header);
+                        adapter.notifyDataSetChanged();
 
-        // 1️⃣ Header
-        ProfileHeaderDTO header = new ProfileHeaderDTO();
-        header.username = username;
-        header.postCount = 3;
-        header.rewardTotal = 100;
+                        loadPosts(true);
+                    }
+                    @Override
+                    public void onFail(String errorMsg) {
 
-        dataList.add(header);
+                    }
+                });
+    }
 
-        // 2️⃣ 帖子
-        for (int i = 0; i < 3; i++) {
-            PostDTO post = new PostDTO();
-            post.setTitle("我的帖子 " + i);
-            post.setContent("这是内容 " + i);
-            post.setUserName(username);
-            post.setLikeCount(i*5);
+    private void loadPosts(boolean isRefresh) {
 
-            dataList.add(post);
+        if (isLoading) return;
+        isLoading = true;
+        if (isRefresh) {
+            page = 0;
         }
+        new ProfileApi().getUserPosts(userId, page, size,
+                new ApiCallback<PageResponse<PostDTO>>() {
+                    @Override
+                    public void onSuccess(PageResponse<PostDTO> response) {
+                        List<PostDTO> list = response.getContent();
+                        if (isRefresh) {
+                            // ⚠️ 注意：header 在 index=0
+                            if (dataList.size() > 1) {
+                                dataList.subList(1, dataList.size()).clear();
+                            }
+                        }
+                        int start = dataList.size();
+                        dataList.addAll(list);
+                        adapter.notifyItemRangeInserted(start, list.size());
+                        page++;
+                        isLoading = false;
 
-        adapter.notifyDataSetChanged();
+                        Log.d("Profile", "dataList size=" + dataList.size());
+                    }
+
+                    @Override
+                    public void onFail(String errorMsg) {
+                        isLoading = false;
+                    }
+                });
     }
 }

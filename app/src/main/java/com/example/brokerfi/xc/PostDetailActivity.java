@@ -18,6 +18,7 @@ import com.example.brokerfi.xc.adapter.PostDetailAdapter;
 import com.example.brokerfi.xc.api.PostApi;
 import com.example.brokerfi.xc.api.RewardApi;
 import com.example.brokerfi.xc.dto.CommentDTO;
+import com.example.brokerfi.xc.dto.LikeStatusDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.net.ApiCallback;
 import com.example.brokerfi.xc.net.PageResponse;
@@ -111,7 +112,18 @@ public class PostDetailActivity extends AppCompatActivity {
 
         });
 
-        adapter.setOnPostActionListener(this::showRewardDialog);
+        adapter.setOnPostActionListener(new PostDetailAdapter.OnPostActionListener() {
+
+            @Override
+            public void onRewardClick(PostDTO post, int position) {
+                showRewardDialog(post, position);
+            }
+
+            @Override
+            public void onLikeClick(PostDTO post, int position) {
+                handleLike(post, position);
+            }
+        });
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -177,6 +189,67 @@ public class PostDetailActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private boolean isLikeRequesting = false;
+    private void handleLike(PostDTO post, int position) {
+
+        Long userId = UserStorageUtil.getUserId(this);
+        if (userId == null) {
+            Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // 防重复请求
+        if (isLikeRequesting) {
+            return;
+        }
+        isLikeRequesting = true;
+
+        if (post.getIsLiked()) {
+            // 取消点赞
+            new PostApi().unlikePost(post.getId(), userId, new LikeCallback(post, position) {
+                @Override
+                public void onFail(String msg) {
+                    super.onFail(msg);
+                    Toast.makeText(PostDetailActivity.this, "取消点赞失败", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            // 点赞
+            new PostApi().likePost(post.getId(), userId, new LikeCallback(post, position) {
+                @Override
+                public void onFail(String msg) {
+                    super.onFail(msg);
+                    Toast.makeText(PostDetailActivity.this, "点赞失败", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    private abstract class LikeCallback implements ApiCallback<LikeStatusDTO> {
+        private final PostDTO post;
+        private final int position;
+
+        public LikeCallback(PostDTO post, int position) {
+            this.post = post;
+            this.position = position;
+        }
+
+        @Override
+        public void onSuccess(LikeStatusDTO res) {
+            isLikeRequesting = false;
+            if (res == null) return;
+            post.setIsLiked(res.isLiked());
+            post.setLikeCount(res.getLikeCount());
+            adapter.notifyItemChanged(position, "payload_like");
+        }
+
+        @Override
+        public void onFail(String msg) {
+            isLikeRequesting = false;
+        }
+    }
+
 
     // 打赏
     private volatile boolean rewarding = false;

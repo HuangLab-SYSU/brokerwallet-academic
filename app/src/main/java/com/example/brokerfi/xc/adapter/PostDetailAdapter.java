@@ -48,6 +48,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public interface OnPostActionListener {
         void onRewardClick(PostDTO post, int position);
+        void onLikeClick(PostDTO post, int position);
     }
 
     private OnPostActionListener listener;
@@ -74,11 +75,6 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         if (holder instanceof PostViewHolder) {
             PostDTO post = (PostDTO) dataList.get(position);
-
-            ((PostViewHolder) holder).tvTitle.setText(post.getTitle());
-            ((PostViewHolder) holder).tvContent.setText(post.getContent());
-            ((PostViewHolder) holder).tvUsername.setText(post.getUserName());
-
             PostViewHolder vh = (PostViewHolder) holder;
 
             // 基础绑定
@@ -93,20 +89,11 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
             vh.tvRewardTotal.setText("Total Reward(BKC): " + rewardStr);
 
-            // 点赞点击
+            // 点赞
             vh.btnLike.setOnClickListener(v -> {
-
-                if (post.getIsLiked()) {
-                    int like = post.getLikeCount() - 1;
-                    post.setLikeCount(like);
-                } else {
-                    int like = post.getLikeCount() + 1;
-                    post.setLikeCount(like);
+                if (listener != null) {
+                    listener.onLikeClick(post, position);
                 }
-
-                post.setIsLiked(!post.getIsLiked());
-
-                notifyItemChanged(position);
             });
 
             // 打赏

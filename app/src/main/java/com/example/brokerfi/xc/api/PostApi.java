@@ -1,6 +1,7 @@
 package com.example.brokerfi.xc.api;
 
 import com.example.brokerfi.xc.dto.CommentDTO;
+import com.example.brokerfi.xc.dto.LikeStatusDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.net.ApiCallback;
 import com.example.brokerfi.xc.net.ApiResponse;
@@ -73,5 +74,29 @@ public class PostApi extends BaseApi {
         Type type = new TypeToken<ApiResponse<CommentDTO>>() {}.getType();
 
         executePost(url, body, type, callback);
+    }
+
+    //点赞
+    public void likePost(Long postId, Long userId, ApiCallback<LikeStatusDTO> callback) {
+
+        String url = "http://10.0.2.2:5001/likes"
+                + "?postId=" + postId
+                + "&userId=" + userId;
+
+        Type type = new TypeToken<ApiResponse<LikeStatusDTO>>() {}.getType();
+
+        executePost(url, null, type, callback);
+    }
+
+    //取消点赞
+    public void unlikePost(Long postId, Long userId, ApiCallback<LikeStatusDTO> callback) {
+
+        String url = "http://10.0.2.2:5001/likes"
+                + "?postId=" + postId
+                + "&userId=" + userId;
+
+        Type type = new TypeToken<ApiResponse<LikeStatusDTO>>() {}.getType();
+
+        executeDelete(url, null, type, callback);
     }
 }

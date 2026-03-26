@@ -39,10 +39,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        if (dataList.get(position) instanceof ProfileHeaderDTO) {
+        Object obj = dataList.get(position);
+        if (obj instanceof ProfileHeaderDTO) {
             return TYPE_HEADER;
-        } else {
+        } else if (obj instanceof PostDTO) {
             return TYPE_POST;
+        } else {
+            throw new IllegalStateException("Unknown type");
         }
     }
 
@@ -96,9 +99,9 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
         public void bind(ProfileHeaderDTO data) {
-            tvUsername.setText(data.username);
-            tvPostCount.setText("Posts: " + data.postCount);
-            tvReward.setText("Earned: " + data.rewardTotal);
+            tvUsername.setText(data.getUsername());
+            tvPostCount.setText("Posts: " + data.getPostCount());
+            tvReward.setText("Earned: " + data.getRewardTotal());
         }
     }
 
