@@ -1,5 +1,6 @@
 package com.example.brokerfi.xc.dto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class PostDTO {
@@ -15,7 +16,7 @@ public class PostDTO {
     private int commentCount;
     private boolean isRewarded;
     private boolean isLiked;
-    private double rewardAmount; // 打赏总额
+    private BigDecimal rewardAmount; // 打赏总额
     private String createTime;
     private String address;//发帖人的钱包地址
 
@@ -124,11 +125,11 @@ public class PostDTO {
         isLiked = liked;
     }
 
-    public double getRewardAmount() {
+    public BigDecimal getRewardAmount() {
         return rewardAmount;
     }
 
-    public void setRewardAmount(double rewardAmount) {
+    public void setRewardAmount(BigDecimal rewardAmount) {
         this.rewardAmount = rewardAmount;
     }
 

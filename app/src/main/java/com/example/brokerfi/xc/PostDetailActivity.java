@@ -26,6 +26,7 @@ import org.web3j.crypto.Credentials;
 import org.web3j.crypto.Sign;
 import org.web3j.utils.Numeric;
 
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -241,9 +242,9 @@ public class PostDetailActivity extends AppCompatActivity {
 
         new Thread(() -> {
 
-//            runOnUiThread(() -> {
-//                Toast.makeText(this, "交易已提交，等待确认...", Toast.LENGTH_LONG).show();
-//            });
+            runOnUiThread(() -> {
+                Toast.makeText(this, "交易已提交，等待确认...", Toast.LENGTH_LONG).show();
+            });
 
             try {
                 //发送交易
@@ -258,8 +259,6 @@ public class PostDetailActivity extends AppCompatActivity {
                     );
                     return;
                 }
-
-                String publicKey = SecurityUtil.getPublicKeyFromPrivateKey(privateKey);
 
                 // 构造 message
                 long timestamp = System.currentTimeMillis() / 1000;
@@ -277,6 +276,8 @@ public class PostDetailActivity extends AppCompatActivity {
                         sigMap.get("r"),
                         sigMap.get("s"),
                         sigMap.get("v"),
+                        amount,
+                        post.getId(),
                         new ApiCallback<Boolean>() {
 
                             @Override
@@ -285,7 +286,10 @@ public class PostDetailActivity extends AppCompatActivity {
                                     if (success) {
                                         Toast.makeText(PostDetailActivity.this, "打赏成功", Toast.LENGTH_LONG).show();
 
-                                        post.setRewardAmount(post.getRewardAmount() + Double.parseDouble(amount));
+                                        BigDecimal current = post.getRewardAmount() == null ? BigDecimal.ZERO : post.getRewardAmount();
+                                        BigDecimal addAmount = new BigDecimal(amount.trim());
+                                        post.setRewardAmount(current.add(addAmount));
+
                                         adapter.notifyItemChanged(position);
 
                                     } else {

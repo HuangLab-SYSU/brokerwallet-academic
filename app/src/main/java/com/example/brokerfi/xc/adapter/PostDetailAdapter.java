@@ -85,10 +85,13 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.tvTitle.setText(post.getTitle());
             vh.tvContent.setText(post.getContent());
             vh.tvUsername.setText(post.getUserName());
-            vh.tvRewardTotal.setText("Total Reward: " + post.getRewardAmount());
-
-            // 点赞数显示
+            vh.btnComment.setText("💬 " + post.getCommentCount());
             vh.btnLike.setText("👍 " + post.getLikeCount());
+            String rewardStr = "0";
+            if (post.getRewardAmount() != null) {
+                rewardStr = post.getRewardAmount().stripTrailingZeros().toPlainString();
+            }
+            vh.tvRewardTotal.setText("Total Reward(BKC): " + rewardStr);
 
             // 点赞点击
             vh.btnLike.setOnClickListener(v -> {
@@ -130,7 +133,6 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
 
             vh.tvUsername.setText(comment.userName);
-            //vh.tvTime.setText(comment.createTime);
             vh.tvContent.setText(comment.content);
 
             // 头像（用 Glide 或默认图）
@@ -153,7 +155,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     static class PostViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle, tvContent, tvUsername;
-        TextView btnLike, btnReward, tvRewardTotal;
+        TextView btnLike, btnComment, btnReward, tvRewardTotal;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -163,6 +165,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tvUsername = itemView.findViewById(R.id.tv_username);
 
             btnLike = itemView.findViewById(R.id.btn_like);
+            btnComment = itemView.findViewById(R.id.btn_comment);
             btnReward = itemView.findViewById(R.id.btn_reward);
             tvRewardTotal = itemView.findViewById(R.id.tv_reward_total);
         }

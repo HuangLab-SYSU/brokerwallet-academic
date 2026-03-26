@@ -19,6 +19,13 @@ public class Web3jTransferUtil {
 
     private static final String RPC_URL = "http://dash.broker-chain.com:42515";
 
+    /**
+     * 基于Web3j的原生BKC转账
+     * @param privateKey 转账人私钥
+     * @param toAddress 接收人地址
+     * @param amountEther 转账单位（BKC
+     * @return 交易哈希
+     */
     public static String sendTransaction(String privateKey, String toAddress, String amountEther) {
         try {
             Web3j web3j = Web3j.build(new HttpService(RPC_URL));
@@ -38,7 +45,7 @@ public class Web3jTransferUtil {
             // 转账金额（单位：wei）
             BigInteger value = Convert.toWei(amountEther, Convert.Unit.ETHER).toBigInteger();
 
-            // gas 参数（可以后续优化）
+            // gas 参数（后续优化）
             BigInteger gasPrice = Convert.toWei("20", Convert.Unit.GWEI).toBigInteger();
             BigInteger gasLimit = BigInteger.valueOf(21000);
 

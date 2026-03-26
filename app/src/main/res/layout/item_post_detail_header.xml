@@ -79,7 +79,7 @@
 
         <TextView
             android:id="@+id/btn_like"
-            android:text="👍 10"
+            android:text="👍 0"
             android:layout_marginEnd="16dp"
             android:textColor="@color/grey_60"
             android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
 
         <TextView
             android:id="@+id/btn_comment"
-            android:text="💬 5"
+            android:text="💬 0"
             android:layout_marginEnd="16dp"
             android:textColor="@color/grey_60"
             android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
     <!-- 打赏总额 -->
     <TextView
         android:id="@+id/tv_reward_total"
-        android:text="Total Reward: 100"
+        android:text="Total Reward: 0"
         android:textSize="14sp"
         android:textColor="@color/black"
         android:layout_marginTop="8dp"
