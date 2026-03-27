@@ -47,7 +47,14 @@ public class PostApi extends BaseApi {
         executeGet(url, type, callback);
     }
 
-    //TODO:发帖
+    //发帖
+    public void addPost(PostDTO postDTO, ApiCallback<PostDTO> callback) {
+        String url = "http://10.0.2.2:5001/posts";
+
+        Type type = new TypeToken<ApiResponse<PostDTO>>() {}.getType();
+
+        executePost(url, postDTO, type, callback);
+    }
 
     // 获取评论列表
     public void getComments(Long postId, int page, int size,

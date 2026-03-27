@@ -55,8 +55,8 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        loadHeader();     // ⭐ 先加载头部
-        loadPosts(true);  // ⭐ 再加载第一页帖子
+        loadHeader();     //先加载头部
+        loadPosts(true);  //加载第一页帖子
     }
 
     private void loadHeader() {

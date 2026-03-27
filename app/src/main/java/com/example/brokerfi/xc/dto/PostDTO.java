@@ -1,9 +1,10 @@
 package com.example.brokerfi.xc.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class PostDTO {
+public class PostDTO implements Serializable {
     private long id;
     private String userName;
     private long userId;

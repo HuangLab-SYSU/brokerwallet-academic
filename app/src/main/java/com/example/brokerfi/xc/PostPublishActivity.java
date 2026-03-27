@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.api.PostApi;
 import com.example.brokerfi.xc.dto.PostDTO;
+import com.example.brokerfi.xc.manager.UserManager;
+import com.example.brokerfi.xc.net.ApiCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +33,12 @@ public class PostPublishActivity extends AppCompatActivity {
     private TextView tvContentCount;
     private GridLayout gridImages;
     private Button btnSubmit;
-
-    // 图片列表（统一用String，兼容本地URI & 网络URL）
     private final List<String> imageList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_community_publish); // ❗换成你的XML名字
+        setContentView(R.layout.activity_community_publish);
 
         initView();
         initListener();
@@ -177,7 +177,6 @@ public class PostPublishActivity extends AppCompatActivity {
      * 发布帖子
      */
     private void submitPost() {
-
         String title = etTitle.getText().toString().trim();
         String content = etContent.getText().toString().trim();
 
@@ -186,29 +185,36 @@ public class PostPublishActivity extends AppCompatActivity {
             Toast.makeText(this, "请输入标题", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (content.isEmpty()) {
             Toast.makeText(this, "请输入内容", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // 构造 PostDTO
-        PostDTO post = new PostDTO();
-//        post.setUserId(1L);
-//        post.setUsername("北风");
-//        post.setTitle(title);
-//        post.setContent(content);
-//        post.setImageUrls(new ArrayList<>(imageList));
-//        post.setLikeCount(0);
-//        post.setCreateTime(String.valueOf(System.currentTimeMillis()));
+        btnSubmit.setEnabled(false);
 
-        // ⭐ 本地模拟存储（后续替换为API）
-        //PostApi.getInstance().addPost(post);
+        PostDTO postDTO = new PostDTO();
+        postDTO.setUserId(UserManager.getInstance().getUserId());
+        postDTO.setTitle(title);
+        postDTO.setContent(content);
+        postDTO.setImageUrls(new ArrayList<>(imageList));
 
-        Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
+        new PostApi().addPost(postDTO, new ApiCallback<PostDTO>() {
+            @Override
+            public void onSuccess(PostDTO result) {
+                Toast.makeText(PostPublishActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.putExtra("newPost", result);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
 
-        // 返回首页刷新
-        setResult(RESULT_OK);
-        finish();
+            @Override
+            public void onFail(String error) {
+                Toast.makeText(PostPublishActivity.this, "发布失败：" + error, Toast.LENGTH_SHORT).show();
+                setResult(RESULT_CANCELED);
+                finish();
+
+            }
+        });
     }
 }

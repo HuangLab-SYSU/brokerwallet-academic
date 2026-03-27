@@ -93,12 +93,26 @@ public class CommunityActivity extends AppCompatActivity {
 
             Long userId = UserManager.getInstance().getUserId();
             String username = UserStorageUtil.getUsername(this);
-
             intent.putExtra("userId", userId);
             intent.putExtra("userName", username);
 
             startActivity(intent);
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 来自发帖页面的返回
+        if (requestCode == 1001 && resultCode == RESULT_OK && data != null) {
+            // 拿到刚发布的帖子
+            PostDTO newPost = (PostDTO) data.getSerializableExtra("newPost");
+            if (newPost != null) {
+                postList.add(0, newPost);
+                adapter.notifyItemInserted(0);
+                rvPosts.scrollToPosition(0);
+            }
+        }
     }
 
     /**
@@ -118,11 +132,8 @@ public class CommunityActivity extends AppCompatActivity {
 
             @Override
             public void onFail(String msg) {
-
                 Log.e("loadPosts", "error: " + msg);
-
                 Toast.makeText(CommunityActivity.this, msg, Toast.LENGTH_SHORT).show();
-
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -132,9 +143,7 @@ public class CommunityActivity extends AppCompatActivity {
     private void initUser() {
 
         UserManager.getInstance().init(this);
-
         String address = getCurrentWalletAddress();
-
         if (address == null) {
             Log.e("UserInit", "wallet address is null");
             return;
@@ -153,10 +162,8 @@ public class CommunityActivity extends AppCompatActivity {
                 );
 
                 Log.d("UserInit", "user init success: " + user.getUserId());
-
                 loadPosts();
             }
-
             @Override
             public void onFail(String msg) {
                 Log.e("UserInit", "login failed: " + msg);
