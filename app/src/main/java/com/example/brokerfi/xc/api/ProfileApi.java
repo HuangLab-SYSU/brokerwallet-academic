@@ -14,7 +14,7 @@ public class ProfileApi extends BaseApi {
     public void getProfileHeader(Long userId,
                                  ApiCallback<ProfileHeaderDTO> callback) {
 
-        String url = "http://10.0.2.2:5001/api/users/header/" + userId;
+        String url = "http://172.27.71.58:5001/api/users/header/" + userId;
 
         Type type = new TypeToken<ApiResponse<ProfileHeaderDTO>>() {}.getType();
 
@@ -24,7 +24,7 @@ public class ProfileApi extends BaseApi {
     public void getUserPosts(Long userId, int page, int size,
                              ApiCallback<PageResponse<PostDTO>> callback) {
 
-        String url = "http://10.0.2.2:5001/api/users/posts/"
+        String url = "http://172.27.71.58:5001/api/users/posts/"
                 + userId + "?page=" + page + "&size=" + size;
 
         Type type = new TypeToken<ApiResponse<PageResponse<PostDTO>>>() {}.getType();

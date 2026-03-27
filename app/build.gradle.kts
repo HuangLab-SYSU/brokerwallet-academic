@@ -14,6 +14,7 @@ android {
         versionName = "2.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
     }
     buildTypes {
         release {
@@ -56,6 +57,17 @@ dependencies {
 //    implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.web3j:core:4.9.8")
     implementation("androidx.exifinterface:exifinterface:1.3.6")
+
+    // 腾讯云 COS Android SDK
+    implementation("com.qcloud.cos:cos-android:5.9.+")
+
+    // 安卓网络权限兼容
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.multidex:multidex:2.0.1")
+
+    // 图片处理
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
     
     // OpenCV for document scanning - using a manual approach
     // Note: OpenCV Android SDK needs to be downloaded manually and added as a module

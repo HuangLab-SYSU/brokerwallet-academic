@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -103,6 +105,23 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
             });
 
+            //图片展示
+            List<String> imageList = post.getImages();
+            if (imageList != null && !imageList.isEmpty()) {
+                vh.rvImages.setVisibility(View.VISIBLE);
+
+                // 九宫格 3列
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
+                vh.rvImages.setLayoutManager(gridLayoutManager);
+                vh.rvImages.setNestedScrollingEnabled(false);  // 关闭嵌套滚动
+                vh.rvImages.setHasFixedSize(false);            // 允许高度自适应
+                ImageAdapter imageAdapter = new ImageAdapter(context, imageList);
+                vh.rvImages.setAdapter(imageAdapter);
+
+            } else {
+                vh.rvImages.setVisibility(View.GONE);
+            }
+
         } else if (holder instanceof CommentViewHolder) {
             CommentDTO comment = (CommentDTO) dataList.get(position);
 
@@ -143,6 +162,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         TextView tvTitle, tvContent, tvUsername;
         TextView btnLike, btnComment, btnReward, tvRewardTotal;
+        RecyclerView rvImages;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -155,6 +175,8 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             btnComment = itemView.findViewById(R.id.btn_comment);
             btnReward = itemView.findViewById(R.id.btn_reward);
             tvRewardTotal = itemView.findViewById(R.id.tv_reward_total);
+
+            rvImages = itemView.findViewById(R.id.rv_images);
         }
     }
 

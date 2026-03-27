@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <queries>
         <intent>
@@ -31,6 +32,7 @@
         android:roundIcon="@mipmap/ic_launcher4_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BrokerFi"
+        android:requestLegacyExternalStorage="true"
         tools:targetApi="31">
         <activity
             android:name=".xc.AboutActivity"
@@ -198,6 +200,10 @@
             android:exported="false" />
         <activity
             android:name=".xc.PostPublishActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.ImagePreviewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="false" />
 
 

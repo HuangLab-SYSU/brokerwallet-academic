@@ -12,7 +12,7 @@ public class PostDTO implements Serializable {
     private String title;
     private String content;
     private String firstImageUrl; // 取首张图(以后优化掉
-    private List<String> imageUrls;
+    private List<String> images;
     private int likeCount;
     private int commentCount;
     private boolean isRewarded;
@@ -82,12 +82,12 @@ public class PostDTO implements Serializable {
         this.firstImageUrl = firstImageUrl;
     }
 
-    public List<String> getImageUrls() {
-        return imageUrls;
+    public List<String> getImages() {
+        return images;
     }
 
-    public void setImageUrls(List<String> imageUrls) {
-        this.imageUrls = imageUrls;
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
     public int getLikeCount() {

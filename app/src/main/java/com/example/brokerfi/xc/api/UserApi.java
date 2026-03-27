@@ -13,7 +13,7 @@ import java.util.Map;
 public class UserApi extends BaseApi {
     public void login(String walletAddress, ApiCallback<UserAccountDTO> callback) {
 
-        String url = "http://10.0.2.2:5001/api/users/login";
+        String url = "http://172.27.71.58:5001/api/users/login";
 
         Map<String, String> body = new HashMap<>();
         body.put("walletAddress", walletAddress);
