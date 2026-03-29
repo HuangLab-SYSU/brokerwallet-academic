@@ -22,10 +22,13 @@ import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.dto.UserAccountDTO;
 import com.example.brokerfi.xc.manager.UserManager;
 import com.example.brokerfi.xc.net.ApiCallback;
+import com.example.brokerfi.xc.net.SharedPrefsUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CommunityActivity extends AppCompatActivity {
 
@@ -144,29 +147,78 @@ public class CommunityActivity extends AppCompatActivity {
 
         UserManager.getInstance().init(this);
         String address = getCurrentWalletAddress();
+
         if (address == null) {
             Log.e("UserInit", "wallet address is null");
             return;
         }
 
-        new UserApi().login(address, new ApiCallback<UserAccountDTO>() {
+        UserApi api = new UserApi();
+
+        // ================== 1. 获取 nonce ==================
+        api.getNonce(address, new ApiCallback<String>() {
             @Override
-            public void onSuccess(UserAccountDTO user) {
+            public void onSuccess(String nonce) {
 
-                UserManager.getInstance().setUser(
-                        CommunityActivity.this,
-                        user.getUserId(),
-                        user.getUsername(),
-                        user.getAvatarUrl(),
-                        user.getWalletAddress()
-                );
+                try {
+                    // ================== 2. 获取私钥 ==================
+                    String account = StorageUtil.getPrivateKey(CommunityActivity.this);
+                    String acc = StorageUtil.getCurrentAccount(CommunityActivity.this);
+                    int i = (acc == null) ? 0 : Integer.parseInt(acc);
 
-                Log.d("UserInit", "user init success: " + user.getUserId());
-                loadPosts();
+                    if (account == null) {
+                        Log.e("UserInit", "no account");
+                        return;
+                    }
+
+                    String privateKey = account.split(";")[i];
+
+                    // ================== 3. 签名 ==================
+                    Map<String, String> signMap =
+                            SecurityUtil.signMessage(privateKey, nonce);
+
+                    // ================== 4. 组装请求 ==================
+                    Map<String, String> body = new HashMap<>();
+                    body.put("walletAddress", address);
+                    body.put("r", signMap.get("r"));
+                    body.put("s", signMap.get("s"));
+                    body.put("v", signMap.get("v"));
+                    body.put("message", nonce);
+
+                    // ================== 5. 登录 ==================
+                    api.login(body, new ApiCallback<UserAccountDTO>() {
+                        @Override
+                        public void onSuccess(UserAccountDTO user) {
+
+                            // 存 token
+                            SharedPrefsUtil.putString("wallet_token", user.getToken());
+
+                            UserManager.getInstance().setUser(
+                                    CommunityActivity.this,
+                                    user.getUserId(),
+                                    user.getUsername(),
+                                    user.getAvatarUrl(),
+                                    user.getWalletAddress()
+                            );
+
+                            Log.d("UserInit", "login success");
+                            loadPosts();
+                        }
+
+                        @Override
+                        public void onFail(String msg) {
+                            Log.e("UserInit", "login failed: " + msg);
+                        }
+                    });
+
+                } catch (Exception e) {
+                    Log.e("UserInit", "sign error", e);
+                }
             }
+
             @Override
             public void onFail(String msg) {
-                Log.e("UserInit", "login failed: " + msg);
+                Log.e("UserInit", "get nonce failed: " + msg);
             }
         });
     }

@@ -5,7 +5,14 @@ public class UserAccountDTO {
     private String username;
     private String avatarUrl;
     private String walletAddress;
+    private String token;
 
+    public String getToken() {
+        return token;
+    }
+    public void setToken(String token) {
+        this.token = token;
+    }
     public UserAccountDTO() {
     }
 

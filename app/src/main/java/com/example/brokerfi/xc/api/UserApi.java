@@ -11,12 +11,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserApi extends BaseApi {
-    public void login(String walletAddress, ApiCallback<UserAccountDTO> callback) {
+    //获取 nonce
+    public void getNonce(String walletAddress, ApiCallback<String> callback) {
 
-        String url = "http://172.27.71.58:5001/api/users/login";
+        String url = "http://172.27.71.58:5001/login/nonce?walletAddress=" + walletAddress;
 
-        Map<String, String> body = new HashMap<>();
-        body.put("walletAddress", walletAddress);
+        Type type = new TypeToken<ApiResponse<String>>() {}.getType();
+
+        executeGet(url, type, callback);
+    }
+
+    //签名登录（返回 token）
+    public void login(Map<String, String> body, ApiCallback<UserAccountDTO> callback) {
+
+        String url = "http://172.27.71.58:5001/login/sign";
 
         Type type = new TypeToken<ApiResponse<UserAccountDTO>>() {}.getType();
 

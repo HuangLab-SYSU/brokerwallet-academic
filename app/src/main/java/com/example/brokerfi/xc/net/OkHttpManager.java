@@ -15,16 +15,38 @@ public class OkHttpManager {
     private static final Handler handler = new Handler(Looper.getMainLooper());
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
+    // ==================== 统一获取 Token ====================
+    private static String getToken() {
+        // 这里返回你本地存储的 Token
+        // 例如：SharedPreferences 读取
+        return SharedPrefsUtil.getString("wallet_token", "");
+    }
+
+    // ==================== 给 Request 统一添加请求头 ====================
+    private static Request addAuthHeader(Request originalRequest) {
+        String token = getToken();
+        if (token.isEmpty()) {
+            return originalRequest; // 未登录，不添加
+        }
+
+        // 标准格式：Bearer + Token
+        return originalRequest.newBuilder()
+                .addHeader("Authorization", "Bearer " + token)
+                .build();
+    }
+
     /* ==================== 对外接口 ==================== */
 
     public static void get(String url, ApiCallback<String> callback) {
-        Request request = new Request.Builder().url(url).get().build();
+        Request original = new Request.Builder().url(url).get().build();
+        Request request = addAuthHeader(original); // 自动加头
         execute(request, callback);
     }
 
     public static void post(String url, String json, ApiCallback<String> callback) {
         RequestBody body = RequestBody.create(json, JSON);
-        Request request = new Request.Builder().url(url).post(body).build();
+        Request original = new Request.Builder().url(url).post(body).build();
+        Request request = addAuthHeader(original); // 自动加头
         execute(request, callback);
     }
 
@@ -33,7 +55,8 @@ public class OkHttpManager {
                 ? RequestBody.create(new byte[0], null)
                 : RequestBody.create(json, JSON);
 
-        Request request = new Request.Builder().url(url).delete(body).build();
+        Request original = new Request.Builder().url(url).delete(body).build();
+        Request request = addAuthHeader(original); // 自动加头
         execute(request, callback);
     }
 
