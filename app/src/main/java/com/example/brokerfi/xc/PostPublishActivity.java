@@ -1,5 +1,7 @@
 package com.example.brokerfi.xc;
 
+import static com.example.brokerfi.config.ServerConfig.BASE_URL_HTTP;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -50,11 +52,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class PostPublishActivity extends AppCompatActivity {
-
-    // ====================== 【你只需要改这里 4 个】======================
     private static final String REGION = "ap-guangzhou";        // COS 地域
     private static final String BUCKET = "wallet-community-1416742399";   // 存储桶名称
-    private static final String COS_TEMP_KEY_URL = "http://172.27.71.58:5001/cos/temp-credential"; // 后端密钥接口
+    private static final String COS_TEMP_KEY_URL = BASE_URL_HTTP + "/cos/temp-credential"; // 后端密钥接口
     private static final int UPLOAD_EXPIRE_SECONDS = 1800;   // 密钥有效期
     // =================================================================
 
@@ -91,8 +91,8 @@ public class PostPublishActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
 
-                Log.d("COS_DEBUG", "==================== 开始请求后端临时密钥 ====================");
-                Log.d("COS_DEBUG", "请求地址：" + COS_TEMP_KEY_URL);
+//                Log.d("COS_DEBUG", "==================== 开始请求后端临时密钥 ====================");
+//                Log.d("COS_DEBUG", "请求地址：" + COS_TEMP_KEY_URL);
 
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
@@ -109,11 +109,11 @@ public class PostPublishActivity extends AppCompatActivity {
                 sessionToken = obj.getString("sessionToken");
                 expiredTime = obj.getLong("expiredTime");
 
-                Log.d("COS_DEBUG", "==================== 获取密钥成功 ====================");
-                Log.d("COS_DEBUG", "tmpSecretId: " + tmpSecretId);
-                Log.d("COS_DEBUG", "tmpSecretKey: " + tmpSecretKey);
-                Log.d("COS_DEBUG", "sessionToken: " + sessionToken);
-                Log.d("COS_DEBUG", "expiredTime: " + expiredTime);
+//                Log.d("COS_DEBUG", "==================== 获取密钥成功 ====================");
+//                Log.d("COS_DEBUG", "tmpSecretId: " + tmpSecretId);
+//                Log.d("COS_DEBUG", "tmpSecretKey: " + tmpSecretKey);
+//                Log.d("COS_DEBUG", "sessionToken: " + sessionToken);
+//                Log.d("COS_DEBUG", "expiredTime: " + expiredTime);
 
                 // 初始化 COS
                 initCOS();
@@ -396,8 +396,8 @@ public class PostPublishActivity extends AppCompatActivity {
         postDTO.setContent(content);
         postDTO.setImages(new ArrayList<>(cosImageUrls));
 
-        Log.d("COS_DEBUG", "用户ID：" + postDTO.getUserId());
-        Log.d("COS_DEBUG", "入库的图片URL：" + postDTO.getImages());
+//        Log.d("COS_DEBUG", "用户ID：" + postDTO.getUserId());
+//        Log.d("COS_DEBUG", "入库的图片URL：" + postDTO.getImages());
 
         new PostApi().addPost(postDTO, new ApiCallback<PostDTO>() {
             @Override

@@ -28,7 +28,7 @@ public class ServerConfig {
 
     public static final String SERVER_HOST = "10.0.2.2";
     //public static final String SERVER_HOST = "dash.broker-chain.com";
-    //public static final String SERVER_HOST = "192.168.121.1";
+    //public static final String SERVER_HOST = "172.27.71.58";
 
     /**
      * 主服务器端口
@@ -41,6 +41,8 @@ public class ServerConfig {
      * 完整的服务器基础URL
      */
     public static final String BASE_URL = "https://" + SERVER_HOST + ":" + SERVER_PORT;
+
+    public static final String BASE_URL_HTTP = "http://" + SERVER_HOST + ":" + SERVER_PORT;
 
     // ==================== API端点配置 ====================
     

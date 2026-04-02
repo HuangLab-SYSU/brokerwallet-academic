@@ -1,5 +1,7 @@
 package com.example.brokerfi.xc.api;
 
+import static com.example.brokerfi.config.ServerConfig.BASE_URL_HTTP;
+
 import com.example.brokerfi.xc.net.ApiCallback;
 import com.example.brokerfi.xc.net.ApiResponse;
 import com.example.brokerfi.xc.net.BaseApi;
@@ -13,7 +15,7 @@ import java.util.Map;
 
 public class RewardApi extends BaseApi {
 
-    private static final String url = "http://172.27.71.58:5001/reward/verify";
+    private static final String url = BASE_URL_HTTP + "/reward/verify";
 
     /**
      * 后端验证请求

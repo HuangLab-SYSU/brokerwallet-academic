@@ -20,6 +20,7 @@ import com.example.brokerfi.xc.api.RewardApi;
 import com.example.brokerfi.xc.dto.CommentDTO;
 import com.example.brokerfi.xc.dto.LikeStatusDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
+import com.example.brokerfi.xc.manager.UserManager;
 import com.example.brokerfi.xc.net.ApiCallback;
 import com.example.brokerfi.xc.net.PageResponse;
 
@@ -67,7 +68,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         rvDetail.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PostDetailAdapter(this, dataList);
+        adapter = new PostDetailAdapter(this, dataList, UserManager.getInstance().getUserId());
         rvDetail.setAdapter(adapter);
 
         rvDetail.addOnScrollListener(new RecyclerView.OnScrollListener() {

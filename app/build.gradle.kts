@@ -68,7 +68,8 @@ dependencies {
     // 图片处理
     implementation("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
-    
+
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
     // OpenCV for document scanning - using a manual approach
     // Note: OpenCV Android SDK needs to be downloaded manually and added as a module
     // For now, we'll implement a simplified version without OpenCV

@@ -26,13 +26,15 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private static final int TYPE_POST = 0;
     private static final int TYPE_COMMENT = 1;
+    private Long currentUserId;
 
     private Context context;
     private List<Object> dataList;
 
-    public PostDetailAdapter(Context context, List<Object> dataList) {
+    public PostDetailAdapter(Context context, List<Object> dataList, Long currentUserId) {
         this.context = context;
         this.dataList = dataList;
+        this.currentUserId = currentUserId;
     }
 
     @Override
@@ -90,6 +92,14 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 rewardStr = post.getRewardAmount().stripTrailingZeros().toPlainString();
             }
             vh.tvRewardTotal.setText("Total Reward(BKC): " + rewardStr);
+
+            if (post.getUserId().equals(currentUserId)) {
+                // 自己发的帖子：隐藏打赏按钮
+                vh.btnReward.setVisibility(View.GONE);
+            } else {
+                // 别人的帖子：正常显示
+                vh.btnReward.setVisibility(View.VISIBLE);
+            }
 
             // 点赞
             vh.btnLike.setOnClickListener(v -> {

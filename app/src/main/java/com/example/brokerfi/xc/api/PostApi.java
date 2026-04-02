@@ -1,5 +1,7 @@
 package com.example.brokerfi.xc.api;
 
+import static com.example.brokerfi.config.ServerConfig.BASE_URL_HTTP;
+
 import com.example.brokerfi.xc.dto.CommentDTO;
 import com.example.brokerfi.xc.dto.LikeStatusDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
@@ -20,7 +22,7 @@ public class PostApi extends BaseApi {
     // 获取帖子列表
     public void getPosts(ApiCallback<List<PostDTO>> callback) {
 
-        String url = "http://172.27.71.58:5001/posts";
+        String url = BASE_URL_HTTP + "/posts";
 
         Type type = new TypeToken<ApiResponse<PageResponse<PostDTO>>>() {}.getType();
 
@@ -40,7 +42,7 @@ public class PostApi extends BaseApi {
     // 获取帖子详情
     public void getPostDetail(Long postId, ApiCallback<PostDTO> callback) {
 
-        String url = "http://172.27.71.58:5001/posts/" + postId;
+        String url = BASE_URL_HTTP + "/posts/" + postId;
 
         Type type = new TypeToken<ApiResponse<PostDTO>>() {}.getType();
 
@@ -49,7 +51,7 @@ public class PostApi extends BaseApi {
 
     //发帖
     public void addPost(PostDTO postDTO, ApiCallback<PostDTO> callback) {
-        String url = "http://172.27.71.58:5001/posts";
+        String url = BASE_URL_HTTP + "/posts";
 
         Type type = new TypeToken<ApiResponse<PostDTO>>() {}.getType();
 
@@ -60,7 +62,7 @@ public class PostApi extends BaseApi {
     public void getComments(Long postId, int page, int size,
                             ApiCallback<PageResponse<CommentDTO>> callback) {
 
-        String url = "http://172.27.71.58:5001/comments/post/"
+        String url = BASE_URL_HTTP + "/comments/post/"
                 + postId + "?page=" + page + "&size=" + size;
 
         Type type = new TypeToken<ApiResponse<PageResponse<CommentDTO>>>() {}.getType();
@@ -71,7 +73,7 @@ public class PostApi extends BaseApi {
     // 发送评论
     public void addComment(Long postId, Long userId, String content, ApiCallback<CommentDTO> callback) {
 
-        String url = "http://172.27.71.58:5001/comments";
+        String url = BASE_URL_HTTP + "/comments";
 
         Map<String, Object> body = new HashMap<>();
         body.put("postId", postId);
@@ -86,7 +88,7 @@ public class PostApi extends BaseApi {
     //点赞
     public void likePost(Long postId, Long userId, ApiCallback<LikeStatusDTO> callback) {
 
-        String url = "http://172.27.71.58:5001/likes"
+        String url = BASE_URL_HTTP + "/likes"
                 + "?postId=" + postId
                 + "&userId=" + userId;
 
@@ -98,7 +100,7 @@ public class PostApi extends BaseApi {
     //取消点赞
     public void unlikePost(Long postId, Long userId, ApiCallback<LikeStatusDTO> callback) {
 
-        String url = "http://172.27.71.58:5001/likes"
+        String url = BASE_URL_HTTP + "/likes"
                 + "?postId=" + postId
                 + "&userId=" + userId;
 

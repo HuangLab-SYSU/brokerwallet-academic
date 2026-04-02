@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.menu.NavigationHelper;
+import com.example.brokerfi.xc.net.SharedPrefsUtil;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -95,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
         flag2 = true;
         accountSpinner = findViewById(R.id.accountSpinner);
 
-
-
+        //保存Community token
+        SharedPrefsUtil.init(this);
 
 
 
