@@ -20,8 +20,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.xc.api.CosApi;
 import com.example.brokerfi.xc.api.PostApi;
+import com.example.brokerfi.xc.dto.CosCredentialDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
+import com.example.brokerfi.xc.manager.CosServiceFactory;
+import com.example.brokerfi.xc.manager.CosUploadManager;
+import com.example.brokerfi.xc.manager.UploadCallback;
 import com.example.brokerfi.xc.manager.UserManager;
 import com.example.brokerfi.xc.net.ApiCallback;
 import com.tencent.cos.xml.CosXmlService;
@@ -52,12 +57,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class PostPublishActivity extends AppCompatActivity {
-    private static final String REGION = "ap-guangzhou";        // COS 地域
-    private static final String BUCKET = "wallet-community-1416742399";   // 存储桶名称
-    private static final String COS_TEMP_KEY_URL = BASE_URL_HTTP + "/cos/temp-credential"; // 后端密钥接口
-    private static final int UPLOAD_EXPIRE_SECONDS = 1800;   // 密钥有效期
-    // =================================================================
-
+    private CosUploadManager cosUploadManager;
     private static final int REQUEST_IMAGE = 2001;
     private EditText etTitle, etContent;
     private TextView tvContentCount;
@@ -66,7 +66,6 @@ public class PostPublishActivity extends AppCompatActivity {
     private final List<String> imageList = new ArrayList<>();
     private final List<String> cosImageUrls = new ArrayList<>();
     private CosXmlService cosXmlService;
-    private int uploadCount = 0;
 
     // 临时密钥
     private String tmpSecretId;
@@ -88,72 +87,34 @@ public class PostPublishActivity extends AppCompatActivity {
      * 从后端获取临时密钥
      */
     private void getTempCredentialFromServer() {
-        new Thread(() -> {
-            try {
 
-//                Log.d("COS_DEBUG", "==================== 开始请求后端临时密钥 ====================");
-//                Log.d("COS_DEBUG", "请求地址：" + COS_TEMP_KEY_URL);
-
-                OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder()
-                        .url(COS_TEMP_KEY_URL)
-                        .get()
-                        .build();
-
-                Response response = client.newCall(request).execute();
-                String json = response.body().string();
-                JSONObject obj = new JSONObject(json);
-
-                tmpSecretId = obj.getString("tmpSecretId");
-                tmpSecretKey = obj.getString("tmpSecretKey");
-                sessionToken = obj.getString("sessionToken");
-                expiredTime = obj.getLong("expiredTime");
-
-//                Log.d("COS_DEBUG", "==================== 获取密钥成功 ====================");
-//                Log.d("COS_DEBUG", "tmpSecretId: " + tmpSecretId);
-//                Log.d("COS_DEBUG", "tmpSecretKey: " + tmpSecretKey);
-//                Log.d("COS_DEBUG", "sessionToken: " + sessionToken);
-//                Log.d("COS_DEBUG", "expiredTime: " + expiredTime);
-
-                // 初始化 COS
-                initCOS();
-
-            } catch (Exception e) {
-                Log.e("COS_DEBUG", "==================== 获取密钥失败 ====================");
-                Log.e("COS_DEBUG", "错误信息：" + e.getMessage());
-                e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(PostPublishActivity.this, "获取密钥失败", Toast.LENGTH_SHORT).show());
-            }
-        }).start();
-    }
-
-    /**
-     * 初始化 COS（使用临时密钥）
-     */
-    private void initCOS() {
-        CosXmlServiceConfig serviceConfig = new CosXmlServiceConfig.Builder()
-                .setRegion(REGION)
-                .isHttps(true)
-                .builder();
-
-        // 临时密钥提供器
-        BasicLifecycleCredentialProvider provider = new BasicLifecycleCredentialProvider() {
+        new CosApi().getTempCredential(new ApiCallback<CosCredentialDTO>() {
             @Override
-            protected QCloudLifecycleCredentials fetchNewCredentials() throws QCloudClientException {
-                return new SessionQCloudCredentials(
-                        tmpSecretId,
-                        tmpSecretKey,
-                        sessionToken,
-                        expiredTime
-                );
+            public void onSuccess(CosCredentialDTO data) {
+                tmpSecretId = data.getTmpSecretId();
+                tmpSecretKey = data.getTmpSecretKey();
+                sessionToken = data.getSessionToken();
+                expiredTime = data.getExpiredTime();
+
+                Log.d("COS_DEBUG", "==================== 获取密钥成功 ====================");
+                Log.d("COS_DEBUG", "tmpSecretId: " + tmpSecretId);
+                Log.d("COS_DEBUG", "tmpSecretKey: " + tmpSecretKey);
+                Log.d("COS_DEBUG", "sessionToken: " + sessionToken);
+                Log.d("COS_DEBUG", "expiredTime: " + expiredTime);
+
+                //初始化 COS
+                cosXmlService = CosServiceFactory.create(PostPublishActivity.this, tmpSecretId, tmpSecretKey, sessionToken, expiredTime);
+                cosUploadManager = new CosUploadManager(PostPublishActivity.this, cosXmlService);
+
             }
-        };
 
-        cosXmlService = new CosXmlService(this, serviceConfig, provider);
-
-        // 日志：COS 初始化成功
-        Log.d("COS_DEBUG", "==================== COS 初始化成功 ====================");
-        Log.d("COS_DEBUG", "cosXmlService 初始化完成：" + (cosXmlService != null));
+            @Override
+            public void onFail(String errorMsg) {
+                Log.e("COS_DEBUG", "==================== 获取密钥失败 ====================");
+                Log.e("COS_DEBUG", "错误信息：" + errorMsg);
+                Toast.makeText(PostPublishActivity.this, "获取密钥失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initView() {
@@ -295,7 +256,6 @@ public class PostPublishActivity extends AppCompatActivity {
 
         btnSubmit.setEnabled(false);
         cosImageUrls.clear();
-        uploadCount = 0;
 
         // 无图片，直接发布
         if (imageList.isEmpty()) {
@@ -303,88 +263,37 @@ public class PostPublishActivity extends AppCompatActivity {
             return;
         }
 
-        // 有图片，逐个上传COS
+        // 有图片,上传COS
         Toast.makeText(this, "正在上传图片...", Toast.LENGTH_SHORT).show();
+        List<Uri> uriList = new ArrayList<>();
         for (String uriStr : imageList) {
-            uploadImageToCOS(Uri.parse(uriStr));
+            uriList.add(Uri.parse(uriStr));
         }
-    }
 
-    /**
-     * 上传单张图片到COS
-     */
-    private void uploadImageToCOS(Uri uri) {
-        try {
-            Log.d("COS_DEBUG", "==================== 开始处理单张图片 ====================");
-            Log.d("COS_DEBUG", "图片Uri：" + uri.toString());
+        cosUploadManager.uploadMultiple(uriList, new UploadCallback() {
+            @Override
+            public void onSuccess(List<String> urls) {
+                runOnUiThread(() -> {
+                    Log.d("COS_DEBUG", "全部图片上传完成：" + urls.size());
 
-            // 把Uri转为本地文件（适配相册选择）
-            InputStream inputStream = getContentResolver().openInputStream(uri);
-            File tempFile = File.createTempFile("cos_" + UUID.randomUUID(), ".jpg", getCacheDir());
-            FileOutputStream fos = new FileOutputStream(tempFile);
-            byte[] buffer = new byte[4096];
-            int len;
-            while ((len = inputStream.read(buffer)) != -1) {
-                fos.write(buffer, 0, len);
+                    cosImageUrls.clear();
+                    cosImageUrls.addAll(urls);
+
+                    publishToServer(title, content);
+                });
             }
-            fos.close();
-            inputStream.close();
-            Log.d("COS_DEBUG", "临时文件创建成功：" + tempFile.getAbsolutePath());
-            Log.d("COS_DEBUG", "文件大小：" + tempFile.length() + " byte");
 
-            // COS上传路径（随机文件名，防止重名）
-            String cosPath = "community/post/" + UUID.randomUUID() + ".jpg";
-            Log.d("COS_DEBUG", "COS存储路径：" + cosPath);
-
-            PutObjectRequest request = new PutObjectRequest(BUCKET, cosPath, tempFile.getAbsolutePath());
-
-            cosXmlService.putObjectAsync(request, new CosXmlResultListener() {
-                @Override
-                public void onSuccess(CosXmlRequest request, CosXmlResult result) {
-                    // 获取云端URL
-                    String url = ((PutObjectResult) result).accessUrl;
-                    cosImageUrls.add(url);
-                    uploadCount++;
-                    Log.d("COS_DEBUG", "✅ 图片上传成功");
-                    Log.d("COS_DEBUG", "COS URL：" + url);
-
-                    // 所有图片上传完成，提交帖子
-                    if (uploadCount == imageList.size()) {
-                        publishToServer(etTitle.getText().toString().trim(), etContent.getText().toString().trim());
-                    }
-                    // 删除临时文件
-                    tempFile.delete();
-                }
-
-                @Override
-                public void onFail(CosXmlRequest request, CosXmlClientException clientException, CosXmlServiceException serviceException) {
-                    runOnUiThread(() -> {
-                        String errMsg = "";
-                        if (clientException != null) {
-                            errMsg = clientException.getMessage();
-                            Log.e("COS_DEBUG", "❌ 图片上传客户端异常：" + clientException.toString());
-                        }
-                        if (serviceException != null) {
-                            errMsg = serviceException.getMessage();
-                            Log.e("COS_DEBUG", "❌ 图片上传服务异常：" + serviceException.toString());
-                        }
-
-                        Log.e("COS_DEBUG", "❌ 最终上传失败：" + errMsg);
-                        Toast.makeText(PostPublishActivity.this, "上传失败：" + errMsg, Toast.LENGTH_SHORT).show();
-                        btnSubmit.setEnabled(true);
-                        tempFile.delete();
-                    });
-                }
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            runOnUiThread(() -> {
-                Toast.makeText(this, "图片处理失败", Toast.LENGTH_SHORT).show();
-                btnSubmit.setEnabled(true);
-            });
-        }
+            @Override
+            public void onFail(String error) {
+                runOnUiThread(() -> {
+                    Log.e("COS_DEBUG", "上传失败：" + error);
+                    Toast.makeText(PostPublishActivity.this, "上传失败：" + error, Toast.LENGTH_SHORT).show();
+                    btnSubmit.setEnabled(true);
+                });
+            }
+        });
     }
+
 
     /**
      * 发布帖子

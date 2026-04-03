@@ -1,5 +1,6 @@
 package com.example.brokerfi.xc;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,13 +56,20 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        adapter.setOnEditClickListener(() -> {
+            Intent intent = new Intent(this, EditProfileActivity.class);
+            intent.putExtra("userId", userId);
+            intent.putExtra("userName", username);
+            startActivity(intent);
+        });
+
         loadHeader();     //先加载头部
-        loadPosts(true);  //加载第一页帖子
     }
 
     private void loadHeader() {
         new ProfileApi().getProfileHeader(userId,
                 new ApiCallback<ProfileHeaderDTO>() {
+                    @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onSuccess(ProfileHeaderDTO header) {
                         dataList.clear();

@@ -16,7 +16,9 @@
             android:id="@+id/iv_avatar"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@android:drawable/sym_def_app_icon" />
+            android:src="@android:drawable/sym_def_app_icon"
+            android:background="@drawable/avatar_round_bg"
+            android:clipToOutline="true" />
 
         <TextView
             android:id="@+id/tv_username"
@@ -50,6 +52,8 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Posts: 0"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:textColor="@color/black"/>
 
         <TextView
@@ -58,7 +62,27 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Earned(BKC): 0"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:textColor="@color/black"/>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_my_posts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Posts"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"/>
+
+
 
 </LinearLayout>

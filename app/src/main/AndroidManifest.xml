@@ -12,6 +12,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 相册/图片权限 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <queries>
         <intent>
@@ -205,7 +207,9 @@
             android:name=".xc.ImagePreviewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="false" />
-
+        <activity
+            android:name=".xc.EditProfileActivity"
+            android:exported="false" />
 
         <!-- FileProvider for camera photos -->
         <provider

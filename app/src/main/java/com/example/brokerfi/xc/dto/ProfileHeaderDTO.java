@@ -3,18 +3,17 @@ package com.example.brokerfi.xc.dto;
 import java.math.BigDecimal;
 
 public class ProfileHeaderDTO {
-    private String avatarUrl;
+    private String avatar;
     private String username;
-
     private int postCount;
     private BigDecimal rewardTotal;
 
-    public String getAvatarUrl() {
-        return avatarUrl;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getUsername() {

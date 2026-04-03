@@ -1,26 +1,37 @@
 package com.example.brokerfi.xc.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.dto.ProfileHeaderDTO;
+import com.bumptech.glide.Glide;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_POST = 1;
 
-    private Context context;
-    private List<Object> dataList;
+    private final Context context;
+    private final List<Object> dataList;
 
     public interface OnPostClickListener {
         void onPostClick(PostDTO post);
@@ -35,6 +46,16 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public ProfileAdapter(Context context, List<Object> dataList) {
         this.context = context;
         this.dataList = dataList;
+    }
+
+    public interface OnEditClickListener {
+        void onEditClick();
+    }
+
+    private OnEditClickListener onEditClickListener;
+
+    public void setOnEditClickListener(OnEditClickListener listener) {
+        this.onEditClickListener = listener;
     }
 
     @Override
@@ -54,8 +75,9 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return dataList.size();
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         if (viewType == TYPE_HEADER) {
             View view = LayoutInflater.from(context)
@@ -69,7 +91,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         if (holder instanceof HeaderHolder) {
             ProfileHeaderDTO data = (ProfileHeaderDTO) dataList.get(position);
@@ -89,25 +111,43 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     class HeaderHolder extends RecyclerView.ViewHolder {
 
+        ImageView ivAvatar;
         TextView tvUsername, tvPostCount, tvReward;
+        View btnEdit;
 
         public HeaderHolder(View itemView) {
             super(itemView);
+            ivAvatar = itemView.findViewById(R.id.iv_avatar);
             tvUsername = itemView.findViewById(R.id.tv_username);
             tvPostCount = itemView.findViewById(R.id.tv_post_count);
             tvReward = itemView.findViewById(R.id.tv_reward_total);
+            btnEdit = itemView.findViewById(R.id.btn_edit);
         }
 
+        @SuppressLint("SetTextI18n")
         public void bind(ProfileHeaderDTO data) {
             tvUsername.setText(data.getUsername());
             tvPostCount.setText("Posts: " + data.getPostCount());
             tvReward.setText("Earned: " + data.getRewardTotal());
+
+            if (data.getAvatar() != null && !data.getAvatar().isEmpty()) {
+                Glide.with(context)
+                        .load(data.getAvatar())
+                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(7)))
+                        .into(ivAvatar);
+            }
+
+            btnEdit.setOnClickListener(v -> {
+                if (onEditClickListener != null) {
+                    onEditClickListener.onEditClick();
+                }
+            });
         }
     }
 
-    class PostHolder extends RecyclerView.ViewHolder {
+    static class PostHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTitle, tvContent, tvUsername, tvLike;
+        TextView tvTitle, tvContent, tvUsername, tvLike, tvPostTime;
 
         public PostHolder(View itemView) {
             super(itemView);
@@ -115,13 +155,26 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tvContent = itemView.findViewById(R.id.tv_content);
             tvUsername = itemView.findViewById(R.id.tv_username);
             tvLike = itemView.findViewById(R.id.btn_like);
+            tvPostTime = itemView.findViewById(R.id.tv_post_time);
         }
 
+        @SuppressLint("SetTextI18n")
         public void bind(PostDTO post) {
             tvTitle.setText(post.getTitle());
             tvContent.setText(post.getContent());
             tvUsername.setText(post.getUserName());
             tvLike.setText("👍 " + post.getLikeCount());
+            // 格式化时间
+            try {
+                tvPostTime.setText(
+                        new SimpleDateFormat("MM-dd", Locale.getDefault()).format(
+                                Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).parse(post.getCreateTime()))
+                        )
+                );
+            } catch (Exception e) {
+                tvPostTime.setText(post.getCreateTime());
+            }
+
         }
     }
 }

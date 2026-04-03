@@ -87,6 +87,17 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.tvUsername.setText(post.getUserName());
             vh.btnComment.setText("💬 " + post.getCommentCount());
             vh.btnLike.setText("👍 " + post.getLikeCount());
+            // 格式化时间
+            try {
+                vh.tvTime.setText(
+                        new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault()).format(
+                                Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).parse(post.getCreateTime()))
+                        )
+                );
+            } catch (Exception e) {
+                vh.tvTime.setText(post.getCreateTime());
+            }
+
             String rewardStr = "0";
             if (post.getRewardAmount() != null) {
                 rewardStr = post.getRewardAmount().stripTrailingZeros().toPlainString();
@@ -141,20 +152,20 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             try {
                 vh.tvTime.setText(
                         new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault()).format(
-                                Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).parse(comment.createTime))
+                                Objects.requireNonNull(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).parse(comment.getCreateTime()))
                         )
                 );
             } catch (Exception e) {
-                vh.tvTime.setText(comment.createTime);
+                vh.tvTime.setText(comment.getCreateTime());
             }
 
-            vh.tvUsername.setText(comment.userName);
-            vh.tvContent.setText(comment.content);
+            vh.tvUsername.setText(comment.getUserName());
+            vh.tvContent.setText(comment.getContent());
 
             // 头像（用 Glide 或默认图）
-            if (comment.avatarUrl != null && !comment.avatarUrl.isEmpty()) {
+            if (comment.getAvatarUrl() != null && !comment.getAvatarUrl().isEmpty()) {
                 Glide.with(context)
-                        .load(comment.avatarUrl)
+                        .load(comment.getAvatarUrl())
                         .placeholder(R.drawable.placeholder_image)
                         .into(vh.ivAvatar);
             } else {
@@ -170,7 +181,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     static class PostViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTitle, tvContent, tvUsername;
+        TextView tvTitle, tvContent, tvUsername, tvTime;
         TextView btnLike, btnComment, btnReward, tvRewardTotal;
         RecyclerView rvImages;
 
@@ -180,6 +191,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvContent = itemView.findViewById(R.id.tv_content);
             tvUsername = itemView.findViewById(R.id.tv_username);
+            tvTime = itemView.findViewById(R.id.tv_time);
 
             btnLike = itemView.findViewById(R.id.btn_like);
             btnComment = itemView.findViewById(R.id.btn_comment);
