@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.dto.CommentDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
@@ -98,6 +100,16 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 vh.tvTime.setText(post.getCreateTime());
             }
 
+            if (post.getAvatarUrl() != null && !post.getAvatarUrl().isEmpty()) {
+                Glide.with(context)
+                        .load(post.getAvatarUrl())
+                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(7)))
+                        .placeholder(R.drawable.placeholder_image) // 占位图
+                        .into(vh.ivAvatar);
+            } else {
+                vh.ivAvatar.setImageResource(R.drawable.placeholder_image);
+            }
+
             String rewardStr = "0";
             if (post.getRewardAmount() != null) {
                 rewardStr = post.getRewardAmount().stripTrailingZeros().toPlainString();
@@ -162,10 +174,11 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.tvUsername.setText(comment.getUserName());
             vh.tvContent.setText(comment.getContent());
 
-            // 头像（用 Glide 或默认图）
+            // 头像
             if (comment.getAvatarUrl() != null && !comment.getAvatarUrl().isEmpty()) {
                 Glide.with(context)
                         .load(comment.getAvatarUrl())
+                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(7)))
                         .placeholder(R.drawable.placeholder_image)
                         .into(vh.ivAvatar);
             } else {
@@ -181,6 +194,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     static class PostViewHolder extends RecyclerView.ViewHolder {
 
+        ImageView ivAvatar;
         TextView tvTitle, tvContent, tvUsername, tvTime;
         TextView btnLike, btnComment, btnReward, tvRewardTotal;
         RecyclerView rvImages;
@@ -192,6 +206,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tvContent = itemView.findViewById(R.id.tv_content);
             tvUsername = itemView.findViewById(R.id.tv_username);
             tvTime = itemView.findViewById(R.id.tv_time);
+            ivAvatar = itemView.findViewById(R.id.iv_avatar);
 
             btnLike = itemView.findViewById(R.id.btn_like);
             btnComment = itemView.findViewById(R.id.btn_comment);

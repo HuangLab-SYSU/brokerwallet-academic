@@ -2,6 +2,7 @@ package com.example.brokerfi.xc.net;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKey;
@@ -15,7 +16,7 @@ public class SharedPrefsUtil {
     private static Context appContext;
     private static SharedPreferences encryptedSp;
 
-    // 初始化（建议在 Application 或 MainActivity 调用一次）
+    // 初始化
     public static void init(Context context){
         if(appContext == null){
             appContext = context.getApplicationContext();
