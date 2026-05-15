@@ -26,8 +26,8 @@ public class ServerConfig {
      * 请使用电脑的局域网 IP 或者服务器的 公网 IP；
      */
 
-    public static final String SERVER_HOST = "10.0.2.2";
-    //public static final String SERVER_HOST = "dash.broker-chain.com";
+    //public static final String SERVER_HOST = "10.0.2.2";
+    public static final String SERVER_HOST = "dash.broker-chain.com";
     //public static final String SERVER_HOST = "172.27.71.58";
 
     /**
