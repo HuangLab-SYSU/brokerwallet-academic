@@ -59,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView broker;
     private ImageView nft;
     private ImageView news;
-    private ImageView medalSystem;
+    // EmulatorDAO functionality commented out
+    // private ImageView medalSystem;
     private ImageView community;
     private LinearLayout support;
     private NavigationHelper navigationHelper;
@@ -443,7 +444,8 @@ public class MainActivity extends AppCompatActivity {
         tsv_dollar=findViewById(R.id.tsv_dollar);
         nft = findViewById(R.id.nft);
         news = findViewById(R.id.news);
-        medalSystem = findViewById(R.id.medalSystem);
+        // EmulatorDAO functionality commented out
+        // medalSystem = findViewById(R.id.medalSystem);
         receive = findViewById(R.id.receiveicon);
         accounts = findViewById(R.id.accounts);
         community = findViewById(R.id.community);
@@ -546,12 +548,15 @@ public class MainActivity extends AppCompatActivity {
             //跳转
             startActivity(intent);
         });
-        
+
+        // EmulatorDAO functionality commented out
+        /*
         medalSystem.setOnClickListener(view -> {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,MedalRankingActivity.class);
             startActivity(intent);
         });
+        */
 
         community.setOnClickListener(view -> {
             Intent intent = new Intent();
