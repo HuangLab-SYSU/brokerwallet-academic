@@ -1,15 +1,18 @@
 package com.example.brokerfi.xc;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.brokerfi.R;
@@ -93,13 +96,70 @@ public class SendActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendtx2network();
+                // SendInfo
+                String fromAddress = edt_sendfrom.getText().toString();
+                String toAddress = edt_sendto.getText().toString();
+                String amount = edt_amount.getText().toString();
+                String fee = edt_fee.getText().toString();
+                
+                // IsInput？
+                if (toAddress.isEmpty() || amount.isEmpty() || fee.isEmpty()) {
+                    Toast.makeText(SendActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                
+                // Toast Confirm
+                showConfirmDialog(fromAddress, toAddress, amount, fee);
             }
         });
 
     }
 
     private volatile boolean tx = false;
+    private AlertDialog confirmDialog;
+    
+    private void showConfirmDialog(String fromAddress, String toAddress, String amount, String fee) {
+        //SUM
+        double amountValue = Double.parseDouble(amount);
+        double feeValue = Double.parseDouble(fee);
+        double totalValue = amountValue + feeValue;
+        String totalAmount = String.format("%.6f", totalValue);
+        
+        // Creat Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        
+        //Dialog Layout
+    
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_confirm_transaction, null);
+        
+        TextView tvFrom = dialogView.findViewById(R.id.tv_from);
+        TextView tvTo = dialogView.findViewById(R.id.tv_to);
+        TextView tvAmount = dialogView.findViewById(R.id.tv_amount);
+        TextView tvFee = dialogView.findViewById(R.id.tv_fee);
+        TextView tvTotal = dialogView.findViewById(R.id.tv_total);
+        
+        tvFrom.setText("From: " + fromAddress);
+        tvTo.setText("To: " + toAddress);
+        tvAmount.setText("Amount: " + amount + " BKC");
+        tvFee.setText("Gas Fee: " + fee + " BKC");
+        tvTotal.setText("Total: " + totalAmount + " BKC");
+        
+        builder.setView(dialogView);
+        
+        builder.setNegativeButton("Cancel", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        
+        builder.setPositiveButton("Confirm", (dialog, which) -> {
+            dialog.dismiss();
+            sendtx2network();
+        });
+        
+        confirmDialog = builder.create();
+        confirmDialog.getWindow().setBackgroundDrawableResource(R.color.black);
+        confirmDialog.show();
+    }
+    
     private void sendtx2network(){
         if(tx){
             Toast.makeText(SendActivity.this,"Do not resubmit the transaction!",Toast.LENGTH_LONG).show();
@@ -107,6 +167,17 @@ public class SendActivity extends AppCompatActivity {
         }
         tx = true;
         String sendTo = edt_sendto.getText().toString();
+        
+        // Verify the format of the destination address
+        if (!SecurityUtil.isAddressFormatValid(sendTo)) {
+            Toast.makeText(SendActivity.this,"Invalid address format!",Toast.LENGTH_LONG).show();
+            tx = false;
+            return;
+        }
+        
+        // Remove 0x or 0X prefix before sending 
+        String formattedSendTo = SecurityUtil.removeAddressPrefix(sendTo);
+        
         String amount = edt_amount.getText().toString();
         String fee = edt_fee.getText().toString();
 
@@ -126,7 +197,7 @@ public class SendActivity extends AppCompatActivity {
                     Toast.makeText(SendActivity.this,"Submit transaction successfully! Please wait for the result.",Toast.LENGTH_LONG).show();
                 });
                 try {
-                    String s = MyUtil.SendTX(privatekey,sendTo,amount,fee);
+                    String s = MyUtil.SendTX(privatekey,formattedSendTo,amount,fee);
                     if(s!=null &&s.contains("success")){
                         runOnUiThread(()->{
                             Toast.makeText(SendActivity.this,"Send successfully",Toast.LENGTH_LONG).show();
@@ -146,11 +217,23 @@ public class SendActivity extends AppCompatActivity {
         }
 
     }
-//    public void onBackPressed() {
-//        Intent intent = new Intent(this, MainActivity.class);
-//        startActivity(intent);
-//        overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
-//    }
+    
+    @Override
+    public void onBackPressed() {
+      
+        if (confirmDialog != null && confirmDialog.isShowing()) {
+            confirmDialog.dismiss();
+        } 
+        
+        else if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            navigationHelper.hidePopup();
+        } 
+        
+        else {
+            super.onBackPressed();
+            overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
+        }
+    }
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult intentResult = IntentIntegrator.parseActivityResult(

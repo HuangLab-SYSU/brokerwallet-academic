@@ -10,10 +10,13 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.xc.menu.NavigationHelper;
+
 
 public class ImportActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String PREF_ACCOUNT_NUMBER = "accountNumber";
+    private NavigationHelper navigationHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,5 +34,15 @@ public class ImportActivity extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return settings.getString(PREF_ACCOUNT_NUMBER, null); // 如果没有找到，返回null
     }
+
+    @Override
+    public void onBackPressed() {
+        if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            navigationHelper.hidePopup();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 
 }

@@ -52,4 +52,13 @@ public class SwapActivity extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            navigationHelper.hidePopup();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

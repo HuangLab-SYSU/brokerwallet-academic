@@ -21,6 +21,8 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 
 
 import com.example.brokerfi.R;
@@ -82,11 +84,17 @@ public class NavigationHelper{
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(0, marginTop, 0, 0);
             this.action_bar.setLayoutParams(params);
+        } else if (action_bar.getParent() instanceof ConstraintLayout) {
+            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
+                    ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0, marginTop, 0, 0);
+            this.action_bar.setLayoutParams(params);
         }
 
         customView = LayoutInflater.from(context).inflate(R.layout.menu, null);
 
         this.action_bar.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
             @Override
             public void onGlobalLayout() {
                 if (!hasExecuted) {
@@ -222,6 +230,8 @@ public class NavigationHelper{
 
 
 
+
+
     private void toggleMenuIcon() {
         if (isIcon1) {
             menu.setImageResource(R.drawable.up_circle);
@@ -265,8 +275,23 @@ public class NavigationHelper{
         return result;
     }
 
+    //检查菜单
+    public boolean isPopupVisible() {
+        return isPopupVisible;
+    }
 
-
+    //Hide
+    public void hidePopup() {
+        if (isPopupVisible && popupWindow != null) {
+            popupWindow.dismiss();
+            isPopupVisible = false;
+            // 切换菜单图标
+            if (!isIcon1) {
+                menu.setImageResource(R.drawable.action_menu_30);
+                isIcon1 = true;
+            }
+        }
+    }
 
 
 

@@ -1,5 +1,7 @@
 package com.example.brokerfi.xc;
 
+import static com.example.brokerfi.config.ApiConfig.API_MESSAGE_NEWS;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebResourceError;
@@ -88,9 +90,7 @@ public class NewsActivity extends AppCompatActivity {
             }
         });
 
-        // 加载指定网站
-        //webView.loadUrl("https://academic.broker-chain.com:444/news");
-        webView.loadUrl("https://dash.broker-chain.com:444/news");
+        webView.loadUrl(API_MESSAGE_NEWS);
         //webView.loadUrl("https://")
     }
     @Override

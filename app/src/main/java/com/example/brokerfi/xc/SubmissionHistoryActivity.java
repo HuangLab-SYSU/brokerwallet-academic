@@ -446,5 +446,15 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
         intent.putExtra("fileName", record.getFileName());
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            navigationHelper.hidePopup();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 }
 

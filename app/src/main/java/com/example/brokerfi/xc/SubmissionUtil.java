@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.example.brokerfi.config.ApiConfig;
 import com.example.brokerfi.config.ServerConfig;
 
 /**
@@ -123,7 +124,7 @@ public class SubmissionUtil {
                 MultipartBody requestBody = requestBuilder.build();
                 
                 Request request = new Request.Builder()
-                        .url(ServerConfig.BASE_URL + "/api/upload/complete")
+                        .url(ApiConfig.BASE_URL + "/api/upload/complete")
                         .post(requestBody)
                         .build();
                 

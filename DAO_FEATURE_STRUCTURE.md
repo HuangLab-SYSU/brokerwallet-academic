@@ -998,7 +998,7 @@ adb reverse --list
 ### Q1: 网络请求失败
 **解决：** 
 1. 检查后端是否启动
-2. 检查 `ServerConfig.BASE_URL` 是否正确
+2. 检查 `ApiConfig.BASE_URL` 是否正确
 3. 确保执行了 `adb reverse tcp:5000 tcp:5000`
 
 ### Q2: 图片加载失败

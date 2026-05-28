@@ -228,6 +228,7 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    //btn.setText(R.string.View_My_Profit);If use string resource,the btn will be slower
                                     btn.setText("View My Profit");
                                 }
                             });
@@ -236,6 +237,7 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    //btn.setText(R.string.Apply_Broker);
                                     btn.setText("Apply to Become Broker");
                                 }
                             });
@@ -310,4 +312,14 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
 
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            navigationHelper.hidePopup();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 }

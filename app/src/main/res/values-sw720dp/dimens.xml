@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dimensions for extra large screens (720dp+) -->
+    <dimen name="icon_size">64dp</dimen>
+    <dimen name="small_icon_size">32dp</dimen>
+    <dimen name="edittext_height">52dp</dimen>
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="broker_container_height">420dp</dimen>
+    <dimen name="broker_edittext_height">418dp</dimen>
+    <dimen name="text_size_xlarge">36sp</dimen>
+    <dimen name="text_size_large">32sp</dimen>
+    <dimen name="text_size_normal">20sp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="text_size_smallest">12sp</dimen>
+</resources>

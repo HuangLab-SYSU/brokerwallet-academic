@@ -210,12 +210,73 @@ public class SecurityUtil {
     }
     
     //The standard private key format is a 32-byte 256-bit hexadecimal number.
+    //Support both with and without 0x/0X prefix (like MetaMask)
     public static boolean isNewPrivateKeyFormat(String privateKey) {
-        if (privateKey == null || privateKey.length() != 64) {
+        if (privateKey == null) {
             return false;
         }
-        // IS hexadecimal
-        return privateKey.matches("[0-9a-fA-F]+");
+        // Check if it has 0x or 0X prefix
+        if (privateKey.startsWith("0x") || privateKey.startsWith("0X")) {
+            // Must be exactly 66 characters long (2 for prefix + 64 for key)
+            if (privateKey.length() != 66) {
+                return false;
+            }
+            // Check if the part after prefix is hexadecimal
+            return privateKey.substring(2).matches("[0-9a-fA-F]+");
+        } else {
+            // Standard format without prefix
+            if (privateKey.length() != 64) {
+                return false;
+            }
+            // Check if it's hexadecimal
+            return privateKey.matches("[0-9a-fA-F]+");
+        }
+    }
+    
+    // Remove 0x or 0X prefix from private key if exists
+    public static String removePrivateKeyPrefix(String privateKey) {
+        if (privateKey == null) {
+            return null;
+        }
+        if (privateKey.startsWith("0x") || privateKey.startsWith("0X")) {
+            return privateKey.substring(2);
+        }
+        return privateKey;
+    }
+    
+    // Check if the address format is valid
+    // Standard address is 40 hex characters without 0x prefix
+    public static boolean isAddressFormatValid(String address) {
+        if (address == null) {
+            return false;
+        }
+        // Check if it has 0x or 0X prefix
+        if (address.startsWith("0x") || address.startsWith("0X")) {
+            // Must be exactly 42 characters long (2 for prefix + 40 for address)
+            if (address.length() != 42) {
+                return false;
+            }
+            // Check if the part after prefix is hexadecimal
+            return address.substring(2).matches("[0-9a-fA-F]+");
+        } else {
+            // Standard format without prefix
+            if (address.length() != 40) {
+                return false;
+            }
+            // Check if it's hexadecimal
+            return address.matches("[0-9a-fA-F]+");
+        }
+    }
+    
+    // Remove 0x or 0X prefix from address if exists
+    public static String removeAddressPrefix(String address) {
+        if (address == null) {
+            return null;
+        }
+        if (address.startsWith("0x") || address.startsWith("0X")) {
+            return address.substring(2);
+        }
+        return address;
     }
 
 

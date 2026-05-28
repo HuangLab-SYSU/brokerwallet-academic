@@ -1,6 +1,8 @@
 package com.example.brokerfi.xc;
 
 
+import static com.example.brokerfi.config.ApiConfig.API_NOTIFICATION_NEWS2_doGET2;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -251,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 try {
                     //byte[] bytes = HTTPUtil.doGet2("https://academic.broker-chain.com/user/news2", null);
-                    byte[] bytes = HTTPUtil.doGet2("https://dash.broker-chain.com:444/user/news2", null);
+                    byte[] bytes = HTTPUtil.doGet2(API_NOTIFICATION_NEWS2_doGET2, null);
 
                     //Get the update tip message from database in Server
                     //FOr Developer:Use the "title" keyword-This can be edited in the database in Server
@@ -715,15 +717,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setMessage(R.string.Exit_Confirm)
-                .setCancelable(false)
-                .setPositiveButton(R.string.Yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        finishAffinity();
-                    }
-                })
-                .setNegativeButton(R.string.No, null)
-                .show();
+        // 检查 NavigationHelper 是否弹出
+        if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            // 是则隐藏菜单
+            navigationHelper.hidePopup();
+        } else {
+            // 显示退出确认对话框
+            new AlertDialog.Builder(this)
+                    .setMessage(R.string.Exit_Confirm)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.Yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finishAffinity();
+                        }
+                    })
+                    .setNegativeButton(R.string.No, null)
+                    .show();
+        }
     }
 }

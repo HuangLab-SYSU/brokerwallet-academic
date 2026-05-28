@@ -5,6 +5,8 @@ package com.example.brokerfi.xc;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.menu.NavigationHelper;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -51,6 +54,7 @@ public class SelectAccountActivity extends AppCompatActivity {
     private boolean hiddenAccountsExpanded = false;
     private static final String PREF_HIDDEN_ACCOUNTS = "hidden_accounts";
     private static final String PREFS_NAME = "MyPrefs"; // 添加PREFS_NAME常量定义
+    private NavigationHelper navigationHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -276,7 +280,7 @@ public class SelectAccountActivity extends AppCompatActivity {
     }
 
     private void intEvent() {
-        NavigationHelper navigationHelper = new NavigationHelper(menu, action_bar, this, notificationBtn);
+        navigationHelper = new NavigationHelper(menu, action_bar, this, notificationBtn);
         Button btn_export_private_key = findViewById(R.id.btn_export_private_key);
 
         btn_add.setOnClickListener(view -> {
@@ -383,6 +387,23 @@ public class SelectAccountActivity extends AppCompatActivity {
         
         relativeLayout.setOnClickListener(this::onRelativeLayoutClick);
 
+        // 长按监听器
+        relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                // Copy Address
+                String accountAddress = accountState.getAccountAddr();
+                if (!TextUtils.isEmpty(accountAddress)) {
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("Account Address", accountAddress);
+                    clipboard.setPrimaryClip(clip);
+                    //Toast copy success
+                    Toast.makeText(SelectAccountActivity.this, getString(R.string.copy_success), Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+
         ImageView imageView = new ImageView(SelectAccountActivity.this);
         RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -395,6 +416,7 @@ public class SelectAccountActivity extends AppCompatActivity {
         relativeLayout.addView(imageView);
 
         LinearLayout leftInfoLayout = new LinearLayout(SelectAccountActivity.this);
+        leftInfoLayout.setId(View.generateViewId()); // Set ID for layout positioning
         RelativeLayout.LayoutParams leftParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT
@@ -493,7 +515,35 @@ public class SelectAccountActivity extends AppCompatActivity {
         }
 
         relativeLayout.addView(leftInfoLayout);
-        
+
+        ImageView moreButton = new ImageView(SelectAccountActivity.this);
+        RelativeLayout.LayoutParams moreParams = new RelativeLayout.LayoutParams(
+                48, // Set fixed width for better visibility
+                48  // Set fixed height for better visibility
+        );
+        moreParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        moreParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        moreParams.rightMargin = 8; // Small margin to keep it close to edge
+        moreButton.setLayoutParams(moreParams);
+        moreButton.setImageResource(R.drawable.ic_more_vert);
+        moreButton.setColorFilter(Color.BLACK); // Ensure icon is black
+        moreButton.setScaleType(ImageView.ScaleType.CENTER); // Center the icon
+        moreButton.setClickable(true);
+        moreButton.setId(View.generateViewId()); // Set ID for layout positioning
+        moreButton.setOnClickListener(v -> {
+            // Get account index from account name
+            String accountName = accountState.getAccountName();
+            int accountIndex = Integer.parseInt(accountName.split(" ")[1]) - 1;
+            
+            // Navigate to AccountDetailActivity
+            Intent intent = new Intent(SelectAccountActivity.this, AccountDetailActivity.class);
+            intent.putExtra("accountIndex", String.valueOf(accountIndex));
+            intent.putExtra("accountAddress", accountState.getAccountAddr());
+            intent.putExtra("accountName", accountName);
+            startActivity(intent);
+        });
+        relativeLayout.addView(moreButton);
+
         // Account Balance (Use the FormatUtil to format)
         String balance = accountState.getBalance();
         String formattedBalance = FormatUtil.formatBalance(balance);
@@ -509,9 +559,9 @@ public class SelectAccountActivity extends AppCompatActivity {
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT
         );
-        balanceParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        balanceParams.addRule(RelativeLayout.LEFT_OF, moreButton.getId());
         balanceParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        balanceParams.rightMargin = paddingInDp;
+        balanceParams.rightMargin = 16; // Space between balance and button
         textView3.setLayoutParams(balanceParams);
         relativeLayout.addView(textView3);
 
@@ -649,6 +699,22 @@ public class SelectAccountActivity extends AppCompatActivity {
         
         editor.putString(PREF_HIDDEN_ACCOUNTS, sb.toString());
         editor.apply();
+    }
+
+    @Override
+    public void onBackPressed() {
+        
+        if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            
+            navigationHelper.hidePopup();
+        } else if (hiddenAccountsExpanded) {
+            
+            hiddenAccountsExpanded = false;
+            refresh();
+        } else {
+            
+            super.onBackPressed();
+        }
     }
 
 }

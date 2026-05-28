@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.config.ApiConfig;
 import com.example.brokerfi.config.ServerConfig;
 import com.example.brokerfi.xc.menu.NavigationHelper;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -189,7 +190,7 @@ public class ProofSubmissionActivity extends AppCompatActivity {
                 // 构建API请求URL - 使用ServerConfig配置
                 String apiUrl = ServerConfig.USER_INFO_API + "/" + myAddress;
                 Log.d("ProofSubmission", "请求URL: " + apiUrl);
-                Log.d("ProofSubmission", "BASE_URL: " + ServerConfig.BASE_URL);
+                Log.d("ProofSubmission", "BASE_URL: " + ApiConfig.BASE_URL);
                 
                 // 发送HTTP GET请求
                 java.net.URL url = new java.net.URL(apiUrl);
@@ -422,6 +423,17 @@ public class ProofSubmissionActivity extends AppCompatActivity {
         Log.d("ProofSubmission", "最终文件名: " + result);
         return result;
     }
+
+    @Override
+    public void onBackPressed() {
+        if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            navigationHelper.hidePopup();
+        } else {
+            super.onBackPressed();
+        }
+    }//异常
+
+
 }
 
 

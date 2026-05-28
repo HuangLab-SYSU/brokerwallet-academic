@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".xc.ShowPrivateKeyActivity">
+
+    <!-- Top Bar -->
+    <include
+        layout="@layout/topbar"
+        android:id="@+id/action_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/action_bar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Private Key"
+                android:fontFamily="@font/work_sans_black"
+                android:textSize="@dimen/text_size_xlarge"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:gravity="center" />
+
+            <!-- Description -->
+            <TextView
+                android:id="@+id/Warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="NEVER disclose this key！"
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="#CC0000"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/WarningDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Anyone with your private keys can steal any assets held in your account."
+                android:textSize="@dimen/text_size_small"
+                android:textColor="#000000"
+                android:gravity="center" />
+
+
+            <!-- Private Key Display (Hidden by default) -->
+            <TextView
+                android:id="@+id/privateKeyTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:singleLine="false"
+                android:maxLines="3" />
+
+            <!-- Reveal Button (Long press to show private key) -->
+            <android.widget.Button
+                android:id="@+id/revealButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/custom_button_background"
+                android:text="Long press to reveal private key"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/text_size_normal" />
+
+            <!-- Copy Button (Initially hidden, shown after reveal) -->
+            <android.widget.Button
+                android:id="@+id/copyButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_button_background_black"
+                android:text="Copy Private Key"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/text_size_normal"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

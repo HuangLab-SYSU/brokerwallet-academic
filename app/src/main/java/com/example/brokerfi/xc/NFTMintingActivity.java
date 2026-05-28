@@ -214,6 +214,16 @@ public class NFTMintingActivity extends AppCompatActivity {
         }
         return result;
     }
+
+    @Override
+    public void onBackPressed() {
+        if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            navigationHelper.hidePopup();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 }
 
 

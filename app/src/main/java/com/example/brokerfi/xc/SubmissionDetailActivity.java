@@ -279,5 +279,15 @@ public class SubmissionDetailActivity extends AppCompatActivity {
             return dateTime != null ? dateTime : "";
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            navigationHelper.hidePopup();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 }
 

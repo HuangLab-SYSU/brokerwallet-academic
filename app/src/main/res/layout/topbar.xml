@@ -76,7 +76,7 @@
         android:layout_toEndOf="@+id/brokerTextview1"
         android:layout_toStartOf="@+id/menu"
         android:padding="8dp"
-        android:src="@drawable/notifications"
+        android:src="@drawable/notifications_vector"
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="通知"
         android:layout_marginStart="8dp"

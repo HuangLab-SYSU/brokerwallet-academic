@@ -1,5 +1,8 @@
 package com.example.brokerfi.xc;
 
+import static com.example.brokerfi.config.ApiConfig.API_BLOCKCHAIN_MEDALS;
+import static com.example.brokerfi.config.ApiConfig.API_BLOCKCHAIN_NFT_USER;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -330,7 +333,7 @@ public class MyCenterActivity extends AppCompatActivity {
             try {
                 // 构建API请求URL
 //                String apiUrl = "http://academic.broker-chain.com:5000/api/blockchain/medals/" + myAddress;
-                String apiUrl = "https://dash.broker-chain.com:440/api/blockchain/medals/" + myAddress;
+                String apiUrl = API_BLOCKCHAIN_MEDALS  + myAddress;
 
                 // 发送HTTP GET请求
                 java.net.URL url = new java.net.URL(apiUrl);
@@ -534,8 +537,7 @@ public class MyCenterActivity extends AppCompatActivity {
             try {
                 // 构建API请求URL，添加分页参数
 //                String apiUrl = "http://academic.broker-chain.com:5000/api/blockchain/nft/user/" + myAddress +
-                String apiUrl = "https://dash.broker-chain.com:440/api/blockchain/nft/user/" + myAddress +
-                              "?page=" + nftCurrentPage + "&size=" + nftPageSize;
+                String apiUrl = API_BLOCKCHAIN_NFT_USER + myAddress + "?page=" + nftCurrentPage + "&size=" + nftPageSize;
                 
                 // 发送HTTP GET请求，增加超时时间
                 java.net.URL url = new java.net.URL(apiUrl);

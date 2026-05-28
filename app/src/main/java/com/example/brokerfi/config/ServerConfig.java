@@ -1,6 +1,8 @@
 package com.example.brokerfi.config;
 
-    /**
+import static com.example.brokerfi.config.ApiConfig.BASE_URL;
+
+/**
      * 【开发者请注意】：
      * 这是服务器配置文件
      * 位于独立的config包中，方便修改IP配置
@@ -28,21 +30,20 @@ public class ServerConfig {
 
     //public static final String SERVER_HOST = "10.0.2.2";
     public static final String SERVER_HOST = "dash.broker-chain.com";
-    //public static final String SERVER_HOST = "172.27.71.58";
+    //public static final String SERVER_HOST = "academic.broker-chain.com";
 
     /**
      * 主服务器端口
      */
-    public static final int SERVER_PORT = 5001;
-    //public static final int SERVER_PORT = 440;
+    public static final int SERVER_PORT = 440;
+    public static final int FEATURE_PORT = 444;
+    public static final int NFT_DAO_PORT = 5000;
     //public static final int SERVER_PORT = 56741;
 
     /**
      * 完整的服务器基础URL
      */
-    public static final String BASE_URL = "https://" + SERVER_HOST + ":" + SERVER_PORT;
 
-    public static final String BASE_URL_HTTP = "http://" + SERVER_HOST + ":" + SERVER_PORT;
 
     // ==================== API端点配置 ====================
     

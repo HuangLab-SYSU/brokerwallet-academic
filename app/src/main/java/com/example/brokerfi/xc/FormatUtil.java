@@ -19,10 +19,10 @@ public class FormatUtil {
                 if (balanceValue == Math.round(balanceValue)) {
                     return String.valueOf((long) balanceValue);
                 } else {
-                    return formatNumber(balanceValue, 10);
+                    return formatNumber(balanceValue, 3);
                 }
             } else {
-                return formatNumber(balanceValue, 13);
+                return formatNumber(balanceValue, 6);
             }
         } catch (NumberFormatException e) {
             // If not a valid number, return original

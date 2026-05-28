@@ -156,10 +156,27 @@ public class AfterBrokerActivity extends AppCompatActivity {
                                 finalSumBalance = finalSumBalance.substring(0,8);
                                 bkctextview.setTextSize(20);
                             }
-                            bkctextview.setText(finalSumBalance + " BKC");
+                            String FinalSumBalance = getString(R.string.BKC,finalSumBalance);
+                            bkctextview.setText(FinalSumBalance);
                             brokerprofit.removeAllViews();
 
-                            for (int i = 0; i < 100; i++) {
+                            int totalShards = 0;
+                            for (int i = 0; i < 100000; i++) {
+                                try {
+                                    if (finalJsonResponse.has(String.valueOf(i)) && finalJsonResponse.getString(String.valueOf(i)) != null) {
+                                        totalShards++;
+                                    } else {
+                                        break;
+                                    }
+                                } catch (Exception e) {
+                                    break;
+                                }
+                            }
+
+                            int startIndex = Math.max(0, totalShards - 30);
+                            int endIndex = totalShards;
+
+                            for (int i = startIndex; i < endIndex; i++) {
                                 String s;
                                 try {
                                     s = finalJsonResponse.getString(String.valueOf(i));
@@ -373,5 +390,13 @@ public class AfterBrokerActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            navigationHelper.hidePopup();
+        } else {
+            super.onBackPressed();
+        }
+    }
 
 }

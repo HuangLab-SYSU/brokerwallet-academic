@@ -19,7 +19,9 @@ public class WelcomeBackActivity extends AppCompatActivity {
 
     private EditText edt_passw;
     private Button btn_unlock;
+    private Button btn_toggle_password;
     private TextView txw_tip;
+    private boolean isPasswordVisible = false;
 
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String Pass = "password";
@@ -36,8 +38,9 @@ public class WelcomeBackActivity extends AppCompatActivity {
     }
     private void intView() {
         edt_passw = findViewById(R.id.edt_passw);
-        btn_unlock = (Button) findViewById(R.id.btn_unlock);
-        txw_tip = findViewById(R.id.txw_tip);
+        btn_unlock = findViewById(R.id.btn_unlock);
+        btn_toggle_password = findViewById(R.id.btn_toggle_password);
+        //txw_tip = findViewById(R.id.txw_tip);
     }
 
     @Override
@@ -73,6 +76,18 @@ public class WelcomeBackActivity extends AppCompatActivity {
             }
 
 
+        });
+
+        btn_toggle_password.setOnClickListener(view -> {
+            isPasswordVisible = !isPasswordVisible;
+            if (isPasswordVisible) {
+                edt_passw.setInputType(android.text.InputType.TYPE_CLASS_TEXT);
+                btn_toggle_password.setBackgroundResource(R.drawable.ic_eye_closed);
+            } else {
+                edt_passw.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                btn_toggle_password.setBackgroundResource(R.drawable.ic_eye_open);
+            }
+            edt_passw.setSelection(edt_passw.getText().length());
         });
 
     }

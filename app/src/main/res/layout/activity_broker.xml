@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".xc.BrokerActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".xc.BrokerActivity">
 
+    <!-- Top Bar -->
     <include
-        layout="@layout/topbar"/>
-    <androidx.core.widget.NestedScrollView
+        layout="@layout/topbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/action_bar">
-        <RelativeLayout
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Scrollable Content Area -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/action_bar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp">
 
+            <!-- Title -->
             <TextView
                 android:id="@+id/buytitle"
                 android:layout_width="match_parent"
@@ -27,78 +36,64 @@
                 android:text="Broker"
                 android:fontFamily="@font/work_sans_black"
                 android:textColor="#000000"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/text_size_xlarge"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- Description -->
             <TextView
                 android:id="@+id/textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/buytitle"
                 android:layout_marginTop="8dp"
                 android:text="This operation will invoke the requestBroker() function in the smart contract."
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintTop_toBottomOf="@id/buytitle" />
 
+            <!-- Dashed Border Container -->
             <View
-                android:id="@+id/view"
-                android:layout_width="395dp"
-                android:layout_height="332dp"
-                android:layout_below="@+id/textview"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/dashed_border" />
-
-            <LinearLayout
+                android:id="@+id/view_dashed_border"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/view"
-                android:layout_marginTop="18dp"
-                android:orientation="vertical">
+                android:layout_height="@dimen/broker_container_height"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/dashed_border"
+                app:layout_constraintTop_toBottomOf="@id/textview" />
 
-
-                <android.widget.Button
-                    android:id="@+id/button"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="32dp"
-                    android:background="@drawable/custom_button_background"
-                    android:paddingStart="16dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="8dp"
-                    android:text="Get started"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-
-            </LinearLayout>
-
+            <!-- Multi-line Input Field -->
             <EditText
                 android:id="@+id/editTextTextMultiLine"
-                android:layout_width="365dp"
-                android:layout_height="330dp"
-                android:layout_above="@+id/textview2"
-                android:layout_below="@+id/textview"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="16dp"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/broker_edittext_height"
                 android:layout_marginTop="13dp"
-                android:layout_marginEnd="14dp"
-                android:layout_marginBottom="8dp"
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
                 android:maxLines="27"
+                android:textSize="@dimen/text_size_small"
                 android:scrollbars="horizontal|vertical"
-                android:textSize="12sp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview" />
 
+            <!-- Action Button -->
+            <android.widget.Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/custom_button_background"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:text="Get started"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/text_size_normal"
+                app:layout_constraintTop_toBottomOf="@id/view_dashed_border" />
 
-        </RelativeLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,16 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.menu.NavigationHelper;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.kenai.jffi.Main;
-import org.bouncycastle.jce.ECNamedCurveTable;
-import org.bouncycastle.jce.spec.ECNamedCurveParameterSpec;
-import java.math.BigInteger;
 
 public class AddAccountActivity extends AppCompatActivity {
     private ImageView menu;
@@ -81,13 +76,16 @@ public class AddAccountActivity extends AppCompatActivity {
                 tvError.setVisibility(View.GONE);
             }
             
+            // Remove 0x or 0X prefix before saving (like MetaMask)
+            String formattedAcc = SecurityUtil.removePrivateKeyPrefix(acc);
+            
             String existAcc = StorageUtil.getPrivateKey(this);
             if (existAcc != null) {
-                if(!existAcc.contains(acc)){
-                    existAcc += (";" + acc);
+                if(!existAcc.contains(formattedAcc)){
+                    existAcc += (";" + formattedAcc);
                 }
             } else {
-                existAcc = acc;
+                existAcc = formattedAcc;
             }
             StorageUtil.savePrivateKey(this, existAcc);
 

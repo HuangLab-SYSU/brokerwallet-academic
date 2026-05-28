@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dimensions for medium screens (480dp - 599dp) -->
+    <dimen name="icon_size">48dp</dimen>
+    <dimen name="small_icon_size">24dp</dimen>
+    <dimen name="edittext_height">44dp</dimen>
+    <dimen name="button_height">40dp</dimen>
+    <dimen name="broker_container_height">300dp</dimen>
+    <dimen name="broker_edittext_height">298dp</dimen>
+    <dimen name="text_size_xlarge">28sp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_small">13sp</dimen>
+    <dimen name="text_size_smallest">10sp</dimen>
+</resources>

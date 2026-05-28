@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 相册/图片权限 -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
@@ -132,9 +133,6 @@
             android:name=".xc.FaucetActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.ConvertActivity"
-            android:exported="false" />
-        <activity
             android:name=".xc.MenuActivity"
             android:exported="false" />
         <activity
@@ -190,6 +188,15 @@
             android:exported="false" />
         <activity
             android:name=".xc.MyCenterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.AccountDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.ConfirmPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".xc.ShowPrivateKeyActivity"
             android:exported="false" />
         <activity
             android:name=".xc.CommunityActivity"

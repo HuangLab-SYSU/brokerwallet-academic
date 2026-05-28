@@ -1,128 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".xc.WithdrawActivity"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".xc.WithdrawActivity">
 
+    <!-- Top Bar -->
     <include
-        layout="@layout/topbar"/>
-    <LinearLayout
+        layout="@layout/topbar"
+        android:id="@+id/action_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Title Section -->
+    <TextView
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="16dp"
-        android:paddingHorizontal="16dp">
+        android:paddingHorizontal="16dp"
+        android:text="Withdraw"
+        android:fontFamily="@font/work_sans_black"
+        android:textSize="@dimen/text_size_xlarge"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/action_bar" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Withdraw"
-            android:fontFamily="@font/work_sans_black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:textColor="#000000"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Transfer your coins securely back from broker system address"
-            android:textSize="16sp"
-            android:textColor="#000000"/>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <!-- Description Text -->
+    <TextView
+        android:id="@+id/tv_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:paddingHorizontal="16dp"
+        android:text="Transfer your coins securely back from broker system address"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <!-- Scrollable Form Area -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="32dp"
-        android:paddingHorizontal="16dp">
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Send from"
-            android:textSize="16sp"
-            android:textColor="#000000"/>
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edt_sendfrom"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginTop="8dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:background="@drawable/custom_edittext_border"/>
+            <!-- Send From Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Send from"
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="#000000" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Send to"
-            android:textSize="16sp"
-            android:textColor="#000000"/>
+            <!-- Send From Input -->
+            <EditText
+                android:id="@+id/edt_sendfrom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_edittext_border"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="@dimen/text_size_normal" />
 
-        <EditText
-            android:id="@+id/edt_sendto"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/custom_edittext_border"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="8dp"
-            android:textSize="15sp" />
+            <!-- Send To Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Send to"
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="#000000" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Amount"
-            android:textSize="16sp"
-            android:textColor="#000000"/>
+            <!-- Send To Input -->
+            <EditText
+                android:id="@+id/edt_sendto"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_edittext_border"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="@dimen/text_size_normal" />
 
-        <EditText
-            android:id="@+id/edt_amount"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/custom_edittext_border"
-            android:hint="0.00"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="8dp" />
+            <!-- Amount Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Amount"
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="#000000" />
 
-        <android.widget.Button
-            android:id="@+id/btn_withdraw"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Withdraw"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:textColor="#FFFFFF"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/custom_button_background" />
+            <!-- Amount Input -->
+            <EditText
+                android:id="@+id/edt_amount"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_edittext_border"
+                android:hint="0.00"
+                android:inputType="numberDecimal"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="@dimen/text_size_normal" />
 
-    </LinearLayout>
+            <!-- Withdraw Button -->
+            <android.widget.Button
+                android:id="@+id/btn_withdraw"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/custom_button_background"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Withdraw"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/text_size_normal" />
 
+        </LinearLayout>
 
+    </androidx.core.widget.NestedScrollView>
 
-
-
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

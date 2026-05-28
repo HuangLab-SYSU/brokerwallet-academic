@@ -106,7 +106,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
                 Button btnCancel = dialog.findViewById(R.id.btn_cancel);
 
                 // 设置提示信息
-                tv_title.setText("Buy");
+                tv_title.setText(R.string.Buy);
                 // 修改标签文本
                 tvPriceLabel.setText("Total (Gas fee included)");
 

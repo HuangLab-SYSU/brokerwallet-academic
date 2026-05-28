@@ -1,5 +1,7 @@
 package com.example.brokerfi.xc;
 
+import static com.example.brokerfi.config.ServerConfig.SERVER_HOST;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +26,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.xc.StorageUtil;
 import com.example.brokerfi.xc.menu.NavigationHelper;
 import com.example.brokerfi.xc.model.Transaction;
 import com.example.brokerfi.xc.model.TransactionResponse;
@@ -37,7 +40,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -56,7 +58,7 @@ public class AtvActivity extends AppCompatActivity {
     private ExecutorService executorService;
     private static final String CACHE_FILE_NAME = "transactions_cache.txt";
     
-    private static final String API_URL = "http://dash.broker-chain.com/gettx2?acc=";
+    private static final String API_URL = "http://" + SERVER_HOST + "/gettx2?acc=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -297,11 +299,14 @@ public class AtvActivity extends AppCompatActivity {
     private void intEvent(){
         navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
     }
-    
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();//退回上一级页面
-        overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
+        if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            navigationHelper.hidePopup();
+        } else {
+            super.onBackPressed();
+        }
     }
     
     @Override

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default dimensions for normal screens -->
+    <dimen name="icon_size">48dp</dimen>
+    <dimen name="small_icon_size">24dp</dimen>
+    <dimen name="edittext_height">44dp</dimen>
+    <dimen name="edittext_height_large">56dp</dimen>
+    <dimen name="button_height">40dp</dimen>
+    <dimen name="button_height_large">56dp</dimen>
+    <dimen name="broker_container_height">332dp</dimen>
+    <dimen name="broker_edittext_height">330dp</dimen>
+    <dimen name="text_size_xlarge">28sp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_small">13sp</dimen>
+    <dimen name="text_size_smallest">10sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="dialog_padding">20dp</dimen>
+    <dimen name="spacing_small">10dp</dimen>
+    <dimen name="spacing_medium">20dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="spacing_tiny">8dp</dimen>
+</resources>

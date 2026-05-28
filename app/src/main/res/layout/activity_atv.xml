@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".xc.AtvActivity"
-    android:fillViewport="true">
-    
-    <LinearLayout
+    android:background="@color/white"
+    tools:context=".xc.AtvActivity">
+
+    <!-- Top Bar -->
+    <include
+        layout="@layout/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        
-        <!-- Logo and Text -->
-        <include
-            layout="@layout/topbar"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/buytitle"
-            android:layout_width="match_parent"
+    <!-- Title -->
+    <TextView
+        android:id="@+id/buytitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:text="Activity"
+        android:fontFamily="@font/work_sans_black"
+        android:textColor="#000000"
+        android:textSize="@dimen/text_size_xlarge"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/action_bar" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"
+        android:paddingHorizontal="16dp"
+        android:text="Transactions of current account"
+        android:textColor="#000000"
+        android:textSize="@dimen/text_size_small"
+        app:layout_constraintTop_toBottomOf="@id/buytitle" />
+
+    <!-- Transaction List Container (Black Background) -->
+    <FrameLayout
+        android:id="@+id/container_transactions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#000000"
+        app:layout_constraintTop_toBottomOf="@id/textview"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Progress Bar (Centered) -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/work_sans_black"
-            android:paddingHorizontal="16dp"
-            android:text="Activity"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:layout_gravity="center" />
 
-        <TextView
-            android:id="@+id/textview"
+        <!-- RecyclerView (Fills container) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/transactions_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6.5dp"
-            android:layout_marginBottom="16dp"
-            android:paddingHorizontal="16dp"
-            android:text="Transactions of current account"
-            android:textColor="#000000"
-            android:textSize="14sp" />
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:clipToPadding="false" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:background="#000000">
-            
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:minHeight="400dp"
-                    android:background="#000000">
-                
-                <ProgressBar
-                    android:id="@+id/progress_bar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"/>
-                
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/transactions_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="10dp"
-                    android:clipToPadding="false"
-                    android:nestedScrollingEnabled="false"/>
-            </RelativeLayout>
-        </LinearLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

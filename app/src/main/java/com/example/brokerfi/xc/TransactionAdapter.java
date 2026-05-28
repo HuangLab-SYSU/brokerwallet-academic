@@ -69,12 +69,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         }
 
         holder.transactionType.setText(type);
-        
-        // 格式化时间，dashboard返回的时间格式非标准时间格式
+
         String formattedTime = formatTimestamp(transaction.getTimestamp());
         holder.transactionTime.setText(formattedTime);
 
-        // 设置其他信息
         holder.transactionFrom.setText(transaction.getFrom() != null ? transaction.getFrom() : "-");
         holder.transactionTo.setText(transaction.getTo() != null ? transaction.getTo() : "-");
         holder.transactionId.setText(transaction.getId());

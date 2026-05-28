@@ -38,5 +38,10 @@
     <string name="Yes">Yes</string>
     <string name="No">No</string>
     <string name="Wrong_Password_Warning">Wrong Password</string>
+    <string name="Version">Version %s</string>
+    <string name="copy_success">Copy successful</string>
+    <string name="Buy">Buy</string>
+    <string name="View_My_Profit">View My Profit</string>
+    <string name="Apply_Broker">Apply to Become Broker</string>
 </resources>
 

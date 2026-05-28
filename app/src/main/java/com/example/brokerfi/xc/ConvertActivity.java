@@ -28,7 +28,6 @@ public class ConvertActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_convert);
 
         intView();
         intEvent();
@@ -47,9 +46,6 @@ public class ConvertActivity extends AppCompatActivity {
         menu = findViewById(R.id.menu);
         notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
-        oldAddressInput = findViewById(R.id.oldAddressInput);
-        newAddressInput = findViewById(R.id.newAddressInput);
-        convertButton = findViewById(R.id.convertButton);
 
         convertButton.setOnClickListener(new View.OnClickListener() {
             @Override

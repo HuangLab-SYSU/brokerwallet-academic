@@ -1,122 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".xc.SwapActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".xc.SwapActivity">
 
+    <!-- Top Bar -->
     <include
-        layout="@layout/topbar"/>
+        layout="@layout/topbar"
+        android:id="@+id/action_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Scrollable Content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/action_bar">
-        <RelativeLayout
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/action_bar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- Title -->
             <TextView
                 android:id="@+id/buytitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Receive"
                 android:fontFamily="@font/work_sans_black"
-                android:textSize="30sp"
+                android:textSize="@dimen/text_size_xlarge"
                 android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- Description -->
             <TextView
                 android:id="@+id/textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/buytitle"
                 android:layout_marginTop="8dp"
                 android:text="Generate a secure address to receive coins from others"
-                android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buytitle" />
 
+            <!-- Receive To Label -->
             <TextView
                 android:id="@+id/textview2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textview"
                 android:layout_marginTop="32dp"
                 android:text="Receive to"
-                android:textSize="16sp"
-                android:textColor="#000000"/>
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview" />
 
+            <!-- Address Input -->
             <EditText
                 android:id="@+id/edittext"
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_below="@+id/textview2"
+                android:layout_height="@dimen/edittext_height"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/custom_edittext_border"
                 android:inputType="text"
                 android:maxLines="1"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="8dp"
-                android:textSize="15sp" />
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:textSize="@dimen/text_size_normal"
+                app:layout_constraintTop_toBottomOf="@id/textview2" />
 
-
+            <!-- QR Code Image -->
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/edittext"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:layout_constraintTop_toBottomOf="@id/edittext" />
 
-            <LinearLayout
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/imageView"
-                android:layout_marginTop="8dp">
+            <!-- Copy Address Button -->
+            <android.widget.Button
+                android:id="@+id/copyaddress"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/custom_button_bg_white"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="remindMeLater"
+                android:padding="4dp"
+                android:text="Copy address"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_size_normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/saveqrcodebtn"
+                app:layout_constraintTop_toBottomOf="@id/imageView" />
 
-                <!-- 第一个按钮 -->
-                <android.widget.Button
-                    android:id="@+id/copyaddress"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/custom_button_bg_white"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:onClick="remindMeLater"
-                    android:padding="4dp"
-                    android:text="Copy address"
-                    android:textAllCaps="false"
-                    android:textSize="16dp" />
+            <!-- Save QRCode Button -->
+            <android.widget.Button
+                android:id="@+id/saveqrcodebtn"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_button_background"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="nextAction"
+                android:padding="4dp"
+                android:text="Save QRCode"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_normal"
+                app:layout_constraintStart_toEndOf="@+id/copyaddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView" />
 
-                <!-- 第二个按钮 -->
-                <android.widget.Button
-                    android:id="@+id/saveqrcodebtn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/custom_button_background"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:onClick="nextAction"
-                    android:padding="4dp"
-                    android:text="Save QRCode"
-                    android:textAllCaps="false"
-                    android:textColor="#ffffff"
-                    android:textSize="16dp" />
-
-            </LinearLayout>
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

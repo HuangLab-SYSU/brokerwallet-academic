@@ -1,78 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FFFFFF"
-    android:padding="24dp">
+    android:fillViewport="true"
+    android:background="#FFFFFF">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Verify Password"
-        android:textSize="24sp"
-        android:textColor="#000000"
-        android:fontFamily="sans-serif-medium"
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="32dp"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Please enter your wallet lock screen password to verify the operation"
-        android:textSize="16sp"
-        android:textColor="#666666"
-        android:layout_marginBottom="48dp"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:lineSpacingExtra="4dp" />
-
-    <EditText
-        android:id="@+id/et_password"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:hint="Enter password"
-        android:inputType="textPassword"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:background="@drawable/custom_edittext_background"
-        android:paddingHorizontal="16dp"
-        android:layout_marginBottom="32dp"
-        android:singleLine="true"
-        android:maxLength="20" />
-
-    <Button
-        android:id="@+id/btn_verify"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:text="Verify"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/custom_button_background"
-        android:layout_marginBottom="16dp"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/btn_cancel"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:text="Cancel"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:background="@drawable/custom_button_background_white"
-        android:textAllCaps="false" />
-
-    <TextView
-        android:id="@+id/tv_wallet_address"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="3"
-        android:text="私钥将保存到:\n /Download/BrokerWallet/ \n private_keys_timestamp.txt"
-        android:textColor="#000000"
-        android:textSize="10sp" />
+        android:padding="24dp">
 
-</LinearLayout>
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Verify Password"
+            android:textSize="@dimen/text_size_large"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Please enter your wallet lock screen password to verify the operation"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <!-- Password Input -->
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height_large"
+            android:layout_marginTop="20dp"
+            android:hint="Enter password"
+            android:inputType="textPassword"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="#000000"
+            android:background="@drawable/custom_edittext_background"
+            android:paddingHorizontal="16dp"
+            android:singleLine="true"
+            android:maxLength="20"
+            app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+        <!-- Verify Button -->
+        <Button
+            android:id="@+id/btn_verify"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_large"
+            android:layout_marginTop="32dp"
+            android:text="Verify"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/custom_button_background"
+            android:textAllCaps="false"
+            app:layout_constraintTop_toBottomOf="@id/et_password" />
+
+        <!-- Cancel Button -->
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_large"
+            android:layout_marginTop="16dp"
+            android:text="Cancel"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="#000000"
+            android:background="@drawable/custom_button_background_white"
+            android:textAllCaps="false"
+            app:layout_constraintTop_toBottomOf="@id/btn_verify" />
+
+        <!-- Wallet Address Info -->
+        <TextView
+            android:id="@+id/tv_wallet_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="3"
+            android:text="私钥将保存到:\n /Download/BrokerWallet/ \n private_keys_timestamp.txt"
+            android:textColor="#000000"
+            android:textSize="@dimen/text_size_smallest"
+            app:layout_constraintTop_toBottomOf="@id/btn_cancel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

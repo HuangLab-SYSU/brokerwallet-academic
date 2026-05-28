@@ -1,5 +1,7 @@
 package com.example.brokerfi.xc;
 
+import static com.example.brokerfi.config.ApiConfig.API_NOTIFICATION_NEWS2;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebResourceError;
@@ -79,9 +81,7 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
 
-
-        //webView.loadUrl("https://academic.broker-chain.com:444/news2");
-        webView.loadUrl("https://dash.broker-chain.com:444/news2");
+        webView.loadUrl(API_NOTIFICATION_NEWS2);
     }
     /// ////////
     @Override

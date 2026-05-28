@@ -130,4 +130,13 @@ public class NFTViewActivity extends AppCompatActivity {
         public String getOwnerDisplayName() { return ownerDisplayName; }
         public void setOwnerDisplayName(String ownerDisplayName) { this.ownerDisplayName = ownerDisplayName; }
     }
+    @Override
+    public void onBackPressed() {
+        if (navigationHelper != null && navigationHelper.isPopupVisible()) {
+            navigationHelper.hidePopup();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 }
