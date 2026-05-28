@@ -1,5 +1,6 @@
 package com.example.brokerfi.config;
 
+import static com.example.brokerfi.config.ServerConfig.COMMUNITY_PORT;
 import static com.example.brokerfi.config.ServerConfig.FEATURE_PORT;
 import static com.example.brokerfi.config.ServerConfig.NFT_DAO_PORT;
 import static com.example.brokerfi.config.ServerConfig.SERVER_HOST;
@@ -37,6 +38,8 @@ public class ApiConfig {
     public static final String BASE_URL = "https://" + SERVER_HOST + ":" + SERVER_PORT;
     public static final String FEATURE_URL = "https://" + SERVER_HOST + ":" + FEATURE_PORT;
     public static final String NFT_DAO_URL = "https://" + SERVER_HOST + ":" + NFT_DAO_PORT;
+    public static final String BASE_URL_HTTP = "http://" + SERVER_HOST + ":" + COMMUNITY_PORT;
+
 
     /**
      * API接口路径

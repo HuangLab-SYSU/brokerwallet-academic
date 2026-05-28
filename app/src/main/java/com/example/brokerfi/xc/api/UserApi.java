@@ -1,6 +1,6 @@
 package com.example.brokerfi.xc.api;
 
-import static com.example.brokerfi.config.ServerConfig.BASE_URL_HTTP;
+import static com.example.brokerfi.config.ApiConfig.BASE_URL_HTTP;
 
 import com.example.brokerfi.xc.dto.UserAccountDTO;
 import com.example.brokerfi.xc.net.ApiCallback;

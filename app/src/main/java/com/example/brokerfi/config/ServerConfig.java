@@ -38,6 +38,7 @@ public class ServerConfig {
     public static final int SERVER_PORT = 440;
     public static final int FEATURE_PORT = 444;
     public static final int NFT_DAO_PORT = 5000;
+    public static final int COMMUNITY_PORT = 5001;
     //public static final int SERVER_PORT = 56741;
 
     /**

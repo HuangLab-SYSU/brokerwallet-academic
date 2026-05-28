@@ -1,6 +1,6 @@
 package com.example.brokerfi.xc;
 
-import static com.example.brokerfi.config.ServerConfig.BASE_URL_HTTP;
+import static com.example.brokerfi.config.ApiConfig.BASE_URL_HTTP;
 
 import android.content.Intent;
 import android.net.Uri;
