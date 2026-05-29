@@ -163,18 +163,16 @@ public class AboutActivity extends AppCompatActivity {
     // FOR Developer：Please update the latest appVersion in the database before each new release！
     //********************************************************************************************
     private String getAppVersionName() {
-        // TEST MODE: Return old version to trigger update
-        return "1.0.0";
-        
-        // Production code (commented out for testing):
-        /*
+        // TEST MODE: Return old version to trigger update (已禁用)
+        // return "1.0.0";
+
+        // Production code (生产版本 - 已启用):
         try {
             return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (Exception e) {
             Log.e("Version", "Error getting version", e);
             return "Can't get AppVersion";
         }
-        */
     }
 
     // 打开应用在 Play 商店的页面（For update the app）
