@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     private final int size = 10;
     private boolean isLoading = false;
 
-    // 顶部 menu 相关控件
+    // menu 相关控件
     private ImageView menu;
     private ImageView notificationBtn;
     private RelativeLayout actionBar;

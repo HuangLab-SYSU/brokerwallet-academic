@@ -101,7 +101,7 @@ public class CommunityActivity extends AppCompatActivity {
             startActivityForResult(intent, 1001);
         });
 
-        // 个人主页按钮
+        // 个人主页
         profileButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, ProfileActivity.class);
 
