@@ -32,7 +32,7 @@
                     android:id="@+id/bkctextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="100 BKC"
+                    android:text="0 BKC"
                     android:fontFamily="@font/work_sans_black"
                     android:textStyle="bold"
                     android:textSize="24dp"
@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/work_sans_black"
-                    android:text="+22 BKC"
+                    android:text="+0 BKC"
                     android:textColor="@color/green"
                     android:textSize="20dp"
                     android:textStyle="bold" />
