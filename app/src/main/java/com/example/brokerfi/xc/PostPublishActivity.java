@@ -56,6 +56,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import com.example.brokerfi.xc.menu.NavigationHelper;
+
 public class PostPublishActivity extends AppCompatActivity {
     private CosUploadManager cosUploadManager;
     private static final int REQUEST_IMAGE = 2001;
@@ -72,6 +76,10 @@ public class PostPublishActivity extends AppCompatActivity {
     private String tmpSecretKey;
     private String sessionToken;
     private long expiredTime;
+    private ImageView menu;
+    private ImageView notificationBtn;
+    private RelativeLayout actionBar;
+    private NavigationHelper navigationHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +126,10 @@ public class PostPublishActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
+        actionBar = findViewById(R.id.action_bar);
+        navigationHelper = new NavigationHelper(menu, actionBar, this, notificationBtn);
         etTitle = findViewById(R.id.et_title);
         etContent = findViewById(R.id.et_content);
         tvContentCount = findViewById(R.id.tv_content_count);

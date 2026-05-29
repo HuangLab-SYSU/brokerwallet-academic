@@ -34,6 +34,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import com.example.brokerfi.xc.menu.NavigationHelper;
 
 public class PostDetailActivity extends AppCompatActivity {
 
@@ -49,6 +52,10 @@ public class PostDetailActivity extends AppCompatActivity {
     private final int pageSize = 10;
     private boolean isLoading = false;
     private boolean hasMore = true;
+    private ImageView menu;
+    private ImageView notificationBtn;
+    private RelativeLayout actionBar;
+    private NavigationHelper navigationHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +68,10 @@ public class PostDetailActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
+        actionBar = findViewById(R.id.action_bar);
+        navigationHelper = new NavigationHelper(menu, actionBar, this, notificationBtn);
         rvDetail = findViewById(R.id.rv_post_detail);
         etComment = findViewById(R.id.et_comment);
         btnSend = findViewById(R.id.btn_send);

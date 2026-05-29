@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.adapter.ProfileAdapter;
-import com.example.brokerfi.xc.api.PostApi;
 import com.example.brokerfi.xc.api.ProfileApi;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.dto.ProfileHeaderDTO;
+import com.example.brokerfi.xc.menu.NavigationHelper;
 import com.example.brokerfi.xc.net.ApiCallback;
 import com.example.brokerfi.xc.net.PageResponse;
 
@@ -26,19 +28,47 @@ public class ProfileActivity extends AppCompatActivity {
     private RecyclerView rvProfile;
     private ProfileAdapter adapter;
     private List<Object> dataList = new ArrayList<>();
+
     private Long userId;
     private String username;
     private int page = 0;
     private final int size = 10;
     private boolean isLoading = false;
 
+    // 顶部 menu 相关控件
+    private ImageView menu;
+    private ImageView notificationBtn;
+    private RelativeLayout actionBar;
+    private NavigationHelper navigationHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_profile);
 
+        initView();
+        initMenu();
+        initData();
+        initEvent();
+
+        loadHeader();     // 先加载头部
+    }
+
+    private void initView() {
         rvProfile = findViewById(R.id.rv_profile);
 
+        // 绑定 topbar 中的 menu 控件
+        menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
+        actionBar = findViewById(R.id.action_bar);
+    }
+
+    private void initMenu() {
+        // 初始化原 wallet 的顶部 menu 弹窗逻辑
+        navigationHelper = new NavigationHelper(menu, actionBar, this, notificationBtn);
+    }
+
+    private void initData() {
         userId = getIntent().getLongExtra("userId", -1);
         username = getIntent().getStringExtra("userName");
 
@@ -46,7 +76,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         adapter = new ProfileAdapter(this, dataList);
         rvProfile.setAdapter(adapter);
+    }
 
+    private void initEvent() {
         adapter.setOnPostClickListener(post -> {
             Intent intent = new Intent(this, PostDetailActivity.class);
             intent.putExtra("postId", post.getId());
@@ -62,8 +94,6 @@ public class ProfileActivity extends AppCompatActivity {
             intent.putExtra("userName", username);
             startActivity(intent);
         });
-
-        loadHeader();     //先加载头部
     }
 
     private void loadHeader() {
@@ -78,9 +108,10 @@ public class ProfileActivity extends AppCompatActivity {
 
                         loadPosts(true);
                     }
+
                     @Override
                     public void onFail(String errorMsg) {
-
+                        isLoading = false;
                     }
                 });
     }
@@ -89,23 +120,28 @@ public class ProfileActivity extends AppCompatActivity {
 
         if (isLoading) return;
         isLoading = true;
+
         if (isRefresh) {
             page = 0;
         }
+
         new ProfileApi().getUserPosts(userId, page, size,
                 new ApiCallback<PageResponse<PostDTO>>() {
                     @Override
                     public void onSuccess(PageResponse<PostDTO> response) {
                         List<PostDTO> list = response.getContent();
+
                         if (isRefresh) {
-                            // ⚠️ 注意：header 在 index=0
+                            // 注意：header 在 index=0
                             if (dataList.size() > 1) {
                                 dataList.subList(1, dataList.size()).clear();
                             }
                         }
+
                         int start = dataList.size();
                         dataList.addAll(list);
                         adapter.notifyItemRangeInserted(start, list.size());
+
                         page++;
                         isLoading = false;
 

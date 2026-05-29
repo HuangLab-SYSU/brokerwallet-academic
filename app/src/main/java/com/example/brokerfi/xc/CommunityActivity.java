@@ -30,6 +30,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.widget.RelativeLayout;
+import com.example.brokerfi.xc.menu.NavigationHelper;
+
 public class CommunityActivity extends AppCompatActivity {
 
     private RecyclerView rvPosts;
@@ -39,6 +42,10 @@ public class CommunityActivity extends AppCompatActivity {
     private ImageView profileButton;
     private PostAdapter adapter;
     private List<PostDTO> postList = new ArrayList<>();
+    private ImageView menu;
+    private ImageView notificationBtn;
+    private RelativeLayout actionBar;
+    private NavigationHelper navigationHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +65,9 @@ public class CommunityActivity extends AppCompatActivity {
         tvEmpty = findViewById(R.id.tv_empty);
         fabPost = findViewById(R.id.fab_post);
         profileButton = findViewById(R.id.profileButton);
+        menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
+        actionBar = findViewById(R.id.action_bar);
     }
 
     private void initRecyclerView() {
@@ -78,6 +88,7 @@ public class CommunityActivity extends AppCompatActivity {
     }
 
     private void initListener() {
+        navigationHelper = new NavigationHelper(menu, actionBar, this, notificationBtn);
 
         // 下拉刷新
         swipeRefreshLayout.setOnRefreshListener(() -> {
