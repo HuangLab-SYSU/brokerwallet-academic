@@ -16,13 +16,13 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 public class MenuActivity extends AppCompatActivity {
-    private RelativeLayout sendlist;
-    private RelativeLayout receivelist;
-    private RelativeLayout activitylist;
-    private RelativeLayout setlist;
-    private RelativeLayout supportlist;
-    private RelativeLayout about;
-    private RelativeLayout locklist;
+    private View sendlist;
+    private View receivelist;
+    private View activitylist;
+    private View setlist;
+    private View supportlist;
+    private View about;
+    private View locklist;
     private ImageView up_icon;
 
 

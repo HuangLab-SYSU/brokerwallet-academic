@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "MyPrefs";
     private ImageView menu;
     private ImageView notificationBtn;
-    private RelativeLayout action_bar;
+    private View action_bar;
     private ImageView buy;
     private ImageView send;
     private ImageView swap;

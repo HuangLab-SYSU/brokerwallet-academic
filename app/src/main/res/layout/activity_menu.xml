@@ -7,341 +7,410 @@
     android:background="@color/white"
     tools:context=".xc.MenuActivity">
 
-    <!-- Action Bar -->
-    <RelativeLayout
+    <!-- Action Bar (Top Header) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Logo -->
         <View
             android:id="@+id/dashedBorderView"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/logo4" />
+            android:background="@drawable/logo4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <!-- Broker Text -->
         <TextView
             android:id="@+id/brokerTextview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/dashedBorderView"
-            android:text="Broker"
-            android:textSize="@dimen/text_size_normal"
+            android:text="BrokerChain"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            app:layout_constraintStart_toEndOf="@id/dashedBorderView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <!-- Fi Text (Red) -->
         <TextView
             android:id="@+id/fiTextview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/brokerTextview"
-            android:text="Fi"
+            android:text="Wallet"
             android:textColor="#FF0000"
-            android:textSize="@dimen/text_size_normal"
-            android:textStyle="bold" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/brokerTextview"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-        <!-- Menu Icon -->
+        <!-- Menu Icon (Up Circle) -->
         <ImageView
             android:id="@+id/up_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:src="@drawable/up_circle"
             android:contentDescription="up_circle"
-            android:src="@drawable/up_circle" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Menu Title -->
+    <!-- Title: "Menu" -->
     <TextView
-        android:id="@+id/tv_menu_title"
+        android:id="@+id/menuTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:paddingHorizontal="16dp"
         android:text="Menu"
-        android:textSize="@dimen/text_size_xlarge"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@id/action_bar" />
+        app:layout_constraintTop_toBottomOf="@id/action_bar"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Scrollable Menu List -->
+    <!-- Scrollable Content Area -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_menu_title"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/menuTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <!-- Send (Scan QRCode) -->
-            <RelativeLayout
+            <!-- ==================== Menu Item 1: Send (Scan QRCode) ==================== -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/sendlist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:clickable="true"
                 android:background="@drawable/bg"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
                     android:id="@+id/sendicon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/scan_icon" />
+                    android:src="@drawable/scan_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/sendtext"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@+id/sendicon"
+                    android:layout_marginEnd="16dp"
                     android:text="Send (Scan QRCode)"
                     android:textColor="#000000"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_large"
+                    app:layout_constraintStart_toEndOf="@id/sendicon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/sendarrow" />
 
                 <ImageView
+                    android:id="@+id/sendarrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/right" />
+                    android:src="@drawable/right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Receive -->
-            <RelativeLayout
+            <!-- ==================== Menu Item 2: Receive ==================== -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/receivelist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:clickable="true"
                 android:background="@drawable/bg"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sendlist">
+                app:layout_constraintTop_toBottomOf="@id/sendlist"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
                     android:id="@+id/receiveicon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/qrcode_icon" />
+                    android:src="@drawable/qrcode_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/receivetext"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@+id/receiveicon"
+                    android:layout_marginEnd="16dp"
                     android:text="Receive"
                     android:textColor="#000000"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_large"
+                    app:layout_constraintStart_toEndOf="@id/receiveicon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/receivearrow" />
 
                 <ImageView
+                    android:id="@+id/receivearrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/right" />
+                    android:src="@drawable/right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Activity -->
-            <RelativeLayout
+            <!-- ==================== Menu Item 3: Activity ==================== -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/activitylist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:clickable="true"
                 android:background="@drawable/bg"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/receivelist">
+                app:layout_constraintTop_toBottomOf="@id/receivelist"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
                     android:id="@+id/activityicon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/database_icon" />
+                    android:src="@drawable/database_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/activitytext"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@+id/activityicon"
+                    android:layout_marginEnd="16dp"
                     android:text="Activity"
                     android:textColor="#000000"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_large"
+                    app:layout_constraintStart_toEndOf="@id/activityicon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/activityarrow" />
 
                 <ImageView
+                    android:id="@+id/activityarrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/right" />
+                    android:src="@drawable/right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Accounts -->
-            <RelativeLayout
+            <!-- ==================== Menu Item 4: Accounts ==================== -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/setlist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:clickable="true"
                 android:background="@drawable/bg"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activitylist">
+                app:layout_constraintTop_toBottomOf="@id/activitylist"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
                     android:id="@+id/seticon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/user_icon" />
+                    android:src="@drawable/user_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/settext"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@+id/seticon"
+                    android:layout_marginEnd="16dp"
                     android:text="Accounts"
                     android:textColor="#000000"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_large"
+                    app:layout_constraintStart_toEndOf="@id/seticon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/setarrow" />
 
                 <ImageView
+                    android:id="@+id/setarrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/right" />
+                    android:src="@drawable/right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Support -->
-            <RelativeLayout
+            <!-- ==================== Menu Item 5: Support ==================== -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/supportlist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:clickable="true"
                 android:background="@drawable/bg"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/setlist">
+                app:layout_constraintTop_toBottomOf="@id/setlist"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
                     android:id="@+id/supporticon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/question_circle_icon" />
+                    android:src="@drawable/question_circle_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/supporttext"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@+id/supporticon"
+                    android:layout_marginEnd="16dp"
                     android:text="Support"
                     android:textColor="#000000"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_large"
+                    app:layout_constraintStart_toEndOf="@id/supporticon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/supportarrow" />
 
                 <ImageView
+                    android:id="@+id/supportarrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/right" />
+                    android:src="@drawable/right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- About -->
-            <RelativeLayout
+            <!-- ==================== Menu Item 6: About ==================== -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:clickable="true"
                 android:background="@drawable/bg"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/supportlist">
+                app:layout_constraintTop_toBottomOf="@id/supportlist"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
                     android:id="@+id/abouticon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/question_circle_icon" />
+                    android:src="@drawable/question_circle_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/abouttext"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@+id/abouticon"
+                    android:layout_marginEnd="16dp"
                     android:text="About"
                     android:textColor="#000000"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_large"
+                    app:layout_constraintStart_toEndOf="@id/abouticon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/aboutarrow" />
 
                 <ImageView
+                    android:id="@+id/aboutarrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/right" />
+                    android:src="@drawable/right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Lock Wallet -->
-            <RelativeLayout
+            <!-- ==================== Menu Item 7: Lock Wallet ==================== -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/locklist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:clickable="true"
                 android:background="@drawable/bg"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/about">
+                app:layout_constraintTop_toBottomOf="@id/about"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
                     android:id="@+id/lockicon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/lock_icon" />
+                    android:src="@drawable/lock_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/locktext"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@+id/lockicon"
+                    android:layout_marginEnd="16dp"
                     android:text="Lock Wallet"
                     android:textColor="#000000"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_large"
+                    app:layout_constraintStart_toEndOf="@id/lockicon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/lockarrow" />
 
                 <ImageView
+                    android:id="@+id/lockarrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/right" />
+                    android:src="@drawable/right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

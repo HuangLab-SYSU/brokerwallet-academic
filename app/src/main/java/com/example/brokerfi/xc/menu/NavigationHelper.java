@@ -46,25 +46,25 @@ import com.google.zxing.integration.android.IntentIntegrator;
 public class NavigationHelper{
     private ImageView menu;
     private ImageView notice;
-    private RelativeLayout action_bar;
+    private View action_bar;
     private Context context;
 
     private boolean isIcon1 = true;
     private boolean isPopupVisible = false;
     private View customView;
     private int action_bar_height;
-    private RelativeLayout sendlist;
-    private RelativeLayout receivelist;
-    private RelativeLayout activitylist;
-    private RelativeLayout setlist;
-    private RelativeLayout supportlist;
-    private RelativeLayout about;
-    private RelativeLayout locklist;
+    private View sendlist;
+    private View receivelist;
+    private View activitylist;
+    private View setlist;
+    private View supportlist;
+    private View about;
+    private View locklist;
     private PopupWindow popupWindow;
     boolean hasExecuted = false;
 
 
-    public NavigationHelper(ImageView menu, RelativeLayout action_bar,Context context,ImageView notificationBtn) {
+    public NavigationHelper(ImageView menu, View action_bar,Context context,ImageView notificationBtn) {
         this.menu = menu;
         this.action_bar = action_bar;
         this.context = context;
@@ -112,7 +112,11 @@ public class NavigationHelper{
                         height = (int) (screenHeight - action_bar_height - marginTop );
                     }
 
-                    popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.MATCH_PARENT, height, false);
+                    int safeHeight = (int)(screenHeight * 0.85);
+                    int finalHeight = Math.min(height, safeHeight);
+
+                    popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.MATCH_PARENT, finalHeight, false);
+
                     hasExecuted = true;
                 }
             }
