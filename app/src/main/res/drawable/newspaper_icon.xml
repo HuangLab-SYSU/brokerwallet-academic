@@ -1,0 +1,16 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 黑色实心圆背景 -->
+    <item android:width="39dp" android:height="39dp">
+        <shape android:shape="oval">
+            <solid android:color="#000000" />
+        </shape>
+    </item>
+
+    <!-- 报纸图标 (News) -->
+    <item
+        android:width="20dp"
+        android:height="20dp"
+        android:drawable="@drawable/baseline_newspaper_24"
+        android:gravity="center"
+        />
+</layer-list>
