@@ -2,8 +2,10 @@ package com.example.brokerfi.xc;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -74,6 +76,15 @@ public class PostDetailActivity extends AppCompatActivity {
         rvDetail = findViewById(R.id.rv_post_detail);
         etComment = findViewById(R.id.et_comment);
         btnSend = findViewById(R.id.btn_send);
+
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(PostDetailActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initRecyclerView() {

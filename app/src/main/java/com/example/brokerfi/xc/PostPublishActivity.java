@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -134,6 +135,15 @@ public class PostPublishActivity extends AppCompatActivity {
         tvContentCount = findViewById(R.id.tv_content_count);
         gridImages = findViewById(R.id.grid_images);
         btnSubmit = findViewById(R.id.btn_submit);
+
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(PostPublishActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initListener() {

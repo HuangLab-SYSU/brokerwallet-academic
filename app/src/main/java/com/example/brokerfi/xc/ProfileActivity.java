@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -61,6 +62,15 @@ public class ProfileActivity extends AppCompatActivity {
         menu = findViewById(R.id.menu);
         notificationBtn = findViewById(R.id.notificationBtn);
         actionBar = findViewById(R.id.action_bar);
+
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(ProfileActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initMenu() {

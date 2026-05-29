@@ -68,6 +68,15 @@ public class CommunityActivity extends AppCompatActivity {
         menu = findViewById(R.id.menu);
         notificationBtn = findViewById(R.id.notificationBtn);
         actionBar = findViewById(R.id.action_bar);
+
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(CommunityActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initRecyclerView() {
