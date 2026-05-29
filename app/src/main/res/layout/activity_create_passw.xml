@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
     tools:context=".xc.CreatePasswActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
