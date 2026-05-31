@@ -15,6 +15,11 @@ import android.content.Intent;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ClickableSpan;
+import android.text.method.LinkMovementMethod;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     // For hidden accounts functionality
     private static final String PREF_HIDDEN_ACCOUNTS = "hidden_accounts";
     private static final String PREFS_NAME = "MyPrefs";
+    private static final String DISCLAIMER_TEXT = "BrokerChain（academic）仅供学术交流使用，用户不得使用BrokerChain（academic）从事任何非法活动。用户使用BrokerChain所产生的任何直接或间接后果，均与BrokerChain创始团队无关。BrokerChain（academic）创始团队保留随时修改、更新或终止BrokerChain（academic）的权利，且无需事先通知用户。用户在使用BrokerChain（academic）时，应自行承担风险，并同意放弃对创始团队的任何索赔权利。本免责声明受中华人民共和国法律管辖，并按照其解释。";
     private ImageView menu;
     private ImageView notificationBtn;
     private View action_bar;
@@ -65,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout support;
     private NavigationHelper navigationHelper;
     private RelativeLayout sendlist;
+    private AlertDialog disclaimerDialog;
     private RelativeLayout receivelist;
     private RelativeLayout activitylist;
     private RelativeLayout setlist;
@@ -470,6 +477,10 @@ public class MainActivity extends AppCompatActivity {
 
         navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
+        TextView tvDisclaimer = findViewById(R.id.tv_disclaimer);
+        
+        setupClickableDisclaimerText(tvDisclaimer);
+
         accounts.setOnClickListener(view -> {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,SelectAccountActivity.class);
@@ -718,6 +729,50 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
+    }
+
+    private void setupClickableDisclaimerText(TextView textView) {
+        String fullText = "使用 BrokerChain Wallet 默认您同意以下声明:\n免责声明";
+        String clickableText = "免责声明";
+        
+        SpannableString spannableString = new SpannableString(fullText);
+        int start = fullText.indexOf(clickableText);
+        int end = start + clickableText.length();
+        
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                showDisclaimerDialog();
+            }
+            
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(Color.parseColor("#2196F3"));
+                ds.setUnderlineText(true);
+            }
+        };
+        
+        spannableString.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        
+        textView.setText(spannableString);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    private void showDisclaimerDialog() {
+        if (disclaimerDialog != null && disclaimerDialog.isShowing()) {
+            return;
+        }
+        
+        disclaimerDialog = new AlertDialog.Builder(this)
+                .setTitle("免责声明")
+                .setMessage(DISCLAIMER_TEXT)
+                .setCancelable(false)
+                .setPositiveButton("Confirm", (dialog, which) -> {
+                    disclaimerDialog = null;
+                })
+                .create();
+        disclaimerDialog.show();
     }
 
     @Override

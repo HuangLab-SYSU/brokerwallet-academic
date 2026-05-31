@@ -259,6 +259,8 @@
             android:layout_marginTop="4dp"
             android:gravity="center"
             android:text="Community"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textColor="#000000"
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/community"
@@ -276,5 +278,19 @@
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Disclaimer Text at Bottom -->
+    <TextView
+        android:id="@+id/tv_disclaimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:gravity="center"
+        android:text="使用 BrokerChain Wallet 默认您同意以下声明:\n免责声明"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
