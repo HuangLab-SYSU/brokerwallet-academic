@@ -145,16 +145,19 @@ public class SendActivity extends AppCompatActivity {
         tvTotal.setText("Total: " + totalAmount + " BKC");
         
         builder.setView(dialogView);
-        
-        builder.setNegativeButton("Cancel", (dialog, which) -> {
-            dialog.dismiss();
+
+        Button btnCancel = dialogView.findViewById(R.id.btn_cancel);
+        Button btnConfirm = dialogView.findViewById(R.id.btn_confirm);
+
+        btnCancel.setOnClickListener(v -> {
+            confirmDialog.dismiss();
         });
-        
-        builder.setPositiveButton("Confirm", (dialog, which) -> {
-            dialog.dismiss();
+
+        btnConfirm.setOnClickListener(v -> {
+            confirmDialog.dismiss();
             sendtx2network();
         });
-        
+
         confirmDialog = builder.create();
         confirmDialog.getWindow().setBackgroundDrawableResource(R.color.black);
         confirmDialog.show();
