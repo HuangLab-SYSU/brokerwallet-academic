@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Unlist"
+            android:text="@string/dialog_confirm_unlist_dialog_unlist"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -28,7 +28,7 @@
             android:id="@+id/tv_shares_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Are you sure you want to unlist this NFT?"
+            android:text="@string/dialog_confirm_unlist_confirm_message"
             android:gravity="center"
             android:layout_marginTop="28dp"
             android:textSize="13sp"
@@ -51,7 +51,7 @@
                 android:backgroundTint="@color/grey"
                 android:padding="4dp"
                 android:textAllCaps="false"
-                android:text="Cancel"
+                android:text="@string/dialog_confirm_unlist_cancel"
                 android:layout_marginRight="16dp"/>
 
 
@@ -65,7 +65,7 @@
                 android:textColor="#ffffff"
                 android:padding="4dp"
                 android:textAllCaps="false"
-                android:text="Confirm" />
+                android:text="@string/dialog_confirm_unlist_confirm" />
         </LinearLayout>
 
     </LinearLayout>

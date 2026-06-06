@@ -56,15 +56,15 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         if (transaction.getFrom() != null && transaction.getFrom().toLowerCase().equals(currentAddress)) {
             type = "SEND";
-            holder.transactionAmount.setText("- " + amount + " BKC");
+            holder.transactionAmount.setText("- " + amount + " " + holder.transactionAmount.getContext().getString(R.string.after_broker_bkc));
             holder.transactionAmount.setTextColor(android.graphics.Color.parseColor("#FF6B6B"));
         } else if (transaction.getTo() != null && transaction.getTo().toLowerCase().equals(currentAddress)) {
             type = "RECEIVE";
-            holder.transactionAmount.setText("+ " + amount + " BKC");
+            holder.transactionAmount.setText("+ " + amount + " " + holder.transactionAmount.getContext().getString(R.string.after_broker_bkc));
             holder.transactionAmount.setTextColor(android.graphics.Color.WHITE);
         } else if (transaction.getFrom() != null && transaction.getFrom().equals("Faucet")) {
             type = "FAUCET";
-            holder.transactionAmount.setText("+ " + amount + " BKC");
+            holder.transactionAmount.setText("+ " + amount + " " + holder.transactionAmount.getContext().getString(R.string.after_broker_bkc));
             holder.transactionAmount.setTextColor(android.graphics.Color.WHITE);
         }
 
@@ -82,12 +82,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         if (fee != null && !fee.isEmpty()) {
             try {
                 double feeInBKC = Double.parseDouble(fee) / 1e18;
-                holder.transactionFee.setText(String.format("%.6f", feeInBKC) + " BKC");
+                holder.transactionFee.setText(String.format("%.6f", feeInBKC) + " " + holder.transactionFee.getContext().getString(R.string.after_broker_bkc));
             } catch (NumberFormatException e) {
-                holder.transactionFee.setText("0.0 BKC");
+                holder.transactionFee.setText(R.string.transaction_adapter_amount_0_0_bkc);
             }
         } else {
-            holder.transactionFee.setText("0.0 BKC");
+            holder.transactionFee.setText(R.string.transaction_adapter_amount_0_0_bkc);
         }
     }
 

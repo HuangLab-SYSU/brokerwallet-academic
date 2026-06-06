@@ -18,7 +18,6 @@ import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.dto.ProfileHeaderDTO;
 import com.bumptech.glide.Glide;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -127,8 +126,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         @SuppressLint("SetTextI18n")
         public void bind(ProfileHeaderDTO data) {
             tvUsername.setText(data.getUsername());
-            tvPostCount.setText("Posts: " + data.getPostCount());
-            tvReward.setText("Earned: " + data.getRewardTotal());
+            tvPostCount.setText(tvPostCount.getContext().getString(R.string.profile_adapter_posts) + " " + data.getPostCount());
+            tvReward.setText(tvReward.getContext().getString(R.string.profile_adapter_earned) + " " + data.getRewardTotal());
 
             if (data.getAvatar() != null && !data.getAvatar().isEmpty()) {
                 Glide.with(context)

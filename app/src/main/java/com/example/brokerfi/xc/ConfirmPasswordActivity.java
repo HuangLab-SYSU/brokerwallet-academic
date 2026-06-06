@@ -62,7 +62,7 @@ public class ConfirmPasswordActivity extends AppCompatActivity {
                 intent.putExtra("accountIndex", accountIndex);
                 startActivity(intent);
             } else {
-                Toast.makeText(ConfirmPasswordActivity.this, "密码错误！", Toast.LENGTH_LONG).show();
+                Toast.makeText(ConfirmPasswordActivity.this, R.string.confirm_password_toast_wrong_password, Toast.LENGTH_LONG).show();
             }
         });
 

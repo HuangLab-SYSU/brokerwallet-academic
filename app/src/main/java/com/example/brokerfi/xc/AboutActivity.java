@@ -50,7 +50,7 @@ public class AboutActivity extends AppCompatActivity {
 
         // 检查更新按钮点击事件
         btnCheckUpdate.setOnClickListener(v -> {
-            Toast.makeText(this, "Checking for updates...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.about_toast_checking_for_updates, Toast.LENGTH_SHORT).show();
             
             new Thread(() -> {
                 try {
@@ -61,11 +61,11 @@ public class AboutActivity extends AppCompatActivity {
                     String latestVersion = j.getString("data");
                     
                     if (latestVersion.equals(VersionName)) {
-                        runOnUiThread(() -> Toast.makeText(this, "Your APP is already the latest version.", Toast.LENGTH_SHORT).show());
+                        runOnUiThread(() -> Toast.makeText(this, R.string.about_toast_latest_version, Toast.LENGTH_SHORT).show());
                         return;
                     }
                     
-                    runOnUiThread(() -> Toast.makeText(this, "Update available: Version " + latestVersion + ", downloading...", Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> Toast.makeText(this, getString(R.string.about_toast_update_available_version) + " " + latestVersion + getString(R.string.about_toast_downloading), Toast.LENGTH_SHORT).show());
                     
                     // 构建下载URL并下载APK
                     String downloadUrl = "https://github.com/HuangLab-SYSU/brokerwallet-academic/releases/download/V" + latestVersion + "/BrokerChain-Wallet.apk";
@@ -73,16 +73,16 @@ public class AboutActivity extends AppCompatActivity {
                     
                     if (apkFile != null) {
                         runOnUiThread(() -> {
-                            Toast.makeText(this, "Download completed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, R.string.about_toast_download_completed, Toast.LENGTH_SHORT).show();
                             mApkFile = apkFile;
                             checkInstallPermission();
                         });
                     } else {
-                        runOnUiThread(() -> Toast.makeText(this, "Download failed", Toast.LENGTH_SHORT).show());
+                        runOnUiThread(() -> Toast.makeText(this, R.string.about_toast_download_failed, Toast.LENGTH_SHORT).show());
                     }
                 } catch (Exception e) {
                     Log.e("Update", "Check update failed", e);
-                    runOnUiThread(() -> Toast.makeText(this, "Update check failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> Toast.makeText(this, getString(R.string.about_toast_update_check_failed) + " " + e.getMessage(), Toast.LENGTH_SHORT).show());
                 }
             }).start();
         });
@@ -123,7 +123,7 @@ public class AboutActivity extends AppCompatActivity {
             if (hasPermission) {
                 installApk(mApkFile);
             } else {
-                Toast.makeText(this, "Please enable 'Install unknown apps' permission", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.about_toast_install_permission, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
                         Uri.parse("package:" + getPackageName()));
                 startActivityForResult(intent, REQUEST_INSTALL_PERMISSION);
@@ -151,7 +151,7 @@ public class AboutActivity extends AppCompatActivity {
                 if (hasPermission && mApkFile != null) {
                     installApk(mApkFile);
                 } else {
-                    Toast.makeText(this, "Permission denied, cannot install", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.about_toast_install_permission_denied, Toast.LENGTH_SHORT).show();
                 }
             }
         }

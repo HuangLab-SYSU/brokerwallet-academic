@@ -73,19 +73,19 @@ public class CreatePasswActivity extends AppCompatActivity {
             String newPassw = String.valueOf(new_passw.getText());
             String confirnPassw = String.valueOf(confirm_passw.getText());
             if (!checkBox.isChecked()) {
-                Toast.makeText(CreatePasswActivity.this, "请同意协议！", Toast.LENGTH_LONG).show();
+                Toast.makeText(CreatePasswActivity.this, R.string.create_passw_toast_agree_to_terms, Toast.LENGTH_LONG).show();
                 return;
             }
             if (newPassw == "") {
-                Toast.makeText(CreatePasswActivity.this, "密码不得为空！", Toast.LENGTH_LONG).show();
+                Toast.makeText(CreatePasswActivity.this, R.string.create_passw_toast_empty_password, Toast.LENGTH_LONG).show();
                 return;
             }
             if (newPassw.length() < 6) {
-                Toast.makeText(CreatePasswActivity.this, "密码最少6位！", Toast.LENGTH_LONG).show();
+                Toast.makeText(CreatePasswActivity.this, R.string.create_passw_toast_6, Toast.LENGTH_LONG).show();
                 return;
             }
             if (!newPassw.equals(confirnPassw)) {
-                Toast.makeText(CreatePasswActivity.this, "密码和确认密码不同！", Toast.LENGTH_LONG).show();
+                Toast.makeText(CreatePasswActivity.this, R.string.create_passw_toast_password_mismatch, Toast.LENGTH_LONG).show();
                 return;
             }
 

@@ -146,32 +146,32 @@ public class MintActivity extends AppCompatActivity {
 //                return;
 //            }
             if (nftname.isEmpty()) {
-                edt_nft_name.setError("必填字段");
+                edt_nft_name.setError(getString(R.string.mint_error_required_field));
                 edt_nft_name.requestFocus();
-                Toast.makeText(MintActivity.this, "请输入NFT名字", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MintActivity.this, R.string.mint_toast_enter_nft_name, Toast.LENGTH_SHORT).show();
                 return;
             }
             if (sharesStr.isEmpty()) {
-                edt_shares.setError("必填字段");
+                edt_shares.setError(getString(R.string.mint_error_required_field));
                 edt_shares.requestFocus();
-                Toast.makeText(MintActivity.this, "请输入NFT总份数", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MintActivity.this, R.string.mint_toast_enter_total_nft_shares, Toast.LENGTH_SHORT).show();
                 return;
             }
             try {
                 int share = Integer.parseInt(sharesStr);
                 if (share < 1) {
-                    edt_shares.setError("最小为1份");
-                    Toast.makeText(MintActivity.this, "份数不能小于1", Toast.LENGTH_SHORT).show();
+                    edt_shares.setError(getString(R.string.buy_nfts_error_1));
+                    Toast.makeText(MintActivity.this, R.string.buy_nfts_toast_1, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (share > 10000) {
-                    edt_shares.setError("超过最大限制");
-                    Toast.makeText(MintActivity.this, "最多将NFT分为10000份", Toast.LENGTH_SHORT).show();
+                    edt_shares.setError(getString(R.string.mint_error_exceeds_maximum_limit));
+                    Toast.makeText(MintActivity.this, R.string.mint_toast_maximum_10000_nft_shares, Toast.LENGTH_SHORT).show();
                     return;
                 }
             } catch (NumberFormatException e) {
-                edt_shares.setError("格式示例：100");
-                Toast.makeText(MintActivity.this, "请输入有效的整数份数", Toast.LENGTH_SHORT).show();
+                edt_shares.setError(getString(R.string.mint_error_format_example_100));
+                Toast.makeText(MintActivity.this, R.string.mint_toast_enter_valid_integer_shares, Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -239,7 +239,7 @@ public class MintActivity extends AppCompatActivity {
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
             cameraLauncher.launch(cameraIntent);
         } catch (IOException e) {
-            Toast.makeText(this, "创建文件失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.mint_toast_create_file_failed, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -263,7 +263,7 @@ public class MintActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startGallery();
             } else {
-                Toast.makeText(this, "需要权限才能访问相册", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.mint_toast_album_permission, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -271,7 +271,7 @@ public class MintActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startCamera();
             } else {
-                Toast.makeText(this, "需要权限访问相机", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.mint_toast_camera_permission, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -282,7 +282,7 @@ public class MintActivity extends AppCompatActivity {
             uploadView.setImageBitmap(bitmap);
             hasImage = 1;
         } catch (IOException e) {
-            Toast.makeText(this, "加载图片失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.mint_toast_load_image_failed, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -294,7 +294,7 @@ public class MintActivity extends AppCompatActivity {
                 uploadView.setImageBitmap(bitmap);
                 hasImage = 1;
             } catch (IOException e) {
-                Toast.makeText(this, "加载图片失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.mint_toast_load_image_failed, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -312,7 +312,7 @@ public class MintActivity extends AppCompatActivity {
             if (privatekey == null) {
                 runOnUiThread(() ->
                         Toast.makeText(MintActivity.this,
-                                "铸造失败",
+                                R.string.mint_toast_mint_failed,
                                 Toast.LENGTH_LONG).show()
                 );
                 return;
@@ -321,10 +321,10 @@ public class MintActivity extends AppCompatActivity {
             if (result == null) {
                 runOnUiThread(() -> {
                             Toast.makeText(MintActivity.this,
-                                    "铸造失败,服务器响应为空",
+                                    R.string.mint_error_empty_server_response,
                                     Toast.LENGTH_LONG).show();
 
-                        warning.setText("铸造失败,服务器响应为空");
+                        warning.setText(R.string.mint_error_empty_server_response);
 
                         }
                 );
@@ -336,7 +336,7 @@ public class MintActivity extends AppCompatActivity {
                     if (response.has("error")) {
                         String error = response.getString("error");
                         Toast.makeText(MintActivity.this,
-                                "铸造失败: " + error,
+                                MintActivity.this.getString(R.string.mint_toast_mint_failed_message_prefix) + " " + error,
                                 Toast.LENGTH_LONG).show();
                         runOnUiThread(() -> {
                             warning.setText(error);
@@ -349,7 +349,7 @@ public class MintActivity extends AppCompatActivity {
                 } else {
                     runOnUiThread(() -> {
                                 Toast.makeText(MintActivity.this,
-                                        "服务器错误: " + result,
+                                        MintActivity.this.getString(R.string.buy_nfts_toast_7) + " " + result,
                                         Toast.LENGTH_LONG).show();
 
                                 warning.setText(result);
@@ -360,14 +360,14 @@ public class MintActivity extends AppCompatActivity {
                 e.printStackTrace();
                 runOnUiThread(() ->
                         Toast.makeText(MintActivity.this,
-                                "响应格式错误",
+                                R.string.buy_nfts_toast_11,
                                 Toast.LENGTH_LONG).show()
                 );
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "交易请求失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.mint_toast_transaction_request_failed, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -381,7 +381,7 @@ public class MintActivity extends AppCompatActivity {
             String result = MyUtil.getTransactionReceipt(txHash, StorageUtil.getCurrentPrivatekey(this));
             if (result == null) {
                 runOnUiThread(() ->
-                        Toast.makeText(MintActivity.this, "交易失败！", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(MintActivity.this, R.string.buy_nfts_toast_4, Toast.LENGTH_SHORT).show()
                 );
                 return;
             }
@@ -392,7 +392,7 @@ public class MintActivity extends AppCompatActivity {
                 String status = receipt.optString("status", "0x0");
                 if ("0x1".equals(status)) {
                     runOnUiThread(() -> {
-                        Toast.makeText(MintActivity.this, "铸造成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MintActivity.this, R.string.mint_toast_mint_successful, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent();
                         intent.setClass(MintActivity.this, CongratulationsMintActivity.class);
                         //跳转
@@ -400,7 +400,7 @@ public class MintActivity extends AppCompatActivity {
                     });
                 } else {
                     runOnUiThread(() ->
-                            Toast.makeText(MintActivity.this, "交易失败！", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(MintActivity.this, R.string.buy_nfts_toast_4, Toast.LENGTH_SHORT).show()
                     );
                 }
             } else {
@@ -410,7 +410,7 @@ public class MintActivity extends AppCompatActivity {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(this, "查询请求失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.buy_nfts_toast_15, Toast.LENGTH_SHORT).show();
         }
     }
 }

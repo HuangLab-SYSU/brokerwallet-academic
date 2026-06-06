@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="My account"
+            android:text="@string/activity_my_account_my_account"
             android:fontFamily="@font/work_sans_black"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -61,14 +61,13 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Copy address"
+                android:text="@string/activity_my_account_copy_address"
                 android:textSize="16dp"
                 android:textAllCaps="false"
                 android:background="@drawable/custom_button_bg_white"
                 android:padding="4dp"
                 android:gravity="center"
                 android:clickable="true"
-                android:onClick="remindMeLater"
                 android:layout_marginRight="16dp"/>
 
             <!-- 第二个按钮 -->
@@ -76,7 +75,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Save QRCode"
+                android:text="@string/activity_my_account_save_qrcode"
                 android:textAllCaps="false"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
@@ -84,7 +83,7 @@
                 android:padding="4dp"
                 android:gravity="center"
                 android:clickable="true"
-                android:onClick="nextAction" />
+                />
 
         </LinearLayout>
 
@@ -106,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="Show private key"
+                android:text="@string/activity_my_account_show_private_key"
                 android:textSize="12sp"
                 android:textColor="#888888"/>
 

@@ -85,23 +85,23 @@ public class NFTMintingActivity extends AppCompatActivity {
         String imageType = imageTypeSpinner.getSelectedItem().toString();
         
         if (nftName.isEmpty()) {
-            Toast.makeText(this, "请输入NFT名称", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.activity_nft_minting_hint_name, Toast.LENGTH_SHORT).show();
             return;
         }
         
         if (nftDescription.isEmpty()) {
-            Toast.makeText(this, "请输入NFT描述", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.activity_nft_minting_hint_description, Toast.LENGTH_SHORT).show();
             return;
         }
         
         if ("自定义图片".equals(imageType) && selectedImageUri == null) {
-            Toast.makeText(this, "请选择图片", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.nft_minting_toast_select_image, Toast.LENGTH_SHORT).show();
             return;
         }
         
         // 显示铸造中状态
         mintButton.setEnabled(false);
-        mintButton.setText("铸造中...");
+        mintButton.setText(R.string.nft_minting_minting);
         
         new Thread(() -> {
             try {
@@ -115,21 +115,21 @@ public class NFTMintingActivity extends AppCompatActivity {
                 
                 runOnUiThread(() -> {
                     mintButton.setEnabled(true);
-                    mintButton.setText("铸造NFT");
+                    mintButton.setText(R.string.activity_nft_minting_button_mint_nft);
                     
                     if (result != null && result.contains("success")) {
-                        Toast.makeText(this, "NFT铸造成功！", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, R.string.nft_minting_toast_nft_mint_successful, Toast.LENGTH_LONG).show();
                         clearForm();
                     } else {
-                        Toast.makeText(this, "铸造失败: " + result, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, getString(R.string.mint_toast_mint_failed_message_prefix) + " " + result, Toast.LENGTH_LONG).show();
                     }
                 });
             } catch (Exception e) {
                 Log.e("NFTMinting", "铸造失败", e);
                 runOnUiThread(() -> {
                     mintButton.setEnabled(true);
-                    mintButton.setText("铸造NFT");
-                    Toast.makeText(this, "铸造失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    mintButton.setText(R.string.activity_nft_minting_button_mint_nft);
+                    Toast.makeText(this, getString(R.string.mint_toast_mint_failed_message_prefix) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
             }
         }).start();
@@ -138,7 +138,7 @@ public class NFTMintingActivity extends AppCompatActivity {
     private void clearForm() {
         nftNameEditText.setText("");
         nftDescriptionEditText.setText("");
-        selectedImageText.setText("未选择图片");
+        selectedImageText.setText(R.string.activity_nft_minting_no_image_selected);
         previewImageView.setImageResource(android.R.color.transparent);
         selectedImageUri = null;
         selectedImagePath = null;
@@ -154,13 +154,13 @@ public class NFTMintingActivity extends AppCompatActivity {
                 try {
                     // 复制图片到应用内部存储
                     selectedImagePath = copyImageToInternalStorage(selectedImageUri);
-                    selectedImageText.setText("已选择图片: " + getImageName(selectedImageUri));
+                    selectedImageText.setText(selectedImageText.getContext().getString(R.string.nft_minting_image_selected) + " " + getImageName(selectedImageUri));
                     
                     // 显示预览
                     previewImageView.setImageURI(selectedImageUri);
                 } catch (Exception e) {
                     Log.e("NFTMinting", "图片处理失败", e);
-                    Toast.makeText(this, "图片处理失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.nft_minting_toast_image_failed, Toast.LENGTH_SHORT).show();
                 }
             }
         }

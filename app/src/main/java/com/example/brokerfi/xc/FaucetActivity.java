@@ -52,11 +52,11 @@ public class FaucetActivity extends AppCompatActivity {
                 String result = MyUtil.claim(StorageUtil.getCurrentPrivatekey(FaucetActivity.this));
                 if(result == null){
                     runOnUiThread(() -> {
-                        Toast.makeText(FaucetActivity.this, "领取失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FaucetActivity.this, R.string.faucet_toast_claim_failed, Toast.LENGTH_SHORT).show();
                     });
                     return;
                 }
-                Toast.makeText(FaucetActivity.this, "Result："+result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(FaucetActivity.this, FaucetActivity.this.getString(R.string.faucet_toast_result)+result, Toast.LENGTH_SHORT).show();
             }
         });
     }

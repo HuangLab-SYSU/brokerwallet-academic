@@ -81,7 +81,7 @@ public class GenerateAccountActivity extends AppCompatActivity {
             MainActivity.flag2 = true;
             SelectAccountActivity.flag2 = true;
             editacc.setText(acc);
-            Toast.makeText(this, "✅ Successfully generate a new account!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.generate_account_toast_success, Toast.LENGTH_SHORT).show();
 //            Intent intent = new Intent();
 //            intent.setClass(GenerateAccountActivity.this, SelectAccountActivity.class);
 //            startActivity(intent);

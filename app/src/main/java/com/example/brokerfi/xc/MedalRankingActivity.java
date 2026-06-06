@@ -361,36 +361,36 @@ public class MedalRankingActivity extends AppCompatActivity {
      */
     private void showCalculationHelpDialog() {
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
-        builder.setTitle("🏆 Medal Ranking Calculation");
-        builder.setMessage("📊 Score Calculation Formula:\n" +
-                "Total Score = Gold × 3 + Silver × 2 + Bronze × 1\n\n" +
-                "🥇 Gold Medal = 3 points\n" +
-                "🥈 Silver Medal = 2 points\n" +
-                "🥉 Bronze Medal = 1 point\n\n" +
-                "📈 Ranking Rules:\n" +
-                "1. Sorted by total score (descending)\n" +
-                "2. If tied, sorted by gold medals\n" +
-                "3. If tied, sorted by silver medals\n" +
-                "4. If tied, sorted by bronze medals\n\n" +
-                "🎨 User Profile Display:\n" +
-                "Choose to display your representative work & nickname\n" +
-                "Representative work requires admin approval\n\n" +
+        builder.setTitle(R.string.medal_ranking_title_calculation);
+        builder.setMessage(getString(R.string.medal_ranking_message_score_title) + "\n" +
+                getString(R.string.medal_ranking_message_score_formula) + "\n\n" +
+                getString(R.string.medal_ranking_message_gold_points) + "\n" +
+                getString(R.string.medal_ranking_message_silver_points) + "\n" +
+                getString(R.string.medal_ranking_message_bronze_point) + "\n\n" +
+                getString(R.string.medal_ranking_message_ranking_rules) + "\n" +
+                getString(R.string.medal_ranking_message_sort_rule) + "\n" +
+                getString(R.string.medal_ranking_message_tie_gold) + "\n" +
+                getString(R.string.medal_ranking_message_tie_silver) + "\n" +
+                getString(R.string.medal_ranking_message_tie_bronze) + "\n\n" +
+                getString(R.string.medal_ranking_message_profile_display) + "\n" +
+                getString(R.string.medal_ranking_message_display_work) + "\n" +
+                getString(R.string.medal_ranking_message_work_approval) + "\n\n" +
                 "━━━━━━━━━━━━━━━━━━━\n" +
-                "🎁 Take Action, Earn Rewards!\n\n" +
-                "Submit your proof to receive:\n" +
-                "🏅 Honor Medals - Showcase your contribution\n" +
-                "🖼️ Exclusive NFT - Permanently stored on blockchain\n" +
-                "💰 BKC Tokens - Real rewards\n\n" +
-                "What are you waiting for? Submit now!");
+                getString(R.string.medal_ranking_message_earn_rewards) + "\n\n" +
+                getString(R.string.medal_ranking_message_proof_rewards) + "\n" +
+                getString(R.string.medal_ranking_message_medal_reward) + "\n" +
+                getString(R.string.medal_ranking_message_nft_reward) + "\n" +
+                getString(R.string.medal_ranking_message_bkc_rewards) + "\n\n" +
+                getString(R.string.medal_ranking_message_submit_now));
         
-        builder.setPositiveButton("Submit Now", (dialog, which) -> {
+        builder.setPositiveButton(R.string.medal_ranking_button_submit_now, (dialog, which) -> {
             dialog.dismiss();
             // Jump to proof submission page
             Intent intent = new Intent(this, ProofAndNFTActivity.class);
             startActivity(intent);
         });
         
-        builder.setNegativeButton("Later", (dialog, which) -> {
+        builder.setNegativeButton(R.string.medal_ranking_button_later, (dialog, which) -> {
             dialog.dismiss();
         });
         

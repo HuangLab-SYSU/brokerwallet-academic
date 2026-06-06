@@ -24,7 +24,7 @@
             android:id="@+id/tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username"
+            android:text="@string/item_profile_header_username"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginStart="12dp"
@@ -36,7 +36,7 @@
         android:id="@+id/btn_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Profile"
+        android:text="@string/item_profile_header_edit_profile"
         android:layout_marginTop="12dp"/>
 
     <!-- 统计信息 -->
@@ -51,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Posts: 0"
+            android:text="@string/item_profile_header_posts_0"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
@@ -61,7 +61,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Earned(BKC): 0"
+            android:text="@string/item_profile_header_earned_bkc_0"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
@@ -77,7 +77,7 @@
         android:id="@+id/tv_my_posts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Posts"
+        android:text="@string/item_profile_header_my_posts"
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"

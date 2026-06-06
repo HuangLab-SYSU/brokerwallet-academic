@@ -94,14 +94,14 @@ public class StakeMoreActivity extends AppCompatActivity {
 
         edt_sendfrom.setEnabled(false);
         edt_sendto.setEnabled(false);
-        edt_sendto.setText("Broker2Earn");
+        edt_sendto.setText(R.string.stake_more_broker2earn);
         if(flag){
             runOnUiThread(()->{
-                stakemoretext.setText("Stake");
+                stakemoretext.setText(R.string.activity_stake_more_stake);
             });
         }else {
             runOnUiThread(()->{
-                stakemoretext.setText("Stake more");
+                stakemoretext.setText(R.string.activity_stake_more_stake_more);
             });
         }
 
@@ -142,14 +142,14 @@ public class StakeMoreActivity extends AppCompatActivity {
                     },3000);
                 }else {
                     if(s.get() ==null){
-                        Toast.makeText(StakeMoreActivity.this, "failed", Toast.LENGTH_LONG).show();
+                        Toast.makeText(StakeMoreActivity.this, R.string.stake_more_toast_failed, Toast.LENGTH_LONG).show();
                     }else {
                         Toast.makeText(StakeMoreActivity.this, s.get(), Toast.LENGTH_LONG).show();
                     }
                 }
 
             }else {
-                Toast.makeText(StakeMoreActivity.this, "failed!", Toast.LENGTH_LONG).show();
+                Toast.makeText(StakeMoreActivity.this, R.string.stake_more_toast_failed_2, Toast.LENGTH_LONG).show();
             }
 
         });

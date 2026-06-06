@@ -24,7 +24,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/work_sans_black"
             android:paddingHorizontal="16dp"
-            android:text="My NFTs"
+            android:text="@string/my_nfts"
             android:textColor="#000000"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -35,7 +35,7 @@
             android:layout_marginTop="6.5dp"
             android:layout_marginBottom="4dp"
             android:paddingHorizontal="16dp"
-            android:text="Your owned NFTs are listed here."
+            android:text="@string/activity_my_nfts_owned_listed_here"
             android:textColor="#000000"
             android:textSize="14sp" />
 
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                android:text="Index"
+                android:text="@string/activity_my_nfts_index"
                 android:textColor="#8B8B8B"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Content"
+                android:text="@string/activity_my_nfts_content"
                 android:textColor="#8B8B8B"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:text="Name"
+                android:text="@string/activity_my_nfts_name"
                 android:textColor="#8B8B8B"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="46dp"
-                android:text="Shares"
+                android:text="@string/activity_my_nfts_shares"
                 android:textColor="#8B8B8B"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -96,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
-                android:text="Unit Price"
+                android:text="@string/activity_my_nfts_unit_price"
                 android:textColor="#8B8B8B"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="29dp"
                 android:layout_marginEnd="8dp"
-                android:text="Status"
+                android:text="@string/activity_my_nfts_status"
                 android:textColor="#8B8B8B"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -182,7 +182,7 @@
                     android:layout_gravity="center_horizontal"
 
                     android:clickable="true"
-                    android:text="Sell"
+                    android:text="@string/activity_my_nfts_sell"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
@@ -194,7 +194,7 @@
                     android:layout_columnWeight="1"
                     android:layout_gravity="center_horizontal"
                     android:clickable="true"
-                    android:text="Take down"
+                    android:text="@string/activity_my_nfts_take_down"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 

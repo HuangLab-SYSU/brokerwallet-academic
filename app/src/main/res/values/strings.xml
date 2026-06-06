@@ -1,4 +1,5 @@
 <resources>
+    <!-- Existing resources / 现有资源 -->
     <string name="app_name">BrokerChain Wallet</string>
     <string name="welcome_text">BrokerChain Wallet</string>
     <string name="create_wallet">Create a Wallet</string>
@@ -43,5 +44,1103 @@
     <string name="Buy">Buy</string>
     <string name="View_My_Profit">View My Profit</string>
     <string name="Apply_Broker">Apply to Become Broker</string>
-</resources>
 
+    <!-- Layout text: app/src/main/res/layout/activity_about.xml / 布局前端文本 -->
+    <string name="activity_about_content_desc_app_logo">App Logo</string>
+    <string name="activity_about_version_1_1_10">Version 1.1.10</string>
+    <string name="activity_about_check_for_updates">Check for updates</string>
+    <string name="activity_about_github">GitHub:</string>
+    <string name="activity_about_github_url">https://github.com/HuangLab-SYSU/brokerwallet-academic</string>
+    <string name="activity_about_copyright">© 2025 BrokerChain. All rights reserved.</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_account_detail.xml / 布局前端文本 -->
+    <string name="activity_account_detail_account_1">Account 1</string>
+    <string name="activity_account_detail_receive_qr_code">Receive QR Code</string>
+    <string name="activity_account_detail_address">Address</string>
+    <string name="activity_account_detail_wallet_placeholder">0x...</string>
+    <string name="activity_account_detail_copy_address">Copy Address</string>
+    <string name="activity_account_detail_show_key">Show Private Key</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_add_account.xml / 布局前端文本 -->
+    <string name="activity_add_account_import_existing">Import existing account</string>
+    <string name="activity_add_account_private_key_tip">Fill the private key in the dialog box below to import an existing account.</string>
+    <string name="activity_add_account_account_privatekey">Account privatekey</string>
+    <string name="activity_add_account_invalid_private_key">Can not import invalid private key</string>
+    <string name="activity_add_account_cancel">Cancel</string>
+    <string name="activity_add_account_save">Save</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_add_network.xml / 布局前端文本 -->
+    <string name="activity_add_network_add_a_network">Add a network</string>
+    <string name="activity_add_network_trusted_networks">Only add custom networks you trust</string>
+    <string name="activity_add_network_network_name">Network name</string>
+    <string name="activity_add_network_new_rpc_url">New RPC URL</string>
+    <string name="activity_add_network_chain_id">Chain ID</string>
+    <string name="activity_add_network_currency_symbol">Currency symbol</string>
+    <string name="activity_add_network_block_explorer_url">Block explorer URL (Optional)</string>
+
+    <string name="activity_add_network_cancel">Cancel</string>
+    <string name="activity_add_network_save">Save</string>
+    <!-- Layout text: app/src/main/res/layout/activity_after_broker.xml / 布局前端文本 -->
+    <string name="activity_after_broker_balance_0_bkc">0 BKC</string>
+    <string name="activity_after_broker_profit_0_bkc">+0 BKC</string>
+    <string name="activity_after_broker_broker_profit">Broker profit</string>
+    <string name="activity_after_broker_shard_1">SHARD 1</string>
+    <string name="activity_after_broker_shard_2">SHARD 2</string>
+    <string name="activity_after_broker_shard_3">SHARD 3</string>
+    <string name="activity_after_broker_shard_4">SHARD 4</string>
+    <string name="activity_after_broker_shard_5">SHARD 5</string>
+    <string name="activity_after_broker_shard_6">SHARD 6</string>
+    <string name="activity_after_broker_shard_7">SHARD 7</string>
+    <string name="activity_after_broker_shard_8">SHARD 8</string>
+    <string name="activity_after_broker_shard_9">SHARD 9</string>
+    <string name="activity_after_broker_shard_10">SHARD 10</string>
+    <string name="activity_after_broker_shard_11">SHARD 11</string>
+    <string name="activity_after_broker_stake_more">Stake more</string>
+    <string name="activity_after_broker_withdraw">Withdraw</string>
+    <string name="activity_after_broker_send">Send</string>
+    <string name="activity_after_broker_swap">Swap</string>
+    <string name="activity_after_broker_broker">Broker</string>
+    <string name="activity_after_broker_brokerfi_support">BrokerFi support</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_atv.xml / 布局前端文本 -->
+    <string name="activity_atv_activity">Activity</string>
+    <string name="activity_atv_current_transactions">Transactions of current account</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_before_show_pr_key.xml / 布局前端文本 -->
+    <string name="activity_before_show_pr_key_show_key">Show private key</string>
+    <string name="activity_before_show_pr_key_password">Password</string>
+    <string name="activity_before_show_pr_key_protect_key">Protect your key at all times.</string>
+    <string name="activity_before_show_pr_key_key_risk">Possession of your private keys allows unauthorized access and potential theft of your assets.</string>
+    <string name="activity_before_show_pr_key_confirm">Confirm</string>
+
+    <string name="activity_before_show_pr_key_cancel">Cancel</string>
+    <!-- Layout text: app/src/main/res/layout/activity_broker.xml / 布局前端文本 -->
+    <string name="activity_broker_request_broker_notice">This operation will invoke the requestBroker() function in the smart contract.</string>
+
+    <string name="activity_broker_broker">Broker</string>
+    <string name="activity_broker_get_started">Get started</string>
+    <!-- Layout text: app/src/main/res/layout/activity_buy.xml / 布局前端文本 -->
+    <string name="activity_buy_easy_secure_crypto">Buying crypto is now easy and secure</string>
+    <string name="activity_buy_top_rate_quotes">We link you up with top-rate quotes from dependable sources and assist you throughout, simplifying the self-custody process.</string>
+    <string name="activity_buy_token_network_range">Explore over 75 tokens across more than 8 blockchain networks</string>
+    <string name="activity_buy_safe_payment_methods">Quickly boost your wallet\'s balance using safe payment methods</string>
+    <string name="activity_buy_reduce_gas_fees">Cut down on gas fees and save precious time</string>
+
+    <string name="activity_buy_get_started">Get started</string>
+    <!-- Layout text: app/src/main/res/layout/activity_buy_nfts.xml / 布局前端文本 -->
+    <string name="activity_buy_nfts_buy_nfts">Buy NFTs</string>
+    <string name="activity_buy_nfts_you_can_buy_nfts_here">You can buy NFTs here.</string>
+    <string name="activity_buy_nfts_index">Index</string>
+    <string name="activity_buy_nfts_content">Content</string>
+    <string name="activity_buy_nfts_name">Name</string>
+    <string name="activity_buy_nfts_shares">Shares</string>
+    <string name="activity_buy_nfts_unit_price">Unit Price</string>
+    <string name="activity_buy_nfts_seller_id">Seller Id</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_comfirm_secret.xml / 布局前端文本 -->
+    <string name="activity_comfirm_secret_fi">Fi</string>
+    <string name="activity_comfirm_secret_confirm_phrase">Confirm your Secret Recovery Phrase</string>
+    <string name="activity_comfirm_secret_phrase_tip">Please input your Secret Recovery Phrase to make sure it is correct</string>
+
+    <string name="activity_comfirm_secret_broker">Broker</string>
+    <string name="activity_comfirm_secret_confirm">Confirm</string>
+    <!-- Layout text: app/src/main/res/layout/activity_community.xml / 布局前端文本 -->
+    <string name="activity_community_community">Community</string>
+    <string name="activity_community_no_posts_yet">No posts yet</string>
+    <string name="activity_community_content_desc_post">Post</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_community_posts.xml / 布局前端文本 -->
+    <string name="activity_community_posts_hint_comment">Write a comment...</string>
+
+    <string name="activity_community_posts_send">Send</string>
+    <!-- Layout text: app/src/main/res/layout/activity_community_publish.xml / 布局前端文本 -->
+    <string name="activity_community_publish_hint_title">Enter title (max 30 chars)</string>
+    <string name="activity_community_publish_hint_content">Say something...</string>
+    <string name="activity_community_publish_images_max_9">Images (max 9)</string>
+
+    <string name="activity_community_publish_post">Post</string>
+    <!-- Layout text: app/src/main/res/layout/activity_confirm_password.xml / 布局前端文本 -->
+    <string name="activity_confirm_password_identity">Confirm Identity</string>
+    <string name="activity_confirm_password_key_tip">Please enter your wallet password to view the private key</string>
+    <string name="activity_confirm_password_hint_password">Enter password</string>
+
+    <string name="activity_confirm_password_confirm">Confirm</string>
+    <string name="activity_confirm_password_cancel">Cancel</string>
+    <!-- Layout text: app/src/main/res/layout/activity_congratulations.xml / 布局前端文本 -->
+    <string name="activity_congratulations_title">Congratulations!</string>
+    <string name="activity_congratulations_passed_test">You passed the test</string>
+    <string name="activity_congratulations_all_done">All done</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_congratulations_mint.xml / 布局前端文本 -->
+    <string name="activity_congratulations_mint_success">You successfully minted your NFT!</string>
+    <string name="activity_congratulations_mint_back">Back</string>
+
+    <string name="activity_congratulations_mint_title">Congratulations!</string>
+    <!-- Layout text: app/src/main/res/layout/activity_create_passw.xml / 布局前端文本 -->
+    <string name="activity_create_passw_brokerchain">BrokerChain</string>
+    <string name="activity_create_passw_wallet">Wallet</string>
+    <string name="activity_create_passw_create_password">Create password</string>
+    <string name="activity_create_passw_unlock_wallet_tip">This password is used to unlock this wallet.</string>
+    <string name="activity_create_passw_local_save_tip">This password will only be saved locally.</string>
+    <string name="activity_create_passw_new_password">New password</string>
+    <string name="activity_create_passw_confirm_password">Confirm password</string>
+    <string name="activity_create_passw_agree_terms">I have read and agree to the</string>
+    <string name="activity_create_passw_terms_of_use">Terms of use</string>
+    <string name="activity_create_passw_create">Create</string>
+
+    <string name="activity_create_passw_wallet_spaced">" Wallet"</string>
+    <string name="activity_create_passw_agree_terms_spaced">"I have read and agree to the "</string>
+    <!-- Layout text: app/src/main/res/layout/activity_edit_profile.xml / 布局前端文本 -->
+    <string name="activity_edit_profile_hint_username">Enter username</string>
+
+    <string name="activity_edit_profile_save">Save</string>
+    <!-- Layout text: app/src/main/res/layout/activity_emulator.xml / 布局前端文本 -->
+    <string name="activity_emulator_swap_secure_tip">Swapping crypto is now easy and secure</string>
+    <string name="activity_emulator_optimize_swap_intro">Allow BrokerFi to programmatically optimize your swaps to assist with:</string>
+    <string name="activity_emulator_lower_tx_expenses">Lower your transaction expenses</string>
+    <string name="activity_emulator_reduce_errors">Decrease the chances of transaction errors</string>
+    <string name="activity_emulator_avoid_stuck_tx">Avoid transactions from getting jammed</string>
+    <string name="activity_emulator_front_running_guard">Guard against front-running *</string>
+
+    <string name="activity_emulator_swap">Swap</string>
+    <string name="activity_emulator_get_started">Get started</string>
+    <!-- Layout text: app/src/main/res/layout/activity_export_private_key.xml / 布局前端文本 -->
+    <string name="activity_export_private_key_verify_password">Verify Password</string>
+    <string name="activity_export_private_key_password_tip">Please enter your wallet lock screen password to verify the operation</string>
+    <string name="activity_export_private_key_verify">Verify</string>
+    <string name="activity_export_private_key_save_path">私钥将保存到:\n /Download/BrokerWallet/ \n private_keys_timestamp.txt</string>
+
+    <string name="activity_export_private_key_password_hint">Enter password</string>
+    <string name="activity_export_private_key_cancel">Cancel</string>
+    <!-- Layout text: app/src/main/res/layout/activity_faucet.xml / 布局前端文本 -->
+    <string name="activity_faucet_faucet">Faucet</string>
+    <string name="activity_faucet_claim_academic_bkc">Claim BKC academic tokens through faucets</string>
+    <string name="activity_faucet_claim_daily_bkc">Claim some BKC for free every day</string>
+    <string name="activity_faucet_academic_bkc_token">Claim academic BKC token</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_generate_account.xml / 布局前端文本 -->
+    <string name="activity_generate_account_new_account">Generate new account</string>
+    <string name="activity_generate_account_generate_tip">Click the Generate button to generate a new account\nThe private key will be shown in the dialog box below.</string>
+    <string name="activity_generate_account_generated_key">Account privatekey(Generated)</string>
+    <string name="activity_generate_account_generate">Generate</string>
+
+    <string name="activity_generate_account_cancel">Cancel</string>
+    <!-- Layout text: app/src/main/res/layout/activity_global_stats.xml / 布局前端文本 -->
+    <string name="activity_global_stats_global_stats">📊 Global Stats</string>
+    <string name="activity_global_stats_medal_stats">🏆 Global Medal Stats</string>
+    <string name="activity_global_stats_total_users_0">Total Users: 0</string>
+    <string name="activity_global_stats_gold">Gold</string>
+    <string name="activity_global_stats_silver">Silver</string>
+    <string name="activity_global_stats_bronze">Bronze</string>
+    <string name="activity_global_stats_highest_score_0">Highest Score: 0</string>
+    <string name="activity_global_stats_top_user_none">Top User: None</string>
+    <string name="activity_global_stats_loading_medals">🏆 Loading medal stats...</string>
+    <string name="activity_global_stats_medal_load_failed">Medal stats load failed</string>
+    <string name="activity_global_stats_nft_gallery">🎨 Global NFT Gallery</string>
+    <string name="activity_global_stats_total_0">Total: 0</string>
+    <string name="activity_global_stats_loading_nfts">🖼️ Loading NFTs...</string>
+    <string name="activity_global_stats_no_nfts">No NFTs</string>
+    <string name="activity_global_stats_no_nfts_minted">No NFTs minted globally yet!</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_main.xml / 布局前端文本 -->
+    <string name="activity_main_add_account_first">Please add an account first.</string>
+    <string name="activity_main_add_account_tip">Click on the top right corner -&gt; Settings -&gt; Account -&gt; Add account.</string>
+    <string name="activity_main_receive">Receive</string>
+    <string name="activity_main_account">Account</string>
+    <string name="activity_main_brokerfi">BrokerFi</string>
+    <string name="activity_main_news">News</string>
+    <string name="activity_main_disclaimer_agreement">使用 BrokerChain Wallet 默认您同意以下声明:\n免责声明</string>
+
+    <string name="activity_main_faucet">Faucet</string>
+    <string name="activity_main_send">Send</string>
+    <string name="activity_main_swap">Swap</string>
+    <string name="activity_main_brokerfi_spaced">"BrokerFi "</string>
+    <string name="activity_main_community">Community</string>
+    <!-- Layout text: app/src/main/res/layout/activity_medal_ranking.xml / 布局前端文本 -->
+    <string name="activity_medal_ranking_proof_submit">📄\nProof\nSubmit</string>
+    <string name="activity_medal_ranking_medal_ranking">🏆 Medal Ranking</string>
+    <string name="activity_medal_ranking_no_ranking_data">No Ranking Data</string>
+    <string name="activity_medal_ranking_submit_proof">Submit proof to earn medals!</string>
+    <string name="activity_medal_ranking_my">👤 My</string>
+    <string name="activity_medal_ranking_global">📊 Global</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_menu.xml / 布局前端文本 -->
+    <string name="activity_menu_content_desc_up_circle">up_circle</string>
+    <string name="activity_menu_menu">Menu</string>
+    <string name="activity_menu_send_scan_qrcode">Send (Scan QRCode)</string>
+    <string name="activity_menu_accounts">Accounts</string>
+    <string name="activity_menu_support">Support</string>
+    <string name="activity_menu_about">About</string>
+    <string name="activity_menu_lock_wallet">Lock Wallet</string>
+
+    <string name="activity_menu_brokerchain">BrokerChain</string>
+    <string name="activity_menu_wallet">Wallet</string>
+    <string name="activity_menu_receive">Receive</string>
+    <string name="activity_menu_activity">Activity</string>
+    <!-- Layout text: app/src/main/res/layout/activity_mint.xml / 布局前端文本 -->
+    <string name="activity_mint_upload_unique_nft">Upload an image to create your unique NFT.</string>
+    <string name="activity_mint_camera">Camera</string>
+    <string name="activity_mint_album">Album</string>
+    <string name="activity_mint_nft_name">NFT name</string>
+    <string name="activity_mint_nft_shares">NFT shares</string>
+    <string name="activity_mint_shared_nft_shares">Create shared NFT:\nEnter shares (1=sole owner, &gt;1 splits to X shares)</string>
+    <string name="activity_mint_fractional_ownership">*This platform implements \'fractional NFT ownership\':\n- Divide NFTs into multiple shares\n- Enable multi-user co-ownership\n- Allow per-batch pricing</string>
+    <string name="activity_mint_gas_limit">Gas Limit</string>
+    <string name="activity_mint_mint">Mint</string>
+
+    <string name="activity_mint_cancel">Cancel</string>
+    <!-- Layout text: app/src/main/res/layout/activity_my_account.xml / 布局前端文本 -->
+    <string name="activity_my_account_my_account">My account</string>
+    <string name="activity_my_account_copy_address">Copy address</string>
+    <string name="activity_my_account_save_qrcode">Save QRCode</string>
+
+    <string name="activity_my_account_show_private_key">Show private key</string>
+    <!-- Layout text: app/src/main/res/layout/activity_my_center.xml / 布局前端文本 -->
+    <string name="activity_my_center_my_medals">🏆 My Medals</string>
+    <string name="activity_my_center_loading_medal_data">🏆 Loading medal data...</string>
+    <string name="activity_my_center_medal_load_failed">Medal data load failed</string>
+    <string name="activity_my_center_submission_history">📝 Submission History</string>
+    <string name="activity_my_center_my_nfts">🖼️ My NFTs</string>
+    <string name="activity_my_center_loading_submissions">📝 Loading submission history...</string>
+    <string name="activity_my_center_no_submissions">No Submission History</string>
+    <string name="activity_my_center_rewards_tip">Submit materials to earn medals &amp; NFT rewards~</string>
+    <string name="activity_my_center_mint_first_nft">Go mint your first NFT!</string>
+
+    <string name="activity_my_center_ranking_my">👤 My</string>
+    <string name="activity_my_center_gold">Gold</string>
+    <string name="activity_my_center_silver">Silver</string>
+    <string name="activity_my_center_bronze">Bronze</string>
+    <string name="activity_my_center_total_0">Total: 0</string>
+    <string name="activity_my_center_stats_loading_nfts">🖼️ Loading NFTs...</string>
+    <string name="activity_my_center_no_nfts">No NFTs</string>
+    <!-- Layout text: app/src/main/res/layout/activity_my_nfts.xml / 布局前端文本 -->
+    <string name="activity_my_nfts_owned_listed_here">Your owned NFTs are listed here.</string>
+    <string name="activity_my_nfts_status">Status</string>
+    <string name="activity_my_nfts_sell">Sell</string>
+    <string name="activity_my_nfts_take_down">Take down</string>
+
+    <string name="activity_my_nfts_index">Index</string>
+    <string name="activity_my_nfts_content">Content</string>
+    <string name="activity_my_nfts_name">Name</string>
+    <string name="activity_my_nfts_shares">Shares</string>
+    <string name="activity_my_nfts_unit_price">Unit Price</string>
+    <!-- Layout text: app/src/main/res/layout/activity_nft_main.xml / 布局前端文本 -->
+    <string name="activity_nft_main_nft">NFT</string>
+
+    <string name="activity_nft_main_mint">Mint</string>
+    <string name="activity_nft_main_brokerfi_support">BrokerFi support</string>
+    <!-- Layout text: app/src/main/res/layout/activity_nft_minting.xml / 布局前端文本 -->
+    <string name="activity_nft_minting_title">🎨 NFT铸造</string>
+    <string name="activity_nft_minting_label_nft_name">NFT名称:</string>
+    <string name="activity_nft_minting_hint_name">请输入NFT名称</string>
+    <string name="activity_nft_minting_description_label">NFT描述:</string>
+    <string name="activity_nft_minting_hint_description">请输入NFT描述</string>
+    <string name="activity_nft_minting_label_image_type">图片类型:</string>
+    <string name="activity_nft_minting_label_select_image">选择图片:</string>
+    <string name="activity_nft_minting_select_image">选择图片</string>
+    <string name="activity_nft_minting_no_image_selected">未选择图片</string>
+    <string name="activity_nft_minting_button_mint_nft">铸造NFT</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_nft_view.xml / 布局前端文本 -->
+    <string name="activity_nft_view_title">🖼️ NFT查看</string>
+    <string name="activity_nft_view_my_nfts">我的NFT</string>
+    <string name="activity_nft_view_all_nfts">所有NFT</string>
+    <string name="activity_nft_view_loading">加载中...</string>
+    <string name="activity_nft_view_load_failed">加载失败</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_proof_and_nft.xml / 布局前端文本 -->
+    <string name="activity_proof_and_nft_proof_submission">📄 Proof Submission</string>
+    <string name="activity_proof_and_nft_submit_file">Submit Proof File *</string>
+    <string name="activity_proof_and_nft_select_proof_file">📁 Click to Select Proof File</string>
+    <string name="activity_proof_and_nft_max_files">💡 Maximum 3 files allowed</string>
+    <string name="activity_proof_and_nft_photo_optional">Select Photo for NFT Minting (Optional)</string>
+    <string name="activity_proof_and_nft_select_nft_photo">🖼️ Click to Select NFT Photo</string>
+    <string name="activity_proof_and_nft_nickname_optional">User Nickname (Optional)</string>
+    <string name="activity_proof_and_nft_hint_name">Enter your preferred display nickname</string>
+    <string name="activity_proof_and_nft_work_optional">Representative Work for Ranking (Optional)</string>
+    <string name="activity_proof_and_nft_hint_work">Describe your work, e.g.: Developed multiple DeFi protocols, focused on smart contract security</string>
+    <string name="activity_proof_and_nft_display_work">Display Representative Work on Ranking</string>
+    <string name="activity_proof_and_nft_work_approval">💡 Tip: Representative work requires admin approval before displaying on ranking</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_proof_submission.xml / 布局前端文本 -->
+    <string name="activity_proof_submission_title">📄 证明材料提交</string>
+    <string name="activity_proof_submission_display_name">👤 花名（用户昵称）:</string>
+    <string name="activity_proof_submission_hint_name">请输入您的花名（用于排行榜显示）</string>
+    <string name="activity_proof_submission_representative_work">🏆 代表作:</string>
+    <string name="activity_proof_submission_hint_work">请输入您的代表作（可选）</string>
+    <string name="activity_proof_submission_show_work">📢 在排行榜展示代表作:</string>
+    <string name="activity_proof_submission_approval_note">注：需要管理员审核通过后才会在排行榜显示</string>
+    <string name="activity_proof_submission_author_info">✍️ 作者信息:</string>
+    <string name="activity_proof_submission_hint_author">请输入作者姓名或作者列表</string>
+    <string name="activity_proof_submission_event_type">事件类型:</string>
+    <string name="activity_proof_submission_event_description">事件描述:</string>
+    <string name="activity_proof_submission_hint_blockemulator">详细描述与BlockEmulator的关联事件</string>
+    <string name="activity_proof_submission_contribution_level">贡献等级:</string>
+    <string name="activity_proof_submission_proof_file">证明文件:</string>
+    <string name="activity_proof_submission_select_file">选择文件</string>
+    <string name="activity_proof_submission_no_file">未选择文件</string>
+    <string name="activity_proof_submission_submit_materials">提交证明材料</string>
+    <string name="activity_proof_submission_mint_nft_button">🎨 铸造NFT</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_receive.xml / 布局前端文本 -->
+    <string name="activity_receive_secure_address_tip">Generate a secure address to receive coins from others</string>
+    <string name="activity_receive_receive_to">Receive to</string>
+
+    <string name="activity_receive_receive">Receive</string>
+    <string name="activity_receive_copy_address">Copy address</string>
+    <string name="activity_receive_save_qrcode">Save QRCode</string>
+    <!-- Layout text: app/src/main/res/layout/activity_secret_phrase.xml / 布局前端文本 -->
+    <string name="activity_secret_phrase_recovery_phrase">Secret Recovery Phrase</string>
+    <string name="activity_secret_phrase_store_safely_tip">Remember your Secret Recovery Phrase or keep it stored safely on offline device.</string>
+    <string name="activity_secret_phrase_sample_phrase">cancel cannon sport sustain rail rabbit antenna trigger south relief depend become</string>
+    <string name="activity_secret_phrase_remind_me_later">Remind me later</string>
+    <string name="activity_secret_phrase_next">Next</string>
+
+    <string name="activity_secret_phrase_broker">Broker</string>
+    <string name="activity_secret_phrase_secret_fi">Fi</string>
+    <!-- Layout text: app/src/main/res/layout/activity_select_account.xml / 布局前端文本 -->
+    <string name="activity_select_account_account_list">Account List</string>
+    <string name="activity_select_account_account_2">Account 2</string>
+    <string name="activity_select_account_account_3">Account 3</string>
+    <string name="activity_select_account_account_4">Account 4</string>
+    <string name="activity_select_account_import_account">Import account</string>
+    <string name="activity_select_account_generate">Generate account</string>
+    <string name="activity_select_account_export_key">Export private key</string>
+
+    <string name="activity_select_account_account_1">Account 1</string>
+    <string name="activity_select_account_balance_0_bkc">0 BKC</string>
+    <!-- Layout text: app/src/main/res/layout/activity_select_network.xml / 布局前端文本 -->
+    <string name="activity_select_network_select_network">Select a network</string>
+    <string name="activity_select_network_network_explain">Explain what is a network here</string>
+    <string name="activity_select_network_main_network">Main network</string>
+    <string name="activity_select_network_third_party">Third-party network</string>
+    <string name="activity_select_network_test_network">Test network</string>
+    <string name="activity_select_network_local_dev">Local dev network</string>
+    <string name="activity_select_network_add_network">Add network</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_send.xml / 布局前端文本 -->
+    <string name="activity_send_transfer_tip">Transfer your coins securely to another address</string>
+    <string name="activity_send_send_from">Send from</string>
+    <string name="activity_send_send_to">Send to</string>
+    <string name="activity_send_amount">Amount</string>
+    <string name="activity_send_fee">Fee</string>
+
+    <string name="activity_send_send">Send</string>
+    <!-- Layout text: app/src/main/res/layout/activity_setting.xml / 布局前端文本 -->
+    <string name="activity_setting_settings">Settings</string>
+    <string name="activity_setting_networks">Networks</string>
+
+    <string name="activity_setting_accounts">Accounts</string>
+    <!-- Layout text: app/src/main/res/layout/activity_show_private_key.xml / 布局前端文本 -->
+    <string name="activity_show_private_key_private_key">Private Key</string>
+    <string name="activity_show_private_key_never_disclose">NEVER disclose this key！</string>
+    <string name="activity_show_private_key_theft_warning">Anyone with your private keys can steal any assets held in your account.</string>
+    <string name="activity_show_private_key_long_press">Long press to reveal private key</string>
+    <string name="activity_show_private_key_copy_key">Copy Private Key</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_show_pr_kry.xml / 布局前端文本 -->
+    <string name="activity_show_pr_kry_done">Done</string>
+
+    <string name="activity_show_pr_kry_show_private_key">Show private key</string>
+    <string name="activity_show_pr_kry_protect_key">Protect your key at all times.</string>
+    <string name="activity_show_pr_kry_key_risk">Possession of your private keys allows unauthorized access and potential theft of your assets.</string>
+    <!-- Layout text: app/src/main/res/layout/activity_stake_more.xml / 布局前端文本 -->
+    <string name="activity_stake_more_transfer_tip">Transfer your coins securely to broker system address</string>
+    <string name="activity_stake_more_stake">Stake</string>
+
+    <string name="activity_stake_more_stake_more">Stake more</string>
+    <string name="activity_stake_more_send_from">Send from</string>
+    <string name="activity_stake_more_send_to">Send to</string>
+    <string name="activity_stake_more_amount">Amount</string>
+    <!-- Layout text: app/src/main/res/layout/activity_submission_detail.xml / 布局前端文本 -->
+    <string name="activity_submission_detail_title">📋 提交详情</string>
+    <string name="activity_submission_detail_loading">⏳ 正在加载详情...</string>
+    <string name="activity_submission_detail_load_failed">❌ 加载失败</string>
+    <string name="activity_submission_detail_retry">🔄 重试</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_submission_history.xml / 布局前端文本 -->
+    <string name="activity_submission_history_title">📋 我的提交历史</string>
+    <string name="activity_submission_history_loading">⏳ 正在加载提交历史...</string>
+    <string name="activity_submission_history_no_records">还没有提交记录</string>
+    <string name="activity_submission_history_first_proof">去提交您的第一个证明材料吧！</string>
+
+    <string name="activity_submission_history_detail_load">❌ 加载失败</string>
+    <string name="activity_submission_history_detail_retry">🔄 重试</string>
+    <!-- Layout text: app/src/main/res/layout/activity_swap.xml / 布局前端文本 -->
+    <string name="activity_swap_optimize_swap_intro">Allow BrokerChain Wallet to programmatically optimize your swaps to assist with:</string>
+    <string name="activity_swap_under_development">Under development</string>
+
+    <string name="activity_swap_swap">Swap</string>
+    <string name="activity_swap_swap_secure_tip">Swapping crypto is now easy and secure</string>
+    <string name="activity_swap_lower_tx_expenses">Lower your transaction expenses</string>
+    <string name="activity_swap_reduce_errors">Decrease the chances of transaction errors</string>
+    <string name="activity_swap_avoid_stuck_tx">Avoid transactions from getting jammed</string>
+    <string name="activity_swap_front_running_guard">Guard against front-running *</string>
+    <!-- Layout text: app/src/main/res/layout/activity_welcome_back.xml / 布局前端文本 -->
+    <string name="activity_welcome_back_welcome_back">Welcome back</string>
+    <string name="activity_welcome_back_unlock">Unlock</string>
+    <string name="activity_welcome_back_forgot_password">Forgot password?</string>
+
+    <string name="activity_welcome_back_password">Password</string>
+    <!-- Layout text: app/src/main/res/layout/activity_withdraw.xml / 布局前端文本 -->
+    <string name="activity_withdraw_transfer_tip">Transfer your coins securely back from broker system address</string>
+
+    <string name="activity_withdraw_withdraw">Withdraw</string>
+    <string name="activity_withdraw_send_from">Send from</string>
+    <string name="activity_withdraw_send_to">Send to</string>
+    <string name="activity_withdraw_amount">Amount</string>
+    <!-- Layout text: app/src/main/res/layout/atv_profit.xml / 布局前端文本 -->
+    <string name="atv_profit_type">TYPE</string>
+    <string name="atv_profit_amount">AMOUNT</string>
+    <string name="atv_profit_status_status">STATUS</string>
+    <string name="atv_profit_profit">PROFIT</string>
+    <string name="atv_profit_profit_1_bkc">+ 1 BKC</string>
+    <string name="atv_profit_pending">PENDING</string>
+    <string name="atv_profit_fee">FEE</string>
+    <string name="atv_profit_amount_0_01_bkc">0.01 BKC</string>
+    <string name="atv_profit_model">MODEL</string>
+    <string name="atv_profit_in_shard">in-shard</string>
+    <string name="atv_profit_timestamp">TIMESTAMP</string>
+    <string name="atv_profit_2023_10_26_7_43_18">2023/10/26 下午7:43:18</string>
+    <string name="atv_profit_from_address">FROM ADDRESS</string>
+    <string name="atv_profit_account_address_value">0x7135b24d2387a6eb17d810be19ece92b8a8a3263</string>
+    <string name="atv_profit_to_address">TO ADDRESS</string>
+    <string name="atv_profit_shard_id">SHARD ID</string>
+    <string name="atv_profit_block_height">BLOCK HEIGHT</string>
+    <string name="atv_profit_block_hash">BLOCK HASH</string>
+    <string name="atv_profit_block_hash_value">0x4312f2fab33d34c704ac43e97492dd8677702a0e</string>
+    <string name="atv_profit_transaction_hash">TRANSACTION HASH</string>
+    <string name="atv_profit_transaction_hash_value">0x97dc9728014c67c3a066d46daa9778176611b8d9</string>
+
+    <!-- Layout text: app/src/main/res/layout/atv_receive.xml / 布局前端文本 -->
+    <string name="atv_receive_receive">RECEIVE</string>
+    <string name="atv_receive_cross_shard_with_broker">cross-shard-with-broker</string>
+
+    <string name="atv_receive_type">TYPE</string>
+    <string name="atv_receive_amount">AMOUNT</string>
+    <string name="atv_receive_status">STATUS</string>
+    <string name="atv_receive_amount_positive_1_bkc">+ 1 BKC</string>
+    <string name="atv_receive_pending">PENDING</string>
+    <string name="atv_receive_fee">FEE</string>
+    <string name="atv_receive_fee_value">0.01 BKC</string>
+    <string name="atv_receive_model">MODEL</string>
+    <string name="atv_receive_timestamp">TIMESTAMP</string>
+    <string name="atv_receive_timestamp_value">2023/10/26 下午7:43:18</string>
+    <string name="atv_receive_from_address">FROM ADDRESS</string>
+    <string name="atv_receive_account_address_value">0x7135b24d2387a6eb17d810be19ece92b8a8a3263</string>
+    <string name="atv_receive_to_address">TO ADDRESS</string>
+    <string name="atv_receive_shard_id">SHARD ID</string>
+    <string name="atv_receive_block_height">BLOCK HEIGHT</string>
+    <string name="atv_receive_block_hash">BLOCK HASH</string>
+    <string name="atv_receive_block_hash_value">0x4312f2fab33d34c704ac43e97492dd8677702a0e</string>
+    <string name="atv_receive_transaction_hash">TRANSACTION HASH</string>
+    <string name="atv_receive_transaction_hash_value">0x97dc9728014c67c3a066d46daa9778176611b8d9</string>
+    <!-- Layout text: app/src/main/res/layout/atv_send.xml / 布局前端文本 -->
+    <string name="atv_send_send">SEND</string>
+    <string name="atv_send_sent_1_bkc">- 1 BKC</string>
+
+    <string name="atv_send_type">TYPE</string>
+    <string name="atv_send_amount">AMOUNT</string>
+    <string name="atv_send_status">STATUS</string>
+    <string name="atv_send_pending">PENDING</string>
+    <string name="atv_send_fee">FEE</string>
+    <string name="atv_send_fee_value">0.01 BKC</string>
+    <string name="atv_send_model">MODEL</string>
+    <string name="atv_send_in_shard">in-shard</string>
+    <string name="atv_send_timestamp">TIMESTAMP</string>
+    <string name="atv_send_timestamp_value">2023/10/26 下午7:43:18</string>
+    <string name="atv_send_from_address">FROM ADDRESS</string>
+    <string name="atv_send_account_address_value">0x7135b24d2387a6eb17d810be19ece92b8a8a3263</string>
+    <string name="atv_send_to_address">TO ADDRESS</string>
+    <string name="atv_send_shard_id">SHARD ID</string>
+    <string name="atv_send_block_height">BLOCK HEIGHT</string>
+    <string name="atv_send_block_hash">BLOCK HASH</string>
+    <string name="atv_send_block_hash_value">0x4312f2fab33d34c704ac43e97492dd8677702a0e</string>
+    <string name="atv_send_transaction_hash">TRANSACTION HASH</string>
+    <string name="atv_send_transaction_hash_value">0x97dc9728014c67c3a066d46daa9778176611b8d9</string>
+    <!-- Layout text: app/src/main/res/layout/atv_stake.xml / 布局前端文本 -->
+    <string name="atv_stake_stake">STAKE</string>
+    <string name="atv_stake_staked_10_bkc">- 10 BKC</string>
+
+    <string name="atv_stake_type">TYPE</string>
+    <string name="atv_stake_amount">AMOUNT</string>
+    <string name="atv_stake_status">STATUS</string>
+    <string name="atv_stake_pending">PENDING</string>
+    <string name="atv_stake_fee">FEE</string>
+    <string name="atv_stake_fee_value">0.01 BKC</string>
+    <string name="atv_stake_model">MODEL</string>
+    <string name="atv_stake_in_shard">in-shard</string>
+    <string name="atv_stake_timestamp">TIMESTAMP</string>
+    <string name="atv_stake_timestamp_value">2023/10/26 下午7:43:18</string>
+    <string name="atv_stake_from_address">FROM ADDRESS</string>
+    <string name="atv_stake_account_address_value">0x7135b24d2387a6eb17d810be19ece92b8a8a3263</string>
+    <string name="atv_stake_to_address">TO ADDRESS</string>
+    <string name="atv_stake_shard_id">SHARD ID</string>
+    <string name="atv_stake_block_height">BLOCK HEIGHT</string>
+    <string name="atv_stake_block_hash">BLOCK HASH</string>
+    <string name="atv_stake_block_hash_value">0x4312f2fab33d34c704ac43e97492dd8677702a0e</string>
+    <string name="atv_stake_transaction_hash">TRANSACTION HASH</string>
+    <string name="atv_stake_transaction_hash_value">0x97dc9728014c67c3a066d46daa9778176611b8d9</string>
+    <!-- Layout text: app/src/main/res/layout/atv_withdraw.xml / 布局前端文本 -->
+    <string name="atv_withdraw_withdraw">WITHDRAW</string>
+
+    <string name="atv_withdraw_type">TYPE</string>
+    <string name="atv_withdraw_amount">AMOUNT</string>
+    <string name="atv_withdraw_status">STATUS</string>
+    <string name="atv_withdraw_amount_positive_1_bkc">+ 1 BKC</string>
+    <string name="atv_withdraw_pending">PENDING</string>
+    <string name="atv_withdraw_fee">FEE</string>
+    <string name="atv_withdraw_fee_value">0.01 BKC</string>
+    <string name="atv_withdraw_model">MODEL</string>
+    <string name="atv_withdraw_in_shard">in-shard</string>
+    <string name="atv_withdraw_timestamp">TIMESTAMP</string>
+    <string name="atv_withdraw_timestamp_value">2023/10/26 下午7:43:18</string>
+    <string name="atv_withdraw_from_address">FROM ADDRESS</string>
+    <string name="atv_withdraw_account_address_value">0x7135b24d2387a6eb17d810be19ece92b8a8a3263</string>
+    <string name="atv_withdraw_to_address">TO ADDRESS</string>
+    <string name="atv_withdraw_shard_id">SHARD ID</string>
+    <string name="atv_withdraw_block_height">BLOCK HEIGHT</string>
+    <string name="atv_withdraw_block_hash">BLOCK HASH</string>
+    <string name="atv_withdraw_block_hash_value">0x4312f2fab33d34c704ac43e97492dd8677702a0e</string>
+    <string name="atv_withdraw_transaction_hash">TRANSACTION HASH</string>
+    <string name="atv_withdraw_transaction_hash_value">0x97dc9728014c67c3a066d46daa9778176611b8d9</string>
+    <!-- Layout text: app/src/main/res/layout/dialog_confirm.xml / 布局前端文本 -->
+    <string name="dialog_confirm_dialog_text">Text</string>
+    <string name="dialog_confirm_dialog_number_of_shares">Number of shares</string>
+    <string name="dialog_confirm_price_per_unit">Price per unit (BKC)</string>
+
+    <string name="dialog_confirm_cancel">Cancel</string>
+    <string name="dialog_confirm_confirm">Confirm</string>
+    <!-- Layout text: app/src/main/res/layout/dialog_confirm_transaction.xml / 布局前端文本 -->
+    <string name="dialog_confirm_transaction_dialog_from">From:</string>
+    <string name="dialog_confirm_transaction_dialog_to">To:</string>
+    <string name="dialog_confirm_transaction_amount">Amount:</string>
+    <string name="dialog_confirm_transaction_gas_fee">Gas Fee:</string>
+    <string name="dialog_confirm_transaction_dialog_total">Total:</string>
+
+    <string name="dialog_confirm_transaction_send">Send</string>
+    <string name="dialog_confirm_transaction_cancel">Cancel</string>
+    <string name="dialog_confirm_transaction_confirm">Confirm</string>
+    <!-- Layout text: app/src/main/res/layout/dialog_confirm_unlist.xml / 布局前端文本 -->
+    <string name="dialog_confirm_unlist_dialog_unlist">Unlist</string>
+    <string name="dialog_confirm_unlist_confirm_message">Are you sure you want to unlist this NFT?</string>
+
+    <string name="dialog_confirm_unlist_cancel">Cancel</string>
+    <string name="dialog_confirm_unlist_confirm">Confirm</string>
+    <!-- Layout text: app/src/main/res/layout/dialog_image_fullscreen.xml / 布局前端文本 -->
+    <string name="dialog_image_fullscreen_nft_image">NFT图片</string>
+    <string name="dialog_image_fullscreen_time_info">时间信息</string>
+    <string name="dialog_image_fullscreen_close">关闭</string>
+
+    <!-- Layout text: app/src/main/res/layout/dialog_nft_detail.xml / 布局前端文本 -->
+    <string name="dialog_nft_detail_nft_image">NFT Image</string>
+    <string name="dialog_nft_detail_time_info">Time Information</string>
+
+    <!-- Layout text: app/src/main/res/layout/item_comment.xml / 布局前端文本 -->
+    <string name="item_comment_user123">User123</string>
+    <string name="item_comment_this_is_a_comment">This is a comment...</string>
+
+    <!-- Layout text: app/src/main/res/layout/item_detail_info.xml / 布局前端文本 -->
+    <string name="item_detail_info_label">标签:</string>
+    <string name="item_detail_info_value">值</string>
+
+    <!-- Layout text: app/src/main/res/layout/item_medal_ranking.xml / 布局前端文本 -->
+    <string name="item_medal_ranking_anonymous_user">匿名用户</string>
+    <string name="item_medal_ranking_0x1234_5678">0x1234...5678</string>
+    <string name="item_medal_ranking_6">总计: 6</string>
+    <string name="item_medal_ranking_sample_work">代表作：我的第一个NFT作品</string>
+
+    <!-- Layout text: app/src/main/res/layout/item_nft_footer.xml / 布局前端文本 -->
+    <string name="item_nft_footer_pull_refresh_more">下拉刷新更多</string>
+
+    <!-- Layout text: app/src/main/res/layout/item_post.xml / 布局前端文本 -->
+    <string name="item_post_title_post_title">Post Title</string>
+    <string name="item_post_long_content_preview">This is a long content preview...</string>
+
+    <string name="item_post_user123">User123</string>
+    <!-- Layout text: app/src/main/res/layout/item_post_detail_header.xml / 布局前端文本 -->
+    <string name="item_post_detail_header_username">Username</string>
+    <string name="item_post_detail_header_full_content">Full content...</string>
+    <string name="item_post_detail_header_reward">💰 Reward</string>
+    <string name="item_post_detail_header_total_reward_0">Total Reward: 0</string>
+
+    <string name="item_post_detail_header_post_title">Post Title</string>
+    <!-- Layout text: app/src/main/res/layout/item_profile_header.xml / 布局前端文本 -->
+    <string name="item_profile_header_edit_profile">Edit Profile</string>
+    <string name="item_profile_header_posts_0">Posts: 0</string>
+    <string name="item_profile_header_earned_bkc_0">Earned(BKC): 0</string>
+    <string name="item_profile_header_my_posts">My Posts</string>
+
+    <string name="item_profile_header_username">Username</string>
+    <!-- Layout text: app/src/main/res/layout/item_section_title.xml / 布局前端文本 -->
+    <string name="item_section_title_title_section_title">Section Title</string>
+
+    <!-- Layout text: app/src/main/res/layout/item_selected_file.xml / 布局前端文本 -->
+    <string name="item_selected_file_pdf">文件名.pdf</string>
+
+    <!-- Layout text: app/src/main/res/layout/item_selected_image.xml / 布局前端文本 -->
+    <string name="item_selected_image_jpg">图片.jpg</string>
+    <string name="item_selected_image_preview">Preview</string>
+
+    <!-- Layout text: app/src/main/res/layout/item_submission_history.xml / 布局前端文本 -->
+    <string name="item_submission_history_pdf">研究报告.pdf</string>
+    <string name="item_submission_history_pending">Pending</string>
+    <string name="item_submission_history_2_5_mb_pdf">2.5 MB • PDF</string>
+    <string name="item_submission_history_no_medal">⚪ No Medal</string>
+    <string name="item_submission_history_not_started">🖼️ Not Started</string>
+    <string name="item_submission_history_bkc_reward">💰 BKC Reward: 10.5 BKC</string>
+    <string name="item_submission_history_1_3_uploaded">1/3 Uploaded</string>
+
+    <!-- Layout text: app/src/main/res/layout/nft_holder.xml / 布局前端文本 -->
+    <string name="nft_holder_mynftname">MyNFTName</string>
+    <string name="nft_holder_price_300_bkc">300BKC</string>
+    <string name="nft_holder_onsale">OnSale</string>
+
+    <string name="nft_holder_id">id</string>
+    <!-- Layout text: app/src/main/res/layout/topbar.xml / 布局前端文本 -->
+    <string name="topbar_content_desc_notification">Notification</string>
+    <string name="topbar_content_desc_notifications">通知</string>
+    <string name="topbar_content_desc_menu">menu</string>
+
+    <string name="topbar_brokerchain">BrokerChain</string>
+    <string name="topbar_wallet_spaced">" Wallet"</string>
+    <!-- Layout text: app/src/main/res/layout/transaction_item.xml / 布局前端文本 -->
+    <string name="transaction_item_completed">COMPLETED</string>
+    <string name="transaction_item_from">FROM</string>
+    <string name="transaction_item_to">TO</string>
+    <string name="transaction_item_time">TIME</string>
+    <string name="transaction_item_id">ID</string>
+
+    <string name="transaction_item_type">TYPE</string>
+    <string name="transaction_item_amount">AMOUNT</string>
+    <string name="transaction_item_status">STATUS</string>
+    <string name="transaction_item_fee">FEE</string>
+
+    <!-- Layout text: app/src/main/res/layout/menu.xml / ?????? -->
+    <string name="menu_menu">Menu</string>
+    <string name="menu_send_scan_qrcode">Send (Scan QRCode)</string>
+    <string name="menu_receive">Receive</string>
+    <string name="menu_activity">Activity</string>
+    <string name="menu_accounts">Accounts</string>
+    <string name="menu_support">Support</string>
+    <string name="menu_about">About</string>
+    <string name="menu_lock_wallet">Lock Wallet</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_notification.xml / ?????? -->
+    <string name="activity_notification_swap">Swap</string>
+    <string name="activity_notification_swap_secure_tip">Swapping crypto is now easy and secure</string>
+    <string name="activity_notification_optimize_swap_intro">Allow BrokerFi to programmatically optimize your swaps to assist with:</string>
+    <string name="activity_notification_lower_tx_expenses">Lower your transaction expenses</string>
+    <string name="activity_notification_reduce_errors">Decrease the chances of transaction errors</string>
+    <string name="activity_notification_avoid_stuck_tx">Avoid transactions from getting jammed</string>
+    <string name="activity_notification_front_running_guard">Guard against front-running *</string>
+    <string name="activity_notification_get_started">Get started</string>
+
+    <!-- Layout text: app/src/main/res/layout/activity_news.xml / ?????? -->
+    <string name="activity_news_swap">Swap</string>
+    <string name="activity_news_swap_secure_tip">Swapping crypto is now easy and secure</string>
+    <string name="activity_news_optimize_swap_intro">Allow BrokerFi to programmatically optimize your swaps to assist with:</string>
+    <string name="activity_news_lower_tx_expenses">Lower your transaction expenses</string>
+    <string name="activity_news_reduce_errors">Decrease the chances of transaction errors</string>
+    <string name="activity_news_avoid_stuck_tx">Avoid transactions from getting jammed</string>
+    <string name="activity_news_front_running_guard">Guard against front-running *</string>
+    <string name="activity_news_get_started">Get started</string>
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/AboutActivity.java / Java运行时前端文本 -->
+    <string name="about_toast_checking_for_updates">Checking for updates...</string>
+    <string name="about_toast_latest_version">Your APP is already the latest version.</string>
+    <string name="about_toast_update_available_version">Update available: Version</string>
+    <string name="about_toast_downloading">, downloading...</string>
+    <string name="about_toast_download_completed">Download completed</string>
+    <string name="about_toast_download_failed">Download failed</string>
+    <string name="about_toast_update_check_failed">Update check failed:</string>
+    <string name="about_toast_install_permission">Please enable \'Install unknown apps\' permission</string>
+    <string name="about_toast_install_permission_denied">Permission denied, cannot install</string>
+    <string name="about_status_can_t_get_appversion">Can\'t get AppVersion</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/AccountDetailActivity.java / Java运行时前端文本 -->
+    <string name="account_detail_toast_address_copied">Address copied to clipboard</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/AfterBrokerActivity.java / Java运行时前端文本 -->
+    <string name="after_broker_bkc">BKC</string>
+    <string name="after_broker_shard">SHARD</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/AtvActivity.java / Java运行时前端文本 -->
+    <string name="atv_toast_no_transaction_records_found">没有找到交易记录</string>
+    <string name="atv_toast_showing_cached_data">无法获取最新交易数据，显示缓存数据</string>
+    <string name="atv_toast_transaction_no_cache">无法获取交易数据且无缓存</string>
+    <string name="atv_toast_failed_to_load_cached_data">加载缓存数据失败</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/BrokerActivity.java / Java运行时前端文本 -->
+    <string name="broker_toast_broker">申请成为Broker成功！</string>
+    <string name="broker_toast_broker_2">申请成为Broker失败，请稍后重试</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/BuyNFTsActivity.java / Java运行时前端文本 -->
+    <string name="buy_nfts_total_gas_fee_included">Total (Gas fee included)</string>
+    <string name="buy_nfts_price_bkc">%s BKC</string>
+    <string name="buy_nfts_toast_select_nft_to_buy_first">🛒 请先选择要购买的NFT</string>
+    <string name="buy_nfts_toast_1">份数不能小于1</string>
+    <string name="buy_nfts_toast_exceeds_shares">超过可购买份数</string>
+    <string name="buy_nfts_toast_2">请输入份数</string>
+    <string name="buy_nfts_toast_3">购买成功！总价：</string>
+    <string name="buy_nfts_toast_4">交易失败！</string>
+    <string name="buy_nfts_toast_5">已取消上架</string>
+    <string name="buy_nfts_toast_6">网络请求失败:服务器响应数据为空</string>
+    <string name="buy_nfts_toast_call">call失败:</string>
+    <string name="buy_nfts_toast_error">error</string>
+    <string name="buy_nfts_toast_no_nft_data">暂无NFT数据</string>
+    <string name="buy_nfts_toast_7">服务器错误:</string>
+    <string name="buy_nfts_toast_8">数据解析失败:</string>
+    <string name="buy_nfts_toast_9">请求构造失败:</string>
+    <string name="buy_nfts_toast_transaction_failed">Transaction Failed</string>
+    <string name="buy_nfts_toast_10">购买失败:</string>
+    <string name="buy_nfts_toast_11">响应格式错误</string>
+    <string name="buy_nfts_toast_12">购买请求失败</string>
+    <string name="buy_nfts_toast_checktransactionstatus">checkTransactionStatus失败，服务器响应数据为空</string>
+    <string name="buy_nfts_toast_13">✅ 购买成功</string>
+    <string name="buy_nfts_toast_14">购买失败！</string>
+    <string name="buy_nfts_toast_15">查询请求失败</string>
+    <string name="buy_nfts_error_1">最小为1份</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/CommunityActivity.java / Java运行时前端文本 -->
+    <string name="community_toast_add_account_first">Cannot get wallet address, please add an account first</string>
+    <string name="community_toast_wallet_address_failed">Failed to get wallet address:</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/ConfirmPasswordActivity.java / Java运行时前端文本 -->
+    <string name="confirm_password_toast_wrong_password">密码错误！</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/ConvertActivity.java / Java运行时前端文本 -->
+    <string name="convert_toast_fill_account_addresses">请填写旧账户地址和新账户地址</string>
+    <string name="convert_toast_feature_pending">转换功能待实现</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/CreatePasswActivity.java / Java运行时前端文本 -->
+    <string name="create_passw_toast_agree_to_terms">请同意协议！</string>
+    <string name="create_passw_toast_empty_password">密码不得为空！</string>
+    <string name="create_passw_toast_6">密码最少6位！</string>
+    <string name="create_passw_toast_password_mismatch">密码和确认密码不同！</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/EditProfileActivity.java / Java运行时前端文本 -->
+    <string name="edit_profile_toast_empty_username">用户名不能为空</string>
+    <string name="edit_profile_toast_uploading_avatar">正在上传头像...</string>
+    <string name="edit_profile_toast_upload_failed">上传失败：</string>
+    <string name="edit_profile_toast_failed_to_get_key">获取密钥失败：</string>
+    <string name="edit_profile_toast_save_successful">保存成功</string>
+    <string name="edit_profile_toast_save_failed">保存失败：</string>
+    <string name="edit_profile_toast_avatar_processed">头像处理完成，点击保存上传</string>
+    <string name="edit_profile_toast_avatar_failed">头像处理失败</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/EmulatorActivity.java / Java运行时前端文本 -->
+    <string name="emulator_toast_network_failed">网络连接失败</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/ExportPrivateKeyActivity.java / Java运行时前端文本 -->
+    <string name="export_private_key_toast_no_keys">No private keys found</string>
+    <string name="export_private_key_toast_export_failed">Failed to export private keys</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/FaucetActivity.java / Java运行时前端文本 -->
+    <string name="faucet_toast_claim_failed">领取失败</string>
+    <string name="faucet_toast_result">Result：</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/GenerateAccountActivity.java / Java运行时前端文本 -->
+    <string name="generate_account_toast_success">✅ Successfully generate a new account!</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/GlobalStatsActivity.java / Java运行时前端文本 -->
+    <string name="global_stats_total_users">Total Users:</string>
+    <string name="global_stats_totalusers">totalUsers</string>
+    <string name="global_stats_totalgoldmedals">totalGoldMedals</string>
+    <string name="global_stats_totalsilvermedals">totalSilverMedals</string>
+    <string name="global_stats_totalbronzemedals">totalBronzeMedals</string>
+    <string name="global_stats_highest_score">Highest Score:</string>
+    <string name="global_stats_highestscore">highestScore</string>
+    <string name="global_stats_top_user">Top User:</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/MainActivity.java / Java运行时前端文本 -->
+    <string name="main_address_0x">Address: 0x</string>
+    <string name="main_title">免责声明</string>
+    <string name="main_message_you_have_a_new_message">You have a new message:</string>
+    <string name="main_message_please_check_it_out">Please check it out.</string>
+    <string name="main_toast_receive_old_account">Receive is no longer available for old accounts.</string>
+    <string name="main_toast_faucet_old_account">Faucet is no longer available for old accounts.</string>
+    <string name="main_toast_send_old_account">Send is no longer available for old accounts.</string>
+    <string name="main_toast_swap_old_account">Swap is no longer available for old accounts.</string>
+    <string name="main_toast_broker_old_account">Broker is no longer available for old accounts.</string>
+    <string name="main_button_ok">OK</string>
+    <string name="main_button_confirm">Confirm</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/MedalRankingActivity.java / Java运行时前端文本 -->
+    <string name="medal_ranking_title_calculation">🏆 Medal Ranking Calculation</string>
+    <string name="medal_ranking_message_score_title">📊 Score Calculation Formula:</string>
+    <string name="medal_ranking_message_score_formula">Total Score = Gold × 3 + Silver × 2 + Bronze × 1</string>
+    <string name="medal_ranking_message_gold_points">🥇 Gold Medal = 3 points</string>
+    <string name="medal_ranking_message_silver_points">🥈 Silver Medal = 2 points</string>
+    <string name="medal_ranking_message_bronze_point">🥉 Bronze Medal = 1 point</string>
+    <string name="medal_ranking_message_ranking_rules">📈 Ranking Rules:</string>
+    <string name="medal_ranking_message_sort_rule">1. Sorted by total score (descending)</string>
+    <string name="medal_ranking_message_tie_gold">2. If tied, sorted by gold medals</string>
+    <string name="medal_ranking_message_tie_silver">3. If tied, sorted by silver medals</string>
+    <string name="medal_ranking_message_tie_bronze">4. If tied, sorted by bronze medals</string>
+    <string name="medal_ranking_message_profile_display">🎨 User Profile Display:</string>
+    <string name="medal_ranking_message_display_work">Choose to display your representative work &amp; nickname</string>
+    <string name="medal_ranking_message_work_approval">Representative work requires admin approval</string>
+    <string name="medal_ranking_message_earn_rewards">🎁 Take Action, Earn Rewards!</string>
+    <string name="medal_ranking_message_proof_rewards">Submit your proof to receive:</string>
+    <string name="medal_ranking_message_medal_reward">🏅 Honor Medals - Showcase your contribution</string>
+    <string name="medal_ranking_message_nft_reward">🖼️ Exclusive NFT - Permanently stored on blockchain</string>
+    <string name="medal_ranking_message_bkc_rewards">💰 BKC Tokens - Real rewards</string>
+    <string name="medal_ranking_message_submit_now">What are you waiting for? Submit now!</string>
+    <string name="medal_ranking_button_submit_now">Submit Now</string>
+    <string name="medal_ranking_button_later">Later</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/MintActivity.java / Java运行时前端文本 -->
+    <string name="mint_error_empty_server_response">铸造失败,服务器响应为空</string>
+    <string name="mint_toast_enter_nft_name">请输入NFT名字</string>
+    <string name="mint_toast_enter_total_nft_shares">请输入NFT总份数</string>
+    <string name="mint_toast_maximum_10000_nft_shares">最多将NFT分为10000份</string>
+    <string name="mint_toast_enter_valid_integer_shares">请输入有效的整数份数</string>
+    <string name="mint_toast_create_file_failed">创建文件失败</string>
+    <string name="mint_toast_album_permission">需要权限才能访问相册</string>
+    <string name="mint_toast_camera_permission">需要权限访问相机</string>
+    <string name="mint_toast_load_image_failed">加载图片失败</string>
+    <string name="mint_toast_mint_failed">铸造失败</string>
+    <string name="mint_toast_mint_failed_message_prefix">铸造失败:</string>
+    <string name="mint_toast_transaction_request_failed">交易请求失败</string>
+    <string name="mint_toast_mint_successful">铸造成功</string>
+    <string name="mint_error_required_field">必填字段</string>
+    <string name="mint_error_exceeds_maximum_limit">超过最大限制</string>
+    <string name="mint_error_format_example_100">格式示例：100</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/MyCenterActivity.java / Java运行时前端文本 -->
+    <string name="my_center_total_count">总数:</string>
+    <string name="my_center_status_sample_hash">0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/MyNFTsActivity.java / Java运行时前端文本 -->
+    <string name="my_nfts_list">List</string>
+    <string name="my_nfts_toast_select_nft_to_list_first">⚠️ 请先选择要上架的NFT</string>
+    <string name="my_nfts_toast_nft_already_listed">此NFT已上架</string>
+    <string name="my_nfts_toast_enter_nft_shares_to_list">请输入需要上架的NFT份数</string>
+    <string name="my_nfts_toast_enter_price_per_share">请输入每份的价格</string>
+    <string name="my_nfts_toast_exceeds_owned_nft_shares">超过您所拥有的NFT份数</string>
+    <string name="my_nfts_toast_price_gt_zero">价格必须大于0</string>
+    <string name="my_nfts_toast_enter_valid_number">请输入有效数值</string>
+    <string name="my_nfts_toast_select_unlist_nft">⚠️ 请先选择要下架的NFT</string>
+    <string name="my_nfts_toast_nft_not_listed">此NFT未上架</string>
+    <string name="my_nfts_toast_unlist_successful">✅ 下架成功</string>
+    <string name="my_nfts_toast_unlist_cancelled">已取消下架</string>
+    <string name="my_nfts_toast_fetch_empty_response">fetchMyNFTs失败，服务器返回数据为空:</string>
+    <string name="my_nfts_toast_list_empty_response">上架失败: 服务器响应结果为空</string>
+    <string name="my_nfts_toast_list_failed_prefix">上架失败:</string>
+    <string name="my_nfts_toast_list_build_error">上架失败: 请求构造错误</string>
+    <string name="my_nfts_toast_list_successful">✅ 上架成功</string>
+    <string name="my_nfts_toast_list_failed">上架失败！</string>
+    <string name="my_nfts_toast_unlist_empty_response">下架失败:服务器响应为空</string>
+    <string name="my_nfts_toast_unlist_failed_prefix">下架失败:</string>
+    <string name="my_nfts_toast_unlist_parse_error">下架失败: 数据解析错误</string>
+    <string name="my_nfts_toast_unlist_build_error">下架失败: 请求构造错误</string>
+    <string name="my_nfts_toast_unlist_failed">下架失败！</string>
+    <string name="my_nfts_error_minimum_0_01">最小0.01</string>
+    <string name="my_nfts_error_format_example_10">格式示例：10</string>
+    <string name="my_nfts_error_format_example_0_05">格式示例：0.05</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/NFTMintingActivity.java / Java运行时前端文本 -->
+    <string name="nft_minting_minting">铸造中...</string>
+    <string name="nft_minting_image_selected">已选择图片:</string>
+    <string name="nft_minting_toast_select_image">请选择图片</string>
+    <string name="nft_minting_toast_nft_mint_successful">NFT铸造成功！</string>
+    <string name="nft_minting_toast_image_failed">图片处理失败</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/PostDetailActivity.java / Java运行时前端文本 -->
+    <string name="post_detail_title_reward">打赏</string>
+    <string name="post_detail_toast_comment_failed">评论失败：</string>
+    <string name="post_detail_toast_post_id_error">帖子ID错误</string>
+    <string name="post_detail_toast_load_post_failed">加载帖子失败：</string>
+    <string name="post_detail_toast_load_comments_failed">加载评论失败：</string>
+    <string name="post_detail_toast_login_first">请先登录</string>
+    <string name="post_detail_toast_unlike_failed">取消点赞失败</string>
+    <string name="post_detail_toast_like_failed">点赞失败</string>
+    <string name="post_detail_toast_enter_amount">请输入金额</string>
+    <string name="post_detail_toast_amount_format_error">金额格式错误</string>
+    <string name="post_detail_toast_amount_gt_zero">金额必须大于0</string>
+    <string name="post_detail_toast_do_not_resubmit">请勿重复提交</string>
+    <string name="post_detail_toast_account_not_found">未找到账户</string>
+    <string name="post_detail_toast_tx_submitted">交易已提交，等待确认...</string>
+    <string name="post_detail_toast_reward_failed_prefix">打赏失败：</string>
+    <string name="post_detail_toast_reward_successful">打赏成功</string>
+    <string name="post_detail_toast_backend_failed">后端验证失败</string>
+    <string name="post_detail_toast_request_failed_prefix">请求失败：</string>
+    <string name="post_detail_toast_reward_exception">打赏异常</string>
+    <string name="post_detail_hint_bkc">输入BKC数量</string>
+    <string name="post_detail_button_confirm">确认</string>
+    <string name="post_detail_button_cancel">取消</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/PostPublishActivity.java / Java运行时前端文本 -->
+    <string name="post_publish_toast_failed_to_get_key">获取密钥失败</string>
+    <string name="post_publish_toast_max_9_images">最多选择9张图片</string>
+    <string name="post_publish_toast_enter_title">请输入标题</string>
+    <string name="post_publish_toast_enter_content">请输入内容</string>
+    <string name="post_publish_toast_init_upload_service">正在初始化上传服务，请稍候</string>
+    <string name="post_publish_toast_uploading_images">正在上传图片...</string>
+    <string name="post_publish_toast_publish_successful">发布成功</string>
+    <string name="post_publish_toast_publish_failed_prefix">发布失败：</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/ProofAndNFTActivity.java / Java运行时前端文本 -->
+    <string name="proof_and_nft_submitting">Submitting...</string>
+    <string name="proof_and_nft_submit">Submit</string>
+    <string name="proof_and_nft_maximum">💡 Maximum</string>
+    <string name="proof_and_nft_files_allowed">files allowed</string>
+    <string name="proof_and_nft_selected">💡 Selected</string>
+    <string name="proof_and_nft_file_s">file(s)</string>
+    <string name="proof_and_nft_title_file_selection_tips">💡 File Selection Tips</string>
+    <string name="proof_and_nft_title_nft_image_guide">💡 NFT Image Guide</string>
+    <string name="proof_and_nft_title_select_image_source">Select Image Source</string>
+    <string name="proof_and_nft_title_submission_success">✅ Submission Success</string>
+    <string name="proof_and_nft_title_image_preview">Image Preview</string>
+    <string name="proof_and_nft_message_file_steps_intro">To select files from apps like WeChat, follow these steps:</string>
+    <string name="proof_and_nft_message_file_step_find">1️⃣ Find the file you want to upload in WeChat</string>
+    <string name="proof_and_nft_message_file_step_forward">2️⃣ Long press the file, select 「Forward」</string>
+    <string name="proof_and_nft_message_choose_save_files">3️⃣ Choose 「Save to Files」 or 「More」</string>
+    <string name="proof_and_nft_message_save_phone_storage">4️⃣ Save the file to phone storage</string>
+    <string name="proof_and_nft_message_file_step_select">5️⃣ Return to this page, click 「Select Proof File」 to find the saved file</string>
+    <string name="proof_and_nft_message_save_locally_tip">💡 Tip: Most app files can be selected by 「Share → Save Locally」.</string>
+    <string name="proof_and_nft_message_optional_image">Image is optional. If you don\'t upload, you may receive a unique NFT crafted by the DAO!</string>
+    <string name="proof_and_nft_message_upload_image_tip">💎 Upload Image: Use your photo as NFT</string>
+    <string name="proof_and_nft_message_dao_image_tip">🎨 No Upload: Get a DAO-designed exclusive NFT</string>
+    <string name="proof_and_nft_message_choose_option_tip">Both options are great, choose your preferred way!</string>
+    <string name="proof_and_nft_message_select_source">Please choose where to select your NFT photo:</string>
+    <string name="proof_and_nft_message_submission_id">Submission ID:</string>
+    <string name="proof_and_nft_message_current_status">Current Status:</string>
+    <string name="proof_and_nft_message_details">Details:</string>
+    <string name="proof_and_nft_message_check_ranking">You can check review progress in Medal Ranking</string>
+    <string name="proof_and_nft_toast_maximum">Maximum</string>
+    <string name="proof_and_nft_toast_one_image_limit">Only 1 image allowed, please delete the existing one first</string>
+    <string name="proof_and_nft_toast_camera_access_failed">无法访问摄像头</string>
+    <string name="proof_and_nft_toast_select_proof_file">请先选择证明文件（必填项）</string>
+    <string name="proof_and_nft_toast_wallet_status">无法获取当前钱包地址，请检查钱包状态</string>
+    <string name="proof_and_nft_toast_uploading_nft_image">Uploading NFT image...</string>
+    <string name="proof_and_nft_toast_image_uploaded">NFT image uploaded successfully!</string>
+    <string name="proof_and_nft_toast_wallet_failed">Cannot get wallet address, please check wallet status</string>
+    <string name="proof_and_nft_toast_files_remaining">files allowed, you can add</string>
+    <string name="proof_and_nft_toast_more">more</string>
+    <string name="proof_and_nft_toast_selected">Selected</string>
+    <string name="proof_and_nft_toast_optimizing_image">Optimizing image...</string>
+    <string name="proof_and_nft_toast_scan_completed">📄 Document scanning completed</string>
+    <string name="proof_and_nft_toast_scan_opt_failed">Scan optimization failed, using original image</string>
+    <string name="proof_and_nft_toast_scan_error">Scan processing error, using original image</string>
+    <string name="proof_and_nft_toast_image_selected">NFT image selected successfully</string>
+    <string name="proof_and_nft_toast_image_deleted">Image deleted</string>
+    <string name="proof_and_nft_toast_file_deleted">File deleted</string>
+    <string name="proof_and_nft_toast_camera_permission">Camera permission required to take photos</string>
+    <string name="proof_and_nft_toast_form_reset">Form reset</string>
+    <string name="proof_and_nft_toast_server_connect_failed">无法连接到服务器</string>
+    <string name="proof_and_nft_toast_response_timeout">服务器响应超时</string>
+    <string name="proof_and_nft_button_got_it">Got it</string>
+    <string name="proof_and_nft_button_gallery">🖼️ Gallery</string>
+    <string name="proof_and_nft_button_close">Close</string>
+    <string name="proof_and_nft_button_view_ranking">View Ranking</string>
+    <string name="proof_and_nft_button_retry">Retry</string>
+    <string name="proof_and_nft_button_cancel">Cancel</string>
+    <string name="proof_and_nft_button_camera_scan">📷 Camera Scan</string>
+    <string name="proof_and_nft_error_submission_failed">Submission Failed</string>
+    <string name="proof_and_nft_error_parse">Response Parse Error</string>
+    <string name="proof_and_nft_error_unparseable">Server returned an unparseable response format</string>
+    <string name="proof_and_nft_error_detailed_error">Detailed error:</string>
+    <string name="proof_and_nft_dialog_submission_success">Submission successful! Please wait for admin review.</string>
+    <string name="proof_and_nft_status_pending_review">Pending Review</string>
+    <string name="proof_and_nft_status_approved">Approved</string>
+    <string name="proof_and_nft_status_rejected">Rejected</string>
+    <string name="proof_and_nft_status_processing">Processing</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/ProofSubmissionActivity.java / Java运行时前端文本 -->
+    <string name="proof_submission_submitting">提交中...</string>
+    <string name="proof_submission_file_selected">已选择文件:</string>
+    <string name="proof_submission_toast_enter_author">请输入作者信息</string>
+    <string name="proof_submission_toast_enter_description">请输入事件描述</string>
+    <string name="proof_submission_toast_select_file">请选择证明文件</string>
+    <string name="proof_submission_toast_success">证明材料提交成功！</string>
+    <string name="proof_submission_toast_failed_prefix">提交失败:</string>
+    <string name="proof_submission_toast_network_failed">无法连接到服务器，请检查网络设置</string>
+    <string name="proof_submission_toast_user_info_failed">加载用户信息失败:</string>
+    <string name="proof_submission_toast_file_failed">文件处理失败</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/ReceiveActivity.java / Java运行时前端文本 -->
+    <string name="receive_toast_text_copied_to_clipboard">文本已复制到剪切板</string>
+    <string name="receive_toast_storage_permission">需要存储权限来保存图片</string>
+    <string name="receive_toast_image_saved_to_album">图片已保存到相册</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/SendActivity.java / Java运行时前端文本 -->
+    <string name="send_toast_please_fill_in_all_fields">Please fill in all fields</string>
+    <string name="send_toast_do_not_resubmit">Do not resubmit the transaction!</string>
+    <string name="send_toast_invalid_address_format">Invalid address format!</string>
+    <string name="send_toast_submit_success">Submit transaction successfully! Please wait for the result.</string>
+    <string name="send_toast_send_successfully">Send successfully</string>
+    <string name="send_toast_send_failed">Send failed：</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/ShowPrivateKeyActivity.java / Java运行时前端文本 -->
+    <string name="show_private_key_toast_copied">Private key copied to clipboard</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/StakeMoreActivity.java / Java运行时前端文本 -->
+    <string name="stake_more_broker2earn">Broker2Earn</string>
+    <string name="stake_more_toast_failed">failed</string>
+    <string name="stake_more_toast_failed_2">failed!</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/SubmissionDetailActivity.java / Java运行时前端文本 -->
+    <string name="submission_detail_toast_invalid_id">无效的提交ID</string>
+    <string name="submission_detail_error_parse_failed">数据解析失败</string>
+    <string name="submission_detail_error_display_failed">显示详情失败</string>
+    <string name="submission_detail_error_load_failed">获取详情失败:</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/SubmissionHistoryActivity.java / Java运行时前端文本 -->
+    <string name="submission_history_toast_load_more_prefix">加载更多失败:</string>
+    <string name="submission_history_toast_load_more_plain">加载更多失败</string>
+    <string name="submission_history_error_wallet_address">无法获取钱包地址，请检查账户设置</string>
+    <string name="submission_history_error_load_failed">获取提交历史失败:</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/TransactionAdapter.java / Java运行时前端文本 -->
+    <string name="transaction_adapter_amount_0_0_bkc">0.0 BKC</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/WelcomeBackActivity.java / Java运行时前端文本 -->
+    <string name="welcome_back_message_confirm_exit_app">你确定要退出应用吗？</string>
+    <string name="welcome_back_button_yes">是</string>
+    <string name="welcome_back_button_no">否</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/WithdrawActivity.java / Java运行时前端文本 -->
+    <string name="withdraw_all">ALL</string>
+    <string name="withdraw_toast_withdraw_successfully">Withdraw successfully</string>
+    <string name="withdraw_toast_withdraw_failed">Withdraw failed:</string>
+    <string name="withdraw_toast_withdraw_failed_2">Withdraw failed</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/adapter/MedalRankingAdapter.java / Java运行时前端文本 -->
+    <string name="medal_ranking_adapter_anonymous">Anonymous</string>
+    <string name="medal_ranking_adapter_work">Work:</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/adapter/NFTAdapter.java / Java运行时前端文本 -->
+    <string name="nft_adapter_listed">Listed</string>
+    <string name="nft_adapter_unlisted">Unlisted</string>
+    <string name="nft_adapter_price_bkc">%s BKC</string>
+    <string name="nft_adapter_toast_image_load_failed">图片加载失败</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/adapter/NFTViewAdapter.java / Java运行时前端文本 -->
+    <string name="nft_view_adapter_material_upload">Material Upload:</string>
+    <string name="nft_view_adapter_nft_minted">NFT Minted:</string>
+    <string name="nft_view_adapter_owner_address">Owner Address:</string>
+    <string name="nft_view_adapter_owner_nickname">Owner Nickname:</string>
+    <string name="nft_view_adapter_pull_up_to_load_more">Pull up to load more</string>
+    <string name="nft_view_adapter_end_of_list">End of list ~ Submit materials to get more NFTs</string>
+    <string name="nft_view_adapter_label_material_upload">Material Upload</string>
+    <string name="nft_view_adapter_label_nft_minted">NFT Minted</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/adapter/PostDetailAdapter.java / Java运行时前端文本 -->
+    <string name="post_detail_adapter_total_reward_bkc">Total Reward(BKC):</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/adapter/ProfileAdapter.java / Java运行时前端文本 -->
+    <string name="profile_adapter_posts">Posts:</string>
+    <string name="profile_adapter_earned">Earned:</string>
+
+    <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/adapter/SubmissionHistoryAdapter.java / Java运行时前端文本 -->
+    <string name="submission_history_adapter_bkc_reward">💰 BKC Reward:</string>
+    <string name="submission_history_adapter_no_medal">⚪ No Medal Awarded</string>
+    <string name="submission_history_adapter_medal_awarded">🏅 Medal Awarded</string>
+    <string name="submission_history_adapter_status_file">File</string>
+    <string name="submission_history_adapter_status_pdf">PDF</string>
+    <string name="submission_history_adapter_status_word">Word</string>
+    <string name="submission_history_adapter_status_excel">Excel</string>
+    <string name="submission_history_adapter_status_ppt">PPT</string>
+    <string name="submission_history_adapter_status_image">Image</string>
+</resources>

@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:paddingHorizontal="16dp"
-        android:text="Import existing account"
+        android:text="@string/activity_add_account_import_existing"
         android:fontFamily="@font/work_sans_black"
         android:textSize="@dimen/text_size_xlarge"
         android:textStyle="bold"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:paddingHorizontal="16dp"
-        android:text="Fill the private key in the dialog box below to import an existing account."
+        android:text="@string/activity_add_account_private_key_tip"
         android:textSize="@dimen/text_size_normal"
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:paddingHorizontal="16dp"
-        android:text="Account privatekey"
+        android:text="@string/activity_add_account_account_privatekey"
         android:textColor="#000000"
         android:textSize="@dimen/text_size_normal"
         app:layout_constraintTop_toBottomOf="@id/tv_description" />
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:paddingHorizontal="16dp"
-        android:text="Can not import invalid private key"
+        android:text="@string/activity_add_account_invalid_private_key"
         android:textColor="@color/red_127"
         android:textSize="@dimen/text_size_small"
         android:visibility="gone"
@@ -94,14 +94,13 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@string/activity_add_account_cancel"
             android:textSize="@dimen/text_size_normal"
             android:textAllCaps="false"
             android:background="@drawable/custom_button_bg_white"
             android:padding="4dp"
             android:gravity="center"
             android:clickable="true"
-            android:onClick="remindMeLater"
             android:layout_marginEnd="16dp" />
 
         <!-- Save Button -->
@@ -110,7 +109,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="@string/activity_add_account_save"
             android:textAllCaps="false"
             android:textSize="@dimen/text_size_normal"
             android:textColor="#ffffff"
@@ -118,7 +117,7 @@
             android:padding="4dp"
             android:gravity="center"
             android:clickable="true"
-            android:onClick="nextAction" />
+            />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

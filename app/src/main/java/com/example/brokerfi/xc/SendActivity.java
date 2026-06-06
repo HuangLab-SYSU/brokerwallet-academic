@@ -104,7 +104,7 @@ public class SendActivity extends AppCompatActivity {
                 
                 // IsInput？
                 if (toAddress.isEmpty() || amount.isEmpty() || fee.isEmpty()) {
-                    Toast.makeText(SendActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SendActivity.this, R.string.send_toast_please_fill_in_all_fields, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 
@@ -138,11 +138,11 @@ public class SendActivity extends AppCompatActivity {
         TextView tvFee = dialogView.findViewById(R.id.tv_fee);
         TextView tvTotal = dialogView.findViewById(R.id.tv_total);
         
-        tvFrom.setText("From: " + fromAddress);
-        tvTo.setText("To: " + toAddress);
-        tvAmount.setText("Amount: " + amount + " BKC");
-        tvFee.setText("Gas Fee: " + fee + " BKC");
-        tvTotal.setText("Total: " + totalAmount + " BKC");
+        tvFrom.setText(tvFrom.getContext().getString(R.string.dialog_confirm_transaction_dialog_from) + " " + fromAddress);
+        tvTo.setText(tvTo.getContext().getString(R.string.dialog_confirm_transaction_dialog_to) + " " + toAddress);
+        tvAmount.setText(tvAmount.getContext().getString(R.string.dialog_confirm_transaction_amount) + " " + amount + " " + tvAmount.getContext().getString(R.string.after_broker_bkc));
+        tvFee.setText(tvFee.getContext().getString(R.string.dialog_confirm_transaction_gas_fee) + " " + fee + " " + tvFee.getContext().getString(R.string.after_broker_bkc));
+        tvTotal.setText(tvTotal.getContext().getString(R.string.dialog_confirm_transaction_dialog_total) + " " + totalAmount + " " + tvTotal.getContext().getString(R.string.after_broker_bkc));
         
         builder.setView(dialogView);
 
@@ -165,7 +165,7 @@ public class SendActivity extends AppCompatActivity {
     
     private void sendtx2network(){
         if(tx){
-            Toast.makeText(SendActivity.this,"Do not resubmit the transaction!",Toast.LENGTH_LONG).show();
+            Toast.makeText(SendActivity.this,R.string.send_toast_do_not_resubmit,Toast.LENGTH_LONG).show();
             return;
         }
         tx = true;
@@ -173,7 +173,7 @@ public class SendActivity extends AppCompatActivity {
         
         // Verify the format of the destination address
         if (!SecurityUtil.isAddressFormatValid(sendTo)) {
-            Toast.makeText(SendActivity.this,"Invalid address format!",Toast.LENGTH_LONG).show();
+            Toast.makeText(SendActivity.this,R.string.send_toast_invalid_address_format,Toast.LENGTH_LONG).show();
             tx = false;
             return;
         }
@@ -197,18 +197,18 @@ public class SendActivity extends AppCompatActivity {
             String privatekey = split[i];
             new Thread(()->{
                 runOnUiThread(()->{
-                    Toast.makeText(SendActivity.this,"Submit transaction successfully! Please wait for the result.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(SendActivity.this,R.string.send_toast_submit_success,Toast.LENGTH_LONG).show();
                 });
                 try {
                     String s = MyUtil.SendTX(privatekey,formattedSendTo,amount,fee);
                     if(s!=null &&s.contains("success")){
                         runOnUiThread(()->{
-                            Toast.makeText(SendActivity.this,"Send successfully",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SendActivity.this,R.string.send_toast_send_successfully,Toast.LENGTH_LONG).show();
                         });
 
                     }else{
                         runOnUiThread(()->{
-                            Toast.makeText(SendActivity.this,"Send failed："+ s,Toast.LENGTH_LONG).show();
+                            Toast.makeText(SendActivity.this,SendActivity.this.getString(R.string.send_toast_send_failed)+ s,Toast.LENGTH_LONG).show();
                         });
 
                     }

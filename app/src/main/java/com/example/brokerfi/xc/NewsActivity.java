@@ -68,7 +68,7 @@ public class NewsActivity extends AppCompatActivity {
                 
                 // 只显示一次网络错误提示
                 if (!networkErrorShown) {
-                    Toast.makeText(NewsActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewsActivity.this, R.string.emulator_toast_network_failed, Toast.LENGTH_SHORT).show();
                     networkErrorShown = true;
                 }
 

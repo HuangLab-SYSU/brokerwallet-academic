@@ -30,7 +30,7 @@
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/work_sans_black"
                 android:maxLines="3"
-                android:text="NFT"
+                android:text="@string/activity_nft_main_nft"
                 android:textColor="#000000"
                 android:textSize="60sp"
                 android:textStyle="bold" />
@@ -96,7 +96,7 @@
                     android:layout_gravity="center_horizontal"
 
                     android:clickable="true"
-                    android:text="Mint"
+                    android:text="@string/activity_nft_main_mint"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
@@ -108,7 +108,7 @@
                     android:layout_columnWeight="1"
                     android:layout_gravity="center_horizontal"
                     android:clickable="true"
-                    android:text="My NFTs"
+                    android:text="@string/my_nfts"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
@@ -120,7 +120,7 @@
                     android:layout_columnWeight="1"
                     android:layout_gravity="center_horizontal"
                     android:clickable="true"
-                    android:text="Buy"
+                    android:text="@string/Buy"
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:clickable="true"
-                android:text="BrokerFi support"
+                android:text="@string/activity_nft_main_brokerfi_support"
                 android:textColor="#888888"
                 android:textSize="14sp" />
 

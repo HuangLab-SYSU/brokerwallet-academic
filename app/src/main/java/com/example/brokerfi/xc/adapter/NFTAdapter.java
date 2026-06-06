@@ -17,8 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.xc.FaucetActivity;
-import com.example.brokerfi.xc.Holder;
 import com.example.brokerfi.xc.model.NFT;
 
 import java.util.List;
@@ -84,7 +82,7 @@ public class NFTAdapter extends RecyclerView.Adapter<NFTAdapter.ViewHolder> {
         }
         holder.tvName.setText(item.getName());
         holder.tvShares.setText(item.getShares().toString());
-        holder.tvPrice.setText(item.isListed() ? String.format("%s BKC", item.getPrice().toString()) : "      ——");
+        holder.tvPrice.setText(item.isListed() ? holder.tvPrice.getContext().getString(R.string.nft_adapter_price_bkc, item.getPrice().toString()) : "      ——");
 
         if (fromBuyNFTsActivity) {
             String account = item.getAccountNumber() != null ? item.getAccountNumber() : "";
@@ -96,7 +94,7 @@ public class NFTAdapter extends RecyclerView.Adapter<NFTAdapter.ViewHolder> {
 
             holder.tvSaleStatus.setText(compactDisplay);
         } else {
-            holder.tvSaleStatus.setText(item.isListed() ? "Listed" : "Unlisted");
+            holder.tvSaleStatus.setText(item.isListed() ? holder.tvSaleStatus.getContext().getString(R.string.nft_adapter_listed) : holder.tvSaleStatus.getContext().getString(R.string.nft_adapter_unlisted));
             holder.tvSaleStatus.setTextColor(item.isListed() ? 0xFF4CAF50 : 0xFFF44336);
         }
         holder.ivImage.setOnClickListener(v -> {
@@ -111,7 +109,7 @@ public class NFTAdapter extends RecyclerView.Adapter<NFTAdapter.ViewHolder> {
                     showEnlargedImageDialog(v.getContext(), bitmap);
                 } catch (IllegalArgumentException e) {
                     Log.e("BASE64_ERROR", "Base64格式错误: " + e.getMessage());
-                    Toast.makeText(v.getContext(), "图片加载失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), R.string.nft_adapter_toast_image_load_failed, Toast.LENGTH_SHORT).show();
                 }
             }
         });

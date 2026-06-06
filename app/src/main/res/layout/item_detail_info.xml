@@ -17,7 +17,7 @@
             android:id="@+id/labelText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="标签:"
+            android:text="@string/item_detail_info_label"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -28,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="值"
+            android:text="@string/item_detail_info_value"
             android:textSize="14sp"
             android:textColor="@color/grey_60"
             android:layout_marginStart="8dp" />

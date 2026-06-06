@@ -105,23 +105,23 @@ public class ProofSubmissionActivity extends AppCompatActivity {
         
         // 只验证原有的必填项
         if (authorInfo.isEmpty()) {
-            Toast.makeText(this, "请输入作者信息", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.proof_submission_toast_enter_author, Toast.LENGTH_SHORT).show();
             return;
         }
         
         if (eventDescription.isEmpty()) {
-            Toast.makeText(this, "请输入事件描述", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.proof_submission_toast_enter_description, Toast.LENGTH_SHORT).show();
             return;
         }
         
         if (selectedFileUri == null) {
-            Toast.makeText(this, "请选择证明文件", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.proof_submission_toast_select_file, Toast.LENGTH_SHORT).show();
             return;
         }
         
         // 显示提交中状态
         submitButton.setEnabled(false);
-        submitButton.setText("提交中...");
+        submitButton.setText(R.string.proof_submission_submitting);
         
         new Thread(() -> {
             try {
@@ -139,23 +139,23 @@ public class ProofSubmissionActivity extends AppCompatActivity {
                 
                 runOnUiThread(() -> {
                     submitButton.setEnabled(true);
-                    submitButton.setText("提交证明材料");
+                    submitButton.setText(R.string.activity_proof_submission_submit_materials);
                     
                     if (result != null && result.contains("success")) {
-                        Toast.makeText(this, "证明材料提交成功！", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, R.string.proof_submission_toast_success, Toast.LENGTH_LONG).show();
                         clearForm();
                         // 重新加载用户信息，恢复花名、代表作等字段
                         loadUserInfo();
                     } else {
-                        Toast.makeText(this, "提交失败: " + result, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, getString(R.string.proof_submission_toast_failed_prefix) + " " + result, Toast.LENGTH_LONG).show();
                     }
                 });
             } catch (Exception e) {
                 Log.e("ProofSubmission", "提交失败", e);
                 runOnUiThread(() -> {
                     submitButton.setEnabled(true);
-                    submitButton.setText("提交证明材料");
-                    Toast.makeText(this, "提交失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    submitButton.setText(R.string.activity_proof_submission_submit_materials);
+                    Toast.makeText(this, getString(R.string.proof_submission_toast_failed_prefix) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
             }
         }).start();
@@ -165,7 +165,7 @@ public class ProofSubmissionActivity extends AppCompatActivity {
         // 不清空花名、代表作和展示设置，因为这些是用户的持久信息
         authorInfoEditText.setText("");
         eventDescriptionEditText.setText("");
-        selectedFileText.setText("未选择文件");
+        selectedFileText.setText(R.string.activity_proof_submission_no_file);
         selectedFileUri = null;
         selectedFilePath = null;
         selectedFileName = null;
@@ -263,17 +263,17 @@ public class ProofSubmissionActivity extends AppCompatActivity {
             } catch (java.net.ConnectException e) {
                 Log.e("ProofSubmission", "连接失败: 无法连接到服务器，请检查服务器是否运行", e);
                 runOnUiThread(() -> {
-                    Toast.makeText(this, "无法连接到服务器，请检查网络设置", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.proof_submission_toast_network_failed, Toast.LENGTH_SHORT).show();
                 });
             } catch (java.net.SocketTimeoutException e) {
                 Log.e("ProofSubmission", "连接超时: 服务器响应超时", e);
                 runOnUiThread(() -> {
-                    Toast.makeText(this, "服务器响应超时", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.proof_and_nft_toast_response_timeout, Toast.LENGTH_SHORT).show();
                 });
             } catch (Exception e) {
                 Log.e("ProofSubmission", "加载用户信息异常: " + e.getClass().getName() + " - " + e.getMessage(), e);
                 runOnUiThread(() -> {
-                    Toast.makeText(this, "加载用户信息失败: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.proof_submission_toast_user_info_failed) + " " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
             }
             Log.d("ProofSubmission", "==== 用户信息加载流程结束 ====");
@@ -315,11 +315,11 @@ public class ProofSubmissionActivity extends AppCompatActivity {
                     selectedFileName = getFileName(selectedFileUri);
                     // 复制文件到应用内部存储
                     selectedFilePath = copyFileToInternalStorage(selectedFileUri);
-                    selectedFileText.setText("已选择文件: " + selectedFileName);
+                    selectedFileText.setText(selectedFileText.getContext().getString(R.string.proof_submission_file_selected) + " " + selectedFileName);
                     Log.d("ProofSubmission", "选择文件: " + selectedFileName);
                 } catch (Exception e) {
                     Log.e("ProofSubmission", "文件处理失败", e);
-                    Toast.makeText(this, "文件处理失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.proof_submission_toast_file_failed, Toast.LENGTH_SHORT).show();
                 }
             }
         }

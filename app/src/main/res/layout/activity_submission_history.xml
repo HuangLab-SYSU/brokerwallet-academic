@@ -21,7 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="📋 我的提交历史"
+            android:text="@string/activity_submission_history_title"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/black" />
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="⏳ 正在加载提交历史..."
+            android:text="@string/activity_submission_history_loading"
             android:textSize="16sp"
             android:textColor="@color/grey_60"
             android:visibility="gone" />
@@ -68,7 +68,7 @@
                 android:id="@+id/errorText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="❌ 加载失败"
+                android:text="@string/activity_submission_history_detail_load"
                 android:textSize="16sp"
                 android:textColor="@color/grey_60"
                 android:gravity="center"
@@ -78,7 +78,7 @@
                 android:id="@+id/retryButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🔄 重试"
+                android:text="@string/activity_submission_history_detail_retry"
                 android:textSize="14sp"
                     android:textColor="@color/colorPrimary"
                 android:padding="12dp"
@@ -108,7 +108,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="还没有提交记录"
+                android:text="@string/activity_submission_history_no_records"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:layout_marginBottom="8dp" />
@@ -116,7 +116,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="去提交您的第一个证明材料吧！"
+                android:text="@string/activity_submission_history_first_proof"
                 android:textSize="14sp"
                 android:textColor="@color/grey_60" />
 

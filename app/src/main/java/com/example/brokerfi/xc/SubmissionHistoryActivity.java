@@ -212,7 +212,7 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         isLoading = false;
                         currentPage--; // 回退页码
-                        Toast.makeText(SubmissionHistoryActivity.this, "加载更多失败: " + error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SubmissionHistoryActivity.this, SubmissionHistoryActivity.this.getString(R.string.submission_history_toast_load_more_prefix) + " " + error, Toast.LENGTH_SHORT).show();
                     });
                 }
             });
@@ -310,13 +310,13 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
                 
             } else {
                 currentPage--; // 回退页码
-                Toast.makeText(this, "加载更多失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.submission_history_toast_load_more_plain, Toast.LENGTH_SHORT).show();
             }
             
         } catch (JSONException e) {
             Log.e(TAG, "解析加载更多响应失败", e);
             currentPage--; // 回退页码
-            Toast.makeText(this, "数据解析失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.submission_detail_error_parse_failed, Toast.LENGTH_SHORT).show();
         }
     }
     

@@ -46,14 +46,14 @@ public class WelcomeBackActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
-                .setMessage("你确定要退出应用吗？")
+                .setMessage(R.string.welcome_back_message_confirm_exit_app)
                 .setCancelable(false)
-                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.welcome_back_button_yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finishAffinity();
                     }
                 })
-                .setNegativeButton("否", null)
+                .setNegativeButton(R.string.welcome_back_button_no, null)
                 .show();
     }
 
@@ -72,7 +72,7 @@ public class WelcomeBackActivity extends AppCompatActivity {
 
                 startActivity(intent);
             }else{
-                Toast.makeText(WelcomeBackActivity.this, "密码错误！", Toast.LENGTH_LONG).show();
+                Toast.makeText(WelcomeBackActivity.this, R.string.confirm_password_toast_wrong_password, Toast.LENGTH_LONG).show();
             }
 
 

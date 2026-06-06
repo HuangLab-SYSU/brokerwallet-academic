@@ -69,7 +69,7 @@ public class NotificationActivity extends AppCompatActivity {
                 
 
                 if (!networkErrorShown) {
-                    Toast.makeText(NotificationActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NotificationActivity.this, R.string.emulator_toast_network_failed, Toast.LENGTH_SHORT).show();
                     networkErrorShown = true;
                 }
             }

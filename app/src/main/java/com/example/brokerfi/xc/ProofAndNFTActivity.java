@@ -135,16 +135,16 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void showFileHelpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("💡 File Selection Tips");
-        builder.setMessage("To select files from apps like WeChat, follow these steps:\n\n" +
-                "1️⃣ Find the file you want to upload in WeChat\n" +
-                "2️⃣ Long press the file, select 「Forward」\n" +
-                "3️⃣ Choose 「Save to Files」 or 「More」\n" +
-                "4️⃣ Save the file to phone storage\n" +
-                "5️⃣ Return to this page, click 「Select Proof File」 to find the saved file\n\n" +
-                "💡 Tip: Most app files can be selected by 「Share → Save Locally」.");
+        builder.setTitle(R.string.proof_and_nft_title_file_selection_tips);
+        builder.setMessage(getString(R.string.proof_and_nft_message_file_steps_intro) + "\n\n" +
+                getString(R.string.proof_and_nft_message_file_step_find) + "\n" +
+                getString(R.string.proof_and_nft_message_file_step_forward) + "\n" +
+                getString(R.string.proof_and_nft_message_choose_save_files) + "\n" +
+                getString(R.string.proof_and_nft_message_save_phone_storage) + "\n" +
+                getString(R.string.proof_and_nft_message_file_step_select) + "\n\n" +
+                getString(R.string.proof_and_nft_message_save_locally_tip));
         
-        builder.setPositiveButton("Got it", (dialog, which) -> {
+        builder.setPositiveButton(R.string.proof_and_nft_button_got_it, (dialog, which) -> {
             dialog.dismiss();
         });
         
@@ -157,7 +157,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void selectFile() {
         if (selectedFileUris.size() >= MAX_FILE_COUNT) {
-            Toast.makeText(this, "Maximum " + MAX_FILE_COUNT + " files allowed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.proof_and_nft_toast_maximum) + " " + MAX_FILE_COUNT + " " + getString(R.string.proof_and_nft_files_allowed), Toast.LENGTH_SHORT).show();
             return;
         }
         
@@ -173,13 +173,13 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void showImageHelpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("💡 NFT Image Guide");
-        builder.setMessage("Image is optional. If you don't upload, you may receive a unique NFT crafted by the DAO!\n\n" +
-                "💎 Upload Image: Use your photo as NFT\n" +
-                "🎨 No Upload: Get a DAO-designed exclusive NFT\n\n" +
-                "Both options are great, choose your preferred way!");
+        builder.setTitle(R.string.proof_and_nft_title_nft_image_guide);
+        builder.setMessage(getString(R.string.proof_and_nft_message_optional_image) + "\n\n" +
+                getString(R.string.proof_and_nft_message_upload_image_tip) + "\n" +
+                getString(R.string.proof_and_nft_message_dao_image_tip) + "\n\n" +
+                getString(R.string.proof_and_nft_message_choose_option_tip));
         
-        builder.setPositiveButton("Got it", (dialog, which) -> {
+        builder.setPositiveButton(R.string.proof_and_nft_button_got_it, (dialog, which) -> {
             dialog.dismiss();
         });
         
@@ -192,7 +192,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void selectImage() {
         if (selectedImageUri != null) {
-            Toast.makeText(this, "Only 1 image allowed, please delete the existing one first", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.proof_and_nft_toast_one_image_limit, Toast.LENGTH_SHORT).show();
             return;
         }
         showImageSourceDialog();
@@ -203,21 +203,21 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void showImageSourceDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select Image Source");
-        builder.setMessage("Please choose where to select your NFT photo:");
+        builder.setTitle(R.string.proof_and_nft_title_select_image_source);
+        builder.setMessage(R.string.proof_and_nft_message_select_source);
         
         // From gallery
-        builder.setPositiveButton("🖼️ Gallery", (dialog, which) -> {
+        builder.setPositiveButton(R.string.proof_and_nft_button_gallery, (dialog, which) -> {
             selectImageFromGallery();
         });
         
         // Take photo (with document scanning)
-        builder.setNeutralButton("📷 Camera Scan", (dialog, which) -> {
+        builder.setNeutralButton(R.string.proof_and_nft_button_camera_scan, (dialog, which) -> {
             checkCameraPermissionAndTakePhoto();
         });
         
         // Cancel
-        builder.setNegativeButton("Cancel", (dialog, which) -> {
+        builder.setNegativeButton(R.string.proof_and_nft_button_cancel, (dialog, which) -> {
             dialog.dismiss();
         });
         
@@ -265,7 +265,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
                 startActivityForResult(takePictureIntent, REQUEST_CODE_CAMERA);
             }
         } else {
-            Toast.makeText(this, "无法访问摄像头", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.proof_and_nft_toast_camera_access_failed, Toast.LENGTH_SHORT).show();
         }
     }
     
@@ -289,14 +289,14 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void submitProof() {
         if (selectedFileUris.isEmpty()) {
-            Toast.makeText(this, "请先选择证明文件（必填项）", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.proof_and_nft_toast_select_proof_file, Toast.LENGTH_SHORT).show();
             return;
         }
         
         // 获取当前钱包地址
         String walletAddress = getCurrentWalletAddress();
         if (walletAddress == null) {
-            Toast.makeText(this, "无法获取当前钱包地址，请检查钱包状态", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.proof_and_nft_toast_wallet_status, Toast.LENGTH_SHORT).show();
             return;
         }
         
@@ -306,7 +306,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         boolean showRepresentativeWork = showRepresentativeWorkYes.isChecked();
         
         // Show loading state
-        submitProofButton.setText("Submitting...");
+        submitProofButton.setText(R.string.proof_and_nft_submitting);
         submitProofButton.setEnabled(false);
         
         Log.d("ProofSubmit", "一体化提交 - 钱包地址: " + walletAddress + ", 花名: " + displayName + ", 展示代表作: " + showRepresentativeWork);
@@ -352,14 +352,14 @@ public class ProofAndNFTActivity extends AppCompatActivity {
     private void uploadNftImage() {
         if (selectedImageUri != null) {
             // Call NFT image upload API here
-            Toast.makeText(this, "Uploading NFT image...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.proof_and_nft_toast_uploading_nft_image, Toast.LENGTH_SHORT).show();
             
             // Simulate upload success
             new Thread(() -> {
                 try {
                     Thread.sleep(1000); // Simulate network delay
                     runOnUiThread(() -> {
-                        Toast.makeText(ProofAndNFTActivity.this, "NFT image uploaded successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProofAndNFTActivity.this, R.string.proof_and_nft_toast_image_uploaded, Toast.LENGTH_SHORT).show();
                         resetSubmitButton();
                         showSuccessMessage();
                     });
@@ -395,9 +395,9 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         message += "\nPlease wait patiently for the review result!";
         
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
-        builder.setTitle("✅ Submission Success");
+        builder.setTitle(R.string.proof_and_nft_title_submission_success);
         builder.setMessage(message);
-        builder.setPositiveButton("OK", (dialog, which) -> {
+        builder.setPositiveButton(R.string.main_button_ok, (dialog, which) -> {
             dialog.dismiss();
             // Option to return to main page or clear form
             clearForm();
@@ -431,12 +431,12 @@ public class ProofAndNFTActivity extends AppCompatActivity {
                 return SecurityUtil.GetAddress(privateKey);
             } else {
                 Log.e("WalletAddress", "Cannot get current private key");
-                Toast.makeText(this, "Cannot get wallet address, please check wallet status", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.proof_and_nft_toast_wallet_failed, Toast.LENGTH_SHORT).show();
                 return null;
             }
         } catch (Exception e) {
             Log.e("WalletAddress", "Failed to get wallet address", e);
-            Toast.makeText(this, "Failed to get wallet address: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.community_toast_wallet_address_failed) + " " + e.getMessage(), Toast.LENGTH_SHORT).show();
             return null;
         }
     }
@@ -445,7 +445,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      * 重置提交按钮状态
      */
     private void resetSubmitButton() {
-        submitProofButton.setText("Submit");
+        submitProofButton.setText(R.string.proof_and_nft_submit);
         submitProofButton.setEnabled(true);
     }
     
@@ -493,7 +493,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         int totalCount = selectedFileUris.size() + newFiles.size();
         if (totalCount > MAX_FILE_COUNT) {
             int allowedCount = MAX_FILE_COUNT - selectedFileUris.size();
-            Toast.makeText(this, "Maximum " + MAX_FILE_COUNT + " files allowed, you can add " + allowedCount + " more", 
+            Toast.makeText(this, getString(R.string.proof_and_nft_toast_maximum) + " " + MAX_FILE_COUNT + " " + getString(R.string.proof_and_nft_toast_files_remaining) + " " + allowedCount + " " + getString(R.string.proof_and_nft_toast_more),
                     Toast.LENGTH_SHORT).show();
             // Only add allowed number of files
             for (int i = 0; i < allowedCount && i < newFiles.size(); i++) {
@@ -504,7 +504,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         }
         
         updateFileDisplay();
-        Toast.makeText(this, "Selected " + newFiles.size() + " file(s)", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.proof_and_nft_toast_selected) + " " + newFiles.size() + " " + getString(R.string.proof_and_nft_file_s), Toast.LENGTH_SHORT).show();
     }
     
     /**
@@ -527,7 +527,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void processImageWithDocumentScanning(Uri imageUri) {
         // Show processing hint
-        Toast.makeText(this, "Optimizing image...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.proof_and_nft_toast_optimizing_image, Toast.LENGTH_SHORT).show();
         
         // 在后台线程处理图片
         new Thread(() -> {
@@ -541,23 +541,23 @@ public class ProofAndNFTActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         if (scannedUri != null) {
                             setSelectedImage(scannedUri);
-                            Toast.makeText(this, "📄 Document scanning completed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, R.string.proof_and_nft_toast_scan_completed, Toast.LENGTH_SHORT).show();
                         } else {
                             setSelectedImage(imageUri);
-                            Toast.makeText(this, "Scan optimization failed, using original image", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, R.string.proof_and_nft_toast_scan_opt_failed, Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
                     runOnUiThread(() -> {
                         setSelectedImage(imageUri);
-                        Toast.makeText(this, "Scan optimization failed, using original image", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.proof_and_nft_toast_scan_opt_failed, Toast.LENGTH_SHORT).show();
                     });
                 }
             } catch (Exception e) {
                 Log.e("DocumentScan", "Error processing image", e);
                 runOnUiThread(() -> {
                     setSelectedImage(imageUri);
-                    Toast.makeText(this, "Scan processing error, using original image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.proof_and_nft_toast_scan_error, Toast.LENGTH_SHORT).show();
                 });
             }
         }).start();
@@ -590,7 +590,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
     private void setSelectedImage(Uri uri) {
         selectedImageUri = uri;
         updateImageDisplay();
-        Toast.makeText(this, "NFT image selected successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.proof_and_nft_toast_image_selected, Toast.LENGTH_SHORT).show();
     }
     
     /**
@@ -631,7 +631,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         if (selectedImageUri == null) return;
         
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Image Preview");
+        builder.setTitle(R.string.proof_and_nft_title_image_preview);
         
         // Create ImageView to display image
         ImageView imageView = new ImageView(this);
@@ -645,7 +645,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         imageView.setMaxHeight(maxSize);
         
         builder.setView(imageView);
-        builder.setPositiveButton("Close", (dialog, which) -> dialog.dismiss());
+        builder.setPositiveButton(R.string.proof_and_nft_button_close, (dialog, which) -> dialog.dismiss());
         
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -657,7 +657,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
     private void removeImage() {
         selectedImageUri = null;
         updateImageDisplay();
-        Toast.makeText(this, "Image deleted", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.proof_and_nft_toast_image_deleted, Toast.LENGTH_SHORT).show();
     }
     
     /**
@@ -696,7 +696,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         if (index >= 0 && index < selectedFileUris.size()) {
             selectedFileUris.remove(index);
             updateFileDisplay();
-            Toast.makeText(this, "File deleted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.proof_and_nft_toast_file_deleted, Toast.LENGTH_SHORT).show();
         }
     }
     
@@ -706,9 +706,9 @@ public class ProofAndNFTActivity extends AppCompatActivity {
     private void updateFileCountHint() {
         int currentCount = selectedFileUris.size();
         if (currentCount == 0) {
-            fileCountHint.setText("💡 Maximum " + MAX_FILE_COUNT + " files allowed");
+            fileCountHint.setText(fileCountHint.getContext().getString(R.string.proof_and_nft_maximum) + " " + MAX_FILE_COUNT + " " + fileCountHint.getContext().getString(R.string.proof_and_nft_files_allowed));
         } else {
-            fileCountHint.setText("💡 Selected " + currentCount + "/" + MAX_FILE_COUNT + " file(s)");
+            fileCountHint.setText(fileCountHint.getContext().getString(R.string.proof_and_nft_selected) + " " + currentCount + "/" + MAX_FILE_COUNT + " " + fileCountHint.getContext().getString(R.string.proof_and_nft_file_s));
         }
     }
     
@@ -760,7 +760,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 takePhoto();
             } else {
-                Toast.makeText(this, "Camera permission required to take photos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.proof_and_nft_toast_camera_permission, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -848,16 +848,16 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void showDetailedSuccessDialog(String submissionId, String status, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("✅ Submission Success")
-               .setMessage("Submission ID: " + submissionId + "\n" +
-                          "Current Status: " + getStatusDescription(status) + "\n" +
-                          "Details: " + message + "\n\n" +
-                          "You can check review progress in Medal Ranking")
-               .setPositiveButton("View Ranking", (dialog, which) -> {
+        builder.setTitle(R.string.proof_and_nft_title_submission_success)
+               .setMessage(getString(R.string.proof_and_nft_message_submission_id) + " " + submissionId + "\n" +
+                          getString(R.string.proof_and_nft_message_current_status) + " " + getStatusDescription(status) + "\n" +
+                          getString(R.string.proof_and_nft_message_details) + " " + message + "\n\n" +
+                          getString(R.string.proof_and_nft_message_check_ranking))
+               .setPositiveButton(R.string.proof_and_nft_button_view_ranking, (dialog, which) -> {
                    // Jump to medal ranking page
                    openMedalRankingPage();
                })
-               .setNegativeButton("OK", null)
+               .setNegativeButton(R.string.main_button_ok, null)
                .setCancelable(false)
                .show();
     }
@@ -867,12 +867,12 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void showSimpleSuccessDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("✅ Submission Success")
+        builder.setTitle(R.string.proof_and_nft_title_submission_success)
                .setMessage(message)
-               .setPositiveButton("View Ranking", (dialog, which) -> {
+               .setPositiveButton(R.string.proof_and_nft_button_view_ranking, (dialog, which) -> {
                    openMedalRankingPage();
                })
-               .setNegativeButton("OK", null)
+               .setNegativeButton(R.string.main_button_ok, null)
                .setCancelable(false)
                .show();
     }
@@ -884,11 +884,11 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("❌ " + title)
                .setMessage(message)
-               .setPositiveButton("Retry", (dialog, which) -> {
+               .setPositiveButton(R.string.proof_and_nft_button_retry, (dialog, which) -> {
                    // Can trigger resubmission here
                    dialog.dismiss();
                })
-               .setNegativeButton("Cancel", null)
+               .setNegativeButton(R.string.proof_and_nft_button_cancel, null)
                .setCancelable(true)
                .show();
     }
@@ -950,7 +950,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         updateImageDisplay();
         updateFileCountHint();
         
-        Toast.makeText(this, "Form reset", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.proof_and_nft_toast_form_reset, Toast.LENGTH_SHORT).show();
     }
     
     /**
@@ -1058,12 +1058,12 @@ public class ProofAndNFTActivity extends AppCompatActivity {
             } catch (java.net.ConnectException e) {
                 Log.e("ProofAndNFT", "连接失败: 无法连接到服务器", e);
                 runOnUiThread(() -> {
-                    Toast.makeText(this, "无法连接到服务器", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.proof_and_nft_toast_server_connect_failed, Toast.LENGTH_SHORT).show();
                 });
             } catch (java.net.SocketTimeoutException e) {
                 Log.e("ProofAndNFT", "连接超时: 服务器响应超时", e);
                 runOnUiThread(() -> {
-                    Toast.makeText(this, "服务器响应超时", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.proof_and_nft_toast_response_timeout, Toast.LENGTH_SHORT).show();
                 });
             } catch (Exception e) {
                 Log.e("ProofAndNFT", "加载用户信息异常: " + e.getClass().getName() + " - " + e.getMessage(), e);

@@ -11,7 +11,7 @@
         android:id="@+id/footerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="下拉刷新更多"
+        android:text="@string/item_nft_footer_pull_refresh_more"
         android:textSize="14sp"
         android:textColor="@color/grey_60"
         android:layout_marginBottom="8dp" />

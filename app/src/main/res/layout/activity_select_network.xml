@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:paddingHorizontal="16dp"
-        android:text="Select a network"
+        android:text="@string/activity_select_network_select_network"
         android:fontFamily="@font/work_sans_black"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:paddingHorizontal="16dp"
-        android:text="Explain what is a network here"
+        android:text="@string/activity_select_network_network_explain"
         android:textSize="16sp"
         android:textColor="#000000"/>
 
@@ -62,7 +62,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
                     android:layout_toRightOf="@+id/sendicon"
-                    android:text="Main network"
+                    android:text="@string/activity_select_network_main_network"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
@@ -98,7 +98,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
                     android:layout_toRightOf="@+id/receiveicon"
-                    android:text="Third-party network"
+                    android:text="@string/activity_select_network_third_party"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
@@ -134,7 +134,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
                     android:layout_toRightOf="@+id/activityicon"
-                    android:text="Test network"
+                    android:text="@string/activity_select_network_test_network"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
@@ -170,7 +170,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
                     android:layout_toRightOf="@+id/seticon"
-                    android:text="Local dev network"
+                    android:text="@string/activity_select_network_local_dev"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
@@ -192,7 +192,7 @@
         android:id="@+id/add_network"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="Add network"
+        android:text="@string/activity_select_network_add_network"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textColor="#FFFFFF"

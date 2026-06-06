@@ -291,8 +291,8 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(()->{
                             new AlertDialog.Builder(this)
                                     .setTitle("")  // 标题
-                                    .setMessage("You have a new message: " + finalTitle + " Please check it out.")  // 内容
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    .setMessage(getString(R.string.main_message_you_have_a_new_message) + " " + finalTitle + " " + getString(R.string.main_message_please_check_it_out))  // 内容
+                                    .setPositiveButton(R.string.main_button_ok, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             StorageUtil.saveNoticeId(MainActivity.this,String.valueOf(finalMaxid));
@@ -490,7 +490,7 @@ public class MainActivity extends AppCompatActivity {
         receive.setOnClickListener(view -> {
             //IsNewPrivateKeyFormat
             if (!SecurityUtil.isNewPrivateKeyFormat(StorageUtil.getCurrentPrivatekey(MainActivity.this))) {
-                Toast.makeText(MainActivity.this, "Receive is no longer available for old accounts.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.main_toast_receive_old_account, Toast.LENGTH_SHORT).show();
                 return;
             }
             
@@ -502,7 +502,7 @@ public class MainActivity extends AppCompatActivity {
 
         buy.setOnClickListener(view -> {
             if (!SecurityUtil.isNewPrivateKeyFormat(StorageUtil.getCurrentPrivatekey(MainActivity.this))) {
-                Toast.makeText(MainActivity.this, "Faucet is no longer available for old accounts.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.main_toast_faucet_old_account, Toast.LENGTH_SHORT).show();
                 return;
             }
             
@@ -514,7 +514,7 @@ public class MainActivity extends AppCompatActivity {
 
         send.setOnClickListener(view -> {
             if (!SecurityUtil.isNewPrivateKeyFormat(StorageUtil.getCurrentPrivatekey(MainActivity.this))) {
-                Toast.makeText(MainActivity.this, "Send is no longer available for old accounts.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.main_toast_send_old_account, Toast.LENGTH_SHORT).show();
                 return;
             }
             
@@ -526,7 +526,7 @@ public class MainActivity extends AppCompatActivity {
 
         swap.setOnClickListener(view -> {
             if (!SecurityUtil.isNewPrivateKeyFormat(StorageUtil.getCurrentPrivatekey(MainActivity.this))) {
-                Toast.makeText(MainActivity.this, "Swap is no longer available for old accounts.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.main_toast_swap_old_account, Toast.LENGTH_SHORT).show();
                 return;
             }
             
@@ -538,7 +538,7 @@ public class MainActivity extends AppCompatActivity {
 
         broker.setOnClickListener(view -> {
             if (!SecurityUtil.isNewPrivateKeyFormat(StorageUtil.getCurrentPrivatekey(MainActivity.this))) {
-                Toast.makeText(MainActivity.this, "Broker is no longer available for old accounts.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.main_toast_broker_old_account, Toast.LENGTH_SHORT).show();
                 return;
             }
             
@@ -708,8 +708,8 @@ public class MainActivity extends AppCompatActivity {
                     if(status1.length()>=10){
                         status1 = status1.substring(0,10);
                     }
-                    accountstate.setText(status1+" BKC");
-                    tsv_dollar.setText("Address: 0x"+addr);
+                    accountstate.setText(status1+" " + accountstate.getContext().getString(R.string.after_broker_bkc));
+                    tsv_dollar.setText(tsv_dollar.getContext().getString(R.string.main_address_0x)+addr);
                 }
 
             }
@@ -765,10 +765,10 @@ public class MainActivity extends AppCompatActivity {
         }
         
         disclaimerDialog = new AlertDialog.Builder(this)
-                .setTitle("免责声明")
+                .setTitle(R.string.main_title)
                 .setMessage(DISCLAIMER_TEXT)
                 .setCancelable(false)
-                .setPositiveButton("Confirm", (dialog, which) -> {
+                .setPositiveButton(R.string.main_button_confirm, (dialog, which) -> {
                     disclaimerDialog = null;
                 })
                 .create();

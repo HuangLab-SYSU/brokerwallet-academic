@@ -62,7 +62,7 @@ public class EmulatorActivity extends AppCompatActivity {
 
                 // ✅ 使用 loadDataWithBaseURL
                 view.loadDataWithBaseURL("file:///android_asset/", customErrorHtml, "text/html", "utf-8", null);
-                Toast.makeText(EmulatorActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EmulatorActivity.this, R.string.emulator_toast_network_failed, Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent();
 //                intent.setClass(NewsActivity.this, MainActivity.class);
 //                startActivity(intent);

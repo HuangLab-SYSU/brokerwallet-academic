@@ -25,7 +25,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentStart="true"
-                android:text="📄\nProof\nSubmit"
+                android:text="@string/activity_medal_ranking_proof_submit"
                 android:textSize="11sp"
                 android:textColor="@color/black"
                 android:background="@drawable/custom_light_grey_background"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
-                android:text="🏆 Medal Ranking"
+                android:text="@string/activity_medal_ranking_medal_ranking"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Loading..."
+                    android:text="@string/loading"
                     android:textSize="16sp"
                     android:textColor="@color/grey_60"
                     android:visibility="gone" />
@@ -87,7 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Load Failed"
+                    android:text="@string/load_failed"
                     android:textSize="16sp"
                     android:textColor="@color/red_127"
                     android:visibility="gone" />
@@ -112,7 +112,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="No Ranking Data"
+                        android:text="@string/activity_medal_ranking_no_ranking_data"
                         android:textSize="18sp"
                         android:textColor="@color/grey_60"
                         android:layout_marginBottom="8dp" />
@@ -120,7 +120,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Submit proof to earn medals!"
+                        android:text="@string/activity_medal_ranking_submit_proof"
                         android:textSize="14sp"
                         android:textColor="@color/grey_60" />
 
@@ -152,7 +152,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="👤 My"
+                android:text="@string/activity_medal_ranking_my"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:background="@drawable/custom_green_background"
@@ -167,7 +167,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="📊 Global"
+                android:text="@string/activity_medal_ranking_global"
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:background="@drawable/custom_green_background"

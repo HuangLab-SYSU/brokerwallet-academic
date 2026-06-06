@@ -31,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/work_sans_black"
-                    android:text="Mint NFT"
+                    android:text="@string/mint_nft"
                     android:textColor="#000000"
                     android:textSize="30sp"
                     android:textStyle="bold" />
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/minttitle"
                     android:layout_marginTop="8dp"
-                    android:text="Upload an image to create your unique NFT."
+                    android:text="@string/activity_mint_upload_unique_nft"
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
@@ -80,9 +80,8 @@
                         android:background="@drawable/custom_button_bg_gray"
                         android:clickable="true"
                         android:gravity="center"
-                        android:onClick="remindMeLater"
                         android:padding="4dp"
-                        android:text="Camera"
+                        android:text="@string/activity_mint_camera"
                         android:textAllCaps="false"
                         android:textColor="#ffffff"
                         android:textSize="16dp" />
@@ -96,9 +95,8 @@
                         android:background="@drawable/custom_button_bg_gray"
                         android:clickable="true"
                         android:gravity="center"
-                        android:onClick="nextAction"
                         android:padding="4dp"
-                        android:text="Album"
+                        android:text="@string/activity_mint_album"
                         android:textAllCaps="false"
                         android:textColor="#ffffff"
                         android:textSize="16dp" />
@@ -120,7 +118,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="NFT name"
+                            android:text="@string/activity_mint_nft_name"
                             android:textColor="#000000"
                             android:textSize="16sp" />
 
@@ -139,7 +137,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="NFT shares"
+                            android:text="@string/activity_mint_nft_shares"
                             android:textColor="#000000"
                             android:textSize="16sp" />
 
@@ -147,7 +145,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Create shared NFT:\nEnter shares (1=sole owner, >1 splits to X shares)"
+                            android:text="@string/activity_mint_shared_nft_shares"
                             android:textColor="#6B6B6B"
                             android:textSize="15sp" />
 
@@ -169,7 +167,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="*This platform implements 'fractional NFT ownership':\n- Divide NFTs into multiple shares\n- Enable multi-user co-ownership\n- Allow per-batch pricing"
+                            android:text="@string/activity_mint_fractional_ownership"
                             android:textColor="#6B6B6B"
                             android:textSize="13sp" />
 
@@ -177,7 +175,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:text="Gas Limit"
+                            android:text="@string/activity_mint_gas_limit"
                             android:textColor="#000000"
                             android:textSize="16sp" />
 
@@ -228,9 +226,8 @@
                         android:background="@drawable/custom_button_bg_white"
                         android:clickable="true"
                         android:gravity="center"
-                        android:onClick="remindMeLater"
                         android:padding="4dp"
-                        android:text="Cancel"
+                        android:text="@string/activity_mint_cancel"
                         android:textAllCaps="false"
                         android:textSize="16dp" />
 
@@ -243,9 +240,8 @@
                         android:background="@drawable/custom_button_background"
                         android:clickable="true"
                         android:gravity="center"
-                        android:onClick="nextAction"
                         android:padding="4dp"
-                        android:text="Mint"
+                        android:text="@string/activity_mint_mint"
                         android:textAllCaps="false"
                         android:textColor="#ffffff"
                         android:textSize="16dp" />

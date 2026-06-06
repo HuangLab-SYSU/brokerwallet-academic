@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add a network"
+            android:text="@string/activity_add_network_add_a_network"
             android:fontFamily="@font/work_sans_black"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Only add custom networks you trust"
+            android:text="@string/activity_add_network_trusted_networks"
             android:textSize="16sp"
             android:textColor="#000000"/>
 
@@ -59,7 +59,7 @@
                     android:id="@+id/textview1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Network name"
+                    android:text="@string/activity_add_network_network_name"
                     android:textSize="16sp"
                     android:textColor="#000000"/>
 
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/edittext1"
                     android:layout_marginTop="8dp"
-                    android:text="New RPC URL"
+                    android:text="@string/activity_add_network_new_rpc_url"
                     android:textSize="16sp"
                     android:textColor="#000000"/>
 
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/edittext2"
                     android:layout_marginTop="8dp"
-                    android:text="Chain ID"
+                    android:text="@string/activity_add_network_chain_id"
                     android:textSize="16sp"
                     android:textColor="#000000"/>
 
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/edittext2"
                     android:layout_marginTop="8dp"
-                    android:text="Currency symbol"
+                    android:text="@string/activity_add_network_currency_symbol"
                     android:textSize="16sp"
                     android:textColor="#000000"/>
 
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/edittext2"
                     android:layout_marginTop="8dp"
-                    android:text="Block explorer URL (Optional)"
+                    android:text="@string/activity_add_network_block_explorer_url"
                     android:textSize="16sp"
                     android:textColor="#000000"/>
 
@@ -181,14 +181,13 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Cancel"
+                android:text="@string/activity_add_network_cancel"
                 android:textSize="16dp"
                 android:textAllCaps="false"
                 android:background="@drawable/custom_button_bg_white"
                 android:padding="4dp"
                 android:gravity="center"
                 android:clickable="true"
-                android:onClick="remindMeLater"
                 android:layout_marginRight="16dp"/>
 
             <!-- 第二个按钮 -->
@@ -197,7 +196,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Save"
+                android:text="@string/activity_add_network_save"
                 android:textAllCaps="false"
                 android:textSize="16dp"
                 android:textColor="#ffffff"
@@ -205,7 +204,7 @@
                 android:padding="4dp"
                 android:gravity="center"
                 android:clickable="true"
-                android:onClick="nextAction" />
+                />
 
         </LinearLayout>
 

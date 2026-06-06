@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="🎨 NFT铸造"
+                android:text="@string/activity_nft_minting_title"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NFT名称:"
+                android:text="@string/activity_nft_minting_label_nft_name"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="16dp" />
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="请输入NFT名称"
+                android:hint="@string/activity_nft_minting_hint_name"
                 android:background="@drawable/custom_edittext_border"
                 android:padding="12dp" />
 
@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NFT描述:"
+                android:text="@string/activity_nft_minting_description_label"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="16dp" />
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginTop="8dp"
-                android:hint="请输入NFT描述"
+                android:hint="@string/activity_nft_minting_hint_description"
                 android:background="@drawable/custom_edittext_border"
                 android:padding="12dp"
                 android:gravity="top"
@@ -70,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="图片类型:"
+                android:text="@string/activity_nft_minting_label_image_type"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="16dp" />
@@ -86,7 +86,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="选择图片:"
+                android:text="@string/activity_nft_minting_label_select_image"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="16dp" />
@@ -96,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="选择图片"
+                android:text="@string/activity_nft_minting_select_image"
                 android:background="@drawable/custom_button_background"
                 android:textColor="@color/white" />
 
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="未选择图片"
+                android:text="@string/activity_nft_minting_no_image_selected"
                 android:textSize="14sp"
                 android:textColor="@color/grey_60"
                 android:gravity="center" />
@@ -126,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="铸造NFT"
+                android:text="@string/activity_nft_minting_button_mint_nft"
                 android:background="@drawable/custom_green_background"
                 android:textColor="@color/white" />
 

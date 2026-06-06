@@ -100,7 +100,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         // 校验用户名
         if (TextUtils.isEmpty(username)) {
-            Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.edit_profile_toast_empty_username, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -118,7 +118,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     // 上传头像 → 成功后更新用户信息
     private void uploadAvatarThenUpdate(String username) {
-        runOnUiThread(() -> Toast.makeText(this, "正在上传头像...", Toast.LENGTH_SHORT).show());
+        runOnUiThread(() -> Toast.makeText(this, R.string.edit_profile_toast_uploading_avatar, Toast.LENGTH_SHORT).show());
 
         new CosApi().getTempCredential(new ApiCallback<CosCredentialDTO>() {
             @Override
@@ -150,7 +150,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     @Override
                     public void onFail(String error) {
                         runOnUiThread(() -> {
-                            Toast.makeText(EditProfileActivity.this, "上传失败：" + error, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditProfileActivity.this, EditProfileActivity.this.getString(R.string.edit_profile_toast_upload_failed) + error, Toast.LENGTH_SHORT).show();
                             btnSave.setEnabled(true);
                         });
                     }
@@ -160,7 +160,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onFail(String msg) {
                 runOnUiThread(() -> {
-                    Toast.makeText(EditProfileActivity.this, "获取密钥失败：" + msg, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProfileActivity.this, EditProfileActivity.this.getString(R.string.edit_profile_toast_failed_to_get_key) + msg, Toast.LENGTH_SHORT).show();
                     btnSave.setEnabled(true);
                 });
             }
@@ -174,7 +174,7 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onSuccess(ProfileHeaderDTO data) {
                 runOnUiThread(() -> {
                     Log.d("COS_DEBUG", "图片已入库");
-                    Toast.makeText(EditProfileActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProfileActivity.this, R.string.edit_profile_toast_save_successful, Toast.LENGTH_SHORT).show();
                     finish();
                 });
             }
@@ -182,7 +182,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onFail(String errorMsg) {
                 runOnUiThread(() -> {
-                    Toast.makeText(EditProfileActivity.this, "保存失败：" + errorMsg, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProfileActivity.this, EditProfileActivity.this.getString(R.string.edit_profile_toast_save_failed) + errorMsg, Toast.LENGTH_SHORT).show();
                     btnSave.setEnabled(true);
                 });
             }
@@ -215,14 +215,14 @@ public class EditProfileActivity extends AppCompatActivity {
                     .load(tempFile)
                     .into(ivAvatar);
 
-            Toast.makeText(this, "头像处理完成，点击保存上传", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.edit_profile_toast_avatar_processed, Toast.LENGTH_SHORT).show();
 
             // 5. 设置为待上传Uri
             selectedAvatarUri = Uri.fromFile(tempFile);
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "头像处理失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.edit_profile_toast_avatar_failed, Toast.LENGTH_SHORT).show();
         }
     }
 

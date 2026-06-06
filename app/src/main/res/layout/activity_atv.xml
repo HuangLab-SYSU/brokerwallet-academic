@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
-        android:text="Activity"
+        android:text="@string/activity_atv_activity"
         android:fontFamily="@font/work_sans_black"
         android:textColor="#000000"
         android:textSize="@dimen/text_size_xlarge"
@@ -36,7 +36,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="12dp"
         android:paddingHorizontal="16dp"
-        android:text="Transactions of current account"
+        android:text="@string/activity_atv_current_transactions"
         android:textColor="#000000"
         android:textSize="@dimen/text_size_small"
         app:layout_constraintTop_toBottomOf="@id/buytitle" />

@@ -83,7 +83,7 @@ public class ExportPrivateKeyActivity extends AppCompatActivity {
     private void exportPrivateKeys() {
         String allPrivateKeys = StorageUtil.getPrivateKey(this);
         if (allPrivateKeys == null || allPrivateKeys.isEmpty()) {
-            Toast.makeText(this, "No private keys found", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.export_private_key_toast_no_keys, Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -131,7 +131,7 @@ public class ExportPrivateKeyActivity extends AppCompatActivity {
 
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Failed to export private keys", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.export_private_key_toast_export_failed, Toast.LENGTH_LONG).show();
         }
     }
 }

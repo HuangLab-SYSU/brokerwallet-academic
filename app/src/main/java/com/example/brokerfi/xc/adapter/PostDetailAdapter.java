@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -114,7 +113,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if (post.getRewardAmount() != null) {
                 rewardStr = post.getRewardAmount().stripTrailingZeros().toPlainString();
             }
-            vh.tvRewardTotal.setText("Total Reward(BKC): " + rewardStr);
+            vh.tvRewardTotal.setText(vh.tvRewardTotal.getContext().getString(R.string.post_detail_adapter_total_reward_bkc) + " " + rewardStr);
 
             if (post.getUserId().equals(currentUserId)) {
                 // 自己发的帖子：隐藏打赏按钮

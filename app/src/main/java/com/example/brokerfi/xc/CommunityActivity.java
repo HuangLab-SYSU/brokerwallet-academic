@@ -257,12 +257,12 @@ public class CommunityActivity extends AppCompatActivity {
                 return SecurityUtil.GetAddress(privateKey);
             } else {
                 Log.e("WalletAddress", "Cannot get current private key");
-                Toast.makeText(this, "Cannot get wallet address, please add an account first", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.community_toast_add_account_first, Toast.LENGTH_SHORT).show();
                 return null;
             }
         } catch (Exception e) {
             Log.e("WalletAddress", "Failed to get wallet address", e);
-            Toast.makeText(this, "Failed to get wallet address: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.community_toast_wallet_address_failed) + " " + e.getMessage(), Toast.LENGTH_SHORT).show();
             return null;
         }
     }

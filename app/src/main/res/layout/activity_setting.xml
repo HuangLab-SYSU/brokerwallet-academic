@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:paddingHorizontal="16dp"
-        android:text="Settings"
+        android:text="@string/activity_setting_settings"
         android:fontFamily="@font/work_sans_black"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -55,7 +55,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
                     android:layout_toRightOf="@+id/sendicon"
-                    android:text="Accounts"
+                    android:text="@string/activity_setting_accounts"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
@@ -92,7 +92,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
                     android:layout_toRightOf="@+id/receiveicon"
-                    android:text="Networks"
+                    android:text="@string/activity_setting_networks"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 

@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:paddingHorizontal="16dp"
-        android:text="Withdraw"
+        android:text="@string/activity_withdraw_withdraw"
         android:fontFamily="@font/work_sans_black"
         android:textSize="@dimen/text_size_xlarge"
         android:textStyle="bold"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:paddingHorizontal="16dp"
-        android:text="Transfer your coins securely back from broker system address"
+        android:text="@string/activity_withdraw_transfer_tip"
         android:textSize="@dimen/text_size_normal"
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -59,7 +59,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Send from"
+                android:text="@string/activity_withdraw_send_from"
                 android:textSize="@dimen/text_size_normal"
                 android:textColor="#000000" />
 
@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Send to"
+                android:text="@string/activity_withdraw_send_to"
                 android:textSize="@dimen/text_size_normal"
                 android:textColor="#000000" />
 
@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Amount"
+                android:text="@string/activity_withdraw_amount"
                 android:textSize="@dimen/text_size_normal"
                 android:textColor="#000000" />
 
@@ -133,7 +133,7 @@
                 android:paddingEnd="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Withdraw"
+                android:text="@string/activity_withdraw_withdraw"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/text_size_normal" />

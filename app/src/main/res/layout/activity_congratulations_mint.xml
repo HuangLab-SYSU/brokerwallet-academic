@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/work_sans_black"
-                android:text="Congratulations!"
+                android:text="@string/activity_congratulations_mint_title"
                 android:textColor="#000000"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_marginTop="7dp"
-                android:text="You successfully minted your NFT!"
+                android:text="@string/activity_congratulations_mint_success"
                 android:textColor="#000000"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -51,7 +51,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:paddingBottom="8dp"
-            android:text="Back"
+            android:text="@string/activity_congratulations_mint_back"
             android:textAllCaps="false"
             android:textColor="#FFF"
             android:textSize="16sp" />

@@ -12,14 +12,14 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/logo4"
-        android:contentDescription="App Logo"
+        android:contentDescription="@string/activity_about_content_desc_app_logo"
         android:layout_marginBottom="16dp" />
 
     <!-- App 名称 -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BrokerChain Wallet"
+        android:text="@string/welcome_text"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#333"
@@ -30,7 +30,7 @@
         android:id="@+id/text_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Version 1.1.10"
+        android:text="@string/activity_about_version_1_1_10"
         android:textSize="16sp"
         android:textColor="#666"
         android:layout_marginBottom="32dp" />
@@ -40,7 +40,7 @@
         android:id="@+id/btn_check_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check for updates"
+        android:text="@string/activity_about_check_for_updates"
         android:textColor="#FFFFFF"
         android:backgroundTint="#007BFF"
         android:paddingHorizontal="24dp"
@@ -50,14 +50,14 @@
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginTop="32dp"
-        android:text="GitHub:"
+        android:text="@string/activity_about_github"
         android:textColor="#021DFA"
         android:textSize="13sp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginTop="1dp"
-        android:text="https://github.com/HuangLab-SYSU/brokerwallet-academic"
+        android:text="@string/activity_about_github_url"
         android:textColor="#021DFA"
         android:textIsSelectable="true"
         android:scrollHorizontally="false"
@@ -70,7 +70,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="© 2025 BrokerChain. All rights reserved."
+        android:text="@string/activity_about_copyright"
         android:textSize="13sp"
         android:textColor="#999"
         android:layout_marginTop="32dp" />

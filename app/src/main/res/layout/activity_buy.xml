@@ -23,7 +23,7 @@
                 android:id="@+id/buytitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Buy"
+                android:text="@string/Buy"
                 android:fontFamily="@font/work_sans_black"
                 android:textSize="30sp"
                 android:textStyle="bold"
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/buytitle"
                 android:layout_marginTop="8dp"
-                android:text="Buying crypto is now easy and secure"
+                android:text="@string/activity_buy_easy_secure_crypto"
                 android:textSize="14sp"
                 android:textColor="#000000"/>
 
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view"
                 android:layout_marginTop="32dp"
-                android:text="We link you up with top-rate quotes from dependable sources and assist you throughout, simplifying the self-custody process."
+                android:text="@string/activity_buy_top_rate_quotes"
                 android:textSize="14sp"
                 android:textColor="#000000"/>
             <LinearLayout
@@ -81,7 +81,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:text="Explore over 75 tokens across more than 8 blockchain networks"
+                        android:text="@string/activity_buy_token_network_range"
                         android:textColor="#000000"
                         android:textSize="14sp" />
 
@@ -105,7 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:text="Quickly boost your wallet's balance using safe payment methods"
+                        android:text="@string/activity_buy_safe_payment_methods"
                         android:textColor="#000000"
                         android:textSize="14sp" />
 
@@ -129,7 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:text="Cut down on gas fees and save precious time"
+                        android:text="@string/activity_buy_reduce_gas_fees"
                         android:textColor="#000000"
                         android:textSize="14sp" />
 
@@ -139,7 +139,7 @@
                     android:id="@+id/button"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="Get started"
+                    android:text="@string/activity_buy_get_started"
                     android:textAllCaps="false"
                     android:textSize="16sp"
                     android:textColor="#FFFFFF"

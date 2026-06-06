@@ -32,7 +32,7 @@
                 android:id="@+id/tv_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User123"
+                android:text="@string/item_comment_user123"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:layout_weight="1"
@@ -52,7 +52,7 @@
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This is a comment..."
+            android:text="@string/item_comment_this_is_a_comment"
             android:textSize="14sp"
             android:textColor="@color/black"
             android:layout_marginTop="4dp" />

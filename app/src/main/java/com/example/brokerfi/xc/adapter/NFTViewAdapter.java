@@ -164,7 +164,7 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         
         // Display material upload time
         if (uploadTime != null && !uploadTime.isEmpty()) {
-            holder.uploadTimeText.setText("Material Upload: " + uploadTime);
+            holder.uploadTimeText.setText(holder.uploadTimeText.getContext().getString(R.string.nft_view_adapter_material_upload) + " " + uploadTime);
             holder.uploadTimeText.setVisibility(View.VISIBLE);
             visibleCount++;
         } else {
@@ -173,7 +173,7 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         
         // Display NFT minting time
         if (mintTime != null && !mintTime.isEmpty()) {
-            holder.mintTimeText.setText("NFT Minted: " + mintTime);
+            holder.mintTimeText.setText(holder.mintTimeText.getContext().getString(R.string.nft_view_adapter_nft_minted) + " " + mintTime);
             holder.mintTimeText.setVisibility(View.VISIBLE);
             visibleCount++;
         } else {
@@ -183,7 +183,7 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         // Display owner address (shortened)
         if (ownerAddress != null && !ownerAddress.isEmpty()) {
             String shortAddress = shortenAddress(ownerAddress);
-            holder.ownerAddressText.setText("Owner Address: " + shortAddress);
+            holder.ownerAddressText.setText(holder.ownerAddressText.getContext().getString(R.string.nft_view_adapter_owner_address) + " " + shortAddress);
             holder.ownerAddressText.setVisibility(View.VISIBLE);
             visibleCount++;
         } else {
@@ -192,7 +192,7 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         
         // Display owner nickname
         if (ownerDisplayName != null && !ownerDisplayName.isEmpty() && !ownerDisplayName.equals("Anonymous")) {
-            holder.ownerDisplayNameText.setText("Owner Nickname: " + ownerDisplayName);
+            holder.ownerDisplayNameText.setText(holder.ownerDisplayNameText.getContext().getString(R.string.nft_view_adapter_owner_nickname) + " " + ownerDisplayName);
             holder.ownerDisplayNameText.setVisibility(View.VISIBLE);
             visibleCount++;
         } else {
@@ -327,13 +327,13 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         
         public void bind(boolean hasMore, boolean isLoading) {
             if (isLoading) {
-                footerText.setText("Loading...");
+                footerText.setText(R.string.loading);
                 footerProgress.setVisibility(View.VISIBLE);
             } else if (hasMore) {
-                footerText.setText("Pull up to load more");
+                footerText.setText(R.string.nft_view_adapter_pull_up_to_load_more);
                 footerProgress.setVisibility(View.GONE);
             } else {
-                footerText.setText("End of list ~ Submit materials to get more NFTs");
+                footerText.setText(R.string.nft_view_adapter_end_of_list);
                 footerProgress.setVisibility(View.GONE);
             }
         }

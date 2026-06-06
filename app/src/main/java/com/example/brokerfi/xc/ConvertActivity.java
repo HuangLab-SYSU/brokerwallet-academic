@@ -54,13 +54,13 @@ public class ConvertActivity extends AppCompatActivity {
                 String newAddress = newAddressInput.getText().toString().trim();
                 
                 if (oldAddress.isEmpty() || newAddress.isEmpty()) {
-                    Toast.makeText(ConvertActivity.this, "请填写旧账户地址和新账户地址", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConvertActivity.this, R.string.convert_toast_fill_account_addresses, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 
                 // The Convert function can add below
 
-                Toast.makeText(ConvertActivity.this, "转换功能待实现", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ConvertActivity.this, R.string.convert_toast_feature_pending, Toast.LENGTH_SHORT).show();
             }
         });
     }

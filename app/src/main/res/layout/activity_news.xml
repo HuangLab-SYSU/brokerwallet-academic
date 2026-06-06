@@ -23,7 +23,7 @@
 <!--                android:id="@+id/buytitle"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="wrap_content"-->
-<!--                android:text="Swap"-->
+<!--                android:text="@string/activity_news_swap"-->
 <!--                android:fontFamily="@font/work_sans_black"-->
 <!--                android:textSize="30sp"-->
 <!--                android:textStyle="bold"-->
@@ -35,7 +35,7 @@
 <!--                android:layout_height="wrap_content"-->
 <!--                android:layout_below="@+id/buytitle"-->
 <!--                android:layout_marginTop="8dp"-->
-<!--                android:text="Swapping crypto is now easy and secure"-->
+<!--                android:text="@string/activity_news_swap_secure_tip"-->
 <!--                android:textSize="14sp"-->
 <!--                android:textColor="#000000"/>-->
 
@@ -53,7 +53,7 @@
 <!--                android:layout_height="wrap_content"-->
 <!--                android:layout_below="@+id/view"-->
 <!--                android:layout_marginTop="32dp"-->
-<!--                android:text="Allow BrokerFi to programmatically optimize your swaps to assist with:"-->
+<!--                android:text="@string/activity_news_optimize_swap_intro"-->
 <!--                android:textSize="14sp"-->
 <!--                android:textColor="#000000"/>-->
 <!--            <LinearLayout-->
@@ -80,7 +80,7 @@
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
 <!--                        android:layout_marginLeft="8dp"-->
-<!--                        android:text="Lower your transaction expenses"-->
+<!--                        android:text="@string/activity_news_lower_tx_expenses"-->
 <!--                        android:textColor="#000000"-->
 <!--                        android:textSize="14sp" />-->
 
@@ -103,7 +103,7 @@
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
 <!--                        android:layout_marginLeft="8dp"-->
-<!--                        android:text="Decrease the chances of transaction errors"-->
+<!--                        android:text="@string/activity_news_reduce_errors"-->
 <!--                        android:textColor="#000000"-->
 <!--                        android:textSize="14sp" />-->
 
@@ -126,7 +126,7 @@
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
 <!--                        android:layout_marginLeft="8dp"-->
-<!--                        android:text="Avoid transactions from getting jammed"-->
+<!--                        android:text="@string/activity_news_avoid_stuck_tx"-->
 <!--                        android:textColor="#000000"-->
 <!--                        android:textSize="14sp" />-->
 
@@ -149,7 +149,7 @@
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
 <!--                        android:layout_marginLeft="8dp"-->
-<!--                        android:text="Guard against front-running *"-->
+<!--                        android:text="@string/activity_news_front_running_guard"-->
 <!--                        android:textColor="#000000"-->
 <!--                        android:textSize="14sp" />-->
 
@@ -159,7 +159,7 @@
 <!--                    android:id="@+id/button"-->
 <!--                    android:layout_width="match_parent"-->
 <!--                    android:layout_height="40dp"-->
-<!--                    android:text="Get started"-->
+<!--                    android:text="@string/activity_news_get_started"-->
 <!--                    android:textAllCaps="false"-->
 <!--                    android:textSize="16sp"-->
 <!--                    android:textColor="#FFFFFF"-->

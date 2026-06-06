@@ -151,7 +151,7 @@ public class AfterBrokerActivity extends AppCompatActivity {
                                 finalSum = finalSum.substring(0,6);
                                 bkcprofittextview.setTextSize(16);
                             }
-                            bkcprofittextview.setText("+" + (finalSum) + " BKC");
+                            bkcprofittextview.setText("+" + (finalSum) + " " + bkcprofittextview.getContext().getString(R.string.after_broker_bkc));
                             if(finalSumBalance!=null &&finalSumBalance.length()>8){
                                 finalSumBalance = finalSumBalance.substring(0,8);
                                 bkctextview.setTextSize(20);
@@ -198,7 +198,7 @@ public class AfterBrokerActivity extends AppCompatActivity {
                                 relativeLayout.setLayoutParams(layoutParams);
 
                                 TextView shardTextView = new TextView(AfterBrokerActivity.this);
-                                shardTextView.setText("SHARD " + i);
+                                shardTextView.setText(shardTextView.getContext().getString(R.string.after_broker_shard) + " " + i);
                                 shardTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
                                 shardTextView.setTextColor(ContextCompat.getColor(AfterBrokerActivity.this, R.color.white));
                                 RelativeLayout.LayoutParams shardParams = new RelativeLayout.LayoutParams(

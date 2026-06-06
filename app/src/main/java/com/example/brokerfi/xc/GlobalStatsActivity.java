@@ -105,7 +105,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
             Log.d("GlobalStats", "Using cached NFT data, total: " + nftList.size() + ", count: " + totalNftCount);
             nftRecyclerView.setVisibility(View.VISIBLE);
             nftAdapter.notifyDataSetChanged();
-            nftTotalCountText.setText("Total: " + totalNftCount);  // ✅ Use cached totalNftCount
+            nftTotalCountText.setText(nftTotalCountText.getContext().getString(R.string.dialog_confirm_transaction_dialog_total) + " " + totalNftCount);  // ✅ Use cached totalNftCount
             nftTotalCountText.setVisibility(View.VISIBLE);
             // 更新Adapter的分页状态
             nftAdapter.setHasMore(nftHasMore);
@@ -230,17 +230,17 @@ public class GlobalStatsActivity extends AppCompatActivity {
             JSONObject data = jsonResponse.getJSONObject("data");
             
             // Update UI (keep labels)
-            totalUsersText.setText("Total Users: " + data.optInt("totalUsers", 0));
+            totalUsersText.setText(totalUsersText.getContext().getString(R.string.global_stats_total_users) + " " + data.optInt("totalUsers", 0));
             totalGoldMedalsText.setText(String.valueOf(data.optInt("totalGoldMedals", 0)));
             totalSilverMedalsText.setText(String.valueOf(data.optInt("totalSilverMedals", 0)));
             totalBronzeMedalsText.setText(String.valueOf(data.optInt("totalBronzeMedals", 0)));
-            highestScoreText.setText("Highest Score: " + data.optInt("highestScore", 0));
+            highestScoreText.setText(highestScoreText.getContext().getString(R.string.global_stats_highest_score) + " " + data.optInt("highestScore", 0));
             
             String topUser = data.optString("topUserDisplayName", "None");
             if (topUser.equals("null") || topUser.isEmpty()) {
                 topUser = "None";
             }
-            topUserText.setText("Top User: " + topUser);
+            topUserText.setText(topUserText.getContext().getString(R.string.global_stats_top_user) + " " + topUser);
             
             globalMedalStatsLayout.setVisibility(View.VISIBLE);
             Log.d("GlobalStats", "全局勋章统计加载完成");
@@ -666,7 +666,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                 Log.d("GlobalStats", "NFT总数: " + totalNftCount + ", 当前已加载: " + nftList.size());
                 
                 // Update NFT total count display
-                nftTotalCountText.setText("Total: " + totalNftCount);
+                nftTotalCountText.setText(nftTotalCountText.getContext().getString(R.string.dialog_confirm_transaction_dialog_total) + " " + totalNftCount);
                 nftTotalCountText.setVisibility(View.VISIBLE);
                 
                 // 检查是否还有更多数据（首次加载）

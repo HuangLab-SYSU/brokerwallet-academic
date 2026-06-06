@@ -229,7 +229,7 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
                                 @Override
                                 public void run() {
                                     //btn.setText(R.string.View_My_Profit);If use string resource,the btn will be slower
-                                    btn.setText("View My Profit");
+                                    btn.setText(R.string.View_My_Profit);
                                 }
                             });
                         } else {
@@ -238,7 +238,7 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
                                 @Override
                                 public void run() {
                                     //btn.setText(R.string.Apply_Broker);
-                                    btn.setText("Apply to Become Broker");
+                                    btn.setText(R.string.Apply_Broker);
                                 }
                             });
                         }
@@ -274,19 +274,19 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
                         String s = MyUtil.applybroker(privatekey);
                         if (s!=null &&s.contains("成功")){
                             runOnUiThread(()->{
-                                Toast.makeText(BrokerActivity.this,"申请成为Broker成功！",Toast.LENGTH_LONG).show();
+                                Toast.makeText(BrokerActivity.this,R.string.broker_toast_broker,Toast.LENGTH_LONG).show();
                                 intent.setClass(BrokerActivity.this, StakeMoreActivity.class);
                                 intent.putExtra("extra_data", "applysuccess");
                                 startActivity(intent);
                             });
                         }else {
                             runOnUiThread(()->{
-                                Toast.makeText(BrokerActivity.this,"申请成为Broker失败，请稍后重试",Toast.LENGTH_LONG).show();
+                                Toast.makeText(BrokerActivity.this,R.string.broker_toast_broker_2,Toast.LENGTH_LONG).show();
                             });
                         }
                     }else {
                         runOnUiThread(()->{
-                            Toast.makeText(BrokerActivity.this,"申请成为Broker失败，请稍后重试",Toast.LENGTH_LONG).show();
+                            Toast.makeText(BrokerActivity.this,R.string.broker_toast_broker_2,Toast.LENGTH_LONG).show();
                         });
                     }
 

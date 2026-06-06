@@ -87,7 +87,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
             int position = adapter.getSelectedPosition();
 
             if (adapter.getSelectedItem() == null) {
-                Toast.makeText(this, "🛒 请先选择要购买的NFT", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.buy_nfts_toast_select_nft_to_buy_first, Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -108,10 +108,10 @@ public class BuyNFTsActivity extends AppCompatActivity{
                 // 设置提示信息
                 tv_title.setText(R.string.Buy);
                 // 修改标签文本
-                tvPriceLabel.setText("Total (Gas fee included)");
+                tvPriceLabel.setText(R.string.buy_nfts_total_gas_fee_included);
 
                 // 显示单价并禁用
-                et_price.setText(String.format(Locale.US, "%s BKC", selected.getPrice().add(new BigInteger("20")).toString()));
+                et_price.setText(getString(R.string.buy_nfts_price_bkc, selected.getPrice().add(new BigInteger("20")).toString()));
                 et_price.setEnabled(false);
                 et_price.setTextColor(ContextCompat.getColor(this, R.color.grey_price_disable));
                 et_price.setBackgroundResource(R.drawable.custom_edittext_border_disabled); // 使用自定义背景
@@ -134,23 +134,23 @@ public class BuyNFTsActivity extends AppCompatActivity{
 
                             // 判断shares输入格式
                             if (s.compareTo(BigInteger.ONE) < 0) {
-                                et_shares.setError("最小为1份");
+                                et_shares.setError(getString(R.string.buy_nfts_error_1));
                                 et_price.setText("————————");
                                 btnConfirm.setEnabled(false);
-                                Toast.makeText(BuyNFTsActivity.this, "份数不能小于1", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(BuyNFTsActivity.this, R.string.buy_nfts_toast_1, Toast.LENGTH_SHORT).show();
                                 return;
                             }
 
                             if (s.compareTo(selected.getShares()) > 0) {
-                                et_shares.setError("超过可购买份数");
+                                et_shares.setError(getString(R.string.buy_nfts_toast_exceeds_shares));
                                 et_price.setText("————————");
                                 btnConfirm.setEnabled(false);
-                                Toast.makeText(BuyNFTsActivity.this, "超过可购买份数", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(BuyNFTsActivity.this, R.string.buy_nfts_toast_exceeds_shares, Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             BigInteger total = selected.getPrice().multiply(s)
                                     .add(new BigInteger("20"));
-                            String displayText = String.format(Locale.US, "%s BKC", total.toString());
+                            String displayText = getString(R.string.buy_nfts_price_bkc, total.toString());
                             et_price.setText(displayText);
                             btnConfirm.setEnabled(true);
 
@@ -168,7 +168,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
                 btnConfirm.setOnClickListener(v -> {
                     String s = et_shares.getText().toString();
                     if (s.isEmpty()) {
-                        Toast.makeText(this, "请输入份数", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.buy_nfts_toast_2, Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -179,12 +179,12 @@ public class BuyNFTsActivity extends AppCompatActivity{
                         String data = ABIUtils.encodeBuy(selected.getListingId(),shareValue);
                         BuyNFT(data,totalPrice);
 
-                        Toast.makeText(this, "购买成功！总价：" + totalPrice + " BKC", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.buy_nfts_toast_3) + totalPrice + " " + getString(R.string.after_broker_bkc), Toast.LENGTH_SHORT).show();
                         adapter.clearSelection();
                         dialog.dismiss();
 
                     } catch (NumberFormatException e) {
-                        Toast.makeText(this, "交易失败！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.buy_nfts_toast_4, Toast.LENGTH_SHORT).show();
                         adapter.clearSelection();
                         dialog.dismiss();
                         return;
@@ -192,7 +192,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
                 });
 
                 btnCancel.setOnClickListener(v -> {
-                    Toast.makeText(this, "已取消上架", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.buy_nfts_toast_5, Toast.LENGTH_SHORT).show();
                     adapter.clearSelection();
                     dialog.dismiss();
                 });
@@ -206,7 +206,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
         try {
             String result = MyUtil.sendethcall(ABIUtils.encodeGetListedNFTs(), StorageUtil.getCurrentPrivatekey(this));
             if(result == null) {
-                runOnUiThread(() -> Toast.makeText(BuyNFTsActivity.this, "网络请求失败:服务器响应数据为空 " , Toast.LENGTH_LONG).show());
+                runOnUiThread(() -> Toast.makeText(BuyNFTsActivity.this, BuyNFTsActivity.this.getString(R.string.buy_nfts_toast_6) + " " , Toast.LENGTH_LONG).show());
                 return;
             }
             try {
@@ -214,7 +214,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
                     JSONObject response = new JSONObject(result);
                     if (response.has("error")) {
                         Toast.makeText(BuyNFTsActivity.this,
-                                "call失败: " + response.getString("error"),
+                                BuyNFTsActivity.this.getString(R.string.buy_nfts_toast_call) + " " + response.getString("error"),
                                 Toast.LENGTH_LONG).show();
                     } else {
                         String hexData = response.getString("result");
@@ -237,7 +237,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
 
                         runOnUiThread(() -> {
                             if (nftList.isEmpty()) {
-                                Toast.makeText(BuyNFTsActivity.this, "暂无NFT数据", Toast.LENGTH_LONG).show();
+                                Toast.makeText(BuyNFTsActivity.this, R.string.buy_nfts_toast_no_nft_data, Toast.LENGTH_LONG).show();
                             }
                             NFTData.clear();
                             NFTData.addAll(nftList);
@@ -248,18 +248,18 @@ public class BuyNFTsActivity extends AppCompatActivity{
                     // 处理非JSON响应（如404）
                     runOnUiThread(() ->
                             Toast.makeText(BuyNFTsActivity.this,
-                                    "服务器错误: " + result,
+                                    BuyNFTsActivity.this.getString(R.string.buy_nfts_toast_7) + " " + result,
                                     Toast.LENGTH_LONG).show()
                     );
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
                 Log.e("NFT_FETCH", "响应格式错误", e);
-                runOnUiThread(() -> Toast.makeText(BuyNFTsActivity.this, "数据解析失败: " + e.getMessage(), Toast.LENGTH_LONG).show());
+                runOnUiThread(() -> Toast.makeText(BuyNFTsActivity.this, BuyNFTsActivity.this.getString(R.string.buy_nfts_toast_8) + " " + e.getMessage(), Toast.LENGTH_LONG).show());
             }
 
         } catch (Exception e) {
-            runOnUiThread(() -> Toast.makeText(BuyNFTsActivity.this, "请求构造失败: " + e.getMessage(), Toast.LENGTH_LONG).show());
+            runOnUiThread(() -> Toast.makeText(BuyNFTsActivity.this, BuyNFTsActivity.this.getString(R.string.buy_nfts_toast_9) + " " + e.getMessage(), Toast.LENGTH_LONG).show());
         }
     }
 
@@ -270,7 +270,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
         try {
             String result = MyUtil.sendethtx(data, StorageUtil.getCurrentPrivatekey(this),value.toString(16));
             if(result == null){
-                Toast.makeText(BuyNFTsActivity.this,"Transaction Failed",Toast.LENGTH_LONG).show();
+                Toast.makeText(BuyNFTsActivity.this,R.string.buy_nfts_toast_transaction_failed,Toast.LENGTH_LONG).show();
                 return;
             }
             try {
@@ -279,7 +279,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
                     JSONObject response = new JSONObject(result);
                     if (response.has("error")) {
                         Toast.makeText(BuyNFTsActivity.this,
-                                "购买失败: " + response.getString("error"),
+                                BuyNFTsActivity.this.getString(R.string.buy_nfts_toast_10) + " " + response.getString("error"),
                                 Toast.LENGTH_LONG).show();
                         //刷新市场NFT信息
                         fetchListedNFTs();
@@ -291,7 +291,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
                     // 处理非JSON响应（如404）
                     runOnUiThread(() ->
                             Toast.makeText(BuyNFTsActivity.this,
-                                    "服务器错误: " + result,
+                                    BuyNFTsActivity.this.getString(R.string.buy_nfts_toast_7) + " " + result,
                                     Toast.LENGTH_LONG).show()
                     );
                 }
@@ -300,13 +300,13 @@ public class BuyNFTsActivity extends AppCompatActivity{
                 // 处理无效JSON
                 runOnUiThread(() ->
                         Toast.makeText(BuyNFTsActivity.this,
-                                "响应格式错误",
+                                R.string.buy_nfts_toast_11,
                                 Toast.LENGTH_LONG).show()
                 );
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "购买请求失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.buy_nfts_toast_12, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -317,7 +317,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
             }
             String result = MyUtil.getTransactionReceipt(txHash, StorageUtil.getCurrentPrivatekey(this));
             if(result == null){
-                Toast.makeText(BuyNFTsActivity.this, "checkTransactionStatus失败，服务器响应数据为空", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BuyNFTsActivity.this, R.string.buy_nfts_toast_checktransactionstatus, Toast.LENGTH_SHORT).show();
                 return;
             }
             try {
@@ -328,13 +328,13 @@ public class BuyNFTsActivity extends AppCompatActivity{
                     String status = receipt.optString("status", "0x0");
                     if ("0x1".equals(status)) {
                         runOnUiThread(() -> {
-                            Toast.makeText(BuyNFTsActivity.this, "✅ 购买成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(BuyNFTsActivity.this, R.string.buy_nfts_toast_13, Toast.LENGTH_SHORT).show();
                             //刷新市场NFT信息
                             fetchListedNFTs();
                         });
                     } else {
                         runOnUiThread(() -> {
-                            Toast.makeText(BuyNFTsActivity.this, "购买失败！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(BuyNFTsActivity.this, R.string.buy_nfts_toast_14, Toast.LENGTH_SHORT).show();
                             //刷新市场NFT信息
                             fetchListedNFTs();
                         });
@@ -349,7 +349,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "查询请求失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.buy_nfts_toast_15, Toast.LENGTH_SHORT).show();
         }
     }
 

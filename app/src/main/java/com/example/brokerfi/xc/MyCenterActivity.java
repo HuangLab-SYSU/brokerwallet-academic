@@ -229,7 +229,7 @@ public class MyCenterActivity extends AppCompatActivity {
             Log.d("MyCenter", "Using cached NFT data, total: " + nftList.size() + ", count: " + totalNftCount + ", pull to refresh");
             nftRecyclerView.setVisibility(View.VISIBLE);
             // Update NFT total count display
-            nftTotalCountText.setText("Total: " + totalNftCount);  // ✅ Use cached totalNftCount
+            nftTotalCountText.setText(nftTotalCountText.getContext().getString(R.string.dialog_confirm_transaction_dialog_total) + " " + totalNftCount);  // ✅ Use cached totalNftCount
             nftTotalCountText.setVisibility(View.VISIBLE);
             // 更新Adapter的分页状态
             nftAdapter.setHasMore(nftHasMore);
@@ -708,7 +708,7 @@ public class MyCenterActivity extends AppCompatActivity {
                                 Log.d("MyCenter", "设置RecyclerView可见");
                                 
                                 // 显示NFT总数
-                                nftTotalCountText.setText("总数: " + totalNftCount);
+                                nftTotalCountText.setText(nftTotalCountText.getContext().getString(R.string.my_center_total_count) + " " + totalNftCount);
                                 nftTotalCountText.setVisibility(View.VISIBLE);
                                 
                                 // 更新适配器状态

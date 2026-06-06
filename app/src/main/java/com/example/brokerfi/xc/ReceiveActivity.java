@@ -176,7 +176,7 @@ public class ReceiveActivity extends AppCompatActivity {
                 ClipData.Item item = new ClipData.Item(stringtocopy);
                 ClipData clip = new ClipData((CharSequence)null, new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN}, item);
                 clipboard.setPrimaryClip(clip);
-                Toast.makeText(ReceiveActivity.this, "文本已复制到剪切板", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReceiveActivity.this, R.string.receive_toast_text_copied_to_clipboard, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -224,7 +224,7 @@ public class ReceiveActivity extends AppCompatActivity {
                 Bitmap bitmap = encoder.createBitmap(matrix);
                 saveImageToGallery(bitmap);
             } else {
-                Toast.makeText(ReceiveActivity.this, "需要存储权限来保存图片", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReceiveActivity.this, R.string.receive_toast_storage_permission, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -269,7 +269,7 @@ public class ReceiveActivity extends AppCompatActivity {
                 });
             }
 
-            Toast.makeText(ReceiveActivity.this, "图片已保存到相册", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ReceiveActivity.this, R.string.receive_toast_image_saved_to_album, Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
         }

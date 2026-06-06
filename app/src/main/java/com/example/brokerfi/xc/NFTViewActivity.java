@@ -81,7 +81,7 @@ public class NFTViewActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     loadingText.setVisibility(View.GONE);
                     errorText.setVisibility(View.VISIBLE);
-                    errorText.setText("加载失败");
+                    errorText.setText(R.string.activity_nft_view_load_failed);
                 });
             }
         }).start();

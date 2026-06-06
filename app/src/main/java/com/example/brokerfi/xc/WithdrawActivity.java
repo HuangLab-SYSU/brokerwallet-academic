@@ -46,7 +46,7 @@ public class WithdrawActivity extends AppCompatActivity {
         edt_amount=findViewById(R.id.edt_amount);
     }
     private void intEvent(){
-        edt_sendfrom.setText("Broker2Earn");
+        edt_sendfrom.setText(R.string.stake_more_broker2earn);
         edt_sendfrom.setEnabled(false);
         String account1 = StorageUtil.getPrivateKey(this);
         String acc1 = StorageUtil.getCurrentAccount(this);
@@ -64,7 +64,7 @@ public class WithdrawActivity extends AppCompatActivity {
         }
 
         edt_sendto.setEnabled(false);
-        edt_amount.setText("ALL");
+        edt_amount.setText(R.string.withdraw_all);
         edt_amount.setEnabled(false);
         navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
         btn_withdraw.setOnClickListener(view -> {
@@ -96,18 +96,18 @@ public class WithdrawActivity extends AppCompatActivity {
 //                        },3000);
                         if(s.contains("success")) {
                             runOnUiThread(()->{
-                                Toast.makeText(WithdrawActivity.this, "Withdraw successfully", Toast.LENGTH_LONG).show();
+                                Toast.makeText(WithdrawActivity.this, R.string.withdraw_toast_withdraw_successfully, Toast.LENGTH_LONG).show();
                             });
                         }else {
                             runOnUiThread(()->{
-                                Toast.makeText(WithdrawActivity.this, "Withdraw failed:"+s, Toast.LENGTH_LONG).show();
+                                Toast.makeText(WithdrawActivity.this, WithdrawActivity.this.getString(R.string.withdraw_toast_withdraw_failed)+s, Toast.LENGTH_LONG).show();
                             });
                         }
                     });
 
                 }else {
                     runOnUiThread(()->{
-                        Toast.makeText(WithdrawActivity.this, "Withdraw failed", Toast.LENGTH_LONG).show();
+                        Toast.makeText(WithdrawActivity.this, R.string.withdraw_toast_withdraw_failed_2, Toast.LENGTH_LONG).show();
                     });
                 }
             }

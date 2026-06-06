@@ -97,7 +97,7 @@ public class AccountDetailActivity extends AppCompatActivity {
             ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("Account Address", accountAddress);
             clipboard.setPrimaryClip(clip);
-            Toast.makeText(AccountDetailActivity.this, "Address copied to clipboard", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AccountDetailActivity.this, R.string.account_detail_toast_address_copied, Toast.LENGTH_SHORT).show();
         });
 
         showPrivateKeyBtn.setOnClickListener(view -> {

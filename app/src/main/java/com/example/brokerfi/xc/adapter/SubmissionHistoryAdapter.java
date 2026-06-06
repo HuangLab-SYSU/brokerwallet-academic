@@ -77,7 +77,7 @@ public class SubmissionHistoryAdapter extends RecyclerView.Adapter<SubmissionHis
         // BKC token reward display
         if (record.getTokenReward() != null && !record.getTokenReward().isEmpty() && 
             !record.getTokenReward().equals("0") && !record.getTokenReward().equals("0.0")) {
-            holder.tokenRewardText.setText("💰 BKC Reward: " + record.getTokenReward() + " BKC");
+            holder.tokenRewardText.setText(holder.tokenRewardText.getContext().getString(R.string.submission_history_adapter_bkc_reward) + " " + record.getTokenReward() + " " + holder.tokenRewardText.getContext().getString(R.string.after_broker_bkc));
             holder.tokenRewardText.setVisibility(View.VISIBLE);
         } else {
             holder.tokenRewardText.setVisibility(View.GONE);

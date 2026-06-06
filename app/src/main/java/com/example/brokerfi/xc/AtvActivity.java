@@ -157,7 +157,7 @@ public class AtvActivity extends AppCompatActivity {
                     } else {
                         Log.d("AtvActivity", "没有获取到交易数据");
                         runOnUiThread(() -> {
-                            Toast.makeText(AtvActivity.this, "没有找到交易记录", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AtvActivity.this, R.string.atv_toast_no_transaction_records_found, Toast.LENGTH_SHORT).show();
                             hideProgress();
                         });
                     }
@@ -240,20 +240,20 @@ public class AtvActivity extends AppCompatActivity {
                     transactionList.clear();
                     transactionList.addAll(cachedTransactions);
                     transactionAdapter.updateTransactions(transactionList);
-                    Toast.makeText(AtvActivity.this, "无法获取最新交易数据，显示缓存数据", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AtvActivity.this, R.string.atv_toast_showing_cached_data, Toast.LENGTH_SHORT).show();
                     hideProgress();
                 });
             } else {
                 Log.d("AtvActivity", "没有找到缓存文件");
                 runOnUiThread(() -> {
-                    Toast.makeText(AtvActivity.this, "无法获取交易数据且无缓存", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AtvActivity.this, R.string.atv_toast_transaction_no_cache, Toast.LENGTH_SHORT).show();
                     hideProgress();
                 });
             }
         } catch (Exception e) {
             Log.e("AtvActivity", "加载缓存数据失败", e);
             runOnUiThread(() -> {
-                Toast.makeText(AtvActivity.this, "加载缓存数据失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AtvActivity.this, R.string.atv_toast_failed_to_load_cached_data, Toast.LENGTH_SHORT).show();
                 hideProgress();
             });
         }

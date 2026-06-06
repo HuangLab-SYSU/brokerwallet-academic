@@ -50,7 +50,7 @@ public class SubmissionDetailActivity extends AppCompatActivity {
         fileName = intent.getStringExtra("fileName");
         
         if (submissionId == -1) {
-            Toast.makeText(this, "无效的提交ID", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.submission_detail_toast_invalid_id, Toast.LENGTH_SHORT).show();
             finish();
             return;
         }

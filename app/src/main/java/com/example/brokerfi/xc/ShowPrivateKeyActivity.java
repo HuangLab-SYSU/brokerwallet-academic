@@ -76,7 +76,7 @@ public class ShowPrivateKeyActivity extends AppCompatActivity {
             ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("Private Key", privateKey);
             clipboard.setPrimaryClip(clip);
-            Toast.makeText(ShowPrivateKeyActivity.this, "Private key copied to clipboard", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ShowPrivateKeyActivity.this, R.string.show_private_key_toast_copied, Toast.LENGTH_SHORT).show();
         });
     }
 
