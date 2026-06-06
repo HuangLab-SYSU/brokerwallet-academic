@@ -162,7 +162,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tvTitle.setText(post.getTitle());
             tvContent.setText(post.getContent());
             tvUsername.setText(post.getUserName());
-            tvLike.setText("👍 " + post.getLikeCount());
+            tvLike.setText(tvLike.getContext().getString(R.string.post_adapter_like_count, post.getLikeCount()));
             // 格式化时间
             try {
                 tvPostTime.setText(

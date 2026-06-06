@@ -149,7 +149,7 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
         
         String walletAddress = getCurrentWalletAddress();
         if (walletAddress == null) {
-            showError("无法获取钱包地址，请检查账户设置");
+            showError(getString(R.string.submission_history_error_wallet_address));
             return;
         }
         
@@ -267,13 +267,13 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
                 }
                 
             } else {
-                String message = jsonResponse.optString("message", "获取提交历史失败");
+                String message = jsonResponse.optString("message", getString(R.string.submission_history_error_load_failed_plain));
                 showError(message);
             }
             
         } catch (JSONException e) {
             Log.e(TAG, "解析提交历史响应失败", e);
-            showError("数据解析失败");
+            showError(getString(R.string.submission_detail_error_parse_failed));
         }
     }
     
@@ -368,7 +368,7 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
      */
     private void handleSubmissionHistoryError(String error) {
         Log.e(TAG, "获取提交历史失败: " + error);
-        showError("获取提交历史失败: " + error);
+        showError(getString(R.string.submission_history_error_load_failed) + " " + error);
     }
     
     /**
@@ -457,4 +457,3 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
     }
 
 }
-

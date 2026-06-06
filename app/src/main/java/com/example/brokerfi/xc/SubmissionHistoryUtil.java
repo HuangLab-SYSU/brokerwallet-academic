@@ -54,20 +54,20 @@ public class SubmissionHistoryUtil {
                         Log.d(TAG, "获取提交历史成功: " + responseStr);
                         callback.onSuccess(responseStr);
                     } else {
-                        callback.onError("响应体为空");
+                        callback.onError("Response body is empty");
                     }
                 } else {
-                    String errorBody = response.body() != null ? response.body().string() : "未知错误";
+                    String errorBody = response.body() != null ? response.body().string() : "Unknown error";
                     Log.e(TAG, "获取提交历史失败: " + response.code() + " - " + errorBody);
-                    callback.onError("获取失败: " + response.code() + " - " + errorBody);
+                    callback.onError("Fetch failed: " + response.code() + " - " + errorBody);
                 }
                 
             } catch (IOException e) {
                 Log.e(TAG, "网络请求异常", e);
-                callback.onError("网络连接失败: " + e.getMessage());
+                callback.onError("Network connection failed: " + e.getMessage());
             } catch (Exception e) {
                 Log.e(TAG, "获取提交历史异常", e);
-                callback.onError("获取异常: " + e.getMessage());
+                callback.onError("Fetch exception: " + e.getMessage());
             }
         }).start();
     }
@@ -98,20 +98,20 @@ public class SubmissionHistoryUtil {
                         Log.d(TAG, "获取提交详情成功: " + responseStr);
                         callback.onSuccess(responseStr);
                     } else {
-                        callback.onError("响应体为空");
+                        callback.onError("Response body is empty");
                     }
                 } else {
-                    String errorBody = response.body() != null ? response.body().string() : "未知错误";
+                    String errorBody = response.body() != null ? response.body().string() : "Unknown error";
                     Log.e(TAG, "获取提交详情失败: " + response.code() + " - " + errorBody);
-                    callback.onError("获取失败: " + response.code() + " - " + errorBody);
+                    callback.onError("Fetch failed: " + response.code() + " - " + errorBody);
                 }
                 
             } catch (IOException e) {
                 Log.e(TAG, "网络请求异常", e);
-                callback.onError("网络连接失败: " + e.getMessage());
+                callback.onError("Network connection failed: " + e.getMessage());
             } catch (Exception e) {
                 Log.e(TAG, "获取提交详情异常", e);
-                callback.onError("获取异常: " + e.getMessage());
+                callback.onError("Fetch exception: " + e.getMessage());
             }
         }).start();
     }

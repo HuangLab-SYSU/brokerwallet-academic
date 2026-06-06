@@ -68,7 +68,7 @@ public class OkHttpManager {
 
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                postFail(callback, "请求失败：" + e.getMessage());
+                postFail(callback, "Request failed: " + e.getMessage());
             }
 
             @Override
@@ -76,20 +76,20 @@ public class OkHttpManager {
                 Response res = response;
                 try {
                     if (!res.isSuccessful()) {
-                        postFail(callback, "HTTP错误：" + res.code());
+                        postFail(callback, "HTTP error: " + res.code());
                         return;
                     }
 
                     ResponseBody body = res.body();
                     if (body == null) {
-                        postFail(callback, "响应体为空");
+                        postFail(callback, "Response body is empty");
                         return;
                     }
 
                     postSuccess(callback, body.string());
 
                 } catch (Exception e) {
-                    postFail(callback, "解析异常：" + e.getMessage());
+                    postFail(callback, "Parse exception: " + e.getMessage());
                 } finally {
                     res.close();
                 }

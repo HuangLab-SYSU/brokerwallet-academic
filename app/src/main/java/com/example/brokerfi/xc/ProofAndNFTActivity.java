@@ -165,7 +165,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         intent.setType("*/*"); // Support all file types
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true); // Support multiple selection
-        startActivityForResult(Intent.createChooser(intent, "Select Proof File"), REQUEST_CODE_SELECT_FILE);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.proof_and_nft_chooser_select_proof_file)), REQUEST_CODE_SELECT_FILE);
     }
     
     /**
@@ -232,7 +232,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(Intent.createChooser(intent, "Select NFT Photo from Gallery"), REQUEST_CODE_SELECT_IMAGE);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.proof_and_nft_chooser_select_nft_photo)), REQUEST_CODE_SELECT_IMAGE);
     }
     
     /**
@@ -882,7 +882,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
      */
     private void showErrorDialog(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("❌ " + title)
+        builder.setTitle(getString(R.string.proof_and_nft_error_title_prefix, title))
                .setMessage(message)
                .setPositiveButton(R.string.proof_and_nft_button_retry, (dialog, which) -> {
                    // Can trigger resubmission here

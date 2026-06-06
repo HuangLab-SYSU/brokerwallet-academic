@@ -55,11 +55,11 @@ public class NewsActivity extends AppCompatActivity {
                         "<head>" +
                         "<meta charset='utf-8'>" +
                         "<meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
-                        "<title>离线</title>" +
+                        "<title>" + getString(R.string.webview_offline_title) + "</title>" +
                         "</head>" +
                         "<body style='font-family: sans-serif; text-align: center; margin-top: 40vh; color: #555;'>" +
-                        "<h3>网络连接失败</h3>" +
-                        "<p>请检查网络设置</p>" +
+                        "<h3>" + getString(R.string.webview_offline_heading) + "</h3>" +
+                        "<p>" + getString(R.string.webview_offline_message) + "</p>" +
                         "</body>" +
                         "</html>";
 

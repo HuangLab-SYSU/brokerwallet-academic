@@ -76,7 +76,7 @@ public class NFTMintingActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(Intent.createChooser(intent, "选择图片"), 1002);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.nft_minting_chooser_select_image)), 1002);
     }
 
     private void mintNFT() {
@@ -94,7 +94,7 @@ public class NFTMintingActivity extends AppCompatActivity {
             return;
         }
         
-        if ("自定义图片".equals(imageType) && selectedImageUri == null) {
+        if (getString(R.string.nft_minting_image_type_custom).equals(imageType) && selectedImageUri == null) {
             Toast.makeText(this, R.string.nft_minting_toast_select_image, Toast.LENGTH_SHORT).show();
             return;
         }
@@ -225,7 +225,6 @@ public class NFTMintingActivity extends AppCompatActivity {
     }
 
 }
-
 
 
 

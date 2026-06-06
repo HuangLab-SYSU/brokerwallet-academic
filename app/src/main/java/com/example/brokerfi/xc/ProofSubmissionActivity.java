@@ -93,7 +93,7 @@ public class ProofSubmissionActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(Intent.createChooser(intent, "选择文件"), 1001);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.proof_submission_chooser_select_file)), 1001);
     }
 
     private void submitProof() {
@@ -416,7 +416,7 @@ public class ProofSubmissionActivity extends AppCompatActivity {
         // 如果还是为空或者是document:xxx格式，使用默认名称
         if (result == null || result.isEmpty() || result.startsWith("document:")) {
             Log.w("ProofSubmission", "无法获取有效文件名，当前值: " + result);
-            result = "文件_" + System.currentTimeMillis() + ".file";
+            result = getString(R.string.proof_submission_default_file_prefix) + System.currentTimeMillis() + ".file";
             Log.w("ProofSubmission", "使用默认名称: " + result);
         }
         
@@ -435,7 +435,6 @@ public class ProofSubmissionActivity extends AppCompatActivity {
 
 
 }
-
 
 
 

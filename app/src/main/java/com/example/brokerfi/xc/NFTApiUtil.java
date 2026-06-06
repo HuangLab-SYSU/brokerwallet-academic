@@ -21,7 +21,7 @@ public class NFTApiUtil {
             requestData.addProperty("imageType", imageType);
             
             // 如果是自定义图片，读取并转换为Base64
-            if ("自定义图片".equals(imageType) && imagePath != null) {
+            if ("Custom Image".equals(imageType) && imagePath != null) {
                 File file = new File(imagePath);
                 if (file.exists()) {
                     FileInputStream fis = new FileInputStream(file);

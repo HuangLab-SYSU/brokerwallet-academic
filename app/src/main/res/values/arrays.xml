@@ -2,28 +2,28 @@
 <resources>
     <!-- 事件类型 -->
     <string-array name="event_types">
-        <item>论文发表</item>
-        <item>实验完成</item>
-        <item>代码贡献</item>
-        <item>社区参与</item>
-        <item>会议报告</item>
-        <item>项目合作</item>
-        <item>其他</item>
+        <item>Paper Publication</item>
+        <item>Experiment Completed</item>
+        <item>Code Contribution</item>
+        <item>Community Participation</item>
+        <item>Conference Presentation</item>
+        <item>Project Collaboration</item>
+        <item>Other</item>
     </string-array>
 
     <!-- 贡献等级 -->
     <string-array name="contribution_levels">
-        <item>初级贡献</item>
-        <item>中级贡献</item>
-        <item>高级贡献</item>
-        <item>专家级贡献</item>
-        <item>杰出贡献</item>
+        <item>Entry-Level Contribution</item>
+        <item>Intermediate Contribution</item>
+        <item>Advanced Contribution</item>
+        <item>Expert Contribution</item>
+        <item>Outstanding Contribution</item>
     </string-array>
 
     <!-- 图片类型 -->
     <string-array name="image_types">
-        <item>自动生成勋章</item>
-        <item>自定义图片</item>
+        <item>Auto-Generated Medal</item>
+        <item>Custom Image</item>
     </string-array>
 </resources>
 

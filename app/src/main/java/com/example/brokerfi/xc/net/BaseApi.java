@@ -68,7 +68,7 @@ public abstract class BaseApi {
             }
 
         } catch (Exception e) {
-            callback.onFail("解析错误");
+            callback.onFail("Parse error");
         }
     }
 }

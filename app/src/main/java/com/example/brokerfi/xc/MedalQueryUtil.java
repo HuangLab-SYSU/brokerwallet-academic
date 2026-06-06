@@ -37,11 +37,11 @@ public class MedalQueryUtil {
                 callback.onSuccess(result);
             } else {
                 Log.w("MedalQuery", "响应为空");
-                callback.onError("无响应数据");
+                callback.onError("No response data");
             }
         } catch (Exception e) {
             Log.e("MedalQuery", "查询用户勋章失败", e);
-            callback.onError("查询失败: " + e.getMessage());
+            callback.onError("Query failed: " + e.getMessage());
         }
     }
     
@@ -66,11 +66,11 @@ public class MedalQueryUtil {
                 callback.onSuccess(result);
             } else {
                 Log.w("MedalQuery", "全局统计响应为空");
-                callback.onError("无响应数据");
+                callback.onError("No response data");
             }
         } catch (Exception e) {
             Log.e("MedalQuery", "查询全局统计失败", e);
-            callback.onError("查询失败: " + e.getMessage());
+            callback.onError("Query failed: " + e.getMessage());
         }
     }
     

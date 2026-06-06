@@ -428,7 +428,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                 try {
                     JSONObject nft = nfts.getJSONObject(i);
                     String name = nft.optString("name", "NFT #" + nft.optString("tokenId", ""));
-                    String description = nft.optString("description", "暂无描述");
+                    String description = nft.optString("description", getString(R.string.global_stats_no_description));
                     String imageUrl = nft.optString("imageUrl", "");
                     
                     // 检查图片URL格式并处理
@@ -479,7 +479,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                     // 获取NFT铸造时间、持有者地址和花名
                     String mintTime = nft.optString("mintTime", "");
                     String ownerAddress = nft.optString("ownerAddress", "");
-                    String ownerDisplayName = nft.optString("ownerDisplayName", "匿名用户");
+                    String ownerDisplayName = nft.optString("ownerDisplayName", getString(R.string.global_stats_anonymous_user));
                     
                     // 解析attributes获取材料上传时间
                     String uploadTime = "";
@@ -569,7 +569,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                     try {
                         JSONObject nft = nfts.getJSONObject(i);
                         String name = nft.optString("name", "NFT #" + nft.optString("tokenId", ""));
-                        String description = nft.optString("description", "暂无描述");
+                        String description = nft.optString("description", getString(R.string.global_stats_no_description));
                         String imageUrl = nft.optString("imageUrl", "");
                         
                         // 检查图片URL格式并处理
@@ -620,7 +620,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                         // 获取NFT铸造时间、持有者地址和花名
                         String mintTime = nft.optString("mintTime", "");
                         String ownerAddress = nft.optString("ownerAddress", "");
-                        String ownerDisplayName = nft.optString("ownerDisplayName", "匿名用户");
+                        String ownerDisplayName = nft.optString("ownerDisplayName", getString(R.string.global_stats_anonymous_user));
                         
                         // 解析attributes获取材料上传时间
                         String uploadTime = "";

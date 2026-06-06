@@ -430,12 +430,12 @@ public class MyCenterActivity extends AppCompatActivity {
                                     
                                     // 审核信息
                                     record.setAuditStatus(submission.optString("auditStatus", ""));
-                                    record.setAuditStatusDesc(submission.optString("auditStatusDesc", "未知状态"));
+                                    record.setAuditStatusDesc(submission.optString("auditStatusDesc", getString(R.string.my_center_unknown_status)));
                                     record.setAuditTime(submission.optString("auditTime", ""));
                                     
                                     // 勋章信息
                                     record.setMedalAwarded(submission.optString("medalAwarded", "NONE"));
-                                    record.setMedalAwardedDesc(submission.optString("medalAwardedDesc", "无"));
+                                    record.setMedalAwardedDesc(submission.optString("medalAwardedDesc", getString(R.string.my_center_none)));
                                     record.setMedalAwardTime(submission.optString("medalAwardTime", ""));
                                     record.setMedalTransactionHash(submission.optString("medalTransactionHash", ""));
                                     
@@ -602,7 +602,7 @@ public class MyCenterActivity extends AppCompatActivity {
                                     try {
                                         JSONObject nft = nfts.getJSONObject(i);
                                         String name = nft.optString("name", "NFT #" + nft.optString("tokenId", ""));
-                                        String description = nft.optString("description", "暂无描述");
+                                        String description = nft.optString("description", getString(R.string.my_center_no_description));
                                         String imageUrl = nft.optString("imageUrl", "");
                                         
                                         // 检查图片URL格式并处理

@@ -86,8 +86,8 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.tvTitle.setText(post.getTitle());
             vh.tvContent.setText(post.getContent());
             vh.tvUsername.setText(post.getUserName());
-            vh.btnComment.setText("💬 " + post.getCommentCount());
-            vh.btnLike.setText("👍 " + post.getLikeCount());
+            vh.btnComment.setText(context.getString(R.string.post_adapter_comment_count, post.getCommentCount()));
+            vh.btnLike.setText(context.getString(R.string.post_adapter_like_count, post.getLikeCount()));
             // 格式化时间
             try {
                 vh.tvTime.setText(

@@ -58,7 +58,7 @@ public class SubmissionUtil {
                 
                 // 1. 添加所有证明文件（必填）
                 if (proofFileUris == null || proofFileUris.isEmpty()) {
-                    callback.onError("请选择至少一个证明文件");
+                    callback.onError("Please select at least one proof file");
                     return;
                 }
                 
@@ -73,7 +73,7 @@ public class SubmissionUtil {
                     
                     File proofFile = getFileFromUri(context, proofFileUri);
                     if (proofFile == null) {
-                        callback.onError("无法获取证明文件 " + (i + 1));
+                        callback.onError("Unable to get proof file " + (i + 1));
                         return;
                     }
                     
@@ -136,14 +136,14 @@ public class SubmissionUtil {
                     Log.d(TAG, "一体化提交成功: " + responseBody);
                     callback.onSuccess(responseBody);
                 } else {
-                    String errorBody = response.body() != null ? response.body().string() : "未知错误";
+                    String errorBody = response.body() != null ? response.body().string() : "Unknown error";
                     Log.e(TAG, "一体化提交失败: " + response.code() + " - " + errorBody);
-                    callback.onError("提交失败: " + response.code() + " - " + errorBody);
+                    callback.onError("Submission failed: " + response.code() + " - " + errorBody);
                 }
                 
             } catch (Exception e) {
                 Log.e(TAG, "一体化提交异常", e);
-                callback.onError("提交异常: " + e.getMessage());
+                callback.onError("Submission exception: " + e.getMessage());
             }
         }).start();
     }

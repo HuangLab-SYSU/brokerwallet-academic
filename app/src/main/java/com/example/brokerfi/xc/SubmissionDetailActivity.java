@@ -133,13 +133,13 @@ public class SubmissionDetailActivity extends AppCompatActivity {
                 JSONObject data = jsonResponse.getJSONObject("data");
                 displaySubmissionDetail(data);
             } else {
-                String message = jsonResponse.optString("message", "获取详情失败");
+                String message = jsonResponse.optString("message", getString(R.string.submission_detail_error_load_failed_plain));
                 showError(message);
             }
             
         } catch (JSONException e) {
             Log.e(TAG, "解析详情响应失败", e);
-            showError("数据解析失败");
+            showError(getString(R.string.submission_detail_error_parse_failed));
         }
     }
     
@@ -151,9 +151,9 @@ public class SubmissionDetailActivity extends AppCompatActivity {
             detailContainer.removeAllViews();
             
             // 文件信息
-            addDetailItem("📄 文件名", data.optString("fileName"));
-            addDetailItem("📦 文件大小", formatFileSize(data.optLong("fileSize")));
-            addDetailItem("📅 提交时间", formatDateTime(data.optString("uploadTime")));
+            addDetailItem(getString(R.string.submission_detail_label_file_name), data.optString("fileName"));
+            addDetailItem(getString(R.string.submission_detail_label_file_size), formatFileSize(data.optLong("fileSize")));
+            addDetailItem(getString(R.string.submission_detail_label_upload_time), formatDateTime(data.optString("uploadTime")));
             
             // 审核状态
             String auditStatus = data.optString("auditStatusDesc");
@@ -161,7 +161,7 @@ public class SubmissionDetailActivity extends AppCompatActivity {
             if (auditTime != null && !auditTime.isEmpty()) {
                 auditStatus += " (" + formatDateTime(auditTime) + ")";
             }
-            addDetailItem("🔍 审核状态", auditStatus);
+            addDetailItem(getString(R.string.submission_detail_label_audit_status), auditStatus);
             
             // 勋章信息
             String medalDesc = data.optString("medalAwardedDesc");
@@ -169,7 +169,7 @@ public class SubmissionDetailActivity extends AppCompatActivity {
             if (medalTime != null && !medalTime.isEmpty()) {
                 medalDesc += " (" + formatDateTime(medalTime) + ")";
             }
-            addDetailItem("🏅 勋章奖励", medalDesc);
+            addDetailItem(getString(R.string.submission_detail_label_medal_reward), medalDesc);
             
             // 处理进度
             if (data.has("processSteps")) {
@@ -179,21 +179,21 @@ public class SubmissionDetailActivity extends AppCompatActivity {
                     if (i > 0) stepsText.append("\n");
                     stepsText.append(steps.getString(i));
                 }
-                addDetailItem("📋 处理进度", stepsText.toString());
+                addDetailItem(getString(R.string.submission_detail_label_process_progress), stepsText.toString());
             }
             
             // 用户信息
             if (data.has("user")) {
                 JSONObject user = data.getJSONObject("user");
-                addDetailItem("👤 提交用户", user.optString("displayName", "未设置"));
-                addDetailItem("🏆 总勋章数", String.valueOf(user.optInt("totalMedals")));
+                addDetailItem(getString(R.string.submission_detail_label_submitter), user.optString("displayName", getString(R.string.submission_detail_value_not_set)));
+                addDetailItem(getString(R.string.submission_detail_label_total_medals), String.valueOf(user.optInt("totalMedals")));
             }
             
             detailContainer.setVisibility(View.VISIBLE);
             
         } catch (JSONException e) {
             Log.e(TAG, "显示详情失败", e);
-            showError("显示详情失败");
+            showError(getString(R.string.submission_detail_error_display_failed));
         }
     }
     
@@ -217,7 +217,7 @@ public class SubmissionDetailActivity extends AppCompatActivity {
      */
     private void handleDetailError(String error) {
         Log.e(TAG, "获取提交详情失败: " + error);
-        showError("获取详情失败: " + error);
+        showError(getString(R.string.submission_detail_error_load_failed) + " " + error);
     }
     
     /**
@@ -290,4 +290,3 @@ public class SubmissionDetailActivity extends AppCompatActivity {
     }
 
 }
-

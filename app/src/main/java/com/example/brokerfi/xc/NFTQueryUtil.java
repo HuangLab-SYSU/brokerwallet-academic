@@ -39,11 +39,11 @@ public class NFTQueryUtil {
                 callback.onSuccess(result);
             } else {
                 Log.w("NFTQuery", "NFT响应为空");
-                callback.onError("无响应数据");
+                callback.onError("No response data");
             }
         } catch (Exception e) {
             Log.e("NFTQuery", "查询用户NFT失败", e);
-            callback.onError("查询失败: " + e.getMessage());
+            callback.onError("Query failed: " + e.getMessage());
         }
     }
     
@@ -68,11 +68,11 @@ public class NFTQueryUtil {
                 callback.onSuccess(result);
             } else {
                 Log.w("NFTQuery", "NFT数据响应为空");
-                callback.onError("无响应数据");
+                callback.onError("No response data");
             }
         } catch (Exception e) {
             Log.e("NFTQuery", "查询NFT数据失败", e);
-            callback.onError("查询失败: " + e.getMessage());
+            callback.onError("Query failed: " + e.getMessage());
         }
     }
     

@@ -63,7 +63,7 @@ public class RewardApi extends BaseApi {
             executePost(url, body, type, callback);
 
         } catch (Exception e) {
-            callback.onFail("构造请求失败");
+            callback.onFail("Failed to build request");
         }
     }
 }

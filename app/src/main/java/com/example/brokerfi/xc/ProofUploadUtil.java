@@ -205,14 +205,14 @@ public class ProofUploadUtil {
                     Log.d(TAG, "删除成功: " + responseBody);
                     callback.onSuccess(responseBody);
                 } else {
-                    String errorBody = response.body() != null ? response.body().string() : "未知错误";
+                    String errorBody = response.body() != null ? response.body().string() : "Unknown error";
                     Log.e(TAG, "删除失败: " + response.code() + " - " + errorBody);
-                    callback.onError("删除失败: " + response.code() + " - " + errorBody);
+                    callback.onError("Delete failed: " + response.code() + " - " + errorBody);
                 }
                 
             } catch (Exception e) {
                 Log.e(TAG, "删除异常", e);
-                callback.onError("删除异常: " + e.getMessage());
+                callback.onError("Delete exception: " + e.getMessage());
             }
         }).start();
     }

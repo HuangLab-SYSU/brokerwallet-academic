@@ -124,7 +124,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
 
                         // 空输入处理
                         if (input.isEmpty()) {
-                            et_price.setText("————————");
+                            et_price.setText(R.string.buy_nfts_price_placeholder);
                             btnConfirm.setEnabled(false);
                             return;
                         }
@@ -135,7 +135,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
                             // 判断shares输入格式
                             if (s.compareTo(BigInteger.ONE) < 0) {
                                 et_shares.setError(getString(R.string.buy_nfts_error_1));
-                                et_price.setText("————————");
+                                et_price.setText(R.string.buy_nfts_price_placeholder);
                                 btnConfirm.setEnabled(false);
                                 Toast.makeText(BuyNFTsActivity.this, R.string.buy_nfts_toast_1, Toast.LENGTH_SHORT).show();
                                 return;
@@ -143,7 +143,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
 
                             if (s.compareTo(selected.getShares()) > 0) {
                                 et_shares.setError(getString(R.string.buy_nfts_toast_exceeds_shares));
-                                et_price.setText("————————");
+                                et_price.setText(R.string.buy_nfts_price_placeholder);
                                 btnConfirm.setEnabled(false);
                                 Toast.makeText(BuyNFTsActivity.this, R.string.buy_nfts_toast_exceeds_shares, Toast.LENGTH_SHORT).show();
                                 return;
@@ -155,7 +155,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
                             btnConfirm.setEnabled(true);
 
                         } catch (NumberFormatException e) {
-                            et_price.setText("————————");
+                            et_price.setText(R.string.buy_nfts_price_placeholder);
                             btnConfirm.setEnabled(false);
                         }
                     }

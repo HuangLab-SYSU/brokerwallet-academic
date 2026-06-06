@@ -41,7 +41,7 @@ public class SharedPrefsUtil {
             );
 
         } catch (GeneralSecurityException | IOException e) {
-            throw new RuntimeException("EncryptedSharedPreferences 初始化失败", e);
+            throw new RuntimeException("EncryptedSharedPreferences initialization failed", e);
         }
     }
 

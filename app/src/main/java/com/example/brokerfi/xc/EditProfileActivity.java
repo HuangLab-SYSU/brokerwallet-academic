@@ -143,7 +143,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             Log.d("COS_DEBUG", "图片上传成功：" + finalAvatarUrl);
                             updateUserInfo(username, finalAvatarUrl);
                         } else {
-                            onFail("头像上传失败");
+                            onFail(getString(R.string.edit_profile_toast_avatar_failed));
                         }
                     }
 
