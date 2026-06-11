@@ -21,7 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 
-/** 璇诲彇 ERC-20 浠ｅ竵 symbol / name锛堝吋瀹?string 涓?bytes32锛夈€?*/
+/** Reads ERC-20 {@code symbol}/{@code name} metadata with string and bytes32 fallback. */
 public final class TokenMetadataHelper {
 
     public static final class Erc20Metadata {
@@ -40,7 +40,9 @@ public final class TokenMetadataHelper {
     }
 
     /**
-     * 閾句笂鏍￠獙 ERC-20锛氬繀椤昏兘璇诲埌 symbol 涓?decimals锛屽惁鍒欒繑鍥?null銆?     */
+     * Validates an ERC-20 contract by requiring readable {@code symbol} and
+     * {@code decimals} values. Returns {@code null} when validation fails.
+     */
     @androidx.annotation.Nullable
     public static Erc20Metadata fetchValidatedMetadata(String contractAddress, String privateKey) {
         String symbol = readSymbol(contractAddress, privateKey);
@@ -168,5 +170,3 @@ public final class TokenMetadataHelper {
         return raw != null ? raw : "";
     }
 }
-
-

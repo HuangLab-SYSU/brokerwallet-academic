@@ -8,7 +8,7 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-/** 褰撳墠 wBKC 椤甸€変腑鐨勪唬甯侊紙鎸夐挶鍖呰蹇嗭級銆?*/
+/** Remembers the currently selected token per wallet address. */
 public final class TokenSelection {
 
     private static final String PREFS = "token_selection";
@@ -82,5 +82,3 @@ public final class TokenSelection {
         return context.getApplicationContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
     }
 }
-
-

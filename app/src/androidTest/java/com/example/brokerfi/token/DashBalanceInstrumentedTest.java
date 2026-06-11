@@ -10,7 +10,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * 璁惧/CI 闆嗘垚娴嬭瘯锛歞ash 绛惧悕 eth_call 璇诲彇 wBKC balanceOf銆? * 杩愯锛歿@code ./gradlew connectedDebugAndroidTest}
+ * Device/CI integration test for the dash-signed {@code eth_call} path used to
+ * read the wBKC {@code balanceOf} value.
+ *
+ * Run with {@code ./gradlew connectedDebugAndroidTest}.
  */
 public class DashBalanceInstrumentedTest {
 
@@ -27,4 +30,3 @@ public class DashBalanceInstrumentedTest {
         assertTrue("fresh wallet has no wBKC", balance.signum() == 0);
     }
 }
-

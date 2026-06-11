@@ -18,7 +18,7 @@ public final class TokenConfig {
             "http://" + DASH_GATEWAY_HOST + ":42515";
 
     public static final long DASH_ETH_CALL_TIMEOUT_MS = 25_000L;
-    /** 浣欓 balanceOf 涓撶敤瓒呮椂锛涘け璐ュ悗浼氶噸璇曟垨璧?RPC 鍏滃簳銆?*/
+    /** Dedicated timeout for {@code balanceOf}; callers may retry or fall back to raw RPC. */
     public static final long BALANCE_ETH_CALL_TIMEOUT_MS = 12_000L;
     public static final int BALANCE_READ_MAX_ATTEMPTS = 2;
     public static final long DEFAULT_CHAIN_READ_TIMEOUT_MS = 20_000L;
@@ -27,7 +27,10 @@ public final class TokenConfig {
             "https://" + DASH_GATEWAY_HOST + "/tx/%s";
 
     /**
-     * dash 浜ゆ槗绱㈠紩 {@code gettx2}銆傚綋鍓嶄粎 {@code http://host/gettx2} 鍙敤锛?     * {@code https://host:443/gettx2} 杩斿洖 404锛屽緟 dash 鏀寔鍚庡啀鍒?HTTPS銆?     */
+     * dash transaction index endpoint for {@code gettx2}. At the moment only
+     * {@code http://host/gettx2} works; {@code https://host:443/gettx2} still
+     * returns 404.
+     */
     public static final String DASH_GETTX2_URL =
             "http://" + DASH_GATEWAY_HOST + "/gettx2?acc=";
 
@@ -61,7 +64,7 @@ public final class TokenConfig {
         return base + path;
     }
 
-    /** {@code gettx2?acc=} 瀹屾暣 URL锛寋@code account} 鍙负甯︽垨涓嶅甫 {@code 0x} 鐨勫湴鍧€銆?*/
+    /** Builds the {@code gettx2?acc=} URL. {@code account} may include or omit {@code 0x}. */
     public static String getGetTx2AccountUrl(String account) {
         if (account == null || account.trim().isEmpty()) {
             return DASH_GETTX2_URL;
@@ -85,5 +88,3 @@ public final class TokenConfig {
         return USE_SIGNED_CHAIN_READ;
     }
 }
-
-

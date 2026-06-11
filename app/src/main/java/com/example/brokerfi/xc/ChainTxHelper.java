@@ -9,12 +9,11 @@ import com.example.brokerfi.token.TokenConfig;
 
 import org.json.JSONObject;
 
-/**
- * wBKC 閾句笂鍐欐搷浣滐細dash 绛惧悕 {@code eth_sendTransaction}銆? */
+/** Helper for token-related on-chain writes via dash-signed {@code eth_sendTransaction}. */
 public final class ChainTxHelper {
 
     private static final String TAG = "ChainTxHelper";
-    /** 绾?120s锛氭參鍧楁椂鍑忓皯璇姤 pending銆?*/
+    /** Roughly 120 seconds of receipt polling to reduce false pending results on slow blocks. */
     private static final int RECEIPT_POLL_MAX = 80;
     private static final long RECEIPT_POLL_DELAY_MS = 1500L;
 
@@ -80,7 +79,8 @@ public final class ChainTxHelper {
     }
 
     /**
-     * @return SUCCESS 宸茬‘璁わ紱PENDING 瓒呮椂鏈鍒板洖鎵э紱FAILED 閾句笂 execution reverted
+     * @return SUCCESS when confirmed, PENDING when the timeout expires before a
+     * receipt arrives, and FAILED when the chain reports execution reverted.
      */
     public static ReceiptStatus waitReceiptStatus(String txHash, String privateKey)
             throws InterruptedException {
@@ -101,7 +101,7 @@ public final class ChainTxHelper {
         return ReceiptStatus.PENDING;
     }
 
-    /** -1 鏈煡/灏氭棤鍥炴墽锛? 澶辫触锛? 鎴愬姛銆?*/
+    /** Returns -1 for unknown/no receipt yet, 0 for failure, and 1 for success. */
     private static int queryReceiptState(String txHash, String privateKey) {
         if (TextUtils.isEmpty(txHash)) {
             return -1;
@@ -195,5 +195,3 @@ public final class ChainTxHelper {
         return v.length() >= 66 ? v : null;
     }
 }
-
-

@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.menu.NavigationHelper;
 
-/** 涓?wBKC 瀛愰〉闈㈢粦瀹?BrokerChain 椤舵爮锛坙ogo銆佽彍鍗曘€侀€氱煡锛夈€?*/
+/** Binds the shared BrokerChain top bar on token sub-pages. */
 public final class TokenTopBarHelper {
 
     private TokenTopBarHelper() {
@@ -37,5 +37,3 @@ public final class TokenTopBarHelper {
         }
     }
 }
-
-

@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.brokerfi.R;
 import com.example.brokerfi.xc.ChainAddressUtil;
 
-/** 鍚堢害/鏀舵鍦板潃杈撳叆锛氱矘璐淬€佽ˉ鍏?0x銆佹牎楠屽苟灏嗗厜鏍囩疆浜庡紑澶淬€?*/
+/** Address-entry helper for paste, 0x normalization, validation, and caret reset. */
 public final class TokenAddressInputHelper {
 
     public interface OnAddressChanged {
@@ -199,5 +199,3 @@ public final class TokenAddressInputHelper {
         void set(boolean value);
     }
 }
-
-

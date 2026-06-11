@@ -27,7 +27,8 @@ public final class TokenContractUiHelper {
     }
 
     /**
-     * 缂佹垵鐣鹃崥鍫㈠閸楋紕澧栭敍姘勾閸р偓 + 婢跺秴鍩楅幐澶愭尦閿涙硰@code compact} 娑?true 閺冨爼娈ｉ挊蹇氼嚛閺勫骸鑻熺紓鈺冪叚閸︽澘娼冪仦鏇犮仛閵?
+     * Binds the contract card and optionally switches to the compact display
+     * mode used by tighter layouts.
      */
     public static void bindContractCard(
             AppCompatActivity activity,
@@ -83,5 +84,3 @@ public final class TokenContractUiHelper {
         Toast.makeText(context, R.string.token_address_copied, Toast.LENGTH_SHORT).show();
     }
 }
-
-

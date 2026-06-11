@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brokerfi.R;
 
-/** 娣诲姞浠ｅ竵璇存槑锛氬悎绾﹀湴鍧€鏍煎紡涓庡鍏ヨ姹傘€?*/
+/** Static help screen for importing ERC-20 token contracts. */
 public class TokenAddHelpActivity extends AppCompatActivity {
 
     @Override
@@ -21,5 +21,3 @@ public class TokenAddHelpActivity extends AppCompatActivity {
         title.setText(R.string.token_add_help_title);
     }
 }
-
-

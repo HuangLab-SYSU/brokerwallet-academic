@@ -3,7 +3,6 @@ package com.example.brokerfi.token;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.brokerfi.token.TokenConfig;
 import com.example.brokerfi.xc.ChainAddressUtil;
 import com.example.brokerfi.xc.DashEthCall;
 import com.example.brokerfi.xc.SecurityUtil;
@@ -97,7 +96,10 @@ public final class TokenContractHelper {
     }
 
     /**
-     * ERC-20 浣欓璇诲彇锛歲uery-g 浠呮敮鎸佸師鐢?BKC锛屼唬甯佸繀椤?eth_call balanceOf銆?     * 鍏?dash 绛惧悕 :443锛屽け璐ュ啀璇?:42515 JSON-RPC锛屽悇鏈€澶?{@link TokenConfig#BALANCE_READ_MAX_ATTEMPTS} 娆°€?     */
+     * Reads an ERC-20 balance with the signed dash {@code eth_call} path first, then falls back
+     * to the plain JSON-RPC endpoint. Signed calls are retried up to
+     * {@link TokenConfig#BALANCE_READ_MAX_ATTEMPTS} times.
+     */
     private static String queryBalanceRead(String contractAddress, String dataHex, String privateKey)
             throws Exception {
         Exception lastError = null;
@@ -155,7 +157,7 @@ public final class TokenContractHelper {
         return DashEthCall.signedCall(contractAddress, dataHex, privateKey);
     }
 
-    /** 缁?dash 缃戝叧绛惧悕 {@code eth_call} 璇诲彇閾句笂鍚堢害鐘舵€侊紙metadata 绛夐潪浣欓璇诲彇锛夈€?*/
+    /** Executes a generic signed dash {@code eth_call} for ERC-20 metadata or other read-only calls. */
     public static String queryChainRead(String contractAddress, String dataHex, String privateKey)
             throws Exception {
         if (TextUtils.isEmpty(privateKey)) {
@@ -166,5 +168,3 @@ public final class TokenContractHelper {
         return DashEthCall.signedCall(to, data, privateKey);
     }
 }
-
-

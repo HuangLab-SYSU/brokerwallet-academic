@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicReference;
 
-/** 缂?dash 缁涙儳鎮?{@code eth_call} / {@code eth_sendTransaction} 鐠囪鍟撻柧淇扁偓?*/
+/** dash transport wrapper for {@code eth_call} and {@code eth_sendTransaction}. */
 public final class DashEthCall {
 
     private static final String TAG = "DashEthCall";
@@ -305,5 +305,3 @@ public final class DashEthCall {
         return v;
     }
 }
-
-

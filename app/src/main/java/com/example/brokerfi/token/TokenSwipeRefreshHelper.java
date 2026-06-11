@@ -5,7 +5,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.brokerfi.R;
 
-/** wBKC 椤甸潰缁熶竴鐨?SwipeRefreshLayout 閰嶇疆銆?*/
+/** Shared SwipeRefreshLayout configuration for token screens. */
 public final class TokenSwipeRefreshHelper {
 
     private static final int PROGRESS_START_DP = 20;
@@ -26,7 +26,8 @@ public final class TokenSwipeRefreshHelper {
     }
 
     /**
-     * 涓嬫媺鍒锋柊锛氬己鍒舵媺鍙栭摼涓婁綑棰濓紝鍦ㄤ富绾跨▼鏇存柊 UI 骞跺仠姝㈠埛鏂板姩鐢汇€?
+     * Forces an on-chain balance refresh, updates the UI on the main thread,
+     * and always stops the refresh animation afterward.
      */
     public static void refreshBalances(AppCompatActivity activity, SwipeRefreshLayout refresh,
                                        Runnable updateUiOnMainThread) {
@@ -61,5 +62,3 @@ public final class TokenSwipeRefreshHelper {
         return Math.round(valueDp * refresh.getResources().getDisplayMetrics().density);
     }
 }
-
-

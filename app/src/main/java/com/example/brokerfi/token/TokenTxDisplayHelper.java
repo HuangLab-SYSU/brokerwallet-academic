@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.example.brokerfi.R;
 import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
 
-/** 浜ゆ槗鍘嗗彶鍒楄〃 / 璇︽儏涓殑閲戦灞曠ず锛坰wap 浣跨敤 {@code youjiantou} 绠ご锛夈€?*/
+/** Formats token transaction labels and amounts for list/detail presentation. */
 public final class TokenTxDisplayHelper {
 
     private TokenTxDisplayHelper() {
@@ -119,5 +119,3 @@ public final class TokenTxDisplayHelper {
                 && TokenConfig.NATIVE_SYMBOL.equalsIgnoreCase(record.resolveToSymbol());
     }
 }
-
-

@@ -7,7 +7,7 @@ import android.text.TextUtils;
 
 import com.example.brokerfi.token.TokenConfig;
 
-/** 鍏戞崲椤靛彲閫夎祫浜э細鍘熺敓 BKC 鎴栧凡鍚敤 ERC-20銆?*/
+/** Swap-side token choice: native BKC or an enabled ERC-20 token. */
 public final class SwapTokenOption {
 
     public static final String NATIVE_KEY = "native_bkc";
@@ -65,7 +65,7 @@ public final class SwapTokenOption {
         return !nativeBkc && token != null && token.isBuiltIn();
     }
 
-    /** 鏄惁涓哄畼鏂?wBKC 鍚堢害锛堟寜鍦板潃姣斿锛岄槻姝㈠亣 wBKC 鍙備笌鍖呰鍏戞崲锛夈€?*/
+    /** Returns true when this option points to the official wrapped BKC contract. */
     public boolean isOfficialwrappedBkc(Context context) {
         if (nativeBkc || token == null || context == null) {
             return false;
@@ -92,5 +92,3 @@ public final class SwapTokenOption {
         return a.selectionKey().equals(b.selectionKey());
     }
 }
-
-

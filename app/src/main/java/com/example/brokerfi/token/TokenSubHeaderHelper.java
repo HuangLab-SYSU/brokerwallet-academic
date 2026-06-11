@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brokerfi.R;
 
-/** wBKC 瀛愭爣棰樻爮锛氳鎯呴〉銆?銆嶆墦寮€褰撳墠閫変腑浠ｅ竵鐨勫悎绾︿俊鎭€?*/
+/** Token sub-header helper: opens contract info for the currently selected token. */
 public final class TokenSubHeaderHelper {
 
     private TokenSubHeaderHelper() {
@@ -43,5 +43,3 @@ public final class TokenSubHeaderHelper {
         });
     }
 }
-
-

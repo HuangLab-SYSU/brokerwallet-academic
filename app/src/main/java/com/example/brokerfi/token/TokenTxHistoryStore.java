@@ -1,11 +1,11 @@
 package com.example.brokerfi.token;
 
-import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
-import com.example.brokerfi.xc.ChainAddressUtil;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
+import com.example.brokerfi.xc.ChainAddressUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -16,7 +16,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-/** 鎸夐挶鍖呭湴鍧€鎸佷箙鍖栦唬甯佷氦鏄撳巻鍙诧紙鍙寜鍚堢害绛涢€夛級銆?*/
+/** Persistent store for ERC-20, wrap, unwrap, and swap history records per wallet. */
 public final class TokenTxHistoryStore {
 
     private static final String PREFS = "token_tx_history";
@@ -41,7 +41,7 @@ public final class TokenTxHistoryStore {
         addIfAbsent(context, walletAddress, record);
     }
 
-    /** 鎸変氦鏄撳搱甯?/ 杩戦噸澶嶄簨浠跺幓閲嶅悗鍐欏叆銆?*/
+    /** Adds a record only when an equivalent tx hash or near-duplicate display row is not already stored. */
     public static boolean addIfAbsent(Context context, String walletAddress, TokenTxRecord record) {
         if (context == null || record == null || TextUtils.isEmpty(walletAddress)) {
             return false;
@@ -63,7 +63,7 @@ public final class TokenTxHistoryStore {
         return true;
     }
 
-    /** 鍐欏叆鍓嶆槸鍚︿笌宸叉湁璁板綍杩戦噸澶嶏紙鍚屽悎绾︺€佸悓閲戦銆? 鍒嗛挓鍐呫€佺被鍨嬪啿绐侊級銆?*/
+    /** Checks whether a similar record is already stored for the wallet. */
     public static boolean isDuplicateOfStored(
             Context context, String walletAddress, TokenTxRecord record) {
         if (context == null || record == null || TextUtils.isEmpty(walletAddress)) {
@@ -72,7 +72,7 @@ public final class TokenTxHistoryStore {
         return findNearDuplicate(loadList(context, storageKey(walletAddress)), record) != null;
     }
 
-    /** 鎸佷箙鍖栧幓閲嶏細娓呯悊鏈湴宸插瓨鍌ㄧ殑閲嶅浜ゆ槗锛堜繚鐣?wrap/unwrap 绛変紭鍏堢骇楂樼殑璁板綍锛夈€?*/
+    /** Removes duplicate display rows so wrap/unwrap history stays compact and readable. */
     public static int compactWallet(Context context, String walletAddress) {
         if (context == null || TextUtils.isEmpty(walletAddress)) {
             return 0;
@@ -92,7 +92,9 @@ public final class TokenTxHistoryStore {
     }
 
     /**
-     * 绉婚櫎 gettx2 閽卞寘鈫旈挶鍖呯储寮曡鍐欏叆鐨勮褰曪紙鍚凡鏍囨敞 wBKC 鍚堢害鐨勬棫鏁版嵁锛夈€?     * 涓嶅奖鍝嶆湰鍦?{@code 0x} hash 璁板綍鍙婂悎绾︾储寮曠殑 wrap/unwrap/鏀舵銆?     */
+     * Removes gettx2 wallet-peer SEND/RECEIVE rows identified during sync while preserving
+     * records that already have real on-chain transaction hashes.
+     */
     public static int removeGetTx2WalletPeerRecords(
             Context context,
             String walletAddress,
@@ -123,14 +125,15 @@ public final class TokenTxHistoryStore {
         return removed;
     }
 
-    /**
-     * 璇诲彇鎴栧睍绀哄墠绂荤嚎娓呯悊璇啓鍏ョ殑 gettx2 閽卞寘鈫旈挶鍖呰褰曪紙涓嶄緷璧栫綉缁滐級銆?     */
+    /** Removes misclassified peer-transfer rows left by older gettx2-based history imports. */
     public static int sanitizeWalletHistory(Context context, String walletAddress) {
         return removeMisclassifiedPeerGetTx2Records(context, walletAddress);
     }
 
     /**
-     * 绂荤嚎娓呯悊锛歡ettx2 浠呮暟瀛?id 鐨?SEND/RECEIVE 涓嶅彲闈狅紙鍚悎绾︾储寮曡鏍?wBKC锛夛紝鍙繚鐣?0x 閾句笂 hash銆?     */
+     * Removes legacy gettx2 SEND/RECEIVE rows that still store a numeric API id instead of a real
+     * {@code 0x...} transaction hash.
+     */
     public static int removeMisclassifiedPeerGetTx2Records(Context context, String walletAddress) {
         if (context == null || TextUtils.isEmpty(walletAddress)) {
             return 0;
@@ -172,7 +175,7 @@ public final class TokenTxHistoryStore {
         return !TextUtils.isEmpty(txId) && walletPeerGetTx2Ids.contains(txId);
     }
 
-    /** 灞曠ず灞傝繃婊わ細gettx2 鏁板瓧 id 鐨?SEND/RECEIVE锛堥潪閾句笂 0x hash锛夈€?*/
+    /** Returns true when a record still points to a numeric gettx2 id instead of a real tx hash. */
     public static boolean isMisclassifiedPeerGetTx2Record(TokenTxRecord record) {
         return shouldRemoveMisclassifiedPeerRecord(record);
     }
@@ -249,7 +252,7 @@ public final class TokenTxHistoryStore {
         return display;
     }
 
-    /** 鎸夋椂闂撮檷搴忥細鏈€鏂板湪涓婏紱鏃堕棿鐩稿悓鍒欐寜 txHash 绋冲畾鎺掑簭銆?*/
+    /** Sorts newest-first and falls back to tx hash ordering when timestamps are equal. */
     private static void sortNewestFirst(List<TokenTxRecord> records) {
         if (records == null || records.size() < 2) {
             return;
@@ -277,7 +280,9 @@ public final class TokenTxHistoryStore {
     };
 
     /**
-     * 灞曠ず鍓嶅幓閲嶏細unwrap/wrap 鏈湴璁板綍浼樺厛浜?gettx2 璇爣鐨?鎺ユ敹/鍙戦€併€?     */
+     * Removes display-level duplicates where gettx2 rows overlap with wrap, unwrap, or swap
+     * records created from real transaction receipts.
+     */
     private static List<TokenTxRecord> dedupeForDisplay(List<TokenTxRecord> records) {
         if (records == null || records.isEmpty()) {
             return Collections.emptyList();
@@ -340,7 +345,9 @@ public final class TokenTxHistoryStore {
     }
 
     /**
-     * gettx2 甯告妸 wrap/unwrap 閾句笂浜嬩欢鏍囨垚 鎺ユ敹/鍙戦€侊紝涓庢湰鍦?瀛樺叆/鍙栧洖 閲嶅銆?     */
+     * Treats gettx2 SEND/RECEIVE rows as conflicting with wrap/unwrap/swap rows for the same
+     * value so the higher-quality record can replace the lower-quality one.
+     */
     private static boolean isConflictingTypePair(String typeA, String typeB) {
         if (TextUtils.equals(typeA, typeB)) {
             return true;
@@ -427,5 +434,3 @@ public final class TokenTxHistoryStore {
         prefs.edit().putString(key, GSON.toJson(list)).apply();
     }
 }
-
-

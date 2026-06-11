@@ -17,7 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-/** 灞曠ず绠＄悊浠ｅ竵涓凡鍚敤鐨勪唬甯佷緵鍒囨崲銆?*/
+/** Bottom-sheet picker for enabled tokens. */
 public final class TokenPickerDialog {
 
     public interface Listener {
@@ -81,7 +81,7 @@ public final class TokenPickerDialog {
         void onOptionSelected(SwapTokenOption option);
     }
 
-    /** 鍏戞崲椤碉細浠?BKC 涓庡畼鏂?wBKC锛堜笉鏀寔鑷畾涔変唬甯?swap锛夈€?*/
+    /** Swap picker: only native BKC and the official wrapped BKC token are allowed. */
     public static void showForSwap(
             AppCompatActivity activity,
             List<TokenItem> tokens,
@@ -164,5 +164,3 @@ public final class TokenPickerDialog {
         }
     }
 }
-
-

@@ -1,16 +1,15 @@
 package com.example.brokerfi.token;
 
-import com.example.brokerfi.xc.MyUtil;
-import com.example.brokerfi.xc.SecurityUtil;
-
-import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
-import com.example.brokerfi.xc.ChainAddressUtil;
-import com.example.brokerfi.token.TokenContractHelper;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
+import com.example.brokerfi.xc.ChainAddressUtil;
+import com.example.brokerfi.xc.MyUtil;
+import com.example.brokerfi.xc.SecurityUtil;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -19,7 +18,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 鍐呭瓨缂撳瓨 BKC / wBKC 浣欓銆? * BKC 涓庝富椤靛叡鐢?{@link MyUtil#GetAddrAndBalance}锛坬uery-g锛岃緝蹇級锛? * wBKC 闇€鍚堢害 eth_call锛堣緝鎱級锛屼富椤典綑棰濆姞杞藉悗搴旇皟鐢?{@link #seedNativeFromHome} 鍐嶅悗鍙板彧鎷?wBKC銆? */
+ * In-memory snapshot cache for native BKC and ERC-20 balances.
+ * Native balance may be seeded from the home screen, while token balances are refreshed through
+ * signed {@code eth_call} reads and persisted as raw chain units for quick reuse.
+ */
 public final class TokenBalanceCache {
 
     private static final String TAG = "TokenBalanceCache";
@@ -30,7 +32,7 @@ public final class TokenBalanceCache {
     private static volatile boolean tokenFetchInFlight;
     private static volatile long fetchGeneration;
 
-    /** 鏈夎姹傚湪椋炶涓椂锛岃褰曟渶鏂板緟鎷夊彇鐨勫悎绾︼紙閬垮厤鍒囨崲浠ｅ竵鍚庝綑棰濅笉鍒锋柊锛夈€?*/
+    /** Pending request state used to coalesce multiple token balance fetches into one follow-up read. */
     private static String pendingContract;
     private static android.content.Context pendingContext;
     private static String pendingPrivateKey;
@@ -46,7 +48,7 @@ public final class TokenBalanceCache {
 
     private static final List<Runnable> pendingCompletes = new ArrayList<>();
 
-    /** 鎸夐挶鍖?鍚堢害缂撳瓨鏈€杩戞媺鍙栫殑浠ｅ竵浣欓锛屽垏鎹㈠洖宸茬湅杩囩殑浠ｅ竵鏃跺彲绔嬪嵆灞曠ず銆?*/
+    /** LRU snapshots keyed by wallet+contract so recent ERC-20 balances can be reused across screens. */
     private static final LinkedHashMap<String, Snapshot> tokenSnapshots =
             new LinkedHashMap<String, Snapshot>(16, 0.75f, true) {
                 @Override
@@ -74,7 +76,9 @@ public final class TokenBalanceCache {
     }
 
     /**
-     * 涓婚〉宸茬敤 query-g 鎷垮埌 BKC 浣欓鍚庤皟鐢紝wBKC 椤靛彲绔嬪埢鏄剧ず BKC锛屾棤闇€鍐嶇瓑涓€娆?query-g銆?     */
+     * Seeds the native BKC balance from the home screen cache and optionally schedules the token
+     * side of the snapshot if it is still missing.
+     */
     public static void seedNativeFromHome(Context context, String nativeBalance) {
         String wallet = TokenWalletHelper.getWalletAddress(context);
         if (TextUtils.isEmpty(wallet) || nativeBalance == null) {
@@ -92,7 +96,7 @@ public final class TokenBalanceCache {
             cachedAtMs = System.currentTimeMillis();
             nativeFromHome = true;
         }
-        // 涓婚〉 BKC 杞鏃朵粎棣栨棰勭儹 wBKC锛岄伩鍏嶆瘡绉掓姠鍗?eth_call
+        // Native balance is already known here; fetch the token side only when needed.
         if (getSnapshot(wallet, contract) == null) {
             prefetchTokenBalance(context, contract, false, null);
         }
@@ -104,7 +108,7 @@ public final class TokenBalanceCache {
         }
     }
 
-    /** 涓婚〉宸插啓鍏?BKC 鏃讹紝鍏戞崲椤靛彲绔嬪嵆灞曠ず BKC 琛岋紙wBKC 鍙兘浠嶅湪鍔犺浇锛夈€?*/
+    /** Returns true when the cache has a native balance for the wallet, typically seeded from home. */
     public static boolean hasNativeBalance(String walletAddress) {
         synchronized (LOCK) {
             return matchesAccount(walletAddress, null) && cachedAtMs > 0 && nativeFromHome;
@@ -117,7 +121,7 @@ public final class TokenBalanceCache {
         }
     }
 
-    /** 鍐呭瓨蹇収锛涜嫢鏃犲垯璇讳笂娆￠摼涓婃媺鍙栨垚鍔熷苟鎸佷箙鍖栫殑浣欓銆?*/
+    /** Resolves a snapshot from memory first, then from persisted token-chain units on disk. */
     @Nullable
     public static Snapshot resolveSnapshot(
             Context context, String walletAddress, String contractAddress) {
@@ -141,7 +145,7 @@ public final class TokenBalanceCache {
         return disk;
     }
 
-    /** 涓婚〉宸茬紦瀛樼殑 BKC 浣欓锛堜笉浠ｈ〃 ERC-20 宸叉媺鍙栵級銆?*/
+    /** Returns the cached native BKC display balance for the active wallet, if available. */
     @Nullable
     public static String getNativeBalanceDisplay(String walletAddress) {
         synchronized (LOCK) {
@@ -183,7 +187,7 @@ public final class TokenBalanceCache {
         }
     }
 
-    /** 鍒囨崲璐︽埛锛氭竻绌虹紦瀛樺苟浣滃簾杩涜涓殑浣欓鎷夊彇銆?*/
+    /** Clears all cached balance state when the active wallet changes. */
     public static void invalidateOnAccountSwitch() {
         synchronized (LOCK) {
             clearCacheStateLocked();
@@ -209,13 +213,17 @@ public final class TokenBalanceCache {
     }
 
     /**
-     * 浠呯Щ闄ゆ寚瀹氶挶鍖?鍚堢害鐨勪綑棰濆揩鐓э紙涓嶅奖鍝嶅叾浠栦唬甯佺紦瀛橈級銆?     * 鐢ㄤ簬閾句笂鍐欐搷浣溿€佸鍏?绂佺敤浠ｅ竵绛夊満鏅€?     */
+     * Invalidates one token snapshot after a token write. This keeps the native side available
+     * but forces the next ERC-20 balance read to refresh from chain.
+     */
     public static void invalidateTokenSnapshot(String walletAddress, String contractAddress) {
         invalidateAfterWrite(walletAddress, contractAddress);
     }
 
     /**
-     * 閾句笂鍐欐搷浣滃悗浠呭け鏁堟寚瀹氶挶鍖?鍚堢害鐨勪唬甯佸揩鐓э紝骞舵爣璁?BKC 闇€鍒锋柊锛?     * 涓嶆竻绌哄叾浠栦唬甯佺紦瀛樻垨鏁磋〃銆?     */
+     * Invalidates the wallet/contract pair after a send, wrap, unwrap, or swap so subsequent
+     * screens do not keep showing stale token data.
+     */
     public static void invalidateAfterWrite(String walletAddress, String contractAddress) {
         if (TextUtils.isEmpty(walletAddress)) {
             return;
@@ -309,7 +317,7 @@ public final class TokenBalanceCache {
         prefetchTokenOnly(context, true, onComplete, onFetchFailed);
     }
 
-    /** 浠呮媺鍙?wBKC 鍚堢害浣欓锛堟參锛夛紱BKC 浼樺厛鐢ㄤ富椤靛凡缂撳瓨鐨?native銆?*/
+    /** Prefetches the selected token snapshot while reusing any native balance already in cache. */
     public static void prefetchTokenOnly(Context context, boolean force, Runnable onComplete) {
         prefetchTokenOnly(context, force, onComplete, null);
     }
@@ -323,13 +331,13 @@ public final class TokenBalanceCache {
         prefetchTokenBalance(context, contract, force, onComplete, onFetchFailed);
     }
 
-    /** 鎷夊彇鎸囧畾 ERC-20 鍚堢害浣欓銆?*/
+    /** Prefetches the balance snapshot for a specific ERC-20 contract. */
     public static void prefetchTokenBalance(
             Context context, String contractAddress, boolean force, Runnable onComplete) {
         prefetchTokenBalance(context, contractAddress, force, onComplete, null);
     }
 
-    /** 鎷夊彇鎸囧畾 ERC-20 鍚堢害浣欓锛泏@code onFetchFailed} 鍦ㄥ己鍒跺埛鏂颁笖閾句笂鏃犵粨鏋溿€佸張鏃犳棫蹇収鏃跺洖璋冦€?*/
+    /** Prefetches an ERC-20 snapshot and optionally reports a forced-refresh miss to the caller. */
     public static void prefetchTokenBalance(
             Context context,
             String contractAddress,
@@ -551,5 +559,3 @@ public final class TokenBalanceCache {
         }
     }
 }
-
-

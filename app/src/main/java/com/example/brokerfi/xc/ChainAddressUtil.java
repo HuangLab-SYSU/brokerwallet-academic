@@ -20,7 +20,7 @@ public final class ChainAddressUtil {
         return address.trim().toLowerCase(Locale.US);
     }
 
-    /** 灞曠ず鐢細淇濊瘉浠?0x 寮€澶达紙灏忓啓锛夈€?*/
+    /** Returns the display form and guarantees a lowercase {@code 0x} prefix. */
     public static String displayAddress(String address) {
         String normalized = normalizeAddress(address);
         if (TextUtils.isEmpty(normalized)) {
@@ -36,7 +36,7 @@ public final class ChainAddressUtil {
         return !TextUtils.isEmpty(address) && ADDRESS_PATTERN.matcher(address.trim()).matches();
     }
 
-    /** 浠庝簩缁寸爜鍐呭瑙ｆ瀽浠ュお鍧婂湴鍧€锛堟敮鎸?ethereum: URI銆佺函鍦板潃绛夛級銆?*/
+    /** Parses an Ethereum-style address from QR text, including {@code ethereum:} URIs. */
     public static String parseAddressFromQr(String contents) {
         if (TextUtils.isEmpty(contents)) {
             return null;
@@ -66,5 +66,3 @@ public final class ChainAddressUtil {
         return isValidAddress(display) ? display : null;
     }
 }
-
-

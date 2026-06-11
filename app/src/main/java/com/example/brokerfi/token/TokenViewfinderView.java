@@ -7,11 +7,10 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 
 import com.google.zxing.ResultPoint;
-import com.journeyapps.barcodescanner.Size;
 import com.journeyapps.barcodescanner.ViewfinderView;
 
 /**
- * 鎵爜鍙栨櫙锛氭鏂瑰舰閬僵 + 鍥涜妗嗭紝涓嶆樉绀洪粍鑹查棯鐑佽瘑鍒偣銆?
+ * Custom scan overlay with square corner brackets and without the default ZXing result dots.
  */
 public class TokenViewfinderView extends ViewfinderView {
 
@@ -37,7 +36,7 @@ public class TokenViewfinderView extends ViewfinderView {
 
     @Override
     public void addPossibleResultPoint(ResultPoint point) {
-        // 涓嶇粯鍒?ZXing 榛樿鐨勯粍鑹查棯鐑佽瘑鍒偣
+        // Suppress the default ZXing animated result dots.
     }
 
     @Override
@@ -88,5 +87,3 @@ public class TokenViewfinderView extends ViewfinderView {
         canvas.drawLine(right, bottom, right, bottom - len, cornerPaint);
     }
 }
-
-

@@ -1,6 +1,5 @@
 package com.example.brokerfi.token;
 
-import com.example.brokerfi.xc.ChainAddressUtil;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.graphics.Color;
@@ -17,12 +16,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.xc.ChainAddressUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/** 閸樺棗褰舵禍銈嗘鐠囷附鍎忓鍦崶閿涘牏绨跨粻鈧€涙顔岄敍澶堚偓?*/
+/** Modal that shows token transaction details and allows copying the transaction hash. */
 public final class TokenTxDetailDialog {
 
     private TokenTxDetailDialog() {
@@ -121,5 +121,3 @@ public final class TokenTxDetailDialog {
         Toast.makeText(activity, R.string.token_tx_hash_copied, Toast.LENGTH_SHORT).show();
     }
 }
-
-

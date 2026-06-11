@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-/** 灞曠ず褰撳墠閫変腑浠ｅ竵鐨勫悎绾﹀湴鍧€涓庯紙鍐呯疆 wBKC锛夋簮鐮併€?*/
+/** Shows the selected token contract address and the built-in wBKC source asset. */
 public class TokenInfoActivity extends AppCompatActivity {
 
     public static final String EXTRA_CONTRACT = TokenSelection.EXTRA_CONTRACT;
@@ -98,5 +98,3 @@ public class TokenInfoActivity extends AppCompatActivity {
         }
     }
 }
-
-

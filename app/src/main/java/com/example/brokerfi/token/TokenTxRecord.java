@@ -7,13 +7,13 @@ import com.example.brokerfi.xc.ChainAddressUtil;
 
 import java.io.Serializable;
 
-/** 鏈湴浠ｅ竵浜ゆ槗璁板綍锛堝厬鎹?/ 鍙戦€?/ 鎺ユ敹绛夛級銆?*/
+/** Local token transaction record for swap, send, receive, and related actions. */
 public class TokenTxRecord implements Serializable {
 
     public static final String TYPE_SWAP = "SWAP";
-    /** @deprecated 鏃х増璁板綍绫诲瀷锛屽睍绀烘椂涓?{@link #TYPE_SWAP} 鐩稿悓 */
+    /** @deprecated legacy type kept for display compatibility with {@link #TYPE_SWAP}. */
     public static final String TYPE_WRAP = "WRAP";
-    /** @deprecated 鏃х増璁板綍绫诲瀷锛屽睍绀烘椂涓?{@link #TYPE_SWAP} 鐩稿悓 */
+    /** @deprecated legacy type kept for display compatibility with {@link #TYPE_SWAP}. */
     public static final String TYPE_UNWRAP = "UNWRAP";
     public static final String TYPE_SEND = "SEND";
     public static final String TYPE_RECEIVE = "RECEIVE";
@@ -23,11 +23,11 @@ public class TokenTxRecord implements Serializable {
     public String detail;
     public String txHash;
     public long timestampMs;
-    /** 浜ゆ槗鎵€灞炲悎绾︼紱鏃ц褰曚负绌烘椂瑙嗕负榛樿 wBKC 鍚堢害銆?*/
+    /** Contract for this transaction; old records default to the wrapped BKC contract. */
     public String contractAddress;
-    /** 鍏戞崲鏀粯渚т唬甯佺鍙凤紙浠?swap 绫昏褰曪級銆?*/
+    /** Paying-side symbol for swap-style records. */
     public String fromSymbol;
-    /** 鍏戞崲鎺ユ敹渚т唬甯佺鍙凤紙浠?swap 绫昏褰曪級銆?*/
+    /** Receiving-side symbol for swap-style records. */
     public String toSymbol;
 
     public TokenTxRecord() {
@@ -129,5 +129,3 @@ public class TokenTxRecord implements Serializable {
         return symbol;
     }
 }
-
-

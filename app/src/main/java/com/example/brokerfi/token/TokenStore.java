@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/** 鎸佷箙鍖栫敤鎴峰鍏ヤ唬甯佸強鍚敤鐘舵€併€?*/
+/** Persists imported tokens and per-token enabled state. */
 public final class TokenStore {
 
     private static final String PREFS = "token_store";
@@ -175,5 +175,3 @@ public final class TokenStore {
         prefs.edit().putString(KEY_CUSTOM, GSON.toJson(list)).apply();
     }
 }
-
-

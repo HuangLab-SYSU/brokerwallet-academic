@@ -4,8 +4,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import com.example.brokerfi.token.TokenConfig;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -26,13 +24,12 @@ public final class TokenAmountUtil {
     }
 
     /**
-     * Tokens 鐣岄潰灞曠ず锛氭寜鏁伴噺绾ц嚜閫傚簲灏忔暟浣嶄笌缂╁啓锛岄伩鍏嶄綑棰濆崰婊″睆骞曘€?
+     * Formats token amounts for compact display.
      * <ul>
-     *   <li>鈮?100 涓囷細K / M / B / T 缂╁啓锛堟渶澶?2 浣嶅皬鏁帮級</li>
-     *   <li>鈮?1,000锛氬崈鍒嗕綅 + 鏈€澶?2 浣嶅皬鏁?/li>
-     *   <li>鈮?1锛氭渶澶?2 浣嶅皬鏁?/li>
-     *   <li>鈮?0.0001锛氭渶澶?4 浣嶅皬鏁?/li>
-     *   <li>鏇村皬锛氭渶澶?6 浣嶅皬鏁?/li>
+     *   <li>Values >= 1,000 use K / M / B / T suffixes with up to 2 decimals.</li>
+     *   <li>Values >= 1 show up to 2 decimals.</li>
+     *   <li>Values >= 0.0001 show up to 4 decimals.</li>
+     *   <li>Smaller values show up to 6 decimals.</li>
      * </ul>
      */
     public static String formatDisplayAmount(@Nullable String raw) {
@@ -145,5 +142,3 @@ public final class TokenAmountUtil {
                 .toPlainString();
     }
 }
-
-

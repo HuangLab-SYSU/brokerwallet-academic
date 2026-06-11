@@ -1,10 +1,5 @@
 package com.example.brokerfi.token;
 
-import com.example.brokerfi.xc.ChainTxHelper;
-
-import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
-import com.example.brokerfi.xc.ChainAddressUtil;
-import com.example.brokerfi.token.TokenContractHelper;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,7 +7,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,7 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.token.TokenConfig;
+import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
+import com.example.brokerfi.xc.ChainAddressUtil;
+import com.example.brokerfi.xc.ChainTxHelper;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -33,7 +29,7 @@ public class TokenSwapActivity extends AppCompatActivity {
 
     private static final String TAG = "TokenSwapActivity";
     public static final String EXTRA_UNWRAP = "unwrap";
-    /** 浠庤鎯呴〉杩涘叆鏃讹紝棰勫～銆屾敮浠樸€嶄晶浠ｅ竵鍚堢害鍦板潃銆?*/
+    /** Optional contract override used to preselect the pay token when opening the swap screen. */
     public static final String EXTRA_PAY_CONTRACT = "pay_contract";
     private static final long REFRESH_SPINNER_MAX_MS = 10_000L;
 
@@ -222,7 +218,7 @@ public class TokenSwapActivity extends AppCompatActivity {
         fetchBalancesInBackground(true);
     }
 
-    /** 杞湀鏈€澶氭樉绀?2 绉掞紝涔嬪悗闅愯棌鍔ㄧ敾浣嗗悗鍙扮户缁媺浣欓銆?*/
+    /** Stops the pull-to-refresh spinner if the background balance fetch does not finish in time. */
     private void scheduleRefreshSpinnerTimeout() {
         cancelRefreshSpinnerTimeout();
         hideRefreshSpinnerRunnable = () -> {
@@ -728,5 +724,3 @@ public class TokenSwapActivity extends AppCompatActivity {
         }).start();
     }
 }
-
-

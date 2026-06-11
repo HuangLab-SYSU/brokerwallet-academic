@@ -8,7 +8,7 @@ import com.example.brokerfi.token.TokenConfig;
 
 import java.util.Locale;
 
-/** 绠＄悊浠ｅ竵鍒楄〃椤癸紙鍐呯疆 wBKC + 鐢ㄦ埛瀵煎叆锛夈€?*/
+/** Token entry used by the manage-tokens list and persisted user imports. */
 public class TokenItem {
 
     public static final String CATEGORY_POPULAR = "popular";
@@ -37,7 +37,7 @@ public class TokenItem {
         return item;
     }
 
-    /** 涓庡畼鏂?wBKC 閮ㄧ讲鍚堢害鍦板潃涓€鑷达紙涓嶄緷璧?isBuiltIn 鏍囪锛夈€?*/
+    /** Matches the official wrapped BKC deployment address without relying on {@code builtIn}. */
     public boolean matchesOfficialwrappedBkc(String officialContractAddress) {
         if (TextUtils.isEmpty(contractAddress) || TextUtils.isEmpty(officialContractAddress)) {
             return false;
@@ -116,5 +116,3 @@ public class TokenItem {
         return symbol != null ? symbol : "";
     }
 }
-
-

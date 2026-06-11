@@ -15,7 +15,10 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * 鏈満鐧昏鐨勬垚鍔熼摼涓婁唬甯佽浆鍑猴紙鍚敹娆惧湴鍧€涓?tx hash锛夛紝渚涙敹娆捐处鎴峰湪 gettx2 鏈储寮曟椂缁忓洖鎵у悓姝ャ€? */
+ * Local registry of successful outbound token transfers, including recipient
+ * address and tx hash, so receipt-based sync can backfill history before
+ * {@code gettx2} catches up.
+ */
 public final class TokenOutboundNotifyStore {
 
     private static final String PREFS = "token_outbound_notify";
@@ -64,7 +67,7 @@ public final class TokenOutboundNotifyStore {
         save(context, list);
     }
 
-    /** 鎵弿鏈満鍏ㄩ儴浠ｅ竵鍘嗗彶涓殑 SEND 璁板綍锛岀櫥璁?tx hash锛堣法璐︽埛鏀舵鍚屾锛夈€?*/
+    /** Seeds the registry from every locally stored SEND record that has a 0x tx hash. */
     public static void seedFromAllStoredHistories(Context context) {
         if (context == null) {
             return;
@@ -96,7 +99,7 @@ public final class TokenOutboundNotifyStore {
         return hashes;
     }
 
-    /** 灏嗘湰鍦板凡淇濆瓨鐨?SEND 璁板綍锛堝惈 0x hash锛夊洖濉埌鏈満鐧昏锛屼究浜庢敹娆炬柟鍥炴墽鍚屾銆?*/
+    /** Seeds the registry from all SEND records stored for the given wallet. */
     public static void seedFromHistory(Context context, String walletAddress) {
         if (context == null || TextUtils.isEmpty(walletAddress)) {
             return;
@@ -123,7 +126,7 @@ public final class TokenOutboundNotifyStore {
         }
     }
 
-    /** 涓庡綋鍓嶉挶鍖呯浉鍏崇殑寰呭悓姝ヨ浆鍑?hash锛堟敹娆炬垨浠樻鏂癸級銆?*/
+    /** Returns all registered hashes related to the current wallet, inbound or outbound. */
     public static List<String> hashesForWallet(Context context, String walletAddress) {
         if (context == null || TextUtils.isEmpty(walletAddress)) {
             return Collections.emptyList();
@@ -193,5 +196,3 @@ public final class TokenOutboundNotifyStore {
         long createdMs;
     }
 }
-
-

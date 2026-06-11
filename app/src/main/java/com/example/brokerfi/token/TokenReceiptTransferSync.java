@@ -26,7 +26,9 @@ import java.util.Locale;
 import java.util.Set;
 
 /**
- * 褰?gettx2 鏈储寮?ERC-20 杞处鏃讹紝缁?dash 鍥炴墽瑙ｆ瀽 {@code Transfer} 鏃ュ織琛ュ叏鍘嗗彶銆? */
+ * Restores ERC-20 transfer history from receipt logs when {@code gettx2}
+ * misses token transfers.
+ */
 public final class TokenReceiptTransferSync {
 
     private static final String TAG = "TokenReceiptTransferSync";
@@ -365,5 +367,3 @@ public final class TokenReceiptTransferSync {
         return normalized.startsWith("0x") ? normalized.substring(2).toLowerCase(Locale.US) : normalized;
     }
 }
-
-

@@ -26,7 +26,7 @@ import com.example.brokerfi.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/** 绠＄悊浠ｅ竵锛氶粯璁や粎 wBKC锛屽彲閫氳繃娣诲姞瀵煎叆鏇村銆?*/
+/** Manage-tokens screen. Starts with built-in wBKC and allows additional imports. */
 public class TokenManageActivity extends AppCompatActivity {
 
     public static final int TAB_ALL = 0;
@@ -255,5 +255,3 @@ public class TokenManageActivity extends AppCompatActivity {
         }
     }
 }
-
-

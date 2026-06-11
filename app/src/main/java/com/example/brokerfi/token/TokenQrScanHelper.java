@@ -25,7 +25,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.io.InputStream;
 
-/** wBKC 鍙戦€侀〉锛氱浉鏈烘壂鐮?/ 鐩稿唽璇嗙爜銆?*/
+/** QR scanning helper for token send/receive flows and gallery fallback. */
 public final class TokenQrScanHelper {
 
     public static final int REQUEST_GALLERY = 9201;
@@ -53,7 +53,7 @@ public final class TokenQrScanHelper {
     }
 
     /**
-     * @return true 琛ㄧず宸插鐞嗚 requestCode
+     * @return {@code true} when the request code was handled here.
      */
     public static boolean handleActivityResult(
             AppCompatActivity activity,
@@ -178,5 +178,3 @@ public final class TokenQrScanHelper {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show();
     }
 }
-
-
