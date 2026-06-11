@@ -14,4 +14,13 @@
     <color name="green_83">#14532D</color>
     <color name="red_127">#7F1D1D</color>
     <color name="grey_price_disable">#6B6B6B</color>
+    <color name="token_btn_disabled">#DADADA</color>
+    <color name="token_btn_danger_bg">#C98386</color>
+    <color name="token_btn_danger_text">#1F1415</color>
+    <color name="token_wrap_btn_default">#111827</color>
+    <color name="token_wrap_btn_pressed">#1F2937</color>
+    <color name="token_wrap_btn_disabled">#CBD5E1</color>
+    <color name="token_pill_bg">#FFFFFFFF</color>
+    <color name="token_pill_stroke">#E5E7EB</color>
+    <color name="token_pill_text">#374151</color>
 </resources>

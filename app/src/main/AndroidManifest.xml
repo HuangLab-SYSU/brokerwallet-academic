@@ -219,6 +219,28 @@
             android:exported="false" />
 
         <!-- FileProvider for camera photos -->
+        <activity
+            android:name=".token.TokenDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".token.TokenSwapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".token.TokenSendActivity"
+            android:exported="false" />
+        <activity
+            android:name=".token.TokenInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".token.TokenManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".token.TokenAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".token.TokenAddHelpActivity"
+            android:exported="false" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.brokerfi.fileprovider"

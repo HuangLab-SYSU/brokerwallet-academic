@@ -31,3 +31,4 @@ public class ExampleUnitTest {
         System.out.println(SecurityUtil.GetAddress(privatekey));
     }
 }
+

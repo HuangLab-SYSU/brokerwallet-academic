@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="39dp"
+        android:height="39dp">
+        <shape android:shape="oval">
+            <solid android:color="#000000" />
+        </shape>
+    </item>
+    <item
+        android:width="16dp"
+        android:height="16dp"
+        android:drawable="@drawable/daibi_white"
+        android:gravity="center" />
+</layer-list>

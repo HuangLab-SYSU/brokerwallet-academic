@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/token_page_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:paddingStart="4dp"
+    android:paddingEnd="8dp">
+
+    <ImageButton
+        android:id="@+id/token_toolbar_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/token_back"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_token_back"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/token_toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/work_sans_black"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/token_toolbar_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" />
+
+</RelativeLayout>
