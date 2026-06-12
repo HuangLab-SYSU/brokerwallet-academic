@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:background="#F3F4F6">
+
+
+
+    <include layout="@layout/topbar" />
+
+
+
+    <include
+
+        android:id="@+id/token_add_toolbar_include"
+
+        layout="@layout/include_token_page_toolbar"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/action_bar" />
+
+
+
+    <androidx.core.widget.NestedScrollView
+
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+
+        android:layout_above="@+id/token_import_button"
+
+        android:layout_below="@id/token_add_toolbar_include"
+
+        android:fillViewport="true">
+
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical"
+
+            android:padding="16dp">
+
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+
+                android:text="@string/token_contract_label"
+
+                android:textColor="#64748B"
+
+                android:textSize="13sp" />
+
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="8dp"
+
+                android:background="@drawable/token_card_surface"
+
+                android:gravity="center_vertical"
+
+                android:orientation="horizontal"
+
+                android:paddingStart="16dp"
+
+                android:paddingTop="4dp"
+
+                android:paddingEnd="8dp"
+
+                android:paddingBottom="4dp">
+
+
+
+                <EditText
+
+                    android:id="@+id/token_contract_input"
+
+                    android:layout_width="0dp"
+
+                    android:layout_height="52dp"
+
+                    android:layout_weight="1"
+
+                    android:background="@android:color/transparent"
+
+                    android:fontFamily="monospace"
+
+                    android:hint="@string/token_contract_address_hint"
+
+                    android:inputType="text"
+
+                    android:scrollHorizontally="true"
+
+                    android:singleLine="true"
+
+                    android:textColor="#0F172A"
+
+                    android:textColorHint="#94A3B8"
+
+                    android:textSize="15sp" />
+
+
+
+                <ImageButton
+
+                    android:id="@+id/token_contract_paste"
+
+                    android:layout_width="40dp"
+
+                    android:layout_height="40dp"
+
+                    android:background="?attr/selectableItemBackgroundBorderless"
+
+                    android:contentDescription="@string/token_paste"
+
+                    android:padding="8dp"
+
+                    android:scaleType="fitCenter"
+
+                    android:src="@drawable/ic_token_paste" />
+
+
+
+                <ImageButton
+
+                    android:id="@+id/token_contract_scan"
+
+                    android:layout_width="40dp"
+
+                    android:layout_height="40dp"
+
+                    android:background="?attr/selectableItemBackgroundBorderless"
+
+                    android:contentDescription="@string/token_scan"
+
+                    android:padding="8dp"
+
+                    android:scaleType="fitCenter"
+
+                    android:src="@drawable/saoma" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+    <android.widget.Button
+
+        android:id="@+id/token_import_button"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="52dp"
+
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginStart="16dp"
+
+        android:layout_marginEnd="16dp"
+
+        android:layout_marginBottom="24dp"
+
+        android:background="@drawable/token_btn_primary_selector"
+
+        android:backgroundTint="@null"
+
+        android:enabled="false"
+
+        android:stateListAnimator="@null"
+
+        android:text="@string/token_import"
+
+        android:textAllCaps="false"
+
+        android:textColor="@color/white"
+
+        android:textSize="16sp"
+
+        android:textStyle="bold" />
+
+</RelativeLayout>
+

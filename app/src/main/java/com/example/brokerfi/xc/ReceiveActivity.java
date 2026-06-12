@@ -54,6 +54,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class ReceiveActivity extends AppCompatActivity {
+    public static final String EXTRA_TOKEN_SYMBOL = "extra_token_symbol";
+    public static final String EXTRA_TOKEN_NAME = "extra_token_name";
+
     private static final int REQUEST_CODE_SAVE_IMAGE = 1;
     private ImageView menu;
     private ImageView notificationBtn;

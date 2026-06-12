@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/token_dialog_bg"
+    android:orientation="vertical"
+    android:padding="18dp">
+
+    <TextView
+        android:id="@+id/token_tx_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/token_tx_detail_title"
+        android:textColor="#111827"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/token_tx_dialog_type_label"
+        android:textColor="#64748B"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/token_tx_dialog_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="#111827"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/token_tx_dialog_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/token_tx_dialog_swap_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/token_tx_dialog_swap_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@null"
+            android:importantForAccessibility="no"
+            android:scaleType="fitCenter"
+            android:src="@drawable/youjiantou" />
+
+        <TextView
+            android:id="@+id/token_tx_dialog_swap_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/token_tx_dialog_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:textColor="#6B7280"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/token_tx_dialog_to_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="@string/token_tx_dialog_to_short"
+        android:textColor="#64748B"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/token_tx_dialog_to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="monospace"
+        android:textColor="#111827"
+        android:textIsSelectable="true"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="@string/token_tx_dialog_hash"
+        android:textColor="#64748B"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/token_tx_dialog_hash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/token_card_bg"
+        android:fontFamily="monospace"
+        android:lineSpacingExtra="3dp"
+        android:padding="10dp"
+        android:textColor="#111827"
+        android:textIsSelectable="true"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/token_tx_dialog_hash_copy_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/token_tx_dialog_tap_hash_copy"
+        android:textColor="#1A73E8"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/token_tx_dialog_close"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_button_background"
+        android:backgroundTint="@color/black"
+        android:text="@string/token_confirm_ok"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</LinearLayout>
