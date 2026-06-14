@@ -3,7 +3,10 @@ package com.example.brokerfi.token;
 import com.example.brokerfi.core.config.ChainConfig;
 
 /**
- * BrokerChain token module: token display and read timing settings.
+ * BrokerChain token 模块配置。
+ *
+ * 网络地址和链连接配置已经迁移到 {@link ChainConfig}；这里仅保留 token
+ * 模块的显示、超时和重试参数，并提供少量旧字段兼容。
  */
 public final class TokenConfig {
 
@@ -26,7 +29,7 @@ public final class TokenConfig {
     public static final String CHAIN_JSON_RPC_URL = ChainConfig.CHAIN_JSON_RPC_URL;
 
     public static final long DASH_ETH_CALL_TIMEOUT_MS = 25_000L;
-    /** Dedicated timeout for {@code balanceOf}; callers may retry or fall back to raw RPC. */
+    /** balanceOf 单独使用较短超时，失败后调用方可重试或回退到 raw RPC。 */
     public static final long BALANCE_ETH_CALL_TIMEOUT_MS = 12_000L;
     public static final int BALANCE_READ_MAX_ATTEMPTS = 2;
     public static final long DEFAULT_CHAIN_READ_TIMEOUT_MS = 20_000L;
@@ -72,7 +75,7 @@ public final class TokenConfig {
         return ChainConfig.getDashGatewayPostUrl(methodPath);
     }
 
-    /** Builds the {@code gettx2?acc=} URL. {@code account} may include or omit {@code 0x}. */
+    /** 拼接 {@code gettx2?acc=} URL，{@code account} 可包含或省略 {@code 0x}。 */
     /** @deprecated use {@link ChainConfig#getGetTx2AccountUrl(String)}. */
     @Deprecated
     public static String getGetTx2AccountUrl(String account) {
