@@ -1,6 +1,4 @@
-package com.example.brokerfi.xc;
-
-import static com.example.brokerfi.config.ApiConfig.API_NOTIFICATION_NEWS2;
+package com.example.brokerfi.news;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,42 +15,43 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.brokerfi.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.example.brokerfi.main.MainActivity;
+import com.example.brokerfi.main.menu.NavigationHelper;
+import com.example.brokerfi.send.SendActivity;
 
-public class NotificationActivity extends AppCompatActivity {
 
-    // 通知功能
-
+public class NoticeActivity extends AppCompatActivity {
 
 //    private ImageView menu;
 //    private RelativeLayout action_bar;
 //    private NavigationHelper navigationHelper;
     private WebView webView;
 
-
-    private boolean networkErrorShown = false;
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification);
+        setContentView(R.layout.activity_emulator);
 
         intView();
         intEvent();
         webView = findViewById(R.id.webview);
 
-
+        // 启用 JavaScript（可选，如果网站需要）
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-
+        // 设置 WebViewClient，确保在 App 内打开页面，而不是调用外部浏览器
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+//                if (true) {
+//                    return;
+//                }
                 if (!request.isForMainFrame()) {
                     return;
                 }
 
-                String customErrorHtml = "<html>" +
+                    String customErrorHtml = "<html>" +
                         "<head>" +
                         "<meta charset='utf-8'>" +
                         "<meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
@@ -61,41 +60,50 @@ public class NotificationActivity extends AppCompatActivity {
                         "<body style='font-family: sans-serif; text-align: center; margin-top: 40vh; color: #555;'>" +
                         "<h3>" + getString(R.string.webview_offline_heading) + "</h3>" +
                         "<p>" + getString(R.string.webview_offline_message) + "</p>" +
+//                        "<button onclick='window.location.reload()'>重新加载</button>" +
                         "</body>" +
                         "</html>";
 
-
+                // ✅ 使用 loadDataWithBaseURL
                 view.loadDataWithBaseURL("file:///android_asset/", customErrorHtml, "text/html", "utf-8", null);
-                
-
-                if (!networkErrorShown) {
-                    Toast.makeText(NotificationActivity.this, R.string.emulator_toast_network_failed, Toast.LENGTH_SHORT).show();
-                    networkErrorShown = true;
+                Toast.makeText(NoticeActivity.this, R.string.emulator_toast_network_failed, Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent();
+//                intent.setClass(NewsActivity.this, MainActivity.class);
+//                startActivity(intent);
+                if (true) {
+                    return;
                 }
+
+//                String customErrorHtml = "<html><head><meta charset='utf-8'>" +
+//                        "<meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
+//                        "<title>网络错误</title>" +
+//                        "</head><body style='font-family: sans-serif; text-align: center; margin-top: 40vh; color: #555;'>" +
+//                        "<h3>网络连接失败</h3>" +
+//                        "<p>请检查网络设置</p>" +
+//                        "<button onclick='window.location.reload()'>重新加载</button>" +
+//                        "</body></html>";
+//                view.loadData(customErrorHtml, "text/html", "utf-8");
             }
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-
+                // 确保页面内跳转也在 WebView 中打开
                 return false;
             }
         });
 
-        webView.loadUrl(API_NOTIFICATION_NEWS2);
+        // 加载指定网站
+        webView.loadUrl("https://www.blockemulator.com");
     }
-    /// ////////
     @Override
     public void onBackPressed() {
-        // 当显示错误页面时，直接退出活动
-        if (networkErrorShown) {
-            super.onBackPressed();
-        } else if (webView.canGoBack()) {
+        if (webView.canGoBack()) {
             webView.goBack();
         } else {
             super.onBackPressed();
         }
     }
-    /// ////////
+
     private void intView() {
 //        menu = findViewById(R.id.menu);
 //        action_bar = findViewById(R.id.action_bar);
@@ -112,7 +120,7 @@ public class NotificationActivity extends AppCompatActivity {
         );
         if (intentResult.getContents() != null){
             String scannedData = intentResult.getContents();
-            Intent intent = new Intent(this,SendActivity.class);
+            Intent intent = new Intent(this, SendActivity.class);
             intent.putExtra("scannedData",scannedData);
             startActivity(intent);
 

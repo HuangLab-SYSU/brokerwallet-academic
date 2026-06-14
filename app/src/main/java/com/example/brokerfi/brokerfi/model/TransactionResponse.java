@@ -1,4 +1,4 @@
-package com.example.brokerfi.xc.model;
+package com.example.brokerfi.brokerfi.model;
 
 import java.util.List;
 

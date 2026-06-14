@@ -1,4 +1,4 @@
-package com.example.brokerfi.xc;
+package com.example.brokerfi.news;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,8 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.brokerfi.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.example.brokerfi.main.MainActivity;
+import com.example.brokerfi.main.menu.NavigationHelper;
+import com.example.brokerfi.send.SendActivity;
 
-public class NoticeActivity extends AppCompatActivity {
+
+public class EmulatorActivity extends AppCompatActivity {
 
 //    private ImageView menu;
 //    private RelativeLayout action_bar;
@@ -62,7 +66,7 @@ public class NoticeActivity extends AppCompatActivity {
 
                 // ✅ 使用 loadDataWithBaseURL
                 view.loadDataWithBaseURL("file:///android_asset/", customErrorHtml, "text/html", "utf-8", null);
-                Toast.makeText(NoticeActivity.this, R.string.emulator_toast_network_failed, Toast.LENGTH_SHORT).show();
+                Toast.makeText(EmulatorActivity.this, R.string.emulator_toast_network_failed, Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent();
 //                intent.setClass(NewsActivity.this, MainActivity.class);
 //                startActivity(intent);

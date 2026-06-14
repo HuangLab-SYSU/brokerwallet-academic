@@ -1,4 +1,4 @@
-package com.example.brokerfi.xc;
+package com.example.brokerfi.brokerfi;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.xc.menu.NavigationHelper;
+import com.example.brokerfi.main.menu.NavigationHelper;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -28,6 +28,11 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import com.example.brokerfi.core.storage.StorageUtil;
+import com.example.brokerfi.core.util.MyUtil;
+import com.example.brokerfi.main.MainActivity;
+import com.example.brokerfi.send.SendActivity;
+
 
 public class BrokerActivity extends AppCompatActivity implements View.OnTouchListener{
     private ImageView menu;

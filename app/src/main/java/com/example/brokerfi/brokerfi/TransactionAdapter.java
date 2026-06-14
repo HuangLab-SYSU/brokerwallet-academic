@@ -1,4 +1,4 @@
-package com.example.brokerfi.xc;
+package com.example.brokerfi.brokerfi;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,12 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.xc.model.Transaction;
+import com.example.brokerfi.brokerfi.model.Transaction;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import com.example.brokerfi.common.ui.Holder;
+
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder> {
 

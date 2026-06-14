@@ -1,4 +1,6 @@
-package com.example.brokerfi.xc;
+package com.example.brokerfi.news;
+
+import static com.example.brokerfi.core.config.ApiConfig.API_MESSAGE_NEWS;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,26 +9,34 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.main.menu.NavigationHelper;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.example.brokerfi.core.config.ApiConfig;
+import com.example.brokerfi.send.SendActivity;
 
-public class EmulatorActivity extends AppCompatActivity {
+
+public class NewsActivity extends AppCompatActivity {
 
 //    private ImageView menu;
 //    private RelativeLayout action_bar;
 //    private NavigationHelper navigationHelper;
     private WebView webView;
+    
+    private boolean networkErrorShown = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emulator);
+        setContentView(R.layout.activity_news);
 
         intView();
         intEvent();
@@ -40,14 +50,11 @@ public class EmulatorActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-//                if (true) {
-//                    return;
-//                }
                 if (!request.isForMainFrame()) {
                     return;
                 }
 
-                    String customErrorHtml = "<html>" +
+                String customErrorHtml = "<html>" +
                         "<head>" +
                         "<meta charset='utf-8'>" +
                         "<meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
@@ -56,18 +63,16 @@ public class EmulatorActivity extends AppCompatActivity {
                         "<body style='font-family: sans-serif; text-align: center; margin-top: 40vh; color: #555;'>" +
                         "<h3>" + getString(R.string.webview_offline_heading) + "</h3>" +
                         "<p>" + getString(R.string.webview_offline_message) + "</p>" +
-//                        "<button onclick='window.location.reload()'>重新加载</button>" +
                         "</body>" +
                         "</html>";
 
                 // ✅ 使用 loadDataWithBaseURL
                 view.loadDataWithBaseURL("file:///android_asset/", customErrorHtml, "text/html", "utf-8", null);
-                Toast.makeText(EmulatorActivity.this, R.string.emulator_toast_network_failed, Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent();
-//                intent.setClass(NewsActivity.this, MainActivity.class);
-//                startActivity(intent);
-                if (true) {
-                    return;
+                
+                // 只显示一次网络错误提示
+                if (!networkErrorShown) {
+                    Toast.makeText(NewsActivity.this, R.string.emulator_toast_network_failed, Toast.LENGTH_SHORT).show();
+                    networkErrorShown = true;
                 }
 
 //                String customErrorHtml = "<html><head><meta charset='utf-8'>" +
@@ -88,15 +93,20 @@ public class EmulatorActivity extends AppCompatActivity {
             }
         });
 
-        // 加载指定网站
-        webView.loadUrl("https://www.blockemulator.com");
+        webView.loadUrl(API_MESSAGE_NEWS);
+        //webView.loadUrl("https://")
     }
     @Override
     public void onBackPressed() {
-        if (webView.canGoBack()) {
+        // 当显示错误页面时，直接退出活动
+        if (networkErrorShown) {
+            super.onBackPressed();
+            overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
+        } else if (webView.canGoBack()) {
             webView.goBack();
         } else {
             super.onBackPressed();
+            overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
         }
     }
 
@@ -116,7 +126,7 @@ public class EmulatorActivity extends AppCompatActivity {
         );
         if (intentResult.getContents() != null){
             String scannedData = intentResult.getContents();
-            Intent intent = new Intent(this, SendActivity.class);
+            Intent intent = new Intent(this,SendActivity.class);
             intent.putExtra("scannedData",scannedData);
             startActivity(intent);
 

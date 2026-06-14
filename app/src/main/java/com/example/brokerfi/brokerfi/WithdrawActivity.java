@@ -1,4 +1,4 @@
-package com.example.brokerfi.xc;
+package com.example.brokerfi.brokerfi;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,9 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.xc.menu.NavigationHelper;
+import com.example.brokerfi.main.menu.NavigationHelper;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.example.brokerfi.core.security.SecurityUtil;
+import com.example.brokerfi.core.storage.StorageUtil;
+import com.example.brokerfi.core.util.MyUtil;
+import com.example.brokerfi.main.MainActivity;
+import com.example.brokerfi.send.SendActivity;
+
 
 public class WithdrawActivity extends AppCompatActivity {
     private ImageView menu;

@@ -1,6 +1,6 @@
-package com.example.brokerfi.xc;
+package com.example.brokerfi.brokerfi;
 
-import static com.example.brokerfi.config.ServerConfig.SERVER_HOST;
+import static com.example.brokerfi.core.config.ServerConfig.SERVER_HOST;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,11 +26,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.xc.StorageUtil;
-import com.example.brokerfi.xc.menu.NavigationHelper;
-import com.example.brokerfi.xc.model.Transaction;
-import com.example.brokerfi.xc.model.TransactionResponse;
-import com.example.brokerfi.xc.SecurityUtil;
+import com.example.brokerfi.core.storage.StorageUtil;
+import com.example.brokerfi.main.menu.NavigationHelper;
+import com.example.brokerfi.brokerfi.model.Transaction;
+import com.example.brokerfi.brokerfi.model.TransactionResponse;
+import com.example.brokerfi.core.security.SecurityUtil;
 import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -43,6 +43,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import com.example.brokerfi.core.config.ServerConfig;
+import com.example.brokerfi.main.MainActivity;
+import com.example.brokerfi.send.SendActivity;
+
 
 public class AtvActivity extends AppCompatActivity {
     private ImageView menu;

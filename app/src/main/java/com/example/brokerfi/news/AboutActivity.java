@@ -1,6 +1,6 @@
-package com.example.brokerfi.xc;
+package com.example.brokerfi.news;
 
-import static com.example.brokerfi.config.ApiConfig.API_ABOUT_doPost2;
+import static com.example.brokerfi.core.config.ApiConfig.API_ABOUT_doPost2;
 
 import com.example.brokerfi.R;
 import android.content.Intent;
@@ -28,6 +28,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
+import com.example.brokerfi.core.config.ApiConfig;
+import com.example.brokerfi.core.network.HTTPUtil;
+
 
 public class AboutActivity extends AppCompatActivity {
 
