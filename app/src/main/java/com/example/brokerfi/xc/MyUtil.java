@@ -343,6 +343,14 @@ public class MyUtil {
         return null;
     }
 
+    public static String getNativeBalanceForPrivateKey(String privateKey) {
+        ReturnAccountState state = GetAddrAndBalance(privateKey);
+        if (state == null || state.getBalance() == null || state.getBalance().trim().isEmpty()) {
+            return "0";
+        }
+        return state.getBalance().trim();
+    }
+
     public static void Getreward(String privateKey) {
         try {
             String uuid = UUID.randomUUID().toString();

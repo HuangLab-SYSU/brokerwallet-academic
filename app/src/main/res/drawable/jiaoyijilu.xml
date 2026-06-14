@@ -1,0 +1,33 @@
+<!--
+  ~ Copyright (C) 2026 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="1024"
+    android:viewportHeight="1024">
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M372.4,442.5l-247.5,0c-39.2,0 -52.1,-21 -55.9,-30.1s-9.5,-33 18.3,-60.8l79.9,-79.9c11.4,-11.4 29.8,-11.4 41.2,0 11.4,11.4 11.4,29.8 0,41.2l-71.4,71.4 235.4,0c16.1,0 29.1,13 29.1,29.1C401.5,429.5 388.5,442.5 372.4,442.5z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M539.8,784.5c-7.4,0 -14.9,-2.8 -20.6,-8.5 -11.4,-11.4 -11.4,-29.8 0,-41.2l71.4,-71.4L94.9,663.4c-16.1,0 -29.1,-13 -29.1,-29.1 0,-16.1 13,-29.1 29.1,-29.1l507.8,0c39.2,0 52.1,21 55.9,30.1s9.5,33 -18.3,60.8l-79.9,79.9C554.7,781.6 547.3,784.5 539.8,784.5z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M712.3,560.6c-134.5,0 -244,-109.5 -244,-244 0,-134.6 109.4,-244 244,-244 134.6,0 244,109.5 244,244C956.4,451.1 846.9,560.6 712.3,560.6zM712.3,130.7c-102.4,0 -185.8,83.4 -185.8,185.8 0,102.4 83.3,185.8 185.8,185.8 102.5,0 185.8,-83.4 185.8,-185.8C898.2,214.1 814.8,130.7 712.3,130.7z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M842.3,346.8 L708.7,346.8c-16.1,0 -29.1,-13 -29.1,-29.1L679.6,211c0,-16.1 13,-29.1 29.1,-29.1 16.1,0 29.1,13 29.1,29.1l0,77.5L842.3,288.6c16.1,0 29.1,13 29.1,29.1C871.4,333.8 858.4,346.8 842.3,346.8z"/>
+</vector>

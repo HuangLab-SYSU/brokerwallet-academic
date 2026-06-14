@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F4F6">
+
+    <include layout="@layout/topbar" />
+
+    <include
+        android:id="@+id/token_manage_toolbar_include"
+        layout="@layout/include_token_page_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/action_bar"
+        android:background="@drawable/token_page_toolbar_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/token_manage_toolbar_include"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/token_search_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_token_search" />
+
+            <EditText
+                android:id="@+id/token_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/token_search_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:textColor="#0F172A"
+                android:textColorHint="#94A3B8"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/token_manage_tabs_bg"
+                android:orientation="horizontal"
+                android:padding="4dp">
+
+                <TextView
+                    android:id="@+id/token_tab_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/token_tab_left_selected"
+                    android:gravity="center"
+                    android:minWidth="82dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="@string/token_tab_all"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/token_tab_popular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/token_tab_right_normal"
+                    android:gravity="center"
+                    android:minWidth="96dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="@string/token_tab_popular"
+                    android:textColor="#0F172A"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/token_card_surface"
+            android:elevation="2dp"
+            android:outlineProvider="background">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/token_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="true"
+                android:overScrollMode="never"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:splitMotionEvents="false" />
+
+            <TextView
+                android:id="@+id/token_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="24dp"
+                android:text="@string/token_list_empty"
+                android:textColor="#94A3B8"
+                android:textSize="14sp"
+                android:visibility="gone" />
+        </FrameLayout>
+    </LinearLayout>
+</RelativeLayout>

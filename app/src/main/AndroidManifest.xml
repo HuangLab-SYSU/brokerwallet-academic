@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- 相册/图片权限 -->
+    <!-- Gallery and image access permission -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <queries>
@@ -219,6 +219,28 @@
             android:exported="false" />
 
         <!-- FileProvider for camera photos -->
+        <activity
+            android:name=".token.TokenDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".token.TokenSwapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".token.TokenSendActivity"
+            android:exported="false" />
+        <activity
+            android:name=".token.TokenInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".token.TokenManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".token.TokenAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".token.TokenAddHelpActivity"
+            android:exported="false" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.brokerfi.fileprovider"

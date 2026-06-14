@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.token.TokenDetailActivity;
 import com.example.brokerfi.xc.menu.NavigationHelper;
 import com.example.brokerfi.xc.net.SharedPrefsUtil;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView broker;
     private ImageView nft;
     private ImageView news;
+    private ImageView tokenEntry;
     // EmulatorDAO functionality commented out
     // private ImageView medalSystem;
     private ImageView community;
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout locklist;
     private ImageView receive;
     private ImageView accounts;
+    private TextView tokenEntryLabel;
     private TextView accountstate;
     private TextView tsv_dollar;
     private volatile boolean flag = false;
@@ -450,6 +453,8 @@ public class MainActivity extends AppCompatActivity {
         tsv_dollar=findViewById(R.id.tsv_dollar);
         nft = findViewById(R.id.nft);
         news = findViewById(R.id.news);
+        tokenEntry = findViewById(R.id.token_entry);
+        tokenEntryLabel = findViewById(R.id.token_entry_label);
         // EmulatorDAO functionality commented out
         // medalSystem = findViewById(R.id.medalSystem);
         receive = findViewById(R.id.receiveicon);
@@ -573,6 +578,14 @@ public class MainActivity extends AppCompatActivity {
             intent.setClass(MainActivity.this,CommunityActivity.class);
             startActivity(intent);
         });
+
+        View.OnClickListener tokenEntryClickListener = view -> {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, TokenDetailActivity.class);
+            startActivity(intent);
+        };
+        tokenEntry.setOnClickListener(tokenEntryClickListener);
+        tokenEntryLabel.setOnClickListener(tokenEntryClickListener);
         
         //findViewById(R.id.convertBtn).setOnClickListener(view -> {
             //Intent intent = new Intent();

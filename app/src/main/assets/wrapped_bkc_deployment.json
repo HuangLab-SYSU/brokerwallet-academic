@@ -1,0 +1,9 @@
+{
+  "displayName": "wrapped BKC",
+  "contractAddress": "0xf66338bff6a95a4ce5f7ec688b120f223096acd5",
+  "chainId": 4176,
+  "symbol": "wBKC",
+  "nativeSymbol": "BKC",
+  "decimals": 18,
+  "deployTxHash": "0xfa27c83468c94e501212beebc6e665ac715bc7eb279ab6e074adb8b4d6a7fb3e"
+}

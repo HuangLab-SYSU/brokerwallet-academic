@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/token_sub_header"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <LinearLayout
+        android:id="@+id/token_picker_trigger"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/token_sub_header_picker_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/token_page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/work_sans_black"
+            android:text="@string/token_title"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/token_picker_arrow"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="2dp"
+            android:contentDescription="@string/token_picker_open"
+            android:padding="2dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_token_chevron_down"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/token_info_button"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:contentDescription="@string/token_info_help_desc"
+        android:focusable="true"
+        android:padding="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_token_help"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

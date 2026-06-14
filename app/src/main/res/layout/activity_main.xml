@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="34dp"
         app:layout_constraintTop_toBottomOf="@id/tsv_dollar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_disclaimer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -267,6 +267,41 @@
             app:layout_constraintStart_toStartOf="@id/community"
             app:layout_constraintEnd_toEndOf="@id/community" />
 
+        <View
+            android:id="@+id/spacer2"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toBottomOf="@id/label_community"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/token_entry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/token_home_label"
+            android:focusable="true"
+            android:src="@drawable/tokens_home_icon"
+            app:layout_constraintTop_toBottomOf="@id/spacer2"
+            app:layout_constraintStart_toStartOf="@id/accounts"
+            app:layout_constraintEnd_toEndOf="@id/accounts" />
+
+        <TextView
+            android:id="@+id/token_entry_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/token_home_label"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/token_entry"
+            app:layout_constraintStart_toStartOf="@id/token_entry"
+            app:layout_constraintEnd_toEndOf="@id/token_entry" />
+
         <!-- NFT icon hidden (visibility=gone) for compatibility with Java code -->
         <ImageView
             android:id="@+id/nft"
@@ -274,7 +309,7 @@
             android:layout_height="0dp"
             android:visibility="gone"
             android:src="@drawable/codepen_icon"
-            app:layout_constraintTop_toBottomOf="@id/label_community"
+            app:layout_constraintTop_toBottomOf="@id/token_entry_label"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
