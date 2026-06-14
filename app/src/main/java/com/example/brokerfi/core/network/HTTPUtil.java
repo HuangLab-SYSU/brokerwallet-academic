@@ -5,16 +5,14 @@ import com.google.gson.Gson;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import com.example.brokerfi.common.ui.Holder;
+import com.example.brokerfi.core.config.ChainConfig;
 
 
 public class HTTPUtil {
     public static byte[] doPost(String url, Object requestBody) throws Exception {
         Gson gson = new Gson();
         String jsonInputString = gson.toJson(requestBody);
-//        String urlString = "https://" + Holder.serverHost + ":" + Holder.serverPort+"/";
-        String urlString = "https://" + Holder.serverHost + ":" + "443"+"/";
-        urlString += url;
+        String urlString = ChainConfig.getDashGatewayPostUrl(url);
 
         URL requestUrl = new URL(urlString);
         HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
@@ -40,9 +38,6 @@ public class HTTPUtil {
     public static byte[] doPost2(String url, Object requestBody) throws Exception {
         Gson gson = new Gson();
         String jsonInputString = gson.toJson(requestBody);
-//        String urlString = "http://" + Holder.serverHost + ":" + Holder.serverPort+"/";
-//        urlString += url;
-
         URL requestUrl = new URL(url);
         HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
         connection.setRequestMethod("POST");
@@ -67,9 +62,7 @@ public class HTTPUtil {
     public static byte[] doGet(String url, Object requestBody) throws Exception {
         Gson gson = new Gson();
         String jsonInputString = gson.toJson(requestBody);
-        //String urlString = "https://" + Holder.serverHost + ":" + Holder.serverPort+"/";
-        String urlString = "https://" + Holder.serverHost + ":" +"443" +"/";
-        urlString += url;
+        String urlString = ChainConfig.getDashGatewayPostUrl(url);
 
         URL requestUrl = new URL(urlString);
         HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();

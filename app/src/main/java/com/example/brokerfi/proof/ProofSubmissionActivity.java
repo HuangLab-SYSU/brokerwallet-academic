@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.core.config.ApiConfig;
-import com.example.brokerfi.core.config.ServerConfig;
 import com.example.brokerfi.main.menu.NavigationHelper;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -193,7 +192,7 @@ public class ProofSubmissionActivity extends AppCompatActivity {
                 }
                 
                 // 构建API请求URL - 使用ServerConfig配置
-                String apiUrl = ServerConfig.USER_INFO_API + "/" + myAddress;
+                String apiUrl = ApiConfig.API_USER_INFO + "/" + myAddress;
                 Log.d("ProofSubmission", "请求URL: " + apiUrl);
                 Log.d("ProofSubmission", "BASE_URL: " + ApiConfig.BASE_URL);
                 

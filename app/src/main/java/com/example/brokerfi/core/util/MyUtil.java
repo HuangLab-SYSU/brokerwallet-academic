@@ -11,9 +11,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
-import com.example.brokerfi.common.ui.Holder;
 import com.example.brokerfi.core.blockchain.model.CallReq;
 import com.example.brokerfi.core.blockchain.model.SendETHTXReq;
+import com.example.brokerfi.core.config.ChainConfig;
 import com.example.brokerfi.core.model.ReturnAccountState;
 import com.example.brokerfi.core.network.HTTPUtil;
 import com.example.brokerfi.core.security.SecurityUtil;
@@ -64,13 +64,13 @@ public class MyUtil {
                 String gas = "0x"+hexString;
                 String uuid = UUID.randomUUID().toString();
                 SendETHTXReq req = new SendETHTXReq();
-                String thedata = Holder.contractaddr + data + "0x0" + gas + uuid;
+                String thedata = ChainConfig.MAIN_CONTRACT_ADDRESS + data + "0x0" + gas + uuid;
                 String[] sign = SecurityUtil.signECDSA(privateKey, thedata);
 
                 req.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey));
                 req.setData(data);
                 req.setRandomStr(uuid);
-                req.setTo(Holder.contractaddr);
+                req.setTo(ChainConfig.MAIN_CONTRACT_ADDRESS);
                 req.setValue("0x0");
                 req.setSign1(sign[0]);
                 req.setSign2(sign[1]);
@@ -100,13 +100,13 @@ public class MyUtil {
                 String gas = "0xf4240";
                 String uuid = UUID.randomUUID().toString();
                 SendETHTXReq req = new SendETHTXReq();
-                String thedata = Holder.contractaddr + data + "0x0" + gas + uuid;
+                String thedata = ChainConfig.MAIN_CONTRACT_ADDRESS + data + "0x0" + gas + uuid;
                 String[] sign = SecurityUtil.signECDSA(privateKey, thedata);
 
                 req.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey));
                 req.setData(data);
                 req.setRandomStr(uuid);
-                req.setTo(Holder.contractaddr);
+                req.setTo(ChainConfig.MAIN_CONTRACT_ADDRESS);
                 req.setValue("0x0");
                 req.setSign1(sign[0]);
                 req.setSign2(sign[1]);
@@ -138,13 +138,13 @@ public class MyUtil {
                 String gas = "0xf4240";
                 String uuid = UUID.randomUUID().toString();
                 SendETHTXReq req = new SendETHTXReq();
-                String thedata = Holder.contractaddr + data + finalValue + gas + uuid;
+                String thedata = ChainConfig.MAIN_CONTRACT_ADDRESS + data + finalValue + gas + uuid;
                 String[] sign = SecurityUtil.signECDSA(privateKey, thedata);
 
                 req.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey));
                 req.setData(data);
                 req.setRandomStr(uuid);
-                req.setTo(Holder.contractaddr);
+                req.setTo(ChainConfig.MAIN_CONTRACT_ADDRESS);
                 req.setValue(finalValue);
                 req.setSign1(sign[0]);
                 req.setSign2(sign[1]);
@@ -173,13 +173,13 @@ public class MyUtil {
         try {
             String uuid = UUID.randomUUID().toString();
             CallReq req = new CallReq();
-            String thedata = Holder.contractaddr + data + "0x0" + uuid;
+            String thedata = ChainConfig.MAIN_CONTRACT_ADDRESS + data + "0x0" + uuid;
             String[] sign = SecurityUtil.signECDSA(privateKey, thedata);
 
             req.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey));
             req.setData(data);
             req.setRandomStr(uuid);
-            req.setTo(Holder.contractaddr);
+            req.setTo(ChainConfig.MAIN_CONTRACT_ADDRESS);
             req.setValue("0x0");
             req.setSign1(sign[0]);
             req.setSign2(sign[1]);

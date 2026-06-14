@@ -1,66 +1,111 @@
 package com.example.brokerfi.core.config;
 
-import static com.example.brokerfi.core.config.ServerConfig.COMMUNITY_PORT;
-import static com.example.brokerfi.core.config.ServerConfig.FEATURE_PORT;
-import static com.example.brokerfi.core.config.ServerConfig.NFT_DAO_PORT;
-import static com.example.brokerfi.core.config.ServerConfig.SERVER_HOST;
-import static com.example.brokerfi.core.config.ServerConfig.SERVER_PORT;
-import com.example.brokerfi.nft.model.NFT;
-
-
 /**
- * API服务器配置
- * 
- * 🔧 部署配置说明：
- * 
- * 1. USB调试模式（手机连接电脑）：
- *    - 获取电脑的局域网IP地址（例如：192.168.1.100）
- *    - 修改 BASE_URL 为 "http://192.168.1.100:5000"
- *    - 确保手机和电脑在同一WiFi下
- * 
- * 2. 云服务器部署：
- *    - 修改 BASE_URL 为云服务器地址（例如：http://your-domain.com）
- *    - 重新编译APK
- * 
- * 注意：修改此配置后需要重新编译整个应用！
+ * Central backend API endpoint configuration.
+ *
+ * Server host and ports are defined in {@link ServerConfig}. Keep concrete
+ * feature paths here so Activities, adapters, and utilities never hardcode
+ * service URLs.
  */
-public class ApiConfig {
-    
-    /**
-     * 后端服务器基础URL
-     * 
-     * 📝 修改说明：
-     * - 本地开发：http://127.0.0.1:56741 或 http://localhost:56741
-     * - USB调试：http://你的电脑IP:56741（例如：http://192.168.1.100:56741）
-     * - 云服务器：http://your-domain.com 或 http://服务器IP:56741
-     */
-    //public static final String BASE_URL = "http://academic.broker-chain.com:5000";
-    //public static final String BASE_URL = "https://academic.broker-chain.com:440";
-    //public static final String BASE_URL = "http://10.0.2.2:56741";
-    public static final String BASE_URL = "https://" + SERVER_HOST + ":" + SERVER_PORT;
-    public static final String FEATURE_URL = "https://" + SERVER_HOST + ":" + FEATURE_PORT;
-    public static final String NFT_DAO_URL = "https://" + SERVER_HOST + ":" + NFT_DAO_PORT;
-    public static final String BASE_URL_HTTP = "http://" + SERVER_HOST + ":" + COMMUNITY_PORT;
+public final class ApiConfig {
 
+    public static final String BASE_API_URL = ServerConfig.httpsUrl(ServerConfig.SERVER_PORT);
+    /** @deprecated use {@link #BASE_API_URL}. */
+    @Deprecated
+    public static final String BASE_URL = BASE_API_URL;
 
-    /**
-     * API接口路径
-     */
-    public static final String API_ABOUT_doPost2 = FEATURE_URL + "/appversion";
+    public static final String FEATURE_URL = ServerConfig.httpsUrl(ServerConfig.FEATURE_PORT);
+    public static final String NFT_DAO_URL = ServerConfig.httpUrl(ServerConfig.NFT_DAO_PORT);
+    public static final String NFT_DAO_API_URL = NFT_DAO_URL + "/api";
+    public static final String COMMUNITY_URL = ServerConfig.httpUrl(ServerConfig.COMMUNITY_PORT);
+    /** @deprecated use {@link #COMMUNITY_URL}. */
+    @Deprecated
+    public static final String BASE_URL_HTTP = COMMUNITY_URL;
+
+    public static final String API_ABOUT_APP_VERSION = FEATURE_URL + "/appversion";
+    /** @deprecated use {@link #API_ABOUT_APP_VERSION}. */
+    @Deprecated
+    public static final String API_ABOUT_doPost2 = API_ABOUT_APP_VERSION;
+
     public static final String API_MESSAGE_NEWS = FEATURE_URL + "/news";
     public static final String API_NOTIFICATION_NEWS2 = FEATURE_URL + "/news2";
-    public static final String API_NOTIFICATION_NEWS2_doGET2 = FEATURE_URL + "/user/news2";
-    public static final String API_BLOCKCHAIN_MEDALS = BASE_URL + "/api/blockchain/medals/";
-    public static final String API_BLOCKCHAIN_NFT_USER = BASE_URL + "/api/blockchain/nft/user/";
-    public static final String API_BLOCKCHAIN_NFT_ALL = BASE_URL + "/api/blockchain/nft/all";
-    public static final String API_UPLOAD_USER_SUBMISSIONS = BASE_URL + "/api/upload/user/submissions";
+    public static final String API_NOTIFICATION_NEWS2_USER = FEATURE_URL + "/user/news2";
+    /** @deprecated use {@link #API_NOTIFICATION_NEWS2_USER}. */
+    @Deprecated
+    public static final String API_NOTIFICATION_NEWS2_doGET2 = API_NOTIFICATION_NEWS2_USER;
 
+    public static final String API_BLOCKCHAIN_MEDALS = BASE_API_URL + "/api/blockchain/medals/";
+    public static final String API_BLOCKCHAIN_NFT_USER = BASE_API_URL + "/api/blockchain/nft/user/";
+    public static final String API_BLOCKCHAIN_NFT_ALL = BASE_API_URL + "/api/blockchain/nft/all";
 
-    
-    /**
-     * 获取服务器基础URL（用于图片访问）
-     */
+    public static final String API_MEDAL_RANKING = BASE_API_URL + "/api/medal/ranking";
+    public static final String API_MEDAL_QUERY = BASE_API_URL + "/api/medal/query";
+    public static final String API_MEDAL_STATS = BASE_API_URL + "/api/medal/stats";
+    public static final String API_SERVER_INFO = BASE_API_URL + "/api/server/info";
+    public static final String API_HEALTH = BASE_API_URL + "/api/health";
+
+    public static final String API_PROOF_UPLOAD = BASE_API_URL + "/api/proof/upload";
+    public static final String API_PROOF_LIST = BASE_API_URL + "/api/proof/list";
+    public static final String API_PROOF_DETAIL = BASE_API_URL + "/api/proof/detail";
+    public static final String API_PROOF_DELETE = BASE_API_URL + "/api/proof/delete";
+
+    public static final String API_UPLOAD_COMPLETE = BASE_API_URL + "/api/upload/complete";
+    public static final String API_UPLOAD_USER_SUBMISSIONS = BASE_API_URL + "/api/upload/user/submissions";
+    public static final String API_UPLOAD_SUBMISSION_DETAIL = BASE_API_URL + "/api/upload/submission/detail";
+    public static final String API_USER_INFO = BASE_API_URL + "/api/admin/user/info";
+
+    public static final String API_NFT_DAO_UPLOAD_COMPLETE = NFT_DAO_API_URL + "/upload/complete";
+    public static final String API_NFT_DAO_SUBMIT_PROOF = NFT_DAO_API_URL + "/submit-proof";
+    public static final String API_NFT_DAO_MINT_NFT = NFT_DAO_API_URL + "/mint-nft";
+    public static final String API_NFT_DAO_QUERY_NFT = NFT_DAO_API_URL + "/query-nft";
+    public static final String API_NFT_DAO_QUERY_ALL_NFTS = NFT_DAO_API_URL + "/query-all-nfts";
+
+    public static final String NFT_PLACEHOLDER_IMAGE_URL =
+            "https://via.placeholder.com/300x300?text=NFT";
+
+    public static final String EXTERNAL_BLOCK_EMULATOR_URL = "https://www.blockemulator.com";
+    public static final String GITHUB_RELEASE_APK_URL_TEMPLATE =
+            "https://github.com/HuangLab-SYSU/brokerwallet-academic/releases/download/V%s/BrokerChain-Wallet.apk";
+    public static final String GOOGLE_PLAY_APP_URL_PREFIX =
+            "https://play.google.com/store/apps/details?id=";
+
+    private ApiConfig() {
+    }
+
     public static String getServerUrl() {
-        return BASE_URL;
+        return BASE_API_URL;
+    }
+
+    public static String getAllNftsUrl(int page, int size) {
+        return API_BLOCKCHAIN_NFT_ALL + "?page=" + page + "&size=" + size;
+    }
+
+    public static String getMedalQueryUrl(String address) {
+        return API_MEDAL_QUERY + "?address=" + address;
+    }
+
+    public static String getGithubReleaseApkUrl(String version) {
+        return String.format(GITHUB_RELEASE_APK_URL_TEMPLATE, version);
+    }
+
+    public static String getGooglePlayAppUrl(String packageName) {
+        return GOOGLE_PLAY_APP_URL_PREFIX + packageName;
+    }
+
+    public static String resolveNftAssetUrl(String pathOrUrl) {
+        if (pathOrUrl == null || pathOrUrl.trim().isEmpty()) {
+            return pathOrUrl;
+        }
+        String value = pathOrUrl.trim();
+        if (value.startsWith("http://") || value.startsWith("https://") || value.startsWith("data:")) {
+            if (value.startsWith("http://localhost:5000/")) {
+                return value.replace("http://localhost:5000", NFT_DAO_URL);
+            }
+            return value;
+        }
+        if (value.startsWith("/")) {
+            return NFT_DAO_URL + value;
+        }
+        return ServerConfig.appendPath(NFT_DAO_URL, value);
     }
 }

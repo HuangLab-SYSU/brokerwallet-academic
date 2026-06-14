@@ -3,6 +3,7 @@ package com.example.brokerfi.core.blockchain;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.brokerfi.core.config.ChainConfig;
 import com.example.brokerfi.token.TokenConfig;
 import com.example.brokerfi.core.blockchain.model.CallReq;
 import com.example.brokerfi.core.blockchain.model.SendETHTXReq;
@@ -202,7 +203,7 @@ public final class DashEthCall {
     private static byte[] postDash(String path, Object requestBody) throws Exception {
         Gson gson = new Gson();
         String jsonInputString = gson.toJson(requestBody);
-        String urlString = TokenConfig.getDashGatewayPostUrl(path);
+        String urlString = ChainConfig.getDashGatewayPostUrl(path);
 
         URL requestUrl = new URL(urlString);
         HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();

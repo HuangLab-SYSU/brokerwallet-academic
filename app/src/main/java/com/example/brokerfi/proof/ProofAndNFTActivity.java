@@ -36,7 +36,6 @@ import java.util.Locale;
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.core.config.ApiConfig;
-import com.example.brokerfi.core.config.ServerConfig;
 import com.example.brokerfi.main.menu.NavigationHelper;
 import com.example.brokerfi.core.security.SecurityUtil;
 import com.example.brokerfi.core.storage.StorageUtil;
@@ -985,7 +984,7 @@ public class ProofAndNFTActivity extends AppCompatActivity {
                 }
                 
                 // 构建API请求URL - 使用ServerConfig配置
-                String apiUrl = ServerConfig.USER_INFO_API + "/" + myAddress;
+                String apiUrl = ApiConfig.API_USER_INFO + "/" + myAddress;
                 Log.d("ProofAndNFT", "请求URL: " + apiUrl);
                 Log.d("ProofAndNFT", "BASE_URL: " + ApiConfig.BASE_URL);
                 

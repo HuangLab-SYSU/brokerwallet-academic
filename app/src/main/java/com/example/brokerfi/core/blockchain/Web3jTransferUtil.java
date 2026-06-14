@@ -2,6 +2,8 @@ package com.example.brokerfi.core.blockchain;
 
 import android.util.Log;
 
+import com.example.brokerfi.core.config.ChainConfig;
+
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.RawTransaction;
 import org.web3j.crypto.TransactionEncoder;
@@ -17,8 +19,6 @@ import java.math.BigInteger;
 
 public class Web3jTransferUtil {
 
-    private static final String RPC_URL = "http://dash.broker-chain.com:42515";
-
     /**
      * 基于Web3j的原生BKC转账
      * @param privateKey 转账人私钥
@@ -28,7 +28,7 @@ public class Web3jTransferUtil {
      */
     public static String sendTransaction(String privateKey, String toAddress, String amountEther) {
         try {
-            Web3j web3j = Web3j.build(new HttpService(RPC_URL));
+            Web3j web3j = Web3j.build(new HttpService(ChainConfig.CHAIN_JSON_RPC_URL));
 
             Credentials credentials = Credentials.create(privateKey);
 

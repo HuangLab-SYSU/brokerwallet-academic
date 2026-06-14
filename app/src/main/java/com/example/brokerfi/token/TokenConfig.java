@@ -1,21 +1,29 @@
 package com.example.brokerfi.token;
 
+import com.example.brokerfi.core.config.ChainConfig;
+
 /**
- * BrokerChain token module: network and shared chain read settings.
+ * BrokerChain token module: token display and read timing settings.
  */
 public final class TokenConfig {
 
-    public static final boolean USE_LOCAL_BROKERCHAIN_NODE = false;
-    public static final boolean USE_DASH_CHAIN_ONLY = true;
-    public static final boolean USE_SIGNED_CHAIN_READ = true;
+    /** @deprecated use {@link ChainConfig#USE_LOCAL_BROKERCHAIN_NODE}. */
+    @Deprecated
+    public static final boolean USE_LOCAL_BROKERCHAIN_NODE = ChainConfig.USE_LOCAL_BROKERCHAIN_NODE;
+    /** @deprecated use {@link ChainConfig#USE_DASH_CHAIN_ONLY}. */
+    @Deprecated
+    public static final boolean USE_DASH_CHAIN_ONLY = ChainConfig.USE_DASH_CHAIN_ONLY;
+    /** @deprecated use {@link ChainConfig#USE_SIGNED_CHAIN_READ}. */
+    @Deprecated
+    public static final boolean USE_SIGNED_CHAIN_READ = ChainConfig.USE_SIGNED_CHAIN_READ;
 
-    public static final String DASH_GATEWAY_HOST = "dash.broker-chain.com";
-    public static final int DASH_GATEWAY_PORT = 443;
-    public static final String DASH_GATEWAY_URL =
-            "https://" + DASH_GATEWAY_HOST + ":" + DASH_GATEWAY_PORT;
+    /** @deprecated use {@link ChainConfig#DASH_GATEWAY_URL}. */
+    @Deprecated
+    public static final String DASH_GATEWAY_URL = ChainConfig.DASH_GATEWAY_URL;
 
-    public static final String CHAIN_JSON_RPC_URL =
-            "http://" + DASH_GATEWAY_HOST + ":42515";
+    /** @deprecated use {@link ChainConfig#CHAIN_JSON_RPC_URL}. */
+    @Deprecated
+    public static final String CHAIN_JSON_RPC_URL = ChainConfig.CHAIN_JSON_RPC_URL;
 
     public static final long DASH_ETH_CALL_TIMEOUT_MS = 25_000L;
     /** Dedicated timeout for {@code balanceOf}; callers may retry or fall back to raw RPC. */
@@ -23,18 +31,17 @@ public final class TokenConfig {
     public static final int BALANCE_READ_MAX_ATTEMPTS = 2;
     public static final long DEFAULT_CHAIN_READ_TIMEOUT_MS = 20_000L;
 
-    public static final String EXPLORER_URL_TEMPLATE =
-            "https://" + DASH_GATEWAY_HOST + "/tx/%s";
+    /** @deprecated use {@link ChainConfig#EXPLORER_TX_URL_TEMPLATE}. */
+    @Deprecated
+    public static final String EXPLORER_URL_TEMPLATE = ChainConfig.EXPLORER_TX_URL_TEMPLATE;
 
-    /**
-     * dash transaction index endpoint for {@code gettx2}. At the moment only
-     * {@code http://host/gettx2} works; {@code https://host:443/gettx2} still
-     * returns 404.
-     */
-    public static final String DASH_GETTX2_URL =
-            "http://" + DASH_GATEWAY_HOST + "/gettx2?acc=";
+    /** @deprecated use {@link ChainConfig#DASH_GETTX2_URL}. */
+    @Deprecated
+    public static final String DASH_GETTX2_URL = ChainConfig.DASH_GETTX2_URL;
 
-    public static final long LOCAL_CHAIN_ID = 4176L;
+    /** @deprecated use {@link ChainConfig#LOCAL_CHAIN_ID}. */
+    @Deprecated
+    public static final long LOCAL_CHAIN_ID = ChainConfig.LOCAL_CHAIN_ID;
 
     public static final String NATIVE_SYMBOL = "BKC";
     public static final int DEFAULT_TOKEN_DECIMALS = 18;
@@ -47,44 +54,46 @@ public final class TokenConfig {
     private TokenConfig() {
     }
 
+    /** @deprecated use {@link ChainConfig#getLocalChainRpcUrl()}. */
+    @Deprecated
     public static String getLocalChainRpcUrl() {
-        if (useDashChainOnly()) {
-            return CHAIN_JSON_RPC_URL;
-        }
-        return "http://" + DASH_GATEWAY_HOST + ":" + DASH_GATEWAY_PORT;
+        return ChainConfig.getLocalChainRpcUrl();
     }
 
+    /** @deprecated use {@link ChainConfig#DASH_GATEWAY_URL}. */
+    @Deprecated
     public static String getDashGatewayRootUrl() {
-        return DASH_GATEWAY_URL;
+        return ChainConfig.DASH_GATEWAY_URL;
     }
 
+    /** @deprecated use {@link ChainConfig#getDashGatewayPostUrl(String)}. */
+    @Deprecated
     public static String getDashGatewayPostUrl(String methodPath) {
-        String base = DASH_GATEWAY_URL.endsWith("/") ? DASH_GATEWAY_URL : DASH_GATEWAY_URL + "/";
-        String path = methodPath.startsWith("/") ? methodPath.substring(1) : methodPath;
-        return base + path;
+        return ChainConfig.getDashGatewayPostUrl(methodPath);
     }
 
     /** Builds the {@code gettx2?acc=} URL. {@code account} may include or omit {@code 0x}. */
+    /** @deprecated use {@link ChainConfig#getGetTx2AccountUrl(String)}. */
+    @Deprecated
     public static String getGetTx2AccountUrl(String account) {
-        if (account == null || account.trim().isEmpty()) {
-            return DASH_GETTX2_URL;
-        }
-        String hex = account.trim();
-        if (hex.startsWith("0x") || hex.startsWith("0X")) {
-            hex = hex.substring(2);
-        }
-        return DASH_GETTX2_URL + hex;
+        return ChainConfig.getGetTx2AccountUrl(account);
     }
 
+    /** @deprecated use {@link ChainConfig#useDashChainOnly()}. */
+    @Deprecated
     public static boolean useDashChainOnly() {
-        return USE_DASH_CHAIN_ONLY || !USE_LOCAL_BROKERCHAIN_NODE;
+        return ChainConfig.useDashChainOnly();
     }
 
+    /** @deprecated use {@link ChainConfig#useLocalBrokerChainNode()}. */
+    @Deprecated
     public static boolean useLocalBrokerChainNode() {
-        return USE_LOCAL_BROKERCHAIN_NODE;
+        return ChainConfig.useLocalBrokerChainNode();
     }
 
+    /** @deprecated use {@link ChainConfig#useSignedChainRead()}. */
+    @Deprecated
     public static boolean useSignedChainRead() {
-        return USE_SIGNED_CHAIN_READ;
+        return ChainConfig.useSignedChainRead();
     }
 }

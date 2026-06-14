@@ -5,7 +5,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import com.example.brokerfi.core.config.ServerConfig;
+import com.example.brokerfi.core.config.ApiConfig;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +33,7 @@ public class SubmissionHistoryUtil {
     public static void getUserSubmissions(String walletAddress, int page, int size, SubmissionHistoryCallback callback) {
         new Thread(() -> {
             try {
-                String url = ServerConfig.USER_SUBMISSIONS_API + 
+                String url = ApiConfig.API_UPLOAD_USER_SUBMISSIONS + 
                     "?walletAddress=" + walletAddress + 
                     "&page=" + page + 
                     "&size=" + size;
@@ -80,7 +80,7 @@ public class SubmissionHistoryUtil {
     public static void getSubmissionDetail(Long submissionId, SubmissionDetailCallback callback) {
         new Thread(() -> {
             try {
-                String url = ServerConfig.SUBMISSION_DETAIL_API + "/" + submissionId;
+                String url = ApiConfig.API_UPLOAD_SUBMISSION_DETAIL + "/" + submissionId;
                 
                 Log.d(TAG, "获取提交详情: " + url);
                 

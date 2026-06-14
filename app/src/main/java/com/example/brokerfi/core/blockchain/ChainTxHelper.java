@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.token.TokenConfig;
+import com.example.brokerfi.core.config.ChainConfig;
 
 import org.json.JSONObject;
 import com.example.brokerfi.core.security.SecurityUtil;
@@ -39,7 +39,7 @@ public final class ChainTxHelper {
         if (TextUtils.isEmpty(privateKey) || TextUtils.isEmpty(contractAddress)) {
             return null;
         }
-        if (TokenConfig.useLocalBrokerChainNode()) {
+        if (ChainConfig.useLocalBrokerChainNode()) {
             try {
                 String from = SecurityUtil.GetAddress(privateKey);
                 String hash = BrokerChainLocalRpc.sendContractTransaction(
@@ -110,7 +110,7 @@ public final class ChainTxHelper {
             return -1;
         }
         try {
-            if (TokenConfig.useLocalBrokerChainNode()) {
+            if (ChainConfig.useLocalBrokerChainNode()) {
                 if (BrokerChainLocalRpc.isReceiptSuccess(txHash)) {
                     return 1;
                 }
@@ -152,10 +152,10 @@ public final class ChainTxHelper {
             return "";
         }
         Context app = context.getApplicationContext();
-        if (TokenConfig.useDashChainOnly()) {
+        if (ChainConfig.useDashChainOnly()) {
             return app.getString(R.string.token_send_failure_hint_dash);
         }
-        if (TokenConfig.useLocalBrokerChainNode()) {
+        if (ChainConfig.useLocalBrokerChainNode()) {
             return app.getString(R.string.token_send_failure_hint_local);
         }
         return app.getString(R.string.token_send_failure_hint_network);

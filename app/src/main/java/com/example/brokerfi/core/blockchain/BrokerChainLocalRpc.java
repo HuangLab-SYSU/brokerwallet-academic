@@ -2,7 +2,7 @@ package com.example.brokerfi.core.blockchain;
 
 import android.text.TextUtils;
 
-import com.example.brokerfi.token.TokenConfig;
+import com.example.brokerfi.core.config.ChainConfig;
 import com.example.brokerfi.core.network.GsonConverter;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -26,12 +26,12 @@ public final class BrokerChainLocalRpc {
     }
 
     public static String getRpcUrl() {
-        return TokenConfig.getLocalChainRpcUrl();
+        return ChainConfig.getLocalChainRpcUrl();
     }
 
     /** 鏍囧噯 JSON-RPC 鑺傜偣锛?42515锛夛紱dash :443 鏍硅矾寰勪笉鏀寔 eth_getLogs 绛夈€?*/
     public static String getReadOnlyRpcUrl() {
-        return TokenConfig.getLocalChainRpcUrl();
+        return ChainConfig.getReadOnlyRpcUrl();
     }
 
     public static String sendContractTransaction(
@@ -66,7 +66,7 @@ public final class BrokerChainLocalRpc {
             tx.put("value", value);
             tx.put("gas", toHexQuantity(parseQuantity(gasLimitDec, 1_500_000L)));
             tx.put("gasPrice", toHexQuantity(parseQuantity(gasPriceDec, 1_000_000_000L)));
-            tx.put("chainId", "0x" + Long.toHexString(TokenConfig.LOCAL_CHAIN_ID));
+            tx.put("chainId", "0x" + Long.toHexString(ChainConfig.LOCAL_CHAIN_ID));
             tx.put("nonce", "0x" + nonce.toString(16));
 
             return jsonRpc("eth_sendTransaction", Arrays.asList(tx));

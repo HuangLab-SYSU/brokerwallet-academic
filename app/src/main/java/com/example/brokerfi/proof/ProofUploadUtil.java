@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 // 导入配置包中的ServerConfig
-import com.example.brokerfi.core.config.ServerConfig;
+import com.example.brokerfi.core.config.ApiConfig;
 import com.example.brokerfi.core.security.SecurityUtil;
 import com.example.brokerfi.core.storage.StorageUtil;
 import com.example.brokerfi.nft.model.NFT;
@@ -89,7 +89,7 @@ public class ProofUploadUtil {
                 
                 // 创建请求
                 Request request = new Request.Builder()
-                        .url(ServerConfig.UPLOAD_PROOF_API)
+                        .url(ApiConfig.API_PROOF_UPLOAD)
                         .post(requestBody)
                         .build();
                 
@@ -166,7 +166,7 @@ public class ProofUploadUtil {
         new Thread(() -> {
             try {
                 Request request = new Request.Builder()
-                        .url(ServerConfig.GET_PROOF_LIST_API)
+                        .url(ApiConfig.API_PROOF_LIST)
                         .get()
                         .build();
                 
@@ -198,7 +198,7 @@ public class ProofUploadUtil {
         new Thread(() -> {
             try {
                 Request request = new Request.Builder()
-                        .url(ServerConfig.DELETE_PROOF_API + "?fileId=" + fileId)
+                        .url(ApiConfig.API_PROOF_DELETE + "?fileId=" + fileId)
                         .delete()
                         .build();
                 
@@ -283,8 +283,7 @@ public class ProofUploadUtil {
         
         // 创建请求
         Request request = new Request.Builder()
-                //.url("http://academic.broker-chain.com:5000/api/upload/complete")
-                .url("http://dash.broker-chain.com:5000/api/upload/complete")
+                .url(ApiConfig.API_NFT_DAO_UPLOAD_COMPLETE)
                 .post(requestBody)
                 .build();
         

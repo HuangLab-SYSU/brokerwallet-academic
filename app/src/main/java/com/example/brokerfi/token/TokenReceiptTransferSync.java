@@ -1,6 +1,7 @@
 package com.example.brokerfi.token;
 
 import com.example.brokerfi.core.blockchain.ChainAddressUtil;
+import com.example.brokerfi.core.config.ChainConfig;
 import com.example.brokerfi.core.util.MyUtil;
 import android.content.Context;
 import android.text.TextUtils;
@@ -191,7 +192,7 @@ public final class TokenReceiptTransferSync {
 
     @Nullable
     private static String fetchReceiptUnsigned(String txHash) throws Exception {
-        String rpcUrl = TokenConfig.CHAIN_JSON_RPC_URL;
+        String rpcUrl = ChainConfig.CHAIN_JSON_RPC_URL;
         String payload = "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"eth_getTransactionReceipt\",\"params\":[\""
                 + txHash + "\"]}";
         URL url = new URL(rpcUrl);
@@ -240,7 +241,7 @@ public final class TokenReceiptTransferSync {
     private static JsonObject fetchBlockUnsigned(String blockNumberHex) throws Exception {
         String payload = "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"eth_getBlockByNumber\",\"params\":[\""
                 + blockNumberHex + "\",false]}";
-        URL url = new URL(TokenConfig.CHAIN_JSON_RPC_URL);
+        URL url = new URL(ChainConfig.CHAIN_JSON_RPC_URL);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");

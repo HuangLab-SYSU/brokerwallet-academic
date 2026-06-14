@@ -1,7 +1,5 @@
 package com.example.brokerfi.brokerfi;
 
-import static com.example.brokerfi.core.config.ServerConfig.SERVER_HOST;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -43,7 +41,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import com.example.brokerfi.core.config.ServerConfig;
+import com.example.brokerfi.core.config.ChainConfig;
 import com.example.brokerfi.main.MainActivity;
 import com.example.brokerfi.send.SendActivity;
 
@@ -62,8 +60,6 @@ public class AtvActivity extends AppCompatActivity {
     private ExecutorService executorService;
     private static final String CACHE_FILE_NAME = "transactions_cache.txt";
     
-    private static final String API_URL = "http://" + SERVER_HOST + "/gettx2?acc=";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +102,7 @@ public class AtvActivity extends AppCompatActivity {
                 String currentAddress = getCurrentAccountAddress();
                 
                 // API URL
-                String fullUrl = API_URL + currentAddress;
+                String fullUrl = ChainConfig.getGetTx2AccountUrl(currentAddress);
                 Log.d("AtvActivity", "请求URL: " + fullUrl);
                 
                 URL url = new URL(fullUrl);

@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.example.brokerfi.core.config.ApiConfig;
-import com.example.brokerfi.core.config.ServerConfig;
 import com.example.brokerfi.core.security.SecurityUtil;
 import com.example.brokerfi.core.storage.StorageUtil;
 
@@ -127,7 +126,7 @@ public class SubmissionUtil {
                 MultipartBody requestBody = requestBuilder.build();
                 
                 Request request = new Request.Builder()
-                        .url(ApiConfig.BASE_URL + "/api/upload/complete")
+                        .url(ApiConfig.API_UPLOAD_COMPLETE)
                         .post(requestBody)
                         .build();
                 
