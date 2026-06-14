@@ -3,6 +3,8 @@ package com.example.brokerfi.nft;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import com.example.brokerfi.core.config.ApiConfig;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
@@ -12,8 +14,6 @@ import com.example.brokerfi.nft.model.NFT;
 
 
 public class NFTApiUtil {
-    private static final String BASE_URL = "http://localhost:3001/api"; // contract项目的API地址
-    
     public static String mintNFT(String name, String description, String imageType, String imagePath) {
         try {
             // 构建请求数据
@@ -37,7 +37,7 @@ public class NFTApiUtil {
             }
             
             // 发送请求
-            URL url = new URL(BASE_URL + "/mint-nft");
+            URL url = new URL(ApiConfig.API_NFT_DAO_MINT_NFT);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
@@ -64,7 +64,7 @@ public class NFTApiUtil {
     
     public static String getUserNFTs(String address) {
         try {
-            URL url = new URL(BASE_URL + "/query-nft/" + address);
+            URL url = new URL(ApiConfig.API_NFT_DAO_QUERY_NFT + "/" + address);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", "application/json");
@@ -82,7 +82,7 @@ public class NFTApiUtil {
     
     public static String getAllNFTs() {
         try {
-            URL url = new URL(BASE_URL + "/query-all-nfts");
+            URL url = new URL(ApiConfig.API_NFT_DAO_QUERY_ALL_NFTS);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", "application/json");
@@ -126,7 +126,7 @@ public class NFTApiUtil {
             nft.addProperty("tokenId", tokenIds[i]);
             nft.addProperty("name", names[i]);
             nft.addProperty("description", descriptions[i]);
-            nft.addProperty("imageUrl", "https://via.placeholder.com/300x300?text=NFT+" + (i + 1));
+            nft.addProperty("imageUrl", ApiConfig.NFT_PLACEHOLDER_IMAGE_URL + "+" + (i + 1));
             nft.addProperty("ownerAddress", owners[i]);
             nfts.add(nft);
         }

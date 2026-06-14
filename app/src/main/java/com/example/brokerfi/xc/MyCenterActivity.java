@@ -339,7 +339,6 @@ public class MyCenterActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 // 构建API请求URL
-//                String apiUrl = "http://academic.broker-chain.com:5000/api/blockchain/medals/" + myAddress;
                 String apiUrl = API_BLOCKCHAIN_MEDALS  + myAddress;
 
                 // 发送HTTP GET请求
@@ -543,7 +542,6 @@ public class MyCenterActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 // 构建API请求URL，添加分页参数
-//                String apiUrl = "http://academic.broker-chain.com:5000/api/blockchain/nft/user/" + myAddress +
                 String apiUrl = API_BLOCKCHAIN_NFT_USER + myAddress + "?page=" + nftCurrentPage + "&size=" + nftPageSize;
                 
                 // 发送HTTP GET请求，增加超时时间
@@ -621,11 +619,11 @@ public class MyCenterActivity extends AppCompatActivity {
                                                 
                                                 if ("backend-server".equals(storageType)) {
                                                     String path = imageMetadata.optString("path", "");
-                                                    String serverUrl = imageMetadata.optString("serverUrl", "http://dash.broker-chain.com:5000");
+                                                    String serverUrl = imageMetadata.optString("serverUrl", ApiConfig.NFT_DAO_URL);
                                                     
                                                     if (!path.isEmpty()) {
                                                         // 拼接完整URL
-                                                        imageUrl = serverUrl + path;
+                                                        imageUrl = ApiConfig.resolveNftAssetUrl(serverUrl + path);
                                                         Log.d("MyCenter", "使用后端服务器图片: " + imageUrl);
                                                     } else {
                                                         Log.w("MyCenter", "图片路径为空");

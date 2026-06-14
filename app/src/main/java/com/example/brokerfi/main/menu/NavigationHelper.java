@@ -166,7 +166,6 @@ public class NavigationHelper{
                 intent.setClass(context, EmulatorActivity.class);
                 //跳转
                 context.startActivity(intent);
-//                String url = "https://www.blockemulator.com";
 //
 //                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 //
@@ -176,7 +175,6 @@ public class NavigationHelper{
 //                    context.startActivity(intent);
 //                } else {
 //
-//                    Toast.makeText(context, "打开网页失败，请手动打开https://www.blockemulator.com", Toast.LENGTH_LONG).show();
 //                }
             }
         });

@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.core.config.ApiConfig;
 import com.example.brokerfi.nft.adapter.NFTViewAdapter;
 import com.example.brokerfi.main.menu.NavigationHelper;
 import com.example.brokerfi.core.network.ABIUtils;
@@ -284,8 +285,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                 if (response == null || response.trim().isEmpty()) {
                     Log.d("GlobalStats", "MedalApiUtil返回空，尝试直接HTTP调用");
                     try {
-//                        String testUrl = "http://academic.broker-chain.com:5000/api/blockchain/nft/all?page=" + nftCurrentPage + "&size=" + nftPageSize;
-                        String testUrl = "https://dash.broker-chain.com:440/api/blockchain/nft/all?page=" + nftCurrentPage + "&size=" + nftPageSize;
+                        String testUrl = ApiConfig.getAllNftsUrl(nftCurrentPage, nftPageSize);
                         java.net.URL url = new java.net.URL(testUrl);
                         java.net.HttpURLConnection connection = (java.net.HttpURLConnection) url.openConnection();
                         connection.setRequestMethod("GET");
@@ -345,8 +345,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
                 Log.d("GlobalStats", "开始加载所有NFT");
                 
                 // 直接测试API调用
-//                String testUrl = "http://academic.broker-chain.com:5000/api/blockchain/nft/all?page=" + nftCurrentPage + "&size=" + nftPageSize;
-                String testUrl = "https://dash.broker-chain.com:440/api/blockchain/nft/all?page=" + nftCurrentPage + "&size=" + nftPageSize;
+                String testUrl = ApiConfig.getAllNftsUrl(nftCurrentPage, nftPageSize);
                 Log.d("GlobalStats", "测试URL: " + testUrl);
                 
                 String response = MedalApiUtil.getAllNfts(nftCurrentPage, nftPageSize);
@@ -445,10 +444,10 @@ public class GlobalStatsActivity extends AppCompatActivity {
                             
                             if ("backend-server".equals(storageType)) {
                                 String path = imageMetadata.optString("path", "");
-                                String serverUrl = imageMetadata.optString("serverUrl", "http://dash.broker-chain.com:5000");
+                                String serverUrl = imageMetadata.optString("serverUrl", ApiConfig.NFT_DAO_URL);
                                 
                                 if (!path.isEmpty()) {
-                                    imageUrl = serverUrl + path;
+                                    imageUrl = ApiConfig.resolveNftAssetUrl(serverUrl + path);
                                     Log.d("GlobalStats", "使用后端服务器图片: " + imageUrl);
                                 } else {
                                     Log.w("GlobalStats", "图片路径为空");
@@ -586,10 +585,10 @@ public class GlobalStatsActivity extends AppCompatActivity {
                                 
                                 if ("backend-server".equals(storageType)) {
                                     String path = imageMetadata.optString("path", "");
-                                    String serverUrl = imageMetadata.optString("serverUrl", "http://dash.broker-chain.com:5000");
+                                    String serverUrl = imageMetadata.optString("serverUrl", ApiConfig.NFT_DAO_URL);
                                     
                                     if (!path.isEmpty()) {
-                                        imageUrl = serverUrl + path;
+                                        imageUrl = ApiConfig.resolveNftAssetUrl(serverUrl + path);
                                         Log.d("GlobalStats", "使用后端服务器图片: " + imageUrl);
                                     } else {
                                         Log.w("GlobalStats", "图片路径为空");

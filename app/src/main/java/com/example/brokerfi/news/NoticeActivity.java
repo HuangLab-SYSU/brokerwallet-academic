@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.core.config.ApiConfig;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.example.brokerfi.main.MainActivity;
@@ -93,7 +94,7 @@ public class NoticeActivity extends AppCompatActivity {
         });
 
         // 加载指定网站
-        webView.loadUrl("https://www.blockemulator.com");
+        webView.loadUrl(ApiConfig.EXTERNAL_BLOCK_EMULATOR_URL);
     }
     @Override
     public void onBackPressed() {

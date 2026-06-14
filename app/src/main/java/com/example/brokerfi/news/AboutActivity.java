@@ -1,7 +1,5 @@
 package com.example.brokerfi.news;
 
-import static com.example.brokerfi.core.config.ApiConfig.API_ABOUT_doPost2;
-
 import com.example.brokerfi.R;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -58,7 +56,7 @@ public class AboutActivity extends AppCompatActivity {
             new Thread(() -> {
                 try {
                     // 从服务器获取最新版本号
-                    byte[] bytes = HTTPUtil.doPost2(API_ABOUT_doPost2, null);
+                    byte[] bytes = HTTPUtil.doPost2(ApiConfig.API_ABOUT_APP_VERSION, null);
                     String response = new String(bytes);
                     JSONObject j = new JSONObject(response);
                     String latestVersion = j.getString("data");
@@ -71,7 +69,7 @@ public class AboutActivity extends AppCompatActivity {
                     runOnUiThread(() -> Toast.makeText(this, getString(R.string.about_toast_update_available_version) + " " + latestVersion + getString(R.string.about_toast_downloading), Toast.LENGTH_SHORT).show());
                     
                     // 构建下载URL并下载APK
-                    String downloadUrl = "https://github.com/HuangLab-SYSU/brokerwallet-academic/releases/download/V" + latestVersion + "/BrokerChain-Wallet.apk";
+                    String downloadUrl = ApiConfig.getGithubReleaseApkUrl(latestVersion);
                     File apkFile = downloadApk(downloadUrl);
                     
                     if (apkFile != null) {
@@ -186,7 +184,7 @@ public class AboutActivity extends AppCompatActivity {
         } catch (android.content.ActivityNotFoundException e) {
             // Play 商店未安装，跳转网页
             startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())));
+                    Uri.parse(ApiConfig.getGooglePlayAppUrl(getPackageName()))));
         }
     }
 }

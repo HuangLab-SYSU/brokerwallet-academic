@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.core.config.ApiConfig;
 import com.example.brokerfi.nft.adapter.NFTViewAdapter;
 import com.example.brokerfi.main.menu.NavigationHelper;
 
@@ -71,9 +72,9 @@ public class NFTViewActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     loadingText.setVisibility(View.GONE);
                     // 添加一些模拟数据
-                    nftList.add(new NFTItem("NFT #1", "描述1", "https://example.com/image1.jpg"));
-                    nftList.add(new NFTItem("NFT #2", "描述2", "https://example.com/image2.jpg"));
-                    nftList.add(new NFTItem("NFT #3", "描述3", "https://example.com/image3.jpg"));
+                    nftList.add(new NFTItem("NFT #1", "描述1", ApiConfig.NFT_PLACEHOLDER_IMAGE_URL + "+1"));
+                    nftList.add(new NFTItem("NFT #2", "描述2", ApiConfig.NFT_PLACEHOLDER_IMAGE_URL + "+2"));
+                    nftList.add(new NFTItem("NFT #3", "描述3", ApiConfig.NFT_PLACEHOLDER_IMAGE_URL + "+3"));
                     
                     adapter.notifyDataSetChanged();
                     recyclerView.setVisibility(View.VISIBLE);

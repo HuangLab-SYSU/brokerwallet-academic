@@ -24,7 +24,7 @@ public class MedalApiUtil {
      */
     public static String getMedalRanking() {
         Request request = new Request.Builder()
-                .url(ApiConfig.BASE_URL + "/api/medal/ranking")
+                .url(ApiConfig.API_MEDAL_RANKING)
                 .build();
         
         // 使用try-with-resources自动管理Response资源
@@ -59,7 +59,7 @@ public class MedalApiUtil {
         }
         
         Request request = new Request.Builder()
-                .url(ApiConfig.BASE_URL + "/api/medal/query?address=" + address)
+                .url(ApiConfig.getMedalQueryUrl(address))
                 .build();
         
         // 使用try-with-resources自动管理Response资源
@@ -89,7 +89,7 @@ public class MedalApiUtil {
      */
     public static String getGlobalStats() {
         Request request = new Request.Builder()
-                .url(ApiConfig.BASE_URL + "/api/medal/stats")
+                .url(ApiConfig.API_MEDAL_STATS)
                 .build();
         
         try (Response response = client.newCall(request).execute()) {
@@ -119,7 +119,7 @@ public class MedalApiUtil {
      */
     public static String getServerInfo() {
         Request request = new Request.Builder()
-                .url(ApiConfig.BASE_URL + "/api/server/info")
+                .url(ApiConfig.API_SERVER_INFO)
                 .build();
         
         try (Response response = client.newCall(request).execute()) {
@@ -149,7 +149,7 @@ public class MedalApiUtil {
      */
     public static String getHealthStatus() {
         Request request = new Request.Builder()
-                .url(ApiConfig.BASE_URL + "/api/health")
+                .url(ApiConfig.API_HEALTH)
                 .build();
         
         try (Response response = client.newCall(request).execute()) {
@@ -180,7 +180,7 @@ public class MedalApiUtil {
      * @return JSON字符串，失败返回null
      */
     public static String getAllNfts(int page, int size) {
-        String url = ApiConfig.BASE_URL + "/api/blockchain/nft/all?page=" + page + "&size=" + size;
+        String url = ApiConfig.getAllNftsUrl(page, size);
         Log.d(TAG, "Calling getAllNfts API: " + url);
         Request request = new Request.Builder()
                 .url(url)

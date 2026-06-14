@@ -1,7 +1,7 @@
 package com.example.brokerfi.main;
 
 
-import static com.example.brokerfi.core.config.ApiConfig.API_NOTIFICATION_NEWS2_doGET2;
+import static com.example.brokerfi.core.config.ApiConfig.API_NOTIFICATION_NEWS2_USER;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -282,8 +282,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
                 try {
-                    //byte[] bytes = HTTPUtil.doGet2("https://academic.broker-chain.com/user/news2", null);
-                    byte[] bytes = HTTPUtil.doGet2(API_NOTIFICATION_NEWS2_doGET2, null);
+                    byte[] bytes = HTTPUtil.doGet2(API_NOTIFICATION_NEWS2_USER, null);
 
                     //Get the update tip message from database in Server
                     //FOr Developer:Use the "title" keyword-This can be edited in the database in Server

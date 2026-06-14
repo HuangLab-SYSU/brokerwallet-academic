@@ -9,9 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.brokerfi.R;
+import com.example.brokerfi.core.config.ApiConfig;
 import com.example.brokerfi.nft.NFTViewActivity.NFTItem;
 import java.util.List;
-import com.example.brokerfi.common.ui.Holder;
 import com.example.brokerfi.nft.model.NFT;
 import com.example.brokerfi.nft.NFTViewActivity;
 
@@ -102,11 +102,8 @@ public class NFTViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
         
         NFTItem item = nftList.get(position);
-        if(item.getImageUrl().startsWith("http://localhost:5000/")){
-            item.setImageUrl(item.getImageUrl().replace("http://localhost:5000/","http://dash.broker-chain.com.com:5000/"));
-        }
-        if(item.getImageUrl().startsWith("/uploads")){
-            item.setImageUrl("http://dash.broker-chain.com:5000"+item.getImageUrl());
+        if (item.getImageUrl() != null) {
+            item.setImageUrl(ApiConfig.resolveNftAssetUrl(item.getImageUrl()));
         }
         ViewHolder nftHolder = (ViewHolder) holder;
         

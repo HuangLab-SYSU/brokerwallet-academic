@@ -3,6 +3,8 @@ package com.example.brokerfi.proof;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import com.example.brokerfi.core.config.ApiConfig;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
@@ -10,8 +12,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ProofApiUtil {
-    private static final String BASE_URL = "http://localhost:3001/api"; // contract项目的API地址
-    
     public static String submitProof(String authorInfo, String eventType, String eventDescription, 
                                    String contributionLevel, String filePath) {
         try {
@@ -38,7 +38,7 @@ public class ProofApiUtil {
             }
             
             // 发送请求
-            URL url = new URL(BASE_URL + "/submit-proof");
+            URL url = new URL(ApiConfig.API_NFT_DAO_SUBMIT_PROOF);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
