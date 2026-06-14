@@ -1,6 +1,6 @@
 package com.example.brokerfi.token;
 
-import com.example.brokerfi.xc.ReceiveActivity;
+import com.example.brokerfi.receive.ReceiveActivity;
 
 import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
 import android.content.Intent;
@@ -448,5 +448,3 @@ public class TokenDetailActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
-
-

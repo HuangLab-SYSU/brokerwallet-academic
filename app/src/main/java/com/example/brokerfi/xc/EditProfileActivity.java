@@ -25,7 +25,7 @@ import com.example.brokerfi.xc.dto.ProfileHeaderDTO;
 import com.example.brokerfi.xc.manager.CosServiceFactory;
 import com.example.brokerfi.xc.manager.CosUploadManager;
 import com.example.brokerfi.xc.manager.UploadCallback;
-import com.example.brokerfi.xc.net.ApiCallback;
+import com.example.brokerfi.core.network.ApiCallback;
 import com.tencent.cos.xml.CosXmlService;
 
 import java.io.File;

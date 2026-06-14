@@ -1,10 +1,10 @@
 package com.example.brokerfi.xc.api;
 
-import static com.example.brokerfi.config.ApiConfig.BASE_URL_HTTP;
+import static com.example.brokerfi.core.config.ApiConfig.BASE_URL_HTTP;
 
-import com.example.brokerfi.xc.net.ApiCallback;
-import com.example.brokerfi.xc.net.ApiResponse;
-import com.example.brokerfi.xc.net.BaseApi;
+import com.example.brokerfi.core.network.ApiCallback;
+import com.example.brokerfi.core.network.ApiResponse;
+import com.example.brokerfi.core.network.BaseApi;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
@@ -12,6 +12,8 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+import com.example.brokerfi.core.config.ApiConfig;
+
 
 public class RewardApi extends BaseApi {
 

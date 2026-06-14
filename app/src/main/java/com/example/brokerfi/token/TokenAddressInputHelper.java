@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.xc.ChainAddressUtil;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
 
 /** Address-entry helper for paste, 0x normalization, validation, and caret reset. */
 public final class TokenAddressInputHelper {

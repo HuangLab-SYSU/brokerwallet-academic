@@ -18,8 +18,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
-import com.example.brokerfi.xc.ChainAddressUtil;
-import com.example.brokerfi.xc.ChainTxHelper;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
+import com.example.brokerfi.core.blockchain.ChainTxHelper;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

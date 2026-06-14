@@ -1,7 +1,7 @@
 package com.example.brokerfi.token;
 
 import com.example.brokerfi.token.wrappedbkc.wrappedBkcConfig;
-import com.example.brokerfi.xc.ChainAddressUtil;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
 import android.text.TextUtils;
 
 import com.example.brokerfi.token.TokenConfig;

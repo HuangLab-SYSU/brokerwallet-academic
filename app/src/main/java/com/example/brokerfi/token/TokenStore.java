@@ -6,7 +6,7 @@ import android.text.TextUtils;
 
 import com.example.brokerfi.token.wrappedbkc.wrappedBkcConfig;
 import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
-import com.example.brokerfi.xc.ChainAddressUtil;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

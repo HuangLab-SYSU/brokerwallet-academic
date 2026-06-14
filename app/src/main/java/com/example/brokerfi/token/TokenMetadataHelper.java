@@ -1,8 +1,8 @@
 package com.example.brokerfi.token;
 
-import com.example.brokerfi.xc.ChainAddressUtil;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
 import com.example.brokerfi.token.TokenContractHelper;
-import com.example.brokerfi.xc.DashEthCall;
+import com.example.brokerfi.core.blockchain.DashEthCall;
 import android.text.TextUtils;
 
 import org.web3j.abi.FunctionEncoder;

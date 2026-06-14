@@ -103,5 +103,3 @@ public class TokenTxAdapter extends RecyclerView.Adapter<TokenTxAdapter.Holder> 
         }
     }
 }
-
-

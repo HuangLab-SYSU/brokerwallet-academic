@@ -1,6 +1,6 @@
 package com.example.brokerfi.token;
 
-import com.example.brokerfi.xc.MainActivity;
+import com.example.brokerfi.main.MainActivity;
 
 import android.content.Intent;
 import android.view.View;
@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.xc.menu.NavigationHelper;
+import com.example.brokerfi.main.menu.NavigationHelper;
 
 /** Binds the shared BrokerChain top bar on token sub-pages. */
 public final class TokenTopBarHelper {

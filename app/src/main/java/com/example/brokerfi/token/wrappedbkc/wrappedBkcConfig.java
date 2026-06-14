@@ -15,5 +15,3 @@ public final class wrappedBkcConfig {
     private wrappedBkcConfig() {
     }
 }
-
-

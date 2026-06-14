@@ -7,9 +7,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
-import com.example.brokerfi.xc.ChainAddressUtil;
-import com.example.brokerfi.xc.model.Transaction;
-import com.example.brokerfi.xc.model.TransactionResponse;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
+import com.example.brokerfi.brokerfi.model.Transaction;
+import com.example.brokerfi.brokerfi.model.TransactionResponse;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;

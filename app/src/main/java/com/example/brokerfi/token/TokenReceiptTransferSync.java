@@ -1,7 +1,7 @@
 package com.example.brokerfi.token;
 
-import com.example.brokerfi.xc.ChainAddressUtil;
-import com.example.brokerfi.xc.MyUtil;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
+import com.example.brokerfi.core.util.MyUtil;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;

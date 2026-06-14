@@ -7,9 +7,9 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
-import com.example.brokerfi.xc.ChainAddressUtil;
-import com.example.brokerfi.xc.MyUtil;
-import com.example.brokerfi.xc.SecurityUtil;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
+import com.example.brokerfi.core.util.MyUtil;
+import com.example.brokerfi.core.security.SecurityUtil;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

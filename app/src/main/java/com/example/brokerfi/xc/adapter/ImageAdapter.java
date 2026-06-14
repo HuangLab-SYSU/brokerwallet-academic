@@ -16,6 +16,8 @@ import com.example.brokerfi.xc.ImagePreviewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.brokerfi.common.ui.Holder;
+
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
 

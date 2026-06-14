@@ -1,6 +1,6 @@
 package com.example.brokerfi.xc;
 
-import static com.example.brokerfi.config.ApiConfig.BASE_URL_HTTP;
+import static com.example.brokerfi.core.config.ApiConfig.BASE_URL_HTTP;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -29,7 +29,7 @@ import com.example.brokerfi.xc.manager.CosServiceFactory;
 import com.example.brokerfi.xc.manager.CosUploadManager;
 import com.example.brokerfi.xc.manager.UploadCallback;
 import com.example.brokerfi.xc.manager.UserManager;
-import com.example.brokerfi.xc.net.ApiCallback;
+import com.example.brokerfi.core.network.ApiCallback;
 import com.tencent.cos.xml.CosXmlService;
 import com.tencent.cos.xml.CosXmlServiceConfig;
 import com.tencent.cos.xml.exception.CosXmlClientException;
@@ -58,7 +58,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import android.widget.RelativeLayout;
-import com.example.brokerfi.xc.menu.NavigationHelper;
+import com.example.brokerfi.main.menu.NavigationHelper;
+import com.example.brokerfi.core.config.ApiConfig;
+import com.example.brokerfi.main.MainActivity;
+
 
 public class PostPublishActivity extends AppCompatActivity {
     private CosUploadManager cosUploadManager;

@@ -23,8 +23,8 @@ import com.example.brokerfi.xc.dto.CommentDTO;
 import com.example.brokerfi.xc.dto.LikeStatusDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.manager.UserManager;
-import com.example.brokerfi.xc.net.ApiCallback;
-import com.example.brokerfi.xc.net.PageResponse;
+import com.example.brokerfi.core.network.ApiCallback;
+import com.example.brokerfi.core.network.PageResponse;
 
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.Sign;
@@ -37,7 +37,14 @@ import java.util.Map;
 import java.util.UUID;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import com.example.brokerfi.xc.menu.NavigationHelper;
+import com.example.brokerfi.main.menu.NavigationHelper;
+import com.example.brokerfi.brokerfi.model.Transaction;
+import com.example.brokerfi.core.blockchain.Web3jTransferUtil;
+import com.example.brokerfi.core.security.SecurityUtil;
+import com.example.brokerfi.core.storage.StorageUtil;
+import com.example.brokerfi.core.storage.UserStorageUtil;
+import com.example.brokerfi.main.MainActivity;
+
 
 public class PostDetailActivity extends AppCompatActivity {
 

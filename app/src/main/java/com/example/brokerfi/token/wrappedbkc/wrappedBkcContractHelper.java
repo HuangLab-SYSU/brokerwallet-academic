@@ -3,7 +3,7 @@ package com.example.brokerfi.token.wrappedbkc;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.example.brokerfi.xc.ChainAddressUtil;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -60,5 +60,3 @@ public final class wrappedBkcContractHelper {
         return FunctionEncoder.encode(function);
     }
 }
-
-

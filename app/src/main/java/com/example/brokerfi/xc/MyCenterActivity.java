@@ -1,7 +1,7 @@
 package com.example.brokerfi.xc;
 
-import static com.example.brokerfi.config.ApiConfig.API_BLOCKCHAIN_MEDALS;
-import static com.example.brokerfi.config.ApiConfig.API_BLOCKCHAIN_NFT_USER;
+import static com.example.brokerfi.core.config.ApiConfig.API_BLOCKCHAIN_MEDALS;
+import static com.example.brokerfi.core.config.ApiConfig.API_BLOCKCHAIN_NFT_USER;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,13 +18,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.xc.adapter.NFTViewAdapter;
-import com.example.brokerfi.xc.adapter.SubmissionHistoryAdapter;
-import com.example.brokerfi.xc.menu.NavigationHelper;
-import com.example.brokerfi.xc.model.SubmissionRecord;
-import com.example.brokerfi.xc.net.ABIUtils;
-import com.example.brokerfi.xc.StorageUtil;
-import com.example.brokerfi.xc.SecurityUtil;
+import com.example.brokerfi.nft.adapter.NFTViewAdapter;
+import com.example.brokerfi.proof.adapter.SubmissionHistoryAdapter;
+import com.example.brokerfi.main.menu.NavigationHelper;
+import com.example.brokerfi.proof.model.SubmissionRecord;
+import com.example.brokerfi.core.network.ABIUtils;
+import com.example.brokerfi.core.storage.StorageUtil;
+import com.example.brokerfi.core.security.SecurityUtil;
 import org.json.JSONException;
 
 import org.json.JSONArray;
@@ -32,6 +32,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.brokerfi.core.config.ApiConfig;
+import com.example.brokerfi.main.MainActivity;
+import com.example.brokerfi.nft.adapter.NFTAdapter;
+import com.example.brokerfi.nft.model.NFT;
+import com.example.brokerfi.nft.NFTViewActivity;
+import com.example.brokerfi.proof.SubmissionHistoryUtil;
+
 
 /**
  * 我的界面 - 个人中心
