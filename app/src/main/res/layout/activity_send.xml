@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:paddingHorizontal="16dp"
-        android:text="Send"
+        android:text="@string/activity_send_send"
         android:fontFamily="@font/work_sans_black"
         android:textSize="@dimen/text_size_xlarge"
         android:textStyle="bold"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:paddingHorizontal="16dp"
-        android:text="Transfer your coins securely to another address"
+        android:text="@string/activity_send_transfer_tip"
         android:textSize="@dimen/text_size_normal"
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -59,7 +59,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Send from"
+                android:text="@string/activity_send_send_from"
                 android:textColor="#000000"
                 android:textSize="@dimen/text_size_normal" />
 
@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Send to"
+                android:text="@string/activity_send_send_to"
                 android:textColor="#000000"
                 android:textSize="@dimen/text_size_normal" />
 
@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Amount"
+                android:text="@string/activity_send_amount"
                 android:textColor="#000000"
                 android:textSize="@dimen/text_size_normal" />
 
@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Fee"
+                android:text="@string/activity_send_fee"
                 android:textColor="#000000"
                 android:textSize="@dimen/text_size_normal" />
 
@@ -164,7 +164,7 @@
         android:paddingTop="8dp"
         android:paddingEnd="16dp"
         android:paddingBottom="8dp"
-        android:text="Send"
+        android:text="@string/activity_send_send"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="@dimen/text_size_normal"

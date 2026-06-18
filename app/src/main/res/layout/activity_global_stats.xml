@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="📊 Global Stats"
+            android:text="@string/activity_global_stats_global_stats"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -38,7 +38,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="🏆 Global Medal Stats"
+                android:text="@string/activity_global_stats_medal_stats"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -49,7 +49,7 @@
                 android:id="@+id/totalUsersText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Total Users: 0"
+                android:text="@string/activity_global_stats_total_users_0"
                 android:textSize="14sp"
                 android:textColor="@color/grey_60"
                 android:layout_marginBottom="12dp" />
@@ -89,7 +89,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Gold"
+                        android:text="@string/activity_global_stats_gold"
                         android:textSize="12sp"
                         android:textColor="@color/black" />
 
@@ -124,7 +124,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Silver"
+                        android:text="@string/activity_global_stats_silver"
                         android:textSize="12sp"
                         android:textColor="@color/black" />
 
@@ -159,7 +159,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bronze"
+                        android:text="@string/activity_global_stats_bronze"
                         android:textSize="12sp"
                         android:textColor="@color/black" />
 
@@ -179,7 +179,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Highest Score: 0"
+                    android:text="@string/activity_global_stats_highest_score_0"
                     android:textSize="14sp"
                     android:textColor="@color/grey_60" />
 
@@ -188,7 +188,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Top User: None"
+                    android:text="@string/activity_global_stats_top_user_none"
                     android:textSize="14sp"
                     android:textColor="@color/grey_60" />
 
@@ -200,7 +200,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="🏆 Loading medal stats..."
+                android:text="@string/activity_global_stats_loading_medals"
                 android:textSize="14sp"
                 android:textColor="@color/grey_60"
                 android:visibility="gone" />
@@ -211,7 +211,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Medal stats load failed"
+                android:text="@string/activity_global_stats_medal_load_failed"
                 android:textSize="14sp"
                 android:textColor="@color/red_127"
                 android:visibility="gone" />
@@ -231,7 +231,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="🎨 Global NFT Gallery"
+                android:text="@string/activity_global_stats_nft_gallery"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
@@ -240,7 +240,7 @@
                 android:id="@+id/nftTotalCountText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total: 0"
+                android:text="@string/activity_global_stats_total_0"
                 android:textSize="14sp"
                 android:textColor="@color/grey_60"
                 android:visibility="gone" />
@@ -264,7 +264,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="🖼️ Loading NFTs..."
+                    android:text="@string/activity_global_stats_loading_nfts"
                     android:textSize="16sp"
                     android:textColor="@color/grey_60"
                     android:visibility="gone" />
@@ -275,7 +275,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Load Failed"
+                    android:text="@string/load_failed"
                     android:textSize="16sp"
                     android:textColor="@color/red_127"
                     android:visibility="gone" />
@@ -300,7 +300,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="No NFTs"
+                        android:text="@string/activity_global_stats_no_nfts"
                         android:textSize="18sp"
                         android:textColor="@color/grey_60"
                         android:layout_marginBottom="8dp" />
@@ -308,7 +308,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="No NFTs minted globally yet!"
+                        android:text="@string/activity_global_stats_no_nfts_minted"
                         android:textSize="14sp"
                         android:textColor="@color/grey_60" />
 

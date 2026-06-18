@@ -32,7 +32,7 @@
                     android:id="@+id/bkctextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 BKC"
+                    android:text="@string/activity_after_broker_balance_0_bkc"
                     android:fontFamily="@font/work_sans_black"
                     android:textStyle="bold"
                     android:textSize="24dp"
@@ -58,14 +58,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/work_sans_black"
-                    android:text="+0 BKC"
+                    android:text="@string/activity_after_broker_profit_0_bkc"
                     android:textColor="@color/green"
                     android:textSize="20dp"
                     android:textStyle="bold" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Broker profit"
+                    android:text="@string/activity_after_broker_broker_profit"
                     android:textSize="12dp"
                     android:textColor="@color/white"
                     android:layout_gravity="right"/>
@@ -93,7 +93,7 @@
 <!--                    <TextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="SHARD 1"-->
+<!--                        android:text="@string/activity_after_broker_shard_1"-->
 <!--                        android:textSize="14dp"-->
 <!--                        android:textColor="@color/white"/>-->
 <!--                    <TextView-->
@@ -126,7 +126,7 @@
 <!--                    <TextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="SHARD 2"-->
+<!--                        android:text="@string/activity_after_broker_shard_2"-->
 <!--                        android:textSize="14dp"-->
 <!--                        android:textColor="@color/white"/>-->
 <!--                    <TextView-->
@@ -158,7 +158,7 @@
 <!--                    <TextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="SHARD 3"-->
+<!--                        android:text="@string/activity_after_broker_shard_3"-->
 <!--                        android:textSize="14dp"-->
 <!--                        android:textColor="@color/white"/>-->
 <!--                    <TextView-->
@@ -190,7 +190,7 @@
 <!--                    <TextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="SHARD 4"-->
+<!--                        android:text="@string/activity_after_broker_shard_4"-->
 <!--                        android:textSize="14dp"-->
 <!--                        android:textColor="@color/white"/>-->
 <!--                    <TextView-->
@@ -222,7 +222,7 @@
 <!--                    <TextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="SHARD 5"-->
+<!--                        android:text="@string/activity_after_broker_shard_5"-->
 <!--                        android:textSize="14dp"-->
 <!--                        android:textColor="@color/white"/>-->
 <!--                    <TextView-->
@@ -254,7 +254,7 @@
 <!--                    <TextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="SHARD 6"-->
+<!--                        android:text="@string/activity_after_broker_shard_6"-->
 <!--                        android:textSize="14dp"-->
 <!--                        android:textColor="@color/white"/>-->
 <!--                    <TextView-->
@@ -286,7 +286,7 @@
 <!--                    <TextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="SHARD 7"-->
+<!--                        android:text="@string/activity_after_broker_shard_7"-->
 <!--                        android:textSize="14dp"-->
 <!--                        android:textColor="@color/white"/>-->
 <!--                    <TextView-->
@@ -318,7 +318,7 @@
 <!--                    <TextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="SHARD 8"-->
+<!--                        android:text="@string/activity_after_broker_shard_8"-->
 <!--                        android:textSize="14dp"-->
 <!--                        android:textColor="@color/white"/>-->
 <!--                    <TextView-->
@@ -350,7 +350,7 @@
 <!--                    <TextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="SHARD 9"-->
+<!--                        android:text="@string/activity_after_broker_shard_9"-->
 <!--                        android:textSize="14dp"-->
 <!--                        android:textColor="@color/white"/>-->
 <!--                    <TextView-->
@@ -382,7 +382,7 @@
 <!--                    <TextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="SHARD 10"-->
+<!--                        android:text="@string/activity_after_broker_shard_10"-->
 <!--                        android:textSize="14dp"-->
 <!--                        android:textColor="@color/white"/>-->
 <!--                    <TextView-->
@@ -414,7 +414,7 @@
 <!--                    <TextView-->
 <!--                        android:layout_width="wrap_content"-->
 <!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="SHARD 11"-->
+<!--                        android:text="@string/activity_after_broker_shard_11"-->
 <!--                        android:textSize="14dp"-->
 <!--                        android:textColor="@color/white"/>-->
 <!--                    <TextView-->
@@ -461,7 +461,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Stake more"
+                android:text="@string/activity_after_broker_stake_more"
                 android:textSize="16dp"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
@@ -470,7 +470,6 @@
                 android:gravity="left|center_vertical"
                 android:drawablePadding="8dp"
                 android:clickable="true"
-                android:onClick="remindMeLater"
                 android:layout_marginRight="16dp"/>
 
             <!-- 第二个按钮 -->
@@ -479,7 +478,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Withdraw"
+                android:text="@string/activity_after_broker_withdraw"
                 android:textAllCaps="false"
                 android:textSize="16dp"
                 android:textColor="@color/white"
@@ -488,7 +487,7 @@
                 android:gravity="left|center_vertical"
                 android:drawablePadding="8dp"
                 android:clickable="true"
-                android:onClick="nextAction" />
+                />
 
         </LinearLayout>
 
@@ -567,7 +566,7 @@
                 android:layout_gravity="center_horizontal"
 
                 android:clickable="true"
-                android:text="Buy"
+                android:text="@string/Buy"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
@@ -579,7 +578,7 @@
                 android:layout_columnWeight="1"
                 android:layout_gravity="center_horizontal"
                 android:clickable="true"
-                android:text="Send"
+                android:text="@string/activity_after_broker_send"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
@@ -591,7 +590,7 @@
                 android:layout_columnWeight="1"
                 android:layout_gravity="center_horizontal"
                 android:clickable="true"
-                android:text="Swap"
+                android:text="@string/activity_after_broker_swap"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
@@ -603,7 +602,7 @@
                 android:layout_columnWeight="1"
                 android:layout_gravity="center_horizontal"
                 android:clickable="true"
-                android:text="Broker"
+                android:text="@string/activity_after_broker_broker"
                 android:textColor="#000000"
                 android:textSize="16sp" />
 
@@ -633,7 +632,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="BrokerFi support"
+                android:text="@string/activity_after_broker_brokerfi_support"
                 android:textColor="#888888"
                 android:textSize="14sp"
                 android:clickable="true"/>

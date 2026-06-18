@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="📄 Proof Submission"
+                android:text="@string/activity_proof_and_nft_proof_submission"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -41,7 +41,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Submit Proof File *"
+                    android:text="@string/activity_proof_and_nft_submit_file"
                     android:textSize="16sp"
                     android:textColor="@color/black" />
                 
@@ -62,7 +62,7 @@
                 android:id="@+id/selectFileButton"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:text="📁 Click to Select Proof File"
+                android:text="@string/activity_proof_and_nft_select_proof_file"
                 android:textSize="14sp"
                 android:textColor="@color/black"
                 android:background="@drawable/dashed_border"
@@ -75,7 +75,7 @@
                 android:id="@+id/fileCountHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="💡 Maximum 3 files allowed"
+                android:text="@string/activity_proof_and_nft_max_files"
                 android:textSize="12sp"
                 android:textColor="@color/grey_60"
                 android:layout_marginBottom="8dp" />
@@ -100,7 +100,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Select Photo for NFT Minting (Optional)"
+                    android:text="@string/activity_proof_and_nft_photo_optional"
                     android:textSize="16sp"
                     android:textColor="@color/black" />
                 
@@ -121,7 +121,7 @@
                 android:id="@+id/selectImageButton"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:text="🖼️ Click to Select NFT Photo"
+                android:text="@string/activity_proof_and_nft_select_nft_photo"
                 android:textSize="14sp"
                 android:textColor="@color/black"
                 android:background="@drawable/dashed_border"
@@ -149,7 +149,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User Nickname (Optional)"
+                android:text="@string/activity_proof_and_nft_nickname_optional"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:layout_marginBottom="8dp" />
@@ -158,7 +158,7 @@
                 android:id="@+id/displayNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your preferred display nickname"
+                android:hint="@string/activity_proof_and_nft_hint_name"
                 android:textSize="14sp"
                 android:padding="12dp"
                 android:background="@drawable/custom_edittext_border"
@@ -168,7 +168,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Representative Work for Ranking (Optional)"
+                android:text="@string/activity_proof_and_nft_work_optional"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:layout_marginBottom="8dp" />
@@ -177,7 +177,7 @@
                 android:id="@+id/representativeWorkEditText"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:hint="Describe your work, e.g.: Developed multiple DeFi protocols, focused on smart contract security"
+                android:hint="@string/activity_proof_and_nft_hint_work"
                 android:textSize="14sp"
                 android:padding="12dp"
                 android:background="@drawable/custom_edittext_border"
@@ -196,7 +196,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Display Representative Work on Ranking"
+                android:text="@string/activity_proof_and_nft_display_work"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:layout_marginBottom="12dp" />
@@ -212,7 +212,7 @@
                     android:id="@+id/showRepresentativeWorkYes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yes"
+                    android:text="@string/Yes"
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:layout_marginRight="32dp" />
@@ -221,7 +221,7 @@
                     android:id="@+id/showRepresentativeWorkNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No"
+                    android:text="@string/No"
                     android:textSize="14sp"
                     android:textColor="@color/black"
                     android:checked="true" />
@@ -232,7 +232,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="💡 Tip: Representative work requires admin approval before displaying on ranking"
+                android:text="@string/activity_proof_and_nft_work_approval"
                 android:textSize="12sp"
                 android:textColor="@color/grey_60"
                 android:layout_marginBottom="24dp" />
@@ -242,7 +242,7 @@
                 android:id="@+id/submitProofButton"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="Submit Proof"
+                android:text="@string/submit_proof"
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:background="@drawable/custom_green_background"

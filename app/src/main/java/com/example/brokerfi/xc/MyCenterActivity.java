@@ -1,7 +1,7 @@
 package com.example.brokerfi.xc;
 
-import static com.example.brokerfi.config.ApiConfig.API_BLOCKCHAIN_MEDALS;
-import static com.example.brokerfi.config.ApiConfig.API_BLOCKCHAIN_NFT_USER;
+import static com.example.brokerfi.core.config.ApiConfig.API_BLOCKCHAIN_MEDALS;
+import static com.example.brokerfi.core.config.ApiConfig.API_BLOCKCHAIN_NFT_USER;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,13 +18,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.xc.adapter.NFTViewAdapter;
-import com.example.brokerfi.xc.adapter.SubmissionHistoryAdapter;
-import com.example.brokerfi.xc.menu.NavigationHelper;
-import com.example.brokerfi.xc.model.SubmissionRecord;
-import com.example.brokerfi.xc.net.ABIUtils;
-import com.example.brokerfi.xc.StorageUtil;
-import com.example.brokerfi.xc.SecurityUtil;
+import com.example.brokerfi.nft.adapter.NFTViewAdapter;
+import com.example.brokerfi.proof.adapter.SubmissionHistoryAdapter;
+import com.example.brokerfi.main.menu.NavigationHelper;
+import com.example.brokerfi.proof.model.SubmissionRecord;
+import com.example.brokerfi.core.network.ABIUtils;
+import com.example.brokerfi.core.storage.StorageUtil;
+import com.example.brokerfi.core.security.SecurityUtil;
 import org.json.JSONException;
 
 import org.json.JSONArray;
@@ -32,6 +32,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.brokerfi.core.config.ApiConfig;
+import com.example.brokerfi.main.MainActivity;
+import com.example.brokerfi.nft.adapter.NFTAdapter;
+import com.example.brokerfi.nft.model.NFT;
+import com.example.brokerfi.nft.NFTViewActivity;
+import com.example.brokerfi.proof.SubmissionHistoryUtil;
+
 
 /**
  * 我的界面 - 个人中心
@@ -229,7 +236,7 @@ public class MyCenterActivity extends AppCompatActivity {
             Log.d("MyCenter", "Using cached NFT data, total: " + nftList.size() + ", count: " + totalNftCount + ", pull to refresh");
             nftRecyclerView.setVisibility(View.VISIBLE);
             // Update NFT total count display
-            nftTotalCountText.setText("Total: " + totalNftCount);  // ✅ Use cached totalNftCount
+            nftTotalCountText.setText(nftTotalCountText.getContext().getString(R.string.dialog_confirm_transaction_dialog_total) + " " + totalNftCount);  // ✅ Use cached totalNftCount
             nftTotalCountText.setVisibility(View.VISIBLE);
             // 更新Adapter的分页状态
             nftAdapter.setHasMore(nftHasMore);
@@ -332,7 +339,6 @@ public class MyCenterActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 // 构建API请求URL
-//                String apiUrl = "http://academic.broker-chain.com:5000/api/blockchain/medals/" + myAddress;
                 String apiUrl = API_BLOCKCHAIN_MEDALS  + myAddress;
 
                 // 发送HTTP GET请求
@@ -430,12 +436,12 @@ public class MyCenterActivity extends AppCompatActivity {
                                     
                                     // 审核信息
                                     record.setAuditStatus(submission.optString("auditStatus", ""));
-                                    record.setAuditStatusDesc(submission.optString("auditStatusDesc", "未知状态"));
+                                    record.setAuditStatusDesc(submission.optString("auditStatusDesc", getString(R.string.my_center_unknown_status)));
                                     record.setAuditTime(submission.optString("auditTime", ""));
                                     
                                     // 勋章信息
                                     record.setMedalAwarded(submission.optString("medalAwarded", "NONE"));
-                                    record.setMedalAwardedDesc(submission.optString("medalAwardedDesc", "无"));
+                                    record.setMedalAwardedDesc(submission.optString("medalAwardedDesc", getString(R.string.my_center_none)));
                                     record.setMedalAwardTime(submission.optString("medalAwardTime", ""));
                                     record.setMedalTransactionHash(submission.optString("medalTransactionHash", ""));
                                     
@@ -536,7 +542,6 @@ public class MyCenterActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 // 构建API请求URL，添加分页参数
-//                String apiUrl = "http://academic.broker-chain.com:5000/api/blockchain/nft/user/" + myAddress +
                 String apiUrl = API_BLOCKCHAIN_NFT_USER + myAddress + "?page=" + nftCurrentPage + "&size=" + nftPageSize;
                 
                 // 发送HTTP GET请求，增加超时时间
@@ -602,7 +607,7 @@ public class MyCenterActivity extends AppCompatActivity {
                                     try {
                                         JSONObject nft = nfts.getJSONObject(i);
                                         String name = nft.optString("name", "NFT #" + nft.optString("tokenId", ""));
-                                        String description = nft.optString("description", "暂无描述");
+                                        String description = nft.optString("description", getString(R.string.my_center_no_description));
                                         String imageUrl = nft.optString("imageUrl", "");
                                         
                                         // 检查图片URL格式并处理
@@ -614,11 +619,11 @@ public class MyCenterActivity extends AppCompatActivity {
                                                 
                                                 if ("backend-server".equals(storageType)) {
                                                     String path = imageMetadata.optString("path", "");
-                                                    String serverUrl = imageMetadata.optString("serverUrl", "http://dash.broker-chain.com:5000");
+                                                    String serverUrl = imageMetadata.optString("serverUrl", ApiConfig.NFT_DAO_URL);
                                                     
                                                     if (!path.isEmpty()) {
                                                         // 拼接完整URL
-                                                        imageUrl = serverUrl + path;
+                                                        imageUrl = ApiConfig.resolveNftAssetUrl(serverUrl + path);
                                                         Log.d("MyCenter", "使用后端服务器图片: " + imageUrl);
                                                     } else {
                                                         Log.w("MyCenter", "图片路径为空");
@@ -708,7 +713,7 @@ public class MyCenterActivity extends AppCompatActivity {
                                 Log.d("MyCenter", "设置RecyclerView可见");
                                 
                                 // 显示NFT总数
-                                nftTotalCountText.setText("总数: " + totalNftCount);
+                                nftTotalCountText.setText(nftTotalCountText.getContext().getString(R.string.my_center_total_count) + " " + totalNftCount);
                                 nftTotalCountText.setVisibility(View.VISIBLE);
                                 
                                 // 更新适配器状态

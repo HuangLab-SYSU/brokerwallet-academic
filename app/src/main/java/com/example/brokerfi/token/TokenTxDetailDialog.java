@@ -16,7 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.brokerfi.R;
-import com.example.brokerfi.xc.ChainAddressUtil;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

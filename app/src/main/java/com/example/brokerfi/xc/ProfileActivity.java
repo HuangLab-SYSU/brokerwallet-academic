@@ -17,12 +17,14 @@ import com.example.brokerfi.xc.adapter.ProfileAdapter;
 import com.example.brokerfi.xc.api.ProfileApi;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.dto.ProfileHeaderDTO;
-import com.example.brokerfi.xc.menu.NavigationHelper;
-import com.example.brokerfi.xc.net.ApiCallback;
-import com.example.brokerfi.xc.net.PageResponse;
+import com.example.brokerfi.main.menu.NavigationHelper;
+import com.example.brokerfi.core.network.ApiCallback;
+import com.example.brokerfi.core.network.PageResponse;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.brokerfi.main.MainActivity;
+
 
 public class ProfileActivity extends AppCompatActivity {
 

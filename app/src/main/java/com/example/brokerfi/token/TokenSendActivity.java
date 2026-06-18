@@ -1,8 +1,8 @@
 package com.example.brokerfi.token;
 
-import com.example.brokerfi.xc.ChainTxHelper;
+import com.example.brokerfi.core.blockchain.ChainTxHelper;
 
-import com.example.brokerfi.xc.ChainAddressUtil;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
 import com.example.brokerfi.token.TokenContractHelper;
 import android.content.Intent;
 import android.os.Bundle;
@@ -369,5 +369,3 @@ public class TokenSendActivity extends AppCompatActivity {
                 });
     }
 }
-
-

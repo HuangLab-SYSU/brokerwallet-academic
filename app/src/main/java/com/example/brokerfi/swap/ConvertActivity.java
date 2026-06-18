@@ -1,0 +1,73 @@
+package com.example.brokerfi.swap;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.brokerfi.R;
+import com.example.brokerfi.main.menu.NavigationHelper;
+import com.example.brokerfi.main.MainActivity;
+
+
+public class ConvertActivity extends AppCompatActivity {
+
+    private ImageView menu;
+    private ImageView notificationBtn;
+    private RelativeLayout action_bar;
+    private NavigationHelper navigationHelper;
+    private EditText oldAddressInput;
+    private EditText newAddressInput;
+    private Button convertButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        intView();
+        intEvent();
+
+        findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(ConvertActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void intView() {
+        menu = findViewById(R.id.menu);
+        notificationBtn = findViewById(R.id.notificationBtn);
+        action_bar = findViewById(R.id.action_bar);
+
+        convertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String oldAddress = oldAddressInput.getText().toString().trim();
+                String newAddress = newAddressInput.getText().toString().trim();
+                
+                if (oldAddress.isEmpty() || newAddress.isEmpty()) {
+                    Toast.makeText(ConvertActivity.this, R.string.convert_toast_fill_account_addresses, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                
+                // The Convert function can add below
+
+                Toast.makeText(ConvertActivity.this, R.string.convert_toast_feature_pending, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void intEvent() {
+        navigationHelper = new NavigationHelper(menu, action_bar, this, notificationBtn);
+    }
+}

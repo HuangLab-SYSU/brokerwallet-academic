@@ -23,8 +23,8 @@ import com.example.brokerfi.xc.dto.CommentDTO;
 import com.example.brokerfi.xc.dto.LikeStatusDTO;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.manager.UserManager;
-import com.example.brokerfi.xc.net.ApiCallback;
-import com.example.brokerfi.xc.net.PageResponse;
+import com.example.brokerfi.core.network.ApiCallback;
+import com.example.brokerfi.core.network.PageResponse;
 
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.Sign;
@@ -37,7 +37,14 @@ import java.util.Map;
 import java.util.UUID;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import com.example.brokerfi.xc.menu.NavigationHelper;
+import com.example.brokerfi.main.menu.NavigationHelper;
+import com.example.brokerfi.brokerfi.model.Transaction;
+import com.example.brokerfi.core.blockchain.Web3jTransferUtil;
+import com.example.brokerfi.core.security.SecurityUtil;
+import com.example.brokerfi.core.storage.StorageUtil;
+import com.example.brokerfi.core.storage.UserStorageUtil;
+import com.example.brokerfi.main.MainActivity;
+
 
 public class PostDetailActivity extends AppCompatActivity {
 
@@ -128,7 +135,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
                 @Override
                 public void onFail(String msg) {
-                    Toast.makeText(PostDetailActivity.this, "评论失败：" + msg, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostDetailActivity.this, PostDetailActivity.this.getString(R.string.post_detail_toast_comment_failed) + msg, Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -153,7 +160,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
         postId = getIntent().getLongExtra("postId", -1);
         if (postId == -1) {
-            Toast.makeText(this, "帖子ID错误", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.post_detail_toast_post_id_error, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -175,7 +182,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
             @Override
             public void onFail(String msg) {
-                Toast.makeText(PostDetailActivity.this, "加载帖子失败：" + msg, Toast.LENGTH_SHORT).show();
+                Toast.makeText(PostDetailActivity.this, PostDetailActivity.this.getString(R.string.post_detail_toast_load_post_failed) + msg, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -207,7 +214,7 @@ public class PostDetailActivity extends AppCompatActivity {
                     @Override
                     public void onFail(String msg) {
                         isLoading = false;
-                        Toast.makeText(PostDetailActivity.this, "加载评论失败：" + msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PostDetailActivity.this, PostDetailActivity.this.getString(R.string.post_detail_toast_load_comments_failed) + msg, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -217,7 +224,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
         Long userId = UserStorageUtil.getUserId(this);
         if (userId == null) {
-            Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.post_detail_toast_login_first, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -233,7 +240,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 @Override
                 public void onFail(String msg) {
                     super.onFail(msg);
-                    Toast.makeText(PostDetailActivity.this, "取消点赞失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostDetailActivity.this, R.string.post_detail_toast_unlike_failed, Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -242,7 +249,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 @Override
                 public void onFail(String msg) {
                     super.onFail(msg);
-                    Toast.makeText(PostDetailActivity.this, "点赞失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostDetailActivity.this, R.string.post_detail_toast_like_failed, Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -278,16 +285,16 @@ public class PostDetailActivity extends AppCompatActivity {
     private void showRewardDialog(PostDTO post, int position) {
 
         EditText input = new EditText(this);
-        input.setHint("输入BKC数量");
+        input.setHint(R.string.post_detail_hint_bkc);
 
         new AlertDialog.Builder(this)
-                .setTitle("打赏")
+                .setTitle(R.string.post_detail_title_reward)
                 .setView(input)
-                .setPositiveButton("确认", (dialog, which) -> {
+                .setPositiveButton(R.string.post_detail_button_confirm, (dialog, which) -> {
 
                     String value = input.getText().toString().trim();
                     if (value.isEmpty()) {
-                        Toast.makeText(this, "请输入金额", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.post_detail_toast_enter_amount, Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -295,11 +302,11 @@ public class PostDetailActivity extends AppCompatActivity {
                     try {
                         amount = Double.parseDouble(value);
                     } catch (Exception e) {
-                        Toast.makeText(this, "金额格式错误", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.post_detail_toast_amount_format_error, Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (amount <= 0) {
-                        Toast.makeText(this, "金额必须大于0", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.post_detail_toast_amount_gt_zero, Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -307,14 +314,14 @@ public class PostDetailActivity extends AppCompatActivity {
                     doReward(toAddress, value, post, position);
 
                 })
-                .setNegativeButton("取消", null)
+                .setNegativeButton(R.string.post_detail_button_cancel, null)
                 .show();
     }
 
     private void doReward(String toAddress, String amount, PostDTO post, int position) {
 
         if (rewarding) {
-            Toast.makeText(this, "请勿重复提交", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.post_detail_toast_do_not_resubmit, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -325,7 +332,7 @@ public class PostDetailActivity extends AppCompatActivity {
         String acc = StorageUtil.getCurrentAccount(this);
         int i = (acc == null) ? 0 : Integer.parseInt(acc);
         if (account == null) {
-            Toast.makeText(this, "未找到账户", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.post_detail_toast_account_not_found, Toast.LENGTH_SHORT).show();
             rewarding = false;
             return;
         }
@@ -338,7 +345,7 @@ public class PostDetailActivity extends AppCompatActivity {
         new Thread(() -> {
 
             runOnUiThread(() -> {
-                Toast.makeText(this, "交易已提交，等待确认...", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.post_detail_toast_tx_submitted, Toast.LENGTH_LONG).show();
             });
 
             try {
@@ -350,7 +357,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 );
                 if (txHash == null || !txHash.startsWith("0x")) {
                     runOnUiThread(() ->
-                            Toast.makeText(this, "打赏失败：" + txHash, Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, getString(R.string.post_detail_toast_reward_failed_prefix) + txHash, Toast.LENGTH_LONG).show()
                     );
                     return;
                 }
@@ -379,7 +386,7 @@ public class PostDetailActivity extends AppCompatActivity {
                             public void onSuccess(Boolean success) {
                                 runOnUiThread(() -> {
                                     if (success) {
-                                        Toast.makeText(PostDetailActivity.this, "打赏成功", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(PostDetailActivity.this, R.string.post_detail_toast_reward_successful, Toast.LENGTH_LONG).show();
 
                                         BigDecimal current = post.getRewardAmount() == null ? BigDecimal.ZERO : post.getRewardAmount();
                                         BigDecimal addAmount = new BigDecimal(amount.trim());
@@ -388,7 +395,7 @@ public class PostDetailActivity extends AppCompatActivity {
                                         adapter.notifyItemChanged(position);
 
                                     } else {
-                                        Toast.makeText(PostDetailActivity.this, "后端验证失败", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(PostDetailActivity.this, R.string.post_detail_toast_backend_failed, Toast.LENGTH_LONG).show();
                                     }
                                 });
                                 rewarding = false;
@@ -397,7 +404,7 @@ public class PostDetailActivity extends AppCompatActivity {
                             @Override
                             public void onFail(String msg) {
                                 runOnUiThread(() ->
-                                        Toast.makeText(PostDetailActivity.this, "请求失败：" + msg, Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(PostDetailActivity.this, PostDetailActivity.this.getString(R.string.post_detail_toast_request_failed_prefix) + msg, Toast.LENGTH_SHORT).show()
                                 );
                                 rewarding = false;
                             }
@@ -407,7 +414,7 @@ public class PostDetailActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
                 runOnUiThread(() ->
-                        Toast.makeText(this, "打赏异常", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, R.string.post_detail_toast_reward_exception, Toast.LENGTH_SHORT).show()
                 );
 
             } finally {

@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/dashedBorderView"
-        android:text="BrokerChain"
+        android:text="@string/topbar_brokerchain"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/brokerTextview"
-        android:text=" Wallet"
+        android:text="@string/topbar_wallet_spaced"
         android:textColor="#FF0000"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -62,7 +62,7 @@
 <!--        android:layout_toStartOf="@+id/menu"-->
 <!--        android:background="?android:attr/selectableItemBackground"-->
 <!--        android:clickable="true"-->
-<!--        android:contentDescription="Notification"-->
+<!--        android:contentDescription="@string/topbar_content_desc_notification"-->
 <!--        android:layout_centerVertical="true"-->
 <!--        android:padding="8dp"-->
 <!--        android:src="@drawable/notifications" />-->
@@ -78,7 +78,7 @@
         android:padding="8dp"
         android:src="@drawable/notifications_vector"
         android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="通知"
+        android:contentDescription="@string/topbar_content_desc_notifications"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:clickable="true" />
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:contentDescription="menu"
+        android:contentDescription="@string/topbar_content_desc_menu"
 
         android:src="@drawable/action_menu_30" />
 

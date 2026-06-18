@@ -67,5 +67,3 @@ public final class TokenConfirmDialog {
         dialog.show();
     }
 }
-
-

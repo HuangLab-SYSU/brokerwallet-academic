@@ -18,12 +18,13 @@ import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.dto.ProfileHeaderDTO;
 import com.bumptech.glide.Glide;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import com.example.brokerfi.common.ui.Holder;
+
 
 public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -127,8 +128,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         @SuppressLint("SetTextI18n")
         public void bind(ProfileHeaderDTO data) {
             tvUsername.setText(data.getUsername());
-            tvPostCount.setText("Posts: " + data.getPostCount());
-            tvReward.setText("Earned: " + data.getRewardTotal());
+            tvPostCount.setText(tvPostCount.getContext().getString(R.string.profile_adapter_posts) + " " + data.getPostCount());
+            tvReward.setText(tvReward.getContext().getString(R.string.profile_adapter_earned) + " " + data.getRewardTotal());
 
             if (data.getAvatar() != null && !data.getAvatar().isEmpty()) {
                 Glide.with(context)
@@ -163,7 +164,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tvTitle.setText(post.getTitle());
             tvContent.setText(post.getContent());
             tvUsername.setText(post.getUserName());
-            tvLike.setText("👍 " + post.getLikeCount());
+            tvLike.setText(tvLike.getContext().getString(R.string.post_adapter_like_count, post.getLikeCount()));
             // 格式化时间
             try {
                 tvPostTime.setText(

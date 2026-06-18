@@ -1,6 +1,6 @@
 package com.example.brokerfi.xc;
 
-import static com.example.brokerfi.config.ApiConfig.BASE_URL_HTTP;
+import static com.example.brokerfi.core.config.ApiConfig.BASE_URL_HTTP;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -29,7 +29,7 @@ import com.example.brokerfi.xc.manager.CosServiceFactory;
 import com.example.brokerfi.xc.manager.CosUploadManager;
 import com.example.brokerfi.xc.manager.UploadCallback;
 import com.example.brokerfi.xc.manager.UserManager;
-import com.example.brokerfi.xc.net.ApiCallback;
+import com.example.brokerfi.core.network.ApiCallback;
 import com.tencent.cos.xml.CosXmlService;
 import com.tencent.cos.xml.CosXmlServiceConfig;
 import com.tencent.cos.xml.exception.CosXmlClientException;
@@ -58,7 +58,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import android.widget.RelativeLayout;
-import com.example.brokerfi.xc.menu.NavigationHelper;
+import com.example.brokerfi.main.menu.NavigationHelper;
+import com.example.brokerfi.core.config.ApiConfig;
+import com.example.brokerfi.main.MainActivity;
+
 
 public class PostPublishActivity extends AppCompatActivity {
     private CosUploadManager cosUploadManager;
@@ -120,7 +123,7 @@ public class PostPublishActivity extends AppCompatActivity {
             public void onFail(String errorMsg) {
                 Log.e("COS_DEBUG", "==================== 获取密钥失败 ====================");
                 Log.e("COS_DEBUG", "错误信息：" + errorMsg);
-                Toast.makeText(PostPublishActivity.this, "获取密钥失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PostPublishActivity.this, R.string.post_publish_toast_failed_to_get_key, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -171,7 +174,7 @@ public class PostPublishActivity extends AppCompatActivity {
      */
     private void openImagePicker() {
         if (imageList.size() >= 9) {
-            Toast.makeText(this, "最多选择9张图片", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.post_publish_toast_max_9_images, Toast.LENGTH_SHORT).show();
             return;
         }
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -262,16 +265,16 @@ public class PostPublishActivity extends AppCompatActivity {
         Log.d("COS_DEBUG", "待上传图片数量：" + imageList.size());
 
         if (title.isEmpty()) {
-            Toast.makeText(this, "请输入标题", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.post_publish_toast_enter_title, Toast.LENGTH_SHORT).show();
             return;
         }
         if (content.isEmpty()) {
-            Toast.makeText(this, "请输入内容", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.post_publish_toast_enter_content, Toast.LENGTH_SHORT).show();
             return;
         }
         if (cosXmlService == null) {
             Log.e("COS_DEBUG", "cosXmlService 未初始化，无法上传");
-            Toast.makeText(this, "正在初始化上传服务，请稍候", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.post_publish_toast_init_upload_service, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -285,7 +288,7 @@ public class PostPublishActivity extends AppCompatActivity {
         }
 
         // 有图片,上传COS
-        Toast.makeText(this, "正在上传图片...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.post_publish_toast_uploading_images, Toast.LENGTH_SHORT).show();
         List<Uri> uriList = new ArrayList<>();
         for (String uriStr : imageList) {
             uriList.add(Uri.parse(uriStr));
@@ -308,7 +311,7 @@ public class PostPublishActivity extends AppCompatActivity {
             public void onFail(String error) {
                 runOnUiThread(() -> {
                     Log.e("COS_DEBUG", "上传失败：" + error);
-                    Toast.makeText(PostPublishActivity.this, "上传失败：" + error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostPublishActivity.this, PostPublishActivity.this.getString(R.string.edit_profile_toast_upload_failed) + error, Toast.LENGTH_SHORT).show();
                     btnSubmit.setEnabled(true);
                 });
             }
@@ -333,7 +336,7 @@ public class PostPublishActivity extends AppCompatActivity {
             @Override
             public void onSuccess(PostDTO result) {
                 runOnUiThread(() -> {
-                    Toast.makeText(PostPublishActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostPublishActivity.this, R.string.post_publish_toast_publish_successful, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     intent.putExtra("newPost", result);
                     setResult(RESULT_OK, intent);
@@ -344,7 +347,7 @@ public class PostPublishActivity extends AppCompatActivity {
             @Override
             public void onFail(String error) {
                 runOnUiThread(() -> {
-                    Toast.makeText(PostPublishActivity.this, "发布失败：" + error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostPublishActivity.this, PostPublishActivity.this.getString(R.string.post_publish_toast_publish_failed_prefix) + error, Toast.LENGTH_SHORT).show();
                     setResult(RESULT_CANCELED);
                     finish();
                 });

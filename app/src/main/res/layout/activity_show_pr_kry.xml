@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Show private key"
+            android:text="@string/activity_show_pr_kry_show_private_key"
             android:fontFamily="@font/work_sans_black"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -70,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Protect your key at all times."
+                android:text="@string/activity_show_pr_kry_protect_key"
                 android:textColor="#B91C1C"
                 android:textSize="14sp" />
 
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Possession of your private keys allows unauthorized access and potential theft of your assets."
+                android:text="@string/activity_show_pr_kry_key_risk"
                 android:textColor="#B91C1C"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -89,7 +89,7 @@
             android:id="@+id/btn_done"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="Done"
+            android:text="@string/activity_show_pr_kry_done"
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textColor="#FFFFFF"

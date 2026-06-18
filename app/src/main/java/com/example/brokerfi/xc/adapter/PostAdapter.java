@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import com.example.brokerfi.common.ui.Holder;
+
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
@@ -73,13 +75,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         }
 
         if (post.getContent() != null && post.getContent().length() > 50) {
-            holder.tvContent.setText(post.getContent().substring(0, 50) + "...");
+            holder.tvContent.setText(context.getString(R.string.post_adapter_content_truncated, post.getContent().substring(0, 50)));
         } else {
             holder.tvContent.setText(post.getContent());
         }
 
-        holder.tvLike.setText("👍 " + post.getLikeCount());
-        holder.tvComment.setText("💬 " + post.getCommentCount());
+        holder.tvLike.setText(context.getString(R.string.post_adapter_like_count, post.getLikeCount()));
+        holder.tvComment.setText(context.getString(R.string.post_adapter_comment_count, post.getCommentCount()));
 
         // 图片
         if (post.getFirstImageUrl() != null && !post.getFirstImageUrl().isEmpty()) {

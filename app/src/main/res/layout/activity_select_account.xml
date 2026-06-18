@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:paddingHorizontal="16dp"
-        android:text="Account List"
+        android:text="@string/activity_select_account_account_list"
         android:fontFamily="@font/work_sans_black"
         android:textColor="#000000"
         android:textSize="@dimen/text_size_xlarge"
@@ -69,7 +69,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Account 1"
+                        android:text="@string/activity_select_account_account_1"
                         android:textSize="@dimen/text_size_normal"
                         android:textColor="#000000" />
 
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:text="0 BKC"
+                    android:text="@string/activity_select_account_balance_0_bkc"
                     android:textSize="@dimen/text_size_normal"
                     android:textColor="@color/black" />
             </RelativeLayout>
@@ -117,7 +117,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Account 2"
+                        android:text="@string/activity_select_account_account_2"
                         android:textSize="@dimen/text_size_normal"
                         android:textColor="#000000" />
 
@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:text="0 BKC"
+                    android:text="@string/activity_select_account_balance_0_bkc"
                     android:textSize="@dimen/text_size_small"
                     android:textColor="@color/black" />
             </RelativeLayout>
@@ -165,7 +165,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Account 3"
+                        android:text="@string/activity_select_account_account_3"
                         android:textSize="@dimen/text_size_normal"
                         android:textColor="#000000" />
 
@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:text="0 BKC"
+                    android:text="@string/activity_select_account_balance_0_bkc"
                     android:textSize="@dimen/text_size_small"
                     android:textColor="@color/black" />
             </RelativeLayout>
@@ -213,7 +213,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Account 4"
+                        android:text="@string/activity_select_account_account_4"
                         android:textSize="@dimen/text_size_normal"
                         android:textColor="#000000" />
 
@@ -230,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:text="0 BKC"
+                    android:text="@string/activity_select_account_balance_0_bkc"
                     android:textSize="@dimen/text_size_small"
                     android:textColor="@color/black" />
             </RelativeLayout>
@@ -247,7 +247,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/custom_button_background"
-        android:text="Import account"
+        android:text="@string/activity_select_account_import_account"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="@dimen/text_size_normal"
@@ -263,7 +263,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/custom_button_background"
-        android:text="Generate account"
+        android:text="@string/activity_select_account_generate"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="@dimen/text_size_normal"
@@ -279,7 +279,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/custom_button_background_black"
-        android:text="Export private key"
+        android:text="@string/activity_select_account_export_key"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="@dimen/text_size_normal"

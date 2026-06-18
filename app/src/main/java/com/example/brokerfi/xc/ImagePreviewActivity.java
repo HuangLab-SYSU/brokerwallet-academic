@@ -13,6 +13,8 @@ import com.example.brokerfi.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.brokerfi.common.ui.Holder;
+
 
 public class ImagePreviewActivity extends AppCompatActivity {
 

@@ -7,9 +7,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
-import com.example.brokerfi.xc.ChainAddressUtil;
-import com.example.brokerfi.xc.model.Transaction;
-import com.example.brokerfi.xc.model.TransactionResponse;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
+import com.example.brokerfi.core.config.ChainConfig;
+import com.example.brokerfi.brokerfi.model.Transaction;
+import com.example.brokerfi.brokerfi.model.TransactionResponse;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -119,7 +120,7 @@ public final class TokenIncomingTxSync {
         try {
             String walletHex = strip0x(wallet);
             boolean walletQuery = addressEquals(queryAccountHex, walletHex);
-            String url = TokenConfig.getGetTx2AccountUrl(queryAccountHex);
+            String url = ChainConfig.getGetTx2AccountUrl(queryAccountHex);
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(15_000);

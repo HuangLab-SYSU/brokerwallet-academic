@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.brokerfi.R;
 import com.tencent.cos.xml.CosXmlService;
 import com.tencent.cos.xml.exception.CosXmlClientException;
 import com.tencent.cos.xml.exception.CosXmlServiceException;
@@ -110,7 +111,7 @@ public class CosUploadManager {
             });
 
         } catch (Exception e) {
-            callback.onFail("文件处理失败");
+            callback.onFail(context.getString(R.string.cos_upload_file_processing_failed));
         }
     }
 

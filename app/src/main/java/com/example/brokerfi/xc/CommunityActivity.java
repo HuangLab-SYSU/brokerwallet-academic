@@ -21,8 +21,8 @@ import com.example.brokerfi.xc.api.UserApi;
 import com.example.brokerfi.xc.dto.PostDTO;
 import com.example.brokerfi.xc.dto.UserAccountDTO;
 import com.example.brokerfi.xc.manager.UserManager;
-import com.example.brokerfi.xc.net.ApiCallback;
-import com.example.brokerfi.xc.net.SharedPrefsUtil;
+import com.example.brokerfi.core.network.ApiCallback;
+import com.example.brokerfi.core.storage.SharedPrefsUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -31,7 +31,12 @@ import java.util.List;
 import java.util.Map;
 
 import android.widget.RelativeLayout;
-import com.example.brokerfi.xc.menu.NavigationHelper;
+import com.example.brokerfi.main.menu.NavigationHelper;
+import com.example.brokerfi.core.security.SecurityUtil;
+import com.example.brokerfi.core.storage.StorageUtil;
+import com.example.brokerfi.core.storage.UserStorageUtil;
+import com.example.brokerfi.main.MainActivity;
+
 
 public class CommunityActivity extends AppCompatActivity {
 
@@ -257,12 +262,12 @@ public class CommunityActivity extends AppCompatActivity {
                 return SecurityUtil.GetAddress(privateKey);
             } else {
                 Log.e("WalletAddress", "Cannot get current private key");
-                Toast.makeText(this, "Cannot get wallet address, please add an account first", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.community_toast_add_account_first, Toast.LENGTH_SHORT).show();
                 return null;
             }
         } catch (Exception e) {
             Log.e("WalletAddress", "Failed to get wallet address", e);
-            Toast.makeText(this, "Failed to get wallet address: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.community_toast_wallet_address_failed) + " " + e.getMessage(), Toast.LENGTH_SHORT).show();
             return null;
         }
     }

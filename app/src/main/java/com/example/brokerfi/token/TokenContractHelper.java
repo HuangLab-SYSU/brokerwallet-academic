@@ -3,9 +3,10 @@ package com.example.brokerfi.token;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.brokerfi.xc.ChainAddressUtil;
-import com.example.brokerfi.xc.DashEthCall;
-import com.example.brokerfi.xc.SecurityUtil;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
+import com.example.brokerfi.core.blockchain.DashEthCall;
+import com.example.brokerfi.core.config.ChainConfig;
+import com.example.brokerfi.core.security.SecurityUtil;
 
 import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.FunctionReturnDecoder;
@@ -121,7 +122,7 @@ public final class TokenContractHelper {
         }
         try {
             String to = ChainAddressUtil.normalizeAddress(contractAddress);
-            String result = DashEthCall.directEthCall(TokenConfig.CHAIN_JSON_RPC_URL, to, dataHex);
+            String result = DashEthCall.directEthCall(ChainConfig.CHAIN_JSON_RPC_URL, to, dataHex);
             if (!TextUtils.isEmpty(result)) {
                 Log.i(TAG, "balanceOf via RPC fallback succeeded");
                 return result;

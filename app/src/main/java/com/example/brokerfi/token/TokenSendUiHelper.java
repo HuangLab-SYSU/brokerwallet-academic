@@ -25,5 +25,3 @@ final class TokenSendUiHelper {
         return balance.compareTo(amount) < 0;
     }
 }
-
-

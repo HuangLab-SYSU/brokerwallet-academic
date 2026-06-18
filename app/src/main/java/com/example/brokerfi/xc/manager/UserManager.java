@@ -2,7 +2,7 @@ package com.example.brokerfi.xc.manager;
 
 import android.content.Context;
 
-import com.example.brokerfi.xc.UserStorageUtil;
+import com.example.brokerfi.core.storage.UserStorageUtil;
 
 //社区用户缓存
 public class UserManager {

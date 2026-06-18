@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Text"
+            android:text="@string/dialog_confirm_dialog_text"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -28,7 +28,7 @@
             android:id="@+id/tv_shares_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Number of shares"
+            android:text="@string/dialog_confirm_dialog_number_of_shares"
             android:layout_marginTop="10dp"
             android:textSize="13sp"
             android:textColor="#000000"/>
@@ -52,7 +52,7 @@
             android:id="@+id/tv_price_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Price per unit (BKC)"
+            android:text="@string/dialog_confirm_price_per_unit"
             android:layout_marginTop="10dp"
             android:textSize="13sp"
             android:textColor="#000000"/>
@@ -89,7 +89,7 @@
                 android:backgroundTint="@color/grey"
                 android:padding="4dp"
                 android:textAllCaps="false"
-                android:text="Cancel"
+                android:text="@string/dialog_confirm_cancel"
                 android:layout_marginRight="16dp"/>
 
 
@@ -105,7 +105,7 @@
                 android:textColor="#ffffff"
                 android:padding="4dp"
                 android:textAllCaps="false"
-                android:text="Confirm" />
+                android:text="@string/dialog_confirm_confirm" />
         </LinearLayout>
 
     </LinearLayout>

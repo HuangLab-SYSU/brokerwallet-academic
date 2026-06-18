@@ -38,123 +38,123 @@
         android:requestLegacyExternalStorage="true"
         tools:targetApi="31">
         <activity
-            android:name=".xc.AboutActivity"
+            android:name=".news.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.NotificationActivity"
+            android:name=".news.NotificationActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.AtvActivity"
+            android:name=".brokerfi.AtvActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.WithdrawActivity"
+            android:name=".brokerfi.WithdrawActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.NewsActivity"
+            android:name=".news.NewsActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.EmulatorActivity"
+            android:name=".news.EmulatorActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.StakeMoreActivity"
+            android:name=".brokerfi.StakeMoreActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.BrokerActivity"
+            android:name=".brokerfi.BrokerActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.AfterBrokerActivity"
+            android:name=".brokerfi.AfterBrokerActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.QRCode.Capture"
+            android:name=".common.qrcode.Capture"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             android:theme="@style/zxing_CaptureTheme" />
         <activity
-            android:name=".xc.MainActivity"
+            android:name=".main.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.NFTMainActivity"
+            android:name=".nft.NFTMainActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.MintActivity"
+            android:name=".nft.MintActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.MyNFTsActivity"
+            android:name=".nft.MyNFTsActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.BuyNFTsActivity"
+            android:name=".nft.BuyNFTsActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.CongratulationsMintActivity"
+            android:name=".nft.CongratulationsMintActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.MyAccountActivity"
+            android:name=".account.MyAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.BeforeShowPrKeyActivity"
+            android:name=".account.BeforeShowPrKeyActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.AddAccountActivity"
+            android:name=".account.AddAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.GenerateAccountActivity"
+            android:name=".account.GenerateAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.SelectAccountActivity"
+            android:name=".account.SelectAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.ExportPrivateKeyActivity"
+            android:name=".account.ExportPrivateKeyActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.SettingActivity"
+            android:name=".account.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.AddNetworkActivity"
+            android:name=".account.AddNetworkActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.SelectNetworkActivity"
+            android:name=".account.SelectNetworkActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.ShowPrKryActivity"
+            android:name=".account.ShowPrKryActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.SendActivity"
+            android:name=".send.SendActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.ReceiveActivity"
+            android:name=".receive.ReceiveActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.SwapActivity"
+            android:name=".swap.SwapActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.BuyActivity"
+            android:name=".swap.BuyActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.FaucetActivity"
+            android:name=".faucet.FaucetActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.MenuActivity"
+            android:name=".main.MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.WelcomeBackActivity"
+            android:name=".account.WelcomeBackActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.CongratulationsActivity"
+            android:name=".account.CongratulationsActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.ComfirmSecretActivity"
+            android:name=".account.ComfirmSecretActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.SecretPhraseActivity"
+            android:name=".account.SecretPhraseActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.CreatePasswActivity"
+            android:name=".account.CreatePasswActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.ImportActivity"
+            android:name=".account.ImportActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.WelcomeActivity"
+            android:name=".account.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -163,40 +163,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".xc.MedalRankingActivity"
+            android:name=".medal.MedalRankingActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.GlobalStatsActivity"
+            android:name=".medal.GlobalStatsActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.ProofSubmissionActivity"
+            android:name=".proof.ProofSubmissionActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.NFTMintingActivity"
+            android:name=".nft.NFTMintingActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.NFTViewActivity"
+            android:name=".nft.NFTViewActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.ProofAndNFTActivity"
+            android:name=".proof.ProofAndNFTActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.SubmissionHistoryActivity"
+            android:name=".proof.SubmissionHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.SubmissionDetailActivity"
+            android:name=".proof.SubmissionDetailActivity"
             android:exported="false" />
         <activity
             android:name=".xc.MyCenterActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.AccountDetailActivity"
+            android:name=".account.AccountDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.ConfirmPasswordActivity"
+            android:name=".account.ConfirmPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".xc.ShowPrivateKeyActivity"
+            android:name=".account.ShowPrivateKeyActivity"
             android:exported="false" />
         <activity
             android:name=".xc.CommunityActivity"

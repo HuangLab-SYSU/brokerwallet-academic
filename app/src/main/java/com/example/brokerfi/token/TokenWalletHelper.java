@@ -1,10 +1,10 @@
 package com.example.brokerfi.token;
 
-import com.example.brokerfi.xc.StorageUtil;
+import com.example.brokerfi.core.storage.StorageUtil;
 
-import com.example.brokerfi.xc.SubmissionUtil;
+import com.example.brokerfi.proof.SubmissionUtil;
 
-import com.example.brokerfi.xc.SecurityUtil;
+import com.example.brokerfi.core.security.SecurityUtil;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -56,5 +56,3 @@ public final class TokenWalletHelper {
         return split[index];
     }
 }
-
-
