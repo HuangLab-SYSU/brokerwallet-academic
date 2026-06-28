@@ -1,8 +1,20 @@
 package com.example.brokerfi.core.util;
 
 
+import com.example.brokerfi.token.TokenConfig;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.RawTransaction;
+import org.web3j.crypto.TransactionEncoder;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
+import org.web3j.protocol.core.methods.response.EthSendTransaction;
+import org.web3j.protocol.http.HttpService;
+import org.web3j.utils.Convert;
+import org.web3j.utils.Numeric;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -384,32 +396,74 @@ public class MyUtil {
     }
 
     public static String SendTX(String privateKey, String to, String value, String fee) {
-        String uuid = UUID.randomUUID().toString();
-        String data = "";
-        if (fee != null && !fee.isEmpty()) {
-            data = uuid + to + value + fee;
-        } else {
-            data = uuid + to + value;
-        }
+        // Old transaction sending method
+        // String uuid = UUID.randomUUID().toString();
+        // String data = "";
+        // if (fee != null && !fee.isEmpty()) {
+        //     data = uuid + to + value + fee;
+        // } else {
+        //     data = uuid + to + value;
+        // }
+        // String[] sign = SecurityUtil.signECDSA(privateKey, data);
+        // TxReq req = new TxReq();
+        // req.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey));
+        // req.setRandomStr(uuid);
+        // req.setTo(to);
+        // req.setValue(value);
+        // req.setSign1(sign[0]);
+        // req.setSign2(sign[1]);
+        // if (fee != null && !fee.isEmpty()) {
+        //     req.setFee(fee);
+        // }
+        // try {
+        //     byte[] bytes = HTTPUtil.doPost("sendtx", req);
+        //     return new String(bytes);
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+        // return null;
 
-        String[] sign = SecurityUtil.signECDSA(privateKey, data);
-        TxReq req = new TxReq();
-        req.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey));
-        req.setRandomStr(uuid);
-        req.setTo(to);
-        req.setValue(value);
-        req.setSign1(sign[0]);
-        req.setSign2(sign[1]);
-        if (fee != null && !fee.isEmpty()) {
-            req.setFee(fee);
-        }
+        // Standard eth_sendRawTransaction: sign locally, broadcast raw tx via JSON-RPC.
         try {
-            byte[] bytes = HTTPUtil.doPost("sendtx", req);
-            return new String(bytes);
+            Web3j web3j = Web3j.build(new HttpService(TokenConfig.getLocalChainRpcUrl()));
+            Credentials credentials = Credentials.create(privateKey);
+
+            // Recipient address: ensure 0x prefix for web3j
+            String toAddress = to;
+            if (!toAddress.startsWith("0x") && !toAddress.startsWith("0X")) {
+                toAddress = "0x" + toAddress;
+            }
+
+            // Fetch nonce from chain
+            EthGetTransactionCount ethGetTransactionCount = web3j.ethGetTransactionCount(
+                    credentials.getAddress(),
+                    DefaultBlockParameterName.LATEST
+            ).send();
+            BigInteger nonce = ethGetTransactionCount.getTransactionCount();
+
+            // Amount: BKC (ether) -> wei
+            BigInteger amountWei = Convert.toWei(value, Convert.Unit.ETHER).toBigInteger();
+
+            // Fee: interpret as gas price in gwei; default 20 gwei when not provided
+            String gweiStr = (fee == null || fee.isEmpty()) ? "20" : fee;
+            BigInteger gasPrice = Convert.toWei(gweiStr, Convert.Unit.GWEI).toBigInteger();
+            BigInteger gasLimit = BigInteger.valueOf(21_000);
+
+            RawTransaction rawTransaction = RawTransaction.createEtherTransaction(
+                    nonce, gasPrice, gasLimit, toAddress, amountWei);
+
+            byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
+            String hexValue = Numeric.toHexString(signedMessage);
+
+            EthSendTransaction ethSendTransaction = web3j.ethSendRawTransaction(hexValue).send();
+            if (ethSendTransaction.hasError()) {
+                return "error: " + ethSendTransaction.getError().getMessage();
+            }
+            return "success:" + ethSendTransaction.getTransactionHash();
         } catch (Exception e) {
             e.printStackTrace();
+            return "error: " + e.getMessage();
         }
-        return null;
     }
 
     public static String claim(String privateKey) {
