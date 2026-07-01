@@ -15,7 +15,7 @@ import com.example.brokerfi.core.config.ApiConfig;
 
 
 public class UserApi extends BaseApi {
-    //获取 nonce
+    // Get nonce
     public void getNonce(String walletAddress, ApiCallback<String> callback) {
 
         String url = BASE_URL_HTTP + "/login/nonce?walletAddress=" + walletAddress;
@@ -25,7 +25,7 @@ public class UserApi extends BaseApi {
         executeGet(url, type, callback);
     }
 
-    //签名登录（返回 token）
+    // Signed login (return token)
     public void login(Map<String, String> body, ApiCallback<UserAccountDTO> callback) {
 
         String url = BASE_URL_HTTP + "/login/sign";

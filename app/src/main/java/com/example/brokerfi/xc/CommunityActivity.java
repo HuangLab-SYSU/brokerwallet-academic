@@ -90,7 +90,7 @@ public class CommunityActivity extends AppCompatActivity {
         adapter = new PostAdapter(this, postList);
         rvPosts.setAdapter(adapter);
 
-        // 跳转详情页
+        // Jump to details page
         adapter.setOnItemClickListener(post -> {
             Intent intent = new Intent(this, PostDetailActivity.class);
             intent.putExtra("postId", post.getId());
@@ -104,18 +104,18 @@ public class CommunityActivity extends AppCompatActivity {
     private void initListener() {
         navigationHelper = new NavigationHelper(menu, actionBar, this, notificationBtn);
 
-        // 下拉刷新
+        // Pull down to refresh
         swipeRefreshLayout.setOnRefreshListener(() -> {
             loadPosts();
         });
 
-        // 发帖按钮
+        // post button
         fabPost.setOnClickListener(v -> {
             Intent intent = new Intent(this, PostPublishActivity.class);
             startActivityForResult(intent, 1001);
         });
 
-        // 个人主页
+        // Personal homepage
         profileButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, ProfileActivity.class);
 
@@ -131,9 +131,9 @@ public class CommunityActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // 来自发帖页面的返回
+        // Return from posting page
         if (requestCode == 1001 && resultCode == RESULT_OK && data != null) {
-            // 拿到刚发布的帖子
+            // Get the newly published post
             PostDTO newPost = (PostDTO) data.getSerializableExtra("newPost");
             if (newPost != null) {
                 postList.add(0, newPost);
@@ -144,7 +144,7 @@ public class CommunityActivity extends AppCompatActivity {
     }
 
     /**
-     * 加载数据
+     * Load data / 加载数据
      */
     private void loadPosts() {
 
@@ -180,13 +180,13 @@ public class CommunityActivity extends AppCompatActivity {
 
         UserApi api = new UserApi();
 
-        // ================== 1. 获取 nonce ==================
+        // ================== 1. Get nonce ==================
         api.getNonce(address, new ApiCallback<String>() {
             @Override
             public void onSuccess(String nonce) {
 
                 try {
-                    // ================== 2. 获取私钥 ==================
+                    // ================== 2. Get private key ==================
                     String account = StorageUtil.getPrivateKey(CommunityActivity.this);
                     String acc = StorageUtil.getCurrentAccount(CommunityActivity.this);
                     int i = (acc == null) ? 0 : Integer.parseInt(acc);
@@ -198,11 +198,11 @@ public class CommunityActivity extends AppCompatActivity {
 
                     String privateKey = account.split(";")[i];
 
-                    // ================== 3. 签名 ==================
+                    // ================== 3. sign ==================
                     Map<String, String> signMap =
                             SecurityUtil.signMessage(privateKey, nonce);
 
-                    // ================== 4. 组装请求 ==================
+                    // ================== 4. Assembly request ==================
                     Map<String, String> body = new HashMap<>();
                     body.put("walletAddress", address);
                     body.put("r", signMap.get("r"));
@@ -210,12 +210,12 @@ public class CommunityActivity extends AppCompatActivity {
                     body.put("v", signMap.get("v"));
                     body.put("message", nonce);
 
-                    // ================== 5. 登录 ==================
+                    // ================== 5. Log in ==================
                     api.login(body, new ApiCallback<UserAccountDTO>() {
                         @Override
                         public void onSuccess(UserAccountDTO user) {
 
-                            // 存 token
+                            // Save token
                             SharedPrefsUtil.putString("wallet_token", user.getToken());
 
                             UserManager.getInstance().setUser(
@@ -250,15 +250,15 @@ public class CommunityActivity extends AppCompatActivity {
 
 
     /**
-     * 获取当前钱包地址
+     * Get current wallet address / 获取当前钱包地址
      */
     private String getCurrentWalletAddress() {
         try {
-            // 获取当前私钥
+            // Get the current private key
             String privateKey = StorageUtil.getCurrentPrivatekey(this);
 
             if (privateKey != null) {
-                // 从私钥生成钱包地址
+                // Generate wallet address from private key
                 return SecurityUtil.GetAddress(privateKey);
             } else {
                 Log.e("WalletAddress", "Cannot get current private key");

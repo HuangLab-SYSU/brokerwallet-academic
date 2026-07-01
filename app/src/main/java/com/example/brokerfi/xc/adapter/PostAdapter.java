@@ -63,7 +63,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         holder.tvUsername.setText(post.getUserName());
         holder.tvTitle.setText(post.getTitle());
-        // 格式化时间
+        // Format time
         try {
             holder.tv_post_time.setText(
                     new SimpleDateFormat("MM-dd", Locale.getDefault()).format(
@@ -83,7 +83,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.tvLike.setText(context.getString(R.string.post_adapter_like_count, post.getLikeCount()));
         holder.tvComment.setText(context.getString(R.string.post_adapter_comment_count, post.getCommentCount()));
 
-        // 图片
+        // picture
         if (post.getFirstImageUrl() != null && !post.getFirstImageUrl().isEmpty()) {
             holder.ivImage.setVisibility(View.VISIBLE);
             Glide.with(context)
@@ -94,7 +94,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             holder.ivImage.setVisibility(View.GONE);
         }
 
-        // 点击事件（重点）
+        // Click event (key point)
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onItemClick(post);
@@ -107,7 +107,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         return postList == null ? 0 : postList.size();
     }
 
-    // 推荐：提供数据刷新方法（比直接操作 list 更规范）
+    // Recommendation: Provide data refresh method (more standardized than directly operating list)
     public void updateData(List<PostDTO> newList) {
         this.postList.clear();
         this.postList.addAll(newList);

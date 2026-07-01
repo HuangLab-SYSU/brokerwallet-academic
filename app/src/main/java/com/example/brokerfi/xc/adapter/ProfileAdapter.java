@@ -165,7 +165,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tvContent.setText(post.getContent());
             tvUsername.setText(post.getUserName());
             tvLike.setText(tvLike.getContext().getString(R.string.post_adapter_like_count, post.getLikeCount()));
-            // 格式化时间
+            // Format time
             try {
                 tvPostTime.setText(
                         new SimpleDateFormat("MM-dd", Locale.getDefault()).format(

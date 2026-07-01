@@ -20,19 +20,19 @@ public class RewardApi extends BaseApi {
     private static final String url = BASE_URL_HTTP + "/reward/verify";
 
     /**
-     * 后端验证请求
-     * 由于目前brokerchain没有收据树，无法直接通过txHash验证交易状态
-     * 因此采用基于账户交易记录的弱匹配机制进行交易确认（fromAddr + toAddr +timestamp）
-     * @param txHash 交易哈希
-     * @param from 打赏人地址
-     * @param to 受赏人地址
-     * @param timestamp 交易时间戳
+     * Backend validation request / 后端验证请求
+     * Since the brokerchain currently does not have a receipt tree, the transaction status cannot be verified directly through txHash. / 由于目前brokerchain没有收据树，无法直接通过txHash验证交易状态
+     * Therefore, a weak matching mechanism based on account transaction records is used for transaction confirmation (fromAddr + toAddr + timestamp) / 因此采用基于账户交易记录的弱匹配机制进行交易确认（fromAddr + toAddr +timestamp）
+     * @param txHash transaction hash / 交易哈希
+     * @param from Tipper address / 打赏人地址
+     * @param to Recipient address / 受赏人地址
+     * @param timestamp transaction timestamp / 交易时间戳
      * @param nonce nonce
      * @param r
      * @param s
      * @param v
-     * @param amount 交易金额（用于后端入库
-     * @param postId 受赏帖子ID用于后端入库
+     * @param amount Transaction amount (used for back-end storage / 交易金额（用于后端入库
+     * @param postId The rewarded post ID is used for backend storage. / 受赏帖子ID用于后端入库
      * @param callback
      */
     public void verifyReward(

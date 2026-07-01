@@ -27,7 +27,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_preview);
 
-        // 全屏黑色背景
+        // Full screen black background
         getWindow().setBackgroundDrawableResource(android.R.color.black);
 
         viewPager = findViewById(R.id.view_pager);
@@ -38,7 +38,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(currentPosition, false);
 
-        // 点击屏幕关闭
+        // Tap the screen to close
         viewPager.setOnClickListener(v -> finish());
     }
 

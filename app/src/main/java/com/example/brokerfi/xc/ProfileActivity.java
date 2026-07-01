@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     private final int size = 10;
     private boolean isLoading = false;
 
-    // menu 相关控件
+    // menu related controls
     private ImageView menu;
     private ImageView notificationBtn;
     private RelativeLayout actionBar;
@@ -54,13 +54,13 @@ public class ProfileActivity extends AppCompatActivity {
         initData();
         initEvent();
 
-        loadHeader();     // 先加载头部
+        loadHeader();     // Load the header first
     }
 
     private void initView() {
         rvProfile = findViewById(R.id.rv_profile);
 
-        // 绑定 topbar 中的 menu 控件
+        // Bind the menu control in topbar
         menu = findViewById(R.id.menu);
         notificationBtn = findViewById(R.id.notificationBtn);
         actionBar = findViewById(R.id.action_bar);
@@ -76,7 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void initMenu() {
-        // 初始化原 wallet 的顶部 menu 弹窗逻辑
+        // Initialize the top menu pop-up window logic of the original wallet.
         navigationHelper = new NavigationHelper(menu, actionBar, this, notificationBtn);
     }
 
@@ -144,7 +144,7 @@ public class ProfileActivity extends AppCompatActivity {
                         List<PostDTO> list = response.getContent();
 
                         if (isRefresh) {
-                            // 注意：header 在 index=0
+                            // Note: header is at index=0
                             if (dataList.size() > 1) {
                                 dataList.subList(1, dataList.size()).clear();
                             }
