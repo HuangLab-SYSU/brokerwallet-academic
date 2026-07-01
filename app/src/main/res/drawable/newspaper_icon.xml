@@ -1,12 +1,12 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 黑色实心圆背景 -->
+    <!-- Black solid circle background -->
     <item android:width="39dp" android:height="39dp">
         <shape android:shape="oval">
             <solid android:color="#000000" />
         </shape>
     </item>
 
-    <!-- 报纸图标 (News) -->
+    <!-- Newspaper icon (News) -->
     <item
         android:width="20dp"
         android:height="20dp"

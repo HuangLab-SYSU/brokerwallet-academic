@@ -2,16 +2,16 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/black" /> <!-- 按下状态的背景颜色 -->
+            <solid android:color="@color/black" /> <!-- The background color of the pressed state -->
             <stroke android:color="@color/pink"
                 android:width="2dp"/>
-            <corners android:radius="24dp" /> <!-- 圆角半径 -->
+            <corners android:radius="24dp" /> <!-- corner radius -->
         </shape>
     </item>
     <item>
         <shape>
-            <solid android:color="@color/black" /> <!-- 默认状态的背景颜色 -->
-            <corners android:radius="24dp" /> <!-- 圆角半径 -->
+            <solid android:color="@color/black" /> <!-- Default background color -->
+            <corners android:radius="24dp" /> <!-- corner radius -->
             <stroke
                 android:width="2dp"
                 android:color="@color/pink" />

@@ -1,7 +1,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#ffffff" /> <!-- 背景颜色 -->
+    <solid android:color="#ffffff" /> <!-- background color -->
     <stroke
         android:width="2dp"
-    android:color="#000000" /> <!-- 边框颜色 -->
-    <corners android:radius="8dp" /> <!-- 圆角半径 -->
+    android:color="#000000" /> <!-- border color -->
+    <corners android:radius="8dp" /> <!-- corner radius -->
 </shape>
