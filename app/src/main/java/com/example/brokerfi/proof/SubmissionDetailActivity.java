@@ -19,89 +19,89 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * 提交详情Activity
- * 显示单个提交的详细信息和处理进度
+ * Submit details Activity / 提交详情Activity
+ * Show details and processing progress of a single commit. / 显示单个提交的详细信息和处理进度
  */
 public class SubmissionDetailActivity extends AppCompatActivity {
-    
+
     private static final String TAG = "SubmissionDetail";
-    
+
     private ImageView menu;
     private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private NavigationHelper navigationHelper;
-    
+
     private TextView loadingText;
     private TextView errorText;
     private LinearLayout detailContainer;
     private TextView retryButton;
-    
+
     private Long submissionId;
     private String fileName;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submission_detail);
-        
-        // 获取传递的参数
+
+        // Get passed parameters
         Intent intent = getIntent();
         submissionId = intent.getLongExtra("submissionId", -1);
         fileName = intent.getStringExtra("fileName");
-        
+
         if (submissionId == -1) {
             Toast.makeText(this, R.string.submission_detail_toast_invalid_id, Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
-        
+
         initializeViews();
         setupUI();
         loadSubmissionDetail();
     }
-    
+
     /**
-     * 初始化视图
+     * Initialize view / 初始化视图
      */
     private void initializeViews() {
-        // 导航相关
+        // Navigation related
         menu = findViewById(R.id.menu);
         notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         navigationHelper = new NavigationHelper(menu, action_bar, this, notificationBtn);
-        
-        // 内容相关
+
+        // Content related
         loadingText = findViewById(R.id.loadingText);
         errorText = findViewById(R.id.errorText);
         detailContainer = findViewById(R.id.detailContainer);
         retryButton = findViewById(R.id.retryButton);
     }
-    
+
     /**
-     * 设置UI
+     * Setup UI / 设置UI
      */
     private void setupUI() {
-        // 设置导航（简化版本）
+        // Setup navigation (simplified version)
         menu.setOnClickListener(v -> {
-            // 可以在这里添加菜单逻辑，暂时留空
+            // You can add menu logic here, leave it blank for now.
         });
         notificationBtn.setOnClickListener(v -> {
-            // 可以在这里添加通知逻辑，暂时留空
+            // You can add notification logic here and leave it blank for now.
         });
-        
-        // 设置重试按钮
+
+        // Set retry button
         retryButton.setOnClickListener(v -> {
             hideError();
             loadSubmissionDetail();
         });
     }
-    
+
     /**
-     * 加载提交详情
+     * Load submission details / 加载提交详情
      */
     private void loadSubmissionDetail() {
         showLoading();
-        
+
         SubmissionHistoryUtil.getSubmissionDetail(submissionId,
             new SubmissionHistoryUtil.SubmissionDetailCallback() {
                 @Override
@@ -111,7 +111,7 @@ public class SubmissionDetailActivity extends AppCompatActivity {
                         handleDetailSuccess(response);
                     });
                 }
-                
+
                 @Override
                 public void onError(String error) {
                     runOnUiThread(() -> {
@@ -121,14 +121,14 @@ public class SubmissionDetailActivity extends AppCompatActivity {
                 }
             });
     }
-    
+
     /**
-     * 处理详情成功响应
+     * Processing details successful response / 处理详情成功响应
      */
     private void handleDetailSuccess(String response) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
-            
+
             if (jsonResponse.getBoolean("success")) {
                 JSONObject data = jsonResponse.getJSONObject("data");
                 displaySubmissionDetail(data);
@@ -136,42 +136,42 @@ public class SubmissionDetailActivity extends AppCompatActivity {
                 String message = jsonResponse.optString("message", getString(R.string.submission_detail_error_load_failed_plain));
                 showError(message);
             }
-            
+
         } catch (JSONException e) {
             Log.e(TAG, "解析详情响应失败", e);
             showError(getString(R.string.submission_detail_error_parse_failed));
         }
     }
-    
+
     /**
-     * 显示提交详情
+     * Show submission details / 显示提交详情
      */
     private void displaySubmissionDetail(JSONObject data) {
         try {
             detailContainer.removeAllViews();
-            
-            // 文件信息
+
+            // File information
             addDetailItem(getString(R.string.submission_detail_label_file_name), data.optString("fileName"));
             addDetailItem(getString(R.string.submission_detail_label_file_size), formatFileSize(data.optLong("fileSize")));
             addDetailItem(getString(R.string.submission_detail_label_upload_time), formatDateTime(data.optString("uploadTime")));
-            
-            // 审核状态
+
+            // Review status
             String auditStatus = data.optString("auditStatusDesc");
             String auditTime = data.optString("auditTime");
             if (auditTime != null && !auditTime.isEmpty()) {
                 auditStatus += " (" + formatDateTime(auditTime) + ")";
             }
             addDetailItem(getString(R.string.submission_detail_label_audit_status), auditStatus);
-            
-            // 勋章信息
+
+            // Medal information
             String medalDesc = data.optString("medalAwardedDesc");
             String medalTime = data.optString("medalAwardTime");
             if (medalTime != null && !medalTime.isEmpty()) {
                 medalDesc += " (" + formatDateTime(medalTime) + ")";
             }
             addDetailItem(getString(R.string.submission_detail_label_medal_reward), medalDesc);
-            
-            // 处理进度
+
+            // Processing progress
             if (data.has("processSteps")) {
                 JSONArray steps = data.getJSONArray("processSteps");
                 StringBuilder stepsText = new StringBuilder();
@@ -181,63 +181,63 @@ public class SubmissionDetailActivity extends AppCompatActivity {
                 }
                 addDetailItem(getString(R.string.submission_detail_label_process_progress), stepsText.toString());
             }
-            
-            // 用户信息
+
+            // User information
             if (data.has("user")) {
                 JSONObject user = data.getJSONObject("user");
                 addDetailItem(getString(R.string.submission_detail_label_submitter), user.optString("displayName", getString(R.string.submission_detail_value_not_set)));
                 addDetailItem(getString(R.string.submission_detail_label_total_medals), String.valueOf(user.optInt("totalMedals")));
             }
-            
+
             detailContainer.setVisibility(View.VISIBLE);
-            
+
         } catch (JSONException e) {
             Log.e(TAG, "显示详情失败", e);
             showError(getString(R.string.submission_detail_error_display_failed));
         }
     }
-    
+
     /**
-     * 添加详情项
+     * Add details / 添加详情项
      */
     private void addDetailItem(String label, String value) {
         View itemView = getLayoutInflater().inflate(R.layout.item_detail_info, detailContainer, false);
-        
+
         TextView labelText = itemView.findViewById(R.id.labelText);
         TextView valueText = itemView.findViewById(R.id.valueText);
-        
+
         labelText.setText(label);
         valueText.setText(value);
-        
+
         detailContainer.addView(itemView);
     }
-    
+
     /**
-     * 处理错误
+     * handling errors / 处理错误
      */
     private void handleDetailError(String error) {
         Log.e(TAG, "获取提交详情失败: " + error);
         showError(getString(R.string.submission_detail_error_load_failed) + " " + error);
     }
-    
+
     /**
-     * 显示加载状态
+     * Show loading state / 显示加载状态
      */
     private void showLoading() {
         loadingText.setVisibility(View.VISIBLE);
         errorText.setVisibility(View.GONE);
         detailContainer.setVisibility(View.GONE);
     }
-    
+
     /**
-     * 隐藏加载状态
+     * Hide loading status / 隐藏加载状态
      */
     private void hideLoading() {
         loadingText.setVisibility(View.GONE);
     }
-    
+
     /**
-     * 显示错误状态
+     * Show error status / 显示错误状态
      */
     private void showError(String message) {
         errorText.setText(message);
@@ -245,16 +245,16 @@ public class SubmissionDetailActivity extends AppCompatActivity {
         loadingText.setVisibility(View.GONE);
         detailContainer.setVisibility(View.GONE);
     }
-    
+
     /**
-     * 隐藏错误状态
+     * Hide error status / 隐藏错误状态
      */
     private void hideError() {
         errorText.setVisibility(View.GONE);
     }
-    
+
     /**
-     * 格式化文件大小
+     * Format file size / 格式化文件大小
      */
     private String formatFileSize(long bytes) {
         if (bytes < 1024) {
@@ -265,9 +265,9 @@ public class SubmissionDetailActivity extends AppCompatActivity {
             return String.format("%.1f MB", bytes / (1024.0 * 1024.0));
         }
     }
-    
+
     /**
-     * 格式化日期时间
+     * Format date time / 格式化日期时间
      */
     private String formatDateTime(String dateTime) {
         try {

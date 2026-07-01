@@ -33,7 +33,7 @@ public class NFTMintingActivity extends AppCompatActivity {
     private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private NavigationHelper navigationHelper;
-    
+
     private EditText nftNameEditText;
     private EditText nftDescriptionEditText;
     private Spinner imageTypeSpinner;
@@ -41,7 +41,7 @@ public class NFTMintingActivity extends AppCompatActivity {
     private Button mintButton;
     private TextView selectedImageText;
     private ImageView previewImageView;
-    
+
     private Uri selectedImageUri;
     private String selectedImagePath;
 
@@ -58,7 +58,7 @@ public class NFTMintingActivity extends AppCompatActivity {
         menu = findViewById(R.id.menu);
         notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
-        
+
         nftNameEditText = findViewById(R.id.nftNameEditText);
         nftDescriptionEditText = findViewById(R.id.nftDescriptionEditText);
         imageTypeSpinner = findViewById(R.id.imageTypeSpinner);
@@ -70,7 +70,7 @@ public class NFTMintingActivity extends AppCompatActivity {
 
     private void intEvent() {
         navigationHelper = new NavigationHelper(menu, action_bar, this, notificationBtn);
-        
+
         selectImageButton.setOnClickListener(v -> selectImage());
         mintButton.setOnClickListener(v -> mintNFT());
     }
@@ -86,40 +86,40 @@ public class NFTMintingActivity extends AppCompatActivity {
         String nftName = nftNameEditText.getText().toString().trim();
         String nftDescription = nftDescriptionEditText.getText().toString().trim();
         String imageType = imageTypeSpinner.getSelectedItem().toString();
-        
+
         if (nftName.isEmpty()) {
             Toast.makeText(this, R.string.activity_nft_minting_hint_name, Toast.LENGTH_SHORT).show();
             return;
         }
-        
+
         if (nftDescription.isEmpty()) {
             Toast.makeText(this, R.string.activity_nft_minting_hint_description, Toast.LENGTH_SHORT).show();
             return;
         }
-        
+
         if (getString(R.string.nft_minting_image_type_custom).equals(imageType) && selectedImageUri == null) {
             Toast.makeText(this, R.string.nft_minting_toast_select_image, Toast.LENGTH_SHORT).show();
             return;
         }
-        
-        // 显示铸造中状态
+
+        //Display casting status
         mintButton.setEnabled(false);
         mintButton.setText(R.string.nft_minting_minting);
-        
+
         new Thread(() -> {
             try {
-                // 调用NFT铸造API
+                // Call NFT casting API
                 String result = NFTApiUtil.mintNFT(
                     nftName,
                     nftDescription,
                     imageType,
                     selectedImagePath
                 );
-                
+
                 runOnUiThread(() -> {
                     mintButton.setEnabled(true);
                     mintButton.setText(R.string.activity_nft_minting_button_mint_nft);
-                    
+
                     if (result != null && result.contains("success")) {
                         Toast.makeText(this, R.string.nft_minting_toast_nft_mint_successful, Toast.LENGTH_LONG).show();
                         clearForm();
@@ -150,16 +150,16 @@ public class NFTMintingActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        
+
         if (requestCode == 1002 && resultCode == RESULT_OK && data != null) {
             selectedImageUri = data.getData();
             if (selectedImageUri != null) {
                 try {
-                    // 复制图片到应用内部存储
+                    //Copy the image to the application's internal storage.
                     selectedImagePath = copyImageToInternalStorage(selectedImageUri);
                     selectedImageText.setText(selectedImageText.getContext().getString(R.string.nft_minting_image_selected) + " " + getImageName(selectedImageUri));
-                    
-                    // 显示预览
+
+                    // show preview
                     previewImageView.setImageURI(selectedImageUri);
                 } catch (Exception e) {
                     Log.e("NFTMinting", "图片处理失败", e);
@@ -167,7 +167,7 @@ public class NFTMintingActivity extends AppCompatActivity {
                 }
             }
         }
-        
+
         IntentResult intentResult = IntentIntegrator.parseActivityResult(
                 requestCode, resultCode, data
         );
@@ -183,16 +183,16 @@ public class NFTMintingActivity extends AppCompatActivity {
         InputStream inputStream = getContentResolver().openInputStream(uri);
         File file = new File(getFilesDir(), "nft_image_" + System.currentTimeMillis() + ".jpg");
         FileOutputStream outputStream = new FileOutputStream(file);
-        
+
         byte[] buffer = new byte[1024];
         int length;
         while ((length = inputStream.read(buffer)) > 0) {
             outputStream.write(buffer, 0, length);
         }
-        
+
         inputStream.close();
         outputStream.close();
-        
+
         return file.getAbsolutePath();
     }
 

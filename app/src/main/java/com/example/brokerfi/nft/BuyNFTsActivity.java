@@ -86,7 +86,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
     private void intEvent(){
         navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
-        //购买按钮
+        // buy button
         btn_buy_nfts.setOnClickListener(view -> {
             NFT selected = adapter.getSelectedItem();
             int position = adapter.getSelectedPosition();
@@ -96,8 +96,8 @@ public class BuyNFTsActivity extends AppCompatActivity{
                 return;
             }
 
-            // 执行购买逻辑
-            // 创建弹窗
+            // Execute purchase logic
+            // Create pop-up window
             AlertDialog dialog = new AlertDialog.Builder(this)
                     .setView(R.layout.dialog_confirm)
                     .create();
@@ -110,24 +110,24 @@ public class BuyNFTsActivity extends AppCompatActivity{
                 Button btnConfirm = dialog.findViewById(R.id.btn_confirm);
                 Button btnCancel = dialog.findViewById(R.id.btn_cancel);
 
-                // 设置提示信息
+                // Set reminder information
                 tv_title.setText(R.string.Buy);
-                // 修改标签文本
+                // Modify label text
                 tvPriceLabel.setText(R.string.buy_nfts_total_gas_fee_included);
 
-                // 显示单价并禁用
+                // Show unit price and disable
                 et_price.setText(getString(R.string.buy_nfts_price_bkc, selected.getPrice().add(new BigInteger("20")).toString()));
                 et_price.setEnabled(false);
                 et_price.setTextColor(ContextCompat.getColor(this, R.color.grey_price_disable));
-                et_price.setBackgroundResource(R.drawable.custom_edittext_border_disabled); // 使用自定义背景
+                et_price.setBackgroundResource(R.drawable.custom_edittext_border_disabled); // Use a custom background
 
-                // 设置输入监听，根据份数自动生成total price
+                // Set up input monitoring and automatically generate total price based on the number of copies.
                 et_shares.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void afterTextChanged(Editable shares) {
                         String input = shares.toString().trim();
 
-                        // 空输入处理
+                        // Empty input handling
                         if (input.isEmpty()) {
                             et_price.setText(R.string.buy_nfts_price_placeholder);
                             btnConfirm.setEnabled(false);
@@ -137,7 +137,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
                         try {
                             BigInteger s = new BigInteger(input);
 
-                            // 判断shares输入格式
+                            // Determine the shares input format
                             if (s.compareTo(BigInteger.ONE) < 0) {
                                 et_shares.setError(getString(R.string.buy_nfts_error_1));
                                 et_price.setText(R.string.buy_nfts_price_placeholder);
@@ -230,7 +230,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
                             NFT nft = new NFT(
                                     nfts.nftIds[i],
                                     nfts.addressList[i],
-                                    nfts.images[i], // 直接存储Base64图片数据
+                                    nfts.images[i], // Directly store Base64 image data
                                     nfts.names[i],
                                     nfts.sharesList[i],
                                     nfts.pricesList[i],
@@ -250,7 +250,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
                         });
                     }
                 } else {
-                    // 处理非JSON响应（如404）
+                    // Handle non-JSON responses (such as 404)
                     runOnUiThread(() ->
                             Toast.makeText(BuyNFTsActivity.this,
                                     BuyNFTsActivity.this.getString(R.string.buy_nfts_toast_7) + " " + result,
@@ -279,21 +279,21 @@ public class BuyNFTsActivity extends AppCompatActivity{
                 return;
             }
             try {
-                // 先检查是否是有效的JSON
+                // First check if it is valid JSON
                 if (result.trim().startsWith("{")) {
                     JSONObject response = new JSONObject(result);
                     if (response.has("error")) {
                         Toast.makeText(BuyNFTsActivity.this,
                                 BuyNFTsActivity.this.getString(R.string.buy_nfts_toast_10) + " " + response.getString("error"),
                                 Toast.LENGTH_LONG).show();
-                        //刷新市场NFT信息
+                        // Refresh market NFT information
                         fetchListedNFTs();
                     } else {
                         String txHash = response.getString("result");
                         checkTransactionStatus(txHash);
                     }
                 } else {
-                    // 处理非JSON响应（如404）
+                    // Handle non-JSON responses (such as 404)
                     runOnUiThread(() ->
                             Toast.makeText(BuyNFTsActivity.this,
                                     BuyNFTsActivity.this.getString(R.string.buy_nfts_toast_7) + " " + result,
@@ -302,7 +302,7 @@ public class BuyNFTsActivity extends AppCompatActivity{
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                // 处理无效JSON
+                // Handling invalid JSON
                 runOnUiThread(() ->
                         Toast.makeText(BuyNFTsActivity.this,
                                 R.string.buy_nfts_toast_11,
@@ -334,18 +334,18 @@ public class BuyNFTsActivity extends AppCompatActivity{
                     if ("0x1".equals(status)) {
                         runOnUiThread(() -> {
                             Toast.makeText(BuyNFTsActivity.this, R.string.buy_nfts_toast_13, Toast.LENGTH_SHORT).show();
-                            //刷新市场NFT信息
+                            // Refresh market NFT information
                             fetchListedNFTs();
                         });
                     } else {
                         runOnUiThread(() -> {
                             Toast.makeText(BuyNFTsActivity.this, R.string.buy_nfts_toast_14, Toast.LENGTH_SHORT).show();
-                            //刷新市场NFT信息
+                            // Refresh market NFT information
                             fetchListedNFTs();
                         });
                     }
                 } else {
-                    // 交易尚未上链，继续轮询
+                    // The transaction has not yet been uploaded to the chain, continue polling.
                     String finalTxHash = txHash;
                     new Handler().postDelayed(() -> checkTransactionStatus(finalTxHash), 2000);
                 }

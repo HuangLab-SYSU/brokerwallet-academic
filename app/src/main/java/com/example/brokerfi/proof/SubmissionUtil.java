@@ -25,114 +25,114 @@ import com.example.brokerfi.core.storage.StorageUtil;
 
 
 /**
- * 一体化提交工具类
- * 处理证明文件、NFT图片、用户信息的一次性提交
+ * Integrated submission utility / 一体化提交工具类
+ * Handles one-time submission of proof files, NFT images, and user information. / 处理证明文件、NFT图片、用户信息的一次性提交
  */
 public class SubmissionUtil {
-    
+
     private static final String TAG = "SubmissionUtil";
     private static final OkHttpClient client = new OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .build();
-    
+
     /**
-     * 一体化提交：多个证明文件 + NFT图片 + 用户信息
-     * @param context Android上下文
-     * @param proofFileUris 证明文件URI列表（必填，1-3个）
-     * @param nftImageUri NFT图片URI（可选）
-     * @param walletAddress 钱包地址（自动获取）
-     * @param displayName 用户花名（可选）
-     * @param representativeWork 代表作描述（可选）
-     * @param showRepresentativeWork 是否展示代表作
-     * @param callback 提交结果回调
+     * Integrated submission: multiple supporting documents + NFT images + user information. / 一体化提交：多个证明文件 + NFT图片 + 用户信息
+     * @param context Android context / Android上下文
+     * @param proofFileUris List of supporting document URIs (required, 1-3) / 证明文件URI列表（必填，1-3个）
+     * @param nftImageUri NFT image URI (optional) / NFT图片URI（可选）
+     * @param walletAddress Wallet address (obtained automatically) / 钱包地址（自动获取）
+     * @param displayName Display name (optional) / 用户花名（可选）
+     * @param representativeWork Representative work description (optional) / 代表作描述（可选）
+     * @param showRepresentativeWork Whether to show the representative work / 是否展示代表作
+     * @param callback Submission result callback / 提交结果回调
      */
     public static void submitComplete(Context context, List<Uri> proofFileUris, Uri nftImageUri,
                                     String walletAddress, String displayName, String representativeWork,
                                     boolean showRepresentativeWork, SubmissionCallback callback) {
-        
+
         new Thread(() -> {
             try {
-                // 构建请求体
+                // Build the request body
                 MultipartBody.Builder requestBuilder = new MultipartBody.Builder()
                         .setType(MultipartBody.FORM);
-                
-                // 1. 添加所有证明文件（必填）
+
+                // 1. Add all supporting documents (required)
                 if (proofFileUris == null || proofFileUris.isEmpty()) {
                     callback.onError("Please select at least one proof file");
                     return;
                 }
-                
+
                 for (int i = 0; i < proofFileUris.size(); i++) {
                     Uri proofFileUri = proofFileUris.get(i);
-                    
-                    // 获取原始文件名
+
+                    // Get the original file name
                     String originalFileName = getFileNameFromUri(context, proofFileUri);
                     if (originalFileName == null || originalFileName.isEmpty()) {
                         originalFileName = "proof_file_" + (i + 1) + ".dat";
                     }
-                    
+
                     File proofFile = getFileFromUri(context, proofFileUri);
                     if (proofFile == null) {
                         callback.onError("Unable to get proof file " + (i + 1));
                         return;
                     }
-                    
+
                     RequestBody proofFileBody = RequestBody.create(
-                        MediaType.parse("application/octet-stream"), 
+                        MediaType.parse("application/octet-stream"),
                         proofFile
                     );
-                    // 使用原始文件名而不是临时文件名
+                    // Use original filename instead of temporary filename
                     requestBuilder.addFormDataPart("proofFiles", originalFileName, proofFileBody);
                     Log.d(TAG, "添加证明文件: " + originalFileName + " (大小: " + proofFile.length() + " bytes)");
                 }
-                
-                // 2. 添加NFT图片（可选）
+
+                // 2. Add NFT image (optional)
                 if (nftImageUri != null) {
-                    // 获取原始图片文件名
+                    // Get the original image file name
                     String originalImageName = getFileNameFromUri(context, nftImageUri);
                     if (originalImageName == null || originalImageName.isEmpty()) {
                         originalImageName = "nft_image.jpg";
                     }
-                    
+
                     File nftImageFile = getFileFromUri(context, nftImageUri);
                     if (nftImageFile != null) {
                         RequestBody nftImageBody = RequestBody.create(
-                            MediaType.parse("image/*"), 
+                            MediaType.parse("image/*"),
                             nftImageFile
                         );
-                        // 使用原始图片文件名
+                        // Use original image file name
                         requestBuilder.addFormDataPart("nftImage", originalImageName, nftImageBody);
                         Log.d(TAG, "添加NFT图片: " + originalImageName + " (大小: " + nftImageFile.length() + " bytes)");
                     }
                 }
-                
-                // 3. 添加钱包地址（必填）
+
+                // 3. Add wallet address (required)
                 requestBuilder.addFormDataPart("walletAddress", walletAddress);
-                
-                // 4. 添加用户信息（可选）
+
+                // 4. Add user information (optional)
                 if (displayName != null && !displayName.trim().isEmpty()) {
                     requestBuilder.addFormDataPart("displayName", displayName.trim());
                 }
-                
+
                 if (representativeWork != null && !representativeWork.trim().isEmpty()) {
                     requestBuilder.addFormDataPart("representativeWork", representativeWork.trim());
                 }
-                
+
                 requestBuilder.addFormDataPart("showRepresentativeWork", String.valueOf(showRepresentativeWork));
-                
-                // 5. 构建请求
+
+                // 5. Build request
                 MultipartBody requestBody = requestBuilder.build();
-                
+
                 Request request = new Request.Builder()
                         .url(ApiConfig.API_UPLOAD_COMPLETE)
                         .post(requestBody)
                         .build();
-                
-                // 6. 执行请求
+
+                // 6. Execute the request
                 Response response = client.newCall(request).execute();
-                
+
                 if (response.isSuccessful()) {
                     String responseBody = response.body().string();
                     Log.d(TAG, "一体化提交成功: " + responseBody);
@@ -142,66 +142,66 @@ public class SubmissionUtil {
                     Log.e(TAG, "一体化提交失败: " + response.code() + " - " + errorBody);
                     callback.onError("Submission failed: " + response.code() + " - " + errorBody);
                 }
-                
+
             } catch (Exception e) {
                 Log.e(TAG, "一体化提交异常", e);
                 callback.onError("Submission exception: " + e.getMessage());
             }
         }).start();
     }
-    
+
     /**
-     * 从URI获取文件（兼容Android 10+分区存储）
+     * Get a file from a URI (compatible with Android 10+ scoped storage)
      */
     private static File getFileFromUri(Context context, Uri uri) {
         try {
             Log.d(TAG, "处理URI: " + uri.toString());
-            
-            // 获取原始文件名和扩展名
+
+            // Get original file name and extension
             String originalFileName = getFileNameFromUri(context, uri);
             String extension = "";
             if (originalFileName != null && originalFileName.contains(".")) {
                 extension = originalFileName.substring(originalFileName.lastIndexOf("."));
             }
-            
-            // 创建临时文件（保留扩展名）
+
+            // Create temporary file (keep extension)
             String fileName = "temp_" + System.currentTimeMillis() + extension;
             File tempFile = new File(context.getCacheDir(), fileName);
-            
-            // 从URI读取内容到临时文件
+
+            // Read content from URI to temporary file
             InputStream inputStream = context.getContentResolver().openInputStream(uri);
             if (inputStream == null) {
                 Log.e(TAG, "无法打开输入流");
                 return null;
             }
-            
+
             FileOutputStream outputStream = new FileOutputStream(tempFile);
             byte[] buffer = new byte[4096];
             int bytesRead;
             while ((bytesRead = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, bytesRead);
             }
-            
+
             inputStream.close();
             outputStream.close();
-            
+
             Log.d(TAG, "临时文件创建成功: " + tempFile.getAbsolutePath() + " (大小: " + tempFile.length() + " bytes)");
             return tempFile;
-            
+
         } catch (Exception e) {
             Log.e(TAG, "获取文件失败", e);
             return null;
         }
     }
-    
+
     /**
-     * 从URI获取原始文件名
+     * Get original filename from URI / 从URI获取原始文件名
      */
     private static String getFileNameFromUri(Context context, Uri uri) {
         String fileName = null;
-        
+
         if ("content".equals(uri.getScheme())) {
-            // 对于content://类型的URI，查询文件名
+            // For content:// type URI, query the file name.
             Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
             if (cursor != null) {
                 try {
@@ -216,39 +216,39 @@ public class SubmissionUtil {
                 }
             }
         } else if ("file".equals(uri.getScheme())) {
-            // 对于file://类型的URI，直接从路径获取文件名
+            // For file:// type URI, get the file name directly from the path.
             fileName = new File(uri.getPath()).getName();
         }
-        
+
         Log.d(TAG, "获取到的文件名: " + fileName);
         return fileName;
     }
-    
+
     /**
-     * 获取当前钱包地址
+     * Get current wallet address / 获取当前钱包地址
      */
     public static String getCurrentWalletAddress(Context context) {
         try {
             if (context instanceof android.app.Activity) {
                 android.app.Activity activity = (android.app.Activity) context;
-                
-                // 获取当前私钥
+
+                // Get the current private key
                 String privateKey = StorageUtil.getCurrentPrivatekey((androidx.appcompat.app.AppCompatActivity) activity);
-                
+
                 if (privateKey != null) {
-                    // 从私钥生成钱包地址
+                    // Generate wallet address from private key
                     return SecurityUtil.GetAddress(privateKey);
                 }
             }
         } catch (Exception e) {
             Log.e(TAG, "获取当前钱包地址失败", e);
         }
-        
+
         return null;
     }
-    
-    // ==================== 回调接口 ====================
-    
+
+    // ==================== callback interface ====================
+
     public interface SubmissionCallback {
         void onSuccess(String response);
         void onError(String error);

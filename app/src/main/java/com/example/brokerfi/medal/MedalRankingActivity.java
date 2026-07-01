@@ -50,12 +50,12 @@ public class MedalRankingActivity extends AppCompatActivity {
     private TextView myCenterButton;
     private TextView globalStatsButton;
     private TextView helpButton;
-    
-    // 下拉刷新相关
+
+    // Pull down to refresh related
     private androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefreshLayout;
     private boolean isRefreshing = false;
-    
-    // 静态缓存，用于Activity重建时恢复数据
+
+    // Static cache, used to restore data when the Activity is rebuilt.
     private static List<MedalRankingItem> cachedRankingList = null;
 
     @Override
@@ -74,10 +74,10 @@ public class MedalRankingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        // 恢复排行榜缓存
+        // Restore leaderboard cache
         restoreRankingCache();
-        
-        // 如果有缓存，不重新加载；如果没有缓存，才加载
+
+        // If there is cache, do not reload; if there is no cache, load.
         if (rankingList.isEmpty()) {
             loadMedalRanking();
         } else {
@@ -100,7 +100,7 @@ public class MedalRankingActivity extends AppCompatActivity {
         myCenterButton = findViewById(R.id.myCenterButton);
         globalStatsButton = findViewById(R.id.globalStatsButton);
         helpButton = findViewById(R.id.helpButton);
-        
+
         rankingList = new ArrayList<>();
         adapter = new MedalRankingAdapter(rankingList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -109,12 +109,12 @@ public class MedalRankingActivity extends AppCompatActivity {
 
     private void intEvent() {
         navigationHelper = new NavigationHelper(menu, action_bar, this, notificationBtn);
-        
+
         proofAndNftButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, ProofAndNFTActivity.class);
             startActivity(intent);
         });
-        
+
         myCenterButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MyCenterActivity.class);
             startActivity(intent);
@@ -123,14 +123,14 @@ public class MedalRankingActivity extends AppCompatActivity {
         globalStatsButton.setOnClickListener(v -> {
             showGlobalStatsMenu();
         });
-        
+
         helpButton.setOnClickListener(v -> {
             showCalculationHelpDialog();
         });
     }
 
     /**
-     * 设置下拉刷新
+     * Set pull-down refresh / 设置下拉刷新
      */
     private void setupPullToRefresh() {
         if (swipeRefreshLayout != null) {
@@ -139,8 +139,8 @@ public class MedalRankingActivity extends AppCompatActivity {
                 isRefreshing = true;
                 loadMedalRanking();
             });
-            
-            // 设置刷新动画颜色
+
+            // Set refresh animation color
             swipeRefreshLayout.setColorSchemeResources(
                 android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -149,9 +149,9 @@ public class MedalRankingActivity extends AppCompatActivity {
             );
         }
     }
-    
+
     private void loadMedalRanking() {
-        // 如果不是下拉刷新，显示加载状态
+        // If it is not a pull-down refresh, the loading status is displayed.
         if (!isRefreshing) {
             showLoading();
         }
@@ -160,7 +160,7 @@ public class MedalRankingActivity extends AppCompatActivity {
             try {
                 Log.d("MedalRanking", "开始加载排行榜数据");
                 String response = MedalApiUtil.getMedalRanking();
-                
+
                 runOnUiThread(() -> {
                     hideLoading();
                     stopRefreshing();
@@ -182,9 +182,9 @@ public class MedalRankingActivity extends AppCompatActivity {
             }
         }).start();
     }
-    
+
     /**
-     * 恢复排行榜缓存
+     * Restore leaderboard cache / 恢复排行榜缓存
      */
     private void restoreRankingCache() {
         if (cachedRankingList != null && !cachedRankingList.isEmpty()) {
@@ -195,9 +195,9 @@ public class MedalRankingActivity extends AppCompatActivity {
             Log.d("MedalRanking", "No cached ranking data available");
         }
     }
-    
+
     /**
-     * 保存排行榜缓存
+     * Save leaderboard cache / 保存排行榜缓存
      */
     private void saveRankingCache() {
         if (rankingList != null && !rankingList.isEmpty()) {
@@ -205,9 +205,9 @@ public class MedalRankingActivity extends AppCompatActivity {
             Log.d("MedalRanking", "Saved ranking cache, total: " + cachedRankingList.size());
         }
     }
-    
+
     /**
-     * 停止下拉刷新动画
+     * Stop pull-down refresh animation / 停止下拉刷新动画
      */
     private void stopRefreshing() {
         if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing()) {
@@ -244,15 +244,15 @@ public class MedalRankingActivity extends AppCompatActivity {
     private void parseRankingData(String response) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
-            
+
             if (!jsonResponse.getBoolean("success")) {
                 Log.w("MedalRanking", "API返回失败: " + jsonResponse.optString("message"));
                 showEmptyState();
                 return;
             }
-            
+
             JSONArray data = jsonResponse.getJSONArray("data");
-            
+
             rankingList.clear();
             for (int i = 0; i < data.length(); i++) {
                 JSONObject item = data.getJSONObject(i);
@@ -268,22 +268,22 @@ public class MedalRankingActivity extends AppCompatActivity {
                 rankingItem.setShowRepresentativeWork(item.optBoolean("showRepresentativeWork", false));
                 rankingList.add(rankingItem);
             }
-            
+
             if (rankingList.isEmpty()) {
                 showEmptyState();
             } else {
-                // 按总分排序（后端应该已经排序了，但保险起见）
+                // Sort by total score (the backend should already sort it, but just to be safe)
                 Collections.sort(rankingList, (a, b) -> Integer.compare(b.getTotalMedalScore(), a.getTotalMedalScore()));
-                
-                // 更新排名
+
+                // Update ranking
                 for (int i = 0; i < rankingList.size(); i++) {
                     rankingList.get(i).setRank(i + 1);
                 }
-                
+
                 adapter.notifyDataSetChanged();
                 showRankingList();
-                
-                // 保存排行榜缓存
+
+                // Save leaderboard cache
                 saveRankingCache();
             }
         } catch (JSONException e) {
@@ -293,7 +293,7 @@ public class MedalRankingActivity extends AppCompatActivity {
     }
 
     private void showGlobalStatsMenu() {
-        // 直接跳转到全局统计界面
+        // Jump directly to the global statistics interface
         Intent intent = new Intent(this, GlobalStatsActivity.class);
         startActivity(intent);
     }
@@ -327,32 +327,32 @@ public class MedalRankingActivity extends AppCompatActivity {
         // Getters and Setters
         public int getRank() { return rank; }
         public void setRank(int rank) { this.rank = rank; }
-        
+
         public String getWalletAddress() { return walletAddress; }
         public void setWalletAddress(String walletAddress) { this.walletAddress = walletAddress; }
-        
+
         public String getDisplayName() { return displayName; }
         public void setDisplayName(String displayName) { this.displayName = displayName; }
-        
+
         public int getGoldMedals() { return goldMedals; }
         public void setGoldMedals(int goldMedals) { this.goldMedals = goldMedals; }
-        
+
         public int getSilverMedals() { return silverMedals; }
         public void setSilverMedals(int silverMedals) { this.silverMedals = silverMedals; }
-        
+
         public int getBronzeMedals() { return bronzeMedals; }
         public void setBronzeMedals(int bronzeMedals) { this.bronzeMedals = bronzeMedals; }
-        
+
         public int getTotalMedalScore() { return totalMedalScore; }
         public void setTotalMedalScore(int totalMedalScore) { this.totalMedalScore = totalMedalScore; }
-        
+
         public String getRepresentativeWork() { return representativeWork; }
         public void setRepresentativeWork(String representativeWork) { this.representativeWork = representativeWork; }
-        
+
         public boolean isShowRepresentativeWork() { return showRepresentativeWork; }
         public void setShowRepresentativeWork(boolean showRepresentativeWork) { this.showRepresentativeWork = showRepresentativeWork; }
 
-        // 格式化钱包地址显示
+        // Format wallet address display
         public String getFormattedAddress() {
             if (walletAddress == null || walletAddress.length() < 10) {
                 return walletAddress;
@@ -360,9 +360,9 @@ public class MedalRankingActivity extends AppCompatActivity {
             return walletAddress.substring(0, 6) + "..." + walletAddress.substring(walletAddress.length() - 4);
         }
     }
-    
+
     /**
-     * 显示计算方法说明对话框
+     * Display the calculation method description dialog box / 显示计算方法说明对话框
      */
     private void showCalculationHelpDialog() {
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
@@ -387,18 +387,18 @@ public class MedalRankingActivity extends AppCompatActivity {
                 getString(R.string.medal_ranking_message_nft_reward) + "\n" +
                 getString(R.string.medal_ranking_message_bkc_rewards) + "\n\n" +
                 getString(R.string.medal_ranking_message_submit_now));
-        
+
         builder.setPositiveButton(R.string.medal_ranking_button_submit_now, (dialog, which) -> {
             dialog.dismiss();
             // Jump to proof submission page
             Intent intent = new Intent(this, ProofAndNFTActivity.class);
             startActivity(intent);
         });
-        
+
         builder.setNegativeButton(R.string.medal_ranking_button_later, (dialog, which) -> {
             dialog.dismiss();
         });
-        
+
         androidx.appcompat.app.AlertDialog dialog = builder.create();
         dialog.show();
     }

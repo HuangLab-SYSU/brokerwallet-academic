@@ -16,7 +16,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-// 导入配置包中的ServerConfig
+// Import ServerConfig in the configuration package
 import com.example.brokerfi.core.config.ApiConfig;
 import com.example.brokerfi.core.security.SecurityUtil;
 import com.example.brokerfi.core.storage.StorageUtil;
@@ -24,31 +24,31 @@ import com.example.brokerfi.nft.model.NFT;
 
 
 /**
- * 证明文件上传工具类
- * 负责处理证明文件的上传、下载、删除等操作
+ * Document upload tool / 证明文件上传工具类
+ * Responsible for handling operations such as uploading, downloading, and deleting certification documents. / 负责处理证明文件的上传、下载、删除等操作
  */
 public class ProofUploadUtil {
-    
+
     private static final String TAG = "ProofUploadUtil";
     private static final OkHttpClient client = new OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .build();
-    
+
     /**
-     * 上传证明文件（更新版：支持个人信息）
-     * @param context Android上下文
-     * @param fileUri 文件URI
-     * @param fileName 文件名
-     * @param fileType 文件类型（如：image/jpeg, application/pdf等）
-     * @param walletAddress 钱包地址
-     * @param displayName 用户花名（可选）
-     * @param representativeWork 代表作描述（可选）
-     * @param showRepresentativeWork 是否展示代表作
-     * @param callback 上传结果回调
+     * Upload supporting documents (updated version: supports personal information) / 上传证明文件（更新版：支持个人信息）
+     * @param context Android context / Android上下文
+     * @param fileUri File URI / 文件URI
+     * @param fileName file name / 文件名
+     * @param fileType File type (such as: image/jpeg, application/pdf, etc.) / 文件类型（如：image/jpeg, application/pdf等）
+     * @param walletAddress wallet address / 钱包地址
+     * @param displayName Display name (optional) / 用户花名（可选）
+     * @param representativeWork Representative work description (optional) / 代表作描述（可选）
+     * @param showRepresentativeWork Whether to show the representative work / 是否展示代表作
+     * @param callback Upload result callback / 上传结果回调
      */
-    public static void uploadProofFile(Context context, Uri fileUri, String fileName, 
+    public static void uploadProofFile(Context context, Uri fileUri, String fileName,
                                      String fileType, String walletAddress, String displayName,
                                      String representativeWork, boolean showRepresentativeWork,
                                      UploadCallback callback) {
@@ -60,42 +60,42 @@ public class ProofUploadUtil {
                     callback.onError("Cannot get file");
                     return;
                 }
-                
-                // 创建请求体
+
+                // Build the request body
                 RequestBody fileBody = RequestBody.create(
-                    MediaType.parse(fileType), 
+                    MediaType.parse(fileType),
                     file
                 );
-                
+
                 MultipartBody.Builder requestBuilder = new MultipartBody.Builder()
                         .setType(MultipartBody.FORM)
                         .addFormDataPart("file", fileName, fileBody)
                         .addFormDataPart("walletAddress", walletAddress)
                         .addFormDataPart("fileType", fileType)
                         .addFormDataPart("uploadTime", String.valueOf(System.currentTimeMillis()));
-                
-                // 添加个人信息参数（如果有提供的话）
+
+                // Add personal information parameters (if provided)
                 if (displayName != null && !displayName.trim().isEmpty()) {
                     requestBuilder.addFormDataPart("displayName", displayName.trim());
                 }
-                
+
                 if (representativeWork != null && !representativeWork.trim().isEmpty()) {
                     requestBuilder.addFormDataPart("representativeWork", representativeWork.trim());
                 }
-                
+
                 requestBuilder.addFormDataPart("showRepresentativeWork", String.valueOf(showRepresentativeWork));
-                
+
                 MultipartBody requestBody = requestBuilder.build();
-                
-                // 创建请求
+
+                // Create request
                 Request request = new Request.Builder()
                         .url(ApiConfig.API_PROOF_UPLOAD)
                         .post(requestBody)
                         .build();
-                
-                // 执行请求
+
+                // Execute request
                 Response response = client.newCall(request).execute();
-                
+
                 if (response.isSuccessful()) {
                     String responseBody = response.body().string();
                     Log.d(TAG, "上传成功: " + responseBody);
@@ -103,64 +103,64 @@ public class ProofUploadUtil {
                 } else {
                     String errorBody = response.body() != null ? response.body().string() : "Unknown error";
                     Log.e(TAG, "Upload failed: " + response.code() + " - " + errorBody);
-                    
+
                     // Parse error message to extract friendly hints
                     String friendlyError = parseErrorMessage(errorBody, response.code());
                     callback.onError(friendlyError);
                 }
-                
+
             } catch (Exception e) {
                 Log.e(TAG, "Upload exception", e);
                 callback.onError("Upload exception: " + e.getMessage());
             }
         }).start();
     }
-    
+
     /**
-     * 上传证明文件（兼容旧版本）
-     * @param context Android上下文
-     * @param fileUri 文件URI
-     * @param fileName 文件名
-     * @param fileType 文件类型
-     * @param callback 上传结果回调
+     * Upload supporting documents (compatible with older versions) / 上传证明文件（兼容旧版本）
+     * @param context Android context / Android上下文
+     * @param fileUri File URI / 文件URI
+     * @param fileName file name / 文件名
+     * @param fileType File type / 文件类型
+     * @param callback Upload result callback / 上传结果回调
      */
-    public static void uploadProofFile(Context context, Uri fileUri, String fileName, 
+    public static void uploadProofFile(Context context, Uri fileUri, String fileName,
                                      String fileType, UploadCallback callback) {
-        // 获取当前钱包地址
+        // Get current wallet address
         String walletAddress = getCurrentWalletAddress(context);
-        
-        // 调用新版本方法
-        uploadProofFile(context, fileUri, fileName, fileType, walletAddress, 
+
+        // Call new version method
+        uploadProofFile(context, fileUri, fileName, fileType, walletAddress,
                        null, null, false, callback);
     }
-    
+
     /**
-     * 获取当前钱包地址
+     * Get current wallet address / 获取当前钱包地址
      */
     private static String getCurrentWalletAddress(Context context) {
         try {
             if (context instanceof android.app.Activity) {
                 android.app.Activity activity = (android.app.Activity) context;
-                
-                // 获取当前私钥
+
+                // Get the current private key
                 String privateKey = StorageUtil.getCurrentPrivatekey((androidx.appcompat.app.AppCompatActivity) activity);
-                
+
                 if (privateKey != null) {
-                    // 从私钥生成钱包地址
+                    // Generate wallet address from private key
                     return SecurityUtil.GetAddress(privateKey);
                 }
             }
         } catch (Exception e) {
             Log.e(TAG, "获取当前钱包地址失败", e);
         }
-        
-        // 如果获取失败，返回null（让调用方处理错误）
+
+        // If the acquisition fails, return null (let the caller handle the error)
         return null;
     }
-    
+
     /**
-     * 获取证明文件列表
-     * @param callback 结果回调
+     * Get a list of supporting documents / 获取证明文件列表
+     * @param callback result callback / 结果回调
      */
     public static void getProofList(ProofListCallback callback) {
         new Thread(() -> {
@@ -169,9 +169,9 @@ public class ProofUploadUtil {
                         .url(ApiConfig.API_PROOF_LIST)
                         .get()
                         .build();
-                
+
                 Response response = client.newCall(request).execute();
-                
+
                 if (response.isSuccessful()) {
                     String responseBody = response.body().string();
                     Log.d(TAG, "获取列表成功: " + responseBody);
@@ -181,18 +181,18 @@ public class ProofUploadUtil {
                     Log.e(TAG, "Get list failed: " + response.code() + " - " + errorBody);
                     callback.onError("Get list failed: " + response.code() + " - " + errorBody);
                 }
-                
+
             } catch (Exception e) {
                 Log.e(TAG, "Get list exception", e);
                 callback.onError("Get list exception: " + e.getMessage());
             }
         }).start();
     }
-    
+
     /**
-     * 删除证明文件
-     * @param fileId 文件ID
-     * @param callback 结果回调
+     * Delete supporting documents / 删除证明文件
+     * @param fileId File ID / 文件ID
+     * @param callback result callback / 结果回调
      */
     public static void deleteProofFile(String fileId, DeleteCallback callback) {
         new Thread(() -> {
@@ -201,9 +201,9 @@ public class ProofUploadUtil {
                         .url(ApiConfig.API_PROOF_DELETE + "?fileId=" + fileId)
                         .delete()
                         .build();
-                
+
                 Response response = client.newCall(request).execute();
-                
+
                 if (response.isSuccessful()) {
                     String responseBody = response.body().string();
                     Log.d(TAG, "删除成功: " + responseBody);
@@ -213,83 +213,83 @@ public class ProofUploadUtil {
                     Log.e(TAG, "删除失败: " + response.code() + " - " + errorBody);
                     callback.onError("Delete failed: " + response.code() + " - " + errorBody);
                 }
-                
+
             } catch (Exception e) {
                 Log.e(TAG, "删除异常", e);
                 callback.onError("Delete exception: " + e.getMessage());
             }
         }).start();
     }
-    
+
     /**
-     * 从URI获取文件
+     * Get file from URI / 从URI获取文件
      */
     private static File getFileFromUri(Context context, Uri uri) {
         try {
-            // 这里需要根据URI类型处理文件获取
-            // 简化实现，实际项目中需要更复杂的处理
+            // Here you need to process file acquisition according to URI type.
+            // Simplified implementation, more complex processing is required in actual projects.
             return new File(uri.getPath());
         } catch (Exception e) {
             Log.e(TAG, "获取文件失败", e);
             return null;
         }
     }
-    
+
     /**
-     * 上传证明文件并包含用户信息（同步方法，用于ProofSubmissionActivity）
-     * @param filePath 文件路径
-     * @param originalFileName 原始文件名
-     * @param walletAddress 钱包地址
-     * @param displayName 花名
-     * @param representativeWork 代表作
-     * @param showRepresentativeWork 是否展示代表作
-     * @return 响应字符串
+     * Upload proof file and include user information (synchronous method, used for ProofSubmissionActivity) / 上传证明文件并包含用户信息（同步方法，用于ProofSubmissionActivity）
+     * @param filePath file path / 文件路径
+     * @param originalFileName original file name / 原始文件名
+     * @param walletAddress wallet address / 钱包地址
+     * @param displayName display name / 花名
+     * @param representativeWork Representative works / 代表作
+     * @param showRepresentativeWork Whether to show the representative work / 是否展示代表作
+     * @return response string / 响应字符串
      */
-    public static String uploadProofWithUserInfo(String filePath, String originalFileName, 
-                                                String walletAddress, String displayName, 
+    public static String uploadProofWithUserInfo(String filePath, String originalFileName,
+                                                String walletAddress, String displayName,
                                                 String representativeWork, boolean showRepresentativeWork) throws Exception {
         File file = new File(filePath);
         if (!file.exists()) {
             throw new Exception("File not found: " + filePath);
         }
-        
-        // 使用原始文件名，如果为空则使用文件路径中的名称
-        String fileName = (originalFileName != null && !originalFileName.isEmpty()) ? 
+
+        // Use the original file name, or if empty use the name from the file path.
+        String fileName = (originalFileName != null && !originalFileName.isEmpty()) ?
             originalFileName : file.getName();
-        
-        // 创建请求体
+
+        // Build the request body
         RequestBody fileBody = RequestBody.create(
-            MediaType.parse("application/octet-stream"), 
+            MediaType.parse("application/octet-stream"),
             file
         );
-        
+
         MultipartBody.Builder requestBuilder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("proofFiles", fileName, fileBody)  // 使用原始文件名
+                .addFormDataPart("proofFiles", fileName, fileBody)  // Use original file name
                 .addFormDataPart("walletAddress", walletAddress);
-        
-        // 添加用户信息
+
+        // Add user information
         if (displayName != null && !displayName.trim().isEmpty()) {
             requestBuilder.addFormDataPart("displayName", displayName.trim());
         }
-        
+
         if (representativeWork != null && !representativeWork.trim().isEmpty()) {
             requestBuilder.addFormDataPart("representativeWork", representativeWork.trim());
         }
-        
+
         requestBuilder.addFormDataPart("showRepresentativeWork", String.valueOf(showRepresentativeWork));
-        
+
         MultipartBody requestBody = requestBuilder.build();
-        
-        // 创建请求
+
+        // Create request
         Request request = new Request.Builder()
                 .url(ApiConfig.API_NFT_DAO_UPLOAD_COMPLETE)
                 .post(requestBody)
                 .build();
-        
-        // 执行请求
+
+        // Execute request
         Response response = client.newCall(request).execute();
-        
+
         if (response.isSuccessful()) {
             String responseBody = response.body().string();
             Log.d(TAG, "Upload successful: " + responseBody);
@@ -297,28 +297,28 @@ public class ProofUploadUtil {
         } else {
             String errorBody = response.body() != null ? response.body().string() : "Unknown error";
             Log.e(TAG, "Upload failed: " + response.code() + " - " + errorBody);
-            
+
             // Parse error message to extract friendly hints
             String friendlyError = parseErrorMessage(errorBody, response.code());
             throw new Exception(friendlyError);
         }
     }
-    
+
     /**
-     * 解析错误信息，提取友好的提示
+     * Parse error messages and extract friendly tips / 解析错误信息，提取友好的提示
      */
     private static String parseErrorMessage(String errorBody, int statusCode) {
         try {
-            // 尝试解析JSON错误响应
+            // Try parsing JSON error response
             if (errorBody != null && errorBody.contains("{")) {
                 org.json.JSONObject jsonError = new org.json.JSONObject(errorBody);
-                
+
                 // Check if it's a duplicate NFT image error
                 if (jsonError.has("errorCode") && "DUPLICATE_NFT_IMAGE".equals(jsonError.optString("errorCode"))) {
                     return "NFT image uniqueness constraint: This NFT already exists, please select a different image to mint";
                 }
-                
-                // 提取message字段
+
+                // Extract message field
                 if (jsonError.has("message")) {
                     String message = jsonError.optString("message");
                     if (message != null && !message.isEmpty()) {
@@ -329,7 +329,7 @@ public class ProofUploadUtil {
         } catch (Exception e) {
             Log.e(TAG, "解析错误信息失败", e);
         }
-        
+
         // If unable to parse, return generic error message
         if (statusCode == 400) {
             return "Upload failed, please check file format and content";
@@ -339,19 +339,19 @@ public class ProofUploadUtil {
             return "Upload failed (Error code: " + statusCode + ")";
         }
     }
-    
-    // ==================== 回调接口 ====================
-    
+
+    // ==================== callback interface ====================
+
     public interface UploadCallback {
         void onSuccess(String response);
         void onError(String error);
     }
-    
+
     public interface ProofListCallback {
         void onSuccess(String response);
         void onError(String error);
     }
-    
+
     public interface DeleteCallback {
         void onSuccess(String response);
         void onError(String error);

@@ -31,83 +31,83 @@ import com.example.brokerfi.core.storage.StorageUtil;
 
 
 /**
- * 提交历史Activity
- * 显示用户的所有提交记录和状态
+ * Submit historical activity / 提交历史Activity
+ * Display all submission records and status of the user. / 显示用户的所有提交记录和状态
  */
 public class SubmissionHistoryActivity extends AppCompatActivity {
-    
+
     private static final String TAG = "SubmissionHistory";
-    
+
     private ImageView menu;
     private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private NavigationHelper navigationHelper;
-    
+
     // private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private SubmissionHistoryAdapter adapter;
     private List<SubmissionRecord> submissionList;
-    
+
     private TextView loadingText;
     private TextView errorText;
     private LinearLayout emptyStateLayout;
     private TextView retryButton;
-    
+
     private int currentPage = 0;
     private final int pageSize = 10;
     private boolean isLoading = false;
     private boolean hasMoreData = true;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submission_history);
-        
+
         initializeViews();
         setupUI();
         loadSubmissionHistory();
     }
-    
+
     /**
-     * 初始化视图
+     * Initialize view / 初始化视图
      */
     private void initializeViews() {
-        // 导航相关
+        // Navigation related
         menu = findViewById(R.id.menu);
         notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         navigationHelper = new NavigationHelper(menu, action_bar, this, notificationBtn);
-        
-        // 列表相关
+
+        // List related
         // swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         recyclerView = findViewById(R.id.recyclerView);
         loadingText = findViewById(R.id.loadingText);
         errorText = findViewById(R.id.errorText);
         emptyStateLayout = findViewById(R.id.emptyStateLayout);
         retryButton = findViewById(R.id.retryButton);
-        
-        // 初始化数据
+
+        // initialization data
         submissionList = new ArrayList<>();
         adapter = new SubmissionHistoryAdapter(this, submissionList);
     }
-    
+
     /**
-     * 设置UI
+     * Setup UI / 设置UI
      */
     private void setupUI() {
-        // 设置导航（简化版本）
+        // Setup navigation (simplified version)
         menu.setOnClickListener(v -> {
-            // 可以在这里添加菜单逻辑，暂时留空
+            // You can add menu logic here, leave it blank for now.
         });
         notificationBtn.setOnClickListener(v -> {
-            // 可以在这里添加通知逻辑，暂时留空  
+            // You can add notification logic here and leave it blank for now.
         });
-        
-        // 设置RecyclerView
+
+        // SetupRecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-        
-        // 设置下拉刷新（暂时注释掉）
+
+        // Set pull-down refresh (comment out for now)
         // swipeRefreshLayout.setOnRefreshListener(this::refreshData);
         // swipeRefreshLayout.setColorSchemeResources(
         //     android.R.color.holo_blue_bright,
@@ -115,25 +115,25 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
         //     android.R.color.holo_orange_light,
         //     android.R.color.holo_red_light
         // );
-        
-        // 设置重试按钮
+
+        // Set retry button
         retryButton.setOnClickListener(v -> {
             hideError();
             loadSubmissionHistory();
         });
-        
-        // 设置滚动监听（用于分页加载）
+
+        // Set scroll listening (for paging loading)
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                
+
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (layoutManager != null && !isLoading && hasMoreData) {
                     int visibleItemCount = layoutManager.getChildCount();
                     int totalItemCount = layoutManager.getItemCount();
                     int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-                    
+
                     if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount - 2) {
                         loadMoreData();
                     }
@@ -141,26 +141,26 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     /**
-     * 加载提交历史
+     * Load commit history / 加载提交历史
      */
     private void loadSubmissionHistory() {
         if (isLoading) {
             return;
         }
-        
+
         String walletAddress = getCurrentWalletAddress();
         if (walletAddress == null) {
             showError(getString(R.string.submission_history_error_wallet_address));
             return;
         }
-        
+
         showLoading();
         isLoading = true;
         currentPage = 0;
-        
-        SubmissionHistoryUtil.getUserSubmissions(walletAddress, currentPage, pageSize, 
+
+        SubmissionHistoryUtil.getUserSubmissions(walletAddress, currentPage, pageSize,
             new SubmissionHistoryUtil.SubmissionHistoryCallback() {
                 @Override
                 public void onSuccess(String response) {
@@ -171,7 +171,7 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
                         handleSubmissionHistorySuccess(response);
                     });
                 }
-                
+
                 @Override
                 public void onError(String error) {
                     runOnUiThread(() -> {
@@ -183,23 +183,23 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
                 }
             });
     }
-    
+
     /**
-     * 加载更多数据
+     * load more data / 加载更多数据
      */
     private void loadMoreData() {
         if (isLoading || !hasMoreData) {
             return;
         }
-        
+
         String walletAddress = getCurrentWalletAddress();
         if (walletAddress == null) {
             return;
         }
-        
+
         isLoading = true;
         currentPage++;
-        
+
         SubmissionHistoryUtil.getUserSubmissions(walletAddress, currentPage, pageSize,
             new SubmissionHistoryUtil.SubmissionHistoryCallback() {
                 @Override
@@ -209,41 +209,41 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
                         handleLoadMoreSuccess(response);
                     });
                 }
-                
+
                 @Override
                 public void onError(String error) {
                     runOnUiThread(() -> {
                         isLoading = false;
-                        currentPage--; // 回退页码
+                        currentPage--; // Back page number
                         Toast.makeText(SubmissionHistoryActivity.this, SubmissionHistoryActivity.this.getString(R.string.submission_history_toast_load_more_prefix) + " " + error, Toast.LENGTH_SHORT).show();
                     });
                 }
             });
     }
-    
+
     /**
-     * 刷新数据
+     * Refresh data / 刷新数据
      */
     private void refreshData() {
         currentPage = 0;
         hasMoreData = true;
         loadSubmissionHistory();
     }
-    
+
     /**
-     * 处理提交历史成功响应
+     * Handle commit history success response / 处理提交历史成功响应
      */
     private void handleSubmissionHistorySuccess(String response) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
-            
+
             if (jsonResponse.getBoolean("success")) {
                 JSONArray dataArray = jsonResponse.getJSONArray("data");
-                
-                // 清空现有数据
+
+                // Clear existing data
                 submissionList.clear();
-                
-                // 解析数据
+
+                // Parse data
                 for (int i = 0; i < dataArray.length(); i++) {
                     JSONObject item = dataArray.getJSONObject(i);
                     SubmissionRecord record = parseSubmissionRecord(item);
@@ -251,46 +251,46 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
                         submissionList.add(record);
                     }
                 }
-                
-                // 检查分页信息
+
+                // Check paging information
                 if (jsonResponse.has("pagination")) {
                     JSONObject pagination = jsonResponse.getJSONObject("pagination");
                     int currentPageNum = pagination.getInt("currentPage");
                     int totalPages = pagination.getInt("totalPages");
                     hasMoreData = currentPageNum < totalPages - 1;
                 }
-                
-                // 更新UI
+
+                // Update UI
                 adapter.notifyDataSetChanged();
-                
+
                 if (submissionList.isEmpty()) {
                     showEmptyState();
                 } else {
                     hideEmptyState();
                 }
-                
+
             } else {
                 String message = jsonResponse.optString("message", getString(R.string.submission_history_error_load_failed_plain));
                 showError(message);
             }
-            
+
         } catch (JSONException e) {
             Log.e(TAG, "解析提交历史响应失败", e);
             showError(getString(R.string.submission_detail_error_parse_failed));
         }
     }
-    
+
     /**
-     * 处理加载更多成功响应
+     * Handle loading more successful responses / 处理加载更多成功响应
      */
     private void handleLoadMoreSuccess(String response) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
-            
+
             if (jsonResponse.getBoolean("success")) {
                 JSONArray dataArray = jsonResponse.getJSONArray("data");
-                
-                // 添加新数据
+
+                // Add new data
                 int startPosition = submissionList.size();
                 for (int i = 0; i < dataArray.length(); i++) {
                     JSONObject item = dataArray.getJSONObject(i);
@@ -299,37 +299,37 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
                         submissionList.add(record);
                     }
                 }
-                
-                // 检查是否还有更多数据
+
+                // Check if there is more data
                 if (jsonResponse.has("pagination")) {
                     JSONObject pagination = jsonResponse.getJSONObject("pagination");
                     int currentPageNum = pagination.getInt("currentPage");
                     int totalPages = pagination.getInt("totalPages");
                     hasMoreData = currentPageNum < totalPages - 1;
                 }
-                
-                // 通知适配器数据变化
+
+                // Notify adapter of data changes
                 adapter.notifyItemRangeInserted(startPosition, dataArray.length());
-                
+
             } else {
-                currentPage--; // 回退页码
+                currentPage--; // Back page number
                 Toast.makeText(this, R.string.submission_history_toast_load_more_plain, Toast.LENGTH_SHORT).show();
             }
-            
+
         } catch (JSONException e) {
             Log.e(TAG, "解析加载更多响应失败", e);
-            currentPage--; // 回退页码
+            currentPage--; // Back page number
             Toast.makeText(this, R.string.submission_detail_error_parse_failed, Toast.LENGTH_SHORT).show();
         }
     }
-    
+
     /**
-     * 解析提交记录
+     * Parse commit records / 解析提交记录
      */
     private SubmissionRecord parseSubmissionRecord(JSONObject item) {
         try {
             SubmissionRecord record = new SubmissionRecord();
-            
+
             record.setSubmissionId(item.optString("submissionId"));
             record.setId(item.optLong("id"));
             record.setFileName(item.optString("fileName"));
@@ -343,8 +343,8 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
             record.setMedalAwardedDesc(item.optString("medalAwardedDesc"));
             record.setMedalAwardTime(item.optString("medalAwardTime"));
             record.setMedalTransactionHash(item.optString("medalTransactionHash"));
-            
-            // 解析NFT图片信息
+
+            // Parse NFT image information
             if (item.has("nftImage")) {
                 JSONObject nftImageJson = item.getJSONObject("nftImage");
                 SubmissionRecord.NftImageInfo nftImage = new SubmissionRecord.NftImageInfo();
@@ -357,25 +357,25 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
                 record.setNftImage(nftImage);
                 record.setHasNftImage(true);
             }
-            
+
             return record;
-            
+
         } catch (Exception e) {
             Log.e(TAG, "解析提交记录失败", e);
             return null;
         }
     }
-    
+
     /**
-     * 处理错误
+     * handling errors / 处理错误
      */
     private void handleSubmissionHistoryError(String error) {
         Log.e(TAG, "获取提交历史失败: " + error);
         showError(getString(R.string.submission_history_error_load_failed) + " " + error);
     }
-    
+
     /**
-     * 显示加载状态
+     * Show loading state / 显示加载状态
      */
     private void showLoading() {
         loadingText.setVisibility(View.VISIBLE);
@@ -383,16 +383,16 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
         emptyStateLayout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
     }
-    
+
     /**
-     * 隐藏加载状态
+     * Hide loading status / 隐藏加载状态
      */
     private void hideLoading() {
         loadingText.setVisibility(View.GONE);
     }
-    
+
     /**
-     * 显示错误状态
+     * Show error status / 显示错误状态
      */
     private void showError(String message) {
         errorText.setText(message);
@@ -401,32 +401,32 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
         emptyStateLayout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
     }
-    
+
     /**
-     * 隐藏错误状态
+     * Hide error status / 隐藏错误状态
      */
     private void hideError() {
         errorText.setVisibility(View.GONE);
     }
-    
+
     /**
-     * 显示空状态
+     * Show empty status / 显示空状态
      */
     private void showEmptyState() {
         emptyStateLayout.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
     }
-    
+
     /**
-     * 隐藏空状态
+     * Hide empty state / 隐藏空状态
      */
     private void hideEmptyState() {
         emptyStateLayout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
     }
-    
+
     /**
-     * 获取当前钱包地址
+     * Get current wallet address / 获取当前钱包地址
      */
     private String getCurrentWalletAddress() {
         try {
@@ -439,9 +439,9 @@ public class SubmissionHistoryActivity extends AppCompatActivity {
         }
         return null;
     }
-    
+
     /**
-     * 打开提交详情页面
+     * Open submission details page / 打开提交详情页面
      */
     public void openSubmissionDetail(SubmissionRecord record) {
         Intent intent = new Intent(this, SubmissionDetailActivity.class);

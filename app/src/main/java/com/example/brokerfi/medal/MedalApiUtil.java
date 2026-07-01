@@ -9,7 +9,7 @@ import okhttp3.ResponseBody;
 
 import java.io.IOException;
 
-// 导入配置包中的ApiConfig
+// Import ApiConfig in the configuration package
 import com.example.brokerfi.core.config.ApiConfig;
 import com.example.brokerfi.nft.model.NFT;
 
@@ -17,17 +17,17 @@ import com.example.brokerfi.nft.model.NFT;
 public class MedalApiUtil {
     private static final String TAG = "MedalApiUtil";
     private static final OkHttpClient client = new OkHttpClient();
-    
+
     /**
-     * 获取勋章排行榜数据
-     * @return JSON字符串，失败返回null
+     * Get medal ranking data / 获取勋章排行榜数据
+     * @return JSON string, returns null on failure / JSON字符串，失败返回null
      */
     public static String getMedalRanking() {
         Request request = new Request.Builder()
                 .url(ApiConfig.API_MEDAL_RANKING)
                 .build();
-        
-        // 使用try-with-resources自动管理Response资源
+
+        // Use try-with-resources to automatically manage Response resources
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 ResponseBody body = response.body();
@@ -46,23 +46,23 @@ public class MedalApiUtil {
         }
         return null;
     }
-    
+
     /**
-     * 根据地址获取勋章信息
-     * @param address 用户地址
-     * @return JSON字符串，失败返回null
+     * Get medal information based on address / 根据地址获取勋章信息
+     * @param address User address / 用户地址
+     * @return JSON string, returns null on failure / JSON字符串，失败返回null
      */
     public static String getMedalByAddress(String address) {
         if (address == null || address.trim().isEmpty()) {
             Log.w(TAG, "Address is null or empty");
             return null;
         }
-        
+
         Request request = new Request.Builder()
                 .url(ApiConfig.getMedalQueryUrl(address))
                 .build();
-        
-        // 使用try-with-resources自动管理Response资源
+
+        // Use try-with-resources to automatically manage Response resources
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 ResponseBody body = response.body();
@@ -72,7 +72,7 @@ public class MedalApiUtil {
                     Log.w(TAG, "Response body is null for address: " + address);
                 }
             } else {
-                Log.w(TAG, "Failed to get medal for address: " + address + 
+                Log.w(TAG, "Failed to get medal for address: " + address +
                         ", response code: " + response.code());
             }
         } catch (IOException e) {
@@ -82,16 +82,16 @@ public class MedalApiUtil {
         }
         return null;
     }
-    
+
     /**
-     * 获取全局勋章统计信息
-     * @return JSON字符串，失败返回null
+     * Get global medal statistics / 获取全局勋章统计信息
+     * @return JSON string, returns null on failure / JSON字符串，失败返回null
      */
     public static String getGlobalStats() {
         Request request = new Request.Builder()
                 .url(ApiConfig.API_MEDAL_STATS)
                 .build();
-        
+
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 ResponseBody body = response.body();
@@ -112,16 +112,16 @@ public class MedalApiUtil {
         }
         return null;
     }
-    
+
     /**
-     * 获取服务器信息
-     * @return JSON字符串，失败返回null
+     * Get server information / 获取服务器信息
+     * @return JSON string, returns null on failure / JSON字符串，失败返回null
      */
     public static String getServerInfo() {
         Request request = new Request.Builder()
                 .url(ApiConfig.API_SERVER_INFO)
                 .build();
-        
+
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 ResponseBody body = response.body();
@@ -142,16 +142,16 @@ public class MedalApiUtil {
         }
         return null;
     }
-    
+
     /**
-     * 获取系统健康状态
-     * @return JSON字符串，失败返回null
+     * Get system health status / 获取系统健康状态
+     * @return JSON string, returns null on failure / JSON字符串，失败返回null
      */
     public static String getHealthStatus() {
         Request request = new Request.Builder()
                 .url(ApiConfig.API_HEALTH)
                 .build();
-        
+
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 ResponseBody body = response.body();
@@ -172,12 +172,12 @@ public class MedalApiUtil {
         }
         return null;
     }
-    
+
     /**
-     * 获取所有NFT
-     * @param page 页码
-     * @param size 每页大小
-     * @return JSON字符串，失败返回null
+     * Get all NFTs / 获取所有NFT
+     * @param page page number / 页码
+     * @param size page size / 每页大小
+     * @return JSON string, returns null on failure / JSON字符串，失败返回null
      */
     public static String getAllNfts(int page, int size) {
         String url = ApiConfig.getAllNftsUrl(page, size);
@@ -185,7 +185,7 @@ public class MedalApiUtil {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        
+
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 ResponseBody body = response.body();
