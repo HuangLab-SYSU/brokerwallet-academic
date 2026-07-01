@@ -1,17 +1,17 @@
 package com.example.brokerfi.core.config;
 
 /**
- * 后端业务 API 配置集中入口。
+ * Centralized entry for back-end business API configuration. / 后端业务 API 配置集中入口。
  *
- * Activity、Adapter、Util 中需要访问后端时，只引用这里的常量或方法，
- * 不直接写完整 URL。域名和端口来自 {@link ServerConfig}，这里负责维护
- * 具体业务路径。
+ * When you need to access the backend in Activity, Adapter, or Util, only reference the constants or methods here. / Activity、Adapter、Util 中需要访问后端时，只引用这里的常量或方法，
+ * Do not write the complete URL directly. The domain name and port come from {@link ServerConfig}, which is maintained here. / 不直接写完整 URL。域名和端口来自 {@link ServerConfig}，这里负责维护
+ * Specific business path. / 具体业务路径。
  */
 public final class ApiConfig {
 
-    // 基础服务地址：不同模块使用不同端口，但域名统一来自 ServerConfig。
+    // Basic service address: Different modules use different ports, but the domain name comes from ServerConfig.
     public static final String BASE_API_URL = ServerConfig.httpsUrl(ServerConfig.SERVER_PORT);
-    // 旧字段兼容：保留给尚未迁移的调用方，新代码应使用 BASE_API_URL。
+    // Old field compatibility: reserved for callers that have not yet been migrated, new code should use BASE_API_URL.
     /** @deprecated use {@link #BASE_API_URL}. */
     @Deprecated
     public static final String BASE_URL = BASE_API_URL;
@@ -20,12 +20,12 @@ public final class ApiConfig {
     public static final String NFT_DAO_URL = ServerConfig.httpUrl(ServerConfig.NFT_DAO_PORT);
     public static final String NFT_DAO_API_URL = NFT_DAO_URL + "/api";
     public static final String COMMUNITY_URL = ServerConfig.httpUrl(ServerConfig.COMMUNITY_PORT);
-    // 旧字段兼容：community 模块原来使用 BASE_URL_HTTP。
+    // Old field compatibility: The community module originally used BASE_URL_HTTP.
     /** @deprecated use {@link #COMMUNITY_URL}. */
     @Deprecated
     public static final String BASE_URL_HTTP = COMMUNITY_URL;
 
-    // App 版本、新闻和通知等 feature 服务。
+    // Feature services such as App version, news and notifications.
     public static final String API_ABOUT_APP_VERSION = FEATURE_URL + "/appversion";
     /** @deprecated use {@link #API_ABOUT_APP_VERSION}. */
     @Deprecated
@@ -38,7 +38,7 @@ public final class ApiConfig {
     @Deprecated
     public static final String API_NOTIFICATION_NEWS2_doGET2 = API_NOTIFICATION_NEWS2_USER;
 
-    // Medal、NFT 统计等主后端 API。
+    // Main backend APIs such as Medal and NFT statistics.
     public static final String API_BLOCKCHAIN_MEDALS = BASE_API_URL + "/api/blockchain/medals/";
     public static final String API_BLOCKCHAIN_NFT_USER = BASE_API_URL + "/api/blockchain/nft/user/";
     public static final String API_BLOCKCHAIN_NFT_ALL = BASE_API_URL + "/api/blockchain/nft/all";
@@ -49,7 +49,7 @@ public final class ApiConfig {
     public static final String API_SERVER_INFO = BASE_API_URL + "/api/server/info";
     public static final String API_HEALTH = BASE_API_URL + "/api/health";
 
-    // Proof、上传记录、用户信息等业务 API。
+    // Proof, upload records, user information and other business APIs.
     public static final String API_PROOF_UPLOAD = BASE_API_URL + "/api/proof/upload";
     public static final String API_PROOF_LIST = BASE_API_URL + "/api/proof/list";
     public static final String API_PROOF_DETAIL = BASE_API_URL + "/api/proof/detail";
@@ -60,7 +60,7 @@ public final class ApiConfig {
     public static final String API_UPLOAD_SUBMISSION_DETAIL = BASE_API_URL + "/api/upload/submission/detail";
     public static final String API_USER_INFO = BASE_API_URL + "/api/admin/user/info";
 
-    // NFT DAO/contract 项目 API。
+    // NFT DAO/contract project API.
     public static final String API_NFT_DAO_UPLOAD_COMPLETE = NFT_DAO_API_URL + "/upload/complete";
     public static final String API_NFT_DAO_SUBMIT_PROOF = NFT_DAO_API_URL + "/submit-proof";
     public static final String API_NFT_DAO_MINT_NFT = NFT_DAO_API_URL + "/mint-nft";
@@ -70,7 +70,7 @@ public final class ApiConfig {
     public static final String NFT_PLACEHOLDER_IMAGE_URL =
             "https://via.placeholder.com/300x300?text=NFT";
 
-    // 外部页面和下载链接也集中放在这里，避免 Activity 直接硬编码 URL。
+    // External pages and download links are also concentrated here to avoid direct hard-coding URLs in the Activity.
     public static final String EXTERNAL_BLOCK_EMULATOR_URL = "https://www.blockemulator.com";
     public static final String GITHUB_RELEASE_APK_URL_TEMPLATE =
             "https://github.com/HuangLab-SYSU/brokerwallet-academic/releases/download/V%s/BrokerChain-Wallet.apk";
@@ -100,7 +100,7 @@ public final class ApiConfig {
         return GOOGLE_PLAY_APP_URL_PREFIX + packageName;
     }
 
-    // 统一修正后端返回的 NFT 图片路径；后端可能返回完整 URL、localhost URL 或相对路径。
+    // Uniformly correct the NFT image path returned by the backend; the backend may return the full URL, localhost URL or relative path.
     public static String resolveNftAssetUrl(String pathOrUrl) {
         if (pathOrUrl == null || pathOrUrl.trim().isEmpty()) {
             return pathOrUrl;

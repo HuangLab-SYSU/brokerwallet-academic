@@ -61,7 +61,7 @@ public class SelectAccountActivity extends AppCompatActivity {
     //For determining whether to hide the collapse panel
     private boolean hiddenAccountsExpanded = false;
     private static final String PREF_HIDDEN_ACCOUNTS = "hidden_accounts";
-    private static final String PREFS_NAME = "MyPrefs"; // 添加PREFS_NAME常量定义
+    private static final String PREFS_NAME = "MyPrefs"; // Add PREFS_NAME constant definition
     private NavigationHelper navigationHelper;
 
     @Override
@@ -230,7 +230,7 @@ public class SelectAccountActivity extends AppCompatActivity {
                 hiddenAccounts.addAll(Arrays.asList(hiddenAccountsStr.split(";")));
             }
 
-            // 根据隐藏状态过滤账户  
+            // Filter accounts based on hidden status
             List<ReturnAccountState> visibleAccounts = new ArrayList<>();
             List<ReturnAccountState> hiddenAccountList = new ArrayList<>();
 
@@ -246,7 +246,7 @@ public class SelectAccountActivity extends AppCompatActivity {
 
             runOnUiThread(() -> {
                 acclinear.removeAllViews();
-                
+
                 //Visible account list
                 if (visibleAccounts.isEmpty()) {
                     // The empty list notice
@@ -314,7 +314,7 @@ public class SelectAccountActivity extends AppCompatActivity {
         if (currentLayout != null) {
             // Reset the previous layout's default state
             currentLayout.setBackgroundColor(Color.WHITE);
-            
+
             if (currentLayout == relativeLayout) {
                 currentLayout = null;
             } else {
@@ -387,15 +387,15 @@ public class SelectAccountActivity extends AppCompatActivity {
         relativeLayout.setPadding(paddingInDp, paddingInDp, paddingInDp, paddingInDp);
         relativeLayout.setGravity(Gravity.CENTER_VERTICAL);
         relativeLayout.setClickable(true);
-        
+
         // The transparency
         if (isHiddenItem) {
             relativeLayout.setAlpha(0.7f);
         }
-        
+
         relativeLayout.setOnClickListener(this::onRelativeLayoutClick);
 
-        // 长按监听器
+        // Long press listener
         relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -468,7 +468,7 @@ public class SelectAccountActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         eyeParams.leftMargin = paddingInDp;
-        
+
         //Eye Icon
         if (isHiddenItem) {
             eyeButton.setImageResource(R.drawable.ic_eye_closed);
@@ -479,18 +479,18 @@ public class SelectAccountActivity extends AppCompatActivity {
         eyeButton.setLayoutParams(eyeParams);
         eyeButton.setClickable(true);
         eyeButton.setOnClickListener(v -> toggleAccountVisibility(accountState));
-        
+
         //Transition animation
         eyeButton.setScaleType(ImageView.ScaleType.CENTER);
         eyeButton.setAdjustViewBounds(true);
-        eyeButton.setMaxWidth(42); 
-        eyeButton.setMaxHeight(42); 
-        
+        eyeButton.setMaxWidth(42);
+        eyeButton.setMaxHeight(42);
+
         accountNameLayout.addView(eyeButton);
         leftInfoLayout.addView(accountNameLayout);
 
         TextView textView2 = new TextView(this);
-        // Account Address 
+        // Account Address
         String address = accountState.getAccountAddr();
         if (isNewFormat && !address.startsWith("0x")) {
             String Address = getString(R.string.Address_0x,address);
@@ -542,7 +542,7 @@ public class SelectAccountActivity extends AppCompatActivity {
             // Get account index from account name
             String accountName = accountState.getAccountName();
             int accountIndex = Integer.parseInt(accountName.split(" ")[1]) - 1;
-            
+
             // Navigate to AccountDetailActivity
             Intent intent = new Intent(SelectAccountActivity.this, AccountDetailActivity.class);
             intent.putExtra("accountIndex", String.valueOf(accountIndex));
@@ -582,22 +582,22 @@ public class SelectAccountActivity extends AppCompatActivity {
     private void renderHiddenAccountsSection(List<ReturnAccountState> hiddenAccounts) {
 
 
-        // 前端 Layout:隐藏账户列表标题（可折叠）
+        // Front-end Layout: Hide account list title (collapsible)
         RelativeLayout hiddenSectionHeader = new RelativeLayout(SelectAccountActivity.this);
         RelativeLayout.LayoutParams headerParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT
         );
         hiddenSectionHeader.setLayoutParams(headerParams);
-        
+
         int paddingInDp = (int) TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, 16, getResources().getDisplayMetrics());
         hiddenSectionHeader.setPadding(paddingInDp, paddingInDp, paddingInDp, paddingInDp);
         hiddenSectionHeader.setGravity(Gravity.CENTER_VERTICAL);
         hiddenSectionHeader.setClickable(true);
-        hiddenSectionHeader.setBackgroundColor(getResources().getColor(R.color.grey_light)); // 浅灰色背景
-        
-        // Title: Hidden Accounts   
+        hiddenSectionHeader.setBackgroundColor(getResources().getColor(R.color.grey_light)); // light gray background
+
+        // Title: Hidden Accounts
         TextView hiddenSectionTitle = new TextView(SelectAccountActivity.this);
         String HiddenSectionTitle = getString(R.string.Hidden_Account,hiddenAccounts.size());
         hiddenSectionTitle.setText(HiddenSectionTitle);
@@ -611,7 +611,7 @@ public class SelectAccountActivity extends AppCompatActivity {
         titleParams.addRule(RelativeLayout.CENTER_VERTICAL);
         hiddenSectionTitle.setLayoutParams(titleParams);
         hiddenSectionTitle.setId(View.generateViewId());
-        
+
         //  Fold/Expand Icon
         ImageView expandIcon = new ImageView(SelectAccountActivity.this);
         RelativeLayout.LayoutParams iconParams = new RelativeLayout.LayoutParams(
@@ -620,29 +620,29 @@ public class SelectAccountActivity extends AppCompatActivity {
         );
         iconParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         iconParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        
+
         // Set the icon based on the current expanded state.
         if (hiddenAccountsExpanded) {
-            expandIcon.setImageResource(R.drawable.up_circle); // 展开图标
+            expandIcon.setImageResource(R.drawable.up_circle); // expand icon
         } else {
-            expandIcon.setImageResource(R.drawable.right); // 折叠图标
+            expandIcon.setImageResource(R.drawable.right); // fold icon
         }
-        
+
         expandIcon.setId(View.generateViewId());
         expandIcon.setLayoutParams(iconParams);
-        
+
         hiddenSectionHeader.addView(hiddenSectionTitle);
         hiddenSectionHeader.addView(expandIcon);
-        
+
         // Add click event to toggle the expanded state.
         hiddenSectionHeader.setOnClickListener(v -> {
             hiddenAccountsExpanded = !hiddenAccountsExpanded;
             // Re-render the list to update the expanded state.
             refresh();
         });
-        
+
         acclinear.addView(hiddenSectionHeader);
-        
+
         // If the hidden accounts list is expanded, render the hidden account items.
         if (hiddenAccountsExpanded) {
             // Add a container to hold the hidden account items.
@@ -653,17 +653,17 @@ public class SelectAccountActivity extends AppCompatActivity {
             );
             hiddenAccountsContainer.setLayoutParams(containerParams);
             hiddenAccountsContainer.setOrientation(LinearLayout.VERTICAL);
-            
+
             // Render each hidden account item.
             for (int i = 0; i < hiddenAccounts.size(); i++) {
                 ReturnAccountState accountState = hiddenAccounts.get(i);
                 renderAccountItem(accountState, i + 1, true);
             }
-            
+
             acclinear.addView(hiddenAccountsContainer);
         }
     }
-    
+
     // Toggle the visibility of an account.
     private void toggleAccountVisibility(ReturnAccountState accountState) {
         // Get the current hidden account state.
@@ -672,9 +672,9 @@ public class SelectAccountActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(hiddenAccountsStr)) {
             hiddenAccounts.addAll(Arrays.asList(hiddenAccountsStr.split(";")));
         }
-        
+
         String address = accountState.getAccountAddr();
-        
+
         // Toggle the hidden state.
         if (hiddenAccounts.contains(address)) {
             // Show the account.
@@ -685,14 +685,14 @@ public class SelectAccountActivity extends AppCompatActivity {
             hiddenAccounts.add(address);
             accountState.setHidden(true);
         }
-        
+
         // Save the hidden account state.
         saveHiddenAccounts(hiddenAccounts);
-        
+
         // Re-render the list.
         refresh();
     }
-    
+
     // Save the hiddent accountstate in the local sharedpreference to persist the hidden state.
     private void saveHiddenAccounts(Set<String> hiddenAccounts) {
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
@@ -704,23 +704,23 @@ public class SelectAccountActivity extends AppCompatActivity {
             }
             sb.append(address);
         }
-        
+
         editor.putString(PREF_HIDDEN_ACCOUNTS, sb.toString());
         editor.apply();
     }
 
     @Override
     public void onBackPressed() {
-        
+
         if (navigationHelper != null && navigationHelper.isPopupVisible()) {
-            
+
             navigationHelper.hidePopup();
         } else if (hiddenAccountsExpanded) {
-            
+
             hiddenAccountsExpanded = false;
             refresh();
         } else {
-            
+
             super.onBackPressed();
         }
     }

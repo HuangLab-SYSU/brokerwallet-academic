@@ -72,7 +72,7 @@ public class ReceiveActivity extends AppCompatActivity {
     private Button copyaddress;
     private Button saveqrcodebtn;
     private int qrcode_height;
-    boolean hasExecuted = false;// 保证二维码高度等信息只会被初始化一次
+    boolean hasExecuted = false;// Ensure that information such as the QR code height will only be initialized once.
 
 
     @Override

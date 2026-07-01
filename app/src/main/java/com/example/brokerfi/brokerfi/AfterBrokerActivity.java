@@ -54,8 +54,8 @@ public class AfterBrokerActivity extends AppCompatActivity {
     private TextView bkctextview;
     private TextView bkcprofittextview;
 
-    boolean hasExecuted_btn1 = false;// 保证按钮1只被初始化一次
-    boolean hasExecuted_btn2 = false;// 保证按钮2只被初始化一次
+    boolean hasExecuted_btn1 = false;// Ensure button 1 is initialized only once
+    boolean hasExecuted_btn2 = false;// Ensure button 2 is only initialized once
     private volatile boolean flag = false;
 
 
@@ -338,10 +338,10 @@ public class AfterBrokerActivity extends AppCompatActivity {
             public void onGlobalLayout() {
                 if (!hasExecuted_btn1) {
                     btn_stake.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    hasExecuted_btn1 = true; // 设置标志为已执行
+                    hasExecuted_btn1 = true; // Set flag as executed
                     Drawable[] drawables = btn_stake.getCompoundDrawables();
-                    Drawable leftDrawable = drawables[0]; // 获取左侧图标
-                    String buttonText = btn_stake.getText().toString(); // 获取按钮文本
+                    Drawable leftDrawable = drawables[0]; // Get left icon
+                    String buttonText = btn_stake.getText().toString(); // Get button text
                     int totalWidth = 0;
                     if (leftDrawable != null) {
                         totalWidth += leftDrawable.getIntrinsicWidth();

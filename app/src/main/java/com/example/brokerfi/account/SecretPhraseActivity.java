@@ -40,13 +40,13 @@ public class SecretPhraseActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
-    
+
     /**
-     * 处理"稍后提醒"按钮点击事件
-     * 这个方法被布局文件中的android:onClick="remindMeLater"调用
+     * Handling the "Remind Later" button click event / 处理"稍后提醒"按钮点击事件
+     * This method is called by android:onClick="remindMeLater" in the layout file. / 这个方法被布局文件中的android:onClick="remindMeLater"调用
      */
     public void remindMeLater(View view) {
-        // 与btn_remind的点击事件相同的逻辑
+        // The same logic as the click event of btn_remind.
         Intent intent = new Intent();
         intent.setClass(SecretPhraseActivity.this, CongratulationsActivity.class);
         startActivity(intent);

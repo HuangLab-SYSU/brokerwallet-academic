@@ -52,14 +52,14 @@ public class AtvActivity extends AppCompatActivity {
     private RelativeLayout action_bar;
     private NavigationHelper navigationHelper;
 
-    //交易组件
+    // trading component
     private RecyclerView transactionsRecyclerView;
     private TransactionAdapter transactionAdapter;
     private List<Transaction> transactionList = new ArrayList<>();
     private ProgressBar progressBar;
     private ExecutorService executorService;
     private static final String CACHE_FILE_NAME = "transactions_cache.txt";
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,80 +73,80 @@ public class AtvActivity extends AppCompatActivity {
 
         loadTransactions();
     }
-    
+
     private void initRecyclerView() {
         transactionsRecyclerView = findViewById(R.id.transactions_recycler_view);
         progressBar = findViewById(R.id.progress_bar);
-        
+
         //layoutmanager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         transactionsRecyclerView.setLayoutManager(layoutManager);
-        
+
         // get currentaccount
         String currentAddress = getCurrentAccountAddress();
-        
+
         // creat adapter
         transactionAdapter = new TransactionAdapter(transactionList, currentAddress);
         transactionsRecyclerView.setAdapter(transactionAdapter);
     }
-    
+
     private void loadTransactions() {
         showProgress();
         Log.d("AtvActivity", "开始加载交易数据...");
-        
-        
+
+
         //testAddressValidation();
-        
+
         executorService.execute(() -> {
             try {
                 String currentAddress = getCurrentAccountAddress();
-                
+
                 // API URL
                 String fullUrl = ChainConfig.getGetTx2AccountUrl(currentAddress);
                 Log.d("AtvActivity", "请求URL: " + fullUrl);
-                
+
                 URL url = new URL(fullUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setConnectTimeout(15000);
                 connection.setReadTimeout(15000);
                 connection.setRequestProperty("Accept", "application/json");
-                
+
                 int responseCode = connection.getResponseCode();
                 Log.d("AtvActivity", "响应码: " + responseCode);
-                
+
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStream inputStream = connection.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                     StringBuilder response = new StringBuilder();
                     String line;
-                    
+
                     while ((line = reader.readLine()) != null) {
                         response.append(line);
                     }
-                    
+
                     String responseString = response.toString();
                     Log.d("AtvActivity", "API响应: " + responseString);
-                    
+
                     reader.close();
                     inputStream.close();
-                    
-                    // 解析
+
+                    // parse
                     Gson gson = new Gson();
                     TransactionResponse transactionResponse = gson.fromJson(responseString, TransactionResponse.class);
-                    
+
                     if (transactionResponse != null && transactionResponse.getData() != null) {
                         List<Transaction> newTransactions = transactionResponse.getData();
-                        
-                        // 过滤
+
+                        // filter
                         List<Transaction> filteredTransactions = filterTransactions(newTransactions);
-                        
+
                         Log.d("AtvActivity", "获取到交易数量: " + newTransactions.size() + "，过滤后数量: " + filteredTransactions.size());
-                        
-                        // 缓存
+
+                        // cache
                         cacheTransactions(filteredTransactions);
-                        
-                        // 在UI线程更新数据
+
+                        // Update data on UI thread
                         runOnUiThread(() -> {
                             transactionList.clear();
                             transactionList.addAll(filteredTransactions);
@@ -166,7 +166,7 @@ public class AtvActivity extends AppCompatActivity {
 
                     loadCachedTransactions();
                 }
-                
+
                 connection.disconnect();
             } catch (Exception e) {
                 Log.e("AtvActivity", "加载交易数据异常", e);
@@ -175,40 +175,40 @@ public class AtvActivity extends AppCompatActivity {
             }
         });
     }
-    
-    //过滤包含B2E的交易和非标准地址格式的交易
+
+    // Filter transactions containing B2E and transactions with non-standard address formats.
     private List<Transaction> filterTransactions(List<Transaction> transactions) {
         List<Transaction> filtered = new ArrayList<>();
         if (transactions != null) {
             for (Transaction transaction : transactions) {
                 boolean containsB2E = false;
                 boolean hasInvalidAddress = false;
-                
-                // 检查from或to字段是否包含B2E
+
+                // Check if the from or to field contains B2E.
                 if ((transaction.getFrom() != null && transaction.getFrom().contains("B2E")) ||
                     (transaction.getTo() != null && transaction.getTo().contains("B2E"))) {
                     containsB2E = true;
                 }
-                
-                // 检查地址格式
+
+                // Check address format
                 if ((transaction.getFrom() != null && !isValidAddress(transaction.getFrom())) ||
                     (transaction.getTo() != null && !isValidAddress(transaction.getTo()))) {
                     hasInvalidAddress = true;
                 }
-                
+
 
                 if (!containsB2E && !hasInvalidAddress) {
                     filtered.add(transaction);
                 } else {
-                    Log.d("AtvActivity", "过滤掉交易：from=" + transaction.getFrom() + ", to=" + transaction.getTo() + 
-                          ", 原因：" + (containsB2E ? "包含B2E" : "") + (containsB2E && hasInvalidAddress ? "和" : "") + 
+                    Log.d("AtvActivity", "过滤掉交易：from=" + transaction.getFrom() + ", to=" + transaction.getTo() +
+                          ", 原因：" + (containsB2E ? "包含B2E" : "") + (containsB2E && hasInvalidAddress ? "和" : "") +
                           (hasInvalidAddress ? "地址格式不标准" : ""));
                 }
             }
         }
         return filtered;
     }
-    
+
     //Store to local
     private void cacheTransactions(List<Transaction> transactions) {
         try {
@@ -223,7 +223,7 @@ public class AtvActivity extends AppCompatActivity {
             Log.e("AtvActivity", "缓存交易数据失败", e);
         }
     }
-    
+
     //load from local
     private void loadCachedTransactions() {
         try {
@@ -234,7 +234,7 @@ public class AtvActivity extends AppCompatActivity {
                 List<Transaction> cachedTransactions = (List<Transaction>) ois.readObject();
                 ois.close();
                 fis.close();
-                
+
                 Log.d("AtvActivity", "从缓存加载交易数据，数量: " + cachedTransactions.size());
                 runOnUiThread(() -> {
                     transactionList.clear();
@@ -258,19 +258,19 @@ public class AtvActivity extends AppCompatActivity {
             });
         }
     }
-    
+
     private void showProgress() {
         runOnUiThread(() -> {
             progressBar.setVisibility(View.VISIBLE);
         });
     }
-    
+
     private void hideProgress() {
         runOnUiThread(() -> {
             progressBar.setVisibility(View.GONE);
         });
     }
-    
+
     //Get addr
     private String getCurrentAccountAddress() {
         String privateKey = StorageUtil.getCurrentPrivatekey(this);
@@ -279,13 +279,13 @@ public class AtvActivity extends AppCompatActivity {
         }
         return "";
     }
-    
+
     private void intView() {
         menu = findViewById(R.id.menu);
         notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
-        
-        
+
+
         findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -308,7 +308,7 @@ public class AtvActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -322,7 +322,7 @@ public class AtvActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-    
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -330,13 +330,13 @@ public class AtvActivity extends AppCompatActivity {
             executorService.shutdown();
         }
     }
-    
+
 
     private boolean isValidAddress(String address) {
         if (address == null || address.isEmpty()) {
             return false;
         }
-        // 40个字符、十六进制
+        // 40characters, hexadecimal
         return address.length() == 40 && address.matches("^[0-9a-fA-F]+$");
     }
 

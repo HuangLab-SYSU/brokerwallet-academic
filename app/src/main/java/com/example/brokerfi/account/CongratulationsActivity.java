@@ -26,10 +26,10 @@ public class CongratulationsActivity extends AppCompatActivity {
 
     private void intEvent(){
         btn.setOnClickListener(view -> {
-            //创建意图对象
+            // Create intent object
             Intent intent = new Intent();
             intent.setClass(CongratulationsActivity.this, WelcomeBackActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
 

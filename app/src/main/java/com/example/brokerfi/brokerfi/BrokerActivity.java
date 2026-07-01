@@ -59,7 +59,7 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
     }
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        //触摸的是EditText并且当前EditText可以滚动则将事件交给EditText处理；否则将事件交由其父类处理
+        // If the EditText is touched and the current EditText can be scrolled, the event will be handed over to EditText for processing; otherwise, the event will be handled by its parent class.
         if ((view.getId() == R.id.editTextTextMultiLine && canVerticalScroll(text))) {
             view.getParent().requestDisallowInterceptTouchEvent(true);
             if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -71,18 +71,18 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
 
 
     /**
-     * EditText竖直方向是否可以滚动
-     * @param editText  需要判断的EditText
-     * @return  true：可以滚动   false：不可以滚动
+     * Can EditText be scrolled vertically? / EditText竖直方向是否可以滚动
+     * @param editText  EditText to inspect / 需要判断的EditText
+     * @return  true: scrolling is possible false: scrolling is not possible. / true：可以滚动   false：不可以滚动
      */
     private boolean canVerticalScroll(EditText editText) {
-        //滚动的距离
+        // scroll distance
         int scrollY = editText.getScrollY();
-        //控件内容的总高度
+        // The total height of the control's content
         int scrollRange = editText.getLayout().getHeight();
-        //控件实际显示的高度
+        // The actual displayed height of the control
         int scrollExtent = editText.getHeight() - editText.getCompoundPaddingTop() -editText.getCompoundPaddingBottom();
-        //控件内容总高度与实际显示高度的差值
+        // The difference between the total height of the control content and the actual display height.
         int scrollDifference = scrollRange - scrollExtent;
 
         if(scrollDifference == 0) {
@@ -106,8 +106,8 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
         navigationHelper = new NavigationHelper(menu, action_bar, this,notificationBtn);
 
         List<String> keywords = Arrays.asList("contract", "require", "emit", "function","returns","address","struct","mapping","payable","false","true","event","constructor");
-        int keywordColor = Color.parseColor("#FF8C00"); // 深橙色
-        int defaultColor = Color.BLACK; // 黑色
+        int keywordColor = Color.parseColor("#FF8C00"); // dark orange
+        int defaultColor = Color.BLACK; // black
 
         String code = "contract Broker {\n" +
                 "    // define broker struct\n" +
@@ -177,7 +177,7 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
 
         SpannableString spannableString = new SpannableString(code);
         for (int i = 0; i < code.length(); ) {
-            // 查找下一个空格或代码结束的位置
+            // Find the next space or end of code.
             int end = code.indexOf(' ', i);
             int end2 = code.indexOf("(",i);
             if(end2 == -1){
@@ -258,7 +258,7 @@ public class BrokerActivity extends AppCompatActivity implements View.OnTouchLis
 
 
         btn.setOnClickListener(view -> {
-            //创建意图对象
+            // Create intent object
             Intent intent = new Intent();
             if (atomicBoolean.get()) {
                 intent.setClass(BrokerActivity.this, AfterBrokerActivity.class);

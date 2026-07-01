@@ -16,7 +16,7 @@ public class SharedPrefsUtil {
     private static Context appContext;
     private static SharedPreferences encryptedSp;
 
-    // 初始化
+    // initialization
     public static void init(Context context){
         if(appContext == null){
             appContext = context.getApplicationContext();
@@ -26,12 +26,12 @@ public class SharedPrefsUtil {
 
     private static void initEncryptedSP() {
         try {
-            // 1. 创建主密钥（存储在 Android Keystore）
+            // 1. Create master key (stored in Android Keystore)
             MasterKey masterKey = new MasterKey.Builder(appContext)
                     .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                     .build();
 
-            // 2. 创建加密的 SharedPreferences
+            // 2. Create encrypted SharedPreferences
             encryptedSp = EncryptedSharedPreferences.create(
                     appContext,
                     SP_NAME,

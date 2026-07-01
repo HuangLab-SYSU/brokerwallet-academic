@@ -29,7 +29,7 @@ public final class BrokerChainLocalRpc {
         return ChainConfig.getLocalChainRpcUrl();
     }
 
-    /** 鏍囧噯 JSON-RPC 鑺傜偣锛?42515锛夛紱dash :443 鏍硅矾寰勪笉鏀寔 eth_getLogs 绛夈€?*/
+    /** Standard JSON-RPC node uses 42515; the dash :443 root path does not support eth_getLogs. / ?? JSON-RPC ???? 42515?dash :443 ?????? eth_getLogs? */
     public static String getReadOnlyRpcUrl() {
         return ChainConfig.getReadOnlyRpcUrl();
     }

@@ -47,8 +47,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         String type = "UNKNOWN";
         String amount = transaction.getValue();
-        
-        // 将wei转换为BKC（1 BKC = 1e18 wei）
+
+        // Convert wei to BKC (1 BKC = 1e18 wei)
         try {
             double valueInBKC = Double.parseDouble(amount) / 1e18;
             amount = String.format("%.6f", valueInBKC);
@@ -130,29 +130,29 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         }
     }
 
-    // 格式化时间戳
+    // Format timestamp
     private String formatTimestamp(String timestamp) {
         if (timestamp == null || timestamp.isEmpty()) {
             return "-";
         }
 
         try {
-            // 解析ISO 8601格式
+            // Parse ISO 8601 format
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             Date date = inputFormat.parse(timestamp);
-            
-            // 输出格式化的时间
+
+            // Output formatted time
             SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             return outputFormat.format(date);
         } catch (ParseException e) {
             try {
-                // 其他格式
+                // other formats
                 SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                 Date date = inputFormat.parse(timestamp);
                 SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 return outputFormat.format(date);
             } catch (ParseException ex) {
-                return timestamp; // 解析不了则返回初始时间戳
+                return timestamp; // If it cannot be parsed, the initial timestamp will be returned.
             }
         }
     }

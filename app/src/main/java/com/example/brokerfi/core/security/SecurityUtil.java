@@ -35,7 +35,7 @@ public class SecurityUtil {
         Security.addProvider(new BouncyCastleProvider());
     }
 
-    /* 旧的地址生成方式（SHA-256哈希公钥取前20字节）
+    /* Old address generation method: take the first 20 bytes of the SHA-256 public-key hash. / ?????????SHA-256 ??????? 20 ???
     public static String GetAddress(String privateKey) {
         try {
             String publicKey = getPublicKeyFromPrivateKey(privateKey);
@@ -57,25 +57,25 @@ public class SecurityUtil {
     }
     */
 
-    // 新的地址生成方式，与以太坊标准和服务器端一致：Keccak-256(公钥)的后20字节
+    // New address generation method, consistent with the Ethereum standard and server side: the last 20 bytes of Keccak-256 (public key)
     public static String GetAddress(String privateKey) {
         try {
             String publicKey = getPublicKeyFromPrivateKey(privateKey);
             byte[] decode = Hex.decode(publicKey);
-            
-            // 用Keccak-256对公钥进行哈希，注意！！忽略前缀字节(0x04)
+
+            // Hash the public key with Keccak-256, pay attention! ! Ignore prefix byte (0x04)
             KeccakDigest keccakDigest = new KeccakDigest(256);
 
-            // 这里按照以太坊的标准，也就是 go supervisor 端使用的 crypto 方法，跳过第一个字节（前缀），只使用X和Y坐标部分
+            // According to the standard of Ethereum, that is, the crypto method used on the go supervisor side, the first byte (prefix) is skipped and only the X and Y coordinate parts are used.
             keccakDigest.update(decode, 1, decode.length - 1);
             byte[] keccakHash = new byte[keccakDigest.getDigestSize()];
             keccakDigest.doFinal(keccakHash, 0);
-            
-            // 取Keccak-256哈希结果的后20字节作为地址
+
+            // Take the last 20 bytes of the Keccak-256 hash result as the address.
             byte[] addressBytes = new byte[20];
             System.arraycopy(keccakHash, keccakHash.length - 20, addressBytes, 0, 20);
-            
-            // 将地址字节转换为十六进制字符串
+
+            // Convert address bytes to hex string
             return Hex.toHexString(addressBytes);
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,11 +84,11 @@ public class SecurityUtil {
     }
 
 
-    // 256r1相关代码
+    // 256r1 related code
 //    public static String[] signECDSA(String privateKey1, String data)  {
 //        BigInteger privateKey = new BigInteger(privateKey1,10);
-//        //Bouncy Castle 库中的 ECNamedCurveTable 方法 getParameterSpec 方法
-//        //升级为 secp256k1
+//        // Bouncy Castle ECNamedCurveTable#getParameterSpec.
+//        // Upgrade to secp256k1.
 //        ECNamedCurveParameterSpec spec = ECNamedCurveTable.getParameterSpec("secp256r1");
 //        ECDomainParameters domainParameters = new ECDomainParameters( spec.getCurve(),spec.getG(), spec.getN());
 //        ECDSASigner signer = new ECDSASigner();
@@ -124,7 +124,7 @@ public class SecurityUtil {
         };
     }
 
-    // 256r1相关代码
+    // 256r1 related code
 //    public static String getPublicKeyFromPrivateKey(String p)  {
 //        BigInteger privateKey = new BigInteger(p);
 //        ECNamedCurveParameterSpec spec = ECNamedCurveTable.getParameterSpec("secp256r1");
@@ -137,35 +137,35 @@ public class SecurityUtil {
         BigInteger privateKey = new BigInteger(privateKeyHex, 16);
         ECNamedCurveParameterSpec spec = ECNamedCurveTable.getParameterSpec("secp256k1");
         ECPoint publicPoint = spec.getG().multiply(privateKey);
-        // 将公钥编码从压缩格式改为非压缩格式，以匹配以太坊和supervisor的实现
+        // Change public key encoding from compressed to uncompressed format to match Ethereum and supervisor implementations.
         byte[] encoded = publicPoint.getEncoded(false);
         return Hex.toHexString(encoded);
     }
 
-    // 256r1相关代码
+    // 256r1 related code
 //    public static String generatePrivateKey() {
 //        try {
-//            // 获取 secp256r1 曲线的参数
+//            // Get secp256r1 curve parameters.
 //            ECNamedCurveParameterSpec spec = ECNamedCurveTable.getParameterSpec("secp256r1");
 //            ECDomainParameters domainParams = new ECDomainParameters(
 //                    spec.getCurve(), spec.getG(), spec.getN(), spec.getH());
 //
-//            // 使用安全随机数生成器
+//            // Use a secure random number generator.
 //            SecureRandom random = new SecureRandom();
 //
-//            // 创建密钥对生成器
+//            // Create the key-pair generator.
 //            ECKeyPairGenerator generator = new ECKeyPairGenerator();
 //            ECKeyGenerationParameters params = new ECKeyGenerationParameters(domainParams, random);
 //            generator.init(params);
 //
-//            // 生成密钥对
+//            // Generate the key pair.
 //            AsymmetricCipherKeyPair keyPair = generator.generateKeyPair();
 //            ECPrivateKeyParameters privateKeyParams = (ECPrivateKeyParameters) keyPair.getPrivate();
 //
-//            // 获取私钥的BigInteger值
+//            // Get the private key BigInteger value.
 //            BigInteger privateKey = privateKeyParams.getD();
 //
-//            // 返回私钥的十六进制字符串表示
+//            // Return the private key as a hexadecimal string.
 //            return privateKey.toString(10);
 //
 //        } catch (Exception e) {
@@ -176,27 +176,27 @@ public class SecurityUtil {
 
     public static String generatePrivateKey() {
         try {
-            // 获取 secp256k1 曲线参数
+            // Get secp256k1 curve parameters
             ECNamedCurveParameterSpec spec = ECNamedCurveTable.getParameterSpec("secp256k1");
             ECDomainParameters domainParams = new ECDomainParameters(
                     spec.getCurve(), spec.getG(), spec.getN(), spec.getH());
 
-            // 安全随机数生成器
+            // Secure random number generator
             SecureRandom random = new SecureRandom();
 
-            // 创建密钥对生成器
+            // Create a key pair generator
             ECKeyPairGenerator generator = new ECKeyPairGenerator();
             ECKeyGenerationParameters params = new ECKeyGenerationParameters(domainParams, random);
             generator.init(params);
 
-            // 生成密钥对
+            // Generate key pair
             AsymmetricCipherKeyPair keyPair = generator.generateKeyPair();
             ECPrivateKeyParameters privateKeyParams = (ECPrivateKeyParameters) keyPair.getPrivate();
 
-            // 获取私钥的BigInteger值
+            // Get the BigInteger value of the private key.
             BigInteger privateKey = privateKeyParams.getD();
 
-            // 返回私钥的十六进制字符串表示
+            // Returns the hexadecimal string representation of the private key.
             return privateKey.toString(16);
 
         } catch (Exception e) {
@@ -208,7 +208,7 @@ public class SecurityUtil {
     public static void main(String[] args) {
         System.out.println(generatePrivateKey());
     }
-    
+
     //The standard private key format is a 32-byte 256-bit hexadecimal number.
     //Support both with and without 0x/0X prefix (like MetaMask)
     public static boolean isNewPrivateKeyFormat(String privateKey) {
@@ -232,7 +232,7 @@ public class SecurityUtil {
             return privateKey.matches("[0-9a-fA-F]+");
         }
     }
-    
+
     // Remove 0x or 0X prefix from private key if exists
     public static String removePrivateKeyPrefix(String privateKey) {
         if (privateKey == null) {
@@ -243,7 +243,7 @@ public class SecurityUtil {
         }
         return privateKey;
     }
-    
+
     // Check if the address format is valid
     // Standard address is 40 hex characters without 0x prefix
     public static boolean isAddressFormatValid(String address) {
@@ -267,7 +267,7 @@ public class SecurityUtil {
             return address.matches("[0-9a-fA-F]+");
         }
     }
-    
+
     // Remove 0x or 0X prefix from address if exists
     public static String removeAddressPrefix(String address) {
         if (address == null) {
@@ -285,7 +285,7 @@ public class SecurityUtil {
 
         byte[] messageBytes = message.getBytes(StandardCharsets.UTF_8);
 
-        // 以太坊标准签名（自动加前缀）
+        // Ethereum standard signature (automatically prefixed)
         Sign.SignatureData signature = Sign.signPrefixedMessage(
                 messageBytes,
                 credentials.getEcKeyPair()

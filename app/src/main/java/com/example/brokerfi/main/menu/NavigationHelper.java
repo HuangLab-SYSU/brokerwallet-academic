@@ -155,7 +155,7 @@ public class NavigationHelper{
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(context, NotificationActivity.class);
-                //跳转
+                // Navigate
                 context.startActivity(intent);
             }
         });
@@ -164,7 +164,7 @@ public class NavigationHelper{
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setClass(context, EmulatorActivity.class);
-                //跳转
+                // Navigate
                 context.startActivity(intent);
 //
 //                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -262,12 +262,12 @@ public class NavigationHelper{
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(menu.getWindowToken(), 0);
     }
-    //检查输入法是否在显示
+    // Check if the input method is showing
     private boolean isKeyboardShown() {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         return imm.isAcceptingText();
     }
-    //获取顶部状态栏的高度
+    // Get the height of the top status bar.
     public static int getStatusBarHeight(Context context) {
         int result = 0;
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -277,7 +277,7 @@ public class NavigationHelper{
         return result;
     }
 
-    //检查菜单
+    // Check menu
     public boolean isPopupVisible() {
         return isPopupVisible;
     }
@@ -287,7 +287,7 @@ public class NavigationHelper{
         if (isPopupVisible && popupWindow != null) {
             popupWindow.dismiss();
             isPopupVisible = false;
-            // 切换菜单图标
+            // Toggle menu icon
             if (!isIcon1) {
                 menu.setImageResource(R.drawable.action_menu_30);
                 isIcon1 = true;

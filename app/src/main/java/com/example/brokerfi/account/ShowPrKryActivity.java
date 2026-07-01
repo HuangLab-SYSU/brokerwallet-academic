@@ -45,10 +45,10 @@ public class ShowPrKryActivity extends AppCompatActivity {
         navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
         btn_done.setOnClickListener(view -> {
-            //创建意图对象
+            // Create intent object
             Intent intent = new Intent();
             intent.setClass(ShowPrKryActivity.this, MainActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
     }

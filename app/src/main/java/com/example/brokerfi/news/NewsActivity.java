@@ -30,7 +30,7 @@ public class NewsActivity extends AppCompatActivity {
 //    private RelativeLayout action_bar;
 //    private NavigationHelper navigationHelper;
     private WebView webView;
-    
+
     private boolean networkErrorShown = false;
 
     @Override
@@ -42,11 +42,11 @@ public class NewsActivity extends AppCompatActivity {
         intEvent();
         webView = findViewById(R.id.webview);
 
-        // 启用 JavaScript（可选，如果网站需要）
+        // Enable JavaScript (optional, if required by the site)
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        // 设置 WebViewClient，确保在 App 内打开页面，而不是调用外部浏览器
+        // Set up WebViewClient to ensure that pages are opened within the app rather than calling an external browser.
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
@@ -66,10 +66,10 @@ public class NewsActivity extends AppCompatActivity {
                         "</body>" +
                         "</html>";
 
-                // ✅ 使用 loadDataWithBaseURL
+                // ✅ Use loadDataWithBaseURL
                 view.loadDataWithBaseURL("file:///android_asset/", customErrorHtml, "text/html", "utf-8", null);
-                
-                // 只显示一次网络错误提示
+
+                // Show network error message only once
                 if (!networkErrorShown) {
                     Toast.makeText(NewsActivity.this, R.string.emulator_toast_network_failed, Toast.LENGTH_SHORT).show();
                     networkErrorShown = true;
@@ -88,7 +88,7 @@ public class NewsActivity extends AppCompatActivity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                // 确保页面内跳转也在 WebView 中打开
+                // Make sure intra-page jumps are also opened in WebView.
                 return false;
             }
         });
@@ -98,7 +98,7 @@ public class NewsActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        // 当显示错误页面时，直接退出活动
+        // When an error page is displayed, exit the activity directly.
         if (networkErrorShown) {
             super.onBackPressed();
             overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);

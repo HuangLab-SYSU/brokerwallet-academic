@@ -32,7 +32,7 @@ public class ImportActivity extends AppCompatActivity {
 
     private String getAccountNumberFromSharedPreferences() {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        return settings.getString(PREF_ACCOUNT_NUMBER, null); // 如果没有找到，返回null
+        return settings.getString(PREF_ACCOUNT_NUMBER, null); // If not found, return null
     }
 
     @Override
