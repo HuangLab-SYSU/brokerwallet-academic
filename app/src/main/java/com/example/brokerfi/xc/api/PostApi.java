@@ -21,7 +21,7 @@ import com.example.brokerfi.core.config.ApiConfig;
 
 public class PostApi extends BaseApi {
 
-    // 获取帖子列表
+    // Get list of posts
     public void getPosts(ApiCallback<List<PostDTO>> callback) {
 
         String url = BASE_URL_HTTP + "/posts";
@@ -41,7 +41,7 @@ public class PostApi extends BaseApi {
         });
     }
 
-    // 获取帖子详情
+    // Get post details
     public void getPostDetail(Long postId, ApiCallback<PostDTO> callback) {
 
         String url = BASE_URL_HTTP + "/posts/" + postId;
@@ -51,7 +51,7 @@ public class PostApi extends BaseApi {
         executeGet(url, type, callback);
     }
 
-    //发帖
+    // post
     public void addPost(PostDTO postDTO, ApiCallback<PostDTO> callback) {
         String url = BASE_URL_HTTP + "/posts";
 
@@ -60,7 +60,7 @@ public class PostApi extends BaseApi {
         executePost(url, postDTO, type, callback);
     }
 
-    // 获取评论列表
+    // Get list of comments
     public void getComments(Long postId, int page, int size,
                             ApiCallback<PageResponse<CommentDTO>> callback) {
 
@@ -72,7 +72,7 @@ public class PostApi extends BaseApi {
         executeGet(url, type, callback);
     }
 
-    // 发送评论
+    // Send a comment
     public void addComment(Long postId, Long userId, String content, ApiCallback<CommentDTO> callback) {
 
         String url = BASE_URL_HTTP + "/comments";
@@ -87,7 +87,7 @@ public class PostApi extends BaseApi {
         executePost(url, body, type, callback);
     }
 
-    //点赞
+    // Like
     public void likePost(Long postId, Long userId, ApiCallback<LikeStatusDTO> callback) {
 
         String url = BASE_URL_HTTP + "/likes"
@@ -99,7 +99,7 @@ public class PostApi extends BaseApi {
         executePost(url, null, type, callback);
     }
 
-    //取消点赞
+    // Cancel like
     public void unlikePost(Long postId, Long userId, ApiCallback<LikeStatusDTO> callback) {
 
         String url = BASE_URL_HTTP + "/likes"

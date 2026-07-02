@@ -4,10 +4,10 @@ import com.example.brokerfi.core.config.ChainConfig;
 import com.example.brokerfi.core.config.ServerConfig;
 
 /**
- * 旧代码兼容入口。
+ * Old code compatibility entry. / 旧代码兼容入口。
  *
- * 新代码不要再把服务器或合约配置放到 Holder；服务器配置使用
- * ServerConfig/ApiConfig，链配置使用 ChainConfig。
+ * For new code, do not put server or contract configuration in Holder; use server configuration. / 新代码不要再把服务器或合约配置放到 Holder；服务器配置使用
+ * ServerConfig/ApiConfig, use ChainConfig for chain configuration. / ServerConfig/ApiConfig，链配置使用 ChainConfig。
  */
 public class Holder {
     /** @deprecated use {@link ServerConfig#SERVER_HOST}. */

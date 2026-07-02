@@ -43,7 +43,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                 .load(url)
                 .placeholder(R.drawable.placeholder_image)
                 .into(holder.ivImage);
-        // 点击查看大图
+        // Click to view larger image
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ImagePreviewActivity.class);
             intent.putStringArrayListExtra("imageList", (ArrayList<String>) imageUrlList);

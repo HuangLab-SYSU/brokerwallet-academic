@@ -110,14 +110,14 @@ public class PostDetailActivity extends AppCompatActivity {
                 int total = lm.getItemCount();
                 int lastVisible = lm.findLastVisibleItemPosition();
 
-                // 提前2个加载
+                // Load 2 ahead
                 if (lastVisible >= total - 2) {
                     loadComments();
                 }
             }
         });
 
-        // 发表评论
+        // Leave a comment
         btnSend.setOnClickListener(v -> {
             String content = etComment.getText().toString().trim();
 
@@ -167,7 +167,7 @@ public class PostDetailActivity extends AppCompatActivity {
         dataList.clear();
         adapter.notifyDataSetChanged();
 
-        // 加载帖子详情
+        // Load post details
         new PostApi().getPostDetail(postId, new ApiCallback<PostDTO>() {
             @Override
             public void onSuccess(PostDTO data) {
@@ -176,7 +176,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 adapter.notifyItemInserted(0);
                 currentPage = 0;
                 hasMore = true;
-                // 加载评论详情
+                // Load comment details
                 loadComments();
             }
 
@@ -204,7 +204,7 @@ public class PostDetailActivity extends AppCompatActivity {
                         dataList.addAll(list);
                         adapter.notifyDataSetChanged();
                         currentPage++;
-                        // 是否还有下一页
+                        // Is there a next page?
                         if (currentPage >= pageData.getTotalPages()) {
                             hasMore = false;
                         }
@@ -228,14 +228,14 @@ public class PostDetailActivity extends AppCompatActivity {
             return;
         }
 
-        // 防重复请求
+        // Prevent duplicate requests
         if (isLikeRequesting) {
             return;
         }
         isLikeRequesting = true;
 
         if (post.getIsLiked()) {
-            // 取消点赞
+            // Cancel like
             new PostApi().unlikePost(post.getId(), userId, new LikeCallback(post, position) {
                 @Override
                 public void onFail(String msg) {
@@ -244,7 +244,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 }
             });
         } else {
-            // 点赞
+            // Like
             new PostApi().likePost(post.getId(), userId, new LikeCallback(post, position) {
                 @Override
                 public void onFail(String msg) {
@@ -280,7 +280,7 @@ public class PostDetailActivity extends AppCompatActivity {
     }
 
 
-    // 打赏
+    // reward
     private volatile boolean rewarding = false;
     private void showRewardDialog(PostDTO post, int position) {
 
@@ -327,7 +327,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
         rewarding = true;
 
-        // 获取私钥
+        // Get private key
         String account = StorageUtil.getPrivateKey(this);
         String acc = StorageUtil.getCurrentAccount(this);
         int i = (acc == null) ? 0 : Integer.parseInt(acc);
@@ -349,7 +349,7 @@ public class PostDetailActivity extends AppCompatActivity {
             });
 
             try {
-                //发送交易
+                // Send the transaction
                 String txHash = Web3jTransferUtil.sendTransaction(
                         privateKey,
                         toAddress,
@@ -362,7 +362,7 @@ public class PostDetailActivity extends AppCompatActivity {
                     return;
                 }
 
-                // 构造 message
+                // Construct message
                 long timestamp = System.currentTimeMillis() / 1000;
                 String nonce = UUID.randomUUID().toString();
                 String message = txHash + "|" + fromAddress + "|" + toAddress + "|" + timestamp + "|" + nonce;

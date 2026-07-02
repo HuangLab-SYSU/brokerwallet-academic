@@ -71,9 +71,9 @@ public class MintActivity extends AppCompatActivity {
     private NavigationHelper navigationHelper;
     private Button btn_doCamera, btn_doFile, btn_cancel, btn_mint;
 
-    private Uri imageUri; //保存用户选择的图片
+    private Uri imageUri; // Save user-selected images
     private ImageView uploadView;
-    private int hasImage = 0; // 0-无图片 1-有图片
+    private int hasImage = 0; // 0-No picture 1-With picture
 
     private TextView warning;
 
@@ -186,7 +186,7 @@ public class MintActivity extends AppCompatActivity {
                 if (hasImage == 1) {
                     InputStream in = getContentResolver().openInputStream(imageUri);
                     BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inSampleSize = 4; // 直接缩小4倍
+                    options.inSampleSize = 4; // Directly reduce 4 times
                     Bitmap bitmap = BitmapFactory.decodeStream(in, null, options);
                     in.close();
                     ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -400,7 +400,7 @@ public class MintActivity extends AppCompatActivity {
                         Toast.makeText(MintActivity.this, R.string.mint_toast_mint_successful, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent();
                         intent.setClass(MintActivity.this, CongratulationsMintActivity.class);
-                        //跳转
+                        //jump
                         startActivity(intent);
                     });
                 } else {
@@ -409,7 +409,7 @@ public class MintActivity extends AppCompatActivity {
                     );
                 }
             } else {
-                // 交易尚未上链，继续轮询
+                // The transaction has not yet been uploaded to the chain, continue polling.
                 String finalTxHash = txHash;
                 new Handler().postDelayed(() -> checkTransactionStatus(finalTxHash), 2000);
             }

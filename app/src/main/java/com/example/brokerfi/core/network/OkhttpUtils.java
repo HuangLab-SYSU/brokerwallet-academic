@@ -31,13 +31,13 @@ public class OkhttpUtils {
 
     public void doGet(String url, MyCallBack callBack) {
 
-        //创建request对象
+        // Create request object
         Request request = new Request
                 .Builder()
                 .url(url)
                 .build();
 
-        //创建call对象
+        // Create call object
         Call call = okHttpClient.newCall(request);
 
         call.enqueue(new Callback() {
@@ -69,16 +69,16 @@ public class OkhttpUtils {
     }
 
     public void doPost(String url, String requestBody, MyCallBack callBack) {
-        // 创建请求体
+        // Build the request body
         RequestBody body = RequestBody.create(requestBody, MediaType.parse("application/json; charset=utf-8"));
 
-        // 创建请求对象
+        // Create request object
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
                 .build();
 
-        // 创建Call对象
+        // Create Call object
         Call call = okHttpClient.newCall(request);
 
         call.enqueue(new Callback() {

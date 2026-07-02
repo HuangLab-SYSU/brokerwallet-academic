@@ -37,7 +37,7 @@ public class ProofSubmissionActivity extends AppCompatActivity {
     private ImageView notificationBtn;
     private RelativeLayout action_bar;
     private NavigationHelper navigationHelper;
-    
+
     private EditText displayNameEditText;
     private EditText representativeWorkEditText;
     private SwitchCompat showRepresentativeWorkSwitch;
@@ -49,10 +49,10 @@ public class ProofSubmissionActivity extends AppCompatActivity {
     private Button submitButton;
     private TextView selectedFileText;
     private TextView nftMintButton;
-    
+
     private Uri selectedFileUri;
     private String selectedFilePath;
-    private String selectedFileName;  // 保存原始文件名
+    private String selectedFileName;  // Save original file name
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class ProofSubmissionActivity extends AppCompatActivity {
         menu = findViewById(R.id.menu);
         notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
-        
+
         displayNameEditText = findViewById(R.id.displayNameEditText);
         representativeWorkEditText = findViewById(R.id.representativeWorkEditText);
         showRepresentativeWorkSwitch = findViewById(R.id.showRepresentativeWorkSwitch);
@@ -84,7 +84,7 @@ public class ProofSubmissionActivity extends AppCompatActivity {
 
     private void intEvent() {
         navigationHelper = new NavigationHelper(menu, action_bar, this, notificationBtn);
-        
+
         selectFileButton.setOnClickListener(v -> selectFile());
         submitButton.setOnClickListener(v -> submitProof());
         nftMintButton.setOnClickListener(v -> {
@@ -106,49 +106,49 @@ public class ProofSubmissionActivity extends AppCompatActivity {
         boolean showRepresentativeWork = showRepresentativeWorkSwitch.isChecked();
         String authorInfo = authorInfoEditText.getText().toString().trim();
         String eventDescription = eventDescriptionEditText.getText().toString().trim();
-        
-        // 只验证原有的必填项
+
+        // Only verify the original required fields
         if (authorInfo.isEmpty()) {
             Toast.makeText(this, R.string.proof_submission_toast_enter_author, Toast.LENGTH_SHORT).show();
             return;
         }
-        
+
         if (eventDescription.isEmpty()) {
             Toast.makeText(this, R.string.proof_submission_toast_enter_description, Toast.LENGTH_SHORT).show();
             return;
         }
-        
+
         if (selectedFileUri == null) {
             Toast.makeText(this, R.string.proof_submission_toast_select_file, Toast.LENGTH_SHORT).show();
             return;
         }
-        
-        // 显示提交中状态
+
+        //Show submission status
         submitButton.setEnabled(false);
         submitButton.setText(R.string.proof_submission_submitting);
-        
+
         new Thread(() -> {
             try {
                 String myAddress = getMyAddress();
-                
-                // 使用新的后端API提交，花名、代表作、展示设置都是可选的
+
+                // Submit using the new back-end API. Name, masterpiece, and display settings are all optional.
                 String result = ProofUploadUtil.uploadProofWithUserInfo(
                     selectedFilePath,
-                    selectedFileName,  // 传递原始文件名
+                    selectedFileName, // Pass the original file name
                     myAddress,
                     displayName,
                     representativeWork,
                     showRepresentativeWork
                 );
-                
+
                 runOnUiThread(() -> {
                     submitButton.setEnabled(true);
                     submitButton.setText(R.string.activity_proof_submission_submit_materials);
-                    
+
                     if (result != null && result.contains("success")) {
                         Toast.makeText(this, R.string.proof_submission_toast_success, Toast.LENGTH_LONG).show();
                         clearForm();
-                        // 重新加载用户信息，恢复花名、代表作等字段
+                        // Reload user information and restore fields such as name, masterpiece, etc.
                         loadUserInfo();
                     } else {
                         Toast.makeText(this, getString(R.string.proof_submission_toast_failed_prefix) + " " + result, Toast.LENGTH_LONG).show();
@@ -166,7 +166,7 @@ public class ProofSubmissionActivity extends AppCompatActivity {
     }
 
     private void clearForm() {
-        // 不清空花名、代表作和展示设置，因为这些是用户的持久信息
+        // Do not clear the name, masterpiece and display settings, because these are the user's persistent information.
         authorInfoEditText.setText("");
         eventDescriptionEditText.setText("");
         selectedFileText.setText(R.string.activity_proof_submission_no_file);
@@ -174,9 +174,9 @@ public class ProofSubmissionActivity extends AppCompatActivity {
         selectedFilePath = null;
         selectedFileName = null;
     }
-    
+
     /**
-     * 加载用户信息（花名、代表作、是否展示代表作）
+     * Load user information (name, masterpieces, whether to display masterpieces)
      */
     private void loadUserInfo() {
         new Thread(() -> {
@@ -184,31 +184,31 @@ public class ProofSubmissionActivity extends AppCompatActivity {
                 String myAddress = getMyAddress();
                 Log.d("ProofSubmission", "==== 开始加载用户信息 ====");
                 Log.d("ProofSubmission", "当前地址: " + myAddress);
-                
-                // 检查地址是否有效
+
+                // Check if the address is valid
                 if (myAddress == null || myAddress.equals("0000000000000000000000000000000000000000")) {
                     Log.e("ProofSubmission", "地址无效，跳过加载用户信息");
                     return;
                 }
-                
-                // 构建API请求URL - 使用ServerConfig配置
+
+                // Build API request URL - configured using ServerConfig.
                 String apiUrl = ApiConfig.API_USER_INFO + "/" + myAddress;
                 Log.d("ProofSubmission", "请求URL: " + apiUrl);
                 Log.d("ProofSubmission", "BASE_URL: " + ApiConfig.BASE_URL);
-                
-                // 发送HTTP GET请求
+
+                // Send HTTP GET request
                 java.net.URL url = new java.net.URL(apiUrl);
                 java.net.HttpURLConnection connection = (java.net.HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setConnectTimeout(10000);
                 connection.setReadTimeout(10000);
-                
+
                 Log.d("ProofSubmission", "开始连接...");
                 int responseCode = connection.getResponseCode();
                 Log.d("ProofSubmission", "响应码: " + responseCode);
-                
+
                 if (responseCode == 200) {
-                    // 读取响应
+                    // Read response
                     java.io.BufferedReader reader = new java.io.BufferedReader(
                         new java.io.InputStreamReader(connection.getInputStream()));
                     StringBuilder response = new StringBuilder();
@@ -217,19 +217,19 @@ public class ProofSubmissionActivity extends AppCompatActivity {
                         response.append(line);
                     }
                     reader.close();
-                    
-                    // 解析JSON响应
+
+                    // Parse the JSON response
                     org.json.JSONObject jsonResponse = new org.json.JSONObject(response.toString());
                     Log.d("ProofSubmission", "用户信息响应: " + response.toString());
-                    
+
                     if (jsonResponse.optBoolean("success", false)) {
                         org.json.JSONObject data = jsonResponse.optJSONObject("data");
                         if (data != null) {
                             String displayName = data.optString("displayName", "");
                             String representativeWork = data.optString("representativeWork", "");
                             boolean showRepresentativeWork = data.optBoolean("showRepresentativeWork", false);
-                            
-                            // 在UI线程更新界面
+
+                            // Update the interface in the UI thread
                             runOnUiThread(() -> {
                                 if (!displayName.isEmpty() && !"null".equals(displayName)) {
                                     displayNameEditText.setText(displayName);
@@ -248,8 +248,8 @@ public class ProofSubmissionActivity extends AppCompatActivity {
                     }
                 } else {
                     Log.e("ProofSubmission", "加载用户信息失败，响应码: " + responseCode);
-                    
-                    // 读取错误响应
+
+                    // Read error response
                     try {
                         java.io.BufferedReader errorReader = new java.io.BufferedReader(
                             new java.io.InputStreamReader(connection.getErrorStream()));
@@ -283,16 +283,16 @@ public class ProofSubmissionActivity extends AppCompatActivity {
             Log.d("ProofSubmission", "==== 用户信息加载流程结束 ====");
         }).start();
     }
-    
+
     /**
-     * 获取当前用户地址
+     * Get current user address / 获取当前用户地址
      */
     private String getMyAddress() {
         try {
             String privateKey = StorageUtil.getCurrentPrivatekey(this);
             if (privateKey != null) {
                 String address = SecurityUtil.GetAddress(privateKey);
-                // 确保地址有0x前缀
+                // Make sure the address has a 0x prefix.
                 if (!address.startsWith("0x")) {
                     address = "0x" + address;
                 }
@@ -310,14 +310,14 @@ public class ProofSubmissionActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        
+
         if (requestCode == 1001 && resultCode == RESULT_OK && data != null) {
             selectedFileUri = data.getData();
             if (selectedFileUri != null) {
                 try {
-                    // 获取原始文件名
+                    // Get the original file name
                     selectedFileName = getFileName(selectedFileUri);
-                    // 复制文件到应用内部存储
+                    // Copy files to app internal storage
                     selectedFilePath = copyFileToInternalStorage(selectedFileUri);
                     selectedFileText.setText(selectedFileText.getContext().getString(R.string.proof_submission_file_selected) + " " + selectedFileName);
                     Log.d("ProofSubmission", "选择文件: " + selectedFileName);
@@ -327,7 +327,7 @@ public class ProofSubmissionActivity extends AppCompatActivity {
                 }
             }
         }
-        
+
         IntentResult intentResult = IntentIntegrator.parseActivityResult(
                 requestCode, resultCode, data
         );
@@ -343,43 +343,43 @@ public class ProofSubmissionActivity extends AppCompatActivity {
         InputStream inputStream = getContentResolver().openInputStream(uri);
         File file = new File(getFilesDir(), "proof_" + System.currentTimeMillis() + ".tmp");
         FileOutputStream outputStream = new FileOutputStream(file);
-        
+
         byte[] buffer = new byte[1024];
         int length;
         while ((length = inputStream.read(buffer)) > 0) {
             outputStream.write(buffer, 0, length);
         }
-        
+
         inputStream.close();
         outputStream.close();
-        
+
         return file.getAbsolutePath();
     }
 
     private String getFileName(Uri uri) {
         String result = null;
-        
+
         Log.d("ProofSubmission", "开始获取文件名，URI: " + uri.toString());
         Log.d("ProofSubmission", "URI Scheme: " + uri.getScheme());
-        
-        // 优先使用ContentResolver获取文件名
+
+        // Prioritize using ContentResolver to get the file name.
         if (uri.getScheme() != null && uri.getScheme().equals("content")) {
             android.database.Cursor cursor = null;
             try {
                 String[] projection = {android.provider.OpenableColumns.DISPLAY_NAME};
                 cursor = getContentResolver().query(uri, projection, null, null, null);
-                
+
                 if (cursor != null) {
                     Log.d("ProofSubmission", "Cursor列数: " + cursor.getColumnCount());
                     if (cursor.getColumnCount() > 0) {
                         String[] columnNames = cursor.getColumnNames();
                         Log.d("ProofSubmission", "Cursor列名: " + java.util.Arrays.toString(columnNames));
                     }
-                    
+
                     if (cursor.moveToFirst()) {
                         int nameIndex = cursor.getColumnIndex(android.provider.OpenableColumns.DISPLAY_NAME);
                         Log.d("ProofSubmission", "DISPLAY_NAME列索引: " + nameIndex);
-                        
+
                         if (nameIndex >= 0) {
                             result = cursor.getString(nameIndex);
                             Log.d("ProofSubmission", "从ContentResolver获取文件名: " + result);
@@ -398,13 +398,13 @@ public class ProofSubmissionActivity extends AppCompatActivity {
                 }
             }
         }
-        
-        // 如果仍然为空，尝试从URI路径获取
+
+        // If still empty, try to get from URI path.
         if (result == null || result.isEmpty()) {
             Log.d("ProofSubmission", "尝试从URI路径获取文件名");
             result = uri.getLastPathSegment();
             Log.d("ProofSubmission", "LastPathSegment: " + result);
-            
+
             if (result == null || result.isEmpty()) {
                 result = uri.getPath();
                 Log.d("ProofSubmission", "Path: " + result);
@@ -416,14 +416,14 @@ public class ProofSubmissionActivity extends AppCompatActivity {
                 }
             }
         }
-        
-        // 如果还是为空或者是document:xxx格式，使用默认名称
+
+        // If it is still empty or in document:xxx format, use the default name.
         if (result == null || result.isEmpty() || result.startsWith("document:")) {
             Log.w("ProofSubmission", "无法获取有效文件名，当前值: " + result);
             result = getString(R.string.proof_submission_default_file_prefix) + System.currentTimeMillis() + ".file";
             Log.w("ProofSubmission", "使用默认名称: " + result);
         }
-        
+
         Log.d("ProofSubmission", "最终文件名: " + result);
         return result;
     }
@@ -435,7 +435,7 @@ public class ProofSubmissionActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-    }//异常
+    }// abnormal
 
 
 }

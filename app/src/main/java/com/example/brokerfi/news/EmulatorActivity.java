@@ -37,11 +37,11 @@ public class EmulatorActivity extends AppCompatActivity {
         intEvent();
         webView = findViewById(R.id.webview);
 
-        // 启用 JavaScript（可选，如果网站需要）
+        // Enable JavaScript (optional, if required by the site)
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        // 设置 WebViewClient，确保在 App 内打开页面，而不是调用外部浏览器
+        // Set up WebViewClient to ensure that pages are opened within the app rather than calling an external browser.
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
@@ -65,7 +65,7 @@ public class EmulatorActivity extends AppCompatActivity {
                         "</body>" +
                         "</html>";
 
-                // ✅ 使用 loadDataWithBaseURL
+                // ✅ Use loadDataWithBaseURL
                 view.loadDataWithBaseURL("file:///android_asset/", customErrorHtml, "text/html", "utf-8", null);
                 Toast.makeText(EmulatorActivity.this, R.string.emulator_toast_network_failed, Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent();
@@ -88,12 +88,12 @@ public class EmulatorActivity extends AppCompatActivity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                // 确保页面内跳转也在 WebView 中打开
+                // Make sure intra-page jumps are also opened in WebView.
                 return false;
             }
         });
 
-        // 加载指定网站
+        // Load the specified website
         webView.loadUrl(ApiConfig.EXTERNAL_BLOCK_EMULATOR_URL);
     }
     @Override

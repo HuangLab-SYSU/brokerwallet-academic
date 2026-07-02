@@ -27,10 +27,10 @@ public class ComfirmSecretActivity extends AppCompatActivity {
 
     private void intEvent(){
         btn_confirm.setOnClickListener(view -> {
-            //创建意图对象
+            // Create intent object
             Intent intent = new Intent();
             intent.setClass(ComfirmSecretActivity.this, CongratulationsActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
 

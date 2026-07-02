@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         flag2 = true;
         accountSpinner = findViewById(R.id.accountSpinner);
 
-        //保存Community token
+        // Save Community token
         SharedPrefsUtil.init(this);
 
 
@@ -151,12 +151,12 @@ public class MainActivity extends AppCompatActivity {
                 if (!hiddenAccountsStr.isEmpty()) {
                     hiddenAccounts.addAll(Arrays.asList(hiddenAccountsStr.split(";")));
                 }
-                
+
                 // Get private keys
                 String account = StorageUtil.getPrivateKey(MainActivity.this);
                 if (account != null) {
                     String[] split = account.split(";");
-                    
+
                     // Find position and index
                     int originalIndex = -1;
                     int visibleCount = 0;
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                             visibleCount++;
                         }
                     }
-                    
+
                     if (originalIndex != -1) {
                         // Save position and index
                         MainActivity.this.position = position;
@@ -178,13 +178,13 @@ public class MainActivity extends AppCompatActivity {
 
                         String privatekey = split[originalIndex];
                         final int currentOriginalIndex = originalIndex; // Save Index
-                        
+
                         // IsNewPrivateKey？
                         boolean isOldFormat = !SecurityUtil.isNewPrivateKeyFormat(privatekey);
-                        
+
                         if (isOldFormat) {
-                            // 旧账户直接显示升级提示，不需要获取余额和地址
-                            // 主要是 GetAddrAndBalance 缺少错误处理方法，为了不影响其他功能暂时先这样处理
+                            // The old account will directly display the upgrade prompt without obtaining the balance and address.
+                            // The main reason is that GetAddrAndBalance lacks an error handling method. In order not to affect other functions, we will handle it like this for the time being.
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -197,21 +197,21 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             });
                         } else {
-                            // 新账户正常获取余额和地址
+                            // The new account obtains the balance and address normally.
                             new Thread(()->{
                                 ReturnAccountState returnAccountState = null;
                                 try {
                                     returnAccountState=MyUtil.GetAddrAndBalance(privatekey);
                                     ReturnAccountState finalReturnAccountState = returnAccountState;
-                                    final int reqOriginalIndex = currentOriginalIndex; // 保存到最终变量以在lambda中使用
+                                    final int reqOriginalIndex = currentOriginalIndex; // Save to final variable for use in lambda.
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
                                             // Get the origin index
                                             String currentAccountStr = StorageUtil.getCurrentAccount(MainActivity.this);
                                             int currentOriginal = (currentAccountStr != null) ? Integer.parseInt(currentAccountStr) : 0;
-                                            
-                                            // 只有当返回结果对应当前选择的账户时才更新UI
+
+                                            // Only update the UI when the returned result corresponds to the currently selected account.
                                             if (finalReturnAccountState !=null && reqOriginalIndex == currentOriginal){
                                                 String balance = finalReturnAccountState.getBalance();
                                                 //Log.d("balance:",balance);调试用
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // 没有选择时的处理
+                // What to do when there is no selection.
             }
         });
 //        new Thread(()->{
@@ -311,15 +311,15 @@ public class MainActivity extends AppCompatActivity {
                         String finalTitle = title;
                         runOnUiThread(()->{
                             new AlertDialog.Builder(this)
-                                    .setTitle("")  // 标题
-                                    .setMessage(getString(R.string.main_message_you_have_a_new_message) + " " + finalTitle + " " + getString(R.string.main_message_please_check_it_out))  // 内容
+                                    .setTitle("")  // title
+                                    .setMessage(getString(R.string.main_message_you_have_a_new_message) + " " + finalTitle + " " + getString(R.string.main_message_please_check_it_out))  // content
                                     .setPositiveButton(R.string.main_button_ok, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             StorageUtil.saveNoticeId(MainActivity.this,String.valueOf(finalMaxid));
                                             Intent intent = new Intent();
                                             intent.setClass(MainActivity.this, NotificationActivity.class);
-                                            //跳转
+                                            // Navigate
                                             startActivity(intent);
                                         }
                                     })
@@ -360,30 +360,30 @@ public class MainActivity extends AppCompatActivity {
                 String account = StorageUtil.getPrivateKey(this);
                 if (account != null) {
                     String[] split = account.split(";");
-                    
+
                     // Get HiddenAccount list
                     String hiddenAccountsStr = getHiddenAccounts();
                     Set<String> hiddenAccounts = new HashSet<>();
                     if (!hiddenAccountsStr.isEmpty()) {
                         hiddenAccounts.addAll(Arrays.asList(hiddenAccountsStr.split(";")));
                     }
-                    
+
                     // Render visible account
                     List<String> visibleAccountNames = new ArrayList<>();
                     List<Integer> originalIndices = new ArrayList<>();
-                    
+
                     for (int i = 0; i < split.length; i++) {
                         String address = SecurityUtil.GetAddress(split[i]);
                         if (!hiddenAccounts.contains(address)) {
                             String AccountName = getString(R.string.Account,(i + 1));
                             visibleAccountNames.add(AccountName);
-                            originalIndices.add(i); // 保存可见账户的原始索引
+                            originalIndices.add(i); // Save original index of visible accounts
                         }
                     }
-                    
-                    // 保存可见账户的原始索引映射
+
+                    // Save the original index mapping of visible accounts.
                     final List<Integer> finalOriginalIndices = new ArrayList<>(originalIndices);
-                    
+
                     runOnUiThread(()->{
                         String[] arr = visibleAccountNames.toArray(new String[0]);
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arr){
@@ -406,7 +406,7 @@ public class MainActivity extends AppCompatActivity {
                         };
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         accountSpinner.setAdapter(adapter);
-                        
+
                         // Update the position
                         String currentAccountStr = StorageUtil.getCurrentAccount(MainActivity.this);
                         if (currentAccountStr != null) {
@@ -436,9 +436,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        // 设置适配器
+        // Set up adapter
 
-        // 设置选择监听器
+        // Set selection listener
 
 
 
@@ -501,13 +501,13 @@ public class MainActivity extends AppCompatActivity {
         navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
         TextView tvDisclaimer = findViewById(R.id.tv_disclaimer);
-        
+
         setupClickableDisclaimerText(tvDisclaimer);
 
         accounts.setOnClickListener(view -> {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,SelectAccountActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
         receive.setOnClickListener(view -> {
@@ -516,10 +516,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, R.string.main_toast_receive_old_account, Toast.LENGTH_SHORT).show();
                 return;
             }
-            
+
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,ReceiveActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
 
@@ -528,10 +528,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, R.string.main_toast_faucet_old_account, Toast.LENGTH_SHORT).show();
                 return;
             }
-            
+
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,FaucetActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
 
@@ -540,10 +540,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, R.string.main_toast_send_old_account, Toast.LENGTH_SHORT).show();
                 return;
             }
-            
+
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,SendActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
 
@@ -552,10 +552,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, R.string.main_toast_swap_old_account, Toast.LENGTH_SHORT).show();
                 return;
             }
-            
+
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,SwapActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
 
@@ -564,22 +564,22 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, R.string.main_toast_broker_old_account, Toast.LENGTH_SHORT).show();
                 return;
             }
-            
+
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,BrokerActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
         nft.setOnClickListener(view -> {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,NFTMainActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
         news.setOnClickListener(view -> {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,NewsActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
 
@@ -605,7 +605,7 @@ public class MainActivity extends AppCompatActivity {
         };
         tokenEntry.setOnClickListener(tokenEntryClickListener);
         tokenEntryLabel.setOnClickListener(tokenEntryClickListener);
-        
+
         //findViewById(R.id.convertBtn).setOnClickListener(view -> {
             //Intent intent = new Intent();
             //intent.setClass(MainActivity.this,ConvertActivity.class);
@@ -620,16 +620,16 @@ public class MainActivity extends AppCompatActivity {
         if (acc == null){
             originalIndex=0;
         }else {
-            originalIndex = Integer.parseInt(acc);// 获取原始索引
+            originalIndex = Integer.parseInt(acc);// Get original index
         }
-        
+
         //Is the account hidden?
         String hiddenAccountsStr = getHiddenAccounts();
         Set<String> hiddenAccounts = new HashSet<>();
         if (!hiddenAccountsStr.isEmpty()) {
             hiddenAccounts.addAll(Arrays.asList(hiddenAccountsStr.split(";")));
         }
-        
+
         if (account != null) {
             String[] split = account.split(";");
             if (originalIndex < split.length) {
@@ -638,12 +638,12 @@ public class MainActivity extends AppCompatActivity {
                 if (!hiddenAccounts.contains(address)) {
                     String privatekey = split[originalIndex];
                     final int currentOriginalIndex = originalIndex;
-                    
+
                     // IsOldFormat？
                     boolean isOldFormat = !SecurityUtil.isNewPrivateKeyFormat(privatekey);
-                    
+
                     if (isOldFormat) {
-                        //Just Show the upadate tip to the old account(暂定方案)
+                        // Just Show the updated tip to the old account(tentative plan)
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -660,7 +660,7 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 returnAccountState=MyUtil.GetAddrAndBalance(privatekey);
                                 ReturnAccountState finalReturnAccountState = returnAccountState;
-                                final int reqOriginalIndex = currentOriginalIndex; // 保存到最终变量以在lambda中使用
+                                final int reqOriginalIndex = currentOriginalIndex; // Save to final variable for use in lambda.
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -697,7 +697,7 @@ public class MainActivity extends AppCompatActivity {
         if (!hiddenAccountsStr.isEmpty()) {
             hiddenAccounts.addAll(Arrays.asList(hiddenAccountsStr.split(";")));
         }
-        
+
         if (account != null) {
             String[] split = account.split(";");
             if (originalIndex < split.length) {
@@ -765,17 +765,17 @@ public class MainActivity extends AppCompatActivity {
     private void setupClickableDisclaimerText(TextView textView) {
         String fullText = getString(R.string.activity_main_disclaimer_agreement);
         String clickableText = getString(R.string.activity_main_disclaimer_link);
-        
+
         SpannableString spannableString = new SpannableString(fullText);
         int start = fullText.indexOf(clickableText);
         int end = start + clickableText.length();
-        
+
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
                 showDisclaimerDialog();
             }
-            
+
             @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
@@ -783,9 +783,9 @@ public class MainActivity extends AppCompatActivity {
                 ds.setUnderlineText(true);
             }
         };
-        
+
         spannableString.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        
+
         textView.setText(spannableString);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
@@ -794,7 +794,7 @@ public class MainActivity extends AppCompatActivity {
         if (disclaimerDialog != null && disclaimerDialog.isShowing()) {
             return;
         }
-        
+
         disclaimerDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.main_title)
                 .setMessage(R.string.main_disclaimer_full)
@@ -808,12 +808,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // 检查 NavigationHelper 是否弹出
+        // Check if NavigationHelper pops up
         if (navigationHelper != null && navigationHelper.isPopupVisible()) {
-            // 是则隐藏菜单
+            // Yes, hide the menu
             navigationHelper.hidePopup();
         } else {
-            // 显示退出确认对话框
+            // Show exit confirmation dialog
             new AlertDialog.Builder(this)
                     .setMessage(R.string.Exit_Confirm)
                     .setCancelable(false)

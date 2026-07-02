@@ -11,15 +11,15 @@ public class PostDTO implements Serializable {
     private String avatarUrl;
     private String title;
     private String content;
-    private String firstImageUrl; // 取首张图(以后优化掉
+    private String firstImageUrl; // Take the first picture (optimize it later)
     private List<String> images;
     private int likeCount;
     private int commentCount;
     private boolean isRewarded;
     private boolean isLiked;
-    private BigDecimal rewardAmount; // 打赏总额
+    private BigDecimal rewardAmount; // Total amount of rewards
     private String createTime;
-    private String address;//发帖人的钱包地址
+    private String address;// Poster’s wallet address
 
 
     public String getUserName() {

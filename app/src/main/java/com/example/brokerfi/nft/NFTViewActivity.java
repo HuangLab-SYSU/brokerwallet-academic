@@ -48,7 +48,7 @@ public class NFTViewActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         loadingText = findViewById(R.id.loadingText);
         errorText = findViewById(R.id.errorText);
-        
+
         nftList = new ArrayList<>();
         adapter = new NFTViewAdapter(nftList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -64,18 +64,18 @@ public class NFTViewActivity extends AppCompatActivity {
         errorText.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
 
-        // 模拟加载NFT数据
+        // Simulate loading NFT data
         new Thread(() -> {
             try {
-                Thread.sleep(1000); // 模拟网络延迟
-                
+                Thread.sleep(1000); // Simulate network latency
+
                 runOnUiThread(() -> {
                     loadingText.setVisibility(View.GONE);
-                    // 添加一些模拟数据
+                    // Add some mock data
                     nftList.add(new NFTItem("NFT #1", "描述1", ApiConfig.NFT_PLACEHOLDER_IMAGE_URL + "+1"));
                     nftList.add(new NFTItem("NFT #2", "描述2", ApiConfig.NFT_PLACEHOLDER_IMAGE_URL + "+2"));
                     nftList.add(new NFTItem("NFT #3", "描述3", ApiConfig.NFT_PLACEHOLDER_IMAGE_URL + "+3"));
-                    
+
                     adapter.notifyDataSetChanged();
                     recyclerView.setVisibility(View.VISIBLE);
                 });
@@ -94,12 +94,12 @@ public class NFTViewActivity extends AppCompatActivity {
         private String name;
         private String description;
         private String imageUrl;
-        private String attributes;        // NFT属性（JSON格式）
-        private String mintTime;          // NFT铸造时间
-        private String minter;            // 铸造者地址
-        private String uploadTime;        // 材料上传时间
-        private String ownerAddress;      // 持有者地址
-        private String ownerDisplayName;  // 持有者花名
+        private String attributes;        // NFT properties (JSON format)
+        private String mintTime;          // NFT minting time
+        private String minter;            // Founder's address
+        private String uploadTime;        // Material upload time
+        private String ownerAddress;      // holder address
+        private String ownerDisplayName;  // holder's name
 
         public NFTItem(String name, String description, String imageUrl) {
             this.name = name;

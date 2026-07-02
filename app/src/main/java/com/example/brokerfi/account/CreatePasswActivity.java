@@ -49,7 +49,7 @@ public class CreatePasswActivity extends AppCompatActivity {
 
     private String getAccountNumberFromSharedPreferences() {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        return settings.getString(PREF_ACCOUNT_NUMBER, null); // 如果没有找到，返回null
+        return settings.getString(PREF_ACCOUNT_NUMBER, null); // If not found, return null
     }
 
 
@@ -93,10 +93,10 @@ public class CreatePasswActivity extends AppCompatActivity {
             System.out.println("create address: " + address);
             saveAccountNumberToSharedPreferences(address);
             savePasswd(newPassw);
-            //创建意图对象
+            // Create intent object
             Intent intent = new Intent();
             intent.setClass(CreatePasswActivity.this, CongratulationsActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
 
 
@@ -119,7 +119,7 @@ public class CreatePasswActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed(); // 调用父类的方法以保持默认的返回行为
+        super.onBackPressed(); // Call the parent class's method to maintain the default return behavior.
     }
 
     public static String generateAddress(String input, int length) {

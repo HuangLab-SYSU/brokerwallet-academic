@@ -24,7 +24,7 @@ import com.example.brokerfi.send.SendActivity;
 
 public class NotificationActivity extends AppCompatActivity {
 
-    // 通知功能
+    // Notification function
 
 
 //    private ImageView menu;
@@ -34,7 +34,7 @@ public class NotificationActivity extends AppCompatActivity {
 
 
     private boolean networkErrorShown = false;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +70,7 @@ public class NotificationActivity extends AppCompatActivity {
 
 
                 view.loadDataWithBaseURL("file:///android_asset/", customErrorHtml, "text/html", "utf-8", null);
-                
+
 
                 if (!networkErrorShown) {
                     Toast.makeText(NotificationActivity.this, R.string.emulator_toast_network_failed, Toast.LENGTH_SHORT).show();
@@ -90,7 +90,7 @@ public class NotificationActivity extends AppCompatActivity {
     /// ////////
     @Override
     public void onBackPressed() {
-        // 当显示错误页面时，直接退出活动
+        // When an error page is displayed, exit the activity directly.
         if (networkErrorShown) {
             super.onBackPressed();
         } else if (webView.canGoBack()) {

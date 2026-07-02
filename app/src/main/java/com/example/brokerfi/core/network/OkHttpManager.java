@@ -17,38 +17,38 @@ public class OkHttpManager {
     private static final Handler handler = new Handler(Looper.getMainLooper());
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    // ==================== 统一获取 Token ====================
+    // ==================== Obtain Token uniformly ====================
     private static String getToken() {
-        // 这里返回你本地存储的 Token
-        // 例如：SharedPreferences 读取
+        // Return your locally stored Token here
+        // For example: SharedPreferences read
         return SharedPrefsUtil.getString("wallet_token", "");
     }
 
-    // ==================== 给 Request 统一添加请求头 ====================
+    // ==================== Add request headers to Request uniformly ====================
     private static Request addAuthHeader(Request originalRequest) {
         String token = getToken();
         if (token.isEmpty()) {
-            return originalRequest; // 未登录，不添加
+            return originalRequest; // Not logged in, do not add
         }
 
-        // 标准格式：Bearer + Token
+        // Standard format: Bearer + Token
         return originalRequest.newBuilder()
                 .addHeader("Authorization", "Bearer " + token)
                 .build();
     }
 
-    /* ==================== 对外接口 ==================== */
+    /* ==================== External interface ==================== */
 
     public static void get(String url, ApiCallback<String> callback) {
         Request original = new Request.Builder().url(url).get().build();
-        Request request = addAuthHeader(original); // 自动加头
+        Request request = addAuthHeader(original); // Automatically add header
         execute(request, callback);
     }
 
     public static void post(String url, String json, ApiCallback<String> callback) {
         RequestBody body = RequestBody.create(json, JSON);
         Request original = new Request.Builder().url(url).post(body).build();
-        Request request = addAuthHeader(original); // 自动加头
+        Request request = addAuthHeader(original); // Automatically add header
         execute(request, callback);
     }
 
@@ -58,11 +58,11 @@ public class OkHttpManager {
                 : RequestBody.create(json, JSON);
 
         Request original = new Request.Builder().url(url).delete(body).build();
-        Request request = addAuthHeader(original); // 自动加头
+        Request request = addAuthHeader(original); // Automatically add header
         execute(request, callback);
     }
 
-    /* ==================== 核心执行逻辑 ==================== */
+    /* ==================== core execution logic ==================== */
 
     private static void execute(Request request, ApiCallback<String> callback) {
 
@@ -99,7 +99,7 @@ public class OkHttpManager {
         });
     }
 
-    /* ==================== 主线程分发 ==================== */
+    /* ==================== Main thread distribution ==================== */
 
     private static void postSuccess(ApiCallback<String> callback, String data) {
         handler.post(() -> callback.onSuccess(data));

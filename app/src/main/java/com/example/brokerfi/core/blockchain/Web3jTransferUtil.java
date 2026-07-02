@@ -20,11 +20,11 @@ import java.math.BigInteger;
 public class Web3jTransferUtil {
 
     /**
-     * 基于Web3j的原生BKC转账
-     * @param privateKey 转账人私钥
-     * @param toAddress 接收人地址
-     * @param amountEther 转账单位（BKC
-     * @return 交易哈希
+     * Native BKC transfer based on Web3j / 基于Web3j的原生BKC转账
+     * @param privateKey Transferor’s private key / 转账人私钥
+     * @param toAddress Recipient address / 接收人地址
+     * @param amountEther Transfer unit (BKC) / 转账单位（BKC
+     * @return transaction hash / 交易哈希
      */
     public static String sendTransaction(String privateKey, String toAddress, String amountEther) {
         try {
@@ -32,7 +32,7 @@ public class Web3jTransferUtil {
 
             Credentials credentials = Credentials.create(privateKey);
 
-            // 获取 nonce
+            // Get nonce
             EthGetTransactionCount ethGetTransactionCount = web3j.ethGetTransactionCount(
                     credentials.getAddress(),
                     DefaultBlockParameterName.LATEST
@@ -42,14 +42,14 @@ public class Web3jTransferUtil {
 
             Log.d("Web3jTransferUtil", "Nonce: " + nonce);
 
-            // 转账金额（单位：wei）
+            // Transfer amount (unit: wei)
             BigInteger value = Convert.toWei(amountEther, Convert.Unit.ETHER).toBigInteger();
 
-            // gas 参数（后续优化）
+            // gas parameter (subsequent optimization)
             BigInteger gasPrice = Convert.toWei("20", Convert.Unit.GWEI).toBigInteger();
             BigInteger gasLimit = BigInteger.valueOf(21000);
 
-            // 构造交易
+            // Build the transaction
             RawTransaction rawTransaction = RawTransaction.createEtherTransaction(
                     nonce,
                     gasPrice,
@@ -58,12 +58,12 @@ public class Web3jTransferUtil {
                     value
             );
 
-            // 签名交易
+            // Sign the transaction
             byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
 
             String hexValue = Numeric.toHexString(signedMessage);
 
-            // 发送交易
+            // Send the transaction
             EthSendTransaction ethSendTransaction = web3j.ethSendRawTransaction(hexValue).send();
 
             if (ethSendTransaction.hasError()) {

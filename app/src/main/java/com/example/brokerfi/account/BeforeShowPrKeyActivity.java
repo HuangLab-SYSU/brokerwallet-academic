@@ -49,10 +49,10 @@ public class BeforeShowPrKeyActivity extends AppCompatActivity {
             finish();
         });
         btn_confirm.setOnClickListener(view -> {
-            //创建意图对象
+            // Create intent object
             Intent intent = new Intent();
             intent.setClass(BeforeShowPrKeyActivity.this, ShowPrKryActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
 

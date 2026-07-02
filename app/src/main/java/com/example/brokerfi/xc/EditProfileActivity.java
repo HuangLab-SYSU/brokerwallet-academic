@@ -38,8 +38,8 @@ public class EditProfileActivity extends AppCompatActivity {
     private Button btnSave;
 
     private Long userId;
-    private Uri selectedAvatarUri; // 只存选择的图片Uri，不立即上传
-    private String finalAvatarUrl = null; // 最终要提交的头像URL
+    private Uri selectedAvatarUri; // Only the selected image URI is saved and is not uploaded immediately.
+    private String finalAvatarUrl = null; // The final avatar URL to be submitted
     private static final int REQUEST_AVATAR = 3001;
 
     @Override
@@ -63,7 +63,7 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSave.setOnClickListener(v -> saveProfile());
     }
 
-    // 打开相册选择头像
+    // Open photo album and select avatar
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         galleryLauncher.launch("image/*");
@@ -88,17 +88,17 @@ public class EditProfileActivity extends AppCompatActivity {
         if (requestCode == REQUEST_AVATAR) {
             Uri uri = data.getData();
             if (uri != null) {
-                // 选完图直接跳裁剪
+                // After selecting the image, jump directly to cropping.
                 startImageCrop(uri);
             }
         }
     }
 
-    // 点击 Save
+    // Click Save
     private void saveProfile() {
         String username = etUsername.getText().toString().trim();
 
-        // 校验用户名
+        //Verify username
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(this, R.string.edit_profile_toast_empty_username, Toast.LENGTH_SHORT).show();
             return;
@@ -106,17 +106,17 @@ public class EditProfileActivity extends AppCompatActivity {
 
         btnSave.setEnabled(false);
 
-        // 如果没有选择新头像 → 直接更新
+        // If no new avatar is selected → update directly.
         if (selectedAvatarUri == null) {
             updateUserInfo(username, finalAvatarUrl);
             return;
         }
 
-        // 如果选择了新头像 → 先上传，再更新
+        // If a new avatar is selected → upload first, then update.
         uploadAvatarThenUpdate(username);
     }
 
-    // 上传头像 → 成功后更新用户信息
+    // Upload avatar → Update user information after success.
     private void uploadAvatarThenUpdate(String username) {
         runOnUiThread(() -> Toast.makeText(this, R.string.edit_profile_toast_uploading_avatar, Toast.LENGTH_SHORT).show());
 
@@ -139,7 +139,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     public void onSuccess(List<String> urls) {
                         if (!urls.isEmpty()) {
                             finalAvatarUrl = urls.get(0);
-                            // 上传成功 → 提交用户名 + 头像
+                            // Upload successful → Submit username + avatar.
                             Log.d("COS_DEBUG", "图片上传成功：" + finalAvatarUrl);
                             updateUserInfo(username, finalAvatarUrl);
                         } else {
@@ -167,7 +167,7 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
-    // 最终提交：更新用户名 + 头像到服务器
+    // Final submission: update username + avatar to server.
     private void updateUserInfo(String username, String avatarUrl) {
         new ProfileApi().updateProfile(userId, username, avatarUrl, new ApiCallback<ProfileHeaderDTO>() {
             @Override
@@ -189,13 +189,13 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
-    // 启动裁剪（强制1:1正方形）
+    // Start cropping (force 1:1 square)
     private void startImageCrop(Uri sourceUri) {
         try {
-            // 1. 从Uri获取Bitmap
+            // 1. Get the Bitmap from the Uri.
             Bitmap original = MediaStore.Images.Media.getBitmap(getContentResolver(), sourceUri);
 
-            // 2. 中心裁剪成正方形
+            // 2. Cut the center into a square.
             int width = original.getWidth();
             int height = original.getHeight();
             int size = Math.min(width, height);
@@ -203,21 +203,21 @@ public class EditProfileActivity extends AppCompatActivity {
             int y = (height - size) / 2;
             Bitmap cropped = Bitmap.createBitmap(original, x, y, size, size);
 
-            // 3. 压缩Bitmap为JPEG
+            // 3. Compress the Bitmap as JPEG.
             File tempFile = new File(getCacheDir(), "avatar_" + System.currentTimeMillis() + ".jpg");
             java.io.FileOutputStream out = new java.io.FileOutputStream(tempFile);
-            cropped.compress(Bitmap.CompressFormat.JPEG, 90, out); // 压缩质量90
+            cropped.compress(Bitmap.CompressFormat.JPEG, 90, out); // Compression quality: 90
             out.flush();
             out.close();
 
-            // 4. 更新UI显示
+            // 4. Update the UI display.
             Glide.with(this)
                     .load(tempFile)
                     .into(ivAvatar);
 
             Toast.makeText(this, R.string.edit_profile_toast_avatar_processed, Toast.LENGTH_SHORT).show();
 
-            // 5. 设置为待上传Uri
+            // 5. Set as the Uri to be uploaded.
             selectedAvatarUri = Uri.fromFile(tempFile);
 
         } catch (Exception e) {
@@ -230,7 +230,7 @@ public class EditProfileActivity extends AppCompatActivity {
             new ActivityResultContracts.GetContent(),
             uri -> {
                 if (uri != null) {
-                    startImageCrop(uri); // 直接裁剪
+                    startImageCrop(uri); // Crop directly
                 }
             }
     );

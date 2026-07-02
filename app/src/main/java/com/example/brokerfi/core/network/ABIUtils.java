@@ -18,14 +18,14 @@ public class ABIUtils {
     private static final String GET_MY_NFTS_SELECTOR = "629cb2e4";
     private static final String GET_LISTED_NFTS_SELECTOR = "a3f7f7d8";
     private static final String BUY_SELECTOR = "1d85bf03";
-    
-    // 勋章系统选择器
+
+    // Medal system selector
     private static final String GET_USER_MEDALS_SELECTOR = "5ef4daa5";  // getUserMedals(address)
     private static final String GET_GLOBAL_STATS_SELECTOR = "fa55312b";  // getGlobalStats()
-    
-    // NFT查询选择器
-    private static final String GET_USER_NFTS_SELECTOR = "8f4f4f4f";  // getUserNfts(address) - 需要计算正确的Keccak256哈希
-    private static final String GET_NFT_DATA_SELECTOR = "9f5f5f5f";   // getNftData(uint256) - 需要计算正确的Keccak256哈希
+
+    // NFT query selector
+    private static final String GET_USER_NFTS_SELECTOR = "8f4f4f4f";  // getUserNfts(address) - needs the correct Keccak256 hash
+    private static final String GET_NFT_DATA_SELECTOR = "9f5f5f5f";   // getNftData(uint256) - needs the correct Keccak256 hash
 
 
 
@@ -98,27 +98,27 @@ public class ABIUtils {
     public static String encodeGetListedNFTs() {
         return "0x" + GET_LISTED_NFTS_SELECTOR;
     }
-    
-    // 勋章查询编码方法
+
+    // Medal query encoding method
     public static String encodeGetUserMedals(String address) {
         StringBuilder data = new StringBuilder();
         data.append(GET_USER_MEDALS_SELECTOR);
-        data.append(padLeft(address.substring(2), 64)); // 移除0x前缀并填充到64字符
+        data.append(padLeft(address.substring(2), 64)); // Remove 0x prefix and pad to 64 characters.
         return "0x" + data.toString();
     }
-    
+
     public static String encodeGetGlobalStats() {
         return "0x" + GET_GLOBAL_STATS_SELECTOR;
     }
-    
-    // NFT查询编码方法
+
+    // NFT query encoding method
     public static String encodeGetUserNfts(String address) {
         StringBuilder data = new StringBuilder();
         data.append(GET_USER_NFTS_SELECTOR);
-        data.append(padLeft(address.substring(2), 64)); // 移除0x前缀并填充到64字符
+        data.append(padLeft(address.substring(2), 64)); // Remove 0x prefix and pad to 64 characters.
         return "0x" + data.toString();
     }
-    
+
     public static String encodeGetNftData(BigInteger tokenId) {
         StringBuilder data = new StringBuilder();
         data.append(GET_NFT_DATA_SELECTOR);
@@ -166,7 +166,7 @@ public class ABIUtils {
             byte[] data = Numeric.hexStringToByteArray(cleanHex);
 
 
-            // 1. 解析7个动态数组的偏移量
+            // 1. Parse offsets of 7 dynamic arrays
             int[] arrayOffsets = new int[7];
             for (int i = 0; i < 7; i++) {
                 arrayOffsets[i] = Numeric.toBigInt(data, i * 32, 32).intValue();
@@ -320,15 +320,15 @@ public class ABIUtils {
         }
         return array;
     }
-    
-    // 勋章查询结果类
+
+    // Medal query result class
     public static class MedalQueryResult {
         public int goldMedals;
         public int silverMedals;
         public int bronzeMedals;
         public int totalScore;
     }
-    
+
     public static class GlobalStatsResult {
         public int totalUsers;
         public int totalGoldMedals;
@@ -336,23 +336,23 @@ public class ABIUtils {
         public int totalBronzeMedals;
         public int totalMedals;
     }
-    
-    // NFT查询结果类
+
+    // NFT query result class
     public static class UserNftsResult {
         public BigInteger[] tokenIds;
         public String[] names;
         public String[] descriptions;
         public String[] imageUrls;
     }
-    
+
     public static class NftDataResult {
         public String name;
         public String description;
         public String imageUrl;
         public String owner;
     }
-    
-    // 勋章查询解码方法
+
+    // Medal query decoding method
     public static MedalQueryResult decodeGetUserMedals(String hexResponse) {
         MedalQueryResult result = new MedalQueryResult();
         try {
@@ -361,7 +361,7 @@ public class ABIUtils {
                 return result;
             }
             byte[] data = Numeric.hexStringToByteArray(cleanHex);
-            
+
             result.goldMedals = Numeric.toBigInt(data, 0, 32).intValue();
             result.silverMedals = Numeric.toBigInt(data, 32, 32).intValue();
             result.bronzeMedals = Numeric.toBigInt(data, 64, 32).intValue();
@@ -371,7 +371,7 @@ public class ABIUtils {
         }
         return result;
     }
-    
+
     public static GlobalStatsResult decodeGetGlobalStats(String hexResponse) {
         GlobalStatsResult result = new GlobalStatsResult();
         try {
@@ -380,7 +380,7 @@ public class ABIUtils {
                 return result;
             }
             byte[] data = Numeric.hexStringToByteArray(cleanHex);
-            
+
             result.totalUsers = Numeric.toBigInt(data, 0, 32).intValue();
             result.totalGoldMedals = Numeric.toBigInt(data, 32, 32).intValue();
             result.totalSilverMedals = Numeric.toBigInt(data, 64, 32).intValue();
@@ -391,8 +391,8 @@ public class ABIUtils {
         }
         return result;
     }
-    
-    // NFT查询解码方法
+
+    // NFT query decoding method
     public static UserNftsResult decodeGetUserNfts(String hexResponse) {
         UserNftsResult result = new UserNftsResult();
         try {
@@ -401,13 +401,13 @@ public class ABIUtils {
                 return result;
             }
             byte[] data = Numeric.hexStringToByteArray(cleanHex);
-            
-            // 解析动态数组偏移量
+
+            // Parsing dynamic array offsets
             int[] arrayOffsets = new int[4];
             for (int i = 0; i < 4; i++) {
                 arrayOffsets[i] = Numeric.toBigInt(data, i * 32, 32).intValue();
             }
-            
+
             result.tokenIds = decodeUint256Array(data, arrayOffsets[0]);
             result.names = decodeStringArray(data, arrayOffsets[1]);
             result.descriptions = decodeStringArray(data, arrayOffsets[2]);
@@ -417,7 +417,7 @@ public class ABIUtils {
         }
         return result;
     }
-    
+
     public static NftDataResult decodeGetNftData(String hexResponse) {
         NftDataResult result = new NftDataResult();
         try {
@@ -426,13 +426,13 @@ public class ABIUtils {
                 return result;
             }
             byte[] data = Numeric.hexStringToByteArray(cleanHex);
-            
-            // 解析动态字符串偏移量
+
+            // Parsing dynamic string offsets
             int[] stringOffsets = new int[4];
             for (int i = 0; i < 4; i++) {
                 stringOffsets[i] = Numeric.toBigInt(data, i * 32, 32).intValue();
             }
-            
+
             result.name = decodeStringStrict(data, stringOffsets[0]);
             result.description = decodeStringStrict(data, stringOffsets[1]);
             result.imageUrl = decodeStringStrict(data, stringOffsets[2]);

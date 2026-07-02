@@ -1,12 +1,12 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 黑色实心圆背景 -->
+    <!-- Black solid circle background -->
     <item android:width="39dp" android:height="39dp">
         <shape android:shape="oval">
             <solid android:color="#000000" />
         </shape>
     </item>
 
-    <!-- DAO团队图标 -->
+    <!-- DAO team icon -->
     <item
         android:drawable="@drawable/dao_team"
         android:gravity="center"

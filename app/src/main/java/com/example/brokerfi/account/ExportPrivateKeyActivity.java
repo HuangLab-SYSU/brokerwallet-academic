@@ -46,7 +46,7 @@ public class ExportPrivateKeyActivity extends AppCompatActivity {
         btnVerify = findViewById(R.id.btn_verify);
         btnCancel = findViewById(R.id.btn_cancel);
         tvWalletAddress = findViewById(R.id.tv_wallet_address);
-        
+
         // Save path
         displayCurrentWalletAddress();
     }
@@ -76,8 +76,8 @@ public class ExportPrivateKeyActivity extends AppCompatActivity {
     }
 
     private void displayCurrentWalletAddress() {
-        // Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) 方法在 Android 10 版本后已经不再使用，应该改成其他方法，后续再改
-        // 后续改为使用 getExternalFilesDir或getExternalCacheDir 方法
+        // Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) is deprecated after Android 10; switch to getExternalFilesDir or getExternalCacheDir later.
+
         String storagePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/BrokerWallet";
         //tvWalletAddress.setText("私钥将导出保存到: " + storagePath + "/private_keys_时间戳.txt");
         tvWalletAddress.setTextSize(20);
@@ -113,7 +113,7 @@ public class ExportPrivateKeyActivity extends AppCompatActivity {
             for (int i = 0; i < privateKeys.length; i++) {
                 String privateKey = privateKeys[i];
                 String address = SecurityUtil.GetAddress(privateKey);
-                
+
                 fos.write("Account ".getBytes());
                 fos.write(String.valueOf(i + 1).getBytes());
                 fos.write("\n".getBytes());

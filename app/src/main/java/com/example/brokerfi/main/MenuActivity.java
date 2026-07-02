@@ -68,21 +68,21 @@ public class MenuActivity extends AppCompatActivity {
         receivelist.setOnClickListener(view -> {
             Intent intent = new Intent();
             intent.setClass(MenuActivity.this,ReceiveActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
 
         activitylist.setOnClickListener(view -> {
             Intent intent = new Intent();
            intent.setClass(MenuActivity.this,AtvActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
 
         setlist.setOnClickListener(view -> {
             Intent intent = new Intent();
             intent.setClass(MenuActivity.this,SelectAccountActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
 

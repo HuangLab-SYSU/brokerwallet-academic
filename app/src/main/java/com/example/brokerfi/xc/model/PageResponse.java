@@ -6,9 +6,9 @@ public class PageResponse<T> {
 
     private List<T> content;
 
-    private int number;     // 当前页
-    private int size;       // 每页大小
-    private int totalPages; // 总页数
+    private int number;     // Current page
+    private int size;       // page size
+    private int totalPages; // Total pages
     private long totalElements;
 
     public List<T> getContent() {

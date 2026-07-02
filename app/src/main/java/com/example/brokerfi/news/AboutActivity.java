@@ -44,34 +44,34 @@ public class AboutActivity extends AppCompatActivity {
         TextView textVersion = findViewById(R.id.text_version);
         Button btnCheckUpdate = findViewById(R.id.btn_check_update);
 
-        // 显示版本号
+        // Show version number
         String versionName = getAppVersionName();
         VersionName = versionName;
         textVersion.setText(getString(R.string.Version,versionName));
 
-        // 检查更新按钮点击事件
+        // Check update button click event
         btnCheckUpdate.setOnClickListener(v -> {
             Toast.makeText(this, R.string.about_toast_checking_for_updates, Toast.LENGTH_SHORT).show();
-            
+
             new Thread(() -> {
                 try {
-                    // 从服务器获取最新版本号
+                    // Get the latest version number from the server.
                     byte[] bytes = HTTPUtil.doPost2(ApiConfig.API_ABOUT_APP_VERSION, null);
                     String response = new String(bytes);
                     JSONObject j = new JSONObject(response);
                     String latestVersion = j.getString("data");
-                    
+
                     if (latestVersion.equals(VersionName)) {
                         runOnUiThread(() -> Toast.makeText(this, R.string.about_toast_latest_version, Toast.LENGTH_SHORT).show());
                         return;
                     }
-                    
+
                     runOnUiThread(() -> Toast.makeText(this, getString(R.string.about_toast_update_available_version) + " " + latestVersion + getString(R.string.about_toast_downloading), Toast.LENGTH_SHORT).show());
-                    
-                    // 构建下载URL并下载APK
+
+                    // Build the download URL and download the APK.
                     String downloadUrl = ApiConfig.getGithubReleaseApkUrl(latestVersion);
                     File apkFile = downloadApk(downloadUrl);
-                    
+
                     if (apkFile != null) {
                         runOnUiThread(() -> {
                             Toast.makeText(this, R.string.about_toast_download_completed, Toast.LENGTH_SHORT).show();
@@ -88,36 +88,36 @@ public class AboutActivity extends AppCompatActivity {
             }).start();
         });
     }
-    
-    // 下载APK文件
+
+    // Download APK file
     private File downloadApk(String urlStr) throws Exception {
         URL url = new URL(urlStr);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setConnectTimeout(10000);
         conn.setReadTimeout(30000);
-        
+
         if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
             return null;
         }
-        
+
         File apkFile = new File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "BrokerChain-Wallet.apk");
         InputStream is = conn.getInputStream();
         FileOutputStream fos = new FileOutputStream(apkFile);
-        
+
         byte[] buffer = new byte[4096];
         int len;
         while ((len = is.read(buffer)) != -1) {
             fos.write(buffer, 0, len);
         }
-        
+
         fos.close();
         is.close();
         conn.disconnect();
-        
+
         return apkFile;
     }
-    
-    // 检查安装权限
+
+    // Check installation permissions
     private void checkInstallPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             boolean hasPermission = getPackageManager().canRequestPackageInstalls();
@@ -133,8 +133,8 @@ public class AboutActivity extends AppCompatActivity {
             installApk(mApkFile);
         }
     }
-    
-    // 安装APK文件
+
+    // Install APK file
     private void installApk(File apkFile) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         Uri apkUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", apkFile);
@@ -142,7 +142,7 @@ public class AboutActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(intent);
     }
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -164,10 +164,10 @@ public class AboutActivity extends AppCompatActivity {
     // FOR Developer：Please update the latest appVersion in the database before each new release！
     //********************************************************************************************
     private String getAppVersionName() {
-        // TEST MODE: Return old version to trigger update (已禁用)
+        // TEST MODE: Return old version to trigger update (disabled)
         // return "1.0.0";
 
-        // Production code (生产版本 - 已启用):
+        // Production code (production version - enabled):
         try {
             return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (Exception e) {
@@ -176,13 +176,13 @@ public class AboutActivity extends AppCompatActivity {
         }
     }
 
-    // 打开应用在 Play 商店的页面（For update the app）
+    // Open the app's Play Store page (For update the app)
     private void openAppInPlayStore() {
         try {
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("market://details?id=" + getPackageName())));
         } catch (android.content.ActivityNotFoundException e) {
-            // Play 商店未安装，跳转网页
+            // The Play Store is not installed and redirects to the web page.
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse(ApiConfig.getGooglePlayAppUrl(getPackageName()))));
         }

@@ -207,7 +207,7 @@ public class SelectNetworkActivity extends AppCompatActivity {
                     if (currentLayout == dev_network) {
                         currentLayout = null;
                     } else {
-                        // 切换当前布局的背景
+                        // Switch the background of the current layout
                         dev_network.setBackgroundColor(grayColor);
                         currentLayout = dev_network;
 

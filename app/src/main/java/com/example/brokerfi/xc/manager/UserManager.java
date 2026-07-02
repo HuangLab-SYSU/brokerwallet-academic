@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.example.brokerfi.core.storage.UserStorageUtil;
 
-//社区用户缓存
+// Community user cache
 public class UserManager {
 
     private static UserManager instance;

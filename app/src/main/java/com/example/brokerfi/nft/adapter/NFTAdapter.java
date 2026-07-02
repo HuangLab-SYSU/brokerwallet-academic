@@ -28,15 +28,15 @@ public class NFTAdapter extends RecyclerView.Adapter<NFTAdapter.ViewHolder> {
     private int lastSelectedPosition = -1;
     private final boolean fromBuyNFTsActivity;
     private void showEnlargedImageDialog(Context context, Bitmap bitmap) {
-        // 创建自定义 Dialog
+        // Create a custom Dialog
         Dialog dialog = new Dialog(context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         dialog.setContentView(R.layout.dialog_enlarged_image);
 
-        // 设置放大的图片
+        // Set enlarged picture
         ImageView enlargedImage = dialog.findViewById(R.id.enlarged_image);
         enlargedImage.setImageBitmap(bitmap);
 
-        // 点击图片或返回键关闭 Dialog
+        // Click the picture or return key to close Dialog.
         enlargedImage.setOnClickListener(v -> dialog.dismiss());
 
         dialog.show();
@@ -90,7 +90,7 @@ public class NFTAdapter extends RecyclerView.Adapter<NFTAdapter.ViewHolder> {
             String account = item.getAccountNumber() != null ? item.getAccountNumber() : "";
             int length = account.length();
 
-            String compactDisplay = (length >= 6) 
+            String compactDisplay = (length >= 6)
                 ? account.substring(0, 3) + "…" + account.substring(length - 3)
                 : account;
 
@@ -100,14 +100,14 @@ public class NFTAdapter extends RecyclerView.Adapter<NFTAdapter.ViewHolder> {
             holder.tvSaleStatus.setTextColor(item.isListed() ? 0xFF4CAF50 : 0xFFF44336);
         }
         holder.ivImage.setOnClickListener(v -> {
-            // 获取当前 NFT 项的图片数据
+            // Get the image data of the current NFT item.
             NFT item1 = nftData.get(holder.getAdapterPosition());
             if (item1.getImageBase64() != null && !item1.getImageBase64().isEmpty()) {
                 try {
                     byte[] imageBytes = Base64.decode(item1.getImageBase64(), Base64.NO_WRAP);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
 
-                    // 弹出放大图片的 Dialog
+                    // Pop up a Dialog to enlarge the picture.
                     showEnlargedImageDialog(v.getContext(), bitmap);
                 } catch (IllegalArgumentException e) {
                     Log.e("BASE64_ERROR", "Base64格式错误: " + e.getMessage());
@@ -125,7 +125,7 @@ public class NFTAdapter extends RecyclerView.Adapter<NFTAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(v -> {
             int prevSelected = lastSelectedPosition;
             int currentPosition = holder.getAdapterPosition();
-            
+
             if (currentPosition == RecyclerView.NO_POSITION) return;
 
             if (lastSelectedPosition == currentPosition) {

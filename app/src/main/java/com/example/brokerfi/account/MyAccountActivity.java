@@ -53,10 +53,10 @@ public class MyAccountActivity extends AppCompatActivity {
         navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
         show_key.setOnClickListener(view -> {
-            //创建意图对象
+            // Create intent object
             Intent intent = new Intent();
             intent.setClass(MyAccountActivity.this, BeforeShowPrKeyActivity.class);
-            //跳转
+            // Navigate
             startActivity(intent);
         });
     }

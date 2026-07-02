@@ -140,10 +140,10 @@ public class StakeMoreActivity extends AppCompatActivity {
                     Toast.makeText(StakeMoreActivity.this, s.get(), Toast.LENGTH_LONG).show();
                     Handler h = new Handler();
                     h.postDelayed(()->{
-                        //创建意图对象
+                        // Create intent object
                         Intent intent = new Intent();
                         intent.setClass(StakeMoreActivity.this, AfterBrokerActivity.class);
-                        //跳转
+                        // Navigate
                         startActivity(intent);
                     },3000);
                 }else {

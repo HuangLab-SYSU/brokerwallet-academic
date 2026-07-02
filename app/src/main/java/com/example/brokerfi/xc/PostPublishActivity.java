@@ -74,7 +74,7 @@ public class PostPublishActivity extends AppCompatActivity {
     private final List<String> cosImageUrls = new ArrayList<>();
     private CosXmlService cosXmlService;
 
-    // 临时密钥
+    // Temporary key
     private String tmpSecretId;
     private String tmpSecretKey;
     private String sessionToken;
@@ -95,7 +95,7 @@ public class PostPublishActivity extends AppCompatActivity {
     }
 
     /**
-     * 从后端获取临时密钥
+     * Get temporary key from backend / 从后端获取临时密钥
      */
     private void getTempCredentialFromServer() {
 
@@ -113,7 +113,7 @@ public class PostPublishActivity extends AppCompatActivity {
                 Log.d("COS_DEBUG", "sessionToken: " + sessionToken);
                 Log.d("COS_DEBUG", "expiredTime: " + expiredTime);
 
-                //初始化 COS
+                // Initialize COS
                 cosXmlService = CosServiceFactory.create(PostPublishActivity.this, tmpSecretId, tmpSecretKey, sessionToken, expiredTime);
                 cosUploadManager = new CosUploadManager(PostPublishActivity.this, cosXmlService);
 
@@ -150,7 +150,7 @@ public class PostPublishActivity extends AppCompatActivity {
     }
 
     private void initListener() {
-        // 字数统计
+        // word count
         etContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -163,14 +163,14 @@ public class PostPublishActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         });
-        // 添加图片
+        // add picture
         findViewById(R.id.btn_add_image).setOnClickListener(v -> openImagePicker());
-        // 发布
+        // release
         btnSubmit.setOnClickListener(v -> submitPost());
     }
 
     /**
-     * 打开相册
+     * Open photo album / 打开相册
      */
     private void openImagePicker() {
         if (imageList.size() >= 9) {
@@ -183,7 +183,7 @@ public class PostPublishActivity extends AppCompatActivity {
     }
 
     /**
-     * 接收图片选择结果
+     * Receive image selection results
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -198,13 +198,13 @@ public class PostPublishActivity extends AppCompatActivity {
     }
 
     /**
-     * 刷新图片网格
+     * Refresh image grid / 刷新图片网格
      */
     private void refreshImageGrid() {
         gridImages.removeAllViews();
         int size = getResources().getDisplayMetrics().widthPixels / 3 - 24;
 
-        // 已选图片
+        // Selected image
         for (int i = 0; i < imageList.size(); i++) {
             String path = imageList.get(i);
             FrameLayout container = new FrameLayout(this);
@@ -222,7 +222,7 @@ public class PostPublishActivity extends AppCompatActivity {
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setImageURI(Uri.parse(path));
 
-            // 删除按钮
+            // delete button
             ImageView deleteBtn = new ImageView(this);
             FrameLayout.LayoutParams delParams = new FrameLayout.LayoutParams(60, 60);
             delParams.gravity = Gravity.END | Gravity.TOP;
@@ -240,7 +240,7 @@ public class PostPublishActivity extends AppCompatActivity {
             gridImages.addView(container);
         }
 
-        // 添加按钮
+        // Add button
         if (imageList.size() < 9) {
             ImageView addBtn = new ImageView(this);
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
@@ -281,13 +281,13 @@ public class PostPublishActivity extends AppCompatActivity {
         btnSubmit.setEnabled(false);
         cosImageUrls.clear();
 
-        // 无图片，直接发布
+        // No pictures, post directly
         if (imageList.isEmpty()) {
             publishToServer(title, content);
             return;
         }
 
-        // 有图片,上传COS
+        // If you have pictures, upload COS
         Toast.makeText(this, R.string.post_publish_toast_uploading_images, Toast.LENGTH_SHORT).show();
         List<Uri> uriList = new ArrayList<>();
         for (String uriStr : imageList) {
@@ -320,7 +320,7 @@ public class PostPublishActivity extends AppCompatActivity {
 
 
     /**
-     * 发布帖子
+     * post / 发布帖子
      */
     private void publishToServer(String title, String content) {
         PostDTO postDTO = new PostDTO();

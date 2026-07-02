@@ -59,7 +59,7 @@ public class MyUtil {
             try {
                 int decimalNumber = Integer.parseInt(gas1);
 
-                // 将整数转换为十六进制字符串
+                // Convert integer to hexadecimal string
                 String hexString = Integer.toHexString(decimalNumber);
                 String gas = "0x"+hexString;
                 String uuid = UUID.randomUUID().toString();
@@ -281,7 +281,7 @@ public class MyUtil {
             String uuid = UUID.randomUUID().toString();
             String data = uuid;
             String[] sign = SecurityUtil.signECDSA(privateKey, data);
-            req.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey)); // 注意：这里的 global.PublicKey 需要根据你的实际情况进行替换
+            req.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey)); // Note: global.PublicKey here needs to be replaced according to your actual situation.
             req.setRandomStr(uuid);
             req.setSign1(sign[0]);
             req.setSign2(sign[1]);
@@ -317,14 +317,14 @@ public class MyUtil {
     public static ReturnAccountState GetAddrAndBalance(String privateKey) {
         try {
             String uuid = UUID.randomUUID().toString();
-            //UUID 是一个随机产生的 ID，字符串类型;
-            // data 为 uuid+地址;此地址为通过私钥获取地址;
+            // UUID is a randomly generated ID, string type;
+            // Data is uuid+address; this address is obtained through the private key;
             String data = uuid + SecurityUtil.GetAddress(privateKey);
             //String data = uuid;
             String[] sign = SecurityUtil.signECDSA(privateKey, data);
-            //设置这个 query-g 的 req 参数的属性：公钥+RandomStr+Sign1+Sign2+UUID
+            // Set the properties of the req parameter of this query-g: public key+RandomStr+Sign1+Sign2+UUID.
             QueryReq queryReq = new QueryReq();
-            queryReq.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey)); // 注意：这里的 global.PublicKey 需要根据你的实际情况进行替换
+            queryReq.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey)); // Note: global.PublicKey here needs to be replaced according to your actual situation.
             queryReq.setRandomStr(uuid);
             queryReq.setSign1(sign[0]);
             queryReq.setSign2(sign[1]);
@@ -365,7 +365,7 @@ public class MyUtil {
             String data = uuid ;
             String[] sign = SecurityUtil.signECDSA(privateKey, data);
             RewardReq rewardReq = new RewardReq();
-            rewardReq.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey)); // 注意：这里的 global.PublicKey 需要根据你的实际情况进行替换
+            rewardReq.setPublicKey(SecurityUtil.getPublicKeyFromPrivateKey(privateKey)); // Note: global.PublicKey here needs to be replaced according to your actual situation.
             rewardReq.setRandomStr(uuid);
             rewardReq.setSign1(sign[0]);
             rewardReq.setSign2(sign[1]);

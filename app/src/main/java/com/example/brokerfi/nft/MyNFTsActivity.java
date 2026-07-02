@@ -82,7 +82,7 @@ public class MyNFTsActivity extends AppCompatActivity{
         adapter = new NFTAdapter(NFTData,false);
         recyclerView.setAdapter(adapter);
     }
-    
+
     private void intEvent(){
         navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
@@ -301,14 +301,14 @@ public class MyNFTsActivity extends AppCompatActivity{
                     Toast.makeText(MyNFTsActivity.this,
                             MyNFTsActivity.this.getString(R.string.my_nfts_toast_list_failed_prefix) + " " + response.getString("error"),
                             Toast.LENGTH_LONG).show();
-                    // 刷新NFT数据
+                    // Refresh NFT data
                     fetchMyNFTs();
                 } else {
                     String txHash = response.getString("result");
                     checkTransactionStatus(txHash);
                 }
             } else {
-                // 处理非JSON响应（如404）
+                // Handle non-JSON responses (such as 404)
                 runOnUiThread(() -> Toast.makeText(MyNFTsActivity.this,
                         MyNFTsActivity.this.getString(R.string.buy_nfts_toast_7) + " " + result,
                         Toast.LENGTH_LONG).show());
@@ -346,12 +346,12 @@ public class MyNFTsActivity extends AppCompatActivity{
                 } else {
                     runOnUiThread(() ->  {
                         Toast.makeText(MyNFTsActivity.this, R.string.my_nfts_toast_list_failed, Toast.LENGTH_SHORT).show();
-                        // 刷新NFT数据
+                        // Refresh NFT data
                         fetchMyNFTs();
                     });
                 }
             } else {
-                // 交易尚未上链，继续轮询
+                // The transaction has not yet been uploaded to the chain, continue polling.
                 String finalTxHash = txHash;
                 new Handler().postDelayed(() -> checkTransactionStatus(finalTxHash), 2000);
             }
@@ -363,7 +363,7 @@ public class MyNFTsActivity extends AppCompatActivity{
     }
 
 
-    // 下架NFT的后端接口调用
+    // Backend interface call for delisting NFT
     private void unlistNFT(String data) {
         try {
             String result = MyUtil.sendethtx(data, StorageUtil.getCurrentPrivatekey(this));

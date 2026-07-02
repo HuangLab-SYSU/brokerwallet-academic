@@ -84,13 +84,13 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             PostDTO post = (PostDTO) dataList.get(position);
             PostViewHolder vh = (PostViewHolder) holder;
 
-            // 基础绑定
+            // basic binding
             vh.tvTitle.setText(post.getTitle());
             vh.tvContent.setText(post.getContent());
             vh.tvUsername.setText(post.getUserName());
             vh.btnComment.setText(context.getString(R.string.post_adapter_comment_count, post.getCommentCount()));
             vh.btnLike.setText(context.getString(R.string.post_adapter_like_count, post.getLikeCount()));
-            // 格式化时间
+            // Format time
             try {
                 vh.tvTime.setText(
                         new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault()).format(
@@ -105,7 +105,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 Glide.with(context)
                         .load(post.getAvatarUrl())
                         .apply(RequestOptions.bitmapTransform(new RoundedCorners(7)))
-                        .placeholder(R.drawable.placeholder_image) // 占位图
+                        .placeholder(R.drawable.placeholder_image) // placeholder image
                         .into(vh.ivAvatar);
             } else {
                 vh.ivAvatar.setImageResource(R.drawable.placeholder_image);
@@ -118,37 +118,37 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.tvRewardTotal.setText(vh.tvRewardTotal.getContext().getString(R.string.post_detail_adapter_total_reward_bkc) + " " + rewardStr);
 
             if (post.getUserId().equals(currentUserId)) {
-                // 自己发的帖子：隐藏打赏按钮
+                // Posts made by yourself: Hide the reward button.
                 vh.btnReward.setVisibility(View.GONE);
             } else {
-                // 别人的帖子：正常显示
+                // Other people’s posts: displayed normally
                 vh.btnReward.setVisibility(View.VISIBLE);
             }
 
-            // 点赞
+            // Like
             vh.btnLike.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.onLikeClick(post, position);
                 }
             });
 
-            // 打赏
+            // reward
             vh.btnReward.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.onRewardClick(post, position);
                 }
             });
 
-            //图片展示
+            // Picture display
             List<String> imageList = post.getImages();
             if (imageList != null && !imageList.isEmpty()) {
                 vh.rvImages.setVisibility(View.VISIBLE);
 
-                // 九宫格 3列
+                // Nine-square grid 3 columns
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
                 vh.rvImages.setLayoutManager(gridLayoutManager);
-                vh.rvImages.setNestedScrollingEnabled(false);  // 关闭嵌套滚动
-                vh.rvImages.setHasFixedSize(false);            // 允许高度自适应
+                vh.rvImages.setNestedScrollingEnabled(false);  // Turn off nested scrolling
+                vh.rvImages.setHasFixedSize(false);            // Allows for a high degree of adaptability
                 ImageAdapter imageAdapter = new ImageAdapter(context, imageList);
                 vh.rvImages.setAdapter(imageAdapter);
 
@@ -161,7 +161,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             CommentViewHolder vh = (CommentViewHolder) holder;
 
-            // 格式化时间
+            // Format time
             try {
                 vh.tvTime.setText(
                         new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault()).format(
@@ -175,7 +175,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             vh.tvUsername.setText(comment.getUserName());
             vh.tvContent.setText(comment.getContent());
 
-            // 头像
+            // avatar
             if (comment.getAvatarUrl() != null && !comment.getAvatarUrl().isEmpty()) {
                 Glide.with(context)
                         .load(comment.getAvatarUrl())
