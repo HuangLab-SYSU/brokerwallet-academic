@@ -96,13 +96,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Transaction Hash Row (hidden until the tx is sent) -->
+    <LinearLayout
+        android:id="@+id/hash_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:layout_constraintTop_toBottomOf="@id/tv_total"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tv_hash"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hash:"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="#FFFFFF"
+            android:singleLine="true"
+            android:ellipsize="middle" />
+
+        <Button
+            android:id="@+id/btn_copy_hash"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Copy"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/green_round_button"
+            android:layout_marginStart="@dimen/spacing_small" />
+    </LinearLayout>
+
     <!-- Button Container -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_medium"
-        app:layout_constraintTop_toBottomOf="@id/tv_total"
+        app:layout_constraintTop_toBottomOf="@id/hash_row"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">

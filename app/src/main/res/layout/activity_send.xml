@@ -128,24 +128,115 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/activity_send_fee"
+                android:text="Gas Price"
                 android:textColor="#000000"
                 android:textSize="@dimen/text_size_normal" />
 
-            <!-- Fee Input -->
-            <EditText
-                android:id="@+id/edt_amount2"
+            <!-- Gas Price Value Row -->
+            <LinearLayout
+                android:id="@+id/fee_value_row"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edittext_height"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/custom_edittext_border"
-                android:hint="0.00"
-                android:inputType="numberDecimal"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="8dp"
-                android:textSize="@dimen/text_size_normal" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <EditText
+                    android:id="@+id/edt_fee_value"
+                    android:layout_width="96dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:background="@drawable/custom_edittext_border"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="50"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Gwei"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/text_size_normal" />
+            </LinearLayout>
+
+            <!-- Gas Price Slider -->
+            <SeekBar
+                android:id="@+id/seekbar_fee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:max="200"
+                android:progress="50"
+                android:progressDrawable="@drawable/seekbar_progress_black"
+                android:thumb="@drawable/seekbar_thumb_black" />
+
+            <!-- Slider Labels (clickable presets, positioned at actual Gwei values) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp">
+
+                <!-- spacer: 0 -> Slow (20/200) -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="20" />
+
+                <TextView
+                    android:id="@+id/label_slow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Slow"
+                    android:textColor="#888888"
+                    android:textSize="20sp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <!-- spacer: Slow(20) -> Medium(50) = 30/200 -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="30" />
+
+                <TextView
+                    android:id="@+id/label_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Medium"
+                    android:textColor="#888888"
+                    android:textSize="20sp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <!-- spacer: Medium(50) -> Fast(100) = 50/200 -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="50" />
+
+                <TextView
+                    android:id="@+id/label_fast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fast"
+                    android:textColor="#888888"
+                    android:textSize="20sp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <!-- spacer: Fast(100) -> end(200) = 100/200 -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="100" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
