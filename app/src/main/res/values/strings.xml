@@ -824,7 +824,7 @@
     <string name="item_submission_history_no_medal">⚪ No Medal</string>
     <string name="item_submission_history_not_started">🖼️ Not Started</string>
     <string name="item_submission_history_bkc_reward">💰 BKC Reward: 10.5 BKC</string>
-    <string name="item_submission_history_1_3_uploaded">1/3 Uploaded</string>
+    <string name="item_submission_history_1_3_uploaded">⅓ Uploaded</string>
 
     <!-- Layout text: app/src/main/res/layout/nft_holder.xml / 布局前端文本 -->
     <string name="nft_holder_mynftname">MyNFTName</string>
