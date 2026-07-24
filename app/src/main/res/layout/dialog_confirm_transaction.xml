@@ -63,7 +63,7 @@
         android:id="@+id/tv_fee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dialog_confirm_transaction_gas_fee"
+        android:text="@string/dialog_confirm_transaction_gas_price"
         android:textSize="@dimen/text_size_normal"
         android:textColor="#FFFFFF"
         android:layout_marginTop="@dimen/spacing_small"

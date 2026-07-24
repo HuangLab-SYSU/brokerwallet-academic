@@ -749,7 +749,7 @@
     <string name="dialog_confirm_transaction_dialog_from">From:</string>
     <string name="dialog_confirm_transaction_dialog_to">To:</string>
     <string name="dialog_confirm_transaction_amount">Amount:</string>
-    <string name="dialog_confirm_transaction_gas_fee">Gas Fee:</string>
+    <string name="dialog_confirm_transaction_gas_price">Gas Price:</string>
     <string name="dialog_confirm_transaction_dialog_total">Total:</string>
 
     <string name="dialog_confirm_transaction_send">Send</string>
@@ -897,6 +897,7 @@
     <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/AfterBrokerActivity.java / Java运行时前端文本 -->
     <string name="after_broker_bkc">BKC</string>
     <string name="after_broker_shard">SHARD</string>
+    <string name="send_activity_gwei">Gwei</string>
 
     <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/AtvActivity.java / Java运行时前端文本 -->
     <string name="atv_toast_no_transaction_records_found">No transaction records found</string>

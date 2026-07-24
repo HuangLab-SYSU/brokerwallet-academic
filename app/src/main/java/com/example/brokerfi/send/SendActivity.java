@@ -1,4 +1,4 @@
-package com.example.brokerfi.xc;
+package com.example.brokerfi.send;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -232,15 +232,8 @@ public class SendActivity extends AppCompatActivity {
         tvFrom.setText(tvFrom.getContext().getString(R.string.dialog_confirm_transaction_dialog_from) + " " + fromAddress);
         tvTo.setText(tvTo.getContext().getString(R.string.dialog_confirm_transaction_dialog_to) + " " + toAddress);
         tvAmount.setText(tvAmount.getContext().getString(R.string.dialog_confirm_transaction_amount) + " " + amount + " " + tvAmount.getContext().getString(R.string.after_broker_bkc));
-        tvFee.setText(tvFee.getContext().getString(R.string.dialog_confirm_transaction_gas_fee) + " " + fee + " " + tvFee.getContext().getString(R.string.after_broker_bkc));
+        tvFee.setText(tvFee.getContext().getString(R.string.dialog_confirm_transaction_gas_price) + " " + fee + " " + tvFee.getContext().getString(R.string.send_activity_gwei));
         tvTotal.setText(tvTotal.getContext().getString(R.string.dialog_confirm_transaction_dialog_total) + " " + totalAmount + " " + tvTotal.getContext().getString(R.string.after_broker_bkc));
-        
-
-        tvFrom.setText("From: " + fromAddress);
-        tvTo.setText("To: " + toAddress);
-        tvAmount.setText("Amount: " + amount + " BKC");
-        tvFee.setText("Gas Fee: " + fee + " BKC");
-        tvTotal.setText("Total: " + totalAmount + " BKC");
 
         // Hash row references (hidden until the tx is broadcast)
         hashRow = dialogView.findViewById(R.id.hash_row);
