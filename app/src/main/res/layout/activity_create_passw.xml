@@ -7,7 +7,7 @@
     android:fillViewport="true"
     android:background="@color/white"
     android:fitsSystemWindows="true"
-    tools:context=".xc.CreatePasswActivity">
+    tools:context=".account.CreatePasswActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

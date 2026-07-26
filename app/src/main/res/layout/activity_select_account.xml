@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:fitsSystemWindows="true"
-    tools:context=".xc.SelectAccountActivity">
+    tools:context=".account.SelectAccountActivity">
 
     <!-- Top Bar -->
     <include
