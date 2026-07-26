@@ -71,6 +71,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Gas Limit -->
+    <TextView
+        android:id="@+id/tv_gas_limit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gas Limit:"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:layout_constraintTop_toBottomOf="@id/tv_fee"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <!-- Divider Line -->
     <View
         android:id="@+id/divider"
@@ -78,7 +91,7 @@
         android:layout_height="@dimen/divider_height"
         android:background="#E0E0E0"
         android:layout_marginTop="@dimen/spacing_small"
-        app:layout_constraintTop_toBottomOf="@id/tv_fee"
+        app:layout_constraintTop_toBottomOf="@id/tv_gas_limit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

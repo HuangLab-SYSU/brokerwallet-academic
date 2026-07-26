@@ -8,7 +8,10 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +49,16 @@ public class SendActivity extends AppCompatActivity {
     // Gas price presets: Slow(20), Medium(50), Fast(100) in Gwei
     private static final int[] FEE_PRESETS = {20, 50, 100};
     private String currentFee = "50"; // default to Medium
+
+    // Gas limit fields
+    private EditText edtGasLimit;
+    private Button btnGasAdvanced;
+    private LinearLayout gasLimitStepper;
+    private Button btnGasPlus;
+    private Button btnGasMinus;
+    private TextView tvGasWarning;
+    private String currentGasLimit = "21000";
+    private boolean gasLimitAdvanced = false;
 
 
     @Override
@@ -101,6 +114,9 @@ public class SendActivity extends AppCompatActivity {
 
         // Setup gas price slider
         setupFeeSlider();
+
+        // Setup gas limit section
+        setupGasLimit();
 
         button=findViewById(R.id.btn_send);
     }
@@ -171,6 +187,88 @@ public class SendActivity extends AppCompatActivity {
         updatingFee = false;
     }
 
+    private void setupGasLimit() {
+        edtGasLimit = findViewById(R.id.edt_gas_limit);
+        btnGasAdvanced = findViewById(R.id.btn_gas_advanced);
+        gasLimitStepper = findViewById(R.id.gas_limit_stepper);
+        btnGasPlus = findViewById(R.id.btn_gas_plus);
+        btnGasMinus = findViewById(R.id.btn_gas_minus);
+        tvGasWarning = findViewById(R.id.tv_gas_warning);
+
+        edtGasLimit.setText(currentGasLimit);
+
+        // Advanced button: toggle editability and stepper visibility
+        btnGasAdvanced.setOnClickListener(v -> {
+            gasLimitAdvanced = !gasLimitAdvanced;
+            if (gasLimitAdvanced) {
+                edtGasLimit.setEnabled(true);
+                edtGasLimit.setFocusable(true);
+                edtGasLimit.setFocusableInTouchMode(true);
+                gasLimitStepper.setVisibility(View.VISIBLE);
+                btnGasAdvanced.setText("Simple");
+                validateGasLimit(currentGasLimit);
+            } else {
+                edtGasLimit.setEnabled(false);
+                edtGasLimit.setFocusable(false);
+                edtGasLimit.setFocusableInTouchMode(false);
+                gasLimitStepper.setVisibility(View.GONE);
+                btnGasAdvanced.setText("Advanced");
+                tvGasWarning.setVisibility(View.GONE);
+                edtGasLimit.setTextColor(Color.parseColor("#999999"));
+                currentGasLimit = "21000";
+                edtGasLimit.setText(currentGasLimit);
+            }
+        });
+
+        // EditText change listener: validate and update currentGasLimit
+        edtGasLimit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                String val = s.toString().trim();
+                if (val.isEmpty()) return;
+                currentGasLimit = val;
+                if (gasLimitAdvanced) {
+                    validateGasLimit(val);
+                }
+            }
+        });
+
+        // +/- stepper buttons
+        btnGasPlus.setOnClickListener(v -> adjustGasLimit(1));
+        btnGasMinus.setOnClickListener(v -> adjustGasLimit(-1));
+    }
+
+    private void adjustGasLimit(int delta) {
+        try {
+            long val = Long.parseLong(currentGasLimit);
+            val += delta;
+            if (val < 0) val = 0;
+            currentGasLimit = String.valueOf(val);
+            edtGasLimit.setText(currentGasLimit);
+            validateGasLimit(currentGasLimit);
+        } catch (NumberFormatException ignored) {}
+    }
+
+    private void validateGasLimit(String val) {
+        try {
+            long limit = Long.parseLong(val);
+            if (limit < 21000) {
+                edtGasLimit.setTextColor(Color.RED);
+                tvGasWarning.setVisibility(View.VISIBLE);
+            } else {
+                edtGasLimit.setTextColor(Color.BLACK);
+                tvGasWarning.setVisibility(View.GONE);
+            }
+        } catch (NumberFormatException e) {
+            edtGasLimit.setTextColor(Color.RED);
+            tvGasWarning.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void intEvent(){
         navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
 
@@ -186,6 +284,7 @@ public class SendActivity extends AppCompatActivity {
                 String toAddress = edt_sendto.getText().toString();
                 String amount = edt_amount.getText().toString();
                 String fee = currentFee;
+                String gasLimit = currentGasLimit;
                 
                 // IsInput？
                 if (toAddress.isEmpty() || amount.isEmpty() || fee.isEmpty()) {
@@ -194,7 +293,7 @@ public class SendActivity extends AppCompatActivity {
                 }
                 
                 // Toast Confirm
-                showConfirmDialog(fromAddress, toAddress, amount, fee);
+                showConfirmDialog(fromAddress, toAddress, amount, fee, gasLimit);
             }
         });
 
@@ -209,7 +308,7 @@ public class SendActivity extends AppCompatActivity {
     private TextView tvHash;
     private Button btnCopyHash;
 
-    private void showConfirmDialog(String fromAddress, String toAddress, String amount, String fee) {
+    private void showConfirmDialog(String fromAddress, String toAddress, String amount, String fee, String gasLimit) {
         //SUM
         double amountValue = Double.parseDouble(amount);
         double feeValue = Double.parseDouble(fee);
@@ -227,12 +326,14 @@ public class SendActivity extends AppCompatActivity {
         TextView tvTo = dialogView.findViewById(R.id.tv_to);
         TextView tvAmount = dialogView.findViewById(R.id.tv_amount);
         TextView tvFee = dialogView.findViewById(R.id.tv_fee);
+        TextView tvGasLimit = dialogView.findViewById(R.id.tv_gas_limit);
         TextView tvTotal = dialogView.findViewById(R.id.tv_total);
         
         tvFrom.setText(tvFrom.getContext().getString(R.string.dialog_confirm_transaction_dialog_from) + " " + fromAddress);
         tvTo.setText(tvTo.getContext().getString(R.string.dialog_confirm_transaction_dialog_to) + " " + toAddress);
         tvAmount.setText(tvAmount.getContext().getString(R.string.dialog_confirm_transaction_amount) + " " + amount + " " + tvAmount.getContext().getString(R.string.after_broker_bkc));
         tvFee.setText(tvFee.getContext().getString(R.string.dialog_confirm_transaction_gas_price) + " " + fee + " " + tvFee.getContext().getString(R.string.send_activity_gwei));
+        tvGasLimit.setText("Gas Limit: " + gasLimit);
         tvTotal.setText(tvTotal.getContext().getString(R.string.dialog_confirm_transaction_dialog_total) + " " + totalAmount + " " + tvTotal.getContext().getString(R.string.after_broker_bkc));
 
         // Hash row references (hidden until the tx is broadcast)
@@ -295,6 +396,7 @@ public class SendActivity extends AppCompatActivity {
 
         String amount = edt_amount.getText().toString();
         String fee = currentFee;
+        String gasLimit = currentGasLimit;
 
         String account = StorageUtil.getPrivateKey(this);
         String acc = StorageUtil.getCurrentAccount(this);
@@ -312,7 +414,7 @@ public class SendActivity extends AppCompatActivity {
                     Toast.makeText(SendActivity.this,R.string.send_toast_submit_success,Toast.LENGTH_LONG).show();
                 });
                 try {
-                    String s = MyUtil.SendTX(privatekey,formattedSendTo,amount,fee);
+                    String s = MyUtil.SendTX(privatekey,formattedSendTo,amount,fee,gasLimit);
                     if(s!=null && s.startsWith("success:")){
                         // Extract the tx hash returned by eth_sendRawTransaction.
                         final String hash = s.substring("success:".length());

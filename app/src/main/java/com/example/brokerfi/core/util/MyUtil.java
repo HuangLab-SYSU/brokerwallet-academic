@@ -395,7 +395,7 @@ public class MyUtil {
         return ;
     }
 
-    public static String SendTX(String privateKey, String to, String value, String fee) {
+    public static String SendTX(String privateKey, String to, String value, String fee, String gasLimitStr) {
         // Old transaction sending method
         // String uuid = UUID.randomUUID().toString();
         // String data = "";
@@ -447,7 +447,15 @@ public class MyUtil {
             // Fee: interpret as gas price in gwei; default 20 gwei when not provided
             String gweiStr = (fee == null || fee.isEmpty()) ? "20" : fee;
             BigInteger gasPrice = Convert.toWei(gweiStr, Convert.Unit.GWEI).toBigInteger();
-            BigInteger gasLimit = BigInteger.valueOf(21_000);
+
+            // Gas Limit: default 21000, use provided value if given
+            long gasLimitVal = 21000;
+            if (gasLimitStr != null && !gasLimitStr.isEmpty()) {
+                try {
+                    gasLimitVal = Long.parseLong(gasLimitStr);
+                } catch (NumberFormatException ignored) {}
+            }
+            BigInteger gasLimit = BigInteger.valueOf(gasLimitVal);
 
             RawTransaction rawTransaction = RawTransaction.createEtherTransaction(
                     nonce, gasPrice, gasLimit, toAddress, amountWei);
