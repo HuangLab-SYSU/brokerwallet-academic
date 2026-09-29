@@ -197,7 +197,14 @@ public class SecurityUtil {
             BigInteger privateKey = privateKeyParams.getD();
 
             // Returns the hexadecimal string representation of the private key.
-            return privateKey.toString(16);
+            // syh_work_01: fill the missing leading zeros
+            // return privateKey.toString(16);
+            String hex_privateKey = privateKey.toString(16);
+            int width = 64;
+            while (hex_privateKey.length() < width) {
+                hex_privateKey = "0" + hex_privateKey;
+            }
+            return hex_privateKey;
 
         } catch (Exception e) {
             e.printStackTrace();
