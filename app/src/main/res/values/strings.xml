@@ -194,6 +194,17 @@
     <string name="activity_account_detail_copy_address">Copy Address</string>
     <string name="activity_account_detail_show_key">Show Private Key</string>
 
+    <!-- syh_work_01 new: text for name changing -->
+    <string name="activity_account_detail_rename">Rename</string>
+    <string name="activity_account_detail_rename_title">Rename Account</string>
+    <string name="activity_account_detail_rename_hint">Enter account name</string>
+    <string name="activity_account_detail_rename_save">Save</string>
+    <string name="activity_account_detail_rename_reset">Reset to default</string>
+    <string name="activity_account_detail_rename_empty">Name cannot be empty</string>
+    <string name="activity_account_detail_rename_too_long">Name too long (max 24 chars)</string>
+    <string name="activity_account_detail_rename_saved">Account renamed</string>
+    <string name="activity_account_detail_rename_reset_done">Name reset to default</string>
+
     <!-- Layout text: app/src/main/res/layout/activity_add_account.xml / 布局前端文本 -->
     <string name="activity_add_account_import_existing">Import existing account</string>
     <string name="activity_add_account_private_key_tip">Fill the private key in the dialog box below to import an existing account.</string>

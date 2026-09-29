@@ -375,7 +375,10 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0; i < split.length; i++) {
                         String address = SecurityUtil.GetAddress(split[i]);
                         if (!hiddenAccounts.contains(address)) {
-                            String AccountName = getString(R.string.Account,(i + 1));
+                            // syh_work_01 replace: nickname first, default name as fallback
+                            // String AccountName = getString(R.string.Account,(i + 1));
+                            String nick = StorageUtil.getAccountNickname(this, address);
+                            String AccountName = (nick != null) ? nick : getString(R.string.Account, (i + 1));
                             visibleAccountNames.add(AccountName);
                             originalIndices.add(i); // Save original index of visible accounts
                         }

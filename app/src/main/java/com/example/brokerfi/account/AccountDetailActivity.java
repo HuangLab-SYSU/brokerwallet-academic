@@ -2,6 +2,8 @@ package com.example.brokerfi.account;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+// syh_work_01 new: pop-up for changing nickname
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -11,12 +13,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+// syh_work_01 new: textbox for changing nickname
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.brokerfi.R;
+// syh_work_01 new: read & write nicknames
+import com.example.brokerfi.core.storage.StorageUtil;
 import com.example.brokerfi.main.menu.NavigationHelper;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -35,6 +41,8 @@ public class AccountDetailActivity extends AppCompatActivity {
     private TextView addressTextView;
     private Button copyAddressBtn;
     private Button showPrivateKeyBtn;
+    // syh_work_01 new: button for changing nickname
+    private Button renameAccountBtn;
     private NavigationHelper navigationHelper;
     private int qrcode_height;
     boolean hasExecuted = false;
@@ -64,6 +72,8 @@ public class AccountDetailActivity extends AppCompatActivity {
         addressTextView = findViewById(R.id.addressTextView);
         copyAddressBtn = findViewById(R.id.copyAddressBtn);
         showPrivateKeyBtn = findViewById(R.id.showPrivateKeyBtn);
+        // syh_work_01 new
+        renameAccountBtn = findViewById(R.id.renameAccountBtn);
         // Get wallet logo view
         findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +89,10 @@ public class AccountDetailActivity extends AppCompatActivity {
 
     private void intEvent() {
         navigationHelper = new NavigationHelper(menu, action_bar, this, notificationBtn);
-        accountNameTextView.setText(accountName);
+        // syh_work_01 replace: nickname first, default name as fallback
+        // accountNameTextView.setText(accountName);
+        String nickname = StorageUtil.getAccountNickname(this, accountAddress);
+        accountNameTextView.setText(nickname != null ? nickname : accountName);
         addressTextView.setText(accountAddress);
 
         ViewTreeObserver vto = qrCodeImageView.getViewTreeObserver();
@@ -107,6 +120,43 @@ public class AccountDetailActivity extends AppCompatActivity {
             intent.putExtra("accountIndex", accountIndex);
             startActivity(intent);
         });
+
+        // syh_work_01 new: button
+        renameAccountBtn.setOnClickListener(view -> showRenameDialog());
+    }
+
+    // syh_work_01 new: name changing method
+    private void showRenameDialog() {
+        final EditText input = new EditText(this);
+        input.setHint(R.string.activity_account_detail_rename_hint);
+        String current = StorageUtil.getAccountNickname(this, accountAddress);
+        input.setText(current != null ? current : accountName);
+        input.setSelection(input.getText().length());
+
+        new AlertDialog.Builder(this)
+            .setTitle(R.string.activity_account_detail_rename_title)
+            .setView(input)
+            .setPositiveButton(R.string.activity_account_detail_rename_save, (dialog, which) -> {
+                String nickname = input.getText().toString().trim();        // read
+                if (nickname.isEmpty()) {                                   // judge：null ?
+                    Toast.makeText(this, R.string.activity_account_detail_rename_empty, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (nickname.length() > 24) {                               // judge：length limited
+                    Toast.makeText(this, R.string.activity_account_detail_rename_too_long, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                StorageUtil.saveAccountNickname(this, accountAddress, nickname);  // write
+                accountNameTextView.setText(nickname);
+                Toast.makeText(this, R.string.activity_account_detail_rename_saved, Toast.LENGTH_SHORT).show();
+            })
+            .setNeutralButton(R.string.activity_account_detail_rename_reset, (dialog, which) -> {
+                StorageUtil.removeAccountNickname(this, accountAddress);     // erase
+                accountNameTextView.setText(accountName);                    // fallback to default name
+                Toast.makeText(this, R.string.activity_account_detail_rename_reset_done, Toast.LENGTH_SHORT).show();
+            })
+            .setNegativeButton(android.R.string.cancel, null)
+            .show();
     }
 
     private void generateQRCode() {

@@ -92,6 +92,19 @@
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />
 
+            <!-- syh_work_01 新增：修改名称按钮 -->
+            <android.widget.Button
+                android:id="@+id/renameAccountBtn"
+                android:layout_width="326dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:background="@drawable/custom_button_background_black"
+                android:text="@string/activity_account_detail_rename"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

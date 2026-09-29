@@ -10,6 +10,8 @@ public class StorageUtil {
     private static final String PREF_ACCOUNT = "accountkey";
     private static final String Curacc = "curacc";
     private static final String PREFS_NAME2 = "MyPrefsFile2";
+    // syh_work_01 new：new SharedPreferences file for storaging nicknames
+    private static final String NICK_PREFS = "account_nicknames";
     private static final String NoticeIdName = "NoticeIdName";
     private static final String NoticeId = "NoticeId";
 
@@ -63,5 +65,23 @@ public class StorageUtil {
             return privatekey;
         }
         return null;
+    }
+
+    // syh_work_01 new: storage the nickname of the account(key = lowercase of address)
+    public static void saveAccountNickname(AppCompatActivity activity, String address, String nickname) {
+        SharedPreferences settings = activity.getSharedPreferences(NICK_PREFS, Context.MODE_PRIVATE);
+        settings.edit().putString(address.toLowerCase(), nickname).apply();
+    }
+
+    // syh_work_01 new：fetch the nickname of the account
+    public static String getAccountNickname(AppCompatActivity activity, String address) {
+        SharedPreferences settings = activity.getSharedPreferences(NICK_PREFS, Context.MODE_PRIVATE);
+        return settings.getString(address.toLowerCase(), null);
+    }
+
+    // syh_work_01 new：remove the nicknames of the account
+    public static void removeAccountNickname(AppCompatActivity activity, String address) {
+        SharedPreferences settings = activity.getSharedPreferences(NICK_PREFS, Context.MODE_PRIVATE);
+        settings.edit().remove(address.toLowerCase()).apply();
     }
 }
