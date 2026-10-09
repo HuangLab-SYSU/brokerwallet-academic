@@ -204,6 +204,8 @@
     <string name="activity_account_detail_rename_too_long">Name too long (max 24 chars)</string>
     <string name="activity_account_detail_rename_saved">Account renamed</string>
     <string name="activity_account_detail_rename_reset_done">Name reset to default</string>
+    <string name="activity_account_detail_rename_is_default">Name cannot be the same as the default name</string>
+    <string name="activity_account_detail_rename_duplicate">This name is already used by another account</string>
 
     <!-- syh_work_02 new: text for avatar change -->
     <string name="activity_account_detail_avatar_desc">Account Avatar</string>
