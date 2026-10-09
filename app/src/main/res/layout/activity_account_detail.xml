@@ -20,6 +20,16 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- syh_work_02 new: account avatar -->
+            <ImageView
+                android:id="@+id/avatarImageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/activity_account_detail_avatar_desc" />
+
             <TextView
                 android:id="@+id/accountName"
                 android:layout_width="match_parent"
@@ -101,6 +111,19 @@
                 android:layout_gravity="center"
                 android:background="@drawable/custom_button_background_black"
                 android:text="@string/activity_account_detail_rename"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <!-- syh_work_02 new: change avatar button -->
+            <android.widget.Button
+                android:id="@+id/changeAvatarBtn"
+                android:layout_width="326dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:background="@drawable/custom_button_background"
+                android:text="@string/activity_account_detail_avatar_change"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp" />

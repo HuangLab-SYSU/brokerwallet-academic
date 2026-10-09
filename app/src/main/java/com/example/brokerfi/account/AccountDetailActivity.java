@@ -31,6 +31,14 @@ import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.example.brokerfi.main.MainActivity;
 
+// syh_work_02 new: avatar upload & display
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.util.TypedValue;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import com.example.brokerfi.core.util.AvatarUtil;
+
 
 public class AccountDetailActivity extends AppCompatActivity {
     private ImageView menu;
@@ -43,6 +51,9 @@ public class AccountDetailActivity extends AppCompatActivity {
     private Button showPrivateKeyBtn;
     // syh_work_01 new: button for changing nickname
     private Button renameAccountBtn;
+    // syh_work_02 new: avatar view & change-avatar button
+    private ImageView avatarImageView;
+    private Button changeAvatarBtn;
     private NavigationHelper navigationHelper;
     private int qrcode_height;
     boolean hasExecuted = false;
@@ -74,6 +85,9 @@ public class AccountDetailActivity extends AppCompatActivity {
         showPrivateKeyBtn = findViewById(R.id.showPrivateKeyBtn);
         // syh_work_01 new
         renameAccountBtn = findViewById(R.id.renameAccountBtn);
+        // syh_work_02 new
+        avatarImageView = findViewById(R.id.avatarImageView);
+        changeAvatarBtn = findViewById(R.id.changeAvatarBtn);
         // Get wallet logo view
         findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +107,10 @@ public class AccountDetailActivity extends AppCompatActivity {
         // accountNameTextView.setText(accountName);
         String nickname = StorageUtil.getAccountNickname(this, accountAddress);
         accountNameTextView.setText(nickname != null ? nickname : accountName);
+        // syh_work_02 new: show avatar (custom file first, else generated identicon)
+        int avatarSize = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+        avatarImageView.setImageBitmap(AvatarUtil.loadAvatar(this, accountAddress, avatarSize));
         addressTextView.setText(accountAddress);
 
         ViewTreeObserver vto = qrCodeImageView.getViewTreeObserver();
@@ -123,6 +141,9 @@ public class AccountDetailActivity extends AppCompatActivity {
 
         // syh_work_01 new: button
         renameAccountBtn.setOnClickListener(view -> showRenameDialog());
+
+        // syh_work_02 new: change avatar button
+        changeAvatarBtn.setOnClickListener(view -> showAvatarDialog());
     }
 
     // syh_work_01 new: name changing method
@@ -157,6 +178,60 @@ public class AccountDetailActivity extends AppCompatActivity {
             })
             .setNegativeButton(android.R.string.cancel, null)
             .show();
+    }
+
+    // syh_work_02 new: avatar change dialog (choose from gallery / reset to default)
+    private void showAvatarDialog() {
+        new AlertDialog.Builder(this)
+            .setTitle(R.string.activity_account_detail_avatar_title)
+            .setItems(new CharSequence[]{
+                getString(R.string.activity_account_detail_avatar_choose),
+                getString(R.string.activity_account_detail_avatar_reset)
+            }, (dialog, which) -> {
+                if (which == 0) {
+                    galleryLauncher.launch("image/*");
+                } else {
+                    AvatarUtil.removeAvatar(this, accountAddress);
+                    refreshAvatar();
+                    Toast.makeText(this, R.string.activity_account_detail_avatar_reset_done, Toast.LENGTH_SHORT).show();
+                }
+            })
+            .setNegativeButton(android.R.string.cancel, null)
+            .show();
+    }
+
+    private void refreshAvatar() {
+        int avatarSize = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+        avatarImageView.setImageBitmap(AvatarUtil.loadAvatar(this, accountAddress, avatarSize));
+    }
+
+    private final ActivityResultLauncher<String> galleryLauncher = registerForActivityResult(
+        new ActivityResultContracts.GetContent(),
+        uri -> {
+            if (uri != null) {
+                startImageCrop(uri);
+            }
+        }
+    );
+
+    private void startImageCrop(Uri sourceUri) {
+        try {
+            Bitmap original = MediaStore.Images.Media.getBitmap(getContentResolver(), sourceUri);
+            int w = original.getWidth();
+            int h = original.getHeight();
+            int size = Math.min(w, h);
+            int x = (w - size) / 2;
+            int y = (h - size) / 2;
+            Bitmap cropped = Bitmap.createBitmap(original, x, y, size, size);
+            Bitmap scaled = Bitmap.createScaledBitmap(cropped, 512, 512, true);
+            AvatarUtil.saveAvatar(this, accountAddress, scaled);
+            refreshAvatar();
+            Toast.makeText(this, R.string.activity_account_detail_avatar_saved, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, R.string.activity_account_detail_avatar_failed, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void generateQRCode() {

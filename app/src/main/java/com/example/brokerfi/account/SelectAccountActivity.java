@@ -42,6 +42,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import com.example.brokerfi.core.security.SecurityUtil;
 import com.example.brokerfi.core.storage.StorageUtil;
+import com.example.brokerfi.core.util.AvatarUtil;
 import com.example.brokerfi.core.util.FormatUtil;
 import com.example.brokerfi.core.util.MyUtil;
 import com.example.brokerfi.main.MainActivity;
@@ -427,14 +428,16 @@ public class SelectAccountActivity extends AppCompatActivity {
         });
 
         ImageView imageView = new ImageView(SelectAccountActivity.this);
-        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-        );
+        int avatarSizePx = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 39, getResources().getDisplayMetrics());
+        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(avatarSizePx, avatarSizePx);
         layoutParams2.addRule(RelativeLayout.CENTER_VERTICAL);
         imageView.setId(R.id.sendicon);
         imageView.setLayoutParams(layoutParams2);
-        imageView.setImageResource(R.drawable.user_icon);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        // syh_work_02 replace: show account avatar (custom file first, else generated identicon)
+        // imageView.setImageResource(R.drawable.user_icon);
+        imageView.setImageBitmap(AvatarUtil.loadAvatar(this, accountState.getAccountAddr(), avatarSizePx));
         relativeLayout.addView(imageView);
 
         LinearLayout leftInfoLayout = new LinearLayout(SelectAccountActivity.this);

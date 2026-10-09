@@ -205,6 +205,16 @@
     <string name="activity_account_detail_rename_saved">Account renamed</string>
     <string name="activity_account_detail_rename_reset_done">Name reset to default</string>
 
+    <!-- syh_work_02 new: text for avatar change -->
+    <string name="activity_account_detail_avatar_desc">Account Avatar</string>
+    <string name="activity_account_detail_avatar_change">Change Avatar</string>
+    <string name="activity_account_detail_avatar_title">Change Avatar</string>
+    <string name="activity_account_detail_avatar_choose">Choose from gallery</string>
+    <string name="activity_account_detail_avatar_reset">Reset to default</string>
+    <string name="activity_account_detail_avatar_reset_done">Avatar reset to default</string>
+    <string name="activity_account_detail_avatar_saved">Avatar updated</string>
+    <string name="activity_account_detail_avatar_failed">Failed to load image</string>
+
     <!-- Layout text: app/src/main/res/layout/activity_add_account.xml / 布局前端文本 -->
     <string name="activity_add_account_import_existing">Import existing account</string>
     <string name="activity_add_account_private_key_tip">Fill the private key in the dialog box below to import an existing account.</string>
