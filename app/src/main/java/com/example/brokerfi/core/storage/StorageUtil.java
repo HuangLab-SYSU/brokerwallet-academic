@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+// syh_work_01 patch new
+import java.util.Map;
+
 public class StorageUtil {
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String PREF_ACCOUNT = "accountkey";
@@ -83,5 +86,18 @@ public class StorageUtil {
     public static void removeAccountNickname(AppCompatActivity activity, String address) {
         SharedPreferences settings = activity.getSharedPreferences(NICK_PREFS, Context.MODE_PRIVATE);
         settings.edit().remove(address.toLowerCase()).apply();
+    }
+
+    // syh_work_01 patch new：check whether a nickname is already taken by another account
+    public static boolean isNicknameTaken(AppCompatActivity activity, String address, String nickname)
+    {
+        SharedPreferences settings = activity.getSharedPreferences(NICK_PREFS, Context.MODE_PRIVATE);
+        String ownKey = (address == null) ? "" : address.toLowerCase();
+        for (Map.Entry<String, ?> entry : settings.getAll().entrySet()) {
+            if (!entry.getKey().equals(ownKey) && nickname.equals(entry.getValue())) {
+               return true;
+           }
+        }
+        return false;
     }
 }
