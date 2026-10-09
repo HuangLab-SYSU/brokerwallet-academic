@@ -18,7 +18,6 @@ public class AvatarUtil {
 
     private static final String AVATAR_DIR = "account_avatars";
 
-    // 取头像统一入口：有自定义头像文件→读文件；否则→实时生成默认 identicon（统一转圆形）
     public static Bitmap loadAvatar(Context context, String address, int sizePx) {
         Bitmap bmp = null;
         if (address != null) {
@@ -36,7 +35,6 @@ public class AvatarUtil {
         return toCircle(bmp);
     }
 
-    // 将方形 bitmap 裁成圆形（透明四角）
     private static Bitmap toCircle(Bitmap src) {
         int size = Math.min(src.getWidth(), src.getHeight());
         Bitmap out = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
@@ -47,8 +45,6 @@ public class AvatarUtil {
         canvas.drawBitmap(src, 0, 0, paint);
         return out;
     }
-
-    // 保存用户上传的头像（已裁剪/压缩）
     public static void saveAvatar(Context context, String address, Bitmap bitmap) {
         File f = getAvatarFile(context, address);
         try (FileOutputStream out = new FileOutputStream(f)) {
@@ -59,7 +55,6 @@ public class AvatarUtil {
         }
     }
 
-    // 删除自定义头像 → 回退到默认 identicon
     public static void removeAvatar(Context context, String address) {
         File f = getAvatarFile(context, address);
         if (f.exists()) {
@@ -79,7 +74,6 @@ public class AvatarUtil {
         return new File(dir, address.toLowerCase() + ".jpg");
     }
 
-    // 确定性 identicon：5×5 水平对称网格，颜色由 seed 哈希决定（同一地址永远同一头像）
     public static Bitmap generateIdenticon(String seed, int sizePx) {
         byte[] hash = sha256(seed == null ? "" : seed);
 
@@ -93,7 +87,7 @@ public class AvatarUtil {
         boolean[][] grid = new boolean[rows][cols];
         int idx = 4;
         for (int r = 0; r < rows; r++) {
-            for (int c = 0; c < 3; c++) {          // 只驱动左 3 列，右侧镜像
+            for (int c = 0; c < 3; c++) {
                 int b = hash[idx % hash.length] & 0xFF;
                 idx++;
                 boolean on = (b & 0x01) != 0;
