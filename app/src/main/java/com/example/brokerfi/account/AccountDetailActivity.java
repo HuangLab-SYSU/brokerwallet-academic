@@ -167,6 +167,14 @@ public class AccountDetailActivity extends AppCompatActivity {
                     Toast.makeText(this, R.string.activity_account_detail_rename_too_long, Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (nickname.equals(accountName)) {                         // judge：cannot be the default name
+                    Toast.makeText(this, R.string.activity_account_detail_rename_is_default, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (StorageUtil.isNicknameTaken(this, accountAddress, nickname)) {      // judge：duplicate with another nickname
+                    Toast.makeText(this, R.string.activity_account_detail_rename_duplicate, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 StorageUtil.saveAccountNickname(this, accountAddress, nickname);  // write
                 accountNameTextView.setText(nickname);
                 Toast.makeText(this, R.string.activity_account_detail_rename_saved, Toast.LENGTH_SHORT).show();
