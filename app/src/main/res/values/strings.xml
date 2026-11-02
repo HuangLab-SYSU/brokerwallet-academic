@@ -84,7 +84,7 @@
     <string name="token_send_amount_label">Amount</string>
     <string name="token_send_success">%1$s sent successfully</string>
     <string name="token_scan">Scan QR code</string>
-    <string name="token_home_label">ERC-20</string>
+    <string name="token_home_label">Assets</string>
     <string name="token_contract_label">Contract address</string>
     <string name="token_contract_hint">Wrap or unwrap BKC via this contract. Do not use the contract address for receiving.</string>
     <string name="token_copy">Copy</string>

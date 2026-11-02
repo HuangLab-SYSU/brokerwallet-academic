@@ -1,6 +1,6 @@
 package com.example.brokerfi.token;
 
-import com.example.brokerfi.xc.SecurityUtil;
+import com.example.brokerfi.core.security.SecurityUtil;
 
 import org.junit.Test;
 

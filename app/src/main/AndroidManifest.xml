@@ -226,6 +226,9 @@
             android:name=".token.TokenSwapActivity"
             android:exported="false" />
         <activity
+            android:name=".swap.BrokerSwapActivity"
+            android:exported="false" />
+        <activity
             android:name=".token.TokenSendActivity"
             android:exported="false" />
         <activity

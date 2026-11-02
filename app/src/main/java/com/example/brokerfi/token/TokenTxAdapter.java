@@ -71,6 +71,13 @@ public class TokenTxAdapter extends RecyclerView.Adapter<TokenTxAdapter.Holder> 
         holder.swapFromText.setTextColor(COLOR_AMOUNT);
         holder.swapToText.setTextColor(COLOR_AMOUNT);
         holder.timeText.setText(timeFormat.format(new Date(record.timestampMs)));
+        if(record.status!=null) {
+            holder.typeText.setText(com.example.brokerfi.swap.VideoTradePresentation.label(record));
+            holder.swapAmountRow.setVisibility(View.GONE);holder.amountText.setVisibility(View.VISIBLE);
+            holder.amountText.setText(com.example.brokerfi.swap.VideoTradePresentation.amount(record.amountDisplay)+" "+record.fromSymbol);
+            String state=com.example.brokerfi.swap.VideoTradePresentation.status(record.status);
+            if(!state.isEmpty())holder.timeText.append("\n"+state);
+        }
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {

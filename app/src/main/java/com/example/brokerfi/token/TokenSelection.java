@@ -46,9 +46,9 @@ public final class TokenSelection {
 
     public static TokenItem ensureValidSelection(Context context) {
         String wrappedBkcContract = wrappedBkcContractHelper.resolveContractAddress(context);
-        List<TokenItem> enabled = TokenStore.getEnabledTokens(context, wrappedBkcContract);
+        List<TokenItem> enabled = TokenStore.getEnabledAssets(context, wrappedBkcContract);
         if (enabled.isEmpty()) {
-            return TokenItem.builtInwrappedBkc(wrappedBkcContract);
+            return TokenItem.nativeBkc();
         }
 
         String wallet = ChainAddressUtil.normalizeAddress(TokenWalletHelper.getWalletAddress(context));

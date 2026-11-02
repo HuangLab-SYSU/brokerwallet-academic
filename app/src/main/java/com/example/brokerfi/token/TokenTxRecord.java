@@ -29,6 +29,37 @@ public class TokenTxRecord implements Serializable {
     public String fromSymbol;
     /** Receiving-side symbol for swap-style records. */
     public String toSymbol;
+    /** Optional MiniV2 fields. Null status identifies a legacy record. Never store signing material. */
+    public String operationId;
+    public String status;
+    public String fromAsset;
+    public String toAsset;
+    public String inputUnits;
+    public String estimatedOutput;
+    public String actualOutput;
+    public String minimumOutput;
+    public String toContractAddress;
+    public String routerAddress;
+    public long chainId;
+    public int slippageBps;
+    public int impactBps;
+    public String gasCost;
+    /** Allowlisted diagnostics only: never persist request bodies, signatures or keys. */
+    public String sendRequestId, sendStage, sendFailure, receiptFailure;
+    public Integer sendHttpStatus, sendRpcCode;
+    public boolean sendMayHaveReachedGateway;
+    public long sendStartedMs, sendUpdatedMs;
+    /** User accepted continuation risk; never means the old request failed or was cancelled. */
+    public long continuationRiskAcceptedMs;
+    public long deadlineSeconds, receiptLastCheckedMs;
+    public int receiptAttempts;
+    /** Optional liquidity fields. Existing histories remain compatible; no signing data. */
+    public String liquidityAction;
+    public String lpUnits, estimatedLp, actualLp;
+    public String bkcUnits, musdtUnits, actualBkc, actualMusdt;
+    public String minimumLpUnits, minimumBkcUnits, minimumMusdtUnits;
+
+    public boolean isLiquidity() { return liquidityAction != null; }
 
     public TokenTxRecord() {
     }
