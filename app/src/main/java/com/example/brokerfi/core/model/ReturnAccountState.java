@@ -10,6 +10,8 @@ public class ReturnAccountState {
     private boolean isHidden = false;
     private String accountName;
     private boolean isNewPrivateKeyFormat;
+    // syh_work_01 new: the original subscript of account in private key string（replace “Account N”）
+    private int accountIndex;
 
     public String getAccountAddr() {
         return AccountAddr;
@@ -49,5 +51,14 @@ public class ReturnAccountState {
 
     public void setNewPrivateKeyFormat(boolean newPrivateKeyFormat) {
         isNewPrivateKeyFormat = newPrivateKeyFormat;
+    }
+
+    // syh_work_01 new：the setter & getter of accountIndex
+    public int getAccountIndex() {
+        return accountIndex;
+    }
+
+    public void setAccountIndex(int accountIndex) {
+        this.accountIndex = accountIndex;
     }
 }

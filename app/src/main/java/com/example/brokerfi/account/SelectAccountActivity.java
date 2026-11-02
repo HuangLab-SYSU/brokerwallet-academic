@@ -42,6 +42,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import com.example.brokerfi.core.security.SecurityUtil;
 import com.example.brokerfi.core.storage.StorageUtil;
+import com.example.brokerfi.core.util.AvatarUtil;
 import com.example.brokerfi.core.util.FormatUtil;
 import com.example.brokerfi.core.util.MyUtil;
 import com.example.brokerfi.main.MainActivity;
@@ -202,6 +203,8 @@ public class SelectAccountActivity extends AppCompatActivity {
                     // Set a fixed 【AccountName】 based on the original index.
                     String AccountName = getString(R.string.Account, i + 1);
                     accountState.setAccountName(AccountName);//Ignore the 'NullPointerException' warning
+                    // syh_work_01 new：record the original subscript i
+                    accountState.setAccountIndex(i);
                     // Set the IsHidden AccountState
                     accountState.setNewPrivateKeyFormat(SecurityUtil.isNewPrivateKeyFormat(split[i]));
                     list.add(accountState);
@@ -321,18 +324,23 @@ public class SelectAccountActivity extends AppCompatActivity {
                 int grayColor = Color.rgb(229, 231, 235);
                 relativeLayout.setBackgroundColor(grayColor);
                 currentLayout = relativeLayout;
-                LinearLayout layout = (LinearLayout) currentLayout.getChildAt(1);
-                if (layout.getChildAt(0) instanceof LinearLayout) {
-                    LinearLayout accountNameLayout = (LinearLayout) layout.getChildAt(0);
-                    if (accountNameLayout.getChildAt(0) instanceof TextView) {
-                        TextView textView0 = (TextView) accountNameLayout.getChildAt(0);
-                        System.out.println(textView0.getText().toString());
-                        int i = Integer.parseInt(textView0.getText().toString().split(" ")[1]);
-                        int cur = i - 1;
-                        String s = String.valueOf(cur);
-                        StorageUtil.saveCurrentAccount(this, s);
-//                accountSpinner.setSelection(cur);
-                    }
+                // syh_work_01 replace: comment out getChildAt & backstepping "Account N" and then label each row of view
+                // LinearLayout layout = (LinearLayout) currentLayout.getChildAt(1);
+                // if (layout.getChildAt(0) instanceof LinearLayout) {
+                //     LinearLayout accountNameLayout = (LinearLayout) layout.getChildAt(0);
+                //     if (accountNameLayout.getChildAt(0) instanceof TextView) {
+                //         TextView textView0 = (TextView) accountNameLayout.getChildAt(0);
+                //         System.out.println(textView0.getText().toString());
+                //         int i = Integer.parseInt(textView0.getText().toString().split(" ")[1]);
+                //         int cur = i - 1;
+                //         String s = String.valueOf(cur);
+                //         StorageUtil.saveCurrentAccount(this, s);
+                //         accountSpinner.setSelection(cur);
+                //     }
+                // }
+                Object tag = relativeLayout.getTag();
+                if (tag instanceof Integer) {
+                    StorageUtil.saveCurrentAccount(this, String.valueOf((Integer) tag));
                 }
             }
 
@@ -341,18 +349,23 @@ public class SelectAccountActivity extends AppCompatActivity {
             relativeLayout.setBackgroundColor(grayColor);
             currentLayout = relativeLayout;
 
-            LinearLayout layout = (LinearLayout) currentLayout.getChildAt(1);
-            if (layout.getChildAt(0) instanceof LinearLayout) {
-                LinearLayout accountNameLayout = (LinearLayout) layout.getChildAt(0);
-                if (accountNameLayout.getChildAt(0) instanceof TextView) {
-                    TextView textView0 = (TextView) accountNameLayout.getChildAt(0);
-                    System.out.println(textView0.getText().toString());
-                    int i = Integer.parseInt(textView0.getText().toString().split(" ")[1]);
-                    int cur = i - 1;
-                    String s = String.valueOf(cur);
-                    StorageUtil.saveCurrentAccount(this, s);
-//            accountSpinner.setSelection(cur);
-                }
+            // syh_work_01 replace: comment out getChildAt & backstepping "Account N" and then label each row of view
+            // LinearLayout layout = (LinearLayout) currentLayout.getChildAt(1);
+            // if (layout.getChildAt(0) instanceof LinearLayout) {
+            //     LinearLayout accountNameLayout = (LinearLayout) layout.getChildAt(0);
+            //     if (accountNameLayout.getChildAt(0) instanceof TextView) {
+            //         TextView textView0 = (TextView) accountNameLayout.getChildAt(0);
+            //         System.out.println(textView0.getText().toString());
+            //         int i = Integer.parseInt(textView0.getText().toString().split(" ")[1]);
+            //         int cur = i - 1;
+            //         String s = String.valueOf(cur);
+            //         StorageUtil.saveCurrentAccount(this, s);
+            //         accountSpinner.setSelection(cur);
+            //     }
+            // }
+            Object tag = relativeLayout.getTag();
+            if (tag instanceof Integer) {
+                StorageUtil.saveCurrentAccount(this, String.valueOf((Integer) tag));
             }
         }
     }
@@ -393,6 +406,8 @@ public class SelectAccountActivity extends AppCompatActivity {
             relativeLayout.setAlpha(0.7f);
         }
 
+        // syh_work_01 replace: comment out getChildAt & backstepping "Account N" and then label each row of view
+        relativeLayout.setTag(accountState.getAccountIndex());
         relativeLayout.setOnClickListener(this::onRelativeLayoutClick);
 
         // Long press listener
@@ -413,14 +428,16 @@ public class SelectAccountActivity extends AppCompatActivity {
         });
 
         ImageView imageView = new ImageView(SelectAccountActivity.this);
-        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-        );
+        int avatarSizePx = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 39, getResources().getDisplayMetrics());
+        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(avatarSizePx, avatarSizePx);
         layoutParams2.addRule(RelativeLayout.CENTER_VERTICAL);
         imageView.setId(R.id.sendicon);
         imageView.setLayoutParams(layoutParams2);
-        imageView.setImageResource(R.drawable.user_icon);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        // syh_work_02 replace: show account avatar (custom file first, else generated identicon)
+        // imageView.setImageResource(R.drawable.user_icon);
+        imageView.setImageBitmap(AvatarUtil.loadAvatar(this, accountState.getAccountAddr(), avatarSizePx));
         relativeLayout.addView(imageView);
 
         LinearLayout leftInfoLayout = new LinearLayout(SelectAccountActivity.this);
@@ -444,7 +461,11 @@ public class SelectAccountActivity extends AppCompatActivity {
 
         TextView textView = new TextView(this);
         // Use a unique ID to identify the account
-        textView.setText(accountState.getAccountName());
+        // syh_work_01 replace: nickname first, default name as fallback
+        // textView.setText(accountState.getAccountName());
+        String addr = accountState.getAccountAddr();
+        String nick = (addr == null) ? null : StorageUtil.getAccountNickname(this, addr);
+        textView.setText(nick != null ? nick : accountState.getAccountName());
         float textSizeInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 18, getResources().getDisplayMetrics());
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPx);
         textView.setTextColor(getResources().getColor(R.color.black));
@@ -541,7 +562,9 @@ public class SelectAccountActivity extends AppCompatActivity {
         moreButton.setOnClickListener(v -> {
             // Get account index from account name
             String accountName = accountState.getAccountName();
-            int accountIndex = Integer.parseInt(accountName.split(" ")[1]) - 1;
+            // syh_work_01 no longer rely on backstepping "Account N", using subscript instead
+            // int accountIndex = Integer.parseInt(accountName.split(" ")[1]) - 1;
+            int accountIndex = accountState.getAccountIndex();
 
             // Navigate to AccountDetailActivity
             Intent intent = new Intent(SelectAccountActivity.this, AccountDetailActivity.class);
