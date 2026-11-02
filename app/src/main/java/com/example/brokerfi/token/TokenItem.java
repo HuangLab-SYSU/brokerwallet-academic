@@ -10,6 +10,13 @@ import java.util.Locale;
 
 /** Token entry used by the manage-tokens list and persisted user imports. */
 public class TokenItem {
+    /** UI/history identity only, never an ERC-20 contract or RPC destination. */
+    public static final String NATIVE_BKC = "native:bkc";
+    public static TokenItem nativeBkc() {
+        TokenItem item=new TokenItem(); item.contractAddress=NATIVE_BKC; item.name="BrokerChain";
+        item.symbol="BKC"; item.enabled=true; item.builtIn=true; item.decimals=18; return item;
+    }
+    public boolean isNative() { return NATIVE_BKC.equals(contractAddress); }
 
     public static final String CATEGORY_POPULAR = "popular";
     public static final String CATEGORY_STABLE = "stable";

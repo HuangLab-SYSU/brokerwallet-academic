@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+    <TextView android:id="@+id/lp_status" style="@style/VideoText" android:visibility="gone" />
+    <TextView style="@style/VideoHeading" android:layout_marginTop="0dp" android:text="BKC Amount" />
+    <EditText android:id="@+id/lp_bkc_amount" style="@style/VideoInput" android:contentDescription="BKC Amount" />
+    <TextView android:id="@+id/lp_bkc_balance" style="@style/VideoText" android:visibility="gone" />
+    <TextView style="@style/VideoHeading" android:layout_marginTop="16dp" android:text="mUSDT Amount" />
+    <EditText android:id="@+id/lp_musdt_amount" style="@style/VideoInput" android:contentDescription="mUSDT Amount" />
+    <TextView android:id="@+id/lp_musdt_balance" style="@style/VideoText" android:visibility="gone" />
+    <TextView android:id="@+id/lp_add_quote" style="@style/VideoText" android:background="@drawable/video_panel" android:padding="16dp" android:layout_marginTop="12dp" android:text="Enter one amount to preview the pool ratio" android:lineSpacingExtra="1dp" />
+    <TextView android:id="@+id/lp_owned" style="@style/VideoHeading" android:layout_marginTop="16dp" android:text="Your LP tokens: — LPC" />
+    <TextView android:id="@+id/lp_add_hint" style="@style/VideoText" android:visibility="gone" />
+    <Button android:id="@+id/lp_approve_add" style="@style/VideoAction" android:text="Approve mUSDT" android:visibility="gone" android:minHeight="52dp" />
+    <Button android:id="@+id/lp_add" style="@style/VideoAction" android:text="Enter one amount to preview the pool ratio" android:minHeight="52dp" />
+    <LinearLayout style="@style/VideoPanel">
+        <TextView style="@style/VideoHeading" android:layout_marginTop="0dp" android:text="Your Liquidity Position" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView style="@style/VideoText" android:layout_marginTop="0dp" android:text="Pooled BKC" android:textSize="10sp" />
+                <TextView android:id="@+id/lp_pooled_bkc" style="@style/VideoHeading" android:layout_marginTop="2dp" android:text="—" />
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView style="@style/VideoText" android:layout_marginTop="0dp" android:text="Pooled mUSDT" android:textSize="10sp" />
+                <TextView android:id="@+id/lp_pooled_musdt" style="@style/VideoHeading" android:layout_marginTop="2dp" android:text="—" />
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView style="@style/VideoText" android:layout_marginTop="0dp" android:text="Pool Share" android:textSize="10sp" />
+                <TextView android:id="@+id/lp_pool_share" style="@style/VideoHeading" android:layout_marginTop="2dp" android:text="—" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginTop="10dp">
+            <TextView style="@style/VideoText" android:layout_width="0dp" android:layout_weight="1" android:layout_marginTop="0dp" android:text="Position Value" />
+            <TextView android:id="@+id/lp_position_value" style="@style/VideoHeading" android:layout_width="wrap_content" android:layout_marginTop="0dp" android:text="—" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginTop="8dp">
+            <TextView style="@style/VideoText" android:layout_width="0dp" android:layout_weight="1" android:layout_marginTop="0dp" android:text="Expected Earned Fees" />
+            <TextView android:id="@+id/lp_fees" style="@style/VideoHeading" android:layout_width="wrap_content" android:layout_marginTop="0dp" android:textColor="#36B992" android:text="—" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginTop="8dp">
+            <TextView style="@style/VideoText" android:layout_width="0dp" android:layout_weight="1" android:layout_marginTop="0dp" android:text="Position Change" />
+            <TextView android:id="@+id/lp_position_change" style="@style/VideoHeading" android:layout_width="wrap_content" android:layout_marginTop="0dp" android:text="—" />
+        </LinearLayout>
+        <TextView android:id="@+id/lp_position" style="@style/VideoText" android:visibility="gone" />
+        <TextView android:id="@+id/lp_position_help" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+    </LinearLayout>
+    <LinearLayout style="@style/VideoPanel">
+        <TextView style="@style/VideoHeading" android:layout_marginTop="0dp" android:text="Remove Liquidity" />
+        <TextView android:id="@+id/lp_remove_percent" style="@style/VideoHeading" android:text="Remove 0% of your LP tokens" />
+        <SeekBar android:id="@+id/lp_remove_slider" android:layout_width="match_parent" android:layout_height="28dp" android:max="100" android:progressTint="#4B8EED" android:thumbTint="#4B8EED" android:contentDescription="Percentage of LP tokens to remove" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+            <Button android:id="@+id/lp_percent_25" style="@style/VideoPercent" android:text="25%" />
+            <Button android:id="@+id/lp_percent_50" style="@style/VideoPercent" android:text="50%" />
+            <Button android:id="@+id/lp_percent_75" style="@style/VideoPercent" android:text="75%" />
+            <Button android:id="@+id/lp_percent_100" style="@style/VideoPercent" android:text="100%" />
+        </LinearLayout>
+        <TextView android:id="@+id/lp_remove_quote" style="@style/VideoText" android:textSize="11sp" android:text="You will receive: — BKC + — mUSDT" />
+        <TextView android:id="@+id/lp_remove_hint" style="@style/VideoText" android:visibility="gone" />
+        <Button android:id="@+id/lp_approve_remove" style="@style/VideoAction" android:text="Approve LP" android:visibility="gone" />
+        <Button android:id="@+id/lp_remove" style="@style/VideoAction" android:text="Remove Liquidity" />
+    </LinearLayout>
+    <LinearLayout style="@style/VideoPanel" android:paddingTop="0dp" android:paddingBottom="0dp">
+        <Button android:id="@+id/lp_history_toggle" style="@style/VideoHistoryToggle" android:text="LP History" android:layout_marginTop="0dp" android:textSize="13sp" android:minHeight="40dp" />
+        <LinearLayout android:id="@+id/lp_history_rows" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

@@ -64,6 +64,11 @@ public class TokenInfoActivity extends AppCompatActivity {
             sourceView.setText(loadContractSource());
         } else {
             String intro = getString(R.string.token_info_custom_intro, tokenName != null ? tokenName : "");
+            try {
+                com.example.brokerfi.swap.BrokerSwapConfig cfg=com.example.brokerfi.swap.BrokerSwapConfig.load(this);
+                if(cfg.musdt().equalsIgnoreCase(address))intro="mUSDT is the 6-decimal mock USDT token used by BrokerChain Swap and Provide Liquidity. Do not send funds to the contract address. Use your wallet address to receive mUSDT.";
+                else if(cfg.wbkc().equalsIgnoreCase(address))intro="wBKC (Swap) is the wrapped BKC used by the swap protocol. It has a different contract from the wallet's original wBKC. Use your wallet address to receive tokens.";
+            } catch(Exception ignored) { }
             introView.setText(intro);
             if (sourceLabel != null) {
                 sourceLabel.setVisibility(View.GONE);

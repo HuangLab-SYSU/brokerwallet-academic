@@ -62,6 +62,7 @@ import com.example.brokerfi.faucet.FaucetActivity;
 import com.example.brokerfi.medal.MedalRankingActivity;
 import com.example.brokerfi.news.NewsActivity;
 import com.example.brokerfi.news.NotificationActivity;
+import com.example.brokerfi.notification.update.UpdateReminderCoordinator;
 import com.example.brokerfi.nft.model.NFT;
 import com.example.brokerfi.nft.NFTMainActivity;
 import com.example.brokerfi.receive.ReceiveActivity;
@@ -460,6 +461,22 @@ public class MainActivity extends AppCompatActivity {
         }).start();
 
         fetchAccountStatus();
+        checkForUpdateAfterLogin();
+    }
+
+    private void checkForUpdateAfterLogin() {
+        Intent launchIntent = getIntent();
+        if (!launchIntent.getBooleanExtra(
+                UpdateReminderCoordinator.EXTRA_CHECK_UPDATE_AFTER_LOGIN,
+                false
+        )) {
+            return;
+        }
+
+        launchIntent.removeExtra(UpdateReminderCoordinator.EXTRA_CHECK_UPDATE_AFTER_LOGIN);
+        getWindow().getDecorView().post(() ->
+                UpdateReminderCoordinator.checkAndShow(this)
+        );
     }
 
     private void intView() {

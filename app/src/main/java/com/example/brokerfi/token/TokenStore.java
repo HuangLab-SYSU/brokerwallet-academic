@@ -117,9 +117,15 @@ public final class TokenStore {
         }
         return result;
     }
+    /** Assets includes native BKC without persisting a fake ERC-20 contract. */
+    public static List<TokenItem> getEnabledAssets(Context context, String wrappedBkcContractAddress) {
+        List<TokenItem> assets=new ArrayList<>(); assets.add(TokenItem.nativeBkc());
+        assets.addAll(getEnabledTokens(context,wrappedBkcContractAddress)); return assets;
+    }
 
     public static String resolveSymbol(Context context, String contractAddress, String wrappedBkcContractAddress) {
         String target = ChainAddressUtil.normalizeAddress(contractAddress);
+        if (TokenItem.NATIVE_BKC.equals(target)) return "BKC";
         if (TextUtils.isEmpty(target)) {
             return wrappedBkcConfig.SYMBOL;
         }
