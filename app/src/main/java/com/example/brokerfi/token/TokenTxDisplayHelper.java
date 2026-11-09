@@ -26,6 +26,8 @@ public final class TokenTxDisplayHelper {
         if (context == null || record == null || record.type == null) {
             return "";
         }
+        if (record.status != null) return com.example.brokerfi.swap.SwapRecordPresentation.label(record) + " · "
+                + com.example.brokerfi.swap.SwapRecordPresentation.status(record.status);
         if (TokenTxRecord.isSwapType(record.type)) {
             if (isWrapRecord(record)) {
                 return context.getString(R.string.token_tx_type_wrap);
@@ -66,14 +68,15 @@ public final class TokenTxDisplayHelper {
             return;
         }
         if (record.isSwap()
-                && showDetailedSwapAmounts
+                && (showDetailedSwapAmounts || record.status != null)
                 && swapAmountRow != null
                 && swapFromView != null
                 && swapToView != null) {
             simpleAmountView.setVisibility(View.GONE);
             swapAmountRow.setVisibility(View.VISIBLE);
             swapFromView.setText(legLabel(record.amountDisplay, record.resolveFromSymbol()));
-            swapToView.setText(legLabel(record.amountDisplay, record.resolveToSymbol()));
+            swapToView.setText(record.status == null ? legLabel(record.amountDisplay, record.resolveToSymbol())
+                    : legLabel(record.actualOutput == null ? "Unverified" : record.actualOutput, record.resolveToSymbol()));
             return;
         }
         if (swapAmountRow != null) {
@@ -94,6 +97,7 @@ public final class TokenTxDisplayHelper {
         if (context == null || record == null) {
             return "";
         }
+        if(record.isLiquidity())return record.amountDisplay;
         if (!showDetailedSwapAmounts && record.isSwap()) {
             return legLabel(record.amountDisplay, record.resolveFromSymbol());
         }

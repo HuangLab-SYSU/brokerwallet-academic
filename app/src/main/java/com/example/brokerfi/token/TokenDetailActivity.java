@@ -27,6 +27,12 @@ import com.example.brokerfi.R;
 
 import java.math.BigInteger;
 import java.util.List;
+import com.example.brokerfi.swap.BrokerSwapConfig;
+import com.example.brokerfi.swap.BrokerSwapClient;
+import com.example.brokerfi.swap.SwapQuoteMath;
+import com.example.brokerfi.swap.TradeDisplay;
+import com.example.brokerfi.core.config.ChainConfig;
+import com.example.brokerfi.send.SendActivity;
 
 public class TokenDetailActivity extends AppCompatActivity {
 
@@ -62,6 +68,10 @@ public class TokenDetailActivity extends AppCompatActivity {
     private String walletAddress;
     private String privateKey;
     private BigInteger tokenBalance = BigInteger.ZERO;
+    private final java.util.concurrent.ExecutorService assetReads=java.util.concurrent.Executors.newSingleThreadExecutor();
+    private boolean nativeLoading;
+    private boolean nativeBalanceKnown;
+    private int assetGeneration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +121,7 @@ public class TokenDetailActivity extends AppCompatActivity {
         bindActionWithHaptics(R.id.token_action_receive, v -> openReceive());
 
         resolveAccount();
+        importConfiguredAssets();
         reloadSelectedToken();
     }
 
@@ -138,11 +149,17 @@ public class TokenDetailActivity extends AppCompatActivity {
 
     private void resolveAccount() {
         privateKey = TokenWalletHelper.getCurrentPrivateKey(this);
-        walletAddress = TokenWalletHelper.getWalletAddress(this);
+        String current=TokenWalletHelper.getWalletAddress(this);
+        if(!TextUtils.equals(walletAddress,current)) { assetGeneration++; nativeBalanceKnown=false; tokenBalance=BigInteger.ZERO; }
+        walletAddress=current;
     }
 
     private void reloadSelectedToken() {
+        String previous=selectedToken==null?"":selectedToken.getContractAddress();
         selectedToken = TokenSelection.ensureValidSelection(this);
+        if(selectedToken!=null && !selectedToken.getContractAddress().equals(previous)) {
+            assetGeneration++; nativeBalanceKnown=false; tokenBalance=BigInteger.ZERO;
+        }
         applyCachedBalance();
         applySelectedTokenUi();
         refreshTxHistory();
@@ -154,20 +171,24 @@ public class TokenDetailActivity extends AppCompatActivity {
             return;
         }
         String symbol = selectedToken.getSymbol();
-        String name = selectedToken.getName();
-        pageTitle.setText(name);
+        String title=symbol;
+        try {
+            if(BrokerSwapConfig.load(this).musdt().equalsIgnoreCase(selectedToken.getContractAddress()))title="mock USDT";
+        } catch(Exception ignored) { }
+        pageTitle.setText(title);
         balanceText.setText(
-                TokenAmountUtil.formatDisplayAmount(tokenBalance, selectedToken.getDecimals())
-                        + " " + symbol);
+                selectedToken.isNative() && !nativeBalanceKnown ? getString(R.string.token_balance_loading)
+                        : TradeDisplay.amount(tokenBalance, selectedToken.getDecimals())+" "+symbol);
 
         tokenIcon.setText(TokenItem.iconLetter(symbol));
 
         swapAction.setVisibility(View.VISIBLE);
+        findViewById(R.id.token_info_button).setVisibility(selectedToken.isNative()?View.GONE:View.VISIBLE);
     }
 
     private void openTokenPicker() {
         String wrappedBkcContract = wrappedBkcContractHelper.resolveContractAddress(this);
-        List<TokenItem> enabled = TokenStore.getEnabledTokens(this, wrappedBkcContract);
+        List<TokenItem> enabled = TokenStore.getEnabledAssets(this, wrappedBkcContract);
         if (enabled.isEmpty()) {
             Toast.makeText(this, R.string.token_list_empty, Toast.LENGTH_SHORT).show();
             return;
@@ -207,6 +228,19 @@ public class TokenDetailActivity extends AppCompatActivity {
         if (selectedToken == null) {
             return false;
         }
+        if (selectedToken.isNative()) {
+            TokenBalanceCache.Snapshot nativeSnapshot=TokenBalanceCache.getSnapshot(walletAddress,TokenItem.NATIVE_BKC);
+            if(nativeSnapshot!=null) {
+                tokenBalance=nativeSnapshot.tokenBalance; nativeBalanceKnown=true;
+                balanceText.setText(TradeDisplay.amount(tokenBalance,18)+" BKC");return true;
+            }
+            String cached=TokenBalanceCache.hasNativeBalance(walletAddress)?TokenBalanceCache.getNativeBalanceDisplay(walletAddress):null;
+            if (cached==null) return false;
+            try { tokenBalance=new java.math.BigDecimal(cached).movePointRight(18).toBigIntegerExact();
+                nativeBalanceKnown=true;
+                balanceText.setText(TradeDisplay.amount(tokenBalance,18)+" BKC");return true; }
+            catch (RuntimeException e) { return false; }
+        }
         TokenBalanceCache.Snapshot snapshot = TokenBalanceCache.resolveSnapshot(
                 this, walletAddress, selectedToken.getContractAddress());
         if (snapshot == null) {
@@ -214,18 +248,20 @@ public class TokenDetailActivity extends AppCompatActivity {
         }
         tokenBalance = snapshot.tokenBalance;
         balanceText.setText(
-                TokenAmountUtil.formatDisplayAmount(tokenBalance, selectedToken.getDecimals())
+                TradeDisplay.amount(tokenBalance, selectedToken.getDecimals())
                         + " " + selectedToken.getSymbol());
         return true;
     }
 
     private void fetchBalanceInBackground(boolean force, boolean silent) {
+        if (selectedToken!=null && selectedToken.isNative()) { fetchNativeBalance(silent); return; }
         if (TextUtils.isEmpty(walletAddress) || selectedToken == null
                 || TextUtils.isEmpty(selectedToken.getContractAddress())) {
             showZeroBalance();
             return;
         }
         final boolean hadDisplay = applyCachedBalance();
+        final int generation=assetGeneration;
         if (!hadDisplay) {
             if (silent) {
                 showZeroBalance();
@@ -238,7 +274,7 @@ public class TokenDetailActivity extends AppCompatActivity {
                 selectedToken.getContractAddress(),
                 force,
                 () -> runOnUiThread(() -> {
-                    if (isFinishing()) {
+                    if (isFinishing() || generation!=assetGeneration) {
                         return;
                     }
                     if (!applyCachedBalance() && !hadDisplay) {
@@ -246,7 +282,7 @@ public class TokenDetailActivity extends AppCompatActivity {
                     }
                 }),
                 () -> runOnUiThread(() -> {
-                    if (isFinishing()) {
+                    if (isFinishing() || generation!=assetGeneration) {
                         return;
                     }
                     if (!applyCachedBalance() && !hadDisplay) {
@@ -267,6 +303,7 @@ public class TokenDetailActivity extends AppCompatActivity {
     private void onPullRefresh() {
         Log.i(TAG, "onPullRefresh balance only");
         resolveAccount();
+        if (selectedToken!=null && selectedToken.isNative()) { fetchNativeBalance(false);syncIncomingTxHistory(this::refreshTxHistory); return; }
         if (selectedToken == null) {
             reloadSelectedToken();
             TokenSwipeRefreshHelper.stop(swipeRefresh);
@@ -355,7 +392,8 @@ public class TokenDetailActivity extends AppCompatActivity {
             }
             return;
         }
-        TokenIncomingTxSync.sync(this, afterSync);
+        if (selectedToken!=null && selectedToken.isNative()) NativeAssetHistorySync.sync(this,walletAddress,afterSync);
+        else TokenIncomingTxSync.sync(this, afterSync);
     }
 
     private void showZeroBalance() {
@@ -424,6 +462,7 @@ public class TokenDetailActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.token_no_account, Toast.LENGTH_SHORT).show();
             return;
         }
+        if (selectedToken!=null && selectedToken.isNative()) { startActivity(new Intent(this,SendActivity.class)); return; }
         if (selectedToken == null || TextUtils.isEmpty(selectedToken.getContractAddress())) {
             Toast.makeText(this, R.string.token_contract_missing, Toast.LENGTH_LONG).show();
             return;
@@ -440,11 +479,59 @@ public class TokenDetailActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.token_contract_missing, Toast.LENGTH_LONG).show();
             return;
         }
-        Intent intent = new Intent(this, TokenSwapActivity.class);
+        try {
+            BrokerSwapConfig cfg=BrokerSwapConfig.load(this);
+            String selected=selectedToken==null?"":selectedToken.getContractAddress();
+            if (selectedToken==null || !(selectedToken.isNative() || selected.equalsIgnoreCase(cfg.musdt())
+                    || selected.equalsIgnoreCase(cfg.wbkc()) || selected.equalsIgnoreCase(wrappedBkcContractHelper.resolveContractAddress(this)))) {
+                Toast.makeText(this,"This asset is not supported by Trade.",Toast.LENGTH_LONG).show();return;
+            }
+        } catch (Exception e) { Toast.makeText(this,"Trade configuration unavailable.",Toast.LENGTH_LONG).show();return; }
+        Intent intent = new Intent(this, com.example.brokerfi.swap.BrokerSwapActivity.class);
         intent.putExtra(TokenSwapActivity.EXTRA_UNWRAP, unwrap);
         if (selectedToken != null && !TextUtils.isEmpty(selectedToken.getContractAddress())) {
             intent.putExtra(TokenSwapActivity.EXTRA_PAY_CONTRACT, selectedToken.getContractAddress());
         }
         startActivity(intent);
     }
+    private void importConfiguredAssets() {
+        if (ChainConfig.useLocalBrokerChainNode()) return;
+        try {
+            BrokerSwapConfig cfg=BrokerSwapConfig.load(this);
+            for (boolean musdt:new boolean[]{false,true}) {
+                String contract=musdt?cfg.musdt():cfg.wbkc(); if(TokenStore.contains(this,contract))continue;
+                TokenItem item=new TokenItem();item.setContractAddress(contract);item.setSymbol(musdt?"mUSDT":"wBKC (Swap)");
+                item.setName(musdt?"mock USDT (test)":"BrokerSwap wrapped BKC");item.setDecimals(musdt?6:18);item.setEnabled(true);
+                TokenStore.addCustom(this,item);
+            }
+        } catch (Exception ignored) { }
+    }
+    private void fetchNativeBalance(boolean silent) {
+        if(nativeLoading || TextUtils.isEmpty(walletAddress)) { TokenSwipeRefreshHelper.stop(swipeRefresh);return; }
+        final int id=assetGeneration;final String address=walletAddress;
+        if(!applyCachedBalance())balanceText.setText(getString(R.string.token_balance_loading));
+        nativeLoading=true;
+        assetReads.execute(() -> {
+            try {
+                BigInteger units=new BrokerSwapClient(BrokerSwapConfig.load(this)).balance("",address,"");
+                runOnUiThread(() -> {
+                    nativeLoading=false;TokenSwipeRefreshHelper.stop(swipeRefresh);
+                    if(isFinishing() || id!=assetGeneration || selectedToken==null || !selectedToken.isNative()
+                            || !address.equalsIgnoreCase(TokenWalletHelper.getWalletAddress(this)))return;
+                    tokenBalance=units;String exact=SwapQuoteMath.format(units,18);
+                    nativeBalanceKnown=true;
+                    TokenBalanceCache.store(address,TokenItem.NATIVE_BKC,exact,units);
+                    balanceText.setText(TradeDisplay.amount(units,18)+" BKC");
+                });
+            } catch(Exception e) {
+                runOnUiThread(() -> { nativeLoading=false;TokenSwipeRefreshHelper.stop(swipeRefresh);
+                    if(!isFinishing() && id==assetGeneration && selectedToken!=null && selectedToken.isNative()) {
+                        if(!applyCachedBalance())balanceText.setText("Could not load balance");
+                        if(!silent)notifyBalanceFetchFailed();
+                    }
+                });
+            }
+        });
+    }
+    @Override protected void onDestroy() { assetGeneration++;assetReads.shutdown();super.onDestroy(); }
 }

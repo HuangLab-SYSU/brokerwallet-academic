@@ -33,7 +33,34 @@
         android:text="@string/activity_about_version_1_1_10"
         android:textSize="16sp"
         android:textColor="#666"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginBottom="24dp" />
+
+    <LinearLayout
+        android:id="@+id/update_status_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/update_progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:indeterminate="true" />
+
+        <TextView
+            android:id="@+id/update_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:lineSpacingExtra="2dp"
+            android:textColor="#4B5563"
+            android:textSize="15sp" />
+    </LinearLayout>
 
     <!-- 检查更新按钮 -->
     <Button

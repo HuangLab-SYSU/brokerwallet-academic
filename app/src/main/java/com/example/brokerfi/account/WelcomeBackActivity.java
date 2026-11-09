@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.main.MainActivity;
+import com.example.brokerfi.notification.update.UpdateReminderCoordinator;
 
 
 public class WelcomeBackActivity extends AppCompatActivity {
@@ -71,6 +72,10 @@ public class WelcomeBackActivity extends AppCompatActivity {
 
                 Intent intent = new Intent();
                 intent.setClass(WelcomeBackActivity.this, MainActivity.class);
+                intent.putExtra(
+                        UpdateReminderCoordinator.EXTRA_CHECK_UPDATE_AFTER_LOGIN,
+                        true
+                );
 
                 startActivity(intent);
             }else{

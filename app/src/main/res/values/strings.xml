@@ -84,7 +84,7 @@
     <string name="token_send_amount_label">Amount</string>
     <string name="token_send_success">%1$s sent successfully</string>
     <string name="token_scan">Scan QR code</string>
-    <string name="token_home_label">ERC-20</string>
+    <string name="token_home_label">Assets</string>
     <string name="token_contract_label">Contract address</string>
     <string name="token_contract_hint">Wrap or unwrap BKC via this contract. Do not use the contract address for receiving.</string>
     <string name="token_copy">Copy</string>
@@ -185,6 +185,14 @@
     <string name="activity_about_github">GitHub:</string>
     <string name="activity_about_github_url">https://github.com/HuangLab-SYSU/brokerwallet-academic</string>
     <string name="activity_about_copyright">© 2025 BrokerChain. All rights reserved.</string>
+
+    <!-- Update reminder dialog -->
+    <string name="update_reminder_title">Update available</string>
+    <string name="update_reminder_message">A newer version of BrokerChain Wallet is available.</string>
+    <string name="update_reminder_current_version">Current version: %1$s</string>
+    <string name="update_reminder_latest_version">Latest version: %1$s</string>
+    <string name="update_reminder_button_update">Update now</string>
+    <string name="update_reminder_button_ignore">Ignore</string>
 
     <!-- Layout text: app/src/main/res/layout/activity_account_detail.xml / 布局前端文本 -->
     <string name="activity_account_detail_account_1">Account 1</string>
@@ -918,6 +926,16 @@
     <string name="about_toast_install_permission">Please enable \'Install unknown apps\' permission</string>
     <string name="about_toast_install_permission_denied">Permission denied, cannot install</string>
     <string name="about_status_can_t_get_appversion">Can\'t get AppVersion</string>
+    <string name="about_status_checking">Checking for updates…</string>
+    <string name="about_status_latest">You already have the latest version.</string>
+    <string name="about_status_downloading">Downloading version %1$s…</string>
+    <string name="about_status_opening_installer">Download complete. Opening the installer…</string>
+    <string name="about_status_waiting_install_permission">Enable install permission, then return here to continue.</string>
+    <string name="about_status_download_failed">The update could not be downloaded.</string>
+    <string name="about_status_check_failed">The update check failed. Check the network and try again.</string>
+    <string name="about_status_install_permission_denied">Install permission was not granted.</string>
+    <string name="about_status_open_installer_failed">The installer could not be opened.</string>
+    <string name="about_button_retry_update">Retry</string>
 
     <!-- Runtime text: app/src/main/java/com/example/brokerfi/xc/AccountDetailActivity.java / Java运行时前端文本 -->
     <string name="account_detail_toast_address_copied">Address copied to clipboard</string>

@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import com.example.brokerfi.xc.SecurityUtil;
+import com.example.brokerfi.core.security.SecurityUtil;
 
 import java.math.BigInteger;
 

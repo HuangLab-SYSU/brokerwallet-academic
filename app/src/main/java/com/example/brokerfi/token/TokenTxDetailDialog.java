@@ -36,6 +36,16 @@ public final class TokenTxDetailDialog {
         if (activity == null || activity.isFinishing() || record == null) {
             return;
         }
+        if (TokenItem.NATIVE_BKC.equals(record.contractAddress) && record.status==null) {
+            new AlertDialog.Builder(activity).setTitle("BKC transaction details")
+                    .setMessage((TokenTxRecord.TYPE_SEND.equals(record.type)?"Sent: ":"Received: ")+record.amountDisplay+" BKC\nCounterparty: "+record.detail
+                            +"\nTransaction hash: "+record.txHash+"\nNetwork fee: "+(record.gasCost==null?"Unverified":record.gasCost+" BKC"))
+                    .setPositiveButton("Close",null).setNeutralButton("Copy transaction hash",(d,w)->copyHash(activity,record.txHash)).show();return;
+        }
+        if (record.status != null) {
+            com.example.brokerfi.swap.TradeVideoUi.show(com.example.brokerfi.swap.TradeVideoUi.recordBuilder(activity,record).create());
+            return;
+        }
 
         AlertDialog dialog = new AlertDialog.Builder(activity)
                 .setView(R.layout.dialog_token_tx_detail)

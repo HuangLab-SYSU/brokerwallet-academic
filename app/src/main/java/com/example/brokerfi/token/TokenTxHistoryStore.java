@@ -42,7 +42,7 @@ public final class TokenTxHistoryStore {
     }
 
     /** Adds a record only when an equivalent tx hash or near-duplicate display row is not already stored. */
-    public static boolean addIfAbsent(Context context, String walletAddress, TokenTxRecord record) {
+    public static synchronized boolean addIfAbsent(Context context, String walletAddress, TokenTxRecord record) {
         if (context == null || record == null || TextUtils.isEmpty(walletAddress)) {
             return false;
         }
@@ -56,9 +56,7 @@ public final class TokenTxHistoryStore {
         }
         list.add(record);
         sortNewestFirst(list);
-        while (list.size() > MAX_RECORDS) {
-            list.remove(list.size() - 1);
-        }
+        trimCompleted(list);
         saveList(context, key, list);
         return true;
     }
@@ -73,7 +71,7 @@ public final class TokenTxHistoryStore {
     }
 
     /** Removes duplicate display rows so wrap/unwrap history stays compact and readable. */
-    public static int compactWallet(Context context, String walletAddress) {
+    public static synchronized int compactWallet(Context context, String walletAddress) {
         if (context == null || TextUtils.isEmpty(walletAddress)) {
             return 0;
         }
@@ -95,7 +93,7 @@ public final class TokenTxHistoryStore {
      * Removes gettx2 wallet-peer SEND/RECEIVE rows identified during sync while preserving
      * records that already have real on-chain transaction hashes.
      */
-    public static int removeGetTx2WalletPeerRecords(
+    public static synchronized int removeGetTx2WalletPeerRecords(
             Context context,
             String walletAddress,
             java.util.Set<String> walletPeerGetTx2Ids) {
@@ -134,7 +132,7 @@ public final class TokenTxHistoryStore {
      * Removes legacy gettx2 SEND/RECEIVE rows that still store a numeric API id instead of a real
      * {@code 0x...} transaction hash.
      */
-    public static int removeMisclassifiedPeerGetTx2Records(Context context, String walletAddress) {
+    public static synchronized int removeMisclassifiedPeerGetTx2Records(Context context, String walletAddress) {
         if (context == null || TextUtils.isEmpty(walletAddress)) {
             return 0;
         }
@@ -161,7 +159,7 @@ public final class TokenTxHistoryStore {
     private static boolean shouldRemoveWalletPeerGetTx2Record(
             TokenTxRecord record,
             java.util.Set<String> walletPeerGetTx2Ids) {
-        if (record == null || TokenTxRecord.isSwapType(record.type)) {
+        if (record == null || TokenTxRecord.isSwapType(record.type) || TokenItem.NATIVE_BKC.equals(record.contractAddress)) {
             return false;
         }
         if (!TokenTxRecord.TYPE_SEND.equals(record.type)
@@ -181,7 +179,7 @@ public final class TokenTxHistoryStore {
     }
 
     private static boolean shouldRemoveMisclassifiedPeerRecord(TokenTxRecord record) {
-        if (record == null || TokenTxRecord.isSwapType(record.type)) {
+        if (record == null || TokenTxRecord.isSwapType(record.type) || TokenItem.NATIVE_BKC.equals(record.contractAddress)) {
             return false;
         }
         if (!TokenTxRecord.TYPE_SEND.equals(record.type)
@@ -210,7 +208,7 @@ public final class TokenTxHistoryStore {
         return false;
     }
 
-    public static List<TokenTxRecord> getAll(Context context, String walletAddress) {
+    public static synchronized List<TokenTxRecord> getAll(Context context, String walletAddress) {
         if (context == null || TextUtils.isEmpty(walletAddress)) {
             return Collections.emptyList();
         }
@@ -233,17 +231,7 @@ public final class TokenTxHistoryStore {
             if (isMisclassifiedPeerGetTx2Record(record)) {
                 continue;
             }
-            String recordContract = ChainAddressUtil.normalizeAddress(record.contractAddress);
-            if (TextUtils.isEmpty(recordContract)) {
-                if (TokenTxRecord.isSwapType(record.type)) {
-                    recordContract = defaultContract;
-                } else if (hasHexTxHash(record.txHash)) {
-                    recordContract = defaultContract;
-                } else {
-                    continue;
-                }
-            }
-            if (target.equals(recordContract)) {
+            if (AssetRecordFilter.matches(record,target,defaultContract)) {
                 result.add(record);
             }
         }
@@ -319,6 +307,13 @@ public final class TokenTxHistoryStore {
         if (a == null || b == null) {
             return false;
         }
+        if (TokenItem.NATIVE_BKC.equals(a.contractAddress) || TokenItem.NATIVE_BKC.equals(b.contractAddress))
+            return TokenItem.NATIVE_BKC.equals(a.contractAddress) && TokenItem.NATIVE_BKC.equals(b.contractAddress)
+                    && !TextUtils.isEmpty(a.txHash) && a.txHash.equals(b.txHash);
+        // Two real exchanges with equal input within two minutes are still two transactions.
+        if (a.status != null || b.status != null) {
+            return !TextUtils.isEmpty(a.txHash) && a.txHash.equalsIgnoreCase(b.txHash);
+        }
         if (!sameContract(a, b)) {
             return false;
         }
@@ -392,7 +387,7 @@ public final class TokenTxHistoryStore {
     }
 
     private static String storageKey(String walletAddress) {
-        return KEY_PREFIX + ChainAddressUtil.normalizeAddress(walletAddress);
+        return KEY_PREFIX + HistoryPreferenceMigration.canonicalWallet(walletAddress);
     }
 
     private static void migrateLegacyPrefs(Context context) {
@@ -400,16 +395,12 @@ public final class TokenTxHistoryStore {
                 .getSharedPreferences(LEGACY_PREFS, Context.MODE_PRIVATE);
         SharedPreferences current = context.getApplicationContext()
                 .getSharedPreferences(PREFS, Context.MODE_PRIVATE);
-        if (!legacy.getAll().isEmpty() && current.getAll().isEmpty()) {
+        java.util.Map<String,String> missing=HistoryPreferenceMigration.missingLists(current.getAll(),legacy.getAll());
+        if (!missing.isEmpty()) {
             SharedPreferences.Editor editor = current.edit();
-            for (java.util.Map.Entry<String, ?> entry : legacy.getAll().entrySet()) {
-                String key = entry.getKey();
-                Object value = entry.getValue();
-                if (value instanceof String) {
-                    editor.putString(key, (String) value);
-                }
-            }
-            editor.apply();
+            for (java.util.Map.Entry<String,String> entry : missing.entrySet())editor.putString(entry.getKey(),entry.getValue());
+            // Keep legacy untouched. A failed copy can still be read from the original below.
+            editor.commit();
         }
     }
 
@@ -417,6 +408,12 @@ public final class TokenTxHistoryStore {
         migrateLegacyPrefs(context);
         SharedPreferences prefs = context.getApplicationContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
         String json = prefs.getString(key, null);
+        if (!prefs.contains(key))json=prefs.getString(HistoryPreferenceMigration.aliasKey(key),null);
+        if(json==null) {
+            SharedPreferences legacy=context.getApplicationContext().getSharedPreferences(LEGACY_PREFS,Context.MODE_PRIVATE);
+            json=legacy.getString(key,null);
+            if(json==null)json=legacy.getString(HistoryPreferenceMigration.aliasKey(key),null);
+        }
         if (TextUtils.isEmpty(json)) {
             return new ArrayList<>();
         }
@@ -432,5 +429,39 @@ public final class TokenTxHistoryStore {
     private static void saveList(Context context, String key, List<TokenTxRecord> list) {
         SharedPreferences prefs = context.getApplicationContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
         prefs.edit().putString(key, GSON.toJson(list)).apply();
+    }
+
+    /** Durable operation journal BEFORE sending and after receiving a hash. Returns false on disk failure. */
+    public static synchronized boolean upsertSwap(Context context, String wallet, TokenTxRecord record) {
+        if (context == null || TextUtils.isEmpty(wallet) || record == null || TextUtils.isEmpty(record.operationId)) return false;
+        String key = storageKey(wallet);
+        List<TokenTxRecord> list = loadList(context, key);
+        java.util.Iterator<TokenTxRecord> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            TokenTxRecord r = iterator.next();
+            if (r != null && (record.operationId.equals(r.operationId)
+                    || (!TextUtils.isEmpty(record.txHash) && record.txHash.equalsIgnoreCase(r.txHash)))) iterator.remove();
+        }
+        list.add(record);
+        sortNewestFirst(list);
+        // Pending/unknown operations must not disappear when history fills up.
+        trimCompleted(list);
+        return context.getApplicationContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+                .edit().putString(key, GSON.toJson(list)).commit();
+    }
+
+    public static boolean isUnresolvedSwap(TokenTxRecord record) {
+        return record != null && ("SUBMITTING".equals(record.status) || "PENDING".equals(record.status)
+                || "UNKNOWN".equals(record.status));
+    }
+
+    /** Deferred UNKNOWN is still retained in history, but no longer permanently blocks Trade. */
+    public static boolean isBlockingSwap(TokenTxRecord record) {
+        return com.example.brokerfi.swap.TradeRecoveryPolicy.blocks(record);
+    }
+
+    private static void trimCompleted(List<TokenTxRecord> list) {
+        for (int i = list.size() - 1; list.size() > MAX_RECORDS && i >= 0; i--)
+            if (!isUnresolvedSwap(list.get(i))) list.remove(i);
     }
 }
