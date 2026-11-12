@@ -43,9 +43,22 @@
                         <ImageView android:id="@+id/token_swap_direction" android:layout_width="44dp" android:layout_height="44dp" android:background="@drawable/token_swap_fab" android:clickable="true" android:contentDescription="@string/token_swap_direction_desc" android:elevation="4dp" android:focusable="true" android:padding="10dp" android:scaleType="fitCenter" android:src="@drawable/jiaohuan" app:layout_constraintBottom_toTopOf="@id/token_receive_card" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/token_pay_card" app:layout_constraintVertical_bias="0.5" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <LinearLayout android:id="@+id/broker_swap_panel" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:orientation="vertical">
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
-                            <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Rate" android:textColor="#6B7280" android:textSize="13sp" />
-                            <TextView android:id="@+id/video_rate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Loading quote..." android:textColor="#111827" android:textSize="12sp" />
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="48dp" android:gravity="center_vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rate" android:textColor="#6B7280" android:textSize="13sp" />
+                            <TextView android:id="@+id/video_rate" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:gravity="end" android:layout_marginStart="8dp" android:text="—" android:textColor="#111827" android:textSize="12sp" />
+                            <Button
+                                android:id="@+id/trade_refresh_quote"
+                                android:layout_width="wrap_content"
+                                android:layout_height="48dp"
+                                android:layout_marginStart="8dp"
+                                android:minWidth="0dp"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:text="@string/trade_refresh_quote"
+                                android:textAllCaps="false"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </LinearLayout>
                         <LinearLayout android:id="@+id/video_slippage_row" android:layout_width="match_parent" android:layout_height="36dp" android:gravity="center_vertical">
                             <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Slippage" android:textColor="#6B7280" android:textSize="13sp" />
@@ -61,7 +74,7 @@
                         <Button android:id="@+id/broker_swap_slippage" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
                         <Button android:id="@+id/broker_swap_history" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
                     </LinearLayout>
-                    <android.widget.Button android:id="@+id/token_confirm_button" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="28dp" android:background="@drawable/video_button" android:backgroundTint="@null" android:enabled="false" android:letterSpacing="0" android:stateListAnimator="@null" android:text="Loading quote..." android:textAllCaps="false" android:textColor="@color/white" android:textSize="17sp" android:textStyle="bold" android:minHeight="52dp" android:paddingTop="12dp" android:paddingBottom="12dp" />
+                    <android.widget.Button android:id="@+id/token_confirm_button" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="28dp" android:background="@drawable/video_button" android:backgroundTint="@null" android:enabled="false" android:letterSpacing="0" android:stateListAnimator="@null" android:text="@string/token_swap" android:textAllCaps="false" android:textColor="@color/white" android:textSize="17sp" android:textStyle="bold" android:minHeight="52dp" android:paddingTop="12dp" android:paddingBottom="12dp" />
                     <Button android:id="@+id/trade_swap_history_toggle" style="@style/VideoHistoryToggle" android:text="Swap History" android:visibility="gone" />
                     <LinearLayout android:id="@+id/trade_swap_history_rows" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:visibility="gone" />
                 </LinearLayout>

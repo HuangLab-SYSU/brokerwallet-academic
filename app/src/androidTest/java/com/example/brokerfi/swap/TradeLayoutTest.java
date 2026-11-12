@@ -40,6 +40,13 @@ public class TradeLayoutTest {
     });}
     @Test public void dedicatedTradeLayoutPreservesAllControlsAndDemoText() {main(() -> {
         View root=inflate(R.layout.activity_broker_trade);
+        Button swap = root.findViewById(R.id.token_confirm_button);
+        Button refreshQuote = root.findViewById(R.id.trade_refresh_quote);
+        Button refreshPoolQuote = root.findViewById(R.id.lp_refresh_quote);
+        assertEquals("Swap", swap.getText().toString());
+        assertFalse(swap.isEnabled());
+        assertEquals("Refresh quote", refreshQuote.getText().toString());
+        assertEquals("Refresh quote", refreshPoolQuote.getText().toString());
         for(int id:new int[]{R.id.lp_approve_add,R.id.lp_add,R.id.lp_approve_remove,R.id.lp_remove}) {
             assertTrue(root.findViewById(id) instanceof Button);assertFalse(root.findViewById(id).isEnabled());
         }
