@@ -35,10 +35,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.brokerfi.R;
+import com.example.brokerfi.token.TokenItem;
+import com.example.brokerfi.token.TokenPickerDialog;
+import com.example.brokerfi.token.TokenSelection;
+import com.example.brokerfi.token.TokenStore;
 import com.example.brokerfi.main.menu.NavigationHelper;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -59,8 +64,8 @@ import com.example.brokerfi.send.SendActivity;
 
 
 public class ReceiveActivity extends AppCompatActivity {
-    public static final String EXTRA_TOKEN_SYMBOL = "extra_token_symbol";
-    public static final String EXTRA_TOKEN_NAME = "extra_token_name";
+    private static final String STATE_ASSET = "receive_asset";
+    private TokenItem asset;
 
     private static final int REQUEST_CODE_SAVE_IMAGE = 1;
     private ImageView menu;
@@ -81,6 +86,18 @@ public class ReceiveActivity extends AppCompatActivity {
         setContentView(R.layout.activity_receive);
 
         intView();
+        String contract = savedInstanceState == null
+                ? getIntent().getStringExtra(TokenSelection.EXTRA_CONTRACT)
+                : savedInstanceState.getString(STATE_ASSET);
+        asset = TokenPickerDialog.initialAsset(this, contract);
+        updateAsset();
+        findViewById(R.id.receive_asset_picker).setOnClickListener(v ->
+                TokenPickerDialog.show(this,
+                        TokenStore.getWalletAssets(this),
+                        asset.getContractAddress(), item -> {
+                            asset = item;
+                            updateAsset();
+                        }));
         try {
             intEvent();
         }catch (Exception e){
@@ -95,6 +112,22 @@ public class ReceiveActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void updateAsset() {
+        TextView picker = findViewById(R.id.receive_asset_picker);
+        picker.setText(getString(R.string.wallet_asset_picker, asset.getSymbol()));
+        TextView title = findViewById(R.id.buytitle);
+        title.setText(getString(R.string.token_receive_title_format, asset.getSymbol()));
+        TextView hint = findViewById(R.id.textview);
+        hint.setText(asset.isNative() ? getString(R.string.activity_receive_secure_address_tip)
+                : getString(R.string.token_receive_hint_format, asset.getSymbol()));
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(STATE_ASSET, asset.getContractAddress());
     }
 
     private void intView() {

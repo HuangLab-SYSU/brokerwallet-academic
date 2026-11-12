@@ -7,6 +7,9 @@ import android.text.TextUtils;
 import com.example.brokerfi.token.wrappedbkc.wrappedBkcConfig;
 import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
 import com.example.brokerfi.core.blockchain.ChainAddressUtil;
+import com.example.brokerfi.core.config.ChainConfig;
+import com.example.brokerfi.swap.BrokerSwapConfig;
+import com.example.brokerfi.swap.SwapAsset;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,6 +23,37 @@ import java.util.Map;
 
 /** Persists imported tokens and per-token enabled state. */
 public final class TokenStore {
+    public static List<TokenItem> getWalletAssets(Context context) {
+        importConfiguredAssets(context);
+        return getEnabledAssets(context, wrappedBkcContractHelper.resolveContractAddress(context));
+    }
+
+    private static void importConfiguredAssets(Context context) {
+        if (ChainConfig.useLocalBrokerChainNode()) return;
+        try {
+            importProtocolAssets(context, BrokerSwapConfig.load(context));
+        } catch (Exception ignored) {
+            // The asset list can still display native and manually imported assets.
+        }
+    }
+
+    public static synchronized void importProtocolAssets(
+            Context context, BrokerSwapConfig config) {
+        addProtocolAsset(context, config.wbkc(), SwapAsset.SWAP_WBKC, "BrokerSwap wrapped BKC");
+        addProtocolAsset(context, config.musdt(), SwapAsset.MUSDT, "BrokerSwap mock USDT (test only)");
+    }
+
+    private static void addProtocolAsset(
+            Context context, String contract, SwapAsset asset, String name) {
+        if (contains(context, contract)) return;
+        TokenItem item = new TokenItem();
+        item.setContractAddress(contract);
+        item.setSymbol(asset.symbol);
+        item.setName(name);
+        item.setDecimals(asset.decimals);
+        addCustom(context, item);
+    }
+
 
     private static final String PREFS = "token_store";
     private static final String LEGACY_PREFS = "wbkc_token_store";

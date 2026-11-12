@@ -27,6 +27,15 @@ public final class TokenPickerDialog {
     private TokenPickerDialog() {
     }
 
+    public static TokenItem initialAsset(AppCompatActivity activity, String contract) {
+        if (contract != null && !TokenItem.NATIVE_BKC.equals(contract)) {
+            for (TokenItem item : TokenStore.getWalletAssets(activity)) {
+                if (contract.equalsIgnoreCase(item.getContractAddress())) return item;
+            }
+        }
+        return TokenItem.nativeBkc();
+    }
+
     public static void show(
             AppCompatActivity activity,
             List<TokenItem> tokens,

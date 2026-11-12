@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.brokerfi.R;
 import com.example.brokerfi.token.TokenTxHistoryStore;
 import com.example.brokerfi.token.TokenTxRecord;
@@ -28,12 +29,10 @@ import java.util.UUID;
 
 /** Wallet UI adapter for Du's existing atomic LP router. Does not deploy or alter contracts. */
 final class LiquidityPanelController {
-    interface Busy { boolean get(); }
     private final AppCompatActivity activity;
     private final BrokerSwapConfig config;
     private final BrokerSwapClient client;
-    private final Busy otherBusy;
-    private final Runnable parentChanged;
+    private final SwipeRefreshLayout refresh;
     private final Handler main=new Handler(Looper.getMainLooper());
     private final EditText bkc,musdt;
     private final TextView status,balanceBkc,balanceMusdt,addQuote,owned,position,fees,removeQuote,percentLabel;
@@ -46,11 +45,11 @@ final class LiquidityPanelController {
     private long validatedAt, quoteActionsEnabledAt;
     private volatile int generation;
     private int percent,readProgress;
-    private volatile boolean visible,resumed,preparing;
+    private volatile boolean resumed,preparing;
     private boolean loading,confirming,updating,lastEditedBkc=true,invalidated;
     private final Runnable tick=new Runnable() { public void run() {
         if(!resumed) return;
-        if(visible) render();
+        render();
         main.postDelayed(this,15000);
     }};
     private static final class Snapshot {
@@ -62,8 +61,11 @@ final class LiquidityPanelController {
         }
         boolean fresh() { return pool.isFresh(SystemClock.elapsedRealtime()); }
     }
-    LiquidityPanelController(AppCompatActivity activity,BrokerSwapConfig config,Busy otherBusy,Runnable parentChanged) {
-        this.activity=activity; this.config=config; this.otherBusy=otherBusy; this.parentChanged=parentChanged;
+    LiquidityPanelController(AppCompatActivity activity, BrokerSwapConfig config) {
+        this.activity = activity;
+        this.config = config;
+        refresh = activity.findViewById(R.id.token_refresh);
+        refresh.setOnRefreshListener(this::fetch);
         client=config==null?null:new BrokerSwapClient(config);
         bkc=activity.findViewById(R.id.lp_bkc_amount); musdt=activity.findViewById(R.id.lp_musdt_amount);
         status=activity.findViewById(R.id.lp_status); balanceBkc=activity.findViewById(R.id.lp_bkc_balance);
@@ -109,16 +111,14 @@ final class LiquidityPanelController {
         } catch(Exception ignored) { updating=true; output.setText(""); }
         finally { updating=false; }
     }
-    boolean busy() { return confirming || preparing; }
-    private boolean locked() { return busy() || otherBusy.get() || SwapOperationRunner.active(wallet); }
-    void setVisible(boolean value) { if(value!=visible) { generation++; } visible=value; if(value) { render(); fetch(); } }
+    private boolean locked() { return confirming || preparing || SwapOperationRunner.active(wallet); }
     void onResume(String account) {
         if(!wallet.equalsIgnoreCase(account)) {
             wallet=account; generation++; validatedAt=0; snapshot=null; invalidated=false; error="";
             updating=true; bkc.setText(""); musdt.setText(""); updating=false; slider.setProgress(0);
         }
         resumed=true; main.removeCallbacks(tick); main.postDelayed(tick,15000);
-        if(visible)fetch(); render();
+        resumePending(); fetch(); render();
     }
     void onPause() { resumed=false; generation++; main.removeCallbacks(tick); }
     void onDestroy() { resumed=false; generation++; main.removeCallbacks(tick); }
@@ -131,17 +131,20 @@ final class LiquidityPanelController {
         for(TokenTxRecord r:TokenTxHistoryStore.getAll(activity,wallet))if(TradeRecoveryPolicy.deferred(r))return r;
         return null;
     }
-    void fetch() { fetch(false); }
+    private void fetch() { fetch(false); }
     private void fetch(boolean userRequested) {
-        if(!resumed || !visible || loading || locked() || config==null || !config.hasLiquidity() || wallet.isEmpty()) { parentChanged.run(); return; }
+        if (!resumed || loading || locked() || config == null || !config.hasLiquidity() || wallet.isEmpty()) {
+            refresh.setRefreshing(loading && resumed);
+            return;
+        }
         loading=true; readProgress=0; error=""; render();
         final int id=generation; final String account=wallet;
         final boolean validate=validatedAt==0 || SystemClock.elapsedRealtime()-validatedAt>600000;
         TradeReadSession session=new TradeReadSession(
-                () -> resumed && visible && !locked() && id==generation && sameAccount(account),
+                () -> resumed && !locked() && id==generation && sameAccount(account),
                 number -> main.post(() -> {
-                    if(resumed && visible && id==generation && sameAccount(account)) {
-                        readProgress=number; render(); parentChanged.run();
+                    if(resumed && id==generation && sameAccount(account)) {
+                        readProgress=number; render();
                     }
                 }));
         BrokerSwapClient readClient=new BrokerSwapClient(config,session);
@@ -154,21 +157,21 @@ final class LiquidityPanelController {
                 if(validate) {
                     stage="Liquidity contract validation"; readClient.validateLiquidity(key);
                     long checked=SystemClock.elapsedRealtime();
-                    main.post(() -> { if(!activity.isDestroyed() && resumed && visible && id==generation && sameAccount(account))validatedAt=checked; });
+                    main.post(() -> { if(!activity.isDestroyed() && resumed && id==generation && sameAccount(account))validatedAt=checked; });
                 }
                 stage="Balances, LP and allowances";
                 Snapshot read=readSnapshot(readClient,key,account);
                 main.post(() -> {
                     loading=false;
                     if(activity.isDestroyed())return;
-                    if(!resumed || !visible || id!=generation || !sameAccount(account)) { fetch(); return; }
+                    if(!resumed || id!=generation || !sameAccount(account)) { fetch(); return; }
                     if (userRequested) {
                         quoteActionsEnabledAt = SystemClock.elapsedRealtime() + REFRESH_TAP_GUARD_MS;
                         main.postDelayed(() -> {
-                            if (resumed && visible && !activity.isDestroyed()) render();
+                            if (resumed && !activity.isDestroyed()) render();
                         }, REFRESH_TAP_GUARD_MS);
                     }
-                    snapshot=read; invalidated=false; error=""; matchOther(); render(); parentChanged.run();
+                    snapshot=read; invalidated=false; error=""; matchOther(); render();
                 });
             } catch(Exception e) {
                 final String failed=stage, reason=TradeReadFailure.describe(e);
@@ -176,17 +179,15 @@ final class LiquidityPanelController {
                 main.post(() -> {
                     loading=false;
                     if(activity.isDestroyed())return;
-                    if(cancelled || !resumed || !visible || id!=generation || !sameAccount(account)) { fetch(); return; }
+                    if(cancelled || !resumed || id!=generation || !sameAccount(account)) { fetch(); return; }
                     invalidated=true;
                     error=failed+"："+reason+". Cached data is for reference only. Refresh the quote. This read did not send a transaction."; render();
-                    parentChanged.run();
                 });
             }
         };
         if(userRequested)TradeReadQueue.executeUser(work);else TradeReadQueue.execute(work);
     }
     private boolean viewFresh() { return snapshot!=null && snapshot.fresh() && !invalidated && error.isEmpty(); }
-    boolean loading() { return loading; }
     private Snapshot readSnapshot(String key,String address) throws Exception {
         return readSnapshot(client,key,address);
     }
@@ -224,6 +225,7 @@ final class LiquidityPanelController {
         return "";
     }
     private void render() {
+        refresh.setRefreshing(loading && resumed);
         Snapshot s=snapshot; boolean lock=locked(); TokenTxRecord pending=unresolved();
         String operation=TradeStatusText.operation(confirming,preparing,SwapOperationRunner.active(wallet),pending);
         String state=!operation.isEmpty()?operation
@@ -348,7 +350,7 @@ final class LiquidityPanelController {
             if(approval==approved) { toast(approved?"Allowance is sufficient. No further approval is needed.":"Approve this amount first."); return; }
             String action=approval?adding?"APPROVE_MUSDT":"APPROVE_LP":adding?"ADD":"REMOVE";
             final int id=generation; final String account=wallet;
-            confirming=true; render(); parentChanged.run();
+            confirming=true; render();
             android.content.DialogInterface.OnClickListener onConfirm=(d,w) -> prepare(id,account,action,desiredM,desiredB,lp,minM,minB,minLp,q==null?null:q.lp);
             String token=adding?"mUSDT":"LP";
             String fields=adding?"Pool will use "+SwapQuoteMath.format(desiredB,18)+" BKC + "+SwapQuoteMath.format(desiredM,6)+" mUSDT\nEstimated LP tokens: "+SwapQuoteMath.format(q.lp,18)+" LPC\nMin LP tokens: "+SwapQuoteMath.format(minLp,18)+" LPC"
@@ -356,13 +358,13 @@ final class LiquidityPanelController {
             fields+="\nMin BKC: "+SwapQuoteMath.format(minB,18)+"\nMin mUSDT: "+SwapQuoteMath.format(minM,6)+"\nSlippage: 0.5%";
             AlertDialog dialog=approval?TradeVideoUi.approval(activity,token,SwapQuoteMath.format(adding?desiredM:lp,adding?6:18),onConfirm)
                     :TradeVideoUi.confirmation(activity,adding?"Confirm add liquidity":"Confirm remove liquidity",fields,onConfirm);
-            dialog.setOnDismissListener(d -> { confirming=false; render(); parentChanged.run(); });
+            dialog.setOnDismissListener(d -> { confirming=false; render(); });
             if(approval)TradeVideoUi.showApproval(dialog);else TradeVideoUi.show(dialog);
         } catch(Exception e) { toast("Refresh on-chain data and check the amount or removal percentage."); }
     }
     private void prepare(int id,String account,String action,BigInteger desiredM,BigInteger desiredB,BigInteger lp,
                          BigInteger minM,BigInteger minB,BigInteger minLp,BigInteger estimatedLp) {
-        preparing=true; render(); parentChanged.run();
+        preparing=true; render();
         TradeReadQueue.executeUser(() -> {
             try {
                 if(id!=generation || !sameAccount(account))throw new IllegalStateException("Account changed");
@@ -370,7 +372,7 @@ final class LiquidityPanelController {
                 // Always check code/getters again for a financial action, even if display validation is cached.
                 client.validateLiquidity(key);
                 long checked=SystemClock.elapsedRealtime();
-                main.post(() -> { if(resumed && visible && id==generation && sameAccount(account))validatedAt=checked; });
+                main.post(() -> { if(resumed && id==generation && sameAccount(account))validatedAt=checked; });
                 Snapshot current=readSnapshot(key,account);
                 boolean adding="ADD".equals(action)||"APPROVE_MUSDT".equals(action), approval=action.startsWith("APPROVE");
                 String problem=adding?addProblem(current,desiredM,desiredB):removeProblem(current,lp);
@@ -403,16 +405,15 @@ final class LiquidityPanelController {
                 main.post(() -> {
                     preparing=false;
                     if(activity.isDestroyed() || id!=generation || !sameAccount(account))return;
-                    if(!current.fresh()) { invalidated=true; error="Checks expired. No transaction was sent. Refresh the quote and confirm again."; render(); parentChanged.run(); return; }
+                    if(!current.fresh()) { invalidated=true; error="Checks expired. No transaction was sent. Refresh the quote and confirm again."; render(); return; }
                     if(!SwapOperationRunner.submit(activity,config,account,record,target,data,value,this::completed))toast("A transaction is already in progress.");
-                    render(); parentChanged.run();
+                    render();
                 });
             } catch(Exception e) {
                 main.post(() -> {
                     preparing=false;
                     if(activity.isDestroyed())return;
                     if(id==generation && sameAccount(account)) { invalidated=true; error="Pre-send checks failed. No transaction was sent. Refresh the quote and confirm again."; toast(error); render(); }
-                    parentChanged.run();
                 });
             }
         });
@@ -425,10 +426,24 @@ final class LiquidityPanelController {
         }
         toast(record.liquidityAction!=null && record.liquidityAction.startsWith("APPROVE") && "SUCCESS".equals(record.status)
                 ? "Approval successful" : "SUCCESS".equals(record.status)?"ADD".equals(record.liquidityAction)?"Liquidity added":"Liquidity removed successfully":VideoTradePresentation.status(record.status));
-        invalidated=true; fetch(); render(); parentChanged.run();
+        invalidated=true; fetch(); render();
     }
-    void changed() { invalidated=true; if(visible) { fetch(); render(); } }
-    private void afterHistory() { render(); if(!SwapOperationRunner.active(wallet))fetch(); parentChanged.run(); }
+    private void resumePending() {
+        if (config == null || wallet.isEmpty()) return;
+        TokenTxRecord pending = unresolved();
+        if (pending == null || !SwapReceipt.validHash(pending.txHash)) return;
+        SwapOperationRunner.resume(activity, config, wallet, pending, record -> {
+            if (activity.isDestroyed()) return;
+            if (record.isLiquidity()) {
+                completed(record);
+            } else {
+                invalidated = true;
+                afterHistory();
+            }
+        });
+    }
+
+    private void afterHistory() { render(); if(!SwapOperationRunner.active(wallet))fetch(); }
     private String loadingText() {
         return "Loading quote...";
     }

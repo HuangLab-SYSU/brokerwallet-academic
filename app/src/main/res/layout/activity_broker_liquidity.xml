@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#F7F8FC">
+    <include layout="@layout/topbar" />
+    <include layout="@layout/include_token_sub_header" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@id/action_bar" />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout android:id="@+id/token_refresh" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_below="@id/token_sub_header">
+        <androidx.core.widget.NestedScrollView android:id="@+id/trade_scroll" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true">
+            <LinearLayout android:id="@+id/trade_scroll_body" android:layout_width="match_parent" android:layout_height="wrap_content" android:clipChildren="false" android:clipToPadding="false" android:orientation="vertical" android:paddingStart="16dp" android:paddingTop="8dp" android:paddingEnd="16dp" android:paddingBottom="24dp">
+                <include android:id="@+id/trade_liquidity_content" layout="@layout/include_trade_liquidity" android:layout_width="match_parent" android:layout_height="wrap_content" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</RelativeLayout>

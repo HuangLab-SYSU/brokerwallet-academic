@@ -14,8 +14,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.Spanned;
 import android.text.style.ClickableSpan;
 import android.text.method.LinkMovementMethod;
@@ -44,6 +46,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import android.content.Context;
 import android.content.SharedPreferences;
 import java.util.ArrayList;
@@ -64,12 +68,17 @@ import com.example.brokerfi.news.NewsActivity;
 import com.example.brokerfi.news.NotificationActivity;
 import com.example.brokerfi.notification.update.UpdateReminderCoordinator;
 import com.example.brokerfi.nft.model.NFT;
-import com.example.brokerfi.nft.NFTMainActivity;
 import com.example.brokerfi.receive.ReceiveActivity;
 import com.example.brokerfi.send.SendActivity;
 import com.example.brokerfi.xc.CommunityActivity;
 import com.example.brokerfi.swap.ConvertActivity;
-import com.example.brokerfi.swap.SwapActivity;
+import com.example.brokerfi.swap.BrokerLiquidityActivity;
+import com.example.brokerfi.swap.BrokerSwapActivity;
+import com.example.brokerfi.token.AssetBalanceRow;
+import com.example.brokerfi.token.TokenBalanceCache;
+import com.example.brokerfi.token.TokenItem;
+import com.example.brokerfi.token.TokenWalletHelper;
+import com.example.brokerfi.token.wrappedbkc.wrappedBkcContractHelper;
 
 
 
@@ -80,17 +89,15 @@ public class MainActivity extends AppCompatActivity {
     private ImageView menu;
     private ImageView notificationBtn;
     private View action_bar;
-    private ImageView buy;
-    private ImageView send;
-    private ImageView swap;
-    private ImageView broker;
-    private ImageView nft;
-    private ImageView news;
-    private ImageView tokenEntry;
+    private View buy;
+    private View send;
+    private View swap;
+    private View broker;
+    private View news;
+    private View tokenEntry;
     // EmulatorDAO functionality commented out
     // private ImageView medalSystem;
-    private ImageView community;
-    private LinearLayout support;
+    private View community;
     private NavigationHelper navigationHelper;
     private RelativeLayout sendlist;
     private AlertDialog disclaimerDialog;
@@ -99,9 +106,12 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout setlist;
     private RelativeLayout supportlist;
     private RelativeLayout locklist;
-    private ImageView receive;
-    private ImageView accounts;
-    private TextView tokenEntryLabel;
+    private View receive;
+    private View accounts;
+    private View bkcRow;
+    private View wrappedBkcRow;
+    private TokenItem wrappedBkc;
+    private String assetWallet;
     private TextView accountstate;
     private TextView tsv_dollar;
     private volatile boolean flag = false;
@@ -140,7 +150,9 @@ public class MainActivity extends AppCompatActivity {
 //        balanceTextView = findViewById(R.id.balanceTextView);
 
         //Save CurrentAccount
-        StorageUtil.saveCurrentAccount(MainActivity.this,"0");
+        if (StorageUtil.getCurrentAccount(this) == null) {
+            StorageUtil.saveCurrentAccount(this, "0");
+        }
 
         accountSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -178,6 +190,9 @@ public class MainActivity extends AppCompatActivity {
                         StorageUtil.saveCurrentAccount(MainActivity.this, String.valueOf(originalIndex));
 
                         String privatekey = split[originalIndex];
+                        if (!TextUtils.equals(assetWallet, SecurityUtil.GetAddress(privatekey))) {
+                            refreshAssetSummary();
+                        }
                         final int currentOriginalIndex = originalIndex; // Save Index
 
                         // IsNewPrivateKey？
@@ -216,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                                             if (finalReturnAccountState !=null && reqOriginalIndex == currentOriginal){
                                                 String balance = finalReturnAccountState.getBalance();
                                                 //Log.d("balance:",balance);调试用
-                                                updateAccountStatusText(balance,finalReturnAccountState.getAccountAddr(), false);
+                                                updateAccountStatusText(balance, SecurityUtil.GetAddress(privatekey), false);
                                             }
                                         }
                                     });
@@ -396,7 +411,10 @@ public class MainActivity extends AppCompatActivity {
                             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
                                 View view = super.getView(position, convertView, parent);
                                 TextView textView = (TextView) view;
-                                textView.setTextSize(17);
+                                textView.setTextSize(24);
+                                textView.setTypeface(null, android.graphics.Typeface.BOLD);
+                                textView.setMaxLines(1);
+                                textView.setEllipsize(android.text.TextUtils.TruncateAt.END);
                                 return view;
                             }
 
@@ -487,13 +505,25 @@ public class MainActivity extends AppCompatActivity {
         send = findViewById(R.id.send);
         swap = findViewById(R.id.swap);
         broker = findViewById(R.id.broker);
-        support = findViewById(R.id.support);
         accountstate=findViewById(R.id.WTextview);
         tsv_dollar=findViewById(R.id.tsv_dollar);
-        nft = findViewById(R.id.nft);
         news = findViewById(R.id.news);
         tokenEntry = findViewById(R.id.token_entry);
-        tokenEntryLabel = findViewById(R.id.token_entry_label);
+        bkcRow = findViewById(R.id.home_bkc_row);
+        TextView bkcLabel = bkcRow.findViewById(R.id.asset_row_name);
+        LinearLayout.LayoutParams labelParams = (LinearLayout.LayoutParams) bkcLabel.getLayoutParams();
+        labelParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        labelParams.weight = 0;
+        bkcLabel.setLayoutParams(labelParams);
+        bkcLabel.setTypeface(bkcLabel.getTypeface(), Typeface.BOLD);
+        TextView bkcBalance = bkcRow.findViewById(R.id.asset_row_balance);
+        bkcBalance.setTypeface(bkcBalance.getTypeface(), Typeface.BOLD);
+        bkcBalance.setMaxLines(1);
+        bkcBalance.setEllipsize(TextUtils.TruncateAt.END);
+        wrappedBkcRow = findViewById(R.id.home_wbkc_row);
+        wrappedBkc = TokenItem.builtInwrappedBkc(wrappedBkcContractHelper.resolveContractAddress(this));
+        AssetBalanceRow.show(bkcRow, TokenItem.nativeBkc(), null);
+        AssetBalanceRow.show(wrappedBkcRow, wrappedBkc, null);
         // EmulatorDAO functionality commented out
         // medalSystem = findViewById(R.id.medalSystem);
         receive = findViewById(R.id.receiveicon);
@@ -574,7 +604,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             Intent intent = new Intent();
-            intent.setClass(MainActivity.this,SwapActivity.class);
+            intent.setClass(MainActivity.this, BrokerSwapActivity.class);
             // Navigate
             startActivity(intent);
         });
@@ -587,12 +617,6 @@ public class MainActivity extends AppCompatActivity {
 
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,BrokerActivity.class);
-            // Navigate
-            startActivity(intent);
-        });
-        nft.setOnClickListener(view -> {
-            Intent intent = new Intent();
-            intent.setClass(MainActivity.this,NFTMainActivity.class);
             // Navigate
             startActivity(intent);
         });
@@ -624,7 +648,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         };
         tokenEntry.setOnClickListener(tokenEntryClickListener);
-        tokenEntryLabel.setOnClickListener(tokenEntryClickListener);
+        findViewById(R.id.home_liquidity).setOnClickListener(view -> {
+            if (!SecurityUtil.isNewPrivateKeyFormat(StorageUtil.getCurrentPrivatekey(this))) {
+                Toast.makeText(this, R.string.main_toast_swap_old_account, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            startActivity(new Intent(this, BrokerLiquidityActivity.class));
+        });
 
         //findViewById(R.id.convertBtn).setOnClickListener(view -> {
             //Intent intent = new Intent();
@@ -689,7 +719,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (finalReturnAccountState !=null && reqOriginalIndex == currentAccountPos){
                                             String balance = finalReturnAccountState.getBalance();
                                             Log.d("balance:",balance);
-                                            updateAccountStatusText(balance, finalReturnAccountState.getAccountAddr(), false);
+                                            updateAccountStatusText(balance, SecurityUtil.GetAddress(privatekey), false);
                                         }
                                     }
                                 });
@@ -738,33 +768,76 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void updateAccountStatusText(final String status,final  String addr, final boolean isOldFormat) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                tsv_dollar.setTextSize(10);
-                accountstate.setTextSize(28);
-                tsv_dollar.setTextColor(Color.BLACK);
-                accountstate.setTextColor(Color.BLACK);
-                if (isOldFormat) {
-                    // Old account type
-                    accountstate.setTextSize(19);
-                    accountstate.setText(R.string.Old_Account_Warning_MainPage_FirstLine);
-                    tsv_dollar.setTextSize(12);
-                    tsv_dollar.setTextColor(Color.RED);
-                    tsv_dollar.setText(R.string.Old_Account_Warning_MainPage_SecondLine);
-                } else {
-                    // New account type
-                    String status1 =status;
-                    if(status1.length()>=10){
-                        status1 = status1.substring(0,10);
-                    }
-                    accountstate.setText(status1+" " + accountstate.getContext().getString(R.string.after_broker_bkc));
-                    tsv_dollar.setText(tsv_dollar.getContext().getString(R.string.main_address_0x)+addr);
-                }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshAssetSummary();
+    }
 
+    private void refreshAssetSummary() {
+        String key = TokenWalletHelper.getCurrentPrivateKey(this);
+        boolean validAccount = key != null && SecurityUtil.isNewPrivateKeyFormat(key);
+        String wallet = validAccount ? SecurityUtil.GetAddress(key) : null;
+        boolean accountChanged = !TextUtils.equals(assetWallet, wallet);
+        assetWallet = wallet;
+        if (accountChanged || !validAccount) {
+            AssetBalanceRow.show(bkcRow, TokenItem.nativeBkc(),
+                    validAccount ? AssetBalanceRow.cachedBalance(this, wallet, TokenItem.nativeBkc()) : null);
+        }
+        if (!validAccount) {
+            AssetBalanceRow.show(wrappedBkcRow, wrappedBkc, null);
+            return;
+        }
+        accountstate.setVisibility(View.GONE);
+        tsv_dollar.setTextColor(Color.BLACK);
+        tsv_dollar.setText(getString(R.string.home_account_address, shortAddress(wallet)));
+        showWrappedBkcBalance(wallet);
+        TokenBalanceCache.prefetchTokenBalance(getApplicationContext(),
+                wrappedBkc.getContractAddress(), true, () -> runOnUiThread(() -> {
+                    if (!isDestroyed() && wallet.equals(assetWallet)) {
+                        showWrappedBkcBalance(wallet);
+                    }
+                }));
+    }
+
+    private void showWrappedBkcBalance(String wallet) {
+        AssetBalanceRow.show(wrappedBkcRow, wrappedBkc,
+                AssetBalanceRow.cachedBalance(this, wallet, wrappedBkc));
+    }
+
+    private String shortAddress(String address) {
+        String full = address.startsWith("0x") ? address : "0x" + address;
+        return full.length() > 14
+                ? full.substring(0, 6) + "…" + full.substring(full.length() - 4)
+                : full;
+    }
+
+    private void updateAccountStatusText(String balance, String address, boolean isOldFormat) {
+        if (isOldFormat) {
+            accountstate.setVisibility(View.VISIBLE);
+            accountstate.setText(R.string.Old_Account_Warning_MainPage_FirstLine);
+            tsv_dollar.setTextColor(Color.RED);
+            tsv_dollar.setText(R.string.Old_Account_Warning_MainPage_SecondLine);
+            return;
+        }
+        if (!TextUtils.equals(address, TokenWalletHelper.getWalletAddress(this))) return;
+        accountstate.setVisibility(View.GONE);
+        tsv_dollar.setTextColor(Color.BLACK);
+        if (!TextUtils.isEmpty(address)) {
+            tsv_dollar.setText(getString(R.string.home_account_address, shortAddress(address)));
+        }
+        TokenItem nativeAsset = TokenItem.nativeBkc();
+        if (!TextUtils.isEmpty(balance) && !TextUtils.isEmpty(address)) {
+            try {
+                BigDecimal amount = new BigDecimal(balance);
+                BigInteger units = amount.movePointRight(nativeAsset.getDecimals()).toBigIntegerExact();
+                TokenBalanceCache.storeAssetBalance(this, address, nativeAsset, units);
+                balance = amount.stripTrailingZeros().toPlainString();
+            } catch (IllegalArgumentException | ArithmeticException ignored) {
+                // Keep the display response when it cannot be converted to chain units.
             }
-        });
+        }
+        AssetBalanceRow.show(bkcRow, nativeAsset, balance);
     }
 
     @Override
