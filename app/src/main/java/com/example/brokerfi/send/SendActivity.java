@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -25,15 +26,35 @@ import android.widget.Toast;
 
 import com.example.brokerfi.R;
 import com.example.brokerfi.main.menu.NavigationHelper;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.example.brokerfi.core.security.SecurityUtil;
-import com.example.brokerfi.core.storage.StorageUtil;
 import com.example.brokerfi.core.util.MyUtil;
 import com.example.brokerfi.main.MainActivity;
+import com.example.brokerfi.core.blockchain.ChainAddressUtil;
+import com.example.brokerfi.core.blockchain.ChainTxHelper;
+import com.example.brokerfi.token.AssetBalanceRow;
+import com.example.brokerfi.token.TokenAddressInputHelper;
+import com.example.brokerfi.token.TokenAmountUtil;
+import com.example.brokerfi.token.TokenBalanceCache;
+import com.example.brokerfi.token.TokenConfig;
+import com.example.brokerfi.token.TokenContractHelper;
+import com.example.brokerfi.token.TokenItem;
+import com.example.brokerfi.token.TokenOutboundNotifyStore;
+import com.example.brokerfi.token.TokenPickerDialog;
+import com.example.brokerfi.token.TokenQrScanHelper;
+import com.example.brokerfi.token.TokenSelection;
+import com.example.brokerfi.token.TokenStore;
+import com.example.brokerfi.token.TokenTxHistoryStore;
+import com.example.brokerfi.token.TokenTxRecord;
+import com.example.brokerfi.token.TokenWalletHelper;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 
 public class SendActivity extends AppCompatActivity {
+    private static final String STATE_ASSET = "send_asset";
+    private TokenItem asset;
+    private String walletAddress;
 
     private ImageView menu;
     private ImageView notificationBtn;
@@ -66,6 +87,10 @@ public class SendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send);
 
+        String contract = savedInstanceState == null
+                ? getIntent().getStringExtra(TokenSelection.EXTRA_CONTRACT)
+                : savedInstanceState.getString(STATE_ASSET);
+        asset = TokenPickerDialog.initialAsset(this, contract);
         intView();
         intEvent();
         findViewById(R.id.dashedBorderView).setOnClickListener(new View.OnClickListener() {
@@ -85,23 +110,6 @@ public class SendActivity extends AppCompatActivity {
         notificationBtn = findViewById(R.id.notificationBtn);
         action_bar = findViewById(R.id.action_bar);
         edt_sendfrom = findViewById(R.id.edt_sendfrom);
-
-
-
-        String account = StorageUtil.getPrivateKey(this);
-        String acc = StorageUtil.getCurrentAccount(this);
-        int i;
-        if (acc == null){
-            i=0;
-        }else {
-            i = Integer.parseInt(acc);
-        }
-        if (account != null) {
-            String[] split = account.split(";");
-            String privatekey = split[i];
-            String fromaddr = SecurityUtil.GetAddress(privatekey);
-            edt_sendfrom.setText(fromaddr);
-        }
 
 
 
@@ -269,34 +277,122 @@ public class SendActivity extends AppCompatActivity {
         }
     }
 
-    private void intEvent(){
-        navigationHelper = new NavigationHelper(menu, action_bar,this,notificationBtn);
+    private void intEvent() {
+        navigationHelper = new NavigationHelper(menu, action_bar, this, notificationBtn);
 
         String scannedData = getIntent().getStringExtra("scannedData");
-        if(scannedData != null){
-            edt_sendto.setText(scannedData);
-        }
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // SendInfo
-                String fromAddress = edt_sendfrom.getText().toString();
-                String toAddress = edt_sendto.getText().toString();
-                String amount = edt_amount.getText().toString();
-                String fee = currentFee;
-                String gasLimit = currentGasLimit;
-                
-                // IsInput？
-                if (toAddress.isEmpty() || amount.isEmpty() || fee.isEmpty()) {
-                    Toast.makeText(SendActivity.this, R.string.send_toast_please_fill_in_all_fields, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                
-                // Toast Confirm
-                showConfirmDialog(fromAddress, toAddress, amount, fee, gasLimit);
-            }
+        if (scannedData != null) applyScannedAddress(scannedData);
+        findViewById(R.id.send_scan).setOnClickListener(v -> TokenQrScanHelper.startCameraScan(this));
+        findViewById(R.id.send_gallery).setOnClickListener(v -> TokenQrScanHelper.startGalleryPicker(this));
+        findViewById(R.id.send_asset_picker).setOnClickListener(v -> {
+            if (tx) return;
+            TokenPickerDialog.show(this, TokenStore.getWalletAssets(this),
+                    asset.getContractAddress(), item -> {
+                        if (asset.getContractAddress().equals(item.getContractAddress())) return;
+                        asset = item;
+                        edt_amount.setText("");
+                        updateAsset();
+                    });
         });
+        button.setOnClickListener(v -> prepareSend());
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String current = TokenWalletHelper.getWalletAddress(this);
+        if (walletAddress != null && !TextUtils.equals(walletAddress, current)) {
+            edt_amount.setText("");
+        }
+        walletAddress = current;
+        edt_sendfrom.setText(ChainAddressUtil.displayAddress(walletAddress));
+        updateAsset();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(STATE_ASSET, asset.getContractAddress());
+    }
+
+    private void updateAsset() {
+        TextView picker = findViewById(R.id.send_asset_picker);
+        picker.setText(getString(R.string.wallet_asset_picker, asset.getSymbol()));
+        TextView amountLabel = findViewById(R.id.send_amount_label);
+        amountLabel.setText(getString(R.string.wallet_amount_for_asset, asset.getSymbol()));
+        findViewById(R.id.send_native_gas).setVisibility(asset.isNative() ? View.VISIBLE : View.GONE);
+        showAvailableBalance();
+        if (asset.isNative() || TextUtils.isEmpty(walletAddress)) return;
+        String wallet = walletAddress;
+        String contract = asset.getContractAddress();
+        TokenBalanceCache.prefetchTokenBalance(getApplicationContext(), contract, true,
+                () -> runOnUiThread(() -> {
+                    if (!isDestroyed() && TextUtils.equals(wallet, walletAddress)
+                            && asset.getContractAddress().equals(contract)) {
+                        showAvailableBalance();
+                    }
+                }));
+    }
+
+    private void showAvailableBalance() {
+        String balance = AssetBalanceRow.cachedBalance(this, walletAddress, asset);
+        String value = balance == null ? getString(R.string.wallet_balance_unavailable)
+                : getString(R.string.wallet_asset_balance, balance, asset.getSymbol());
+        TextView available = findViewById(R.id.send_available_balance);
+        available.setText(getString(R.string.wallet_send_available, value));
+    }
+
+    private void prepareSend() {
+        if (tx) return;
+        String key = TokenWalletHelper.getCurrentPrivateKey(this);
+        if (TextUtils.isEmpty(key) || !SecurityUtil.isNewPrivateKeyFormat(key)) {
+            Toast.makeText(this, R.string.token_no_account, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String wallet = SecurityUtil.GetAddress(key);
+        if (!TextUtils.equals(wallet, walletAddress)) {
+            Toast.makeText(this, R.string.wallet_send_account_changed, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String recipient = edt_sendto.getText().toString().trim();
+        if (!SecurityUtil.isAddressFormatValid(recipient)) {
+            Toast.makeText(this, R.string.token_send_to_invalid, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        TokenItem selected = asset;
+        BigInteger units = TokenAmountUtil.toChainUnits(edt_amount.getText().toString(), selected.getDecimals());
+        if (units == null || units.signum() <= 0 || units.bitLength() > 256) {
+            Toast.makeText(this, R.string.token_invalid_amount, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String fee = currentFee;
+        String gasLimit = currentGasLimit;
+        if (selected.isNative()) {
+            try {
+                if (new BigDecimal(fee).signum() < 0 || Long.parseLong(gasLimit) <= 0) {
+                    throw new NumberFormatException();
+                }
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, R.string.wallet_send_check_gas, Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } else {
+            TokenBalanceCache.Snapshot balance = TokenBalanceCache.resolveSnapshot(this, wallet,
+                    selected.getContractAddress());
+            if (balance == null || balance.tokenBalance.compareTo(units) < 0) {
+                Toast.makeText(this, balance == null ? R.string.token_balance_fetch_failed
+                        : R.string.token_button_insufficient_funds, Toast.LENGTH_SHORT).show();
+                if (balance == null) updateAsset();
+                return;
+            }
+        }
+        showConfirmDialog(key, wallet, ChainAddressUtil.displayAddress(recipient), selected,
+                units, fee, gasLimit);
+    }
+
+    private void applyScannedAddress(String raw) {
+        String address = ChainAddressUtil.parseAddressFromQr(raw);
+        if (address != null) TokenAddressInputHelper.applyAddressToField(edt_sendto, address);
     }
 
     private volatile boolean tx = false;
@@ -308,18 +404,10 @@ public class SendActivity extends AppCompatActivity {
     private TextView tvHash;
     private Button btnCopyHash;
 
-    private void showConfirmDialog(String fromAddress, String toAddress, String amount, String fee, String gasLimit) {
-        //SUM
-        double amountValue = Double.parseDouble(amount);
-        double feeValue = Double.parseDouble(fee);
-        double totalValue = amountValue + feeValue;
-        String totalAmount = String.format("%.6f", totalValue);
-
-        // Creat Dialog
+    private void showConfirmDialog(String key, String wallet, String toAddress, TokenItem selected,
+            BigInteger units, String fee, String gasLimit) {
+        String amount = TokenAmountUtil.fromChainUnits(units, selected.getDecimals());
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        //Dialog Layout
-
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_confirm_transaction, null);
 
         TextView tvFrom = dialogView.findViewById(R.id.tv_from);
@@ -328,13 +416,25 @@ public class SendActivity extends AppCompatActivity {
         TextView tvFee = dialogView.findViewById(R.id.tv_fee);
         TextView tvGasLimit = dialogView.findViewById(R.id.tv_gas_limit);
         TextView tvTotal = dialogView.findViewById(R.id.tv_total);
-        
-        tvFrom.setText(tvFrom.getContext().getString(R.string.dialog_confirm_transaction_dialog_from) + " " + fromAddress);
-        tvTo.setText(tvTo.getContext().getString(R.string.dialog_confirm_transaction_dialog_to) + " " + toAddress);
-        tvAmount.setText(tvAmount.getContext().getString(R.string.dialog_confirm_transaction_amount) + " " + amount + " " + tvAmount.getContext().getString(R.string.after_broker_bkc));
-        tvFee.setText(tvFee.getContext().getString(R.string.dialog_confirm_transaction_gas_price) + " " + fee + " " + tvFee.getContext().getString(R.string.send_activity_gwei));
-        tvGasLimit.setText("Gas Limit: " + gasLimit);
-        tvTotal.setText(tvTotal.getContext().getString(R.string.dialog_confirm_transaction_dialog_total) + " " + totalAmount + " " + tvTotal.getContext().getString(R.string.after_broker_bkc));
+
+        tvFrom.setText(getString(R.string.dialog_confirm_transaction_dialog_from) + " "
+                + ChainAddressUtil.displayAddress(wallet));
+        tvTo.setText(getString(R.string.dialog_confirm_transaction_dialog_to) + " " + toAddress);
+        tvAmount.setText(getString(R.string.dialog_confirm_transaction_amount) + " "
+                + amount + " " + selected.getSymbol());
+        if (selected.isNative()) {
+            BigDecimal maxFee = new BigDecimal(fee).multiply(new BigDecimal(gasLimit)).movePointLeft(9);
+            String total = new BigDecimal(amount).add(maxFee).stripTrailingZeros().toPlainString();
+            tvFee.setText(getString(R.string.dialog_confirm_transaction_gas_price) + " "
+                    + fee + " " + getString(R.string.send_activity_gwei));
+            tvGasLimit.setText("Gas Limit: " + gasLimit);
+            tvTotal.setText(getString(R.string.wallet_send_max_total, total));
+        } else {
+            tvFee.setVisibility(View.GONE);
+            tvGasLimit.setVisibility(View.GONE);
+            tvTotal.setText(getString(R.string.wallet_asset_contract,
+                    ChainAddressUtil.displayAddress(selected.getContractAddress())));
+        }
 
         // Hash row references (hidden until the tx is broadcast)
         hashRow = dialogView.findViewById(R.id.hash_row);
@@ -363,12 +463,20 @@ public class SendActivity extends AppCompatActivity {
             confirmDialog.dismiss();
         });
 
-        // Keep the dialog open after confirm so the tx hash can be shown in place.
         btnConfirm.setOnClickListener(v -> {
-            btnConfirm.setText("Sending...");
+            if (tx) return;
+            if (!TextUtils.equals(key, TokenWalletHelper.getCurrentPrivateKey(this))) {
+                confirmDialog.dismiss();
+                Toast.makeText(this, R.string.wallet_send_account_changed, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            tx = true;
+            confirmDialog.setCancelable(false);
+            btnConfirm.setText(R.string.token_submitting);
             btnConfirm.setEnabled(false);
             btnCancel.setEnabled(false);
-            sendtx2network();
+            new Thread(() -> submitTransfer(key, wallet, toAddress, selected, units, amount, fee, gasLimit),
+                    "wallet-send").start();
         });
 
         confirmDialog = builder.create();
@@ -376,78 +484,68 @@ public class SendActivity extends AppCompatActivity {
         confirmDialog.show();
     }
 
-    private void sendtx2network(){
-        if(tx){
-            Toast.makeText(SendActivity.this,R.string.send_toast_do_not_resubmit,Toast.LENGTH_LONG).show();
-            return;
-        }
-        tx = true;
-        String sendTo = edt_sendto.getText().toString();
-
-        // Verify the format of the destination address
-        if (!SecurityUtil.isAddressFormatValid(sendTo)) {
-            Toast.makeText(SendActivity.this,R.string.send_toast_invalid_address_format,Toast.LENGTH_LONG).show();
-            tx = false;
-            return;
-        }
-
-        // Remove 0x or 0X prefix before sending
-        String formattedSendTo = SecurityUtil.removeAddressPrefix(sendTo);
-
-        String amount = edt_amount.getText().toString();
-        String fee = currentFee;
-        String gasLimit = currentGasLimit;
-
-        String account = StorageUtil.getPrivateKey(this);
-        String acc = StorageUtil.getCurrentAccount(this);
-        int i;
-        if (acc == null){
-            i=0;
-        }else {
-            i = Integer.parseInt(acc);
-        }
-        if (account != null) {
-            String[] split = account.split(";");
-            String privatekey = split[i];
-            new Thread(()->{
-                runOnUiThread(()->{
-                    Toast.makeText(SendActivity.this,R.string.send_toast_submit_success,Toast.LENGTH_LONG).show();
-                });
-                try {
-                    String s = MyUtil.SendTX(privatekey,formattedSendTo,amount,fee,gasLimit);
-                    if(s!=null && s.startsWith("success:")){
-                        // Extract the tx hash returned by eth_sendRawTransaction.
-                        final String hash = s.substring("success:".length());
-                        runOnUiThread(()->{
-                            tvHash.setText("Hash: " + hash);
-                            hashRow.setVisibility(View.VISIBLE);
-                            btnConfirm.setText("Done");
-                            btnConfirm.setEnabled(true);
-                            // Re-purpose the confirm button to close the dialog.
-                            btnConfirm.setOnClickListener(v -> confirmDialog.dismiss());
-                            Toast.makeText(SendActivity.this,"Send successfully",Toast.LENGTH_LONG).show();
-                        });
-
-                    }else{
-                        runOnUiThread(()->{
-                            Toast.makeText(SendActivity.this,"Send failed："+ s,Toast.LENGTH_LONG).show();
-                            if (confirmDialog != null && confirmDialog.isShowing()) {
-                                confirmDialog.dismiss();
-                            }
-                        });
-
-                    }
-                }finally {
-                    tx=false;
+    private void submitTransfer(String key, String wallet, String recipient, TokenItem selected,
+            BigInteger units, String amount, String fee, String gasLimit) {
+        try {
+            String hash;
+            boolean pending = false;
+            String contract = selected.getContractAddress();
+            if (selected.isNative()) {
+                String response = MyUtil.SendTX(key, SecurityUtil.removeAddressPrefix(recipient),
+                        amount, fee, gasLimit);
+                if (response == null || !response.startsWith("success:")) {
+                    throw new IllegalStateException(response);
                 }
-            }).start();
-
+                hash = response.substring("success:".length());
+            } else {
+                hash = ChainTxHelper.sendContractCall(key, contract,
+                        TokenContractHelper.encodeTransfer(recipient, units), "0x0",
+                        TokenConfig.DEMO_GAS_LIMIT, TokenConfig.DEMO_GAS_PRICE);
+                if (TextUtils.isEmpty(hash)) {
+                    throw new IllegalStateException(getString(R.string.token_tx_failed)
+                            + "\n" + ChainTxHelper.getSendFailureHint(this));
+                }
+                ChainTxHelper.ReceiptStatus receipt = ChainTxHelper.waitReceiptStatus(hash, key);
+                if (receipt == ChainTxHelper.ReceiptStatus.FAILED) {
+                    throw new IllegalStateException(getString(R.string.token_tx_failed));
+                }
+                pending = receipt == ChainTxHelper.ReceiptStatus.PENDING;
+                String displayAmount = TokenAmountUtil.formatDisplayAmount(units, selected.getDecimals());
+                TokenTxHistoryStore.add(this, wallet,
+                        TokenTxRecord.send(displayAmount, recipient, hash, contract));
+                TokenOutboundNotifyStore.register(this, wallet, recipient, contract, hash, displayAmount);
+            }
+            TokenBalanceCache.invalidateAfterWrite(wallet, contract);
+            String message = pending ? getString(R.string.token_tx_submitted)
+                    : getString(R.string.token_send_success, selected.getSymbol());
+            runOnUiThread(() -> showTransferResult(hash, message));
+        } catch (Exception e) {
+            String message = TextUtils.isEmpty(e.getMessage()) ? getString(R.string.token_tx_failed) : e.getMessage();
+            runOnUiThread(() -> showTransferResult(null, message));
         }
-
     }
-    
+
+    private void showTransferResult(String hash, String message) {
+        tx = false;
+        if (isFinishing() || isDestroyed()) return;
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        confirmDialog.setCancelable(true);
+        if (hash == null) {
+            confirmDialog.dismiss();
+            return;
+        }
+        edt_amount.setText("");
+        updateAsset();
+        tvHash.setText("Hash: " + hash);
+        hashRow.setVisibility(View.VISIBLE);
+        btnConfirm.setText(android.R.string.ok);
+        btnConfirm.setEnabled(true);
+        btnConfirm.setOnClickListener(v -> confirmDialog.dismiss());
+    }
+
     @Override
     public void onBackPressed() {
+        if (tx) return;
       
         if (confirmDialog != null && confirmDialog.isShowing()) {
             confirmDialog.dismiss();
@@ -462,18 +560,10 @@ public class SendActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
         }
     }
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        IntentResult intentResult = IntentIntegrator.parseActivityResult(
-                requestCode,resultCode,data
-        );
-        if (intentResult.getContents() != null){
-            String scannedData = intentResult.getContents();
-            Intent intent = new Intent(this,SendActivity.class);
-            intent.putExtra("scannedData",scannedData);
-            startActivity(intent);
-
-        }
+        TokenQrScanHelper.handleActivityResult(this, requestCode, resultCode, data,
+                address -> TokenAddressInputHelper.applyAddressToField(edt_sendto, address));
     }
-
 }

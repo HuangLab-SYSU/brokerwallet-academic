@@ -15,7 +15,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.brokerfi.R;
-import com.example.brokerfi.token.TokenItem;
 import com.example.brokerfi.token.TokenStore;
 import com.example.brokerfi.token.TokenSwapActivity;
 import com.example.brokerfi.token.TokenTopBarHelper;
@@ -30,8 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/** Assets → Trade adapter. The homepage's original Swap screen remains independent. */
+/** Swap operations for the configured BrokerSwap deployment. */
 public class BrokerSwapActivity extends AppCompatActivity {
+    private static final String STATE_PAY_ASSET = "pay_asset";
+    private static final String STATE_RECEIVE_ASSET = "receive_asset";
     private final Handler main = new Handler(Looper.getMainLooper());
     private BrokerSwapConfig config;
     private BrokerSwapClient client;
@@ -46,28 +47,25 @@ public class BrokerSwapActivity extends AppCompatActivity {
     private int slippage = 50, readProgress;
     private EditText amount;
     private TextView receive, status, details, paySymbol, receiveSymbol, payBalanceView, receiveBalanceView;
-    private Button submit, slipButton;
+    private Button submit, slipButton, refreshQuote;
     private SwipeRefreshLayout refresh;
-    private LiquidityPanelController liquidity;
     private TradeHistory swapHistory;
-    private final TradeQuoteRequest quoteRequest = new TradeQuoteRequest();
-    private volatile boolean liquidityVisible;
     private final Runnable tick = new Runnable() {
         @Override public void run() {
             if (!resumed) return;
             render();
-            if (!liquidityVisible && !loading && !locked() && error.isEmpty()
-                    && TradeQuoteRequest.autoRefreshDue(SystemClock.elapsedRealtime(), readAt)) fetch();
             main.postDelayed(this, 15000);
         }
     };
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_broker_trade);
+        setContentView(R.layout.activity_broker_swap);
         TokenTopBarHelper.bind(this);
-        ((TextView)findViewById(R.id.token_page_title)).setText(R.string.trade_title);
+        ((TextView)findViewById(R.id.token_page_title)).setText(R.string.token_swap);
         findViewById(R.id.token_info_button).setVisibility(View.GONE);
-        findViewById(R.id.trade_tabs).setVisibility(View.VISIBLE);
+        View header = findViewById(R.id.token_picker_trigger);
+        header.setClickable(false);
+        header.setFocusable(false);
         amount = findViewById(R.id.token_pay_amount); receive = findViewById(R.id.token_receive_amount);
         amount.setSingleLine(true);
         status = findViewById(R.id.broker_swap_status); details = findViewById(R.id.broker_swap_details);
@@ -93,6 +91,10 @@ public class BrokerSwapActivity extends AppCompatActivity {
                 to = SwapAsset.BKC;
             else if (from == SwapAsset.MUSDT) to = SwapAsset.BKC;
         } catch (Exception e) { error = "Deployment configuration unavailable. Trading is disabled."; }
+        if (savedInstanceState != null) {
+            from = SwapAsset.valueOf(savedInstanceState.getString(STATE_PAY_ASSET, from.name()));
+            to = SwapAsset.valueOf(savedInstanceState.getString(STATE_RECEIVE_ASSET, to.name()));
+        }
         findViewById(R.id.token_pay_token_selector).setOnClickListener(v -> select(true));
         findViewById(R.id.token_receive_token_selector).setOnClickListener(v -> select(false));
         findViewById(R.id.token_swap_direction).setOnClickListener(v -> {
@@ -108,71 +110,52 @@ public class BrokerSwapActivity extends AppCompatActivity {
             if (locked()) return;
             new AlertDialog.Builder(this).setTitle("Slippage tolerance")
                     .setItems(new String[]{"0.5% (default)", "1%", "2%", "5% (high risk)"}, (d, which) -> {
-                        quoteRequest.cancel(); slippage = new int[]{50,100,200,500}[which]; render();
+                        slippage = new int[]{50,100,200,500}[which]; render();
                     }).show();
         });
         int[] slipIds={R.id.video_slip_05,R.id.video_slip_1,R.id.video_slip_2,R.id.video_slip_5};
         for(int i=0;i<slipIds.length;i++) {
             final int bps=new int[]{50,100,200,500}[i];
-            findViewById(slipIds[i]).setOnClickListener(v -> {if(!locked() && amm()){quoteRequest.cancel();slippage=bps;render();}});
+            findViewById(slipIds[i]).setOnClickListener(v -> {if(!locked() && amm()){slippage=bps;render();}});
         }
         findViewById(R.id.broker_swap_history).setVisibility(View.GONE);
         swapHistory=new TradeHistory(this,R.id.trade_swap_history_toggle,R.id.trade_swap_history_rows,false);
-        liquidity=new LiquidityPanelController(this,config,() -> confirming || preparing,this::liquidityChanged);
-        findViewById(R.id.trade_tab_swap).setOnClickListener(v -> setLiquidity(false));
-        findViewById(R.id.trade_tab_liquidity).setOnClickListener(v -> setLiquidity(true));
-        refresh.setOnRefreshListener(() -> { if(liquidityVisible)liquidity.fetch(); else fetch(); });
+        refresh.setOnRefreshListener(() -> fetch());
+        refreshQuote = findViewById(R.id.trade_refresh_quote);
+        refreshQuote.setOnClickListener(v -> fetch(true));
         submit.setOnClickListener(v -> confirm());
         amount.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-            public void onTextChanged(CharSequence s, int start, int before, int count) { quoteRequest.cancel(); render(); }
+            public void onTextChanged(CharSequence s, int start, int before, int count) { render(); }
             public void afterTextChanged(Editable s) { }
         });
         render();
-        updateTabs();
     }
+
+    @Override protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(STATE_PAY_ASSET, from.name());
+        outState.putString(STATE_RECEIVE_ASSET, to.name());
+    }
+
     @Override protected void onResume() {
         super.onResume(); resumed = true;
         String current = BrokerSwapConfig.walletId(TokenWalletHelper.getWalletAddress(this));
         if (!current.equalsIgnoreCase(wallet)) {
-            quoteRequest.cancel(); wallet = current; generation++; validatedAt = 0; clearRead();
+            wallet = current; generation++; validatedAt = 0; clearRead();
         }
-        liquidity.onResume(wallet);
-        fetch(); resumePending(); main.removeCallbacks(tick); main.postDelayed(tick, 15000);
+        resumePending(); fetch(); main.removeCallbacks(tick); main.postDelayed(tick, 15000);
     }
-    @Override protected void onPause() { quoteRequest.cancel(); resumed = false; generation++; main.removeCallbacks(tick); if(liquidity!=null)liquidity.onPause(); super.onPause(); }
-    @Override protected void onDestroy() { quoteRequest.cancel(); resumed=false; generation++; main.removeCallbacks(tick); if(liquidity!=null)liquidity.onDestroy(); super.onDestroy(); }
-    private void setLiquidity(boolean value) {
-        if(locked())return;
-        if(value==liquidityVisible)return;
-        generation++; // Stop subsequent reads for the page that is being hidden.
-        quoteRequest.cancel();
-        liquidityVisible=value;
-        findViewById(R.id.trade_swap_content).setVisibility(value?View.GONE:View.VISIBLE);
-        findViewById(R.id.trade_liquidity_content).setVisibility(value?View.VISIBLE:View.GONE);
-        liquidity.setVisible(value); updateTabs(); if(!value)fetch();
-    }
-    private void updateTabs() {
-        findViewById(R.id.trade_tab_swap).setSelected(!liquidityVisible);
-        findViewById(R.id.trade_tab_liquidity).setSelected(liquidityVisible);
-        findViewById(R.id.trade_tab_swap).setEnabled(!locked());
-        findViewById(R.id.trade_tab_liquidity).setEnabled(!locked());
-        ((TextView)findViewById(R.id.trade_tab_swap)).setTypeface(null,!liquidityVisible?android.graphics.Typeface.BOLD:android.graphics.Typeface.NORMAL);
-        ((TextView)findViewById(R.id.trade_tab_liquidity)).setTypeface(null,liquidityVisible?android.graphics.Typeface.BOLD:android.graphics.Typeface.NORMAL);
-    }
-    private void liquidityChanged() {
-        if(isDestroyed())return;
-        if(liquidityVisible)refresh.setRefreshing(liquidity.loading());
-        render(); updateTabs();
-    }
+    @Override protected void onPause() { resumed = false; generation++; main.removeCallbacks(tick); super.onPause(); }
+    @Override protected void onDestroy() { resumed=false; generation++; main.removeCallbacks(tick); super.onDestroy(); }
     private String contract(SwapAsset asset) { return config.tokenAddress(asset, original); }
     private boolean amm() { return SwapAsset.isAmm(from, to); }
     private boolean supported() { return amm() || SwapAsset.isWrap(from, to) || SwapAsset.isUnwrap(from, to); }
-    private boolean locked() { return confirming || preparing || liquidity!=null && liquidity.busy() || SwapOperationRunner.active(wallet); }
+    private boolean locked() { return confirming || preparing || SwapOperationRunner.active(wallet); }
     private boolean sameAccount(String address) { return address.equalsIgnoreCase(BrokerSwapConfig.walletId(TokenWalletHelper.getWalletAddress(this))); }
     private boolean fresh() { return error.isEmpty() && readAt > 0 && SystemClock.elapsedRealtime() - readAt <= SwapPoolSnapshot.MAX_AGE_MS; }
     private void clearRead() { pool = null; readAt = 0; nativeBalance = payBalance = receiveBalance = allowance = gasReserve = null; }
-    private void changed() { quoteRequest.cancel(); generation++; clearRead(); amount.setText(""); render(); fetch(); }
+    private void changed() { generation++; clearRead(); amount.setText(""); render(); fetch(); }
     private void select(boolean paying) {
         if (locked() || config == null) return;
         List<SwapAsset> options = new ArrayList<>();
@@ -196,7 +179,7 @@ public class BrokerSwapActivity extends AppCompatActivity {
     }
     private void fetch() { fetch(false); }
     private void fetch(boolean userRequested) {
-        if(!resumed || liquidityVisible)return;
+        if(!resumed)return;
         if (config == null || wallet.isEmpty() || locked()) { refresh.setRefreshing(false); render(); return; }
         if (loading) return;
         loading = true; readProgress=0; error = ""; render();
@@ -205,9 +188,9 @@ public class BrokerSwapActivity extends AppCompatActivity {
         final boolean needsProtocol = pay == SwapAsset.SWAP_WBKC || out == SwapAsset.SWAP_WBKC || pay == SwapAsset.MUSDT || out == SwapAsset.MUSDT;
         final boolean validate = needsProtocol && (validatedAt == 0 || SystemClock.elapsedRealtime()-validatedAt > 600000);
         TradeReadSession session=new TradeReadSession(
-                () -> resumed && !liquidityVisible && !locked() && id==generation && sameAccount(address),
+                () -> resumed && !locked() && id==generation && sameAccount(address),
                 number -> main.post(() -> {
-                    if(resumed && !liquidityVisible && id==generation && sameAccount(address)) {
+                    if(resumed && id==generation && sameAccount(address)) {
                         readProgress=number; render();
                     }
                 }));
@@ -225,9 +208,9 @@ public class BrokerSwapActivity extends AppCompatActivity {
                     main.post(() -> {
                         // Metadata/code validation succeeded independently of later volatile reads.
                         // A failed reserve/balance read must not restart all eight immutable checks.
-                        if (!isDestroyed() && resumed && !liquidityVisible && id == generation && sameAccount(address)) {
+                        if (!isDestroyed() && resumed && id == generation && sameAccount(address)) {
                             validatedAt = checkedAt;
-                            importProtocolTokens();
+                            TokenStore.importProtocolAssets(this, config);
                         }
                     });
                 }
@@ -247,39 +230,27 @@ public class BrokerSwapActivity extends AppCompatActivity {
                 stage = "Pool";
                 SwapPoolSnapshot snapshot = SwapAsset.isAmm(pay, out) ? readClient.pool(key) : null;
                 main.post(() -> {
-                    loading = false; if(!liquidityVisible)refresh.setRefreshing(false);
+                    loading = false; refresh.setRefreshing(false);
                     if (isDestroyed()) return;
-                    if (!resumed || liquidityVisible || id != generation || !sameAccount(address)) { fetch(); return; }
+                    if (!resumed || id != generation || !sameAccount(address)) { fetch(); return; }
                     pool = snapshot; nativeBalance = nativeAmount; payBalance = payAmount; receiveBalance = receiveAmount;
                     gasReserve = gas; allowance = approved;
                     readAt = snapshot == null ? SystemClock.elapsedRealtime() : snapshot.capturedAtMs; error = "";
                     render();
-                    if (quoteRequest.take() != null && !locked()) {
-                        if (fresh()) confirm();
-                        else { readAt=0; error="Read results expired. Refresh the quote. No transaction was sent."; render(); }
-                    }
                 });
             } catch (Exception e) {
                 final String failedStage = stage, reason=TradeReadFailure.describe(e);
                 final boolean cancelled=e instanceof TradeReadSession.Cancelled;
                 main.post(() -> {
-                    loading = false; if(!liquidityVisible)refresh.setRefreshing(false);
+                    loading = false; refresh.setRefreshing(false);
                     if (isDestroyed()) return;
-                    if(cancelled || !resumed || liquidityVisible || id!=generation || !sameAccount(address)) { fetch(); return; }
-                    quoteRequest.cancel(); readAt = 0;
+                    if(cancelled || !resumed || id!=generation || !sameAccount(address)) { fetch(); return; }
+                    readAt = 0;
                     error = failedStage + "："+reason+". Cached data is for reference only. Refresh the quote. This read did not send a transaction."; render();
                 });
             }
         };
         if (userRequested) TradeReadQueue.executeUser(work); else TradeReadQueue.execute(work);
-    }
-    private void importProtocolTokens() {
-        for (SwapAsset asset : new SwapAsset[]{SwapAsset.SWAP_WBKC, SwapAsset.MUSDT}) {
-            if (TokenStore.contains(this, contract(asset))) continue;
-            TokenItem item = new TokenItem(); item.setContractAddress(contract(asset)); item.setSymbol(asset.symbol);
-            item.setName(asset==SwapAsset.MUSDT ? "BrokerSwap mock USDT (test only)" : "BrokerSwap wrapped BKC");
-            item.setDecimals(asset.decimals); item.setEnabled(true); item.setBuiltIn(false); TokenStore.addCustom(this,item);
-        }
     }
     private boolean needsApproval(BigInteger input) { return amm() && from != SwapAsset.BKC && (allowance == null || allowance.compareTo(input)<0); }
     private String loadingText() {
@@ -306,7 +277,7 @@ public class BrokerSwapActivity extends AppCompatActivity {
         if (nativeBalance==null || nativeBalance.compareTo(requiredGas().add(from==SwapAsset.BKC ? input : BigInteger.ZERO))<0)
             return "Insufficient BKC for the amount and reserved network fee.";
         if (quote!=null && quote.blocked()) return "Price impact is 10% or higher. Trading is blocked.";
-        if (unresolved()!=null) return "An unresolved transaction exists. Check Swap History first.";
+        if (unresolved()!=null) return "An unresolved transaction exists. Tap the transaction status to review.";
         return "";
     }
     private void render() {
@@ -333,13 +304,15 @@ public class BrokerSwapActivity extends AppCompatActivity {
         TradeUi.status(status,statusText,pending!=null || !error.isEmpty() || deferred()!=null);
         status.setOnClickListener(v -> { TokenTxRecord r=unresolved(); if(r==null)r=deferred(); if(r!=null)TradeHistory.showRecord(this,config,wallet,r,() -> { render(); fetch(); }); });
         if(swapHistory!=null)swapHistory.bind(config,wallet,() -> { render(); fetch(); });
-        updateTabs();
         String action=amm()?"Swap":from==SwapAsset.BKC?"Wrap":"Unwrap";
+        boolean quoteFresh = fresh();
+        refreshQuote.setVisibility(quoteFresh || loading ? View.GONE : View.VISIBLE);
+        refreshQuote.setEnabled(!loading && !locked() && pending == null && config != null && !wallet.isEmpty());
         String inputHint="";
         TextView feedback=findViewById(R.id.trade_swap_feedback);
         TextView rate=findViewById(R.id.video_rate);
-        rate.setText(loadingText());
-        receive.setText("0");receive.setTextColor(0xffCBD2DC); details.setText(""); submit.setText(loadingText()); submit.setEnabled(false);
+        rate.setText("—");
+        receive.setText("0");receive.setTextColor(0xffCBD2DC); details.setText(""); submit.setText(action); submit.setEnabled(false);
         if (config == null || wallet.isEmpty()) { TradeUi.hint(feedback,"Wallet or deployment is not ready.",true); return; }
         try {
             BigInteger input = SwapQuoteMath.parseUnits(amount.getText().toString(), from.decimals);
@@ -347,16 +320,18 @@ public class BrokerSwapActivity extends AppCompatActivity {
             BigInteger output = q==null ? amm() ? null : input : q.output;
             receive.setText(TradeDisplay.amount(output,to.decimals));
             receive.setTextColor(output==null?0xffCBD2DC:0xff111827);
-            rate.setText(q==null?amm()?loadingText():"1 "+from.symbol+" = 1 "+to.symbol:TradeDisplay.rate(q).replace(" ≈ "," = ~"));
+            rate.setText(q==null?amm()?"—":"1 "+from.symbol+" = 1 "+to.symbol:TradeDisplay.rate(q).replace(" ≈ "," = ~"));
+            String quoteNotice = "";
+            if (!quoteFresh) {
+                quoteNotice = error.isEmpty() ? "\nQuote expired. Refresh quote to continue."
+                        : "\nPrevious quote — for reference only";
+            }
             details.setText(q==null?amm()?"":"Min received: "+TradeDisplay.amount(input,to.decimals)+" "+to.symbol
                     :"Min received: "+TradeDisplay.amount(q.minimum,q.to.decimals)+" "+q.to.symbol
                         +(q.impactBps>=200?"\nPrice impact: "+q.impactBps/100.0+"% (high risk)":"")
-                        +(!fresh()?"\nStale quote — for reference only":""));
+                        +quoteNotice);
             if (!supported()) inputHint="This asset pair is not supported.";
-            else if (!fresh()) {
-                submit.setText(quoteRequest.pending()?loadingText():"Refresh quote");
-                submit.setEnabled(!locked() && pending==null && !quoteRequest.pending());
-            } else {
+            else if (quoteFresh) {
                 String problem = validation(input,q);
                 inputHint=problem;
                 submit.setText(problem.isEmpty() && needsApproval(input) ? "Approve "+from.symbol : action);
@@ -365,17 +340,21 @@ public class BrokerSwapActivity extends AppCompatActivity {
         } catch (Exception e) { if(amount.getText().length()>0)inputHint="Invalid decimal precision or amount too small."; }
         if (!operation.isEmpty() || locked()) {
             submit.setText(action); submit.setEnabled(false); inputHint="";
+        } else if (loading) {
+            submit.setText(loadingText());
+            submit.setEnabled(false);
         }
         TradeUi.hint(feedback,inputHint,true);
         TradeButtons.state(submit,submit.getText().toString(),submit.isEnabled(),pending!=null || !error.isEmpty() || !loading && readAt>0 && !fresh());
     }
     private void confirm() {
-        if (locked()) return;
+        if (loading || locked()) return;
         try {
             BigInteger input = SwapQuoteMath.parseUnits(amount.getText().toString(),from.decimals);
             if (!sameAccount(wallet) || unresolved()!=null || !supported()) { toast("Check your account, assets and unresolved transactions."); return; }
             if (!fresh()) {
-                quoteRequest.request("SWAP"); fetch(true); render(); return;
+                render();
+                return;
             }
             SwapQuoteMath.Quote q = amm() ? quote(input) : null;
             String problem = validation(input,q); if (!problem.isEmpty()) { toast(problem); return; }
@@ -476,15 +455,23 @@ public class BrokerSwapActivity extends AppCompatActivity {
         if (isDestroyed()) return;
         toast("APPROVAL".equals(record.type) && "SUCCESS".equals(record.status)
                 ? "Approval successful" : "SUCCESS".equals(record.status)?"Swap successful":VideoTradePresentation.status(record.status));
-        quoteRequest.cancel(); readAt=0; fetch(); render();
-        liquidity.changed();
+        readAt=0; fetch(); render();
         if ("SUCCESS".equals(record.status) && !"APPROVAL".equals(record.type)) amount.setText("");
     }
     private void resumePending() {
         if (config==null || wallet.isEmpty()) return;
         TokenTxRecord pending=unresolved();
         if (pending!=null && SwapReceipt.validHash(pending.txHash))
-            SwapOperationRunner.resume(getApplicationContext(),config,wallet,pending,this::completed);
+            SwapOperationRunner.resume(getApplicationContext(), config, wallet, pending, record -> {
+                if (isDestroyed()) return;
+                if (record.isLiquidity()) {
+                    readAt = 0;
+                    fetch();
+                    render();
+                } else {
+                    completed(record);
+                }
+            });
     }
     private void toast(String message) { Toast.makeText(this,message,Toast.LENGTH_LONG).show(); }
 }

@@ -181,6 +181,17 @@ public final class TokenBalanceCache {
         }
     }
 
+    /** Caches a successful per-asset read without changing the active wallet snapshot. */
+    public static void storeAssetBalance(Context context, String walletAddress,
+                                         TokenItem asset, BigInteger units) {
+        String wallet = ChainAddressUtil.normalizeAddress(walletAddress);
+        String contract = contractKey(asset.getContractAddress());
+        synchronized (LOCK) {
+            tokenSnapshots.put(snapshotKey(wallet, contract), new Snapshot(wallet, contract, null, units));
+            if (!asset.isNative()) persistSnapshotWei(context, wallet, contract, units);
+        }
+    }
+
     public static void invalidate() {
         synchronized (LOCK) {
             clearCacheStateLocked();

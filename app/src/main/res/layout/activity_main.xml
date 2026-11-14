@@ -1,331 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:fitsSystemWindows="true"
-    tools:context=".main.MainActivity">
+    android:orientation="vertical">
 
-    <!-- Top Bar -->
-    <include
-        android:id="@+id/action_bar"
-        layout="@layout/topbar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <include android:id="@+id/action_bar" layout="@layout/topbar" />
 
-    <!-- Account Spinner -->
-    <Spinner
-        android:id="@+id/accountSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/action_bar"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <!-- Welcome Text Section -->
-    <TextView
-        android:id="@+id/WTextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/work_sans_black"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:text="@string/activity_main_add_account_first"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/accountSpinner"
-        app:layout_constraintBottom_toTopOf="@+id/icon_grid_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Subtitle Text -->
-    <TextView
-        android:id="@+id/tsv_dollar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/activity_main_add_account_tip"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:textColor="#FF0000"
-        android:textSize="13sp"
-        app:layout_constraintTop_toBottomOf="@id/WTextview"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Icon Grid Container (2 rows × 4 columns) -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/icon_grid_container"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="34dp"
-        app:layout_constraintTop_toBottomOf="@id/tsv_dollar"
-        app:layout_constraintBottom_toTopOf="@id/tv_disclaimer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <!-- ==================== ROW 1: Faucet, Send, Receive, Swap ==================== -->
-
-        <!-- Row 1 Icons -->
-        <ImageView
-            android:id="@+id/buy"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/plus_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/send"
-            app:layout_constraintHorizontal_chainStyle="packed" />
-
-        <ImageView
-            android:id="@+id/send"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/send_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/buy"
-            app:layout_constraintEnd_toStartOf="@+id/receiveicon" />
-
-        <ImageView
-            android:id="@+id/receiveicon"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/qrcode_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/send"
-            app:layout_constraintEnd_toStartOf="@+id/swap" />
-
-        <ImageView
-            android:id="@+id/swap"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/transaction_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/receiveicon"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Row 1 Labels -->
-        <TextView
-            android:id="@+id/label_faucet"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="@string/activity_main_faucet"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/buy"
-            app:layout_constraintStart_toStartOf="@id/buy"
-            app:layout_constraintEnd_toEndOf="@id/buy" />
-
-        <TextView
-            android:id="@+id/label_send"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="@string/activity_main_send"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/send"
-            app:layout_constraintStart_toStartOf="@id/send"
-            app:layout_constraintEnd_toEndOf="@id/send" />
-
-        <TextView
-            android:id="@+id/label_receive"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="@string/activity_main_receive"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/receiveicon"
-            app:layout_constraintStart_toStartOf="@id/receiveicon"
-            app:layout_constraintEnd_toEndOf="@id/receiveicon" />
-
-        <TextView
-            android:id="@+id/label_swap"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="@string/activity_main_swap"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/swap"
-            app:layout_constraintStart_toStartOf="@id/swap"
-            app:layout_constraintEnd_toEndOf="@id/swap" />
-
-        <!-- Spacer between Row 1 and Row 2 -->
-        <View
-            android:id="@+id/spacer1"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            app:layout_constraintTop_toBottomOf="@id/label_faucet"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- ==================== ROW 2: Account, Broker, News, Community ==================== -->
-
-        <!-- Row 2 Icons (4 icons in a row) -->
-        <ImageView
-            android:id="@+id/accounts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/user_icon"
-            app:layout_constraintTop_toBottomOf="@id/spacer1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/broker"
-            app:layout_constraintHorizontal_chainStyle="packed" />
-
-        <ImageView
-            android:id="@+id/broker"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/line_chart_icon"
-            app:layout_constraintTop_toBottomOf="@id/spacer1"
-            app:layout_constraintStart_toEndOf="@id/accounts"
-            app:layout_constraintEnd_toStartOf="@+id/news" />
-
-        <ImageView
-            android:id="@+id/news"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/newspaper_icon"
-            app:layout_constraintTop_toBottomOf="@id/spacer1"
-            app:layout_constraintStart_toEndOf="@id/broker"
-            app:layout_constraintEnd_toStartOf="@+id/community" />
-
-        <!-- Community moved to Row 2 (position 4) -->
-        <ImageView
-            android:id="@+id/community"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/dao_team_icon"
-            app:layout_constraintTop_toBottomOf="@id/spacer1"
-            app:layout_constraintStart_toEndOf="@id/news"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Row 2 Labels -->
-        <TextView
-            android:id="@+id/label_account"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="@string/activity_main_account"
-            android:textColor="#000000"
-            android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@id/accounts"
-            app:layout_constraintStart_toStartOf="@id/accounts"
-            app:layout_constraintEnd_toEndOf="@id/accounts" />
-
-        <TextView
-            android:id="@+id/label_broker"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="@string/activity_main_brokerfi_spaced"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/broker"
-            app:layout_constraintStart_toStartOf="@id/broker"
-            app:layout_constraintEnd_toEndOf="@id/broker" />
-
-        <TextView
-            android:id="@+id/label_news"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="@string/activity_main_news"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/news"
-            app:layout_constraintStart_toStartOf="@id/news"
-            app:layout_constraintEnd_toEndOf="@id/news" />
-
-        <TextView
-            android:id="@+id/label_community"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="@string/activity_main_community"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/community"
-            app:layout_constraintStart_toStartOf="@id/community"
-            app:layout_constraintEnd_toEndOf="@id/community" />
-
-        <View
-            android:id="@+id/spacer2"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="16dp"
-            app:layout_constraintTop_toBottomOf="@id/label_community"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageView
-            android:id="@+id/token_entry"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:contentDescription="@string/token_home_label"
-            android:focusable="true"
-            android:src="@drawable/tokens_home_icon"
-            app:layout_constraintTop_toBottomOf="@id/spacer2"
-            app:layout_constraintStart_toStartOf="@id/accounts"
-            app:layout_constraintEnd_toEndOf="@id/accounts" />
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="12dp">
 
-        <TextView
-            android:id="@+id/token_entry_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="@string/token_home_label"
-            android:textColor="#000000"
-            android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@id/token_entry"
-            app:layout_constraintStart_toStartOf="@id/token_entry"
-            app:layout_constraintEnd_toEndOf="@id/token_entry" />
+            <Spinner
+                android:id="@+id/accountSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp" />
 
-        <!-- NFT icon hidden (visibility=gone) for compatibility with Java code -->
-        <ImageView
-            android:id="@+id/nft"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            android:src="@drawable/codepen_icon"
-            app:layout_constraintTop_toBottomOf="@id/token_entry_label"
-            app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/WTextview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/activity_main_add_account_first"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tsv_dollar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/activity_main_add_account_tip"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
 
-    <!-- Disclaimer Text at Bottom -->
-    <TextView
-        android:id="@+id/tv_disclaimer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
-        android:gravity="center"
-        android:text="@string/activity_main_disclaimer_agreement"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/send"
+                    style="@style/WalletHomeAction"
+                    android:drawableTop="@drawable/send_icon"
+                    android:text="@string/activity_main_send" />
+
+                <TextView
+                    android:id="@+id/receiveicon"
+                    style="@style/WalletHomeAction"
+                    android:drawableTop="@drawable/qrcode_icon"
+                    android:text="@string/activity_main_receive" />
+
+                <TextView
+                    android:id="@+id/swap"
+                    style="@style/WalletHomeAction"
+                    android:drawableTop="@drawable/transaction_icon"
+                    android:text="@string/activity_main_swap" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/token_home_label"
+                    android:textColor="@android:color/black"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/token_entry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingHorizontal="8dp"
+                    android:text="@string/home_view_all"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/wallet_asset_card"
+                android:divider="@drawable/wallet_asset_divider"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+                <include android:id="@+id/home_bkc_row" layout="@layout/wallet_asset_row" />
+                <include android:id="@+id/home_wbkc_row" layout="@layout/wallet_asset_row" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/home_liquidity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/wallet_asset_card"
+                android:drawableEnd="@drawable/right"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/ic_pool_stack"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:paddingHorizontal="12dp"
+                android:text="@string/home_provide_liquidity"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/accounts"
+                    style="@style/WalletHomeAction"
+                    android:drawableTop="@drawable/user_icon"
+                    android:text="@string/activity_main_account" />
+
+                <TextView
+                    android:id="@+id/broker"
+                    style="@style/WalletHomeAction"
+                    android:drawableTop="@drawable/line_chart_icon"
+                    android:text="@string/activity_main_brokerfi" />
+
+                <TextView
+                    android:id="@+id/news"
+                    style="@style/WalletHomeAction"
+                    android:drawableTop="@drawable/newspaper_icon"
+                    android:text="@string/activity_main_news" />
+
+                <TextView
+                    android:id="@+id/community"
+                    style="@style/WalletHomeAction"
+                    android:drawableTop="@drawable/dao_team_icon"
+                    android:text="@string/activity_main_community" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:background="?attr/selectableItemBackground"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/plus_icon"
+                android:focusable="true"
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:paddingHorizontal="8dp"
+                android:text="@string/home_test_faucet"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tv_disclaimer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/activity_main_disclaimer_agreement"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

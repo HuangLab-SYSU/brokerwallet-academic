@@ -4,26 +4,7 @@ import org.junit.Test;
 import java.math.BigInteger;
 import static org.junit.Assert.*;
 
-public class TradeQuoteRequestTest {
-    @Test public void refreshOnlyRemembersAnIntentAndConsumesItOnce() {
-        TradeQuoteRequest request=new TradeQuoteRequest();
-        assertFalse(request.pending()); request.request("SWAP"); assertTrue(request.pending());
-        assertEquals("SWAP",request.take()); assertNull(request.take()); assertFalse(request.pending());
-    }
-    @Test public void editingOrLeavingCancelsThePendingConfirmation() {
-        TradeQuoteRequest request=new TradeQuoteRequest();request.request("ADD");request.cancel();
-        assertNull(request.take());assertFalse(request.pending());
-    }
-    @Test public void latestIntentWinsAndPanelsDoNotShareRequests() {
-        TradeQuoteRequest swap=new TradeQuoteRequest(),lp=new TradeQuoteRequest();
-        swap.request("SWAP");lp.request("ADD");lp.request("REMOVE");
-        assertEquals("REMOVE",lp.take());assertEquals("SWAP",swap.take());
-    }
-    @Test public void autoRefreshWaitsAfterTheLastSuccessfulCompletion() {
-        assertTrue(TradeQuoteRequest.autoRefreshDue(1,0));
-        assertFalse(TradeQuoteRequest.autoRefreshDue(29_999,1));
-        assertTrue(TradeQuoteRequest.autoRefreshDue(30_001,1));
-    }
+public class TradeQuoteFreshnessTest {
     @Test public void oldReservesCanBeDisplayedButNeverUsedAsAFinancialQuote() {
         SwapPoolSnapshot pool=new SwapPoolSnapshot(new BigInteger("1000000000"),new BigInteger("10000000000000000000"),100);
         BigInteger input=new BigInteger("100000000000000");

@@ -32,26 +32,48 @@ public class TradeLayoutTest {
     private void main(Runnable action) {InstrumentationRegistry.getInstrumentation().runOnMainSync(action);}
     @Test public void legacySwapDefaultsHideTradeOnlyUi() {main(() -> {
         View root=inflate(R.layout.activity_token_swap);
-        assertNull(root.findViewById(R.id.trade_tabs));
         assertNull(root.findViewById(R.id.broker_swap_panel));
         assertNull(root.findViewById(R.id.trade_liquidity_content));
         assertFalse(root.findViewById(R.id.token_confirm_button).isEnabled());
         assertNull(root.findViewById(R.id.video_rate));
     });}
-    @Test public void dedicatedTradeLayoutPreservesAllControlsAndDemoText() {main(() -> {
-        View root=inflate(R.layout.activity_broker_trade);
+    @Test public void swapAndLiquidityLayoutsKeepTheirOwnControls() {main(() -> {
+        View swapPage = inflate(R.layout.activity_broker_swap);
+        View liquidityPage = inflate(R.layout.activity_broker_liquidity);
+        Button swap = swapPage.findViewById(R.id.token_confirm_button);
+        Button refreshQuote = swapPage.findViewById(R.id.trade_refresh_quote);
+        Button refreshPoolQuote = liquidityPage.findViewById(R.id.lp_refresh_quote);
+        assertEquals("Swap", swap.getText().toString());
+        assertFalse(swap.isEnabled());
+        assertEquals("Refresh quote", refreshQuote.getText().toString());
+        assertEquals("Refresh quote", refreshPoolQuote.getText().toString());
+        assertNotNull(swapPage.findViewById(R.id.token_pay_token_selector));
+        assertNotNull(swapPage.findViewById(R.id.token_receive_token_selector));
+        assertNull(swapPage.findViewById(R.id.trade_liquidity_content));
+        assertNull(liquidityPage.findViewById(R.id.trade_swap_content));
+        assertNotNull(swapPage.findViewById(R.id.trade_swap_history_toggle));
+        assertNotNull(liquidityPage.findViewById(R.id.lp_history_toggle));
         for(int id:new int[]{R.id.lp_approve_add,R.id.lp_add,R.id.lp_approve_remove,R.id.lp_remove}) {
-            assertTrue(root.findViewById(id) instanceof Button);assertFalse(root.findViewById(id).isEnabled());
+            assertTrue(liquidityPage.findViewById(id) instanceof Button);
+            assertFalse(liquidityPage.findViewById(id).isEnabled());
         }
-        assertEquals("Provide Liquidity",((TextView)root.findViewById(R.id.trade_tab_liquidity)).getText().toString());
-        assertEquals("Enter one amount to preview the pool ratio",((TextView)root.findViewById(R.id.lp_add)).getText().toString());
-        assertNotNull(root.findViewById(R.id.lp_pool_share));assertNotNull(root.findViewById(R.id.lp_position_change));
-        assertEquals(View.GONE,root.findViewById(R.id.lp_history_rows).getVisibility());
+        assertEquals("Enter one amount to preview the pool ratio",
+                ((TextView)liquidityPage.findViewById(R.id.lp_add)).getText().toString());
+        assertNotNull(liquidityPage.findViewById(R.id.lp_pool_share));
+        assertNotNull(liquidityPage.findViewById(R.id.lp_position_change));
+        assertEquals(View.GONE,liquidityPage.findViewById(R.id.lp_history_rows).getVisibility());
     });}
-    @Test public void assetsUsesTradeActionAndPreservesSendReceive() {main(() -> {
-        View root=inflate(R.layout.activity_token_detail);
-        assertNotNull(root.findViewById(R.id.token_action_send));assertNotNull(root.findViewById(R.id.token_action_receive));
-        assertNotNull(root.findViewById(R.id.token_action_wrap));assertNotNull(root.findViewById(R.id.token_manage_tokens_button));
+    @Test public void homeOwnsActionsAndAssetsShowsTableAndManagement() {main(() -> {
+        View home=inflate(R.layout.activity_main);
+        assertNotNull(home.findViewById(R.id.send));assertNotNull(home.findViewById(R.id.receiveicon));
+        assertNotNull(home.findViewById(R.id.swap));assertNotNull(home.findViewById(R.id.home_liquidity));
+        assertNotNull(home.findViewById(R.id.home_bkc_row));assertNotNull(home.findViewById(R.id.home_wbkc_row));
+        View assets=inflate(R.layout.activity_token_detail);
+        assertNotNull(assets.findViewById(R.id.wallet_asset_table));
+        Button manage = assets.findViewById(R.id.token_manage_tokens_button);
+        assertEquals("Manage tokens", manage.getText().toString());
+        assertNotNull(manage.getBackground());
+        assertFalse(allText(assets).contains("History"));
         assertEquals("Assets",context().getString(R.string.token_home_label));
     });}
     @Test public void restoredHomepageLayoutRemainsAvailable() {main(() -> assertNotNull(inflate(R.layout.activity_swap)));}
@@ -68,15 +90,14 @@ public class TradeLayoutTest {
         final int[] clicks={0};LinearLayout row=TradeVideoUi.historyRow(large,r,v -> clicks[0]++);
         measure(row,280,0);readable(row);row.performClick();assertEquals(1,clicks[0]);
         assertTrue(allText(row).contains("Do not send again"));assertFalse(allText(row).contains("详情"));
-        View root=LayoutInflater.from(large).inflate(R.layout.activity_broker_trade,null,false);
-        root.findViewById(R.id.trade_swap_content).setVisibility(View.GONE);root.findViewById(R.id.trade_liquidity_content).setVisibility(View.VISIBLE);
+        View root=LayoutInflater.from(large).inflate(R.layout.activity_broker_liquidity,null,false);
         measure(root,320,640);TextView button=root.findViewById(R.id.lp_add);
         assertTrue(button.getHeight()>=button.getLayout().getHeight()+button.getCompoundPaddingTop()+button.getCompoundPaddingBottom());
     });}
     @Test public void cancelAndConfirmHaveSeparateCallbacksAndDetailsCloseWorks() {
         try(ActivityScenario<TradeVisualPreviewActivity> scenario=ActivityScenario.launch(TradeVisualPreviewActivity.class)) {
             scenario.onActivity(activity -> {
-                activity.setContentView(R.layout.activity_broker_trade);final int[] sends={0};
+                activity.setContentView(R.layout.activity_broker_swap);final int[] sends={0};
                 AlertDialog cancel=TradeVideoUi.confirmation(activity,"Confirm swap","Pay: 10 BKC\nMin Receive: 46.55758 mUSDT",(d,w) -> sends[0]++);
                 TradeVideoUi.show(cancel);cancel.getWindow().getDecorView().findViewWithTag("video-cancel").performClick();
                 assertEquals(0,sends[0]);assertFalse(cancel.isShowing());
@@ -112,7 +133,7 @@ public class TradeLayoutTest {
         try(ActivityScenario<TradeVisualPreviewActivity> scenario=ActivityScenario.launch(TradeVisualPreviewActivity.class)) {
             final AlertDialog[] shown={null};final int[] approvals={0};
             scenario.onActivity(activity -> {
-                activity.setContentView(R.layout.activity_broker_trade);
+                activity.setContentView(R.layout.activity_broker_swap);
                 shown[0]=TradeVideoUi.approval(activity,"mUSDT","46.9",(d,w) -> approvals[0]++);TradeVideoUi.showApproval(shown[0]);
             });
             InstrumentationRegistry.getInstrumentation().waitForIdleSync();
@@ -167,23 +188,20 @@ public class TradeLayoutTest {
         View positionPanel=(View)lp.findViewById(R.id.lp_pooled_bkc).getParent().getParent().getParent();
         int y=positionPanel.getTop()+lp.findViewById(R.id.trade_liquidity_content).getTop();lpScroll.scrollTo(0,y);
         save(lp,"07-liquidity-position-reference.png");lpScroll.scrollTo(0,lpScroll.getChildAt(0).getHeight());save(lp,"08-liquidity-history-reference.png");
-        View assets=inflate(R.layout.activity_token_detail);set(assets,R.id.token_page_title,"mock USDT");set(assets,R.id.token_icon,"M");set(assets,R.id.token_balance_text,"197,972.57 mUSDT");
-        assets.findViewById(R.id.token_picker_arrow).setVisibility(View.VISIBLE);
-        assets.findViewById(R.id.token_empty_section).setVisibility(View.GONE);
-        androidx.recyclerview.widget.RecyclerView list=assets.findViewById(R.id.token_tx_list);list.setVisibility(View.VISIBLE);list.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(c));
-        com.example.brokerfi.token.TokenTxAdapter adapter=new com.example.brokerfi.token.TokenTxAdapter();java.util.List<TokenTxRecord> records=new java.util.ArrayList<>();
-        for(int i=0;i<4;i++){TokenTxRecord r=example();if(i<3){r.type="SEND";r.status=null;r.amountDisplay=i==1?"100":"1,000";r.contractAddress="fixture";r.fromSymbol="mUSDT";}records.add(r);}
-        // New-style fixture records avoid token metadata/storage resolution in the adapter.
-        for(TokenTxRecord r:records)if("SEND".equals(r.type))r.status="SUCCESS";
-        adapter.setRecords(records);list.setAdapter(adapter);measure(assets,360,756);save(assets,"09-assets-reference.png");
+        View assets=inflate(R.layout.activity_token_detail);
+        LinearLayout table=assets.findViewById(R.id.wallet_asset_table);
+        for (String[] values : new String[][]{{"BKC", "21.0840685 BKC"}, {"wBKC", "4.32 wBKC"}, {"mUSDT", "197,972.57 mUSDT"}}) {
+            View asset=LayoutInflater.from(c).inflate(R.layout.wallet_asset_row,table,false);
+            set(asset,R.id.asset_row_name,values[0]);set(asset,R.id.asset_row_balance,values[1]);
+            table.addView(asset);
+        }
+        measure(assets,360,756);save(assets,"09-assets-reference.png");
     });}
     private View trade(boolean liquidity) {
-        View root=inflate(R.layout.activity_broker_trade);
-        root.findViewById(R.id.trade_tabs).setVisibility(View.VISIBLE);root.findViewById(R.id.broker_swap_panel).setVisibility(View.VISIBLE);
+        View root=inflate(liquidity ? R.layout.activity_broker_liquidity : R.layout.activity_broker_swap);
         root.findViewById(R.id.token_info_button).setVisibility(View.GONE);
-        set(root,R.id.token_page_title,"Trade");root.findViewById(R.id.trade_tab_swap).setSelected(!liquidity);root.findViewById(R.id.trade_tab_liquidity).setSelected(liquidity);
-        ((TextView)root.findViewById(liquidity?R.id.trade_tab_liquidity:R.id.trade_tab_swap)).setTypeface(null,android.graphics.Typeface.BOLD);
-        root.findViewById(R.id.trade_swap_content).setVisibility(liquidity?View.GONE:View.VISIBLE);root.findViewById(R.id.trade_liquidity_content).setVisibility(liquidity?View.VISIBLE:View.GONE);return root;
+        set(root,R.id.token_page_title,liquidity ? "Provide Liquidity" : "Swap");
+        return root;
     }
     private TokenTxRecord example() {
         TokenTxRecord r=new TokenTxRecord();r.type="SWAP";r.status="SUCCESS";r.amountDisplay="10";r.actualOutput="46.79";r.fromSymbol="BKC";r.toSymbol="mUSDT";

@@ -146,6 +146,8 @@ public class NavigationHelper{
         setlist = customView.findViewById(R.id.setlist);
         supportlist = customView.findViewById(R.id.supportlist);
         about = customView.findViewById(R.id.about);
+        customView.findViewById(R.id.menu_nft).setOnClickListener(v ->
+                context.startActivity(new Intent(context, com.example.brokerfi.nft.NFTMainActivity.class)));
         locklist = customView.findViewById(R.id.locklist);
         about.setOnClickListener(v -> {
             context.startActivity(new Intent(context, AboutActivity.class));

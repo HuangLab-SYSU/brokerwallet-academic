@@ -229,7 +229,7 @@
             android:name=".swap.BrokerSwapActivity"
             android:exported="false" />
         <activity
-            android:name=".token.TokenSendActivity"
+            android:name=".swap.BrokerLiquidityActivity"
             android:exported="false" />
         <activity
             android:name=".token.TokenInfoActivity"

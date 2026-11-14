@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="trade_title">Trade</string>
+    <string name="trade_liquidity_title">Provide Liquidity</string>
+    <string name="trade_refresh_quote">Refresh quote</string>
 </resources>

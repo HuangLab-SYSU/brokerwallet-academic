@@ -2,7 +2,7 @@
 
 ## Scope
 
-Assets extends the existing token screen with native BKC and a Trade entry. Trade reproduces the reference demo with Swap and Provide Liquidity tabs, confirmation dialogs, and collapsible transaction history. The original homepage Swap entry remains unchanged.
+The wallet home screen provides direct access to Send, Receive, Swap, and Provide Liquidity. It previews BKC and wBKC balances and links to the full asset list and token management. Swap and Provide Liquidity open on separate pages with confirmation dialogs and their own transaction history.
 
 The integration reuses wallet accounts, signing, network configuration, token management, and per-wallet transaction history. It does not deploy contracts or change the server. Arbitrary imported tokens are not automatically tradable.
 
@@ -42,7 +42,7 @@ The debug-only layout fixture can be tested on an emulator without funded accoun
 
 ## Current limitations
 
-Dash signed queries can take several minutes. Refreshing a quote does not submit a transaction; stale quotes require a refresh before execution. The current ERC-20 asset page may display zero when a balance query fails, so zero on that page alone does not establish an on-chain balance. Only the configured pool and routes are integrated. Additional wBKC routes have not all received funded live acceptance. Display and historical-record edge cases remain follow-up work.
+Dash signed queries can take several minutes. Refresh stale quotes before opening the confirmation dialog. The asset list shows a dash when a balance is unavailable and no cached value exists. Only the configured pool and routes are integrated. Additional wBKC routes have not all received funded live acceptance. Display and historical-record edge cases remain follow-up work.
 
 ## Reference
 

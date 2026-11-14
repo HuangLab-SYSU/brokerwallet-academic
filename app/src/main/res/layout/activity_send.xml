@@ -28,6 +28,14 @@
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@id/action_bar" />
 
+    <TextView
+        android:id="@+id/send_asset_picker"
+        style="@style/WalletAssetPicker"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
     <!-- Description Text -->
     <TextView
         android:id="@+id/tv_description"
@@ -38,14 +46,14 @@
         android:text="@string/activity_send_transfer_tip"
         android:textSize="@dimen/text_size_normal"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@id/send_asset_picker" />
 
     <!-- Scrollable Form Area -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:paddingHorizontal="16dp"
         app:layout_constraintTop_toBottomOf="@id/tv_description"
         app:layout_constraintBottom_toTopOf="@id/btn_send">
@@ -98,8 +106,26 @@
                 android:paddingBottom="8dp"
                 android:textSize="@dimen/text_size_normal" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/send_scan"
+                    style="@style/WalletSendAddressAction"
+                    android:text="@string/token_scan" />
+
+                <TextView
+                    android:id="@+id/send_gallery"
+                    style="@style/WalletSendAddressAction"
+                    android:text="@string/token_scan_from_gallery" />
+            </LinearLayout>
+
             <!-- Amount Label -->
             <TextView
+                android:id="@+id/send_amount_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -122,215 +148,230 @@
                 android:paddingBottom="8dp"
                 android:textSize="@dimen/text_size_normal" />
 
-            <!-- Fee Label -->
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/send_available_balance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Gas Price"
-                android:textColor="#000000"
-                android:textSize="@dimen/text_size_normal" />
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
 
-            <!-- Gas Price Value Row -->
             <LinearLayout
-                android:id="@+id/fee_value_row"
+                android:id="@+id/send_native_gas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/edt_fee_value"
-                    android:layout_width="96dp"
-                    android:layout_height="@dimen/edittext_height"
-                    android:background="@drawable/custom_edittext_border"
-                    android:gravity="center"
-                    android:inputType="numberDecimal"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="50"
+                <!-- Fee Label -->
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Gas Price"
                     android:textColor="#000000"
                     android:textSize="@dimen/text_size_normal" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Gwei"
-                    android:textColor="#000000"
-                    android:textSize="@dimen/text_size_normal" />
-            </LinearLayout>
-
-            <!-- Gas Price Slider -->
-            <SeekBar
-                android:id="@+id/seekbar_fee"
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
-                android:layout_marginTop="4dp"
-                android:max="200"
-                android:progress="50"
-                android:thumb="@drawable/seekbar_thumb_black"
-                android:progressDrawable="@drawable/seekbar_progress_black"
-                android:splitTrack="false" />
- 
-            <!-- Slider Labels (clickable presets, positioned at actual Gwei values) -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp">
-
-                <!-- spacer: 0 -> Slow (20/200) -->
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="20" />
-
-                <TextView
-                    android:id="@+id/label_slow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Slow"
-                    android:textColor="#888888"
-                    android:textSize="20sp"
-                    android:clickable="true"
-                    android:focusable="true" />
-
-                <!-- spacer: Slow(20) -> Medium(50) = 30/200 -->
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="30" />
-
-                <TextView
-                    android:id="@+id/label_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Medium"
-                    android:textColor="#888888"
-                    android:textSize="20sp"
-                    android:clickable="true"
-                    android:focusable="true" />
-
-                <!-- spacer: Medium(50) -> Fast(100) = 50/200 -->
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="50" />
-
-                <TextView
-                    android:id="@+id/label_fast"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Fast"
-                    android:textColor="#888888"
-                    android:textSize="20sp"
-                    android:clickable="true"
-                    android:focusable="true" />
-
-                <!-- spacer: Fast(100) -> end(200) = 100/200 -->
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="100" />
-
-            </LinearLayout>
-
-            <!-- Gas Limit Label -->
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Gas Limit"
-                android:textColor="#000000"
-                android:textSize="@dimen/text_size_normal" />
-
-            <!-- Gas Limit Value Row -->
-            <LinearLayout
-                android:id="@+id/gas_limit_row"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <EditText
-                    android:id="@+id/edt_gas_limit"
-                    android:layout_width="96dp"
-                    android:layout_height="@dimen/edittext_height"
-                    android:background="@drawable/custom_edittext_border"
-                    android:enabled="false"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:text="21000"
-                    android:textColor="#999999"
-                    android:textSize="@dimen/text_size_normal" />
-
+                <!-- Gas Price Value Row -->
                 <LinearLayout
-                    android:id="@+id/gas_limit_stepper"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/edittext_height"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="8dp">
+                    android:id="@+id/fee_value_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
-                    <Button
-                        android:id="@+id/btn_gas_plus"
-                        android:layout_width="32dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="+"
-                        android:textSize="14sp"
-                        android:textColor="#000000"
+                    <EditText
+                        android:id="@+id/edt_fee_value"
+                        android:layout_width="96dp"
+                        android:layout_height="@dimen/edittext_height"
                         android:background="@drawable/custom_edittext_border"
-                        android:minHeight="0dp"
-                        android:padding="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp" />
+                        android:gravity="center"
+                        android:inputType="numberDecimal"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="50"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/text_size_normal" />
 
-                    <Button
-                        android:id="@+id/btn_gas_minus"
-                        android:layout_width="32dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="-"
-                        android:textSize="14sp"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Gwei"
                         android:textColor="#000000"
-                        android:background="@drawable/custom_edittext_border"
-                        android:minHeight="0dp"
-                        android:padding="0dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp" />
+                        android:textSize="@dimen/text_size_normal" />
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btn_gas_advanced"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/edittext_height"
-                    android:text="Advanced"
-                    android:textSize="12sp"
-                    android:textColor="#FFFFFF"
-                    android:background="@drawable/custom_button_background"
-                    android:minHeight="0dp"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp" />
-            </LinearLayout>
+                <!-- Gas Price Slider -->
+                <SeekBar
+                    android:id="@+id/seekbar_fee"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="4dp"
+                    android:max="200"
+                    android:progress="50"
+                    android:thumb="@drawable/seekbar_thumb_black"
+                    android:progressDrawable="@drawable/seekbar_progress_black"
+                    android:splitTrack="false" />
 
-            <!-- Gas Limit Warning (hidden by default) -->
-            <TextView
-                android:id="@+id/tv_gas_warning"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Gas limit may be too low, transaction might fail"
-                android:textColor="#FF0000"
-                android:textSize="12sp"
-                android:visibility="gone" />
+                <!-- Slider Labels (clickable presets, positioned at actual Gwei values) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp">
+
+                    <!-- spacer: 0 -> Slow (20/200) -->
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="20" />
+
+                    <TextView
+                        android:id="@+id/label_slow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Slow"
+                        android:textColor="#888888"
+                        android:textSize="20sp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <!-- spacer: Slow(20) -> Medium(50) = 30/200 -->
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="30" />
+
+                    <TextView
+                        android:id="@+id/label_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medium"
+                        android:textColor="#888888"
+                        android:textSize="20sp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <!-- spacer: Medium(50) -> Fast(100) = 50/200 -->
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="50" />
+
+                    <TextView
+                        android:id="@+id/label_fast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fast"
+                        android:textColor="#888888"
+                        android:textSize="20sp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <!-- spacer: Fast(100) -> end(200) = 100/200 -->
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="100" />
+
+                </LinearLayout>
+
+                <!-- Gas Limit Label -->
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Gas Limit"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <!-- Gas Limit Value Row -->
+                <LinearLayout
+                    android:id="@+id/gas_limit_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <EditText
+                        android:id="@+id/edt_gas_limit"
+                        android:layout_width="96dp"
+                        android:layout_height="@dimen/edittext_height"
+                        android:background="@drawable/custom_edittext_border"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="21000"
+                        android:textColor="#999999"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <LinearLayout
+                        android:id="@+id/gas_limit_stepper"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/edittext_height"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp">
+
+                        <Button
+                            android:id="@+id/btn_gas_plus"
+                            android:layout_width="32dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="+"
+                            android:textSize="14sp"
+                            android:textColor="#000000"
+                            android:background="@drawable/custom_edittext_border"
+                            android:minHeight="0dp"
+                            android:padding="0dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp" />
+
+                        <Button
+                            android:id="@+id/btn_gas_minus"
+                            android:layout_width="32dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="-"
+                            android:textSize="14sp"
+                            android:textColor="#000000"
+                            android:background="@drawable/custom_edittext_border"
+                            android:minHeight="0dp"
+                            android:padding="0dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_gas_advanced"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/edittext_height"
+                        android:text="Advanced"
+                        android:textSize="12sp"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/custom_button_background"
+                        android:minHeight="0dp"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp" />
+                </LinearLayout>
+
+                <!-- Gas Limit Warning (hidden by default) -->
+                <TextView
+                    android:id="@+id/tv_gas_warning"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Gas limit may be too low, transaction might fail"
+                    android:textColor="#FF0000"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </LinearLayout>
 
         </LinearLayout>
 

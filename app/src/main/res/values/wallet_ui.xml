@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_view_all">View all</string>
+    <string name="home_provide_liquidity">Provide Liquidity (BKC / mUSDT)</string>
+    <string name="home_test_faucet">Faucet · Get test BKC</string>
+    <string name="home_account_address">Address: %1$s</string>
+    <string name="wallet_balance_unavailable">—</string>
+    <string name="wallet_asset_balance">%1$s %2$s</string>
+
+    <string name="wallet_asset_picker">Asset: %1$s</string>
+    <string name="wallet_amount_for_asset">Amount (%1$s)</string>
+    <string name="wallet_asset_name">%1$s (%2$s)</string>
+    <string name="wallet_asset_contract">Contract: %1$s</string>
+
+    <style name="WalletAssetPicker">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">44dp</item>
+        <item name="android:background">@drawable/token_sub_header_picker_bg</item>
+        <item name="android:drawableEnd">@drawable/ic_token_chevron_down</item>
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <string name="wallet_send_available">Available: %1$s</string>
+    <string name="wallet_send_max_total">Max total: %1$s BKC</string>
+    <string name="wallet_send_check_gas">Check the gas price and gas limit.</string>
+    <string name="wallet_send_account_changed">The account changed. Review the transfer again.</string>
+
+    <style name="WalletSendAddressAction">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">44dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingHorizontal">8dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="WalletHomeAction">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+</resources>
