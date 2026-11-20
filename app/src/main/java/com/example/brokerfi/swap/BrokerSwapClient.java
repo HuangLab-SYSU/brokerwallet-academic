@@ -8,6 +8,7 @@ import com.example.brokerfi.core.security.SecurityUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -51,15 +52,25 @@ public final class BrokerSwapClient {
         return post(url,body,http,false);
     }
     private String post(String url, Object body, OkHttpClient transport, boolean readOnly) throws IOException {
-        if(readOnly && session!=null)session.starting();
         Request request = new Request.Builder().url(url).post(RequestBody.create(
                 MediaType.parse("application/json; charset=utf-8"), GSON.toJson(body))).build();
-        try (Response response = transport.newCall(request).execute()) {
+        Call call = transport.newCall(request);
+        TradeReadSession preview = readOnly ? session : null;
+        if (preview != null) {
+            preview.starting();
+            preview.attach(call::cancel);
+        }
+        try (Response response = call.execute()) {
             if (!response.isSuccessful()) throw new TradeReadFailure(TradeReadFailure.Kind.HTTP);
             if (response.body() == null) throw new TradeReadFailure(TradeReadFailure.Kind.INVALID);
             String raw=response.body().string();
-            if(readOnly && session!=null)session.check();
+            if (preview != null) preview.check();
             return raw;
+        } catch (IOException e) {
+            if (preview != null) preview.check();
+            throw e;
+        } finally {
+            if (preview != null) preview.finished();
         }
     }
     private String result(String raw) throws IOException {
@@ -167,7 +178,8 @@ public final class BrokerSwapClient {
         if (r[0].bitLength() > 112 || r[1].bitLength() > 112 || r[2].bitLength() > 32)
             throw new IOException("Invalid pool reserves");
         boolean musdt0 = cfg.musdt().compareTo(cfg.wbkc()) < 0;
-        return new SwapPoolSnapshot(r[musdt0 ? 0 : 1], r[musdt0 ? 1 : 0], SystemClock.elapsedRealtime());
+        return new SwapPoolSnapshot(r[musdt0 ? 0 : 1], r[musdt0 ? 1 : 0],
+                SystemClock.elapsedRealtime(), System.currentTimeMillis());
     }
     public BigInteger balance(String key, String wallet, String contract) throws Exception {
         wallet = BrokerSwapConfig.walletAddress(wallet);

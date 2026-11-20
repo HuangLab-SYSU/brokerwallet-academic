@@ -36,15 +36,17 @@ public class BrokerSwapActivity extends AppCompatActivity {
     private final Handler main = new Handler(Looper.getMainLooper());
     private BrokerSwapConfig config;
     private BrokerSwapClient client;
+    private TradeQuoteCache quoteCache;
+    private TradeReadSession readSession;
     private String original, wallet = "", error = "";
     private SwapAsset from = SwapAsset.BKC, to = SwapAsset.MUSDT;
     private SwapPoolSnapshot pool;
     private BigInteger nativeBalance, payBalance, receiveBalance, allowance, gasReserve;
-    private long readAt, validatedAt;
+    private volatile long validatedAt;
     private boolean loading, confirming;
     private volatile boolean resumed, preparing;
     private volatile int generation;
-    private int slippage = 50, readProgress;
+    private int slippage = 50;
     private EditText amount;
     private TextView receive, status, details, paySymbol, receiveSymbol, payBalanceView, receiveBalanceView;
     private Button submit, slipButton, refreshQuote;
@@ -81,6 +83,8 @@ public class BrokerSwapActivity extends AppCompatActivity {
         refresh = findViewById(R.id.token_refresh); findViewById(R.id.broker_swap_panel).setVisibility(View.VISIBLE);
         try {
             config = BrokerSwapConfig.load(this); client = new BrokerSwapClient(config);
+            quoteCache = new TradeQuoteCache(this, config);
+            pool = quoteCache.loadPool();
             original = wrappedBkcContractHelper.resolveContractAddress(this);
             String preselect = getIntent().getStringExtra(TokenSwapActivity.EXTRA_PAY_CONTRACT);
             if (preselect != null) for (SwapAsset asset : SwapAsset.values())
@@ -102,7 +106,7 @@ public class BrokerSwapActivity extends AppCompatActivity {
             SwapAsset old = from; from = to; to = old; changed();
         });
         findViewById(R.id.token_pay_max).setOnClickListener(v -> {
-            if (locked() || !fresh() || payBalance == null || gasReserve == null) return;
+            if (locked() || payBalance == null || gasReserve == null) return;
             BigInteger max = from == SwapAsset.BKC ? payBalance.subtract(requiredGas()).max(BigInteger.ZERO) : payBalance;
             amount.setText(SwapQuoteMath.format(max, from.decimals));
         });
@@ -144,18 +148,28 @@ public class BrokerSwapActivity extends AppCompatActivity {
         if (!current.equalsIgnoreCase(wallet)) {
             wallet = current; generation++; validatedAt = 0; clearRead();
         }
-        resumePending(); fetch(); main.removeCallbacks(tick); main.postDelayed(tick, 15000);
+        resumePending(); fetch(); render();
+        main.removeCallbacks(tick); main.postDelayed(tick, 15000);
     }
-    @Override protected void onPause() { resumed = false; generation++; main.removeCallbacks(tick); super.onPause(); }
+    @Override protected void onPause() {
+        resumed = false; generation++;
+        if (readSession != null) readSession.cancel();
+        main.removeCallbacks(tick);
+        super.onPause();
+    }
     @Override protected void onDestroy() { resumed=false; generation++; main.removeCallbacks(tick); super.onDestroy(); }
     private String contract(SwapAsset asset) { return config.tokenAddress(asset, original); }
     private boolean amm() { return SwapAsset.isAmm(from, to); }
     private boolean supported() { return amm() || SwapAsset.isWrap(from, to) || SwapAsset.isUnwrap(from, to); }
     private boolean locked() { return confirming || preparing || SwapOperationRunner.active(wallet); }
     private boolean sameAccount(String address) { return address.equalsIgnoreCase(BrokerSwapConfig.walletId(TokenWalletHelper.getWalletAddress(this))); }
-    private boolean fresh() { return error.isEmpty() && readAt > 0 && SystemClock.elapsedRealtime() - readAt <= SwapPoolSnapshot.MAX_AGE_MS; }
-    private void clearRead() { pool = null; readAt = 0; nativeBalance = payBalance = receiveBalance = allowance = gasReserve = null; }
-    private void changed() { generation++; clearRead(); amount.setText(""); render(); fetch(); }
+    private boolean previewReady() { return amm() ? pool != null : nativeBalance != null; }
+    private void clearRead() { nativeBalance = payBalance = receiveBalance = allowance = gasReserve = null; }
+    private void changed() {
+        generation++;
+        if (readSession != null) readSession.cancel();
+        clearRead(); error = ""; amount.setText(""); render(); fetch();
+    }
     private void select(boolean paying) {
         if (locked() || config == null) return;
         List<SwapAsset> options = new ArrayList<>();
@@ -182,18 +196,13 @@ public class BrokerSwapActivity extends AppCompatActivity {
         if(!resumed)return;
         if (config == null || wallet.isEmpty() || locked()) { refresh.setRefreshing(false); render(); return; }
         if (loading) return;
-        loading = true; readProgress=0; error = ""; render();
+        loading = true; error = ""; render();
         final int id = generation; final String address = wallet;
         final SwapAsset pay = from, out = to;
-        final boolean needsProtocol = pay == SwapAsset.SWAP_WBKC || out == SwapAsset.SWAP_WBKC || pay == SwapAsset.MUSDT || out == SwapAsset.MUSDT;
-        final boolean validate = needsProtocol && (validatedAt == 0 || SystemClock.elapsedRealtime()-validatedAt > 600000);
+        final boolean validate = needsValidation(pay, out);
         TradeReadSession session=new TradeReadSession(
-                () -> resumed && !locked() && id==generation && sameAccount(address),
-                number -> main.post(() -> {
-                    if(resumed && id==generation && sameAccount(address)) {
-                        readProgress=number; render();
-                    }
-                }));
+                () -> resumed && !preparing && !SwapOperationRunner.active(address) && id==generation && sameAccount(address), null);
+        readSession = session;
         BrokerSwapClient readClient=new BrokerSwapClient(config,session);
         Runnable work = () -> {
             String stage = "Account";
@@ -225,34 +234,36 @@ public class BrokerSwapActivity extends AppCompatActivity {
                 stage = "Allowance";
                 BigInteger approved = SwapAsset.isAmm(pay, out) && pay != SwapAsset.BKC
                         ? readClient.allowance(key, address, contract(pay)) : BigInteger.ZERO;
-                // Pool calls on Dash may wait for execution. Capture the quote LAST so balance/allowance
-                // reads cannot consume its 45-second validity before it reaches the screen.
                 stage = "Pool";
                 SwapPoolSnapshot snapshot = SwapAsset.isAmm(pay, out) ? readClient.pool(key) : null;
                 main.post(() -> {
-                    loading = false; refresh.setRefreshing(false);
+                    readSession = null; loading = false; refresh.setRefreshing(false);
                     if (isDestroyed()) return;
-                    if (!resumed || id != generation || !sameAccount(address)) { fetch(); return; }
-                    pool = snapshot; nativeBalance = nativeAmount; payBalance = payAmount; receiveBalance = receiveAmount;
+                    if (!resumed || id != generation || !sameAccount(address) || preparing) { fetch(); return; }
+                    if (snapshot != null) { pool = snapshot; quoteCache.savePool(snapshot); }
+                    nativeBalance = nativeAmount; payBalance = payAmount; receiveBalance = receiveAmount;
                     gasReserve = gas; allowance = approved;
-                    readAt = snapshot == null ? SystemClock.elapsedRealtime() : snapshot.capturedAtMs; error = "";
+                    error = "";
                     render();
                 });
             } catch (Exception e) {
                 final String failedStage = stage, reason=TradeReadFailure.describe(e);
                 final boolean cancelled=e instanceof TradeReadSession.Cancelled;
                 main.post(() -> {
-                    loading = false; refresh.setRefreshing(false);
+                    readSession = null; loading = false; refresh.setRefreshing(false);
                     if (isDestroyed()) return;
-                    if(cancelled || !resumed || id!=generation || !sameAccount(address)) { fetch(); return; }
-                    readAt = 0;
-                    error = failedStage + "："+reason+". Cached data is for reference only. Refresh the quote. This read did not send a transaction."; render();
+                    if(cancelled || !resumed || id!=generation || !sameAccount(address) || preparing) { fetch(); return; }
+                    error = failedStage + ": " + reason + ". Refresh the quote to try again."; render();
                 });
             }
         };
         if (userRequested) TradeReadQueue.executeUser(work); else TradeReadQueue.execute(work);
     }
-    private boolean needsApproval(BigInteger input) { return amm() && from != SwapAsset.BKC && (allowance == null || allowance.compareTo(input)<0); }
+    private boolean needsValidation(SwapAsset pay, SwapAsset out) {
+        boolean protocolAsset = pay == SwapAsset.SWAP_WBKC || out == SwapAsset.SWAP_WBKC || SwapAsset.isAmm(pay, out);
+        return protocolAsset && (validatedAt == 0 || SystemClock.elapsedRealtime() - validatedAt > 600_000);
+    }
+    private boolean needsApproval(BigInteger input) { return amm() && from != SwapAsset.BKC && allowance != null && allowance.compareTo(input)<0; }
     private String loadingText() {
         return "Loading quote...";
     }
@@ -268,13 +279,13 @@ public class BrokerSwapActivity extends AppCompatActivity {
         for(TokenTxRecord r:TokenTxHistoryStore.getAll(this,wallet))if(TradeRecoveryPolicy.deferred(r))return r;
         return null;
     }
-    private SwapQuoteMath.Quote quote(BigInteger input) { return SwapQuoteMath.quote(pool, from, to, input, slippage, SystemClock.elapsedRealtime()); }
+    private SwapQuoteMath.Quote preview(BigInteger input) { return SwapQuoteMath.reference(pool, from, to, input, slippage); }
     private String validation(BigInteger input, SwapQuoteMath.Quote quote) {
         if (!sameAccount(wallet)) return "Account changed. Reopen this page.";
-        if (!fresh() || (amm() && (pool==null || !pool.isFresh(SystemClock.elapsedRealtime())))) return "Quote expired. Pull down to refresh.";
+        if (!previewReady()) return "Refresh the quote to continue.";
         if (!supported()) return "This asset pair is not supported.";
-        if (payBalance==null || payBalance.compareTo(input)<0) return "Insufficient payment asset balance.";
-        if (nativeBalance==null || nativeBalance.compareTo(requiredGas().add(from==SwapAsset.BKC ? input : BigInteger.ZERO))<0)
+        if (payBalance!=null && payBalance.compareTo(input)<0) return "Insufficient payment asset balance.";
+        if (nativeBalance!=null && nativeBalance.compareTo(requiredGas().add(from==SwapAsset.BKC ? input : BigInteger.ZERO))<0)
             return "Insufficient BKC for the amount and reserved network fee.";
         if (quote!=null && quote.blocked()) return "Price impact is 10% or higher. Trading is blocked.";
         if (unresolved()!=null) return "An unresolved transaction exists. Tap the transaction status to review.";
@@ -285,8 +296,8 @@ public class BrokerSwapActivity extends AppCompatActivity {
         paySymbol.setText(from.symbol); receiveSymbol.setText(to.symbol);
         ((TextView)findViewById(R.id.token_pay_token_icon)).setText(from==SwapAsset.MUSDT ? "M" : "B");
         ((TextView)findViewById(R.id.token_receive_token_icon)).setText(to==SwapAsset.MUSDT ? "M" : "B");
-        payBalanceView.setText("Balance: " + TradeDisplay.amount(payBalance,from.decimals)+" "+from.symbol + (payBalance == null ? "" : fresh()?"":" (stale)"));
-        receiveBalanceView.setText("Balance: " + TradeDisplay.amount(receiveBalance,to.decimals)+" "+to.symbol + (receiveBalance == null ? "" : fresh()?"":" (stale)"));
+        payBalanceView.setText("Balance: " + TradeDisplay.amount(payBalance,from.decimals)+" "+from.symbol);
+        receiveBalanceView.setText("Balance: " + TradeDisplay.amount(receiveBalance,to.decimals)+" "+to.symbol);
         slipButton.setText("Slippage: " + slippage/100.0 + "% ▾"); slipButton.setEnabled(!locked() && amm());
         int[] slipIds={R.id.video_slip_05,R.id.video_slip_1,R.id.video_slip_2,R.id.video_slip_5};
         for(int i=0;i<slipIds.length;i++) {
@@ -305,33 +316,30 @@ public class BrokerSwapActivity extends AppCompatActivity {
         status.setOnClickListener(v -> { TokenTxRecord r=unresolved(); if(r==null)r=deferred(); if(r!=null)TradeHistory.showRecord(this,config,wallet,r,() -> { render(); fetch(); }); });
         if(swapHistory!=null)swapHistory.bind(config,wallet,() -> { render(); fetch(); });
         String action=amm()?"Swap":from==SwapAsset.BKC?"Wrap":"Unwrap";
-        boolean quoteFresh = fresh();
-        refreshQuote.setVisibility(quoteFresh || loading ? View.GONE : View.VISIBLE);
+        boolean ready = previewReady();
+        refreshQuote.setVisibility(amm() || !ready || !error.isEmpty() ? View.VISIBLE : View.GONE);
+        refreshQuote.setText(loading ? R.string.trade_quote_refreshing : R.string.trade_refresh_quote);
         refreshQuote.setEnabled(!loading && !locked() && pending == null && config != null && !wallet.isEmpty());
         String inputHint="";
         TextView feedback=findViewById(R.id.trade_swap_feedback);
         TextView rate=findViewById(R.id.video_rate);
-        rate.setText("—");
+        String updated = amm() && pool != null ? "\n" + TradeDisplay.quoteUpdated(this, pool) : "";
+        rate.setText(amm() ? pool == null ? "—" : TradeDisplay.poolRate(pool, from, to) + updated
+                : "1 " + from.symbol + " = 1 " + to.symbol);
         receive.setText("0");receive.setTextColor(0xffCBD2DC); details.setText(""); submit.setText(action); submit.setEnabled(false);
         if (config == null || wallet.isEmpty()) { TradeUi.hint(feedback,"Wallet or deployment is not ready.",true); return; }
         try {
             BigInteger input = SwapQuoteMath.parseUnits(amount.getText().toString(), from.decimals);
-            SwapQuoteMath.Quote q = amm() && pool != null ? SwapQuoteMath.reference(pool,from,to,input,slippage) : null;
+            SwapQuoteMath.Quote q = amm() && pool != null ? preview(input) : null;
             BigInteger output = q==null ? amm() ? null : input : q.output;
             receive.setText(TradeDisplay.amount(output,to.decimals));
             receive.setTextColor(output==null?0xffCBD2DC:0xff111827);
-            rate.setText(q==null?amm()?"—":"1 "+from.symbol+" = 1 "+to.symbol:TradeDisplay.rate(q).replace(" ≈ "," = ~"));
-            String quoteNotice = "";
-            if (!quoteFresh) {
-                quoteNotice = error.isEmpty() ? "\nQuote expired. Refresh quote to continue."
-                        : "\nPrevious quote — for reference only";
-            }
+            if (q != null) rate.setText(TradeDisplay.rate(q) + updated);
             details.setText(q==null?amm()?"":"Min received: "+TradeDisplay.amount(input,to.decimals)+" "+to.symbol
                     :"Min received: "+TradeDisplay.amount(q.minimum,q.to.decimals)+" "+q.to.symbol
-                        +(q.impactBps>=200?"\nPrice impact: "+q.impactBps/100.0+"% (high risk)":"")
-                        +quoteNotice);
+                        +(q.impactBps>=200?"\nPrice impact: "+q.impactBps/100.0+"% (high risk)":""));
             if (!supported()) inputHint="This asset pair is not supported.";
-            else if (quoteFresh) {
+            else if (ready) {
                 String problem = validation(input,q);
                 inputHint=problem;
                 submit.setText(problem.isEmpty() && needsApproval(input) ? "Approve "+from.symbol : action);
@@ -340,23 +348,19 @@ public class BrokerSwapActivity extends AppCompatActivity {
         } catch (Exception e) { if(amount.getText().length()>0)inputHint="Invalid decimal precision or amount too small."; }
         if (!operation.isEmpty() || locked()) {
             submit.setText(action); submit.setEnabled(false); inputHint="";
-        } else if (loading) {
+        } else if (loading && !ready) {
             submit.setText(loadingText());
             submit.setEnabled(false);
         }
         TradeUi.hint(feedback,inputHint,true);
-        TradeButtons.state(submit,submit.getText().toString(),submit.isEnabled(),pending!=null || !error.isEmpty() || !loading && readAt>0 && !fresh());
+        TradeButtons.state(submit,submit.getText().toString(),submit.isEnabled(),pending!=null || !error.isEmpty() && !ready);
     }
     private void confirm() {
-        if (loading || locked()) return;
+        if (locked() || !previewReady()) return;
         try {
             BigInteger input = SwapQuoteMath.parseUnits(amount.getText().toString(),from.decimals);
             if (!sameAccount(wallet) || unresolved()!=null || !supported()) { toast("Check your account, assets and unresolved transactions."); return; }
-            if (!fresh()) {
-                render();
-                return;
-            }
-            SwapQuoteMath.Quote q = amm() ? quote(input) : null;
+            SwapQuoteMath.Quote q = amm() ? preview(input) : null;
             String problem = validation(input,q); if (!problem.isEmpty()) { toast(problem); return; }
             boolean approval = needsApproval(input);
             final int id = generation; final String address = wallet; final SwapAsset pay = from, out = to;
@@ -384,11 +388,23 @@ public class BrokerSwapActivity extends AppCompatActivity {
     }
     private void prepare(int id, String address, SwapAsset pay, SwapAsset out, BigInteger input, SwapQuoteMath.Quote confirmed, boolean approval) {
         preparing = true; render();
+        if (readSession != null) readSession.cancel();
         TradeReadQueue.executeUser(() -> {
             String stage = "Account status";
             try {
                 if (id!=generation || !sameAccount(address)) throw new IllegalStateException("Account or assets changed. Confirm again.");
                 String key = TokenWalletHelper.getCurrentPrivateKey(getApplicationContext());
+                if (needsValidation(pay, out)) {
+                    stage = "Contract validation";
+                    client.validate(key);
+                    long checkedAt = SystemClock.elapsedRealtime();
+                    main.post(() -> {
+                        if (resumed && id == generation && sameAccount(address)) {
+                            validatedAt = checkedAt;
+                            TokenStore.importProtocolAssets(this, config);
+                        }
+                    });
+                }
                 stage = "BKC balance";
                 BigInteger nativeAmount = client.balance(key,address,"");
                 stage = "Payment asset balance";
@@ -396,21 +412,21 @@ public class BrokerSwapActivity extends AppCompatActivity {
                 stage = "Network fee";
                 BigInteger reserve = client.gasReserve().multiply(BigInteger.valueOf(confirmed!=null && pay!=SwapAsset.BKC ? 2 : 1));
                 if (balance.compareTo(input)<0 || nativeAmount.compareTo(reserve.add(pay==SwapAsset.BKC ? input : BigInteger.ZERO))<0)
-                    throw new IllegalStateException("Insufficient balance or network fee.");
+                    throw new TradeReadFailure.Preflight("Insufficient balance or network fee.");
                 SwapPoolSnapshot latestPool=null;
                 if (confirmed!=null) {
                     // Read allowance BEFORE reserves, so a slow signed read cannot age the final quote.
                     stage = "Allowance";
                     if (!approval && pay!=SwapAsset.BKC && client.allowance(key,address,contract(pay)).compareTo(input)<0)
-                        throw new IllegalStateException("Insufficient allowance. Approve this amount again.");
+                        throw new TradeReadFailure.Preflight("Insufficient allowance for this amount.");
                     stage = "Latest pool quote";
                     latestPool=client.pool(key);
                     SwapQuoteMath.Quote current = SwapQuoteMath.quote(latestPool,pay,out,input,confirmed.slippageBps,SystemClock.elapsedRealtime());
                     if (current.output.compareTo(confirmed.minimum)<0 || current.blocked()
                             || current.impactBps>=500 && confirmed.impactBps<500)
-                        throw new IllegalStateException("Price changed. Refresh and confirm again.");
+                        throw new TradeReadFailure.Preflight("Price or price impact changed beyond the confirmed limits.");
                 }
-                if(latestPool!=null && !latestPool.isFresh(SystemClock.elapsedRealtime()))throw new IllegalStateException("Quote expired");
+                if(latestPool!=null && !latestPool.isFresh(SystemClock.elapsedRealtime()))throw new TradeReadFailure.Preflight("Pre-send checks expired.");
                 stage = "Transaction encoding";
                 String target, data; BigInteger value = BigInteger.ZERO;
                 long deadline=confirmed!=null && !approval?System.currentTimeMillis()/1000+300:0;
@@ -424,17 +440,19 @@ public class BrokerSwapActivity extends AppCompatActivity {
                 main.post(() -> {
                     preparing=false;
                     if (isDestroyed() || id!=generation || !sameAccount(address)) { render(); return; }
-                    if(finalPool!=null && !finalPool.isFresh(SystemClock.elapsedRealtime())) { readAt=0; error="Checks expired. No transaction was sent. Refresh the quote and confirm again."; render(); return; }
+                    if(finalPool!=null && !finalPool.isFresh(SystemClock.elapsedRealtime())) { error="Checks expired. No transaction was sent. Refresh the quote and confirm again."; toast(error); render(); return; }
                     if (!SwapOperationRunner.submit(getApplicationContext(),config,address,record,sendTarget,sendData,sendValue,this::completed))
                         toast("A transaction is already in progress.");
                     render();
                 });
             } catch (Exception e) {
-                final String failedStage = stage;
+                final String message = e instanceof TradeReadFailure.Preflight ? e.getMessage()
+                        : stage + " check failed. " + TradeReadFailure.describe(e);
                 main.post(() -> {
                     preparing=false;
-                    if(!isDestroyed()) {
-                        readAt=0; error="Pre-send "+failedStage+" check failed. No transaction was sent. Refresh the quote and confirm again.";
+                    if(!isDestroyed() && id==generation && sameAccount(address)) {
+                        clearRead();
+                        error=message+" No transaction was sent. Refresh the quote and confirm again.";
                         toast(error); render();
                     }
                 });
@@ -454,8 +472,9 @@ public class BrokerSwapActivity extends AppCompatActivity {
     private void completed(TokenTxRecord record) {
         if (isDestroyed()) return;
         toast("APPROVAL".equals(record.type) && "SUCCESS".equals(record.status)
-                ? "Approval successful" : "SUCCESS".equals(record.status)?"Swap successful":VideoTradePresentation.status(record.status));
-        readAt=0; fetch(); render();
+                ? "Approval successful" : "SUCCESS".equals(record.status)?"Swap successful":VideoTradePresentation.tradeResult(record.status));
+        if (!"FAILED".equals(record.status)) { clearRead(); fetch(); }
+        render();
         if ("SUCCESS".equals(record.status) && !"APPROVAL".equals(record.type)) amount.setText("");
     }
     private void resumePending() {
@@ -465,7 +484,7 @@ public class BrokerSwapActivity extends AppCompatActivity {
             SwapOperationRunner.resume(getApplicationContext(), config, wallet, pending, record -> {
                 if (isDestroyed()) return;
                 if (record.isLiquidity()) {
-                    readAt = 0;
+                    clearRead();
                     fetch();
                     render();
                 } else {
