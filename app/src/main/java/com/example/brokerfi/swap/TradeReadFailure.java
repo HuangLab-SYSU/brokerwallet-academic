@@ -15,6 +15,9 @@ final class TradeReadFailure extends IOException {
         final String getter;
         Query(String getter, IOException cause) { super("Metadata read failed",cause); this.getter=getter; }
     }
+    static final class Preflight extends IllegalStateException {
+        Preflight(String message) { super(message); }
+    }
     static String describe(Throwable error) {
         for(Throwable e=error;e!=null;e=e.getCause()) {
             if(e instanceof Query) return ((Query)e).getter+" query: "+describe(e.getCause());

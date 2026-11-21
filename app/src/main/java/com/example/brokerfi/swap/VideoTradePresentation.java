@@ -34,6 +34,9 @@ public final class VideoTradePresentation {
         if("NOT_SENT".equals(state))return "Not sent";
         return state==null?"":"Manually reviewed";
     }
+    static String tradeResult(String state) {
+        return "FAILED".equals(state) ? "Transaction failed. Refresh the quote before trying again." : status(state);
+    }
     public static String time(TokenTxRecord r,boolean shortDate) {
         return new SimpleDateFormat(shortDate?"MM-dd HH:mm":"yyyy-MM-dd HH:mm",Locale.US).format(new Date(r.timestampMs));
     }

@@ -14,4 +14,9 @@ public class TradeDisplayTest {
     @Test public void rateUsesQuoteRatherThanInventingOneToOneExchange() {
         assertTrue(TradeDisplay.rate(BrokerSwapAbiTest.quote(SwapAsset.BKC,SwapAsset.MUSDT)).startsWith("1 BKC ≈ "));
     }
+    @Test public void poolRateBeforeEnteringAnAmountUsesEachTokensDecimals() {
+        SwapPoolSnapshot pool=new SwapPoolSnapshot(SwapQuoteMath.parseUnits("5",6),SwapQuoteMath.parseUnits("2",18),0);
+        assertEquals("1 BKC ≈ 2.5 mUSDT",TradeDisplay.poolRate(pool,SwapAsset.BKC,SwapAsset.MUSDT));
+        assertEquals("1 mUSDT ≈ 0.4 BKC",TradeDisplay.poolRate(pool,SwapAsset.MUSDT,SwapAsset.BKC));
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.brokerfi.swap;
 
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -20,6 +22,8 @@ import com.example.brokerfi.R;
 import com.example.brokerfi.token.TokenTxRecord;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import java.math.BigInteger;
+import java.util.UUID;
 import static org.junit.Assert.*;
 
 /** Isolated layout/callback tests. Fixtures never access accounts, sign or contact a network. */
@@ -47,6 +51,7 @@ public class TradeLayoutTest {
         assertFalse(swap.isEnabled());
         assertEquals("Refresh quote", refreshQuote.getText().toString());
         assertEquals("Refresh quote", refreshPoolQuote.getText().toString());
+        assertEquals(View.VISIBLE, refreshPoolQuote.getVisibility());
         assertNotNull(swapPage.findViewById(R.id.token_pay_token_selector));
         assertNotNull(swapPage.findViewById(R.id.token_receive_token_selector));
         assertNull(swapPage.findViewById(R.id.trade_liquidity_content));
@@ -63,6 +68,32 @@ public class TradeLayoutTest {
         assertNotNull(liquidityPage.findViewById(R.id.lp_position_change));
         assertEquals(View.GONE,liquidityPage.findViewById(R.id.lp_history_rows).getVisibility());
     });}
+    @Test public void cachedPoolAndLiquidityCarryTheOriginalReadTimeAcrossInstances() throws Exception {
+        String preferencesName="test_trade_quotes_"+UUID.randomUUID();
+        Context isolated=new ContextWrapper(context()) {
+            @Override public SharedPreferences getSharedPreferences(String name,int mode) {
+                return super.getSharedPreferences(preferencesName,mode);
+            }
+        };
+        try {
+            BrokerSwapConfig config=BrokerSwapConfig.load(isolated);
+            TradeQuoteCache cache=new TradeQuoteCache(isolated,config);
+            assertNull(cache.loadPool());
+            assertNull(cache.loadLiquidity());
+            SwapPoolSnapshot pool=new SwapPoolSnapshot(BigInteger.valueOf(4_000_000),BigInteger.TEN,100,1_700_000_000_000L);
+            cache.saveLiquidity(new TradeQuoteCache.LiquidityQuote(pool,BigInteger.valueOf(50)));
+            TradeQuoteCache reopened=new TradeQuoteCache(isolated,config);
+            assertEquals(pool.updatedAtMs,reopened.loadPool().updatedAtMs);
+            assertFalse(reopened.loadPool().isFresh(100));
+            assertEquals(pool.updatedAtMs,reopened.loadLiquidity().pool.updatedAtMs);
+            assertEquals(BigInteger.valueOf(50),reopened.loadLiquidity().supply);
+            reopened.savePool(new SwapPoolSnapshot(pool.musdtReserve, pool.wbkcReserve, 200, pool.updatedAtMs+50));
+            assertEquals(pool.updatedAtMs+50,reopened.loadPool().updatedAtMs);
+            assertEquals(pool.updatedAtMs,reopened.loadLiquidity().pool.updatedAtMs);
+        } finally {
+            isolated.getSharedPreferences(preferencesName,Context.MODE_PRIVATE).edit().clear().commit();
+        }
+    }
     @Test public void homeOwnsActionsAndAssetsShowsTableAndManagement() {main(() -> {
         View home=inflate(R.layout.activity_main);
         assertNotNull(home.findViewById(R.id.send));assertNotNull(home.findViewById(R.id.receiveicon));

@@ -12,10 +12,13 @@
     <TextView android:id="@+id/lp_add_hint" style="@style/VideoText" android:visibility="gone" />
     <Button
         android:id="@+id/lp_refresh_quote"
-        style="@style/VideoAction"
-        android:minHeight="52dp"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_gravity="end"
+        android:background="?attr/selectableItemBackground"
         android:text="@string/trade_refresh_quote"
-        android:visibility="gone" />
+        android:textAllCaps="false"
+        android:textSize="12sp" />
     <Button android:id="@+id/lp_approve_add" style="@style/VideoAction" android:text="Approve mUSDT" android:visibility="gone" android:minHeight="52dp" />
     <Button android:id="@+id/lp_add" style="@style/VideoAction" android:text="Enter one amount to preview the pool ratio" android:minHeight="52dp" />
     <LinearLayout style="@style/VideoPanel">

@@ -45,6 +45,14 @@ public class TradeReadSessionTest {
         try { session.check(); fail("Obsolete result must be rejected"); }
         catch(TradeReadSession.Cancelled expected) { }
     }
+    @Test public void confirmingCancelsTheActivePreviewRequestAndStopsFurtherReads() throws Exception {
+        AtomicBoolean cancelled=new AtomicBoolean(false);
+        TradeReadSession session=new TradeReadSession(() -> true,null);
+        session.attach(() -> cancelled.set(true));
+        session.cancel();
+        assertTrue(cancelled.get());
+        assertThrows(TradeReadSession.Cancelled.class,session::starting);
+    }
     @Test public void cancelledClientReadDoesNotSignOrContactNetwork() throws Exception {
         TradeReadSession session=new TradeReadSession(() -> false,null);
         BrokerSwapClient client=new BrokerSwapClient(null,session);
